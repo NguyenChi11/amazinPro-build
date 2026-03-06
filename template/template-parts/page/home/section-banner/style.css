@@ -1,0 +1,302 @@
+.section-banner {
+  padding: 0rem 3.75rem;
+  padding-top: 5.625rem;
+  position: relative;
+}
+
+.section-banner_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container-banner-right {
+  flex: 1;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.section-banner__image-stack {
+  position: relative;
+  width: 100%;
+  max-width: 34.375rem;
+  height: 34.375rem;
+  overflow: hidden;
+}
+
+.section-banner__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.875rem;
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.section-banner__image.active {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.section-banner__image.placeholder {
+  background: linear-gradient(135deg, #ececec, #f7f7f7);
+}
+
+.container-banner-left {
+  display: grid;
+  grid-template-areas: "stack";
+  width: 100%;
+  max-width: 39rem; /* Adjust as needed */
+  position: relative;
+  overflow: hidden;
+  height: 25rem; /* Fixed height for animation stability */
+}
+
+.section-banner__item {
+  grid-area: stack;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.section-banner__item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-banner__item-content {
+  margin-bottom: 2.5rem;
+  width: 38.625rem;
+}
+
+.section-banner__item-type {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: rgba(19, 127, 236, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  margin-bottom: 0.75rem;
+}
+
+.section-banner__item-text {
+  font-family: "Poppins", sans-serif;
+  font-size: 3.125rem;
+  font-weight: 900;
+  color: #000;
+  line-height: 3.75rem;
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+.section-banner__item-description {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.125rem;
+  color: rgba(126, 132, 139, 1);
+  line-height: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.section-banner__item-button {
+  padding: 1rem 2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.section-banner__item-button:hover {
+  background-color: #0056b3;
+}
+
+.section-banner__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 1.5rem;
+  margin-top: 6.25rem;
+  position: relative;
+}
+
+.section-banner__pagination-container {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.section-banner__page {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: default;
+  padding: 0;
+  pointer-events: none;
+}
+
+.section-banner__page-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #d9d9d9;
+  transition:
+    width 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.section-banner__page-label {
+  display: none;
+}
+
+.section-banner__page.active .section-banner__page-dot {
+  width: 24px;
+  height: 6px;
+  background-color: rgba(19, 127, 236, 1);
+}
+
+.section-banner__page.pos-left,
+.section-banner__page.pos-center,
+.section-banner__page.pos-right {
+  position: static;
+  transform: none;
+  opacity: 1;
+}
+.section-banner__item-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.section-banner__item-button-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.section-banner__customize-shortcut {
+  position: absolute;
+  right: 3.75rem;
+  top: 5.625rem;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+.section-banner__customize-button {
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+.section-banner__hover-outline {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed #2563eb;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.section-banner:hover .section-banner__hover-outline {
+  opacity: 1;
+}
+.section-banner:hover .section-banner__customize-shortcut {
+  opacity: 1;
+  visibility: visible;
+}
+.section-banner .customize-partial-edit-shortcut {
+  position: absolute;
+  right: 3.75rem;
+  top: 2.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+.section-banner:hover .customize-partial-edit-shortcut {
+  opacity: 1;
+  visibility: visible;
+}
+@media (max-width: 639.98px) {
+  .section-banner {
+    padding: 0rem 1rem;
+    padding-top: 3rem;
+  }
+  .section-banner_container {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .container-banner-left {
+    max-width: none;
+    height: auto;
+  }
+  .section-banner__item-content {
+    margin-bottom: 1.25rem;
+    width: 100%;
+  }
+  .section-banner__item-type {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+  }
+  .section-banner__item-text {
+    font-size: 2rem;
+    line-height: 2.25rem;
+    margin-bottom: 1rem;
+  }
+  .section-banner__item-description {
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+  }
+  .section-banner__item-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+  }
+  .section-banner__item-button-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .container-banner-right {
+    justify-content: center;
+    width: 100%;
+  }
+  .section-banner__image-stack {
+    max-width: 100%;
+    height: 14rem;
+  }
+  .section-banner__pagination {
+    margin-top: 2rem;
+  }
+  .section-banner__customize-shortcut {
+    right: 1rem;
+    top: 3rem;
+  }
+  .section-banner .customize-partial-edit-shortcut {
+    right: 1rem;
+    top: 1rem;
+  }
+}

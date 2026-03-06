@@ -1,0 +1,6 @@
+#header_logo_preview {
+  margin-top: 10px;
+}
+#header_logo_preview img {
+  max-height: 80px;
+}

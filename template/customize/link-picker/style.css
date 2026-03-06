@@ -1,0 +1,241 @@
+/* ─────────────────────────────────────────────────────────────
+   buildpro-link-popup
+   Rendered inside WP Customizer sidebar (~300 px wide)
+   → flat section layout, NOT a floating popup
+───────────────────────────────────────────────────────────── */
+
+.buildpro-link-popup {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, "Helvetica Neue", sans-serif;
+  color: #1d2327;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Fields ─────────────────────────────────────────────────── */
+.buildpro-banner-field {
+  margin: 0 0 12px;
+}
+
+.buildpro-banner-field label {
+  display: block;
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #646970;
+}
+
+.buildpro-banner-field input[type="url"],
+.buildpro-banner-field input[type="text"],
+#buildpro-link-search {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #8c8f94;
+  border-radius: 3px;
+  font-size: 13px;
+  line-height: 1.5;
+  background: #fff;
+  box-sizing: border-box;
+  transition:
+    border-color 0.1s,
+    box-shadow 0.1s;
+}
+
+.buildpro-banner-field input[type="url"]:focus,
+.buildpro-banner-field input[type="text"]:focus,
+#buildpro-link-search:focus {
+  border-color: var(--wp-admin-theme-color, #2271b1);
+  box-shadow: 0 0 0 1px var(--wp-admin-theme-color, #2271b1);
+  outline: none;
+}
+
+/* Checkbox */
+.buildpro-banner-field label input[type="checkbox"] {
+  margin-right: 6px;
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+}
+
+/* ── Section heading ────────────────────────────────────────── */
+.buildpro-link-popup h4 {
+  margin: 16px 0 8px;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #646970;
+  border: none;
+}
+
+/* ── Results list ───────────────────────────────────────────── */
+#buildpro-link-results {
+  width: 100%;
+  max-height: 260px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #dcdcde;
+  border-radius: 3px;
+  background: #fff;
+  margin: 4px 0 12px;
+  box-sizing: border-box;
+}
+
+#buildpro-link-results .result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 10px;
+  border-bottom: 1px solid #f0f0f1;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+#buildpro-link-results .result:last-child {
+  border-bottom: none;
+}
+
+#buildpro-link-results .result:hover,
+#buildpro-link-results .result:focus-within {
+  background: #f0f6fc;
+}
+
+/* Info column – works for both PHP-rendered divs and JS .result-info */
+#buildpro-link-results .result > div:first-child,
+#buildpro-link-results .result > .result-info {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Title row */
+#buildpro-link-results .result > div:first-child > div:first-child,
+#buildpro-link-results .result-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1d2327;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Type chip */
+#buildpro-link-results .chip {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  background: #646970;
+  border-radius: 10px;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+/* URL meta */
+#buildpro-link-results .meta {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #8c8f94;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Select button inside each row ─────────────────────────── */
+.buildpro-link-pick {
+  flex-shrink: 0;
+  background: #2271b1;
+  border: 1px solid #135e96;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0 8px;
+  height: 26px;
+  line-height: 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.buildpro-link-pick:hover,
+.buildpro-link-pick:focus {
+  background: #135e96;
+  border-color: #0a4b78;
+  outline: none;
+}
+
+/* Selected row highlight */
+#buildpro-link-results .result.selected {
+  background: #f0f6fc;
+}
+
+#buildpro-link-results .result.selected .result-title,
+#buildpro-link-results .result.selected > div:first-child > div:first-child {
+  color: #2271b1;
+}
+
+/* ── Actions bar ────────────────────────────────────────────── */
+.buildpro-link-popup .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 0 4px;
+  border-top: 1px solid #dcdcde;
+  margin-top: 4px;
+}
+
+#buildpro-link-apply {
+  background: var(--wp-admin-theme-color, #2271b1);
+  border: 1px solid var(--wp-admin-theme-color, #135e96);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 14px;
+  height: 30px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#buildpro-link-apply:hover,
+#buildpro-link-apply:focus {
+  background: var(--wp-admin-theme-color-darker-10, #1a67a3);
+  outline: none;
+}
+
+#buildpro-link-close {
+  background: #fff;
+  border: 1px solid #8c8f94;
+  color: #1d2327;
+  font-size: 13px;
+  padding: 0 14px;
+  height: 30px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#buildpro-link-close:hover,
+#buildpro-link-close:focus {
+  background: #f6f7f7;
+  outline: none;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+#buildpro-link-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+#buildpro-link-results::-webkit-scrollbar-thumb {
+  background: #c3c4c7;
+  border-radius: 3px;
+}
+
+#buildpro-link-results::-webkit-scrollbar-track {
+  background: #f6f7f7;
+}
