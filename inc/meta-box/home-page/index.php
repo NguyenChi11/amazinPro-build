@@ -1,5 +1,12 @@
 <?php
 require get_template_directory() . '/inc/meta-box/home-page/section-banner/index.php';
+require get_template_directory() . '/inc/meta-box/home-page/section-option/index.php';
+require get_template_directory() . '/inc/meta-box/home-page/section-data/index.php';
+require get_template_directory() . '/inc/meta-box/home-page/section-products/index.php';
+require get_template_directory() . '/inc/meta-box/home-page/section-service/index.php';
+require get_template_directory() . '/inc/meta-box/home-page/section-evaluate/index.php';
+require get_template_directory() . '/inc/meta-box/home-page/section-projects/index.php';
+require get_template_directory() . '/inc/meta-box/home-page/section-post/index.php';
 ?>
 <?php
 function buildpro_home_group_meta_box_add($post_type, $post)
@@ -27,7 +34,7 @@ function buildpro_home_group_meta_box_render($post)
         . '<button type="button" class="button buildpro-admin-tab is-active" data-target="buildpro_banner_meta">Banner</button> '
         . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_option_meta">Option</button> '
         . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_data_meta">Data</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_materials_meta">Materials</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_materials_meta">Products</button> '
         . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_services_meta">Services</button> '
         . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_evaluate_meta">Evaluate</button> '
         . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_portfolio_meta">Portfolio</button>'

@@ -1,0 +1,79 @@
+.buildpro-services-row {
+  border: 1px solid #e5e7eb;
+  margin: 8px 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.buildpro-services-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #f0f0f0;
+  user-select: none;
+}
+.buildpro-services-header:hover {
+  background: #e6e6e6;
+}
+.buildpro-services-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #23282d;
+}
+.buildpro-services-arrow {
+  font-size: 11px;
+  color: #555;
+  transition: transform 0.2s ease;
+  transform: rotate(-90deg);
+  display: inline-block;
+}
+.buildpro-services-body {
+  padding: 10px;
+}
+.buildpro-services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  align-items: start;
+}
+.buildpro-services-block {
+  background: #f9fafb;
+  padding: 8px;
+  border-radius: 6px;
+}
+.buildpro-services-block h4 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: #374151;
+}
+.buildpro-services-field {
+  margin: 6px 0;
+}
+.buildpro-services-field label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #374151;
+}
+.buildpro-services-field .regular-text,
+.buildpro-services-field .large-text,
+.buildpro-services-field .regular-select {
+  width: 100%;
+  max-width: 100%;
+}
+.buildpro-services-actions {
+  margin-top: 8px;
+  text-align: right;
+}
+.services-icon-preview {
+  margin-top: 6px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px dashed #d1d5db;
+  border-radius: 6px;
+}

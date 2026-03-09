@@ -1,0 +1,61 @@
+.buildpro-data-row {
+  border: 1px solid #ddd;
+  margin: 8px 0;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.buildpro-data-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #f0f0f0;
+  user-select: none;
+  border-radius: 6px;
+}
+.buildpro-data-header:hover {
+  background: #e6e6e6;
+}
+.buildpro-data-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #23282d;
+}
+.buildpro-data-arrow {
+  font-size: 11px;
+  color: #555;
+  transition: transform 0.2s ease;
+  transform: rotate(-90deg);
+  display: inline-block;
+}
+.buildpro-data-body {
+  padding: 10px;
+}
+.buildpro-data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.buildpro-data-block {
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 6px;
+}
+.buildpro-data-block h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+.buildpro-data-field {
+  margin: 8px 0px;
+}
+.buildpro-data-field label {
+  display: block;
+  margin-bottom: 4px;
+}
+.buildpro-data-actions {
+  margin-top: 10px;
+  text-align: right;
+}

@@ -121,6 +121,132 @@ function wp_enqueue_custom_assets()
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-banner/script.js'))
         ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-option-style',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-option/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-option/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-option-script',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-option/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-option/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-data-style',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-data/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-data/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-data-script',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-data/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-data/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-products-style',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-products/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-products/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-products-script',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-products/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-products/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-services-style',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-services/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-services/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-services-script',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-services/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-services/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-evaluate-style',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-evaluate/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-evaluate/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-evaluate-script',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-evaluate/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-evaluate/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-projects-style',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-projects/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-projects/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-projects-script',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-projects/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-projects/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-post-style',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-post/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-post/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-post-script',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-post/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-post/script.js'))
+        ],
     ];
     foreach ($wp_enqueue_mapping as $asset) {
         if (isset($asset['condition']) && ! $asset['condition']) {

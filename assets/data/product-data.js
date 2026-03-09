@@ -1,14 +1,14 @@
-const materialsData = {
-  materialsTitle: "MATERIALS",
-  materialsDescription:
-    "High-quality building materials for modern construction projects.",
+const ProductsData = {
+  productsTitle: "Products",
+  productsDescription:
+    "High-quality building products for modern construction projects.",
   items: [
     {
       id: 1001,
       title: "Concrete Mix",
       image: "/wp-content/themes/buildpro/assets/images/image_1.jpg",
       price: "120",
-      link: "/materials/concrete-mix",
+      link: "/products/concrete-mix",
       banner: [
         "/wp-content/themes/buildpro/assets/images/redux/banner/banner_1.jpg",
         "/wp-content/themes/buildpro/assets/images/redux/banner/banner_2.jpg",
@@ -28,7 +28,7 @@ const materialsData = {
       title: "Steel Rebar",
       image: "/wp-content/themes/buildpro/assets/images/image_2.jpg",
       price: "450",
-      link: "/materials/steel-rebar",
+      link: "/products/steel-rebar",
       banner: [
         "/wp-content/themes/buildpro/assets/images/redux/banner/banner_1.jpg",
         "/wp-content/themes/buildpro/assets/images/redux/banner/banner_2.jpg",
@@ -48,7 +48,7 @@ const materialsData = {
       title: "Insulation Panel",
       image: "/wp-content/themes/buildpro/assets/images/image_3.jpg",
       price: "85",
-      link: "/materials/insulation-panel",
+      link: "/products/insulation-panel",
       banner: [
         "/wp-content/themes/buildpro/assets/images/redux/banner/banner_1.jpg",
         "/wp-content/themes/buildpro/assets/images/redux/banner/banner_2.jpg",
@@ -66,4 +66,4 @@ const materialsData = {
   ],
 };
 
-window.materialsData = materialsData;
+window.ProductsData = ProductsData;

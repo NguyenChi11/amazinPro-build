@@ -1,0 +1,69 @@
+.buildpro-services-block {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  margin-top: 8px;
+}
+.buildpro-services-field {
+  margin: 10px 0;
+}
+.buildpro-services-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+.buildpro-services-block .regular-text {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+.buildpro-services-block .large-text {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+.buildpro-service-row {
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  margin: 12px 0;
+  background: #fff;
+  border-radius: 10px;
+}
+.buildpro-service-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.buildpro-service-block {
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 8px;
+}
+.buildpro-service-block h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+.buildpro-service-field {
+  margin: 8px 0;
+}
+.buildpro-service-actions {
+  margin-top: 10px;
+  text-align: right;
+}
+.service-icon-preview {
+  margin-top: 8px;
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px dashed #ddd;
+  border-radius: 6px;
+}

@@ -1,0 +1,75 @@
+.buildpro-option-row {
+  border: 1px solid #ddd;
+  margin: 8px 0;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.buildpro-option-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #f0f0f0;
+  user-select: none;
+  border-radius: 6px;
+}
+.buildpro-option-header:hover {
+  background: #e6e6e6;
+}
+.buildpro-option-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #23282d;
+}
+.buildpro-option-arrow {
+  font-size: 11px;
+  color: #555;
+  transition: transform 0.2s ease;
+  transform: rotate(-90deg);
+  display: inline-block;
+}
+.buildpro-option-body {
+  padding: 10px;
+}
+.buildpro-option-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.buildpro-option-tab {
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.buildpro-option-tab.active {
+  background: #e7e7e7;
+}
+.buildpro-option-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.buildpro-option-block {
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 6px;
+}
+.buildpro-option-block h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+.buildpro-option-field {
+  margin: 8px 0px;
+}
+.buildpro-option-field label {
+  display: block;
+  margin-bottom: 4px;
+}
+.buildpro-option-actions {
+  margin-top: 10px;
+  text-align: right;
+}

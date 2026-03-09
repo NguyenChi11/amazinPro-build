@@ -1,0 +1,187 @@
+.section-services {
+  padding: 0rem 3.75rem;
+  padding: 5.625rem 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.section-services__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-services__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500; /* Medium */
+  font-size: 2rem; /* 32px */
+  margin: 0rem;
+  color: rgba(19, 127, 236, 1);
+  border-bottom: 0.375rem solid rgba(19, 127, 236, 1);
+}
+.section-services__description {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 1.125rem; /* 18px */
+  line-height: 1; /* 100% */
+  letter-spacing: 0;
+  text-align: center;
+  width: 42.8125rem; /* 685px */
+  height: 1.6875rem; /* 27px */
+  opacity: 1;
+  color: rgba(126, 132, 139, 1);
+  margin: 0;
+  margin-top: 1rem;
+}
+.section-services__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2.5rem;
+  padding-top: 0rem 5.625rem;
+  padding: 3.75rem;
+  width: 100%;
+}
+.section-services__item {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1.25rem;
+  box-shadow: 4px 4px 20px 0px rgba(7, 59, 111, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+}
+.section-services__item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem;
+  border-radius: 0.625rem;
+  background-color: rgba(230, 243, 255, 1);
+}
+.section-services__item-icon-image {
+  width: 2rem;
+  height: 2rem;
+}
+.section-services__item-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.625rem; /* 100% */
+  letter-spacing: 0;
+  text-align: justify;
+  margin: 1rem 0;
+  color: rgba(0, 0, 0, 1);
+}
+.section-services__item-description {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.625rem; /* 100% */
+  letter-spacing: 0;
+  text-align: justify;
+  margin: 0;
+  color: rgba(126, 132, 139, 1);
+  margin-bottom: 1rem;
+}
+.section-services__item-link {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.625rem; /* 100% */
+  letter-spacing: 0;
+  text-align: justify;
+  margin: 0;
+  color: rgba(19, 127, 236, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+.section-services__item-link-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.section-services__hover-outline {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed #2563eb;
+  border-radius: 10px;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.section-services:hover .section-services__hover-outline {
+  opacity: 1;
+}
+.section-services .customize-partial-edit-shortcut {
+  position: absolute;
+  right: 3.75rem;
+  top: 2rem;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+.section-services:hover .customize-partial-edit-shortcut {
+  opacity: 1;
+  visibility: visible;
+}
+@media (max-width: 639.98px) {
+  .section-services {
+    padding: 0 1rem;
+    padding-top: 3rem;
+  }
+  .section-services__title {
+    font-size: 1.5rem;
+  }
+  .section-services__description {
+    font-size: 1rem;
+    line-height: 1.5;
+    width: 100%;
+    height: auto;
+    text-align: center;
+  }
+  .section-services__container {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    padding: 1rem;
+  }
+  .section-services__item {
+    padding: 1rem;
+  }
+  .section-services__item-icon {
+    padding: 0.75rem;
+  }
+  .section-services__item-icon-image {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .section-services__item-title {
+    font-size: 1.125rem;
+    text-align: left;
+    margin: 0.75rem 0;
+  }
+  .section-services__item-description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: left;
+  }
+  .section-services__item-link {
+    font-size: 1.125rem;
+  }
+  .section-services__item-link-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .section-services .customize-partial-edit-shortcut {
+    right: 1rem;
+    top: 0.5rem;
+  }
+}

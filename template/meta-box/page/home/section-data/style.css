@@ -1,0 +1,33 @@
+.buildpro-data-row {
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin: 12px 0;
+  background: #fff;
+  border-radius: 6px;
+}
+.buildpro-data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.buildpro-data-block {
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 6px;
+}
+.buildpro-data-block h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+.buildpro-data-field {
+  margin: 8px 0;
+}
+.buildpro-data-field label {
+  display: block;
+  margin-bottom: 4px;
+}
+.buildpro-data-actions {
+  margin-top: 10px;
+  text-align: right;
+}

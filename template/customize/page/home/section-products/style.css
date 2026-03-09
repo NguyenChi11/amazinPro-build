@@ -1,0 +1,12 @@
+.buildpro-product-control {
+  margin: 8px 0 16px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+.buildpro-product-control__hints {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: #6b7280;
+}

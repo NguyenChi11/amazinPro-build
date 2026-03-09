@@ -1,0 +1,29 @@
+.buildpro-post-block {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 8px;
+}
+.buildpro-post-field {
+  margin: 10px 0;
+}
+.buildpro-post-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+.buildpro-post-block .regular-text {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+.buildpro-post-block .large-text {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
