@@ -1,0 +1,92 @@
+.project--section-list {
+  padding: 0 3.75rem;
+}
+.project--section-list .section-portfolio__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1.875rem;
+  row-gap: 3.75rem;
+}
+.project--section-list .section-portfolio__item {
+  width: 100%;
+  height: 28.75rem;
+  width: 29.25rem;
+}
+.project--pagination {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project--pagination ul.page-numbers {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.project--pagination ul.page-numbers li {
+  margin: 0;
+}
+.project--pagination .page-numbers {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0.25rem;
+  border-radius: 0.375rem;
+  color: #111827;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+}
+.project--pagination ul.page-numbers a,
+.project--pagination ul.page-numbers span {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  background: #fff;
+  color: #111827;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.875rem;
+}
+.project--pagination ul.page-numbers a:hover {
+  background: #f3f4f6;
+}
+.project--pagination .page-numbers.current {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+.project--pagination .page-numbers.disabled {
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  background: #fff;
+  pointer-events: none;
+}
+@media (max-width: 639.98px) {
+  .project--section-list .section-portfolio__list {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .project--section-list .section-portfolio__item {
+    height: 12rem;
+    width: 100%;
+  }
+  .project--section-list {
+    padding: 0 1rem;
+  }
+  .project--pagination {
+    margin-top: 1rem;
+  }
+  .project--pagination ul.page-numbers a,
+  .project--pagination ul.page-numbers span {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.75rem;
+  }
+}

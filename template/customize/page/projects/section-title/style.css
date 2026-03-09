@@ -1,0 +1,11 @@
+.buildpro-projects-title-block {
+  margin: 0 0 12px;
+}
+.buildpro-projects-title-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.buildpro-projects-title-actions {
+  margin-top: 8px;
+}

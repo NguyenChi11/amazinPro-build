@@ -247,6 +247,42 @@ function wp_enqueue_custom_assets()
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-post/script.js'))
         ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-projects-list-style',
+            'src' => get_theme_file_uri('template/template-parts/page/projects/section-list/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/projects/section-list/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-projects-list-script',
+            'src' => get_theme_file_uri('template/template-parts/page/projects/section-list/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/projects/section-list/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-projects-title-style',
+            'src' => get_theme_file_uri('template/template-parts/page/projects/section-title/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/projects/section-title/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-projects-title-script',
+            'src' => get_theme_file_uri('template/template-parts/page/projects/section-title/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/projects/section-title/script.js'))
+        ],
     ];
     foreach ($wp_enqueue_mapping as $asset) {
         if (isset($asset['condition']) && ! $asset['condition']) {

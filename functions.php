@@ -29,11 +29,14 @@ add_action('after_setup_theme', 'buildpro_setup');
 require get_template_directory() . '/import/import-css-js.php';
 require get_template_directory() . '/inc/core/buildpro-theme.php';
 require get_template_directory() . '/inc/functions/header-function.php';
+require get_template_directory() . '/inc/customizer/preview-page/index.php';
 require get_template_directory() . '/inc/customizer/header/index.php';
 require get_template_directory() . '/inc/customizer/footer/index.php';
 require get_template_directory() . '/inc/customizer/link-picker/index.php';
 require get_template_directory() . '/inc/customizer/home-page/index.php';
+require get_template_directory() . '/inc/customizer/project-page/index.php';
 require get_template_directory() . '/inc/meta-box/home-page/index.php';
+require get_template_directory() . '/inc/meta-box/project-page/index.php';
 
 
 require get_template_directory() . '/inc/core/contact-form.php';
@@ -280,28 +283,28 @@ function buildpro_maybe_import_default_content()
             buildpro_import_footer_demo();
         }
     }
-    $banner_demo_file = get_theme_file_path('/import/data-demo/page/banner-home.php');
+    $banner_demo_file = get_theme_file_path('/import/data-demo/page/home/banner-home.php');
     if (file_exists($banner_demo_file)) {
         require_once $banner_demo_file;
         if (function_exists('buildpro_import_banner_demo')) {
             buildpro_import_banner_demo();
         }
     }
-    $option_demo_file = get_theme_file_path('/import/data-demo/page/option-home.php');
+    $option_demo_file = get_theme_file_path('/import/data-demo/page/home/option-home.php');
     if (file_exists($option_demo_file)) {
         require_once $option_demo_file;
         if (function_exists('buildpro_import_option_demo')) {
             buildpro_import_option_demo();
         }
     }
-    $data_demo_file = get_theme_file_path('/import/data-demo/page/data-home.php');
+    $data_demo_file = get_theme_file_path('/import/data-demo/page/home/data-home.php');
     if (file_exists($data_demo_file)) {
         require_once $data_demo_file;
         if (function_exists('buildpro_import_data_demo')) {
             buildpro_import_data_demo();
         }
     }
-    $products_demo_file = get_theme_file_path('/import/data-demo/page/products-home.php');
+    $products_demo_file = get_theme_file_path('/import/data-demo/page/home/products-home.php');
     if (file_exists($products_demo_file)) {
         require_once $products_demo_file;
         if (function_exists('buildpro_import_product_demo')) {
@@ -309,32 +312,39 @@ function buildpro_maybe_import_default_content()
         }
     }
 
-    $service_demo_file = get_theme_file_path('/import/data-demo/page/service-home.php');
+    $service_demo_file = get_theme_file_path('/import/data-demo/page/home/service-home.php');
     if (file_exists($service_demo_file)) {
         require_once $service_demo_file;
         if (function_exists('buildpro_import_service_demo')) {
             buildpro_import_service_demo();
         }
     }
-    $evaluate_demo_file = get_theme_file_path('/import/data-demo/page/evaluate-home.php');
+    $evaluate_demo_file = get_theme_file_path('/import/data-demo/page/home/evaluate-home.php');
     if (file_exists($evaluate_demo_file)) {
         require_once $evaluate_demo_file;
         if (function_exists('buildpro_import_evaluate_demo')) {
             buildpro_import_evaluate_demo();
         }
     }
-    $project_demo_file = get_theme_file_path('/import/data-demo/page/project-home.php');
+    $project_demo_file = get_theme_file_path('/import/data-demo/page/home/project-home.php');
     if (file_exists($project_demo_file)) {
         require_once $project_demo_file;
         if (function_exists('buildpro_import_project_demo')) {
             buildpro_import_project_demo();
         }
     }
-    $post_demo_file = get_theme_file_path('/import/data-demo/page/post-home.php');
+    $post_demo_file = get_theme_file_path('/import/data-demo/page/home/post-home.php');
     if (file_exists($post_demo_file)) {
         require_once $post_demo_file;
         if (function_exists('buildpro_import_post_demo')) {
             buildpro_import_post_demo();
+        }
+    }
+    $projects_title_demo_file = get_theme_file_path('/import/data-demo/page/projects/title-project.php');
+    if (file_exists($projects_title_demo_file)) {
+        require_once $projects_title_demo_file;
+        if (function_exists('buildpro_import_projects_title_demo')) {
+            buildpro_import_projects_title_demo();
         }
     }
     $wc_active = class_exists('WooCommerce') || function_exists('wc_get_product');
