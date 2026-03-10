@@ -46,9 +46,9 @@ require get_template_directory() . '/inc/customizer/link-picker/index.php';
 require get_template_directory() . '/inc/customizer/home-page/index.php';
 require get_template_directory() . '/inc/customizer/project-page/index.php';
 require get_template_directory() . '/inc/customizer/about-us-page/index.php';
-require get_template_directory() . '/inc/meta-box/home-page/index.php';
-require get_template_directory() . '/inc/meta-box/project-page/index.php';
-require get_template_directory() . '/inc/meta-box/about-us-page/index.php';
+require get_template_directory() . '/inc/meta-box/page/home-page/index.php';
+require get_template_directory() . '/inc/meta-box/page/project-page/index.php';
+require get_template_directory() . '/inc/meta-box/page/about-us-page/index.php';
 
 
 require get_template_directory() . '/inc/core/contact-form.php';

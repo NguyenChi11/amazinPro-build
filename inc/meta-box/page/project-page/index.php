@@ -1,5 +1,5 @@
 <?php
-require get_template_directory() . '/inc/meta-box/project-page/section-title/index.php';
+require get_template_directory() . '/inc/meta-box/page/project-page/section-title/index.php';
 
 function buildpro_project_group_meta_box_add($post_type, $post)
 {
