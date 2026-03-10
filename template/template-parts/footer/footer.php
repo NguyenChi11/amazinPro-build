@@ -50,6 +50,7 @@ if (!is_customize_preview() && !$has_data) {
     return;
 }
 ?>
+
 <footer id="colophon" class="site-footer" <?php echo $bg_style; ?>>
     <div class="footer__inner">
         <?php if (is_customize_preview()): ?>
@@ -74,6 +75,8 @@ if (!is_customize_preview() && !$has_data) {
                         $header_logo_url = $header_logo_id ? wp_get_attachment_image_url($header_logo_id, 'full') : '';
                         $header_title = get_theme_mod('buildpro_header_title', '');
                         $header_sub = get_theme_mod('buildpro_header_description', '');
+                        $header_title = is_scalar($header_title) ? trim((string)$header_title) : '';
+                        $header_sub = is_scalar($header_sub) ? trim((string)$header_sub) : '';
                         ?>
                         <?php if ($header_logo_url): ?>
                             <img class="footer__logo" src="<?php echo esc_url($header_logo_url); ?>" alt="Footer Logo">

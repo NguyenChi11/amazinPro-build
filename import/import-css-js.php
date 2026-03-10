@@ -283,6 +283,60 @@ function wp_enqueue_custom_assets()
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/projects/section-title/script.js'))
         ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-about-us-banner-style',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-banner/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-banner/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-about-us-banner-script',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-banner/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-banner/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-about-us-core-values-style',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-core-values/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-core-values/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-about-us-core-values-script',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-core-values/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-core-values/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-about-us-leader-style',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-leader/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-leader/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-about-us-leader-script',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-leader/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-leader/script.js'))
+        ],
     ];
     foreach ($wp_enqueue_mapping as $asset) {
         if (isset($asset['condition']) && ! $asset['condition']) {

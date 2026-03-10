@@ -7,8 +7,7 @@ require get_template_directory() . '/inc/meta-box/home-page/section-service/inde
 require get_template_directory() . '/inc/meta-box/home-page/section-evaluate/index.php';
 require get_template_directory() . '/inc/meta-box/home-page/section-projects/index.php';
 require get_template_directory() . '/inc/meta-box/home-page/section-post/index.php';
-?>
-<?php
+
 function buildpro_home_group_meta_box_add($post_type, $post)
 {
     if ($post_type !== 'page') {

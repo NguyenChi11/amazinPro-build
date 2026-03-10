@@ -1,0 +1,33 @@
+.buildpro-about-facts-repeater .buildpro-about-fact {
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.fact-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #f0f0f0;
+  user-select: none;
+}
+.fact-accordion-header:hover {
+  background: #e6e6e6;
+}
+.fact-accordion-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #23282d;
+}
+.fact-accordion-arrow {
+  font-size: 11px;
+  color: #555;
+  transition: transform 0.2s ease;
+  transform: rotate(-90deg);
+  display: inline-block;
+}
+.fact-accordion-body {
+  padding: 8px;
+}

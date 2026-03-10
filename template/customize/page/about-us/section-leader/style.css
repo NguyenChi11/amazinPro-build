@@ -1,0 +1,48 @@
+.buildpro-about-leader-repeater .leader-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  background: #fff;
+}
+.leader-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #f0f0f0;
+  user-select: none;
+}
+.leader-accordion-header:hover {
+  background: #e6e6e6;
+}
+.leader-accordion-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #23282d;
+}
+.leader-accordion-arrow {
+  font-size: 11px;
+  color: #555;
+  transition: transform 0.2s ease;
+  transform: rotate(-90deg);
+  display: inline-block;
+}
+.leader-accordion-body {
+  padding: 0.75rem;
+}
+.buildpro-about-leader-repeater .leader-image-preview {
+  margin: 0.25rem 0 0.5rem;
+}
+.buildpro-about-leader-repeater .leader-image-empty {
+  width: 5rem;
+  height: 5rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 0.75rem;
+}

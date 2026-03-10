@@ -16,6 +16,11 @@ $description_header = get_theme_mod('buildpro_header_description', '');
 if ($description_header === '') {
     $description_header = get_theme_mod('header_description', '');
 }
+if (is_scalar($description_header)) {
+    $description_header = trim((string)$description_header);
+} else {
+    $description_header = '';
+}
 ?>
 
 <header id="masthead" class="site-header">

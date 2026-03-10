@@ -26,6 +26,16 @@ function buildpro_setup()
 }
 add_action('after_setup_theme', 'buildpro_setup');
 
+// Flush rewrite rules once to fix REST API pretty URLs (/wp-json/)
+function buildpro_maybe_flush_rewrite_rules()
+{
+    if (get_option('buildpro_rewrite_flushed') !== '2') {
+        flush_rewrite_rules();
+        update_option('buildpro_rewrite_flushed', '2');
+    }
+}
+add_action('init', 'buildpro_maybe_flush_rewrite_rules', 99);
+
 require get_template_directory() . '/import/import-css-js.php';
 require get_template_directory() . '/inc/core/buildpro-theme.php';
 require get_template_directory() . '/inc/functions/header-function.php';
@@ -35,8 +45,10 @@ require get_template_directory() . '/inc/customizer/footer/index.php';
 require get_template_directory() . '/inc/customizer/link-picker/index.php';
 require get_template_directory() . '/inc/customizer/home-page/index.php';
 require get_template_directory() . '/inc/customizer/project-page/index.php';
+require get_template_directory() . '/inc/customizer/about-us-page/index.php';
 require get_template_directory() . '/inc/meta-box/home-page/index.php';
 require get_template_directory() . '/inc/meta-box/project-page/index.php';
+require get_template_directory() . '/inc/meta-box/about-us-page/index.php';
 
 
 require get_template_directory() . '/inc/core/contact-form.php';
@@ -273,6 +285,14 @@ function buildpro_maybe_import_default_content()
     if (get_option('buildpro_default_content_imported') === '1') {
         $wc_active = class_exists('WooCommerce') || function_exists('wc_get_product');
         if (!$wc_active || get_option('buildpro_wc_default_content_imported') === '1') {
+            // Run any newly added section imports that may have been missed in previous runs
+            $about_leader_demo_file = get_theme_file_path('/import/data-demo/page/about-us/leader-about-us.php');
+            if (file_exists($about_leader_demo_file)) {
+                require_once $about_leader_demo_file;
+                if (function_exists('buildpro_import_about_us_leader_demo')) {
+                    buildpro_import_about_us_leader_demo();
+                }
+            }
             return;
         }
     }
@@ -345,6 +365,27 @@ function buildpro_maybe_import_default_content()
         require_once $projects_title_demo_file;
         if (function_exists('buildpro_import_projects_title_demo')) {
             buildpro_import_projects_title_demo();
+        }
+    }
+    $about_banner_demo_file = get_theme_file_path('/import/data-demo/page/about-us/banner-about-us.php');
+    if (file_exists($about_banner_demo_file)) {
+        require_once $about_banner_demo_file;
+        if (function_exists('buildpro_import_about_us_banner_demo')) {
+            buildpro_import_about_us_banner_demo();
+        }
+    }
+    $about_core_values_demo_file = get_theme_file_path('/import/data-demo/page/about-us/core-value-about-us.php');
+    if (file_exists($about_core_values_demo_file)) {
+        require_once $about_core_values_demo_file;
+        if (function_exists('buildpro_import_about_us_core_values_demo')) {
+            buildpro_import_about_us_core_values_demo();
+        }
+    }
+    $about_leader_demo_file = get_theme_file_path('/import/data-demo/page/about-us/leader-about-us.php');
+    if (file_exists($about_leader_demo_file)) {
+        require_once $about_leader_demo_file;
+        if (function_exists('buildpro_import_about_us_leader_demo')) {
+            buildpro_import_about_us_leader_demo();
         }
     }
     $wc_active = class_exists('WooCommerce') || function_exists('wc_get_product');

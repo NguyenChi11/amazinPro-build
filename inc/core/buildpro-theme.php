@@ -40,8 +40,13 @@ function buildpro_create_default_pages()
         }
         update_option('page_on_front', $home_id);
     }
-    buildpro_ensure_page_with_template('About Us', 'about-us', 'about-page.php');
+    buildpro_ensure_page_with_template('About Us', 'about-us', 'about-us-page.php');
     buildpro_ensure_page_with_template('Blogs', 'blogs', 'blogs-page.php');
     buildpro_ensure_page_with_template('Products', 'products', 'products-page.php');
     buildpro_ensure_page_with_template('Projects', 'projects', 'projects-page.php');
+    // Migrate existing pages using old slug 'about-page.php' -> 'about-us-page.php'
+    $old_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'about-page.php', 'number' => -1));
+    foreach ($old_pages as $op) {
+        update_post_meta($op->ID, '_wp_page_template', 'about-us-page.php');
+    }
 }

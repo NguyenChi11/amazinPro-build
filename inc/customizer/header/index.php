@@ -62,9 +62,6 @@ function buildpro_header_customize_preview_js()
     );
 }
 add_action('customize_preview_init', 'buildpro_header_customize_preview_js');
-?>
-
-<?php
 
 function buildpro_header_admin_menu()
 {
