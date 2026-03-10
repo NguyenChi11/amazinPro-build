@@ -409,6 +409,26 @@ function wp_enqueue_custom_assets()
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/blog/section-blog/script.js'))
         ],
+
+        // [
+        //     'type' => 'style',
+        //     'handle' => 'buildpro-post-style',
+        //     'src' => get_theme_file_uri('template/meta-box/post-type/post/style.css'),
+        //     'deps' => [],
+        //     'ver' => $version,
+        //     'in_footer' => false,
+        //     'condition' => file_exists(get_theme_file_path('template/meta-box/post-type/post/style.css'))
+        // ],
+        // [
+        //     'type' => 'script',
+        //     'handle' => 'buildpro-post-script',
+        //     'src' => get_theme_file_uri('template/meta-box/post-type/post/script.js'),
+        //     'deps' => ['swiper'],
+        //     'ver' => $version,
+        //     'in_footer' => true,
+        //     'condition' => file_exists(get_theme_file_path('template/meta-box/post-type/post/script.js'))
+        // ],
+
     ];
     foreach ($wp_enqueue_mapping as $asset) {
         if (isset($asset['condition']) && ! $asset['condition']) {

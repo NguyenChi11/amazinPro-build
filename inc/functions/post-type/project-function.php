@@ -1,0 +1,131 @@
+<?php
+function buildpro_register_project_cpt()
+{
+    $labels = array(
+        'name' => 'Projects',
+        'singular_name' => 'Project',
+        'menu_name' => 'Projects',
+        'name_admin_bar' => 'Project',
+        'add_new' => 'Add New',
+        'add_new_item' => 'Add New Project',
+        'new_item' => 'New Project',
+        'edit_item' => 'Edit Project',
+        'view_item' => 'View Project',
+        'all_items' => 'All Projects',
+        'search_items' => 'Search Projects',
+        'not_found' => 'No projects found',
+        'not_found_in_trash' => 'No projects found in Trash',
+    );
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_admin_bar' => true,
+        'show_in_nav_menus' => true,
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'projects'),
+        'show_in_rest' => true,
+        'menu_icon' => 'dashicons-portfolio',
+    );
+    register_post_type('project', $args);
+}
+
+add_filter('nav_menu_link_attributes', function ($atts, $item, $args) {
+    if (isset($item->object) && $item->object === 'page' && !empty($item->object_id)) {
+        $atts['data-object-id'] = (string) absint($item->object_id);
+        $atts['data-object-type'] = 'page';
+    }
+    return $atts;
+}, 10, 3);
+add_action('init', 'buildpro_register_project_cpt');
+
+add_action('after_switch_theme', function () {
+    flush_rewrite_rules();
+});
+function buildpro_register_project_taxonomies()
+{
+    $labels = array(
+        'name'              => 'Project Contruction',
+        'singular_name'     => 'Project Contruction',
+        'search_items'      => 'Search Project Contruction',
+        'all_items'         => 'All Project Contruction',
+        'parent_item'       => 'Parent Project Contruction',
+        'parent_item_colon' => 'Parent Project Contruction:',
+        'edit_item'         => 'Edit Project Contruction',
+        'update_item'       => 'Update Project Contruction',
+        'add_new_item'      => 'Add New Project Contruction',
+        'new_item_name'     => 'New Project Contruction Name',
+        'menu_name'         => 'Project Contruction',
+    );
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'project-contruction'),
+        'show_in_rest'      => true,
+    );
+    register_taxonomy('project-contruction', array('project'), $args);
+}
+add_action('init', 'buildpro_register_project_taxonomies');
+
+function buildpro_save_project_meta($post_id)
+{
+    if (!isset($_POST['buildpro_project_meta_nonce']) || !wp_verify_nonce($_POST['buildpro_project_meta_nonce'], 'buildpro_project_meta_save')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+    if (get_post_type($post_id) !== 'project') {
+        return;
+    }
+    $banner_id = isset($_POST['project_banner_id']) ? absint($_POST['project_banner_id']) : 0;
+    $location = isset($_POST['location_project']) ? sanitize_text_field($_POST['location_project']) : '';
+    $about = isset($_POST['about_project']) ? wp_kses_post($_POST['about_project']) : '';
+    $about_image_id = isset($_POST['about_image_project']) ? absint($_POST['about_image_project']) : 0;
+    $price = isset($_POST['price_project']) ? sanitize_text_field($_POST['price_project']) : '';
+    $information = isset($_POST['information_project']) ? wp_kses_post($_POST['information_project']) : '';
+    $datetime = isset($_POST['date_time_project']) ? sanitize_text_field($_POST['date_time_project']) : '';
+    $total_area = isset($_POST['total_area_project']) ? sanitize_text_field($_POST['total_area_project']) : '';
+    $completion = isset($_POST['completion_project']) ? sanitize_text_field($_POST['completion_project']) : '';
+    $arch_style = isset($_POST['architectural_style_project']) ? sanitize_text_field($_POST['architectural_style_project']) : '';
+    $gallery_raw = isset($_POST['project_gallery_ids']) ? $_POST['project_gallery_ids'] : '';
+    $gallery_ids = array();
+    if (is_array($gallery_raw)) {
+        foreach ($gallery_raw as $gid) {
+            $gallery_ids[] = absint($gid);
+        }
+    } elseif (is_string($gallery_raw)) {
+        $gallery_ids = array_filter(array_map('absint', explode(',', $gallery_raw)));
+    }
+    $standards_raw = isset($_POST['project_standards']) && is_array($_POST['project_standards']) ? $_POST['project_standards'] : array();
+    $standards = array();
+    foreach ($standards_raw as $row) {
+        $img = isset($row['image_id']) ? absint($row['image_id']) : 0;
+        $title = isset($row['title']) ? sanitize_text_field($row['title']) : '';
+        $desc = isset($row['description']) ? sanitize_textarea_field($row['description']) : '';
+        if ($img || $title !== '' || $desc !== '') {
+            $standards[] = array('image_id' => $img, 'title' => $title, 'description' => $desc);
+        }
+    }
+    update_post_meta($post_id, 'project_banner_id', $banner_id);
+    update_post_meta($post_id, 'location_project', $location);
+    update_post_meta($post_id, 'about_project', $about);
+    update_post_meta($post_id, 'about_image_project', $about_image_id);
+    update_post_meta($post_id, 'price_project', $price);
+    update_post_meta($post_id, 'date_time_project', $datetime);
+    update_post_meta($post_id, 'project_gallery_ids', $gallery_ids);
+    update_post_meta($post_id, 'project_standards', $standards);
+    update_post_meta($post_id, 'information_project', $information);
+    update_post_meta($post_id, 'total_area_project', $total_area);
+    update_post_meta($post_id, 'completion_project', $completion);
+    update_post_meta($post_id, 'architectural_style_project', $arch_style);
+}
+add_action('save_post_project', 'buildpro_save_project_meta');
