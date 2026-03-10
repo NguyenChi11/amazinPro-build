@@ -1,0 +1,119 @@
+.about-contact {
+  background: #f5f8fc;
+  padding: 0 3.75rem 4rem;
+  position: relative;
+}
+.about-contact__inner {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.about-contact__title {
+  font-family:
+    "Poppins",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  color: #111827;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+.about-contact__desc {
+  color: #718096;
+  margin-bottom: 1.25rem;
+  max-width: 56rem;
+}
+.about-contact__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.about-contact__card {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(29, 41, 57, 0.08);
+  padding: 1rem 1.25rem;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+.about-contact__icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: #e6f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-contact__icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+}
+.about-contact__label {
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+}
+.about-contact__value {
+  color: #4a5568;
+}
+@media (max-width: 1024px) {
+  .about-contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact__hover-outline {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed #2563eb;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.about-contact:hover .contact__hover-outline {
+  opacity: 1;
+}
+.about-contact .customize-partial-edit-shortcut {
+  position: absolute;
+  right: 3.75rem;
+  top: 2.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+.about-contact:hover .customize-partial-edit-shortcut {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 639.98px) {
+  .about-contact {
+    padding: 0 1.25rem 2.5rem;
+  }
+
+  .about-contact__title {
+    font-size: 1.5rem;
+  }
+
+  .about-contact__card {
+    padding: 0.875rem 1rem;
+  }
+  .about-contact__desc {
+    font-size: 0.875rem;
+  }
+  .about-contact__label {
+    font-size: 0.875rem;
+  }
+  .about-contact__value {
+    font-size: 0.75rem;
+  }
+}

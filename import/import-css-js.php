@@ -337,6 +337,60 @@ function wp_enqueue_custom_assets()
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-leader/script.js'))
         ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-about-us-policy-style',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-policy/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-policy/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-about-us-policy-script',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-policy/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-policy/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-about-us-contact-style',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-contact/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-contact/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-about-us-contact-script',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-contact/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-contact/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-about-us-contact-form-style',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-contact-form/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-contact-form/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-about-us-contact-form-script',
+            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-contact-form/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-contact-form/script.js'))
+        ],
     ];
     foreach ($wp_enqueue_mapping as $asset) {
         if (isset($asset['condition']) && ! $asset['condition']) {

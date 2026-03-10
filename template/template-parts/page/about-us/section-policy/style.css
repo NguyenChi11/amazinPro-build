@@ -1,0 +1,203 @@
+:root {
+  --ap-blue: #2f80ed;
+  --ap-muted: #718096;
+  --ap-text: #4a5568;
+  --ap-bg: #f5f8fc;
+  --ap-card-bg: #ffffff;
+  --ap-shadow: 0 6px 20px rgba(29, 41, 57, 0.08);
+}
+.about-policy {
+  background: var(--ap-bg);
+  padding: 0 5rem;
+  padding-bottom: 3rem;
+  position: relative;
+}
+.about-policy__inner {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.about-policy__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.about-policy__title {
+  font-family:
+    "Poppins",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  color: #111827;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+  position: relative;
+  padding-left: 0.75rem;
+}
+.about-policy__title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  width: 4px;
+  background: var(--ap-blue);
+  border-radius: 999px;
+}
+.about-policy__details {
+  background: #f1f5f9;
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.about-policy__detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+.about-policy__detail:last-child {
+  border-bottom: 0;
+}
+.about-policy__detail-label {
+  color: var(--ap-muted);
+}
+.about-policy__detail-value {
+  color: #111827;
+  font-weight: 600;
+}
+.about-policy__cert-card {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 1rem;
+  align-items: center;
+  background: var(--ap-card-bg);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  box-shadow: var(--ap-shadow);
+  margin-top: 1rem;
+}
+.about-policy__cert-icon img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+}
+.about-policy__cert-placeholder {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.75rem;
+  background: #e5e7eb;
+}
+.about-policy__cert-title {
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+}
+.about-policy__cert-desc {
+  color: var(--ap-text);
+}
+.about-policy__cert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ap-blue);
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+.about-policy__text {
+  color: var(--ap-text);
+  margin-bottom: 1.25rem;
+}
+.about-policy__warranty-list {
+  display: grid;
+  gap: 1rem;
+}
+.about-policy__warranty-item {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+.about-policy__warranty-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.625rem;
+  background: #e6f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-policy__warranty-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+}
+.about-policy__warranty-placeholder {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #cbd5e1;
+  border-radius: 0.25rem;
+}
+.about-policy__warranty-title {
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+.about-policy__warranty-desc {
+  color: var(--ap-text);
+}
+@media (max-width: 639.98px) {
+  .about-policy {
+    padding: 0 1.25rem 2.5rem;
+  }
+
+  .about-policy__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-policy__title {
+    font-size: 1.5rem;
+  }
+
+  .about-policy__cert-card {
+    grid-template-columns: 3.5rem 1fr;
+    gap: 0.75rem;
+  }
+
+  .about-policy__cert-icon img,
+  .about-policy__cert-placeholder {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+.policy__hover-outline {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed #2563eb;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.about-policy:hover .policy__hover-outline {
+  opacity: 1;
+}
+.about-policy .customize-partial-edit-shortcut {
+  position: absolute;
+  right: 3.75rem;
+  top: 2.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+.about-policy:hover .customize-partial-edit-shortcut {
+  opacity: 1;
+  visibility: visible;
+}

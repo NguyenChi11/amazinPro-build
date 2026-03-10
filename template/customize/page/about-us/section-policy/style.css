@@ -1,0 +1,48 @@
+.policy-item-row {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: #fff;
+}
+.policy-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: #f0f0f0;
+  user-select: none;
+}
+.policy-accordion-header:hover {
+  background: #e6e6e6;
+}
+.policy-accordion-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #23282d;
+}
+.policy-accordion-arrow {
+  font-size: 11px;
+  color: #555;
+  transition: transform 0.2s ease;
+  transform: rotate(-90deg);
+  display: inline-block;
+}
+.policy-accordion-body {
+  padding: 12px;
+}
+.policy-image-preview {
+  margin: 4px 0 8px;
+}
+.policy-image-empty {
+  width: 80px;
+  height: 80px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 12px;
+}

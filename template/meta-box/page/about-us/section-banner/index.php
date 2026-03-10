@@ -36,15 +36,15 @@
                 foreach ($facts as $i => $f) {
                     $fl = isset($f['label']) ? $f['label'] : '';
                     $fv = isset($f['value']) ? $f['value'] : ''; ?>
-                    <div class="about-fact">
-                        <p><label>Label<br><input type="text" class="widefat"
-                                    name="buildpro_about_banner_facts[<?php echo $i; ?>][label]"
-                                    value="<?php echo esc_attr($fl); ?>"></label></p>
-                        <p><label>Value<br><input type="text" class="widefat"
-                                    name="buildpro_about_banner_facts[<?php echo $i; ?>][value]"
-                                    value="<?php echo esc_attr($fv); ?>"></label></p>
-                        <p><button type="button" class="button remove-fact">Remove</button></p>
-                    </div>
+            <div class="about-fact">
+                <p><label>Label<br><input type="text" class="widefat"
+                            name="buildpro_about_banner_facts[<?php echo $i; ?>][label]"
+                            value="<?php echo esc_attr($fl); ?>"></label></p>
+                <p><label>Value<br><input type="text" class="widefat"
+                            name="buildpro_about_banner_facts[<?php echo $i; ?>][value]"
+                            value="<?php echo esc_attr($fv); ?>"></label></p>
+                <p><button type="button" class="button remove-fact">Remove</button></p>
+            </div>
             <?php }
             } ?>
         </div>
