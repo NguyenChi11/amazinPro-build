@@ -270,6 +270,23 @@ function buildpro_import_copy_to_uploads($src_path)
     return (int)$attach_id;
 }
 
+function buildpro_get_post_views($post_id)
+{
+    $v = (int) get_post_meta($post_id, 'buildpro_post_views', true);
+    return $v;
+}
+
+function buildpro_format_views($n)
+{
+    if ($n >= 1000000) {
+        return round($n / 1000000, 1) . 'm';
+    }
+    if ($n >= 1000) {
+        return round($n / 1000, 1) . 'k';
+    }
+    return (string) $n;
+}
+
 function buildpro_import_resolve_theme_path($url)
 {
     $rel = preg_replace('#^/wp-content/themes/buildpro#', '', $url);
