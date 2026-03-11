@@ -177,7 +177,7 @@ if (!function_exists('buildpro_services_customize_register')) {
         }
 
         $wp_customize->add_section('buildpro_services_section', array(
-            'title' => __('Services Home', 'buildpro'),
+            'title' => __('Home Page: Services', 'buildpro'),
             'priority' => 30,
             'active_callback' => 'buildpro_customizer_is_home_preview',
         ));

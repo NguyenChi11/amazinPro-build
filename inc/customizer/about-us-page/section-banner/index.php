@@ -87,13 +87,6 @@ if (!function_exists('buildpro_about_banner_customize_register')) {
                         return true;
                     }
                 }
-                // Always show if an About Us page exists on the site
-                if (!empty(get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'about-page.php', 'number' => 1)))) {
-                    return true;
-                }
-                if (!empty(get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'about-us-page.php', 'number' => 1)))) {
-                    return true;
-                }
                 return false;
             }
         }

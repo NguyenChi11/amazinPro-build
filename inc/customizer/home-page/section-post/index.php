@@ -83,7 +83,7 @@ if (!function_exists('buildpro_post_customize_register')) {
             }
         }
         $wp_customize->add_section('buildpro_post_section', array(
-            'title' => __('Post Section', 'buildpro'),
+            'title' => __('Home Page: Post', 'buildpro'),
             'priority' => 40,
             'active_callback' => 'buildpro_customizer_is_home_preview',
         ));

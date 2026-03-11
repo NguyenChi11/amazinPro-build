@@ -119,7 +119,7 @@ function buildpro_data_customize_register($wp_customize)
         }
     }
     $wp_customize->add_section('buildpro_data_section', array(
-        'title' => __('Data Home', 'buildpro'),
+        'title' => __('Home Page: Data', 'buildpro'),
         'priority' => 28,
         'active_callback' => 'buildpro_customizer_is_home_preview',
     ));

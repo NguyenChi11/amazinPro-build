@@ -192,7 +192,7 @@ function buildpro_banner_customize_register($wp_customize)
 
     // Section
     $wp_customize->add_section('buildpro_banner_section', array(
-        'title'           => __('Banner Home', 'buildpro'),
+        'title'           => __('Home Page: Banner', 'buildpro'),
         'priority'        => 25,
         'active_callback' => 'buildpro_customizer_is_home_preview',
     ));

@@ -83,7 +83,7 @@ if (!function_exists('buildpro_evaluate_customize_register')) {
             }
         }
         $wp_customize->add_section('buildpro_evaluate_section', array(
-            'title' => __('Evaluate Home', 'buildpro'),
+            'title' => __('Home Page: Evaluate', 'buildpro'),
             'priority' => 36,
             'active_callback' => 'buildpro_customizer_is_home_preview',
         ));

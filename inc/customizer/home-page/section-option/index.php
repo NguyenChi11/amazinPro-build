@@ -126,7 +126,7 @@ function buildpro_option_customize_register($wp_customize)
         }
     }
     $wp_customize->add_section('buildpro_option_section', array(
-        'title' => __('Option Home', 'buildpro'),
+        'title' => __('Home Page: Option', 'buildpro'),
         'priority' => 27,
         'active_callback' => 'buildpro_customizer_is_home_preview',
     ));
