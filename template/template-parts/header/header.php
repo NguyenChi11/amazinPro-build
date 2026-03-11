@@ -102,6 +102,10 @@ if (is_scalar($description_header)) {
                     <p>Request a Quote</p>
                 </a>
             </div>
+            <div class="header-nav-button-cart">
+                <img class="header-nav-button-cart__icon"
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon-cart.png')); ?>" alt="">
+            </div>
         </div>
         <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-sidebar">
             <span>Menu</span>
