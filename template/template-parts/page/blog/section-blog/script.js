@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const left = document.querySelector(".blog-section-blog__left");
   if (!left) return;
   const list = left.querySelector(".section-post__list");
-  const pagination = left.querySelector(".product--pagination");
+  const pagination = left.querySelector(".blog--pagination");
   if (!list) return;
 
   function scrollToList() {

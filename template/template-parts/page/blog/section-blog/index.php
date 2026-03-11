@@ -55,7 +55,7 @@
                 'prev_next' => false,
             ));
             if (!empty($links) && is_array($links)) {
-                echo '<nav class="product--pagination"><ul class="page-numbers">';
+                echo '<nav class="blog--pagination"><ul class="page-numbers">';
                 if ($paged > 1) {
                     echo '<li><a class="page-numbers prev" href="' . esc_url(get_pagenum_link($paged - 1)) . '">&lsaquo;</a></li>';
                 } else {

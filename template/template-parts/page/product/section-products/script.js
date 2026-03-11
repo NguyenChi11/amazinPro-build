@@ -14,31 +14,48 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   if (!form || !input || !listWrap) return;
 
-  function makeURL(pageUrl, qVal) {
-    const url = new URL(pageUrl, window.location.origin);
-    const params = url.searchParams;
-    const q = (qVal || "").trim();
-    if (q) {
-      params.set("q", q);
-    } else {
-      params.delete("q");
-    }
-    params.delete("paged");
-    params.delete("page");
-    url.search = params.toString();
-    return url.toString();
+  // Scroll to product list (like blog pagination behavior)
+  function scrollToList() {
+    const target = listWrap.querySelector(".section-product__list") || listWrap;
+    const top = target.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "smooth" });
   }
 
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("prod_p")) {
+    scrollToList();
+  }
+  if (sessionStorage.getItem("bp_scroll_product") === "1") {
+    sessionStorage.removeItem("bp_scroll_product");
+    scrollToList();
+  }
+
+  // Pagination: full-page reload + sessionStorage scroll (like blog)
   function bindPagination() {
-    const anchors = listWrap.querySelectorAll(".product--pagination a");
-    anchors.forEach((a) => {
-      a.addEventListener("click", function (e) {
-        e.preventDefault();
-        const url = a.getAttribute("href");
-        if (!url) return;
-        updateList(url, true);
+    const pg = listWrap.querySelector(".product--pagination");
+    if (!pg) return;
+    pg.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", function () {
+        sessionStorage.setItem("bp_scroll_product", "1");
       });
     });
+  }
+
+  bindPagination();
+
+  // Search: AJAX update (preserve filter state, reset to page 1)
+  function makeURL(pageUrl, qVal) {
+    const url = new URL(pageUrl, window.location.origin);
+    const prms = url.searchParams;
+    const q = (qVal || "").trim();
+    if (q) {
+      prms.set("q", q);
+    } else {
+      prms.delete("q");
+    }
+    prms.delete("prod_p");
+    url.search = prms.toString();
+    return url.toString();
   }
 
   async function updateList(targetUrl, push) {
@@ -61,12 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
         history.replaceState({}, "", targetUrl);
       }
       bindPagination();
-      const top = listWrap.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: "smooth" });
     } catch (_) {}
   }
-
-  bindPagination();
 
   const onType = debounce(() => {
     const url = makeURL(window.location.href, input.value);

@@ -500,6 +500,15 @@ function wp_enqueue_custom_assets()
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/single/single-project/script.js'))
         ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-cart',
+            'src' => get_theme_file_uri('assets/js/cart.js'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => class_exists('WooCommerce'),
+        ],
 
         // [
         //     'type' => 'style',

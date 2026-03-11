@@ -92,7 +92,7 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
                                 <p class="section-product__item-price">
                                     <span>$</span><?php echo esc_html($item['price']); ?><span>/ton</span>
                                 </p>
-                                <button class="section-product__item-cta">Request a Quote</button>
+                                <button class="section-product__item-cta btn-add-to-cart" data-product-id="<?php echo esc_attr($item['id']); ?>">Add to Cart</button>
                             </div>
                         </div>
                     </a>

@@ -42,13 +42,52 @@ echo '<link rel="stylesheet" href="' . esc_url($buildpro_comments_css) . '" medi
 
         <ol class="comment-list">
             <?php
+            if (!function_exists('buildpro_comment_callback')) {
+                function buildpro_comment_callback($comment, $args, $depth)
+                {
+                    $tag = ($args['style'] === 'div') ? 'div' : 'li';
+            ?>
+                    <<?php echo esc_attr($tag); ?> id="comment-<?php comment_ID(); ?>" <?php comment_class('comment-item', $comment); ?>>
+                        <article class="comment-body">
+                            <footer class="comment-meta">
+                                <div class="comment-author">
+                                    <?php
+                                    $avatar_size = isset($args['avatar_size']) ? (int) $args['avatar_size'] : 56;
+                                    echo get_avatar($comment, $avatar_size, '', '', ['class' => 'comment-avatar']);
+                                    ?>
+                                    <div class="comment-author-info">
+                                        <span class="comment-author-name"><?php comment_author(); ?></span>
+                                        <time class="comment-date" datetime="<?php comment_date(DATE_W3C); ?>">
+                                            <?php comment_date(); ?>
+                                        </time>
+                                    </div>
+                                </div>
+                                <?php if ('0' == $comment->comment_approved) : ?>
+                                    <p class="comment-awaiting-moderation"><?php esc_html_e('Your comment is awaiting moderation.', 'buildpro'); ?></p>
+                                <?php endif; ?>
+                            </footer>
+                            <div class="comment-content">
+                                <?php comment_text(); ?>
+                            </div>
+                            <?php
+                            comment_reply_link(array_merge($args, [
+                                'depth'     => $depth,
+                                'max_depth' => $args['max_depth'],
+                                'before'    => '<div class="reply">',
+                                'after'     => '</div>',
+                            ]));
+                            ?>
+                        </article>
+                <?php
+                }
+            }
             wp_list_comments([
                 'style'       => 'ol',
                 'short_ping'  => true,
                 'avatar_size' => 56,
                 'callback'    => 'buildpro_comment_callback',
             ]);
-            ?>
+                ?>
         </ol>
 
         <?php the_comments_navigation([

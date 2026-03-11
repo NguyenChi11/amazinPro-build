@@ -105,6 +105,8 @@ if (is_scalar($description_header)) {
             <div class="header-nav-button-cart">
                 <img class="header-nav-button-cart__icon"
                     src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon-cart.png')); ?>" alt="">
+                <?php $cart_count = function_exists('WC') && WC()->cart ? (int) WC()->cart->get_cart_contents_count() : 0; ?>
+                <span class="header-cart-count<?php echo $cart_count === 0 ? ' header-cart-count--hidden' : ''; ?>"><?php echo $cart_count; ?></span>
             </div>
         </div>
         <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-sidebar">

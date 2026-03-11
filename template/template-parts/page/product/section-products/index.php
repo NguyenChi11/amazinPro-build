@@ -19,8 +19,8 @@
                 'product_tag'   => array('icon' => $tags_icon, 'label' => 'Tags'),
             );
             $current_url = function_exists('get_permalink') ? get_permalink() : home_url('/');
-            $current_paged = max(1, get_query_var('paged') ? (int) get_query_var('paged') : (get_query_var('page') ? (int) get_query_var('page') : 1));
-            $pagination_key = get_query_var('paged') ? 'paged' : (get_query_var('page') ? 'page' : 'paged');
+            $current_paged = max(1, !empty($_GET['prod_p']) ? (int) $_GET['prod_p'] : 1);
+            $pagination_key = 'prod_p';
             $sel_brand = isset($_GET['brand']) ? sanitize_text_field(wp_unslash($_GET['brand'])) : '';
             $sel_cat   = isset($_GET['category']) ? sanitize_text_field(wp_unslash($_GET['category'])) : '';
             $sel_tag   = isset($_GET['tag']) ? sanitize_text_field(wp_unslash($_GET['tag'])) : '';
@@ -110,7 +110,7 @@
         </div>
         <div class="product-section-products__product--list">
             <?php
-            $paged = max(1, get_query_var('paged') ? (int) get_query_var('paged') : (get_query_var('page') ? (int) get_query_var('page') : 1));
+            $paged = max(1, !empty($_GET['prod_p']) ? (int) $_GET['prod_p'] : 1);
             $ppp = 9;
             $items = array();
             if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
@@ -180,31 +180,32 @@
                         echo '    <h3 class="section-product__item-title">' . esc_html($title) . '</h3>';
                         echo '    <div class="section-product__item-bottom">';
                         echo '      <p class="section-product__item-price"><span>$</span>' . esc_html($price) . '<span>/ton</span></p>';
-                        echo '      <button class="section-product__item-cta">Request a Quote</button>';
+                        echo '      <button class="section-product__item-cta btn-add-to-cart" data-product-id="' . esc_attr($pid) . '">Add to Cart</button>';
                         echo '    </div>';
                         echo '  </div>';
                         echo '</a>';
                     }
                     echo '</div>';
-                    $big = 999999999;
                     $preserve = array();
                     if ($keyword !== '') $preserve['q'] = $keyword;
                     if ($sel_brand !== '') $preserve['brand'] = $sel_brand;
                     if ($sel_cat !== '') $preserve['category'] = $sel_cat;
                     if ($sel_tag !== '') $preserve['tag'] = $sel_tag;
+                    wp_reset_postdata();
+                    $base_pg_url = remove_query_arg(array('prod_p', 'paged', 'page'), empty($preserve) ? $current_url : add_query_arg($preserve, $current_url));
+                    $sep = (strpos($base_pg_url, '?') !== false) ? '&' : '?';
                     $links = paginate_links(array(
-                        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                        'format' => '?paged=%#%',
+                        'base' => $base_pg_url . $sep . 'prod_p=%#%',
+                        'format' => '',
                         'current' => max(1, $paged),
                         'total' => (int) $q->max_num_pages,
                         'type' => 'array',
                         'prev_next' => false,
-                        'add_args' => $preserve,
                     ));
                     if (!empty($links) && is_array($links)) {
                         echo '<nav class="product--pagination"><ul class="page-numbers">';
                         if ($paged > 1) {
-                            echo '<li><a class="page-numbers prev" href="' . esc_url(add_query_arg($preserve, get_pagenum_link($paged - 1))) . '">&lsaquo;</a></li>';
+                            echo '<li><a class="page-numbers prev" href="' . esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged - 1)), $current_url)) . '">&lsaquo;</a></li>';
                         } else {
                             echo '<li><span class="page-numbers prev disabled">&lsaquo;</span></li>';
                         }
@@ -212,13 +213,12 @@
                             echo '<li>' . $lnk . '</li>';
                         }
                         if ($paged < (int) $q->max_num_pages) {
-                            echo '<li><a class="page-numbers next" href="' . esc_url(add_query_arg($preserve, get_pagenum_link($paged + 1))) . '">&rsaquo;</a></li>';
+                            echo '<li><a class="page-numbers next" href="' . esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged + 1)), $current_url)) . '">&rsaquo;</a></li>';
                         } else {
                             echo '<li><span class="page-numbers next disabled">&rsaquo;</span></li>';
                         }
                         echo '</ul></nav>';
                     }
-                    wp_reset_postdata();
                 }
             }
             ?>
