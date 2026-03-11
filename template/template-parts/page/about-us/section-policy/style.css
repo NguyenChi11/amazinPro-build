@@ -119,14 +119,14 @@
   gap: 1rem;
 }
 .about-policy__warranty-item {
-  display: grid;
-  grid-template-columns: 2.75rem 1fr;
+  display: flex;
+
   gap: 0.75rem;
   align-items: start;
 }
 .about-policy__warranty-icon {
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 0.625rem;
   background: #e6f0ff;
   display: flex;
@@ -134,8 +134,8 @@
   justify-content: center;
 }
 .about-policy__warranty-icon img {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 3rem;
+  height: 3rem;
   object-fit: contain;
 }
 .about-policy__warranty-placeholder {
@@ -144,13 +144,20 @@
   background: #cbd5e1;
   border-radius: 0.25rem;
 }
+.about-policy__warranty-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
 .about-policy__warranty-title {
   font-weight: 700;
   color: #1a202c;
   margin: 0;
+  font-size: 1.5rem;
 }
 .about-policy__warranty-desc {
   color: var(--ap-text);
+  font-size: 1rem;
 }
 @media (max-width: 639.98px) {
   .about-policy {

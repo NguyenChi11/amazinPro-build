@@ -1,0 +1,647 @@
+.single-project-detail {
+  width: 100%;
+  padding: 0 3.75rem;
+}
+
+.single-project__back {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 1.875rem;
+  padding-bottom: 1.75rem;
+}
+
+.single-project__back-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.single-post__title_back {
+  margin: 0;
+}
+.single-project__header {
+  position: relative;
+  width: 100%;
+  height: 50rem;
+  overflow: hidden;
+  border-radius: 1.25rem;
+}
+
+.single-project__banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.single-project__banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.single-project__title-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.25rem 2.5rem;
+  color: rgba(255, 255, 255, 1);
+  width: 90rem;
+}
+
+.single-project__taxonomy-list {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.single-project__taxonomy-chip {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  margin: 0;
+  border-radius: 0.625rem;
+  background-color: rgba(197, 128, 75, 1);
+  color: rgba(247, 251, 255, 1);
+  padding: 0.75rem 4rem;
+}
+
+.single-project__title {
+  font-family: "Inter", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 3.5rem;
+  margin: 0;
+  margin-bottom: 1.875rem;
+}
+
+.single-project__meta {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.single-project--title__items {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.single-project__icon {
+  font-size: 1.5rem;
+}
+
+.single-project__text {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Single Project Content - Text first, then full-width images
+   ========================================================================== */
+
+.single-project__content {
+  max-width: 100%; /* hoặc giá trị bạn thích, ví dụ 1400px */
+  margin: 0 auto;
+  padding-top: 2rem;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #2d3748;
+}
+
+/* Text parts - giữ nguyên thứ tự, style đẹp hơn */
+.single-project__content p {
+  margin: 0;
+  margin-bottom: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+}
+
+.single-project__content h1,
+.single-project__content h2,
+.single-project__content h3,
+.single-project__content h4 {
+  margin: 2.5rem 0 1.2rem;
+  color: #1e3a8a;
+  line-height: 1.3;
+}
+
+.single-project__content ul,
+.single-project__content ol {
+  margin: 1.4rem 0 1.4rem 1.8rem;
+}
+
+/* Ẩn float/align mặc định để tránh ảnh xen giữa text */
+.single-project__content img,
+.single-project__content figure.wp-block-image,
+.single-project__content .wp-block-gallery,
+.single-project__content .alignleft,
+.single-project__content .alignright,
+.single-project__content .aligncenter {
+  float: none !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+/* Tất cả ảnh / figure ảnh sẽ xuất hiện SAU text và chiếm full width */
+.single-project__content figure.wp-block-image,
+.single-project__content .wp-block-image,
+.single-project__content img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 24rem !important; /* chiều cao cố định 30rem */
+  margin: 2.5rem 0 !important; /* khoảng cách trên dưới mỗi ảnh */
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Ảnh bên trong sẽ cover toàn bộ khung (crop nếu cần) */
+.single-project__content figure.wp-block-image img,
+.single-project__content .wp-block-image img,
+.single-project__content img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover; /* cover → crop đẹp, giữ tỉ lệ */
+  object-position: center;
+  display: block;
+}
+
+/* Gallery (nếu có nhiều ảnh trong 1 block) */
+.single-project__content .wp-block-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2.5rem 0 !important;
+}
+
+.single-project__content .wp-block-gallery .blocks-gallery-item {
+  flex: 1 1 300px;
+  margin: 0 !important;
+}
+
+.single-project__content .wp-block-gallery img {
+  height: 24rem !important;
+  object-fit: cover;
+}
+
+.single-project__facts-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.single-project__fact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.single-project__fact-item .label {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  margin: 0;
+  color: rgba(126, 132, 139, 1);
+}
+
+.single-project__fact-item .value {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  margin: 0;
+  color: rgba(147, 88, 43, 1);
+}
+
+.single-project__about {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc cho cân đối */
+  justify-content: space-between;
+  gap: 4rem; /* Khoảng cách lớn giữa text và ảnh */
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 1.5rem;
+  margin-top: 4rem;
+}
+
+.single-project__about-content {
+  flex: 1; /* Text chiếm không gian linh hoạt */
+  max-width: 55%; /* Giữ text không quá dài */
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem; /* Giữ kích thước lớn như cũ */
+  line-height: 1.75; /* Dễ đọc, thoáng */
+  color: rgba(0, 0, 0, 1); /* Màu xám đậm sang trọng */
+}
+
+.single-project__about-content p {
+  margin-bottom: 1.8rem; /* Khoảng cách đoạn văn thoải mái */
+}
+
+.single-project__about-content strong,
+.single-project__about-content b {
+  font-weight: 700;
+  color: #1e3a8a; /* Màu xanh navy nhấn mạnh */
+}
+
+.single-project__about-image {
+  flex: 1;
+  max-width: 45%; /* Ảnh chiếm ~45% để cân bằng */
+  height: 45.25rem; /* Giữ chiều cao cao cấp như cũ */
+  overflow: hidden; /* Ẩn phần thừa */
+  border-radius: 1.5rem; /* Bo góc mềm mại hơn */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); /* Shadow sâu hơn cho chiều sâu */
+  transition: transform 0.4s ease;
+}
+
+.single-project__about-image:hover {
+  transform: translateY(-8px); /* Hiệu ứng lift nhẹ khi hover */
+}
+
+.single-project__about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ảnh cover đầy khung, crop đẹp */
+  object-position: center; /* Tập trung trung tâm */
+  border-radius: 1.5rem;
+  display: block;
+}
+
+/* ==========================================================================
+   Single Project Gallery - Luxury Villa Style
+   ========================================================================== */
+
+.single-project__gallery {
+  padding: 5rem 2rem;
+  background: #f8f9fa; /* nền sáng nhẹ, sạch sẽ */
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.single-project__section-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 4rem;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.single-project__section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    #d4af37,
+    #b8975e,
+    #d4af37
+  ); /* vàng ánh kim luxury */
+  border-radius: 2px;
+}
+
+.single-project__gallery-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cột trên desktop */
+  gap: 2.5rem; /* khoảng cách lớn, thoáng */
+}
+
+.single-project__gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  transition: all 0.4s ease;
+  aspect-ratio: 4 / 5; /* tỉ lệ dọc nhẹ, sang trọng */
+}
+
+.single-project__gallery-item:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+}
+
+.single-project__gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+  display: block;
+}
+
+.single-project__gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* Overlay nhẹ khi hover (tạo cảm giác premium) */
+.single-project__gallery-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.35));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 1.25rem;
+  pointer-events: none;
+}
+
+.single-project__gallery-item:hover::after {
+  opacity: 1;
+}
+/* ==========================================================================
+   Single Project Standards - Luxury Villa Style (tương tự Gallery)
+   ========================================================================== */
+
+.single-project__standards {
+  padding: 5rem 2rem;
+  background: #f8f9fa; /* nền sáng nhẹ, sạch sẽ như gallery */
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.single-project__section-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 4rem;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.single-project__section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    #d4af37,
+    #b8975e,
+    #d4af37
+  ); /* vàng ánh kim luxury */
+  border-radius: 2px;
+}
+
+.single-project__standards-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(380px, 1fr)
+  ); /* responsive, tự động chia cột */
+  gap: 2.5rem; /* khoảng cách lớn, thoáng đãng */
+}
+
+.single-project__standard-item {
+  background: white;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.single-project__standard-item:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+.single-project__standard-thumb {
+  height: 18rem; /* chiều cao ảnh cố định, cao cấp */
+  overflow: hidden;
+  position: relative;
+}
+
+.single-project__standard-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.single-project__standard-item:hover .single-project__standard-thumb img {
+  transform: scale(1.08);
+}
+
+/* Overlay nhẹ khi hover (giống gallery) */
+.single-project__standard-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.35));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.single-project__standard-item:hover .single-project__standard-thumb::after {
+  opacity: 1;
+}
+
+.single-project__standard-content {
+  padding: 2rem 1.8rem 2.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.single-project__standard-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.single-project__standard-desc {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #4a5568;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Mobile - giữ nguyên full width, nhưng giảm chiều cao ảnh cho hợp lý */
+@media (max-width: 768px) {
+  .single-project__content figure.wp-block-image,
+  .single-project__content .wp-block-image,
+  .single-project__content img {
+    height: 20rem !important; /* hoặc 24rem, tùy bạn */
+  }
+
+  .single-project__content .wp-block-gallery img {
+    height: 18rem !important;
+  }
+}
+
+/* ===== Responsive: mobile ===== */
+@media (max-width: 639.98px) {
+  .single-project__title-container {
+    padding: 1rem;
+    width: 100%;
+  }
+  .single-project__taxonomy-list {
+    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: fit-content;
+  }
+  .single-project__taxonomy-chip {
+    font-size: 0.625rem;
+    padding: 0.5rem 2rem;
+    line-height: normal;
+  }
+  .single-project-detail {
+    padding: 0 1.25rem;
+  }
+
+  .single-project__back {
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .single-project__title_back {
+    font-size: 1rem;
+  }
+
+  .single-project__section-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .single-project__header {
+    margin-bottom: 1.25rem;
+  }
+
+  .single-project__title {
+    font-size: 1rem;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  .single-project__icon {
+    font-size: 1rem;
+  }
+
+  .single-project__text {
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+
+  .single-project__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .single-project__facts {
+    padding: 1.5rem 0;
+  }
+
+  .single-project__facts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .single-project__fact-item {
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .single-project__fact-item .label {
+    font-size: 1rem;
+  }
+
+  .single-project__fact-item .value {
+    font-size: 0.875rem;
+  }
+
+  .single-project__about-content {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .single-project__content p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .single-project__about {
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 1.25rem;
+  }
+
+  .single-project__about-content,
+  .single-project__about-image {
+    max-width: 100%;
+  }
+
+  .single-project__gallery-items {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .single-project__standards {
+    padding: 2rem 0;
+  }
+
+  .single-project__standards-list {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .single-project__standard-thumb {
+    height: 13rem;
+  }
+
+  .single-project__standard-title {
+    font-size: 1.25rem;
+  }
+
+  .single-project__standard-desc {
+    font-size: 0.9375rem;
+  }
+
+  .single-project__standard-content {
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  .single-project__content figure.wp-block-image,
+  .single-project__content .wp-block-image,
+  .single-project__content img {
+    height: 14rem !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .single-project__content .wp-block-gallery img {
+    height: 12rem !important;
+  }
+  .single-project__gallery {
+    padding: 2rem 0;
+  }
+}

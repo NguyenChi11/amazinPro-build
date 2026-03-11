@@ -60,6 +60,15 @@ function wp_enqueue_custom_assets()
         ],
         [
             'type' => 'style',
+            'handle' => 'buildpro-comment-product-style',
+            'src' => get_theme_file_uri('template/template-parts/comment-product/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('/template-parts/comment-product/style.css'))
+        ],
+        [
+            'type' => 'style',
             'handle' => 'buildpro-global',
             'src' => get_theme_file_uri('/assets/css/global.css'),
             'deps' => [],
@@ -408,6 +417,88 @@ function wp_enqueue_custom_assets()
             'ver' => $version,
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/blog/section-blog/script.js'))
+        ],
+
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-product-style',
+            'src' => get_theme_file_uri('template/template-parts/page/product/section-products/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/product/section-products/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-product-script',
+            'src' => get_theme_file_uri('template/template-parts/page/product/section-products/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/product/section-products/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-comment-product-contact-form-style',
+            'src' => get_theme_file_uri('template/template-parts/comment-product/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/comment-product/style.css'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-single-post-style',
+            'src' => get_theme_file_uri('template/template-parts/single/single-post/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/single/single-post/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-single-post-script',
+            'src' => get_theme_file_uri('template/template-parts/single/single-post/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/single/single-post/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-single-product-style',
+            'src' => get_theme_file_uri('template/template-parts/single/single-product/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/single/single-product/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-single-product-script',
+            'src' => get_theme_file_uri('template/template-parts/single/single-product/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/single/single-product/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-single-project-style',
+            'src' => get_theme_file_uri('template/template-parts/single/single-project/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/single/single-project/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-single-project-script',
+            'src' => get_theme_file_uri('template/template-parts/single/single-project/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/single/single-project/script.js'))
         ],
 
         // [

@@ -29,9 +29,9 @@ add_action('after_setup_theme', 'buildpro_setup');
 // Flush rewrite rules once to fix REST API pretty URLs (/wp-json/)
 function buildpro_maybe_flush_rewrite_rules()
 {
-    if (get_option('buildpro_rewrite_flushed') !== '2') {
+    if (get_option('buildpro_rewrite_flushed') !== '3') {
         flush_rewrite_rules();
-        update_option('buildpro_rewrite_flushed', '2');
+        update_option('buildpro_rewrite_flushed', '3');
     }
 }
 add_action('init', 'buildpro_maybe_flush_rewrite_rules', 99);
@@ -89,6 +89,49 @@ function buildpro_svg_icon($name, $style = 'solid', $class = '')
     return '<svg' . $cls . ' width="1em" height="1em" viewBox="0 0 ' . $w . ' ' . $h . '" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="' . $path . '"></path></svg>';
 }
 
+function buildpro_maybe_import_wc_products()
+{
+    $need = get_option('buildpro_wc_do_import') === '1';
+    $active = class_exists('WooCommerce') || function_exists('wc_get_product');
+    if ($need && $active) {
+        $wcProducts = buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
+        if (isset($wcProducts['items']) && is_array($wcProducts['items'])) {
+            foreach ($wcProducts['items'] as $it) {
+                buildpro_import_create_wc_product($it);
+            }
+        }
+        update_option('buildpro_wc_do_import', '0');
+        update_option('buildpro_wc_default_content_imported', '1');
+    }
+}
+add_action('init', 'buildpro_maybe_import_wc_products', 20);
+if (function_exists('add_action')) {
+    add_action('woocommerce_init', 'buildpro_maybe_import_wc_products');
+}
+
+function buildpro_run_wc_import_now()
+{
+    $active = class_exists('WooCommerce') || function_exists('wc_get_product');
+    if (!$active) {
+        return;
+    }
+    $wcProducts = buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
+    if (isset($wcProducts['items']) && is_array($wcProducts['items'])) {
+        foreach ($wcProducts['items'] as $it) {
+            buildpro_import_create_wc_product($it);
+        }
+    }
+    update_option('buildpro_wc_do_import', '0');
+    update_option('buildpro_wc_default_content_imported', '1');
+}
+
+function buildpro_on_plugin_activated($plugin)
+{
+    if ($plugin === 'woocommerce/woocommerce.php') {
+        buildpro_run_wc_import_now();
+    }
+}
+add_action('activated_plugin', 'buildpro_on_plugin_activated', 10, 1);
 
 function buildpro_get_post_views($post_id)
 {
