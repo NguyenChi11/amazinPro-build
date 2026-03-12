@@ -336,28 +336,54 @@
 
 /* ---------- Footer ---------- */
 .hcd__footer {
+  display: flex;
+  gap: 0.625rem;
   padding: 1rem 1.25rem;
 }
 
-.hcd__view-btn {
+.hcd__view-btn,
+.hcd__checkout-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.625rem;
-  width: 100%;
-  padding: 0.8125rem 1rem;
-  background: #2563eb;
-  color: #fff;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0.75rem 0.75rem;
   border-radius: 0.625rem;
   font-family: "Poppins", sans-serif;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+  white-space: nowrap;
+}
+
+/* View Cart — outlined secondary */
+.hcd__view-btn {
+  background: #fff;
+  color: #374151;
+  border: 1.5px solid #e5e7eb;
 }
 
 .hcd__view-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+/* Checkout — solid primary */
+.hcd__checkout-btn {
+  background: #2563eb;
+  color: #fff;
+  border: 1.5px solid #2563eb;
+}
+
+.hcd__checkout-btn:hover {
   background: #1d4ed8;
+  border-color: #1d4ed8;
   color: #fff;
 }
 

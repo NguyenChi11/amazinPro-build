@@ -103,7 +103,7 @@ if (is_scalar($description_header)) {
                 </a>
             </div>
             <div class="header-cart-wrap">
-                <a href="<?php echo esc_url(function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart/')); ?>"
+                <a href="<?php echo esc_url(function_exists('buildpro_get_cart_page_url') ? buildpro_get_cart_page_url() : (function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart/'))); ?>"
                     class="header-nav-button-cart">
                     <img class="header-nav-button-cart__icon"
                         src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon-cart.png')); ?>" alt="Cart">

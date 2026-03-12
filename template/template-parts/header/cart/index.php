@@ -3,7 +3,7 @@ if (!function_exists('WC') || !WC()->cart) {
     return;
 }
 $cart_items = WC()->cart->get_cart();
-$cart_url   = function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart/');
+$cart_url      = function_exists('buildpro_get_cart_page_url') ? buildpro_get_cart_page_url() : (function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart/'));
 ?>
 <div class="hcd__header">
     <span class="hcd__title">Your Cart</span>
@@ -85,10 +85,13 @@ $cart_url   = function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url(
         <a href="<?php echo esc_url($cart_url); ?>" class="hcd__view-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true">
-                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                <path d="M3 6h19l-2 10H5L3 6z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
                     stroke-linejoin="round" />
+                <circle cx="9" cy="20" r="1" fill="currentColor" />
+                <circle cx="17" cy="20" r="1" fill="currentColor" />
+                <path d="M1 1h3l1 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
             </svg>
-            View my shopping cart
+            View Cart
         </a>
     </div>
 <?php endif; ?>

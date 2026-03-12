@@ -44,9 +44,28 @@ function buildpro_create_default_pages()
     buildpro_ensure_page_with_template('Blogs', 'blogs', 'blogs-page.php');
     buildpro_ensure_page_with_template('Products', 'products', 'products-page.php');
     buildpro_ensure_page_with_template('Projects', 'projects', 'projects-page.php');
+    buildpro_ensure_page_with_template('Cart', 'cart', 'cart-page.php');
     // Migrate existing pages using old slug 'about-page.php' -> 'about-us-page.php'
     $old_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'about-page.php', 'number' => -1));
     foreach ($old_pages as $op) {
         update_post_meta($op->ID, '_wp_page_template', 'about-us-page.php');
     }
 }
+
+// Hook to run on theme switch.
+add_action('after_switch_theme', 'buildpro_create_default_pages', 0);
+
+// One-time check: create the cart page on first frontend load if it doesn't exist yet.
+add_action('wp_loaded', function () {
+    if (is_admin()) return;
+    if (get_option('buildpro_cart_page_ready')) return;
+    $pages = get_pages(array(
+        'meta_key'   => '_wp_page_template',
+        'meta_value' => 'cart-page.php',
+        'number'     => 1,
+    ));
+    if (empty($pages)) {
+        buildpro_ensure_page_with_template('Cart', 'cart', 'cart-page.php');
+    }
+    update_option('buildpro_cart_page_ready', 1);
+}, 20);

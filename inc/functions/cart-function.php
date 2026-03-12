@@ -1,4 +1,26 @@
 <?php
+
+/**
+ * Returns the URL of the custom cart page (template: cart-page.php),
+ * falling back to the WooCommerce cart URL or /cart/.
+ */
+function buildpro_get_cart_page_url()
+{
+    static $url = null;
+    if ($url !== null) return $url;
+    $pages = get_pages([
+        'meta_key'   => '_wp_page_template',
+        'meta_value' => 'cart-page.php',
+        'number'     => 1,
+    ]);
+    if (!empty($pages)) {
+        $url = get_permalink($pages[0]->ID);
+    } else {
+        $url = function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart/');
+    }
+    return $url;
+}
+
 add_action('wp_ajax_buildpro_mini_cart', 'buildpro_mini_cart_ajax');
 add_action('wp_ajax_nopriv_buildpro_mini_cart', 'buildpro_mini_cart_ajax');
 
