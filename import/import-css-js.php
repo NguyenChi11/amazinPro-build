@@ -509,6 +509,24 @@ function wp_enqueue_custom_assets()
             'in_footer' => true,
             'condition' => class_exists('WooCommerce'),
         ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-cart-dropdown-style',
+            'src' => get_theme_file_uri('template/template-parts/header/cart/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => class_exists('WooCommerce'),
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-cart-dropdown-script',
+            'src' => get_theme_file_uri('template/template-parts/header/cart/script.js'),
+            'deps' => ['buildpro-cart'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => class_exists('WooCommerce'),
+        ],
 
         // [
         //     'type' => 'style',

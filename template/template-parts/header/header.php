@@ -102,11 +102,20 @@ if (is_scalar($description_header)) {
                     <p>Request a Quote</p>
                 </a>
             </div>
-            <div class="header-nav-button-cart">
-                <img class="header-nav-button-cart__icon"
-                    src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon-cart.png')); ?>" alt="">
-                <?php $cart_count = function_exists('WC') && WC()->cart ? (int) WC()->cart->get_cart_contents_count() : 0; ?>
-                <span class="header-cart-count<?php echo $cart_count === 0 ? ' header-cart-count--hidden' : ''; ?>"><?php echo $cart_count; ?></span>
+            <div class="header-cart-wrap">
+                <a href="<?php echo esc_url(function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart/')); ?>"
+                    class="header-nav-button-cart">
+                    <img class="header-nav-button-cart__icon"
+                        src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon-cart.png')); ?>" alt="Cart">
+                    <?php $cart_count = function_exists('WC') && WC()->cart ? (int) WC()->cart->get_cart_contents_count() : 0; ?>
+                    <span
+                        class="header-cart-count<?php echo $cart_count === 0 ? ' header-cart-count--hidden' : ''; ?>"><?php echo $cart_count; ?></span>
+                </a>
+                <?php if (class_exists('WooCommerce')) : ?>
+                    <div class="header-cart-dropdown">
+                        <?php get_template_part('template/template-parts/header/cart/index'); ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-sidebar">

@@ -336,6 +336,109 @@
   color: #111827;
 }
 
+/* ==========================================================================
+   SINGLE PRODUCT - QUANTITY + CART
+   ========================================================================== */
+
+.single-product__cart-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.single-product__qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid #d1d5db;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #fff;
+  height: 3rem;
+}
+
+.single-product__qty-btn {
+  width: 2.75rem;
+  height: 100%;
+  background: #f9fafb;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.single-product__qty-btn:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.single-product__qty-btn:active {
+  background: #d1d5db;
+}
+
+.single-product__qty-input {
+  width: 3.5rem;
+  height: 100%;
+  border: none;
+  border-left: 1.5px solid #d1d5db;
+  border-right: 1.5px solid #d1d5db;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.single-product__qty-input::-webkit-outer-spin-button,
+.single-product__qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.single-product__product__cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 2rem;
+  height: 3rem;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.18s,
+    transform 0.1s;
+  white-space: nowrap;
+}
+
+.single-product__product__cart:hover {
+  background: #1d4ed8;
+}
+
+.single-product__product__cart:active {
+  transform: scale(0.97);
+}
+
+.single-product__product__cart:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* Sale range (thời gian khuyến mãi) */
 .single-product__sale-range {
   margin-top: 0.65rem;
@@ -750,5 +853,15 @@
     padding: 0.75rem 1.5rem;
     width: 100%;
     text-align: center;
+  }
+
+  .single-product__cart-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .single-product__product__cart {
+    width: 100%;
+    justify-content: center;
   }
 }

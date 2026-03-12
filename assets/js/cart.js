@@ -13,6 +13,9 @@
     });
   }
 
+  // Expose so cart dropdown script can call it
+  window.buildproUpdateCartBadge = updateCartBadge;
+
   function getCurrentCount() {
     var badge = document.querySelector(".header-cart-count");
     if (!badge) return 0;
@@ -24,9 +27,18 @@
     var originalText = btn.textContent;
     btn.textContent = "Adding…";
 
+    var qty = 1;
+    var row = btn.closest(".single-product__cart-row");
+    if (row) {
+      var qInput = row.querySelector(".single-product__qty-input");
+      if (qInput) {
+        qty = Math.max(1, parseInt(qInput.value, 10) || 1);
+      }
+    }
+
     var formData = new FormData();
     formData.append("product_id", productId);
-    formData.append("quantity", 1);
+    formData.append("quantity", qty);
 
     fetch("/?wc-ajax=add_to_cart", {
       method: "POST",
@@ -40,7 +52,10 @@
         btn.disabled = false;
         if (data && !data.error) {
           btn.textContent = "Added ✓";
-          updateCartBadge(getCurrentCount() + 1);
+          updateCartBadge(getCurrentCount() + 1); // Refresh mini cart dropdown
+          if (typeof window.buildproRefreshMiniCart === "function") {
+            window.buildproRefreshMiniCart(true);
+          }
           setTimeout(function () {
             btn.textContent = originalText;
           }, 1500);
@@ -51,6 +66,34 @@
       .catch(function () {
         btn.disabled = false;
         btn.textContent = originalText;
+      });
+  }
+
+  function bindQty() {
+    document
+      .querySelectorAll(".single-product__cart-row")
+      .forEach(function (row) {
+        if (row.dataset.qtyBound) return;
+        row.dataset.qtyBound = "1";
+        var input = row.querySelector(".single-product__qty-input");
+        var minus = row.querySelector(".single-product__qty-minus");
+        var plus = row.querySelector(".single-product__qty-plus");
+        if (!input) return;
+        minus &&
+          minus.addEventListener("click", function () {
+            var v = parseInt(input.value, 10) || 1;
+            if (v > 1) input.value = v - 1;
+          });
+        plus &&
+          plus.addEventListener("click", function () {
+            var v = parseInt(input.value, 10) || 1;
+            var max = parseInt(input.max, 10) || 999;
+            if (v < max) input.value = v + 1;
+          });
+        input.addEventListener("change", function () {
+          var v = parseInt(input.value, 10);
+          if (!v || v < 1) input.value = 1;
+        });
       });
   }
 
@@ -73,9 +116,11 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       bindButtons();
+      bindQty();
     });
   } else {
     bindButtons();
+    bindQty();
   }
 
   // Re-bind after AJAX list updates (product page pagination/search)
