@@ -17,36 +17,24 @@ function buildpro_import_post_demo($target_id = 0)
     if ($home_id <= 0) {
         return;
     }
-    $existing = new WP_Query(array(
-        'post_type' => 'post',
-        'posts_per_page' => 1,
-        'post_status' => 'publish',
-        'no_found_rows' => true,
-        'fields' => 'ids',
-    ));
-    if ($existing->have_posts()) {
-        wp_reset_postdata();
-    } else {
-        wp_reset_postdata();
-        if (function_exists('buildpro_import_parse_js')) {
-            $data = buildpro_import_parse_js('/assets/data/post-data.js', 'postsData');
-            if (isset($data['items']) && is_array($data['items'])) {
-                foreach ($data['items'] as $it) {
-                    if (function_exists('buildpro_import_create_post')) {
-                        buildpro_import_create_post($it);
-                    }
+    if (function_exists('buildpro_import_parse_js')) {
+        $data = buildpro_import_parse_js('/assets/data/post-data.js', 'postsData');
+        if (isset($data['items']) && is_array($data['items'])) {
+            foreach ($data['items'] as $it) {
+                if (function_exists('buildpro_import_create_post')) {
+                    buildpro_import_create_post($it);
                 }
             }
-            $title = isset($data['postsTitle']) ? (string)$data['postsTitle'] : '';
-            $desc = isset($data['postsDescription']) ? (string)$data['postsDescription'] : '';
-            if ($title !== '') {
-                update_post_meta($home_id, 'title_post', $title);
-                set_theme_mod('title_post', $title);
-            }
-            if ($desc !== '') {
-                update_post_meta($home_id, 'description_post', $desc);
-                set_theme_mod('description_post', $desc);
-            }
+        }
+        $title = isset($data['postsTitle']) ? (string)$data['postsTitle'] : '';
+        $desc = isset($data['postsDescription']) ? (string)$data['postsDescription'] : '';
+        if ($title !== '') {
+            update_post_meta($home_id, 'title_post', $title);
+            set_theme_mod('title_post', $title);
+        }
+        if ($desc !== '') {
+            update_post_meta($home_id, 'description_post', $desc);
+            set_theme_mod('description_post', $desc);
         }
     }
     update_post_meta($home_id, 'buildpro_post_enabled', 1);

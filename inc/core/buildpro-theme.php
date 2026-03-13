@@ -31,6 +31,57 @@ function buildpro_ensure_page_with_template($title, $slug, $template)
     return 0;
 }
 
+function buildpro_title_from_template_name($template_name, $slug)
+{
+    $title = trim((string) $template_name);
+    $title = preg_replace('/\s+Page\s*$/i', '', $title);
+    if ($title === '') {
+        $title = ucwords(str_replace('-', ' ', $slug));
+    }
+    return $title;
+}
+
+function buildpro_slug_from_template_file($template_file)
+{
+    $base = basename((string) $template_file, '.php');
+    if (substr($base, -5) === '-page') {
+        $base = substr($base, 0, -5);
+    }
+    return sanitize_title($base);
+}
+
+function buildpro_create_pages_from_templates_once()
+{
+    if (get_option('buildpro_first_import_pages_created') === '1') {
+        return;
+    }
+
+    // Core pages used by theme header/menu and homepage setup.
+    buildpro_create_default_pages();
+
+    // Checkout flow templates requested for first import.
+    buildpro_ensure_page_with_template('Bill', 'bill', 'bill-page.php');
+    buildpro_ensure_page_with_template('Checkout', 'checkout', 'checkout-page.php');
+    buildpro_ensure_page_with_template('Cart', 'cart', 'cart-page.php');
+
+    $home_pages = get_pages(array(
+        'meta_key' => '_wp_page_template',
+        'meta_value' => 'home-page.php',
+        'number' => 1,
+    ));
+    if (!empty($home_pages)) {
+        $home_id = (int) $home_pages[0]->ID;
+        if ($home_id > 0) {
+            if (get_option('show_on_front') !== 'page') {
+                update_option('show_on_front', 'page');
+            }
+            update_option('page_on_front', $home_id);
+        }
+    }
+
+    update_option('buildpro_first_import_pages_created', '1');
+}
+
 function buildpro_create_default_pages()
 {
     $home_id = buildpro_ensure_page_with_template('Home', 'home', 'home-page.php');
@@ -52,20 +103,6 @@ function buildpro_create_default_pages()
     }
 }
 
-// Hook to run on theme switch.
-add_action('after_switch_theme', 'buildpro_create_default_pages', 0);
-
-// One-time check: create the cart page on first frontend load if it doesn't exist yet.
-add_action('wp_loaded', function () {
-    if (is_admin()) return;
-    if (get_option('buildpro_cart_page_ready')) return;
-    $pages = get_pages(array(
-        'meta_key'   => '_wp_page_template',
-        'meta_value' => 'cart-page.php',
-        'number'     => 1,
-    ));
-    if (empty($pages)) {
-        buildpro_ensure_page_with_template('Cart', 'cart', 'cart-page.php');
-    }
-    update_option('buildpro_cart_page_ready', 1);
-}, 20);
+// One-time bootstrapping for first import/install.
+add_action('after_switch_theme', 'buildpro_create_pages_from_templates_once', 0);
+add_action('init', 'buildpro_create_pages_from_templates_once', 12);

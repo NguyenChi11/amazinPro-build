@@ -32,23 +32,20 @@ function buildpro_ensure_ordered_primary_menu()
     }
     $targets = array(
         array('templates' => array('home-page.php'), 'slugs' => array('home', 'trang-chu', 'homepage')),
-        array('templates' => array('project-page.php', 'projects-page.php'), 'slugs' => array('projects', 'project', 'du-an')),
-        array('templates' => array('product-page.php', 'products-page.php'), 'slugs' => array('products', 'product', 'san-pham')),
-        array('templates' => array('blogs-page.php', 'blog-page.php'), 'slugs' => array('blogs', 'blog', 'tin-tuc')),
-        array('templates' => array('about-page.php', 'about-us-page.php'), 'slugs' => array('about', 'about-us', 'gioi-thieu')),
+        array('templates' => array('project-page.php', 'projects-page.php'), 'slugs' => array('projects', 'project', 'projects')),
+        array('templates' => array('product-page.php', 'products-page.php'), 'slugs' => array('products', 'product', 'products')),
+        array('templates' => array('blogs-page.php', 'blog-page.php'), 'slugs' => array('blogs', 'blog', 'blog')),
+        array('templates' => array('about-page.php', 'about-us-page.php'), 'slugs' => array('about', 'about-us', 'about-us')),
     );
     $existing = wp_get_nav_menu_items($menu_id);
     $existing_by_object = array();
     if (is_array($existing)) {
         foreach ($existing as $it) {
-            if (isset($it->type) && $it->type === 'post_type_archive' && isset($it->object) && $it->object === 'project' && !empty($it->ID)) {
-                wp_delete_post((int)$it->ID, true);
-                continue;
-            }
-            if (isset($it->object) && $it->object === 'page' && !empty($it->object_id)) {
-                $existing_by_object[(int) $it->object_id] = true;
+            if (!empty($it->ID)) {
+                wp_delete_post((int) $it->ID, true);
             }
         }
+        $existing_by_object = array();
     }
     $position = 1;
     foreach ($targets as $t) {
@@ -65,6 +62,15 @@ function buildpro_ensure_ordered_primary_menu()
         $position++;
     }
 }
-add_action('after_setup_theme', function () {
+function buildpro_bootstrap_primary_menu_once()
+{
+    if (get_option('buildpro_primary_menu_created') === '1') {
+        return;
+    }
+
     buildpro_ensure_ordered_primary_menu();
-}, 100);
+    update_option('buildpro_primary_menu_created', '1');
+}
+
+add_action('after_switch_theme', 'buildpro_bootstrap_primary_menu_once', 20);
+add_action('init', 'buildpro_bootstrap_primary_menu_once', 30);

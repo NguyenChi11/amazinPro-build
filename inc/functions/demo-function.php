@@ -195,11 +195,74 @@ function buildpro_import_resolve_theme_path($url)
     return $path;
 }
 
+function buildpro_has_published_content($post_type)
+{
+    $q = new WP_Query(array(
+        'post_type' => $post_type,
+        'posts_per_page' => 1,
+        'post_status' => 'publish',
+        'no_found_rows' => true,
+        'fields' => 'ids',
+    ));
+    $has_posts = $q->have_posts();
+    wp_reset_postdata();
+    return (bool) $has_posts;
+}
+
+function buildpro_maybe_import_post_demo_once()
+{
+    if (get_option('buildpro_post_demo_imported') === '1') {
+        return;
+    }
+
+    $post_demo_file = get_theme_file_path('/import/data-demo/page/home/post-home.php');
+    if (file_exists($post_demo_file)) {
+        require_once $post_demo_file;
+        if (function_exists('buildpro_import_post_demo')) {
+            buildpro_import_post_demo();
+        }
+    }
+
+    update_option('buildpro_post_demo_imported', '1');
+}
+
+function buildpro_backfill_demo_post_types_if_missing()
+{
+    buildpro_maybe_import_post_demo_once();
+
+    $project_demo_file = get_theme_file_path('/import/data-demo/page/home/project-home.php');
+    if (post_type_exists('project') && !buildpro_has_published_content('project') && file_exists($project_demo_file)) {
+        require_once $project_demo_file;
+        if (function_exists('buildpro_import_project_demo')) {
+            buildpro_import_project_demo();
+        }
+    }
+
+    $wc_active = class_exists('WooCommerce') || function_exists('wc_get_product');
+    $products_demo_file = get_theme_file_path('/import/data-demo/page/home/products-home.php');
+    if ($wc_active && !buildpro_has_published_content('product') && file_exists($products_demo_file)) {
+        require_once $products_demo_file;
+        if (function_exists('buildpro_import_product_demo')) {
+            buildpro_import_product_demo();
+        }
+    }
+
+    if ($wc_active) {
+        update_option('buildpro_wc_default_content_imported', '1');
+        update_option('buildpro_wc_do_import', '0');
+    }
+}
+
 function buildpro_maybe_import_default_content()
 {
     if ((defined('REST_REQUEST') && REST_REQUEST) || (defined('DOING_AJAX') && DOING_AJAX)) {
         return;
     }
+
+    if (function_exists('buildpro_create_pages_from_templates_once')) {
+        buildpro_create_pages_from_templates_once();
+    }
+
     if (get_option('buildpro_default_content_imported') === '1') {
         $wc_active = class_exists('WooCommerce') || function_exists('wc_get_product');
         if (!$wc_active || get_option('buildpro_wc_default_content_imported') === '1') {
@@ -211,6 +274,7 @@ function buildpro_maybe_import_default_content()
                     buildpro_import_about_us_leader_demo();
                 }
             }
+            buildpro_backfill_demo_post_types_if_missing();
             return;
         }
     }
@@ -278,6 +342,7 @@ function buildpro_maybe_import_default_content()
             buildpro_import_post_demo();
         }
     }
+    update_option('buildpro_post_demo_imported', '1');
     $projects_title_demo_file = get_theme_file_path('/import/data-demo/page/projects/title-project.php');
     if (file_exists($projects_title_demo_file)) {
         require_once $projects_title_demo_file;
@@ -309,14 +374,17 @@ function buildpro_maybe_import_default_content()
     $wc_active = class_exists('WooCommerce') || function_exists('wc_get_product');
     if ($wc_active) {
         update_option('buildpro_wc_default_content_imported', '1');
+        update_option('buildpro_wc_do_import', '0');
     } else {
         update_option('buildpro_wc_do_import', '1');
     }
     update_option('buildpro_do_import', '0');
     update_option('buildpro_default_content_imported', '1');
+
+    buildpro_backfill_demo_post_types_if_missing();
 }
 
-add_action('init', 'buildpro_maybe_import_default_content');
+add_action('init', 'buildpro_maybe_import_default_content', 50);
 
 // When WooCommerce is activated after first import, reset WC flag so products get imported
 add_action('activated_plugin', function ($plugin) {
