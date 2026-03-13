@@ -148,3 +148,163 @@ function buildpro_cf7_on_plugin_activate($plugin, $network_wide)
     }
 }
 add_action('activated_plugin', 'buildpro_cf7_on_plugin_activate', 10, 2);
+
+function buildpro_cf7_is_flamingo_active()
+{
+    return class_exists('Flamingo_Contact') && class_exists('Flamingo_Inbound_Message');
+}
+
+function buildpro_cf7_get_posted_value($posted_data, $keys)
+{
+    foreach ((array) $keys as $key) {
+        if (!empty($posted_data[$key])) {
+            $value = $posted_data[$key];
+            if (is_array($value)) {
+                $value = implode(', ', array_filter(array_map('strval', $value)));
+            }
+            $value = is_string($value) ? trim($value) : '';
+            if ($value !== '') {
+                return $value;
+            }
+        }
+    }
+    return '';
+}
+
+function buildpro_cf7_subject_from_sender_email($email, $fallback = '')
+{
+    $email = is_string($email) ? trim($email) : '';
+    if ($email === '' || strpos($email, '@') === false) {
+        return $fallback;
+    }
+
+    $local_part = trim((string) strtok($email, '@'));
+    if ($local_part === '') {
+        return $email;
+    }
+
+    $pretty = str_replace(array('.', '_', '-'), ' ', $local_part);
+    $pretty = preg_replace('/\s+/', ' ', (string) $pretty);
+    $pretty = trim((string) $pretty);
+
+    return $pretty !== '' ? ucwords($pretty) : $email;
+}
+
+function buildpro_cf7_set_flamingo_subject_from_sender($args)
+{
+    if (!is_array($args)) {
+        return $args;
+    }
+
+    $from_email = isset($args['from_email']) ? (string) $args['from_email'] : '';
+    $current_subject = isset($args['subject']) ? (string) $args['subject'] : '';
+    $args['subject'] = buildpro_cf7_subject_from_sender_email($from_email, $current_subject);
+
+    return $args;
+}
+
+add_filter('wpcf7_flamingo_inbound_message_parameters', 'buildpro_cf7_set_flamingo_subject_from_sender', 20, 1);
+
+function buildpro_cf7_force_store_to_flamingo($contact_form, $result = array())
+{
+    if (!buildpro_cf7_is_flamingo_active() || !class_exists('WPCF7_Submission')) {
+        return;
+    }
+
+    $submission = WPCF7_Submission::get_instance();
+    if (!$submission) {
+        return;
+    }
+
+    $posted_data = $submission->get_posted_data();
+    if (empty($posted_data) || !is_array($posted_data)) {
+        return;
+    }
+
+    if ($submission->get_meta('do_not_store')) {
+        return;
+    }
+
+    $posted_data_hash = method_exists($submission, 'get_posted_data_hash') ? $submission->get_posted_data_hash() : '';
+    if ($posted_data_hash !== '' && method_exists('Flamingo_Inbound_Message', 'find')) {
+        $exists = Flamingo_Inbound_Message::find(array(
+            'posts_per_page' => 1,
+            'hash' => $posted_data_hash,
+        ));
+        if (!empty($exists)) {
+            return;
+        }
+    }
+
+    $email = buildpro_cf7_get_posted_value($posted_data, array('your-email', 'email'));
+    $name = buildpro_cf7_get_posted_value($posted_data, array('your-name', 'fullname', 'name'));
+    $subject = buildpro_cf7_get_posted_value($posted_data, array('your-subject', 'subject'));
+
+    if ($subject === '') {
+        $subject = sprintf('Form submission: %s', $contact_form->title());
+    }
+
+    $subject = buildpro_cf7_subject_from_sender_email($email, $subject);
+
+    if ($email !== '' && is_email($email) && method_exists('Flamingo_Contact', 'add')) {
+        Flamingo_Contact::add(array(
+            'email' => $email,
+            'name' => $name,
+        ));
+    }
+
+    $timestamp = $submission->get_meta('timestamp');
+    $meta = array(
+        'url' => method_exists($submission, 'get_meta') ? (string) $submission->get_meta('url') : '',
+        'remote_ip' => method_exists($submission, 'get_meta') ? (string) $submission->get_meta('remote_ip') : '',
+        'user_agent' => method_exists($submission, 'get_meta') ? (string) $submission->get_meta('user_agent') : '',
+    );
+
+    $args = array(
+        'channel' => 'contact-form-7',
+        'status' => method_exists($submission, 'get_status') ? $submission->get_status() : 'mail_sent',
+        'subject' => $subject,
+        'from' => trim(sprintf('%s <%s>', $name, $email)),
+        'from_name' => $name,
+        'from_email' => $email,
+        'fields' => $posted_data,
+        'meta' => array_filter($meta),
+        'akismet' => method_exists($submission, 'pull') ? (array) $submission->pull('akismet') : array(),
+        'recaptcha' => method_exists($submission, 'pull') ? (array) $submission->pull('recaptcha') : array(),
+        'consent' => method_exists($submission, 'collect_consent') ? (array) $submission->collect_consent() : array(),
+        'timestamp' => $timestamp,
+        'posted_data_hash' => $posted_data_hash,
+    );
+
+    $args = apply_filters('wpcf7_flamingo_inbound_message_parameters', $args);
+    Flamingo_Inbound_Message::add($args);
+}
+
+add_action('wpcf7_submit', 'buildpro_cf7_force_store_to_flamingo', 20, 2);
+
+function buildpro_cf7_skip_mail_for_demo_form($skip_mail, $contact_form)
+{
+    if (!buildpro_cf7_is_active() || !is_object($contact_form) || !method_exists($contact_form, 'id')) {
+        return $skip_mail;
+    }
+
+    $demo_form_id = buildpro_cf7_find_form_id();
+    if ($demo_form_id <= 0) {
+        return $skip_mail;
+    }
+
+    if ((int) $contact_form->id() !== (int) $demo_form_id) {
+        return $skip_mail;
+    }
+
+    $env = function_exists('wp_get_environment_type') ? wp_get_environment_type() : 'production';
+    if (!in_array($env, array('local', 'development'), true)) {
+        return $skip_mail;
+    }
+
+    // In local environments, mail() is commonly unavailable and causes mail_failed.
+    // Skip actual sending for the BuildPro demo form so submit returns success.
+    return true;
+}
+
+add_filter('wpcf7_skip_mail', 'buildpro_cf7_skip_mail_for_demo_form', 20, 2);

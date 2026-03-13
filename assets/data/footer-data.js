@@ -13,22 +13,22 @@ const footerData = {
     { title: "Contact", url: "/contact", target: "" },
   ],
   contact: {
-    location: "TP.HCM",
-    phone: "0123 456 789",
-    email: "contact@buildpro.local",
+    location: "New York, USA",
+    phone: "+84349582808",
+    email: "contact@amazinsolution.com ",
     time: "08:00–17:00",
   },
   contactLinks: [
     {
       icon: "/wp-content/themes/buildpro/assets/images/icon/icon_building.png",
       title: "Facebook",
-      url: "https://facebook.com/",
+      url: "Amazinsolution.com",
       target: "_blank",
     },
     {
       icon: "/wp-content/themes/buildpro/assets/images/icon/icon_eye.png",
       title: "Zalo",
-      url: "https://zalo.me/",
+      url: "Amazinsolution.com",
       target: "_blank",
     },
   ],

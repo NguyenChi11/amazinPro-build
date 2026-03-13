@@ -1,30 +1,18 @@
 <?php
-$wc_active    = function_exists('WC') && WC()->cart;
-$cart_items   = $wc_active ? WC()->cart->get_cart() : [];
-$checkout_url = function_exists('wc_get_checkout_url') ? wc_get_checkout_url() : home_url('/checkout/');
-$mini_nonce   = wp_create_nonce('buildpro_mini_cart');
-$cart_nonce   = wp_create_nonce('woocommerce-cart');
+$cart_page_data = function_exists('buildpro_cart_get_page_data') ? buildpro_cart_get_page_data() : [];
 
-$shipping_cost = 120.00;
-$tax_rate      = 0.08;
-
-$subtotal_raw = 0.0;
-foreach ($cart_items as $item) {
-    $subtotal_raw += floatval($item['data']->get_price()) * intval($item['quantity']);
-}
-
-$wc_discount = 0.0;
-if ($wc_active) {
-    $wc_discount = floatval(WC()->cart->get_discount_total());
-    $wc_shipping = floatval(WC()->cart->get_shipping_total());
-    if ($wc_shipping > 0) {
-        $shipping_cost = $wc_shipping;
-    }
-}
-
-$tax_base   = $subtotal_raw + $shipping_cost - $wc_discount;
-$tax_amount = $tax_base * $tax_rate;
-$total      = $tax_base + $tax_amount;
+$wc_active = isset($cart_page_data['wc_active']) ? $cart_page_data['wc_active'] : false;
+$cart_items = isset($cart_page_data['cart_items']) ? $cart_page_data['cart_items'] : [];
+$checkout_url = isset($cart_page_data['checkout_url']) ? $cart_page_data['checkout_url'] : home_url('/checkout/');
+$products_page_url = isset($cart_page_data['products_page_url']) ? $cart_page_data['products_page_url'] : home_url('/products/');
+$mini_nonce = isset($cart_page_data['mini_nonce']) ? $cart_page_data['mini_nonce'] : wp_create_nonce('buildpro_mini_cart');
+$cart_nonce = isset($cart_page_data['cart_nonce']) ? $cart_page_data['cart_nonce'] : wp_create_nonce('woocommerce-cart');
+$shipping_cost = isset($cart_page_data['shipping_cost']) ? floatval($cart_page_data['shipping_cost']) : 0.0;
+$tax_rate = isset($cart_page_data['tax_rate']) ? floatval($cart_page_data['tax_rate']) : 0.0;
+$wc_discount = isset($cart_page_data['wc_discount']) ? floatval($cart_page_data['wc_discount']) : 0.0;
+$subtotal_raw = isset($cart_page_data['subtotal_raw']) ? floatval($cart_page_data['subtotal_raw']) : 0.0;
+$summary_regular = isset($cart_page_data['summary_regular']) ? floatval($cart_page_data['summary_regular']) : 0.0;
+$summary_sale = isset($cart_page_data['summary_sale']) ? floatval($cart_page_data['summary_sale']) : 0.0;
 ?>
 
 <section class="cart-section">
@@ -44,8 +32,8 @@ $total      = $tax_base + $tax_amount;
                         <div class="cart-section__empty">
                             <p>Your cart is empty.</p>
                             <?php if ($wc_active) : ?>
-                                <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>"
-                                    class="cart-section__shop-link">Continue Shopping</a>
+                                <a href="<?php echo esc_url($products_page_url); ?>" class="cart-section__shop-link">Continue
+                                    Shopping</a>
                             <?php endif; ?>
                         </div>
                     <?php else : ?>
@@ -116,27 +104,6 @@ $total      = $tax_base + $tax_amount;
                 </div>
 
                 <!-- Order Notes -->
-                <?php $saved_note = ($wc_active && WC()->session) ? WC()->session->get('order_comments', '') : ''; ?>
-                <div class="cart-section__notes" id="cart-notes-block">
-                    <div class="cart-notes__header">
-                        <h3 class="cart-section__notes-title">Order Notes</h3>
-                    </div>
-
-                    <!-- Editor (always visible) -->
-                    <div class="cart-notes__editor" id="notes-editor">
-                        <textarea class="cart-section__notes-textarea" id="notes-textarea"
-                            placeholder="Add any special instructions for delivery or packaging..."><?php echo esc_textarea($saved_note); ?></textarea>
-                        <div class="cart-notes__editor-actions">
-                            <button type="button" class="cart-notes__save-btn" id="notes-save-btn">
-                                <i class="fa-solid fa-check"></i> Save
-                            </button>
-                            <button type="button" class="cart-notes__delete-btn" id="notes-delete-btn">
-                                <i class="fa-solid fa-trash-can"></i> Delete
-                            </button>
-                        </div>
-                        <p class="cart-notes__msg" id="notes-msg"></p>
-                    </div>
-                </div>
             </div>
 
             <!-- ===== RIGHT: Cart Summary ===== -->
@@ -147,16 +114,6 @@ $total      = $tax_base + $tax_amount;
                         <h3 class="cart-summary__title">Cart Summary</h3>
                     </div>
 
-                    <?php
-                    $summary_regular = 0.0;
-                    $summary_sale    = 0.0;
-                    foreach ($cart_items as $ci) {
-                        $cp  = $ci['data'];
-                        $qty = intval($ci['quantity']);
-                        $summary_regular += floatval($cp->get_regular_price()) * $qty;
-                        $summary_sale    += floatval($cp->get_price()) * $qty;
-                    }
-                    ?>
                     <div class="cart-summary__rows">
                         <div class="cart-summary__row">
                             <span>Regular Price</span>

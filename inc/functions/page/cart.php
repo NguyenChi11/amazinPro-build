@@ -1,5 +1,78 @@
 <?php
 
+if (!function_exists('buildpro_cart_get_page_data')) {
+    function buildpro_cart_get_page_data()
+    {
+        $wc_active = function_exists('WC') && WC()->cart;
+        $cart_items = $wc_active ? WC()->cart->get_cart() : [];
+
+        $_checkout_pages = get_pages([
+            'meta_key'   => '_wp_page_template',
+            'meta_value' => 'checkout-page.php',
+            'number'     => 1,
+        ]);
+        $checkout_url = !empty($_checkout_pages)
+            ? get_permalink($_checkout_pages[0]->ID)
+            : (function_exists('wc_get_checkout_url') ? wc_get_checkout_url() : home_url('/checkout/'));
+
+        $_products_pages = get_pages([
+            'meta_key'   => '_wp_page_template',
+            'meta_value' => 'products-page.php',
+            'number'     => 1,
+        ]);
+        $products_page_url = !empty($_products_pages)
+            ? get_permalink($_products_pages[0]->ID)
+            : ($wc_active ? get_permalink(wc_get_page_id('shop')) : home_url('/products/'));
+
+        $shipping_cost = 120.00;
+        $tax_rate = 0.08;
+        $subtotal_raw = 0.0;
+        foreach ($cart_items as $item) {
+            $subtotal_raw += floatval($item['data']->get_price()) * intval($item['quantity']);
+        }
+
+        $wc_discount = 0.0;
+        if ($wc_active) {
+            $wc_discount = floatval(WC()->cart->get_discount_total());
+            $wc_shipping = floatval(WC()->cart->get_shipping_total());
+            if ($wc_shipping > 0) {
+                $shipping_cost = $wc_shipping;
+            }
+        }
+
+        $tax_base = $subtotal_raw + $shipping_cost - $wc_discount;
+        $tax_amount = $tax_base * $tax_rate;
+        $total = $tax_base + $tax_amount;
+
+        $summary_regular = 0.0;
+        $summary_sale = 0.0;
+        foreach ($cart_items as $ci) {
+            $cp = $ci['data'];
+            $qty = intval($ci['quantity']);
+            $summary_regular += floatval($cp->get_regular_price()) * $qty;
+            $summary_sale += floatval($cp->get_price()) * $qty;
+        }
+
+        return [
+            'wc_active' => $wc_active,
+            'cart_items' => $cart_items,
+            'checkout_url' => $checkout_url,
+            'products_page_url' => $products_page_url,
+            'mini_nonce' => wp_create_nonce('buildpro_mini_cart'),
+            'cart_nonce' => wp_create_nonce('woocommerce-cart'),
+            'shipping_cost' => $shipping_cost,
+            'tax_rate' => $tax_rate,
+            'subtotal_raw' => $subtotal_raw,
+            'wc_discount' => $wc_discount,
+            'tax_base' => $tax_base,
+            'tax_amount' => $tax_amount,
+            'total' => $total,
+            'summary_regular' => $summary_regular,
+            'summary_sale' => $summary_sale,
+        ];
+    }
+}
+
 /**
  * Cart page – AJAX handler for applying WooCommerce coupons.
  */

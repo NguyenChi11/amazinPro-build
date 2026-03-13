@@ -519,6 +519,42 @@ function wp_enqueue_custom_assets()
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/cart/section-cart/script.js'))
         ],
         [
+            'type' => 'style',
+            'handle' => 'buildpro-section-checkout-style',
+            'src' => get_theme_file_uri('template/template-parts/page/checkout/section-checkout/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/checkout/section-checkout/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-checkout-script',
+            'src' => get_theme_file_uri('template/template-parts/page/checkout/section-checkout/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/checkout/section-checkout/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-section-bill-style',
+            'src' => get_theme_file_uri('template/template-parts/page/bill/section-bill/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/bill/section-bill/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-bill-script',
+            'src' => get_theme_file_uri('template/template-parts/page/bill/section-bill/script.js'),
+            'deps' => ['swiper'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/bill/section-bill/script.js'))
+        ],
+        [
             'type' => 'script',
             'handle' => 'buildpro-cart',
             'src' => get_theme_file_uri('assets/js/cart.js'),

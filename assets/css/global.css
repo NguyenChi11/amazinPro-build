@@ -46,6 +46,9 @@ a {
   color: inherit;
   cursor: pointer;
 }
+p {
+  margin: 0;
+}
 input[type="checkbox"] {
   transform: scale(1, 1);
 }
