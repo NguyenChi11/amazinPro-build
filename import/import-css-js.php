@@ -555,6 +555,24 @@ function wp_enqueue_custom_assets()
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/bill/section-bill/script.js'))
         ],
         [
+            'type' => 'style',
+            'handle' => 'buildpro-404-style',
+            'src' => get_theme_file_uri('template/template-parts/page/404/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/404/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-404-script',
+            'src' => get_theme_file_uri('template/template-parts/page/404/script.js'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/404/script.js'))
+        ],
+        [
             'type' => 'script',
             'handle' => 'buildpro-cart',
             'src' => get_theme_file_uri('assets/js/cart.js'),

@@ -1,24 +1,21 @@
 <?php
+/*
+Template Name: 404 Page
+*/
+
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<main id="primary" class="site-main">
+    <?php
+    // Load 404 styles
+    wp_enqueue_style('404-styles', get_template_directory_uri() . '/template/template-parts/page/404/style.css', array(), '1.0.0');
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'buildpro' ); ?></h1>
-			</header><!-- .page-header -->
-
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'buildpro' ); ?></p>
-
-				<?php
-					get_search_form();
-				?>
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
-
-	</main><!-- #main -->
+    // Load 404 template
+    get_template_part('template/template-parts/page/404/index');
+    ?>
+</main>
 
 <?php
 get_footer();
+?>

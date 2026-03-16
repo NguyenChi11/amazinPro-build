@@ -37,6 +37,7 @@ function buildpro_maybe_flush_rewrite_rules()
 add_action('init', 'buildpro_maybe_flush_rewrite_rules', 99);
 
 require get_template_directory() . '/import/import-css-js.php';
+require get_template_directory() . '/import/plugin-activation.php';
 require get_template_directory() . '/inc/core/buildpro-theme.php';
 require get_template_directory() . '/inc/functions/home-page-function.php';
 require get_template_directory() . '/inc/functions/header-function.php';

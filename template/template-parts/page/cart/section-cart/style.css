@@ -838,7 +838,7 @@
 
   .cart-item__right {
     align-items: flex-start;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.45rem;
   }
 
