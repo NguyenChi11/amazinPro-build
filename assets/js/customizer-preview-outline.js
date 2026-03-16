@@ -46,6 +46,12 @@
     style.textContent =
       "." +
       FOCUSED_CLASS +
+      " {" +
+      "  outline: 2px solid #2563eb !important;" +
+      "  outline-offset: 4px !important;" +
+      "}" +
+      "." +
+      FOCUSED_CLASS +
       ' [class*="hover-outline"] {' +
       "  opacity: 1 !important;" +
       "  transition: opacity 0.25s ease !important;" +
