@@ -1,0 +1,142 @@
+/* Breadcrumb Styles */
+.breadcrumb-container {
+  padding: 1.25rem 3.75rem;
+}
+
+.custom-breadcrumb-wrapper {
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 0.0625rem solid #e9ecef;
+}
+
+.breadcrumb-nav {
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb-link {
+  color: #007cba;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 0.25rem 0;
+  font-weight: 500;
+}
+
+.breadcrumb-link:hover {
+  color: #005a87;
+  text-decoration: underline;
+}
+
+.breadcrumb-text {
+  color: #666;
+  padding: 0.25rem 0;
+}
+
+.breadcrumb-item.current .breadcrumb-text {
+  color: #333;
+  font-weight: 600;
+}
+
+.breadcrumb-separator {
+  color: #999;
+  margin: 0 0.5rem;
+  user-select: none;
+  font-weight: 400;
+}
+
+/* Responsive Design */
+
+@media (max-width: 639.98px) {
+  .breadcrumb-container {
+    padding: 0.5rem 1.25rem;
+  }
+  /* 480px */
+  .custom-breadcrumb-wrapper {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .breadcrumb-list {
+    font-size: 0.75rem;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 0.25rem;
+  }
+
+  .breadcrumb-link,
+  .breadcrumb-text {
+    padding: 0.125rem 0;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .custom-breadcrumb-wrapper {
+    background: #fafafa;
+  }
+}
+
+/* Print styles */
+@media print {
+  .breadcrumb-container {
+    display: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .breadcrumb-link {
+    color: #000080;
+    font-weight: bold;
+  }
+
+  .breadcrumb-text {
+    color: #000;
+    font-weight: bold;
+  }
+
+  .custom-breadcrumb-wrapper {
+    border: 0.125rem solid #000;
+  }
+}
+
+/* Additional improvements */
+.breadcrumb-link:focus {
+  outline: 0.125rem solid #007cba;
+  outline-offset: 0.125rem;
+  border-radius: 0.125rem;
+}
+
+.breadcrumb-item:not(:last-child) .breadcrumb-link:focus,
+.breadcrumb-item:not(:last-child) .breadcrumb-text:focus {
+  position: relative;
+  z-index: 1;
+}
+
+/* Smooth hover transitions */
+.breadcrumb-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.breadcrumb-link:hover {
+  transform: translateY(-0.0625rem);
+}

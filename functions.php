@@ -41,6 +41,7 @@ require get_template_directory() . '/import/plugin-activation.php';
 require get_template_directory() . '/inc/core/buildpro-theme.php';
 require get_template_directory() . '/inc/functions/home-page-function.php';
 require get_template_directory() . '/inc/functions/header-function.php';
+require get_template_directory() . '/inc/functions/breadcrums-function.php';
 require get_template_directory() . '/inc/functions/demo-function.php';
 require get_template_directory() . '/inc/customizer/preview-page/index.php';
 require get_template_directory() . '/inc/customizer/header/index.php';

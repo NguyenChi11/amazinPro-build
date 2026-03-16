@@ -619,6 +619,26 @@ function wp_enqueue_custom_assets()
         //     'condition' => file_exists(get_theme_file_path('template/meta-box/post-type/post/script.js'))
         // ],
 
+        // Breadcrumb assets
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-breadcrumb-style',
+            'src' => get_theme_file_uri('template/template-parts/breadcrums/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/breadcrums/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-breadcrumb-script',
+            'src' => get_theme_file_uri('template/template-parts/breadcrums/script.js'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/breadcrums/script.js'))
+        ],
+
     ];
     foreach ($wp_enqueue_mapping as $asset) {
         if (isset($asset['condition']) && ! $asset['condition']) {
