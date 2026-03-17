@@ -41,26 +41,26 @@ if ($title === '' && $desc === '') {
 ?>
 <section class="project--section-title">
     <?php if (is_customize_preview()): ?>
-    <div class="project--section-title__hover-outline"></div>
-    <div class="project--section-title__customize-shortcut">
-        <button class="project--section-title__customize-button"
-            data-target-section="buildpro_projects_title_section">Edit Title</button>
-    </div>
-    <script>
-    (function() {
-        var btn = document.querySelector('.project--section-title__customize-button');
-        if (btn && window.parent && window.parent.wp && window.parent.wp.customize) {
-            btn.addEventListener('click', function() {
-                window.parent.wp.customize.section('buildpro_projects_title_section').focus();
-            });
-        }
-    })();
-    </script>
+        <div class="project--section-title__hover-outline"></div>
+        <div class="project--section-title__customize-shortcut">
+            <button class="project--section-title__customize-button"
+                data-target-section="buildpro_projects_title_section"><?php esc_html_e('Edit Title', 'buildpro'); ?></button>
+        </div>
+        <script>
+            (function() {
+                var btn = document.querySelector('.project--section-title__customize-button');
+                if (btn && window.parent && window.parent.wp && window.parent.wp.customize) {
+                    btn.addEventListener('click', function() {
+                        window.parent.wp.customize.section('buildpro_projects_title_section').focus();
+                    });
+                }
+            })();
+        </script>
     <?php endif; ?>
     <?php if ($title !== '') : ?>
-    <h2 class="project--section-title__title"><?php echo esc_html($title); ?></h2>
+        <h2 class="project--section-title__title"><?php echo esc_html($title); ?></h2>
     <?php endif; ?>
     <?php if ($desc !== '') : ?>
-    <p class="project--section-title__desc"><?php echo esc_html($desc); ?></p>
+        <p class="project--section-title__desc"><?php echo esc_html($desc); ?></p>
     <?php endif; ?>
 </section>

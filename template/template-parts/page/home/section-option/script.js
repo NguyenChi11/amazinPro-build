@@ -4,12 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
   var wrapper = document.querySelector(".section-option__swiper-wrapper");
   if (!container || typeof Swiper === "undefined") return;
 
+  var iconAlt = (root && root.getAttribute("data-i18n-icon")) || "Icon";
+
   var rootFontSize =
     parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
   var spacing = 3.75 * rootFontSize;
 
-  var noFallback =
-    root && root.getAttribute("data-no-fallback") === "1";
+  var noFallback = root && root.getAttribute("data-no-fallback") === "1";
   if (
     wrapper &&
     wrapper.children.length === 0 &&
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var img = document.createElement("img");
         img.src = iconUrl;
         img.className = "section-option__item-icon-image";
-        img.alt = "Icon";
+        img.alt = iconAlt;
         iconDiv.appendChild(img);
       }
 

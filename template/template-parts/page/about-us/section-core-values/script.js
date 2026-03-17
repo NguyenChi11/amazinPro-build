@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var section = document.querySelector(".about-core-values[data-auto='1']");
   if (!section) return;
   if (typeof aboutUsCoreValuesData === "undefined") return;
+  var viewDetailsText =
+    section.getAttribute("data-i18n-view-details") || "View Details";
   var data = aboutUsCoreValuesData || {};
   var title = data.title || "";
   var description = data.description || "";
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     a.className = "about-core-values__card-link";
     a.href = String(it.url || "#");
     var sp = document.createElement("span");
-    sp.textContent = "View Details";
+    sp.textContent = viewDetailsText;
     var ai = document.createElement("i");
     ai.className = "fa-solid fa-arrow-right";
     a.appendChild(sp);

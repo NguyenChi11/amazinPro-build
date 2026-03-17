@@ -48,7 +48,7 @@ if ($enabled) :
                                 alt="">
                         </div>
                         <div class="about-contact__content">
-                            <div class="about-contact__label">Office Address</div>
+                            <div class="about-contact__label"><?php esc_html_e('Office Address', 'buildpro'); ?></div>
                             <div class="about-contact__value"><?php echo esc_html($address); ?></div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ if ($enabled) :
                             <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_phone.png')); ?>" alt="">
                         </div>
                         <div class="about-contact__content">
-                            <div class="about-contact__label">Phone Number</div>
+                            <div class="about-contact__label"><?php esc_html_e('Phone Number', 'buildpro'); ?></div>
                             <div class="about-contact__value"><?php echo esc_html($phone); ?></div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ if ($enabled) :
                             <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_mail.png')); ?>" alt="">
                         </div>
                         <div class="about-contact__content">
-                            <div class="about-contact__label">Official Email</div>
+                            <div class="about-contact__label"><?php esc_html_e('Official Email', 'buildpro'); ?></div>
                             <div class="about-contact__value"><?php echo esc_html($email); ?></div>
                         </div>
                     </div>

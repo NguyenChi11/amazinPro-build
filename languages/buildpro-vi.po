@@ -1,0 +1,656 @@
+# Copyright (C) 2026 AmazinPro_Team
+# This file is distributed under the same license as the Build Pro V2 package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Build Pro V2 1.1\n"
+"Report-Msgid-Bugs-To: https://amazinpro.com/\n"
+"POT-Creation-Date: 2026-03-17T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-03-17T00:00:00+00:00\n"
+"Last-Translator: AmazinPro_Team <info@amazinpro.com>\n"
+"Language-Team: Vietnamese <vi@li.org>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: buildpro\n"
+
+#: functions.php:22
+msgid "Primary"
+msgstr "Chính"
+
+#: template/template-parts/page/404/index.php:8
+msgid "Error 404?"
+msgstr "Lỗi 404?"
+
+#: template/template-parts/page/404/index.php:9
+msgid "Page Not Found"
+msgstr "Không tìm thấy trang"
+
+#: template/template-parts/page/404/index.php:11
+msgid "The page you are looking for might have been moved, removed, or is temporarily unavailable. We're building something better!"
+msgstr "Trang bạn đang tìm có thể đã được di chuyển, xóa hoặc tạm thời không khả dụng. Chúng tôi đang xây dựng điều gì đó tốt hơn!"
+
+#: template/template-parts/page/404/index.php:15
+msgid "Back to Home"
+msgstr "Về trang chủ"
+
+#: template/template-parts/page/404/index.php:16
+msgid "Contact Support"
+msgstr "Liên hệ hỗ trợ"
+
+#: template/template-parts/page/cart/section-cart/index.php:25
+msgid "Shopping Cart"
+msgstr "Giỏ hàng"
+
+#: template/template-parts/page/cart/section-cart/index.php:26
+msgid "Review your construction materials and adjust quantities for your project."
+msgstr "Xem lại vật liệu xây dựng và điều chỉnh số lượng cho dự án của bạn."
+
+#: template/template-parts/page/cart/section-cart/index.php:33
+#: template/template-parts/page/checkout/section-checkout/index.php:412
+msgid "Your cart is empty."
+msgstr "Giỏ hàng của bạn đang trống."
+
+#: template/template-parts/page/cart/section-cart/index.php:35
+msgid "Continue Shopping"
+msgstr "Tiếp tục mua sắm"
+
+#: template/template-parts/page/cart/section-cart/index.php:83
+#. translators: %s: unit value
+msgid "Unit: %s"
+msgstr "Đơn vị: %s"
+
+#: template/template-parts/page/cart/section-cart/index.php:98
+msgid "Remove"
+msgstr "Xóa"
+
+#: template/template-parts/page/cart/section-cart/index.php:114
+msgid "Cart Summary"
+msgstr "Tóm tắt giỏ hàng"
+
+#: template/template-parts/page/cart/section-cart/index.php:119
+#: template/template-parts/page/checkout/section-checkout/index.php:463
+msgid "Regular Price"
+msgstr "Giá gốc"
+
+#: template/template-parts/page/cart/section-cart/index.php:125
+#: template/template-parts/page/checkout/section-checkout/index.php:467
+msgid "Sale Price"
+msgstr "Giá khuyến mãi"
+
+#: template/template-parts/page/cart/section-cart/index.php:131
+#: template/template-parts/page/checkout/section-checkout/index.php:471
+msgid "You Save"
+msgstr "Bạn tiết kiệm"
+
+#: template/template-parts/page/cart/section-cart/index.php:137
+msgid "Discount"
+msgstr "Giảm giá"
+
+#: template/template-parts/page/cart/section-cart/index.php:146
+msgid "Total Amount"
+msgstr "Tổng tiền"
+
+#: template/template-parts/page/cart/section-cart/index.php:152
+msgid "Place Order"
+msgstr "Đặt hàng"
+
+#: template/template-parts/page/cart/section-cart/index.php:154
+msgid "Prices include basic unloading at designated curb. Terms &amp; Conditions apply."
+msgstr "Giá đã bao gồm phí bốc dỡ cơ bản tại vị trí quy định. Áp dụng Điều khoản &amp; Điều kiện."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:57
+msgid "Checkout"
+msgstr "Thanh toán"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:58
+msgid "Complete your details to place the order."
+msgstr "Điền thông tin để đặt hàng."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:68
+msgid "Shipping Information"
+msgstr "Thông tin giao hàng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:73
+msgid "Full Name"
+msgstr "Họ và tên"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:79
+msgid "Phone Number"
+msgstr "Số điện thoại"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:87
+msgid "Email Address"
+msgstr "Địa chỉ email"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:94
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:102
+msgid "City"
+msgstr "Thành phố"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:108
+msgid "ZIP / Postal Code"
+msgstr "Mã bưu chính"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:115
+msgid "Country"
+msgstr "Quốc gia"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:118
+msgid "-- Select country --"
+msgstr "-- Chọn quốc gia --"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:130
+msgid "Order Notes"
+msgstr "Ghi chú đơn hàng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:140
+msgid "Payment Method"
+msgstr "Phương thức thanh toán"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:155
+msgid "Cash on Delivery"
+msgstr "Thanh toán khi nhận hàng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:177
+msgid "Credit Card"
+msgstr "Thẻ tín dụng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:187
+msgid "Bank Transfer"
+msgstr "Chuyển khoản ngân hàng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:205
+msgid "Pay in cash upon delivery. Our delivery staff will collect payment directly at your shipping address."
+msgstr "Thanh toán tiền mặt khi nhận hàng. Nhân viên giao hàng sẽ thu tiền trực tiếp tại địa chỉ giao hàng của bạn."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:214
+msgid "Please prepare the exact amount to make the delivery process smoother."
+msgstr "Vui lòng chuẩn bị đúng số tiền để quá trình giao hàng thuận tiện hơn."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:233
+#. translators: %s: payment method name (e.g. PayPal)
+msgid "Continue with %s"
+msgstr "Tiếp tục với %s"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:241
+msgid "You will be redirected to PayPal and returned here after authorization."
+msgstr "Bạn sẽ được chuyển đến PayPal và quay lại đây sau khi xác nhận."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:255
+msgid "Card Number"
+msgstr "Số thẻ"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:261
+msgid "Expiry Date"
+msgstr "Ngày hết hạn"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:267
+msgid "CVV Code"
+msgstr "Mã CVV"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:273
+msgid "Name on Card"
+msgstr "Tên trên thẻ"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:283
+msgid "Card details are encrypted with 256-bit SSL"
+msgstr "Thông tin thẻ được mã hóa bằng SSL 256-bit"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:305
+msgid "Bank"
+msgstr "Ngân hàng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:310
+msgid "Account Name"
+msgstr "Tên tài khoản"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:315
+msgid "Account No."
+msgstr "Số tài khoản"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:320
+#: template/template-parts/page/checkout/section-checkout/index.php:333
+#: template/template-parts/page/checkout/section-checkout/index.php:346
+#: template/template-parts/page/checkout/section-checkout/index.php:359
+msgid "Copy"
+msgstr "Sao chép"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:325
+msgid "Sort Code"
+msgstr "Mã định tuyến"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:338
+msgid "IBAN"
+msgstr "IBAN"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:351
+msgid "BIC / Swift"
+msgstr "BIC / Swift"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:381
+msgid "No bank account details have been configured yet. Please contact us for payment instructions."
+msgstr "Chưa có thông tin tài khoản ngân hàng. Vui lòng liên hệ chúng tôi để được hướng dẫn thanh toán."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:394
+msgid "Please use the exact reference code so your order can be processed quickly."
+msgstr "Vui lòng sử dụng đúng mã tham chiếu để đơn hàng được xử lý nhanh chóng."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:408
+msgid "Order Summary"
+msgstr "Tóm tắt đơn hàng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:439
+#. translators: %s: quantity number
+msgid "Qty: %s"
+msgstr "Số lượng: %s"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:441
+msgid "Regular:"
+msgstr "Giá gốc:"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:445
+msgid "Sale:"
+msgstr "Giá KM:"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:449
+msgid "You Save:"
+msgstr "Tiết kiệm:"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:475
+msgid "Total"
+msgstr "Tổng cộng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:482
+msgid "Bill Order"
+msgstr "Xác nhận đơn hàng"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:496
+msgid "Transaction secured &amp; encrypted"
+msgstr "Giao dịch được bảo mật &amp; mã hóa"
+
+#: template/template-parts/header/header.php:102
+#: template/template-parts/header/header.php:171
+msgid "Request a Quote"
+msgstr "Yêu cầu báo giá"
+
+#: template/template-parts/header/header.php:123
+msgid "Menu"
+msgstr "Menu"
+
+#: template/template-parts/header/header.php:129
+msgid "Close Menu"
+msgstr "Đóng menu"
+
+#: template/template-parts/header/header.php:110
+#: template/template-parts/header/header.php:163
+msgid "Cart"
+msgstr "Giỏ hàng"
+
+#: template/template-parts/header/header.php:164
+#: template/template-parts/header/cart/index.php:102
+msgid "View Cart"
+msgstr "Xem giỏ hàng"
+
+#: template/template-parts/header/cart/index.php:9
+msgid "Your Cart"
+msgstr "Giỏ hàng của bạn"
+
+#: template/template-parts/header/cart/index.php:20
+msgid "Your cart is empty"
+msgstr "Giỏ hàng của bạn đang trống"
+
+#: template/template-parts/header/cart/index.php:81
+msgid "Order total"
+msgstr "Tổng đơn hàng"
+
+#: template/template-parts/header/cart/index.php:59
+msgid "Decrease"
+msgstr "Giảm"
+
+#: template/template-parts/header/cart/index.php:61
+msgid "Increase"
+msgstr "Tăng"
+
+#: template/template-parts/header/cart/index.php:32
+msgid "ton"
+msgstr "tấn"
+
+#: template/template-parts/footer/footer.php:63
+#: template/template-parts/footer/scripts.js:38
+msgid "Footer Logo"
+msgstr "Logo chân trang"
+
+#: template/template-parts/footer/footer.php:64
+#: template/template-parts/footer/footer.php:113
+#: template/template-parts/footer/footer.php:128
+#: template/template-parts/footer/footer.php:136
+#: template/template-parts/footer/footer.php:144
+#: template/template-parts/footer/scripts.js:164
+msgid "icon"
+msgstr "biểu tượng"
+
+#: template/template-parts/footer/footer.php:59
+#: template/template-parts/footer/footer.php:96
+#: template/template-parts/footer/scripts.js:80
+msgid "Connect with us"
+msgstr "Kết nối với chúng tôi"
+
+#: template/template-parts/footer/footer.php:61
+#: template/template-parts/footer/footer.php:134
+#: template/template-parts/footer/scripts.js:134
+msgid "Contact"
+msgstr "Liên hệ"
+
+#: template/template-parts/footer/footer.php:62
+#: template/template-parts/footer/footer.php:182
+#: template/template-parts/footer/scripts.js:271
+msgid "Policy"
+msgstr "Chính sách"
+
+#: template/template-parts/footer/footer.php:63
+#: template/template-parts/footer/footer.php:192
+#: template/template-parts/footer/scripts.js:295
+msgid "Service"
+msgstr "Dịch vụ"
+
+#: template/template-parts/page/about-us/section-core-values/index.php:1
+#: template/template-parts/page/about-us/section-core-values/script.js:1
+msgid "View Details"
+msgstr "Xem chi tiết"
+
+#: template/template-parts/page/about-us/section-leader/index.php:1
+msgid "Core Executives"
+msgstr "Lãnh đạo chủ chốt"
+
+#: template/template-parts/page/about-us/section-leader/index.php:1
+msgid "Total Workforce"
+msgstr "Tổng nhân sự"
+
+#: template/template-parts/page/about-us/section-leader/index.php:1
+msgid "View Profile"
+msgstr "Xem hồ sơ"
+
+#: template/template-parts/page/about-us/section-policy/index.php:1
+msgid "Business Registration"
+msgstr "Đăng ký kinh doanh"
+
+#: template/template-parts/page/about-us/section-policy/index.php:1
+msgid "General Contractor Lic"
+msgstr "Giấy phép tổng thầu"
+
+#: template/template-parts/page/about-us/section-policy/index.php:1
+msgid "DUNS Number"
+msgstr "Mã số DUNS"
+
+#: template/template-parts/page/about-us/section-policy/index.php:1
+msgid "View Certification"
+msgstr "Xem chứng chỉ"
+
+#: template/template-parts/page/about-us/section-contact/index.php:1
+msgid "Office Address"
+msgstr "Địa chỉ văn phòng"
+
+#: template/template-parts/page/about-us/section-contact/index.php:1
+msgid "Official Email"
+msgstr "Email chính thức"
+
+#: template/template-parts/page/about-us/section-contact-form/index.php:1
+msgid "Send an Inquiry"
+msgstr "Gửi yêu cầu"
+
+#: template/template-parts/page/about-us/section-contact-form/index.php:1
+msgid "Contact form is not ready yet."
+msgstr "Biểu mẫu liên hệ chưa sẵn sàng."
+
+#: template/template-parts/page/about-us/section-contact-form/index.php:1
+msgid "Email"
+msgstr "Email"
+
+#: template/template-parts/page/about-us/section-contact-form/index.php:1
+msgid "Phone"
+msgstr "Điện thoại"
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Bill Information"
+msgstr "Thông tin hóa đơn"
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Review your checkout information and submit confirmation."
+msgstr "Xem lại thông tin thanh toán và gửi xác nhận."
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Order Placed Successfully"
+msgstr "Đặt hàng thành công"
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Order #%s has been successfully created."
+msgstr "Đơn hàng #%s đã được tạo thành công."
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Close"
+msgstr "Đóng"
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Customer Information"
+msgstr "Thông tin khách hàng"
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "I confirm all bill information above is correct."
+msgstr "Tôi xác nhận tất cả thông tin hóa đơn ở trên là chính xác."
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Submit Bill Confirmation"
+msgstr "Gửi xác nhận hóa đơn"
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Your cart is currently empty."
+msgstr "Giỏ hàng của bạn hiện đang trống."
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Please confirm the bill information before submitting."
+msgstr "Vui lòng xác nhận thông tin hóa đơn trước khi gửi."
+
+#: template/template-parts/page/bill/section-bill/index.php:1
+msgid "Submitting..."
+msgstr "Đang gửi..."
+
+#: template/template-parts/page/blog/section-blog/index.php:1
+msgid "%s views"
+msgstr "%s lượt xem"
+
+#: template/template-parts/page/blog/section-blog/index.php:1
+msgid "Read more"
+msgstr "Đọc thêm"
+
+#: template/template-parts/page/blog/section-blog/index.php:1
+msgid "Right arrow"
+msgstr "Mũi tên phải"
+
+#: template/template-parts/page/blog/section-blog/index.php:1
+msgid "Trending Now"
+msgstr "Đang thịnh hành"
+
+#: template/template-parts/page/blog/section-blog/index.php:1
+msgid "Trending"
+msgstr "Xu hướng"
+
+#: template/template-parts/page/home/section-banner/index.php:1
+#: template/template-parts/page/home/section-banner/script.js:1
+msgid "View About Us"
+msgstr "Xem về chúng tôi"
+
+#: template/template-parts/page/home/section-banner/index.php:1
+msgid "Edit Banner"
+msgstr "Chỉnh sửa Banner"
+
+#: template/template-parts/page/home/section-products/index.php:1
+msgid "Add to Cart"
+msgstr "Thêm vào giỏ"
+
+#: template/template-parts/page/home/section-products/index.php:1
+msgid "View All Products"
+msgstr "Xem tất cả sản phẩm"
+
+#: template/template-parts/page/home/section-projects/index.php:1
+msgid "View Project"
+msgstr "Xem dự án"
+
+#: template/template-parts/page/home/section-projects/index.php:1
+msgid "Location"
+msgstr "Vị trí"
+
+#: template/template-parts/page/home/section-projects/index.php:1
+msgid "View All Projects"
+msgstr "Xem tất cả dự án"
+
+#: template/template-parts/page/home/section-post/index.php:1
+msgid "View All Posts"
+msgstr "Xem tất cả bài viết"
+
+#: template/template-parts/page/product/section-products/index.php:1
+msgid "Catalog"
+msgstr "Danh mục"
+
+#: template/template-parts/page/product/section-products/index.php:1
+msgid "Construction Supplies"
+msgstr "Vật tư xây dựng"
+
+#: template/template-parts/page/product/section-products/index.php:1
+msgid "Brands"
+msgstr "Thương hiệu"
+
+#: template/template-parts/page/product/section-products/index.php:1
+msgid "Categories"
+msgstr "Danh mục"
+
+#: template/template-parts/page/product/section-products/index.php:1
+msgid "Tags"
+msgstr "Thẻ"
+
+#: template/template-parts/page/product/section-products/index.php:1
+msgid "Search products"
+msgstr "Tìm sản phẩm"
+
+#: template/template-parts/page/product/section-products/index.php:1
+msgid "Search materials, tools, or brands ..."
+msgstr "Tìm vật liệu, dụng cụ hoặc thương hiệu ..."
+
+#: template/template-parts/page/projects/section-title/index.php:1
+msgid "Edit Title"
+msgstr "Chỉnh sửa tiêu đề"
+
+#: template/template-parts/single/single-post/index.php:1
+msgid "Check"
+msgstr "Dấu tích"
+
+#: template/template-parts/single/single-post/index.php:2
+msgid "Gallery image"
+msgstr "Ảnh thư viện"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Start: %s"
+msgstr "Bắt đầu: %s"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "End: %s"
+msgstr "Kết thúc: %s"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Decrease quantity"
+msgstr "Giảm số lượng"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Quantity"
+msgstr "Số lượng"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Increase quantity"
+msgstr "Tăng số lượng"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Typical Range: %s"
+msgstr "Khoảng điển hình: %s"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Engineering Specifications"
+msgstr "Thông số kỹ thuật"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Specifications"
+msgstr "Thông số"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Size"
+msgstr "Kích thước"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Weight"
+msgstr "Trọng lượng"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Shipping class"
+msgstr "Nhóm vận chuyển"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Product Type"
+msgstr "Loại sản phẩm"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Stock Status"
+msgstr "Tình trạng kho"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "Downloads"
+msgstr "Tải xuống"
+
+#: template/template-parts/single/single-product/index.php:1
+msgid "You might also like"
+msgstr "Có thể bạn cũng thích"
+
+#: template/template-parts/single/single-project/index.php:1
+msgid "Total Area"
+msgstr "Tổng diện tích"
+
+#: template/template-parts/single/single-project/index.php:1
+msgid "Completion"
+msgstr "Hoàn thành"
+
+#: template/template-parts/single/single-project/index.php:1
+msgid "Architectural Style"
+msgstr "Phong cách kiến trúc"
+
+#: template/template-parts/single/single-project/index.php:1
+msgid "Gallery"
+msgstr "Thư viện ảnh"
+
+#: template/template-parts/single/single-project/index.php:1
+msgid "Standards"
+msgstr "Tiêu chuẩn"
+
+#: template/template-parts/single/single-project/index.php:1
+msgid "Standard image"
+msgstr "Ảnh tiêu chuẩn"
+
+#: template/template-parts/breadcrums/index.php:1
+msgid "Navigate to %s"
+msgstr "Đi tới %s"
+
+#: template/meta-box/post-type/post/section-banner/index.php:1
+msgid "Banner Image"
+msgstr "Ảnh banner"
+
+#: template/meta-box/post-type/post/section-banner/index.php:1
+msgid "Select photo"
+msgstr "Chọn ảnh"
+
+#: template/meta-box/post-type/post/section-banner/index.php:1
+msgid "Remove photo"
+msgstr "Xóa ảnh"
+
+#: template/meta-box/post-type/post/section-banner/index.php:1
+msgid "No banner selected"
+msgstr "Chưa chọn banner"

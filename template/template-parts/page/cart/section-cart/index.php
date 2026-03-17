@@ -22,18 +22,16 @@ $summary_sale = isset($cart_page_data['summary_sale']) ? floatval($cart_page_dat
             <!-- ===== LEFT: Cart items ===== -->
             <div class="cart-section__main">
                 <div class="cart-section__header">
-                    <h1 class="cart-section__title">Shopping Cart</h1>
-                    <p class="cart-section__subtitle">Review your construction materials and adjust quantities for your
-                        project.</p>
+                    <h1 class="cart-section__title"><?php esc_html_e('Shopping Cart', 'buildpro'); ?></h1>
+                    <p class="cart-section__subtitle"><?php esc_html_e('Review your construction materials and adjust quantities for your project.', 'buildpro'); ?></p>
                 </div>
 
                 <div class="cart-section__items" id="cart-items">
                     <?php if (empty($cart_items)) : ?>
                         <div class="cart-section__empty">
-                            <p>Your cart is empty.</p>
+                            <p><?php esc_html_e('Your cart is empty.', 'buildpro'); ?></p>
                             <?php if ($wc_active) : ?>
-                                <a href="<?php echo esc_url($products_page_url); ?>" class="cart-section__shop-link">Continue
-                                    Shopping</a>
+                                <a href="<?php echo esc_url($products_page_url); ?>" class="cart-section__shop-link"><?php esc_html_e('Continue Shopping', 'buildpro'); ?></a>
                             <?php endif; ?>
                         </div>
                     <?php else : ?>
@@ -80,7 +78,7 @@ $summary_sale = isset($cart_page_data['summary_sale']) ? floatval($cart_page_dat
                                         <?php endif; ?>
                                     </div>
                                     <?php if ($unit) : ?>
-                                        <p class="cart-item__unit">Unit: <?php echo esc_html($unit); ?></p>
+                                        <p class="cart-item__unit"><?php printf(esc_html__('Unit: %s', 'buildpro'), esc_html($unit)); ?></p>
                                     <?php endif; ?>
                                     <div class="cart-item__qty" data-cart-key="<?php echo esc_attr($cart_item_key); ?>"
                                         data-price="<?php echo esc_attr($price); ?>">
@@ -95,7 +93,7 @@ $summary_sale = isset($cart_page_data['summary_sale']) ? floatval($cart_page_dat
                                     <button type="button" class="cart-item__remove"
                                         data-cart-key="<?php echo esc_attr($cart_item_key); ?>"
                                         data-remove-url="<?php echo esc_attr($remove_url); ?>">
-                                        <i class="fa-solid fa-trash-can"></i> Remove
+                                        <i class="fa-solid fa-trash-can"></i> <?php esc_html_e('Remove', 'buildpro'); ?>
                                     </button>
                                 </div>
                             </div>
@@ -111,30 +109,30 @@ $summary_sale = isset($cart_page_data['summary_sale']) ? floatval($cart_page_dat
                 <div class="cart-summary">
                     <div class="cart-summary__header">
                         <i class="fa-solid fa-cart-shopping cart-summary__icon"></i>
-                        <h3 class="cart-summary__title">Cart Summary</h3>
+                        <h3 class="cart-summary__title"><?php esc_html_e('Cart Summary', 'buildpro'); ?></h3>
                     </div>
 
                     <div class="cart-summary__rows">
                         <div class="cart-summary__row">
-                            <span>Regular Price</span>
+                            <span><?php esc_html_e('Regular Price', 'buildpro'); ?></span>
                             <span class="cart-summary__val"
                                 id="summary-regular-price">$<?php echo number_format($summary_regular, 2); ?></span>
                         </div>
                         <div class="cart-summary__row cart-summary__row--sale" id="summary-sale-row"
                             <?php echo ($summary_sale >= $summary_regular) ? ' style="display:none"' : ''; ?>>
-                            <span>Sale Price</span>
+                            <span><?php esc_html_e('Sale Price', 'buildpro'); ?></span>
                             <span class="cart-summary__val cart-summary__val--sale"
                                 id="summary-sale-price">$<?php echo number_format($summary_sale, 2); ?></span>
                         </div>
                         <div class="cart-summary__row cart-summary__row--savings" id="summary-savings-row"
                             <?php echo ($summary_sale >= $summary_regular) ? ' style="display:none"' : ''; ?>>
-                            <span>You Save</span>
+                            <span><?php esc_html_e('You Save', 'buildpro'); ?></span>
                             <span class="cart-summary__val cart-summary__val--savings"
                                 id="summary-savings">-$<?php echo number_format($summary_regular - $summary_sale, 2); ?></span>
                         </div>
                         <div class="cart-summary__row cart-summary__row--discount" id="summary-discount-row"
                             <?php echo $wc_discount <= 0 ? ' style="display:none"' : ''; ?>>
-                            <span>Discount</span>
+                            <span><?php esc_html_e('Discount', 'buildpro'); ?></span>
                             <span class="cart-summary__val cart-summary__val--discount"
                                 id="summary-discount">-$<?php echo number_format($wc_discount, 2); ?></span>
                         </div>
@@ -143,16 +141,15 @@ $summary_sale = isset($cart_page_data['summary_sale']) ? floatval($cart_page_dat
                     <div class="cart-summary__divider"></div>
 
                     <div class="cart-summary__total-row">
-                        <span class="cart-summary__total-label">Total Amount</span>
+                        <span class="cart-summary__total-label"><?php esc_html_e('Total Amount', 'buildpro'); ?></span>
                         <span class="cart-summary__total-val"
                             id="summary-total">$<?php echo number_format($subtotal_raw - $wc_discount, 2); ?></span>
                     </div>
 
                     <a href="<?php echo esc_url($checkout_url); ?>" class="cart-summary__btn">
-                        Place Order <i class="fa-solid fa-arrow-right"></i>
+                        <?php esc_html_e('Place Order', 'buildpro'); ?> <i class="fa-solid fa-arrow-right"></i>
                     </a>
-                    <p class="cart-summary__footnote">Prices include basic unloading at designated curb. Terms &amp;
-                        Conditions apply.</p>
+                    <p class="cart-summary__footnote"><?php esc_html_e('Prices include basic unloading at designated curb. Terms &amp; Conditions apply.', 'buildpro'); ?></p>
                 </div>
             </div>
 

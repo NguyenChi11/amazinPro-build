@@ -2,10 +2,10 @@
     <div class="product-section-products__left">
         <div class="product-section-products__title">
             <h2 class="product-section-products__title-text">
-                Catalog
+                <?php esc_html_e('Catalog', 'buildpro'); ?>
             </h2>
             <p class="product-section-products__title-desc">
-                Construction Supplies
+                <?php esc_html_e('Construction Supplies', 'buildpro'); ?>
             </p>
         </div>
         <div class="product-section-products__category">
@@ -14,9 +14,9 @@
             $cats_icon   = get_theme_file_uri('/assets/images/icon/paint-bucket-svgrepo-com 1.png');
             $tags_icon   = get_theme_file_uri('/assets/images/icon/tools-svgrepo-com 1.png');
             $maps = array(
-                'product_brand' => array('icon' => $brands_icon, 'label' => 'Brands'),
-                'product_cat'   => array('icon' => $cats_icon, 'label' => 'Categories'),
-                'product_tag'   => array('icon' => $tags_icon, 'label' => 'Tags'),
+                'product_brand' => array('icon' => $brands_icon, 'label' => __('Brands', 'buildpro')),
+                'product_cat'   => array('icon' => $cats_icon, 'label' => __('Categories', 'buildpro')),
+                'product_tag'   => array('icon' => $tags_icon, 'label' => __('Tags', 'buildpro')),
             );
             $current_url = function_exists('get_permalink') ? get_permalink() : home_url('/');
             $current_paged = max(1, !empty($_GET['prod_p']) ? (int) $_GET['prod_p'] : 1);
@@ -86,7 +86,7 @@
     <div class="product-section-products__right">
         <div class="product-section-products__product-search">
             <form class="psp-search" role="search" method="get" action="<?php echo esc_url(get_permalink()); ?>">
-                <label class="screen-reader-text" for="psp-search-input">Search products</label>
+                <label class="screen-reader-text" for="psp-search-input"><?php esc_html_e('Search products', 'buildpro'); ?></label>
                 <span class="psp-search__icon" aria-hidden="true">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -95,16 +95,16 @@
                     </svg>
                 </span>
                 <input id="psp-search-input" class="psp-search__input" type="search" name="q"
-                    placeholder="Search materials, tools, or brands ..."
+                    placeholder="<?php esc_attr_e('Search materials, tools, or brands ...', 'buildpro'); ?>"
                     value="<?php echo isset($_GET['q']) ? esc_attr(wp_unslash($_GET['q'])) : ''; ?>" />
                 <?php if (!empty($sel_brand)): ?>
-                <input type="hidden" name="brand" value="<?php echo esc_attr($sel_brand); ?>" />
+                    <input type="hidden" name="brand" value="<?php echo esc_attr($sel_brand); ?>" />
                 <?php endif; ?>
                 <?php if (!empty($sel_cat)): ?>
-                <input type="hidden" name="category" value="<?php echo esc_attr($sel_cat); ?>" />
+                    <input type="hidden" name="category" value="<?php echo esc_attr($sel_cat); ?>" />
                 <?php endif; ?>
                 <?php if (!empty($sel_tag)): ?>
-                <input type="hidden" name="tag" value="<?php echo esc_attr($sel_tag); ?>" />
+                    <input type="hidden" name="tag" value="<?php echo esc_attr($sel_tag); ?>" />
                 <?php endif; ?>
             </form>
         </div>
@@ -179,8 +179,8 @@
                         echo '  <div class="section-product__item-content">';
                         echo '    <h3 class="section-product__item-title">' . esc_html($title) . '</h3>';
                         echo '    <div class="section-product__item-bottom">';
-                        echo '      <p class="section-product__item-price"><span>$</span>' . esc_html($price) . '<span>/ton</span></p>';
-                        echo '      <button class="section-product__item-cta btn-add-to-cart" data-product-id="' . esc_attr($pid) . '">Add to Cart</button>';
+                        echo '      <p class="section-product__item-price"><span>$</span>' . esc_html($price) . '<span>/' . esc_html__('ton', 'buildpro') . '</span></p>';
+                        echo '      <button class="section-product__item-cta btn-add-to-cart" data-product-id="' . esc_attr($pid) . '">' . esc_html__('Add to Cart', 'buildpro') . '</button>';
                         echo '    </div>';
                         echo '  </div>';
                         echo '</a>';

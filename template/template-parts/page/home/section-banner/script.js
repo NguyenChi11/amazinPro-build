@@ -5,6 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const pagination = document.querySelector(
     ".section-banner__pagination-container",
   );
+  const viewAboutUsLabel =
+    (root && root.getAttribute("data-i18n-view-about-us")) || "View About Us";
+  const rightArrowAlt =
+    (root && root.getAttribute("data-i18n-right-arrow")) || "Right arrow";
+  const arrowIconSrc =
+    (root && root.getAttribute("data-arrow-icon-src")) ||
+    "/wp-content/themes/buildpro/assets/images/icon/Arrow_Right.png";
   const noFallback = root && root.getAttribute("data-no-fallback") === "1";
   if (noFallback) {
     if (left) left.innerHTML = "";
@@ -44,22 +51,27 @@ document.addEventListener("DOMContentLoaded", function () {
       content.appendChild(h2);
       content.appendChild(p);
       item.appendChild(content);
-      const btnTitle = "View About Us";
       if (b.linkUrl) {
         const a = document.createElement("a");
         a.className = "section-banner__item-button";
         a.href = b.linkUrl;
-        a.innerHTML =
-          btnTitle +
-          ' <img class="section-banner__item-button-icon" src="/wp-content/themes/buildpro/assets/images/icon/Arrow_Right.png" alt="Arrow Right">';
+        a.appendChild(document.createTextNode(viewAboutUsLabel + " "));
+        const icon = document.createElement("img");
+        icon.className = "section-banner__item-button-icon";
+        icon.src = arrowIconSrc;
+        icon.alt = rightArrowAlt;
+        a.appendChild(icon);
         item.appendChild(a);
       } else {
         const button = document.createElement("button");
         button.className = "section-banner__item-button";
         button.disabled = true;
-        button.innerHTML =
-          btnTitle +
-          ' <img class="section-banner__item-button-icon" src="/wp-content/themes/buildpro/assets/images/icon/Arrow_Right.png" alt="Arrow Right">';
+        button.appendChild(document.createTextNode(viewAboutUsLabel + " "));
+        const icon = document.createElement("img");
+        icon.className = "section-banner__item-button-icon";
+        icon.src = arrowIconSrc;
+        icon.alt = rightArrowAlt;
+        button.appendChild(icon);
         item.appendChild(button);
       }
       left.appendChild(item);

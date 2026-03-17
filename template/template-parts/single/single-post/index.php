@@ -75,7 +75,7 @@ get_template_part('template/template-parts/breadcrums/index');
                     <div class="single-post__kv-item-container">
                         <img class="single-post__key-icon"
                             src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icon/tick_green.png'); ?>"
-                            alt="">
+                            alt="<?php echo esc_attr__('Check', 'buildpro'); ?>">
                         <div class="single-post__kv-item">
                             <?php if ($k !== '') : ?>
                                 <span class="single-post__kv-key"><?php echo esc_html($k); ?>:</span>
@@ -99,7 +99,7 @@ get_template_part('template/template-parts/breadcrums/index');
                         if (!$u) continue;
                     ?>
                         <figure class="single-post__gallery-item">
-                            <img src="<?php echo esc_url($u); ?>" alt="">
+                            <img src="<?php echo esc_url($u); ?>" alt="<?php echo esc_attr__('Gallery image', 'buildpro'); ?>">
                         </figure>
                     <?php endforeach; ?>
                 </div>

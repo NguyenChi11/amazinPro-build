@@ -23,8 +23,8 @@ echo '<script src="' . esc_url(add_query_arg('ver', $buildpro_comments_js_ver, $
     <div class="comments-shell">
 
         <?php if (have_comments()) : ?>
-        <h2 class="comments-title">
-            <?php
+            <h2 class="comments-title">
+                <?php
                 $buildpro_comment_count = get_comments_number();
                 if ('1' === $buildpro_comment_count) {
                     printf(
@@ -45,46 +45,46 @@ echo '<script src="' . esc_url(add_query_arg('ver', $buildpro_comments_js_ver, $
                     );
                 }
                 ?>
-        </h2>
+            </h2>
 
-        <?php the_comments_navigation([
+            <?php the_comments_navigation([
                 'prev_text' => __('← Older comments', 'buildpro'),
                 'next_text' => __('Newer comments →', 'buildpro'),
             ]); ?>
 
-        <div class="comments-stream" id="comments-stream" data-chunk="20">
-            <ol class="comment-list" id="comments-list">
-                <?php
+            <div class="comments-stream" id="comments-stream" data-chunk="20">
+                <ol class="comment-list" id="comments-list">
+                    <?php
                     if (!function_exists('buildpro_comment_callback')) {
                         function buildpro_comment_callback($comment, $args, $depth)
                         {
                             $tag = ($args['style'] === 'div') ? 'div' : 'li';
                     ?>
-                <<?php echo esc_attr($tag); ?> id="comment-<?php comment_ID(); ?>"
-                    <?php comment_class('comment-item', $comment); ?>>
-                    <article class="comment-body">
-                        <footer class="comment-meta">
-                            <div class="comment-author">
-                                <?php
+                            <<?php echo esc_attr($tag); ?> id="comment-<?php comment_ID(); ?>"
+                                <?php comment_class('comment-item', $comment); ?>>
+                                <article class="comment-body">
+                                    <footer class="comment-meta">
+                                        <div class="comment-author">
+                                            <?php
                                             $avatar_size = isset($args['avatar_size']) ? (int) $args['avatar_size'] : 56;
                                             echo get_avatar($comment, $avatar_size, '', '', ['class' => 'comment-avatar']);
                                             ?>
-                                <div class="comment-author-info">
-                                    <span class="comment-author-name"><?php comment_author(); ?></span>
-                                    <time class="comment-date" datetime="<?php comment_date(DATE_W3C); ?>">
-                                        <?php comment_date(); ?>
-                                    </time>
-                                </div>
-                            </div>
-                            <?php if ('0' == $comment->comment_approved) : ?>
-                            <p class="comment-awaiting-moderation">
-                                <?php esc_html_e('Your comment is awaiting moderation.', 'buildpro'); ?></p>
-                            <?php endif; ?>
-                        </footer>
-                        <div class="comment-content">
-                            <?php comment_text(); ?>
-                        </div>
-                        <?php
+                                            <div class="comment-author-info">
+                                                <span class="comment-author-name"><?php comment_author(); ?></span>
+                                                <time class="comment-date" datetime="<?php comment_date(DATE_W3C); ?>">
+                                                    <?php comment_date(); ?>
+                                                </time>
+                                            </div>
+                                        </div>
+                                        <?php if ('0' == $comment->comment_approved) : ?>
+                                            <p class="comment-awaiting-moderation">
+                                                <?php esc_html_e('Your comment is awaiting moderation.', 'buildpro'); ?></p>
+                                        <?php endif; ?>
+                                    </footer>
+                                    <div class="comment-content">
+                                        <?php comment_text(); ?>
+                                    </div>
+                                    <?php
                                     comment_reply_link(array_merge($args, [
                                         'depth'     => $depth,
                                         'max_depth' => $args['max_depth'],
@@ -92,8 +92,8 @@ echo '<script src="' . esc_url(add_query_arg('ver', $buildpro_comments_js_ver, $
                                         'after'     => '</div>',
                                     ]));
                                     ?>
-                    </article>
-                    <?php
+                                </article>
+                        <?php
                         }
                     }
                     wp_list_comments([
@@ -106,17 +106,17 @@ echo '<script src="' . esc_url(add_query_arg('ver', $buildpro_comments_js_ver, $
                         'reverse_children'  => false,
                     ]);
                         ?>
-            </ol>
-        </div>
+                </ol>
+            </div>
 
-        <?php the_comments_navigation([
+            <?php the_comments_navigation([
                 'prev_text' => __('← Older comments', 'buildpro'),
                 'next_text' => __('Newer comments →', 'buildpro'),
             ]); ?>
 
-        <?php if (!comments_open()) : ?>
-        <p class="no-comments"><?php esc_html_e('Comments have been closed.', 'buildpro'); ?></p>
-        <?php endif; ?>
+            <?php if (!comments_open()) : ?>
+                <p class="no-comments"><?php esc_html_e('Comments have been closed.', 'buildpro'); ?></p>
+            <?php endif; ?>
 
         <?php endif; // have_comments() 
         ?>
@@ -139,7 +139,7 @@ echo '<script src="' . esc_url(add_query_arg('ver', $buildpro_comments_js_ver, $
             'comment_notes_after'  => '',
             'label_submit'         => __('Submit', 'buildpro'),
             'class_submit'         => 'comment-submit-btn',
-            'comment_field'        => '<p class="comment-form-comment"><label for="comment" class="comment-label">' . _x('Comment', 'noun') . '</label><textarea id="comment" name="comment" cols="45" rows="4" class="comment-textarea" placeholder="' . esc_attr__('Write a public comment...', 'buildpro') . '" required></textarea></p>',
+            'comment_field'        => '<p class="comment-form-comment"><label for="comment" class="comment-label">' . esc_html_x('Comment', 'noun', 'buildpro') . '</label><textarea id="comment" name="comment" cols="45" rows="4" class="comment-textarea" placeholder="' . esc_attr__('Write a public comment...', 'buildpro') . '" required></textarea></p>',
         ]);
         ?>
     </div>

@@ -92,9 +92,9 @@ if (empty($posts)) {
                     </p>
                 </div>
                 <div class="section-post__item-bottom">
-                    <p class="section-post__item-readmore">Read more
+                    <p class="section-post__item-readmore"><?php esc_html_e('Read more', 'buildpro'); ?>
                         <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')); ?>"
-                            alt="right arrow" class="section-services__item-link-icon">
+                            alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>" class="section-services__item-link-icon">
                     </p>
                 </div>
             </a>
@@ -109,9 +109,9 @@ if (empty($posts)) {
     ?>
     <div class="section-portfolio__page-link">
         <a class="section-portfolio__page-link-text" href="<?php echo esc_url($blog_page_url); ?>">
-            View All Post
+            <?php esc_html_e('View All Posts', 'buildpro'); ?>
         </a>
         <img class="section-banner__item-button-icon"
-            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="Arrow Right">
+            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">
     </div>
 </section>

@@ -1,6 +1,6 @@
 <?php
 $form_id = (int) get_option('buildpro_cf7_demo_form_id', 0);
-$title = 'Send an Inquiry';
+$title = __('Send an Inquiry', 'buildpro');
 $pid = get_queried_object_id();
 $use_mod = is_customize_preview();
 if (!$pid || get_post_type($pid) !== 'page') {
@@ -31,7 +31,7 @@ $map_url = $map_image_id ? wp_get_attachment_image_url($map_image_id, 'full') : 
             if ($form_id > 0 && class_exists('WPCF7_ContactForm')) {
                 echo do_shortcode('[contact-form-7 id="' . $form_id . '" title="BuildPro Contact Form"]');
             } else {
-                echo '<p>Contact Form chưa sẵn sàng.</p>';
+                echo '<p>' . esc_html__('Contact form is not ready yet.', 'buildpro') . '</p>';
             }
             ?>
         </div>
@@ -45,16 +45,16 @@ $map_url = $map_image_id ? wp_get_attachment_image_url($map_image_id, 'full') : 
             <?php endif; ?>
         </div>
         <div class="about-contact-form__connect">
-            <h3 class="about-contact-form__connect-title">Connect With Us</h3>
+            <h3 class="about-contact-form__connect-title"><?php esc_html_e('Connect with us', 'buildpro'); ?></h3>
             <div class="about-contact-form__connect-list">
                 <?php if (!empty($email)) : ?>
-                    <a class="connect-item" href="mailto:<?php echo esc_attr($email); ?>" aria-label="Email">
+                    <a class="connect-item" href="mailto:<?php echo esc_attr($email); ?>" aria-label="<?php echo esc_attr__('Email', 'buildpro'); ?>">
                         <i class="fa-solid fa-globe"></i>
                     </a>
                 <?php endif; ?>
                 <?php if (!empty($phone)) : ?>
                     <a class="connect-item" href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $phone)); ?>"
-                        aria-label="Phone">
+                        aria-label="<?php echo esc_attr__('Phone', 'buildpro'); ?>">
                         <i class="fa-solid fa-phone"></i>
                     </a>
                 <?php endif; ?>

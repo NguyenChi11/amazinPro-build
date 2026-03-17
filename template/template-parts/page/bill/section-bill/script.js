@@ -28,6 +28,12 @@
     return;
   }
 
+  var agreeErrorMessage =
+    form.getAttribute("data-i18n-agree-error") ||
+    "Please confirm the bill information before submitting.";
+  var submittingLabel =
+    form.getAttribute("data-i18n-submitting") || "Submitting...";
+
   var submitBtn = document.getElementById("bill-submit-btn");
   var agreeCheckbox = document.getElementById("bill-agree");
   var agreeError = document.querySelector(
@@ -61,7 +67,7 @@
   form.addEventListener("submit", function (event) {
     if (!agreeCheckbox || !agreeCheckbox.checked) {
       event.preventDefault();
-      showAgreeError("Please confirm the bill information before submitting.");
+      showAgreeError(agreeErrorMessage);
       if (agreeCheckbox) {
         agreeCheckbox.scrollIntoView({ behavior: "smooth", block: "center" });
       }
@@ -72,7 +78,7 @@
 
     if (submitBtn) {
       submitBtn.classList.add("is-loading");
-      submitBtn.textContent = "Submitting...";
+      submitBtn.textContent = submittingLabel;
     }
   });
 })();

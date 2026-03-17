@@ -66,19 +66,19 @@ if ($enabled) :
                         <div class="about-policy__details">
                             <?php if ($business_registration !== '') : ?>
                                 <div class="about-policy__detail">
-                                    <span class="about-policy__detail-label">Bussiness Registration</span>
+                                    <span class="about-policy__detail-label"><?php esc_html_e('Business Registration', 'buildpro'); ?></span>
                                     <span class="about-policy__detail-value"><?php echo esc_html((string)$business_registration); ?></span>
                                 </div>
                             <?php endif; ?>
                             <?php if ($general_contractor !== '') : ?>
                                 <div class="about-policy__detail">
-                                    <span class="about-policy__detail-label">General Contractor Lic</span>
+                                    <span class="about-policy__detail-label"><?php esc_html_e('General Contractor Lic', 'buildpro'); ?></span>
                                     <span class="about-policy__detail-value"><?php echo esc_html((string)$general_contractor); ?></span>
                                 </div>
                             <?php endif; ?>
                             <?php if ($duns_number !== '') : ?>
                                 <div class="about-policy__detail">
-                                    <span class="about-policy__detail-label">DUNS Number</span>
+                                    <span class="about-policy__detail-label"><?php esc_html_e('DUNS Number', 'buildpro'); ?></span>
                                     <span class="about-policy__detail-value"><?php echo esc_html((string)$duns_number); ?></span>
                                 </div>
                             <?php endif; ?>
@@ -103,7 +103,7 @@ if ($enabled) :
                                     <?php endif; ?>
                                     <?php if (!empty($c['url'])) : ?>
                                         <a class="about-policy__cert-link" href="<?php echo esc_url($c['url']); ?>" target="_blank" rel="noopener">
-                                            <span>View Certification</span>
+                                            <span><?php esc_html_e('View Certification', 'buildpro'); ?></span>
                                             <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                                         </a>
                                     <?php endif; ?>

@@ -29,6 +29,8 @@ $submit_error = isset($bill_data['submit_error']) ? $bill_data['submit_error'] :
 $created_order_id = isset($bill_data['created_order_id']) ? $bill_data['created_order_id'] : 0;
 $home_redirect_url = isset($bill_data['home_redirect_url']) ? $bill_data['home_redirect_url'] : home_url('/');
 
+$payment_label = isset($payment_options[$form_data['payment']]['label']) ? $payment_options[$form_data['payment']]['label'] : '-';
+
 wp_enqueue_style(
     'bill-section-style',
     get_template_directory_uri() . '/template/template-parts/page/bill/section-bill/style.css',
@@ -47,8 +49,8 @@ wp_enqueue_script(
 <section class="bill-section">
     <div class="container">
         <div class="bill-section__header">
-            <h1 class="bill-section__title">Bill Information</h1>
-            <p class="bill-section__subtitle">Review your checkout information and submit confirmation.</p>
+            <h1 class="bill-section__title"><?php esc_html_e('Bill Information', 'buildpro'); ?></h1>
+            <p class="bill-section__subtitle"><?php esc_html_e('Review your checkout information and submit confirmation.', 'buildpro'); ?></p>
         </div>
 
         <?php if (!empty($submit_error)) : ?>
@@ -61,56 +63,58 @@ wp_enqueue_script(
                 <div class="bill-success-popup__backdrop" data-popup-close="1"></div>
                 <div class="bill-success-popup__dialog" role="dialog" aria-modal="true"
                     aria-labelledby="bill-success-title">
-                    <h2 class="bill-success-popup__title" id="bill-success-title">order successfully</h2>
+                    <h2 class="bill-success-popup__title" id="bill-success-title"><?php esc_html_e('Order Placed Successfully', 'buildpro'); ?></h2>
                     <p class="bill-success-popup__text">
-                        order #<?php echo esc_html($created_order_id); ?> has been successfully created.
+                        <?php printf(esc_html__('Order #%s has been successfully created.', 'buildpro'), esc_html($created_order_id)); ?>
                     </p>
                     <button type="button" class="bill-success-popup__btn" id="bill-success-close-btn" data-popup-close="1">
-                        Dong
+                        <?php esc_html_e('Close', 'buildpro'); ?>
                     </button>
                 </div>
             </div>
         <?php endif; ?>
 
         <div class="bill-layout">
-            <form class="bill-card bill-card--form" id="bill-confirm-form" method="post" novalidate>
-                <h2 class="bill-card__title">Customer Information</h2>
+            <form class="bill-card bill-card--form" id="bill-confirm-form" method="post" novalidate
+                data-i18n-agree-error="<?php echo esc_attr__('Please confirm the bill information before submitting.', 'buildpro'); ?>"
+                data-i18n-submitting="<?php echo esc_attr__('Submitting...', 'buildpro'); ?>">
+                <h2 class="bill-card__title"><?php esc_html_e('Customer Information', 'buildpro'); ?></h2>
 
                 <div class="bill-info-list">
                     <div class="bill-info-list__row">
-                        <span>Full Name</span>
+                        <span><?php esc_html_e('Full Name', 'buildpro'); ?></span>
                         <strong><?php echo esc_html($form_data['fullname'] ?: '-'); ?></strong>
                     </div>
                     <div class="bill-info-list__row">
-                        <span>Phone Number</span>
+                        <span><?php esc_html_e('Phone Number', 'buildpro'); ?></span>
                         <strong><?php echo esc_html($form_data['phone'] ?: '-'); ?></strong>
                     </div>
                     <div class="bill-info-list__row">
-                        <span>Email Address</span>
+                        <span><?php esc_html_e('Email Address', 'buildpro'); ?></span>
                         <strong><?php echo esc_html($form_data['email'] ?: '-'); ?></strong>
                     </div>
                     <div class="bill-info-list__row">
-                        <span>Address</span>
+                        <span><?php esc_html_e('Address', 'buildpro'); ?></span>
                         <strong><?php echo esc_html($form_data['address'] ?: '-'); ?></strong>
                     </div>
                     <div class="bill-info-list__row">
-                        <span>City</span>
+                        <span><?php esc_html_e('City', 'buildpro'); ?></span>
                         <strong><?php echo esc_html($form_data['city'] ?: '-'); ?></strong>
                     </div>
                     <div class="bill-info-list__row">
-                        <span>ZIP / Postal Code</span>
+                        <span><?php esc_html_e('ZIP / Postal Code', 'buildpro'); ?></span>
                         <strong><?php echo esc_html($form_data['zip'] ?: '-'); ?></strong>
                     </div>
                     <div class="bill-info-list__row">
-                        <span>Country</span>
+                        <span><?php esc_html_e('Country', 'buildpro'); ?></span>
                         <strong><?php echo esc_html($form_data['country_label'] ?: '-'); ?></strong>
                     </div>
                     <div class="bill-info-list__row">
-                        <span>Payment Method</span>
-                        <strong><?php echo esc_html($payment_options[$form_data['payment']]['label']); ?></strong>
+                        <span><?php esc_html_e('Payment Method', 'buildpro'); ?></span>
+                        <strong><?php echo esc_html($payment_label); ?></strong>
                     </div>
                     <div class="bill-info-list__row">
-                        <span>Order Notes</span>
+                        <span><?php esc_html_e('Order Notes', 'buildpro'); ?></span>
                         <strong><?php echo esc_html($form_data['note'] ?: '-'); ?></strong>
                     </div>
                 </div>
@@ -129,7 +133,7 @@ wp_enqueue_script(
                 <label class="bill-agree">
                     <input type="checkbox" id="bill-agree" name="bill_agree" value="1"
                         <?php checked($submit_success); ?>>
-                    <span>I confirm all bill information above is correct.</span>
+                    <span><?php esc_html_e('I confirm all bill information above is correct.', 'buildpro'); ?></span>
                 </label>
                 <span class="bill-form__error" data-for="bill-agree"></span>
 
@@ -137,7 +141,7 @@ wp_enqueue_script(
                 <input type="hidden" name="bp_bill_confirm_submit" value="1">
 
                 <button type="submit" class="bill-submit-btn" id="bill-submit-btn">
-                    Submit Bill Confirmation
+                    <?php esc_html_e('Submit Bill Confirmation', 'buildpro'); ?>
                     <svg viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -148,11 +152,11 @@ wp_enqueue_script(
 
             <aside class="bill-summary-stack">
                 <div class="bill-card bill-card--summary">
-                    <h2 class="bill-card__title">Order Summary</h2>
+                    <h2 class="bill-card__title"><?php esc_html_e('Order Summary', 'buildpro'); ?></h2>
 
                     <div class="bill-order-items">
                         <?php if (empty($cart_items)) : ?>
-                            <p class="bill-order-empty">Your cart is currently empty.</p>
+                            <p class="bill-order-empty"><?php esc_html_e('Your cart is currently empty.', 'buildpro'); ?></p>
                         <?php else : ?>
                             <?php foreach ($cart_items as $item) :
                                 $product  = $item['data'];
@@ -171,7 +175,7 @@ wp_enqueue_script(
                                     </div>
                                     <div class="bill-order-item__meta">
                                         <p class="bill-order-item__name"><?php echo esc_html($name); ?></p>
-                                        <p class="bill-order-item__qty">Qty: <?php echo esc_html($qty); ?></p>
+                                        <p class="bill-order-item__qty"><?php printf(esc_html__('Qty: %s', 'buildpro'), esc_html($qty)); ?></p>
                                     </div>
                                     <p class="bill-order-item__total"><?php echo $bp_price($price * $qty); ?></p>
                                 </div>
@@ -183,20 +187,20 @@ wp_enqueue_script(
 
                     <div class="bill-totals">
                         <div class="bill-totals__row">
-                            <span>Regular Price</span>
+                            <span><?php esc_html_e('Regular Price', 'buildpro'); ?></span>
                             <span><?php echo $bp_price($regular_total_raw); ?></span>
                         </div>
                         <div class="bill-totals__row">
-                            <span>Sale Price</span>
+                            <span><?php esc_html_e('Sale Price', 'buildpro'); ?></span>
                             <span><?php echo $bp_price($sale_total_raw); ?></span>
                         </div>
                         <div class="bill-totals__row">
-                            <span>You Save</span>
+                            <span><?php esc_html_e('You Save', 'buildpro'); ?></span>
                             <span><?php echo $bp_price($you_save_raw); ?></span>
                         </div>
                         <div class="bill-divider"></div>
                         <div class="bill-totals__row bill-totals__row--total">
-                            <span>Total</span>
+                            <span><?php esc_html_e('Total', 'buildpro'); ?></span>
                             <span><?php echo $bp_price($total); ?></span>
                         </div>
                     </div>

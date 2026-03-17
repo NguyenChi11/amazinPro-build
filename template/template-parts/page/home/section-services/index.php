@@ -82,9 +82,9 @@ $icon_right = 212;
                     ?>
                     <a class="section-services__item-link" href="<?php echo esc_url($item['link_url']); ?>"
                         <?php echo $target_attr . $rel_attr; ?>>
-                        <?php echo esc_html('View Details'); ?>
+                        <?php echo esc_html__('View Details', 'buildpro'); ?>
                         <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')); ?>"
-                            alt="right arrow" class="section-services__item-link-icon">
+                            alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>" class="section-services__item-link-icon">
                     </a>
                 <?php endif; ?>
             </div>

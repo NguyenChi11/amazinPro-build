@@ -47,29 +47,30 @@ $no_items = empty($section_option_items);
 $style = $enabled !== 1 ? ' style="display:none"' : '';
 ?>
 <section class="section-option"
+    data-i18n-icon="<?php echo esc_attr__('icon', 'buildpro'); ?>"
     <?php echo $style; ?><?php echo $no_items ? ' data-no-fallback="1" style="display:none"' : ''; ?>>
     <?php if (is_customize_preview()): ?>
-    <div class="section-option__hover-outline"></div>
+        <div class="section-option__hover-outline"></div>
 
 
-    <script>
-    (function() {
-        var btn = document.querySelector('.section-option__customize-button');
-        if (btn && window.parent && window.parent.wp && window.parent.wp.customize) {
-            btn.addEventListener('click', function() {
-                window.parent.wp.customize.section('buildpro_option_section').focus();
-            });
-        }
-    })();
-    </script>
+        <script>
+            (function() {
+                var btn = document.querySelector('.section-option__customize-button');
+                if (btn && window.parent && window.parent.wp && window.parent.wp.customize) {
+                    btn.addEventListener('click', function() {
+                        window.parent.wp.customize.section('buildpro_option_section').focus();
+                    });
+                }
+            })();
+        </script>
     <?php endif; ?>
     <div class="swiper section-option__swiper">
         <div class="swiper-wrapper section-option__swiper-wrapper">
             <?php foreach ($section_option_items as $section_option_item): ?>
-            <div class="swiper-slide section-option__swiper-item">
-                <div class="section-option__item">
-                    <div class="section-option__item-icon">
-                        <?php
+                <div class="swiper-slide section-option__swiper-item">
+                    <div class="section-option__item">
+                        <div class="section-option__item-icon">
+                            <?php
                             $icon_src = '';
                             if (!empty($section_option_item['icon_id'])) {
                                 $icon_src = wp_get_attachment_image_url($section_option_item['icon_id'], 'full');
@@ -78,15 +79,15 @@ $style = $enabled !== 1 ? ' style="display:none"' : '';
                                 $icon_src = $section_option_item['icon_url'];
                             }
                             ?>
-                        <?php if ($icon_src): ?>
-                        <img src="<?php echo esc_url($icon_src); ?>" class="section-option__item-icon-image" alt="Icon">
-                        <?php endif; ?>
+                            <?php if ($icon_src): ?>
+                                <img src="<?php echo esc_url($icon_src); ?>" class="section-option__item-icon-image" alt="<?php echo esc_attr__('icon', 'buildpro'); ?>">
+                            <?php endif; ?>
+                        </div>
+                        <h3 class="section-option__item-text"><?php echo $section_option_item['text']; ?></h3>
+                        <p class="section-option__item-description"><?php echo $section_option_item['description']; ?>
+                        </p>
                     </div>
-                    <h3 class="section-option__item-text"><?php echo $section_option_item['text']; ?></h3>
-                    <p class="section-option__item-description"><?php echo $section_option_item['description']; ?>
-                    </p>
                 </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </div>

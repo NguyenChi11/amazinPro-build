@@ -51,6 +51,21 @@ if (!is_customize_preview() && !$has_data) {
 }
 ?>
 
+<script>
+    (function() {
+        try {
+            window.footerI18n = window.footerI18n || {};
+            window.footerI18n.connectWithUs = window.footerI18n.connectWithUs || <?php echo wp_json_encode(esc_html__('Connect with us', 'buildpro')); ?>;
+            window.footerI18n.menu = window.footerI18n.menu || <?php echo wp_json_encode(esc_html__('Menu', 'buildpro')); ?>;
+            window.footerI18n.contact = window.footerI18n.contact || <?php echo wp_json_encode(esc_html__('Contact', 'buildpro')); ?>;
+            window.footerI18n.policy = window.footerI18n.policy || <?php echo wp_json_encode(esc_html__('Policy', 'buildpro')); ?>;
+            window.footerI18n.service = window.footerI18n.service || <?php echo wp_json_encode(esc_html__('Service', 'buildpro')); ?>;
+            window.footerI18n.footerLogoAlt = window.footerI18n.footerLogoAlt || <?php echo wp_json_encode(esc_attr__('Footer Logo', 'buildpro')); ?>;
+            window.footerI18n.iconAlt = window.footerI18n.iconAlt || <?php echo wp_json_encode(esc_attr__('icon', 'buildpro')); ?>;
+        } catch (e) {}
+    })();
+</script>
+
 <footer id="colophon" class="site-footer" <?php echo $bg_style; ?>>
     <div class="footer__inner">
         <?php if (is_customize_preview()): ?>
@@ -79,7 +94,7 @@ if (!is_customize_preview() && !$has_data) {
                         $header_sub = is_scalar($header_sub) ? trim((string)$header_sub) : '';
                         ?>
                         <?php if ($header_logo_url): ?>
-                            <img class="footer__logo" src="<?php echo esc_url($header_logo_url); ?>" alt="Footer Logo">
+                            <img class="footer__logo" src="<?php echo esc_url($header_logo_url); ?>" alt="<?php esc_attr_e('Footer Logo', 'buildpro'); ?>">
                         <?php endif; ?>
                         <?php if (!empty($header_title)): ?>
                             <h3 class="footer__title"><?php echo esc_html($header_title); ?></h3>
@@ -93,7 +108,7 @@ if (!is_customize_preview() && !$has_data) {
                     <p class="footer__description"><?php echo esc_html($description_ft); ?></p>
                 <?php endif; ?>
 
-                <h3 class="footer__connect-title">Connect with us</h3>
+                <h3 class="footer__connect-title"><?php esc_html_e('Connect with us', 'buildpro'); ?></h3>
 
                 <?php if (!empty($contact_links)): ?>
                     <div class="footer__contact-links">
@@ -105,7 +120,7 @@ if (!is_customize_preview() && !$has_data) {
                             <a class="footer__contact-link" href="<?php echo esc_url($c['url']); ?>"
                                 <?php echo $target_attr . $rel_attr; ?>>
                                 <?php if (!empty($c['icon_url'])): ?>
-                                    <img class="footer__contact-link-icon" src="<?php echo esc_url($c['icon_url']); ?>" alt="icon">
+                                    <img class="footer__contact-link-icon" src="<?php echo esc_url($c['icon_url']); ?>" alt="<?php esc_attr_e('icon', 'buildpro'); ?>">
                                 <?php endif; ?>
 
                             </a>
@@ -114,7 +129,7 @@ if (!is_customize_preview() && !$has_data) {
                 <?php endif; ?>
             </div>
             <div class="footer__pages_wrapper">
-                <h3 class="footer__pages-title">Menu</h3>
+                <h3 class="footer__pages-title"><?php esc_html_e('Menu', 'buildpro'); ?></h3>
                 <?php if (!empty($footer_pages)): ?>
                     <div class="footer__pages">
                         <?php foreach ($footer_pages as $p): ?>
@@ -131,13 +146,13 @@ if (!is_customize_preview() && !$has_data) {
                 <?php endif; ?>
             </div>
             <div class="footer__contact">
-                <h3 class="footer__contact-title">Contact</h3>
+                <h3 class="footer__contact-title"><?php esc_html_e('Contact', 'buildpro'); ?></h3>
                 <div class="footer__contact-info">
                     <?php if (!empty($contact_location)): ?>
                         <p class="footer__contact-location">
                             <img class="footer__contact-icon"
                                 src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/icon_location_ft.png"
-                                alt="icon">
+                                alt="<?php esc_attr_e('icon', 'buildpro'); ?>">
                             <?php echo esc_html($contact_location); ?>
                         </p>
                     <?php endif; ?>
@@ -145,7 +160,7 @@ if (!is_customize_preview() && !$has_data) {
                         <p class="footer__contact-phone">
                             <img class="footer__contact-icon"
                                 src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/icon_phone_ft.png"
-                                alt="icon">
+                                alt="<?php esc_attr_e('icon', 'buildpro'); ?>">
                             <?php echo esc_html($contact_phone); ?>
                         </p>
                     <?php endif; ?>
@@ -153,7 +168,7 @@ if (!is_customize_preview() && !$has_data) {
                         <p class="footer__contact-email">
                             <img class="footer__contact-icon"
                                 src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/icon_email_ft.png"
-                                alt="icon">
+                                alt="<?php esc_attr_e('icon', 'buildpro'); ?>">
                             <?php echo esc_html($contact_email); ?>
                         </p>
                     <?php endif; ?>
@@ -161,7 +176,7 @@ if (!is_customize_preview() && !$has_data) {
                         <p class="footer__contact-time">
                             <img class="footer__contact-icon"
                                 src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/icon_time_ft.png"
-                                alt="icon">
+                                alt="<?php esc_attr_e('icon', 'buildpro'); ?>">
                             <?php echo esc_html($contact_time); ?>
                         </p>
                     <?php endif; ?>
@@ -179,7 +194,7 @@ if (!is_customize_preview() && !$has_data) {
                 ?>
                 <a class="footer__policy" href="<?php echo esc_url($policy_url ?: '#'); ?>"
                     <?php echo $target_attr . $rel_attr; ?>>
-                    <?php echo esc_html($policy_ft ?: 'Policy'); ?>
+                    <?php echo esc_html($policy_ft ?: __('Policy', 'buildpro')); ?>
                 </a>
             <?php endif; ?>
             <?php if (!empty($service_ft) || !empty($service_url)): ?>
@@ -189,7 +204,7 @@ if (!is_customize_preview() && !$has_data) {
                 ?>
                 <a class="footer__service" href="<?php echo esc_url($service_url ?: '#'); ?>"
                     <?php echo $target_attr . $rel_attr; ?>>
-                    <?php echo esc_html($service_ft ?: 'Service'); ?>
+                    <?php echo esc_html($service_ft ?: __('Service', 'buildpro')); ?>
                 </a>
             <?php endif; ?>
         </div>

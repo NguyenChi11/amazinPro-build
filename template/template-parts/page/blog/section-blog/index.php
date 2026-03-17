@@ -21,7 +21,7 @@
                 $date = get_the_date('', $id);
                 $link = get_permalink($id);
                 $views_num = function_exists('buildpro_get_post_views') ? buildpro_get_post_views($id) : (int) get_post_meta($id, 'buildpro_post_views', true);
-                $views_txt = (function_exists('buildpro_format_views') ? buildpro_format_views($views_num) : (string) $views_num) . ' views';
+                $views_txt = sprintf(esc_html__('%s views', 'buildpro'), function_exists('buildpro_format_views') ? buildpro_format_views($views_num) : (string) $views_num);
                 echo '<a class="section-post__item" href="' . esc_url($link) . '">';
                 echo '  <div class="section-post__item-image">';
                 if (!empty($img)) {
@@ -38,8 +38,8 @@
                 echo '    <p class="section-post__item-desc">' . esc_html(get_post_meta($id, 'buildpro_post_description', true)) . '</p>';
                 echo '  </div>';
                 echo '  <div class="section-post__item-bottom">';
-                echo '    <p class="section-post__item-readmore">Read more';
-                echo '      <img src="' . esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')) . '" alt="right arrow" class="section-services__item-link-icon">';
+                echo '    <p class="section-post__item-readmore">' . esc_html__('Read more', 'buildpro');
+                echo '      <img src="' . esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')) . '" alt="' . esc_attr__('Right arrow', 'buildpro') . '" class="section-services__item-link-icon">';
                 echo '    </p>';
                 echo '  </div>';
                 echo '</a>';
@@ -147,13 +147,13 @@
         if (!empty($trending)) {
             echo '<aside class="blog-trending">';
             echo '  <div class="blog-trending__header">';
-            echo '    <span class="blog-trending__title">Trending Now</span>';
-            echo '    <img class="blog-trending__icon" src="' . esc_url(get_theme_file_uri('/assets/images/icon/trend-up-svgrepo-com 1.png')) . '" alt="trending" aria-hidden="true">';
+            echo '    <span class="blog-trending__title">' . esc_html__('Trending Now', 'buildpro') . '</span>';
+            echo '    <img class="blog-trending__icon" src="' . esc_url(get_theme_file_uri('/assets/images/icon/trend-up-svgrepo-com 1.png')) . '" alt="' . esc_attr__('Trending', 'buildpro') . '" aria-hidden="true">';
             echo '  </div>';
             echo '  <ol class="blog-trending__list">';
             foreach ($trending as $i => $p) {
                 $idx = str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT);
-                $views_txt = $format_number($p['views']) . ' views';
+                $views_txt = sprintf(esc_html__('%s views', 'buildpro'), $format_number($p['views']));
                 echo '    <li class="blog-trending__item">';
                 echo '      <span class="blog-trending__index">' . esc_html($idx) . '</span>';
                 echo '      <div class="blog-trending__body">';

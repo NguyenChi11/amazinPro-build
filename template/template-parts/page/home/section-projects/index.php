@@ -54,7 +54,7 @@ if ($query->have_posts()) {
         }
         $location = get_post_meta(get_the_ID(), 'location_project', true);
         $link_url = get_permalink();
-        $link_title = 'View Project';
+        $link_title = __('View Project', 'buildpro');
         $link_target = '';
         $portfolio_items[] = [
             'post_id' => get_the_ID(),
@@ -115,7 +115,7 @@ if ($query->have_posts()) {
                             <h3 class="section-portfolio__item-name"><?php echo $item['name']; ?></h3>
                             <div class="section-portfolio__item-location-wrapper">
                                 <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_location.png')); ?>"
-                                    alt="location" class="section-portfolio__item-location-icon">
+                                    alt="<?php echo esc_attr__('Location', 'buildpro'); ?>" class="section-portfolio__item-location-icon">
                                 <p class="section-portfolio__item-location"><?php echo esc_html($item['location']); ?></p>
                             </div>
                         </div>
@@ -135,10 +135,10 @@ if ($query->have_posts()) {
     ?>
     <div class="section-portfolio__page-link">
         <a class="section-portfolio__page-link-text" href="<?php echo esc_url($projects_page_url); ?>">
-            View All Projects
+            <?php esc_html_e('View All Projects', 'buildpro'); ?>
         </a>
         <img class="section-banner__item-button-icon"
-            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="Arrow Right">
+            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">
     </div>
     <?php if (empty($portfolio_items)) {
         return;

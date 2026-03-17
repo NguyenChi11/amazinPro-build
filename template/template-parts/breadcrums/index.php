@@ -20,7 +20,7 @@ if (!is_front_page()) : ?>
     // Display breadcrumb if function exists
     if (function_exists('display_breadcrumb')) :
     ?>
-        <div class="breadcrumb-container">
+        <div class="breadcrumb-container" data-i18n-navigate-to="<?php echo esc_attr__('Navigate to %s', 'buildpro'); ?>">
             <?php
             display_breadcrumb(' > ', 'custom-breadcrumb-wrapper');
 

@@ -90,9 +90,9 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
                             <h3 class="section-product__item-title"><?php echo esc_html($item['title']); ?></h3>
                             <div class="section-product__item-bottom">
                                 <p class="section-product__item-price">
-                                    <span>$</span><?php echo esc_html($item['price']); ?><span>/ton</span>
+                                    <span>$</span><?php echo esc_html($item['price']); ?><span>/<?php esc_html_e('ton', 'buildpro'); ?></span>
                                 </p>
-                                <button class="section-product__item-cta btn-add-to-cart" data-product-id="<?php echo esc_attr($item['id']); ?>">Add to Cart</button>
+                                <button class="section-product__item-cta btn-add-to-cart" data-product-id="<?php echo esc_attr($item['id']); ?>"><?php esc_html_e('Add to Cart', 'buildpro'); ?></button>
                             </div>
                         </div>
                     </a>
@@ -115,9 +115,9 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
     <div class="section-portfolio__page-link">
         <a class="section-portfolio__page-link-text"
             href="<?php echo esc_url($products_page_url); ?>">
-            View All Product
+            <?php esc_html_e('View All Products', 'buildpro'); ?>
         </a>
         <img class="section-banner__item-button-icon"
-            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="Arrow Right">
+            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">
     </div>
 </section>

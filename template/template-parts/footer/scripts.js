@@ -1,5 +1,6 @@
 (function () {
   var d = window.footerData;
+  var i18n = window.footerI18n || {};
   if (!d) {
     return;
   }
@@ -48,7 +49,7 @@
         img.src = d.information.logo;
       }
       if (!img.alt || img.alt.trim() === "") {
-        img.alt = "Footer Logo";
+        img.alt = i18n.footerLogoAlt || "Footer Logo";
       }
     }
   }
@@ -91,7 +92,7 @@
   if (!connectTitle && brand) {
     connectTitle = document.createElement("h3");
     connectTitle.className = "footer__connect-title";
-    connectTitle.textContent = "Connect with us";
+    connectTitle.textContent = i18n.connectWithUs || "Connect with us";
     brand.appendChild(connectTitle);
   }
   var pagesWrap = document.querySelector(".footer__pages");
@@ -107,7 +108,7 @@
       if (!pagesTitle) {
         pagesTitle = document.createElement("h3");
         pagesTitle.className = "footer__pages-title";
-        pagesTitle.textContent = "Menu";
+        pagesTitle.textContent = i18n.menu || "Menu";
         pagesWrapper.appendChild(pagesTitle);
       }
       pagesWrap = document.createElement("div");
@@ -142,7 +143,7 @@
   if (!contactTitle && contactBlock) {
     contactTitle = document.createElement("h3");
     contactTitle.className = "footer__contact-title";
-    contactTitle.textContent = "Contact";
+    contactTitle.textContent = i18n.contact || "Contact";
     contactBlock.appendChild(contactTitle);
   }
   var contact = document.querySelector(".footer__contact-info") || null;
@@ -166,7 +167,7 @@
     if (!icon) {
       icon = document.createElement("img");
       icon.className = "footer__contact-icon";
-      icon.alt = "icon";
+      icon.alt = i18n.iconAlt || "icon";
       el.insertBefore(icon, el.firstChild);
     }
     if (!icon.src || icon.src.trim() === "") {
@@ -266,7 +267,8 @@
       }
     }
     if (!policy.textContent || policy.textContent.trim() === "") {
-      policy.textContent = (d.policy && d.policy.text) || "Policy";
+      policy.textContent =
+        (d.policy && d.policy.text) || i18n.policy || "Policy";
     }
     var service = bottom.querySelector(".footer__service");
     if (!service) {
@@ -284,7 +286,8 @@
       }
     }
     if (!service.textContent || service.textContent.trim() === "") {
-      service.textContent = (d.service && d.service.text) || "Service";
+      service.textContent =
+        (d.service && d.service.text) || i18n.service || "Service";
     }
   }
 })();

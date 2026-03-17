@@ -56,7 +56,7 @@ if ($q->have_posts()) {
                     <h3 class="section-portfolio__item-name"><?php echo esc_html($item['name']); ?></h3>
                     <div class="section-portfolio__item-location-wrapper">
                         <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_location.png')); ?>"
-                            alt="location" class="section-portfolio__item-location-icon">
+                            alt="<?php echo esc_attr__('Location', 'buildpro'); ?>" class="section-portfolio__item-location-icon">
                         <p class="section-portfolio__item-location"><?php echo esc_html($item['location']); ?></p>
                     </div>
                 </div>

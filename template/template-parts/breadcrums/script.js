@@ -29,10 +29,16 @@ document.addEventListener("DOMContentLoaded", function () {
   function enhanceAccessibility() {
     const breadcrumbLinks = document.querySelectorAll(".breadcrumb-link");
     const currentItem = document.querySelector(".breadcrumb-item.current");
+    const breadcrumbContainer = document.querySelector(".breadcrumb-container");
+    const navigateToTemplate =
+      (breadcrumbContainer &&
+        breadcrumbContainer.getAttribute("data-i18n-navigate-to")) ||
+      "Navigate to %s";
 
     // Add ARIA attributes to links
     breadcrumbLinks.forEach((link, index) => {
-      link.setAttribute("aria-label", `Navigate to ${link.textContent.trim()}`);
+      const label = navigateToTemplate.replace("%s", link.textContent.trim());
+      link.setAttribute("aria-label", label);
     });
 
     // Mark current page for screen readers

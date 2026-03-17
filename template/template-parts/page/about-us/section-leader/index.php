@@ -29,13 +29,13 @@ if ($enabled && (!empty($items) || is_customize_preview())) :
                     <?php if ($executives !== '') : ?>
                         <div class="about-leader__stat">
                             <div class="about-leader__stat-value"><?php echo esc_html($executives); ?></div>
-                            <div class="about-leader__stat-label">Core Executives</div>
+                            <div class="about-leader__stat-label"><?php esc_html_e('Core Executives', 'buildpro'); ?></div>
                         </div>
                     <?php endif; ?>
                     <?php if ($workforce !== '') : ?>
                         <div class="about-leader__stat">
                             <div class="about-leader__stat-value"><?php echo esc_html($workforce); ?></div>
-                            <div class="about-leader__stat-label">Total Workforce</div>
+                            <div class="about-leader__stat-label"><?php esc_html_e('Total Workforce', 'buildpro'); ?></div>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -95,7 +95,7 @@ if ($enabled && (!empty($items) || is_customize_preview())) :
                             <?php endif; ?>
                             <?php if ($it_url !== '') : ?>
                                 <a class="about-leader__link" href="<?php echo esc_url($it_url); ?>">
-                                    <span>View Profile</span>
+                                    <span><?php esc_html_e('View Profile', 'buildpro'); ?></span>
                                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             <?php endif; ?>
