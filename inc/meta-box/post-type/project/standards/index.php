@@ -4,7 +4,7 @@ function buildpro_project_standards_add_meta_box($post_type, $post)
     if ($post_type !== 'project') {
         return;
     }
-    add_meta_box('buildpro_project_tab_standards', 'Standards', 'buildpro_project_standards_render_meta_box', 'project', 'normal', 'default');
+    add_meta_box('buildpro_project_tab_standards', esc_html__('Standards', 'buildpro'), 'buildpro_project_standards_render_meta_box', 'project', 'normal', 'default');
 }
 add_action('add_meta_boxes', 'buildpro_project_standards_add_meta_box', 10, 2);
 
@@ -13,6 +13,18 @@ function buildpro_project_standards_render_meta_box($post)
     wp_enqueue_media();
     $rows = get_post_meta($post->ID, 'project_standards', true);
     $rows = is_array($rows) ? $rows : array();
+
+    $i18n = wp_json_encode([
+        'selectImage' => __('Select image', 'buildpro'),
+        'usePhoto'    => __('Use photo', 'buildpro'),
+        'remove'      => __('Remove', 'buildpro'),
+        'addRow'      => __('Add row', 'buildpro'),
+        'addImage'    => __('Add image', 'buildpro'),
+        'title'       => __('Title', 'buildpro'),
+        'description' => __('Description', 'buildpro'),
+        'empty'       => __('No banner selected', 'buildpro'),
+    ]);
+
     echo '<style>
     .buildpro-post-block{background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.05);padding:16px;margin-top:8px}
     .kv-row{display:grid;grid-template-columns:120px 1fr 1fr auto;gap:8px;align-items:center;margin-top:8px}
@@ -27,20 +39,21 @@ function buildpro_project_standards_render_meta_box($post)
         $desc = isset($row['description']) ? sanitize_text_field($row['description']) : '';
         $thumb = $img_id ? wp_get_attachment_image_url($img_id, 'thumbnail') : '';
         echo '<div class="kv-row" data-index="' . esc_attr($i) . '">
-            <div class="thumb" id="buildpro_project_standards_thumb_' . esc_attr($i) . '">' . ($thumb ? '<img src="' . esc_url($thumb) . '" style="max-height:76px">' : '<span style="color:#888">No image</span>') . '</div>
+            <div class="thumb" id="buildpro_project_standards_thumb_' . esc_attr($i) . '">' . ($thumb ? '<img src="' . esc_url($thumb) . '" style="max-height:76px">' : '<span style="color:#888">' . esc_html__('No banner selected', 'buildpro') . '</span>') . '</div>
             <input type="hidden" name="project_standards[' . esc_attr($i) . '][image_id]" id="buildpro_project_standards_image_' . esc_attr($i) . '" value="' . esc_attr($img_id) . '">
-            <input type="text" name="project_standards[' . esc_attr($i) . '][title]" value="' . esc_attr($title) . '" placeholder="Title" class="regular-text">
-            <input type="text" name="project_standards[' . esc_attr($i) . '][description]" value="' . esc_attr($desc) . '" placeholder="Description" class="regular-text">
-            <button type="button" class="button buildpro-remove-standard">Remove</button>
-            <button type="button" class="button buildpro-select-standard-image" data-index="' . esc_attr($i) . '">Add image</button>
+            <input type="text" name="project_standards[' . esc_attr($i) . '][title]" value="' . esc_attr($title) . '" placeholder="' . esc_attr__('Title', 'buildpro') . '" class="regular-text">
+            <input type="text" name="project_standards[' . esc_attr($i) . '][description]" value="' . esc_attr($desc) . '" placeholder="' . esc_attr__('Description', 'buildpro') . '" class="regular-text">
+            <button type="button" class="button buildpro-remove-standard">' . esc_html__('Remove', 'buildpro') . '</button>
+            <button type="button" class="button buildpro-select-standard-image" data-index="' . esc_attr($i) . '">' . esc_html__('Add image', 'buildpro') . '</button>
         </div>';
         $i++;
     }
     echo '</div>';
-    echo '<button type="button" class="button button-primary" id="buildpro_project_add_standard">Add row</button>';
+    echo '<button type="button" class="button button-primary" id="buildpro_project_add_standard">' . esc_html__('Add row', 'buildpro') . '</button>';
     echo '</div>';
     echo '<script>
     (function(){
+        var i18n = ' . $i18n . ';
         var wrap = document.getElementById("buildpro_project_standards_wrap");
         var add = document.getElementById("buildpro_project_add_standard");
         function bindRow(row){
@@ -51,7 +64,7 @@ function buildpro_project_standards_render_meta_box($post)
                 sel.addEventListener("click", function(e){
                     e.preventDefault();
                     var idx = sel.getAttribute("data-index");
-                    var frame = wp.media({ title: "Chọn ảnh", button: { text: "Sử dụng" }, multiple: false, library: { type: "image" } });
+                    var frame = wp.media({ title: i18n.selectImage, button: { text: i18n.usePhoto }, multiple: false, library: { type: "image" } });
                     frame.on("select", function(){
                         var a = frame.state().get("selection").first().toJSON();
                         var input = document.getElementById("buildpro_project_standards_image_"+idx);
@@ -72,7 +85,7 @@ function buildpro_project_standards_render_meta_box($post)
                 var temp = document.createElement("div");
                 temp.className = "kv-row";
                 temp.setAttribute("data-index", idx);
-                temp.innerHTML = "<div class=\\"thumb\\" id=\\"buildpro_project_standards_thumb_"+idx+"\\"><span style=\\"color:#888\\">No image</span></div><input type=\\"hidden\\" name=\\"project_standards["+idx+"][image_id]\\" id=\\"buildpro_project_standards_image_"+idx+"\\"><input type=\\"text\\" name=\\"project_standards["+idx+"][title]\\" placeholder=\\"Title\\" class=\\"regular-text\\"><input type=\\"text\\" name=\\"project_standards["+idx+"][description]\\" placeholder=\\"Description\\" class=\\"regular-text\\"><button type=\\"button\\" class=\\"button buildpro-remove-standard\\">Xóa</button><button type=\\"button\\" class=\\"button buildpro-select-standard-image\\" data-index=\\""+idx+"\\">Chọn ảnh</button>";
+                temp.innerHTML = "<div class=\\"thumb\\" id=\\"buildpro_project_standards_thumb_"+idx+"\\"><span style=\\"color:#888\\">"+i18n.empty+"</span></div><input type=\\"hidden\\" name=\\"project_standards["+idx+"][image_id]\\" id=\\"buildpro_project_standards_image_"+idx+"\\"><input type=\\"text\\" name=\\"project_standards["+idx+"][title]\\" placeholder=\\""+i18n.title+"\\" class=\\"regular-text\\"><input type=\\"text\\" name=\\"project_standards["+idx+"][description]\\" placeholder=\\""+i18n.description+"\\" class=\\"regular-text\\"><button type=\\"button\\" class=\\"button buildpro-remove-standard\\">"+i18n.remove+"</button><button type=\\"button\\" class=\\"button buildpro-select-standard-image\\" data-index=\\""+idx+"\\">"+i18n.addImage+"</button>";
                 wrap.appendChild(temp);
                 bindRow(temp);
             });

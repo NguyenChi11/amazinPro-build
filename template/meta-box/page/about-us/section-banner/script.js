@@ -1,4 +1,11 @@
 (function () {
+  var i18n = window.buildproAboutUsAdminI18n || {};
+  function t(key, fallback) {
+    return Object.prototype.hasOwnProperty.call(i18n, key)
+      ? i18n[key]
+      : fallback;
+  }
+
   function initTabs() {
     var box = document.getElementById("buildpro_about_banner_meta");
     if (!box) return;
@@ -16,10 +23,7 @@
         }
       });
       tabs.forEach(function (b) {
-        b.classList.toggle(
-          "is-active",
-          b.getAttribute("data-target") === id,
-        );
+        b.classList.toggle("is-active", b.getAttribute("data-target") === id);
       });
     }
     show("buildpro_about_banner_tab_content");
@@ -37,15 +41,17 @@
     var btn = document.getElementById("buildpro_about_banner_image_select");
     var rm = document.getElementById("buildpro_about_banner_image_remove");
     var input = document.getElementById("buildpro_about_banner_image_id");
-    var preview = document.getElementById("buildpro_about_banner_image_preview");
+    var preview = document.getElementById(
+      "buildpro_about_banner_image_preview",
+    );
     function select() {
       if (frame) {
         frame.open();
         return;
       }
       frame = wp.media({
-        title: "Select Image",
-        button: { text: "Use image" },
+        title: t("chooseImage", "Choose Image"),
+        button: { text: t("useImage", "Use Image") },
         multiple: false,
       });
       frame.on("select", function () {
@@ -54,7 +60,7 @@
         var url =
           att.sizes && att.sizes.thumbnail ? att.sizes.thumbnail.url : att.url;
         preview.innerHTML =
-          "<img src=\"" + url + "\" style=\"max-width:150px;height:auto;\">";
+          '<img src="' + url + '" style="max-width:150px;height:auto;">';
       });
       frame.open();
     }
@@ -73,13 +79,19 @@
       var div = document.createElement("div");
       div.className = "about-fact";
       div.innerHTML =
-        '<p><label>Label<br><input type="text" class="widefat" name="buildpro_about_banner_facts[' +
+        "<p><label>" +
+        t("label", "Label") +
+        '<br><input type="text" class="widefat" name="buildpro_about_banner_facts[' +
         idx +
         '][label]" value=""></label></p>' +
-        '<p><label>Value<br><input type="text" class="widefat" name="buildpro_about_banner_facts[' +
+        "<p><label>" +
+        t("value", "Value") +
+        '<br><input type="text" class="widefat" name="buildpro_about_banner_facts[' +
         idx +
         '][value]" value=""></label></p>' +
-        '<p><button type="button" class="button remove-fact">Remove</button></p>';
+        '<p><button type="button" class="button remove-fact">' +
+        t("remove", "Remove") +
+        "</button></p>";
       wrap.appendChild(div);
     }
     if (add) add.addEventListener("click", addFact);

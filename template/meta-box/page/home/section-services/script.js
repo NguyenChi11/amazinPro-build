@@ -1,4 +1,9 @@
 (function () {
+  var i18n = window.buildproHomeAdminI18n || {};
+  function t(key, fallback) {
+    return typeof i18n[key] !== "undefined" ? i18n[key] : fallback || key;
+  }
+
   var wrapper = document.getElementById("buildpro-service-wrapper");
   var addBtn = document.getElementById("buildpro-service-add");
   var enabledInput = document.getElementById("buildpro_service_enabled");
@@ -9,7 +14,8 @@
   function updateEnabledStateText() {
     if (!enabledState || !enabledInput) return;
     var val = parseInt(enabledInput.value || "1", 10) || 0;
-    enabledState.textContent = val === 1 ? "Displaying" : "Hidden";
+    enabledState.textContent =
+      val === 1 ? t("displaying", "Displaying") : t("hidden", "Hidden");
   }
   var data = window.buildproServicesData || { enabled: 1 };
   if (enabledInput) {
@@ -52,8 +58,8 @@
         e.preventDefault();
         if (!frame) {
           frame = wp.media({
-            title: "Chọn icon",
-            button: { text: "Sử dụng" },
+            title: t("selectOptionIcon", "Select Icon"),
+            button: { text: t("useIcon", "Use") },
             multiple: false,
             library: { type: "image" },
           });
@@ -78,7 +84,10 @@
       removeIconBtn.addEventListener("click", function (e) {
         e.preventDefault();
         input.value = "";
-        preview.innerHTML = '<span style="color:#888">No Icon Selected</span>';
+        preview.innerHTML =
+          '<span style="color:#888">' +
+          t("noIconSelected", "No icon selected") +
+          "</span>";
       });
     }
     function openLinkPicker() {

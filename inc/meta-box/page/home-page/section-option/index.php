@@ -11,7 +11,7 @@ function buildpro_option_add_meta_box($post_type, $post)
     }
     add_meta_box(
         'buildpro_option_meta',
-        'Option',
+        esc_html__('Option', 'buildpro'),
         'buildpro_option_render_meta_box',
         'page',
         'normal',

@@ -1,4 +1,9 @@
 (function () {
+  var i18n = window.buildproHomeAdminI18n || {};
+  function t(key, fallback) {
+    return typeof i18n[key] !== "undefined" ? i18n[key] : fallback || key;
+  }
+
   var box = document.getElementById("buildpro-materials-meta-box");
   var enabledInput = document.getElementById("materials_enabled");
   var disableBtn = document.getElementById("materials_disable_btn");
@@ -8,7 +13,8 @@
   function updateEnabledStateText() {
     if (!enabledState || !enabledInput) return;
     var val = parseInt(enabledInput.value || "1", 10) || 0;
-    enabledState.textContent = val === 1 ? "Displaying" : "Hidden";
+    enabledState.textContent =
+      val === 1 ? t("displaying", "Displaying") : t("hidden", "Hidden");
   }
   var data = window.buildproMaterialsData || { enabled: 1 };
   if (enabledInput) {

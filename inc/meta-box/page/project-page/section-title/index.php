@@ -10,7 +10,7 @@ function buildpro_projects_title_add_meta_box($post_type, $post)
     }
     add_meta_box(
         'buildpro_projects_title_meta',
-        'Projects Title',
+        esc_html__('Projects Title', 'buildpro'),
         'buildpro_projects_title_render_meta_box',
         'page',
         'normal',

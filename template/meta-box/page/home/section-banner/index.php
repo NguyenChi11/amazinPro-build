@@ -3,11 +3,11 @@
 } ?>
 <div class="buildpro-banner-block"
     style="margin-bottom:10px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px">
-    <h4>Home Banner Status</h4>
+    <h4><?php echo esc_html__('Home Banner Status', 'buildpro'); ?></h4>
     <input type="hidden" id="buildpro_banner_enabled" name="buildpro_banner_enabled" value="1">
     <div style="display:flex;gap:8px">
-        <button type="button" class="button button-secondary" id="buildpro_banner_disable_btn">Disable Banner</button>
-        <button type="button" class="button button-primary" id="buildpro_banner_enable_btn">Enable Banner</button>
+        <button type="button" class="button button-secondary" id="buildpro_banner_disable_btn"><?php echo esc_html__('Disable Banner', 'buildpro'); ?></button>
+        <button type="button" class="button button-primary" id="buildpro_banner_enable_btn"><?php echo esc_html__('Enable Banner', 'buildpro'); ?></button>
         <span id="buildpro_banner_enabled_state" style="align-self:center;color:#374151"></span>
     </div>
 </div>
@@ -15,44 +15,44 @@
     <div class="buildpro-banner-row" data-index="__INDEX__">
         <div class="buildpro-banner-grid">
             <div class="buildpro-banner-block">
-                <h4>Banner Image</h4>
+                <h4><?php echo esc_html__('Banner Image', 'buildpro'); ?></h4>
                 <div class="buildpro-banner-field">
                     <input type="hidden" class="banner-image-id" name="buildpro_banner_items[__INDEX__][image_id]"
                         value="">
-                    <button type="button" class="button select-banner-image">Select Image</button>
-                    <button type="button" class="button remove-banner-image">Remove Image</button>
+                    <button type="button" class="button select-banner-image"><?php echo esc_html__('Select photo', 'buildpro'); ?></button>
+                    <button type="button" class="button remove-banner-image"><?php echo esc_html__('Remove photo', 'buildpro'); ?></button>
                 </div>
                 <div class="banner-image-preview"
                     style="margin-top:8px;min-height:84px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px dashed #ddd;border-radius:6px">
-                    <span style="color:#888">No image selected</span>
+                    <span style="color:#888"><?php echo esc_html__('No image selected', 'buildpro'); ?></span>
                 </div>
             </div>
             <div class="buildpro-banner-block">
-                <h4>Banner Content</h4>
-                <p class="buildpro-banner-field"><label>Type</label><input type="text"
+                <h4><?php echo esc_html__('Banner Content', 'buildpro'); ?></h4>
+                <p class="buildpro-banner-field"><label><?php echo esc_html__('Type', 'buildpro'); ?></label><input type="text"
                         name="buildpro_banner_items[__INDEX__][type]" class="regular-text" value=""></p>
-                <p class="buildpro-banner-field"><label>Text</label><input type="text"
+                <p class="buildpro-banner-field"><label><?php echo esc_html__('Text', 'buildpro'); ?></label><input type="text"
                         name="buildpro_banner_items[__INDEX__][text]" class="regular-text" value=""></p>
-                <p class="buildpro-banner-field"><label>Description</label><textarea
+                <p class="buildpro-banner-field"><label><?php echo esc_html__('Description', 'buildpro'); ?></label><textarea
                         name="buildpro_banner_items[__INDEX__][description]" rows="4" class="large-text"></textarea></p>
-                <h4>Liên kết</h4>
-                <p class="buildpro-banner-field"><label>Link URL</label><input type="url"
+                <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
+                <p class="buildpro-banner-field"><label><?php echo esc_html__('Link URL', 'buildpro'); ?></label><input type="url"
                         name="buildpro_banner_items[__INDEX__][link_url]" class="regular-text" value=""
-                        placeholder="https://..."> <button type="button" class="button choose-link">Choose Link</button>
+                        placeholder="https://..."> <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                 </p>
-                <p class="buildpro-banner-field"><label>Link Title</label><input type="text"
+                <p class="buildpro-banner-field"><label><?php echo esc_html__('Link Title', 'buildpro'); ?></label><input type="text"
                         name="buildpro_banner_items[__INDEX__][link_title]" class="regular-text" value=""
-                        placeholder="Text nút"></p>
-                <p class="buildpro-banner-field"><label>Link Target</label><select
+                        placeholder="<?php echo esc_attr__('Button text', 'buildpro'); ?>"></p>
+                <p class="buildpro-banner-field"><label><?php echo esc_html__('Link Target', 'buildpro'); ?></label><select
                         name="buildpro_banner_items[__INDEX__][link_target]">
-                        <option value="">Default</option>
-                        <option value="_blank">Open in new tab</option>
+                        <option value=""><?php echo esc_html__('Default', 'buildpro'); ?></option>
+                        <option value="_blank"><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
                     </select></p>
             </div>
         </div>
-        <div class="buildpro-banner-actions"><button type="button" class="button remove-banner-row">Remove Item</button>
+        <div class="buildpro-banner-actions"><button type="button" class="button remove-banner-row"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
         </div>
     </div>
 </template>
 <div id="buildpro-banner-wrapper"></div>
-<button type="button" class="button button-primary" id="buildpro-banner-add">Add Item</button>
+<button type="button" class="button button-primary" id="buildpro-banner-add"><?php echo esc_html__('Add row', 'buildpro'); ?></button>

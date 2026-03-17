@@ -6,7 +6,7 @@ function buildpro_project_infomations_add_meta_box($post_type, $post)
     }
     add_meta_box(
         'buildpro_project_tab_infomations',
-        'Infomations',
+        esc_html__('Information', 'buildpro'),
         'buildpro_project_infomations_render_meta_box',
         'project',
         'normal',
@@ -26,8 +26,8 @@ function buildpro_project_infomations_render_meta_box($post)
     .buildpro-post-block .regular-text{width:100%;max-width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px}
     </style>';
     echo '<div id="buildpro_project_tab_infomations" class="buildpro-post-block">';
-    echo '<p class="buildpro-post-field"><label>TOTAL AREA</label><input type="text" name="total_area_project" class="regular-text" value="' . esc_attr($total_area) . '" placeholder="e.g. 1,200 m²"></p>';
-    echo '<p class="buildpro-post-field"><label>COMPLETION</label><input type="text" name="completion_project" class="regular-text" value="' . esc_attr($completion) . '" placeholder="e.g. 2025-08"></p>';
-    echo '<p class="buildpro-post-field"><label>ARCHITECTURAL STYLE</label><input type="text" name="architectural_style_project" class="regular-text" value="' . esc_attr($arch_style) . '" placeholder="e.g. Modern Minimalist"></p>';
+    echo '<p class="buildpro-post-field"><label>' . esc_html__('Total Area', 'buildpro') . '</label><input type="text" name="total_area_project" class="regular-text" value="' . esc_attr($total_area) . '" placeholder="e.g. 1,200 m²"></p>';
+    echo '<p class="buildpro-post-field"><label>' . esc_html__('Completion', 'buildpro') . '</label><input type="text" name="completion_project" class="regular-text" value="' . esc_attr($completion) . '" placeholder="e.g. 2025-08"></p>';
+    echo '<p class="buildpro-post-field"><label>' . esc_html__('Architectural Style', 'buildpro') . '</label><input type="text" name="architectural_style_project" class="regular-text" value="' . esc_attr($arch_style) . '" placeholder="e.g. Modern Minimalist"></p>';
     echo '</div>';
 }

@@ -1,4 +1,11 @@
 (function () {
+  var i18n = window.buildproAboutUsAdminI18n || {};
+  function t(key, fallback) {
+    return Object.prototype.hasOwnProperty.call(i18n, key)
+      ? i18n[key]
+      : fallback;
+  }
+
   function initTabs() {
     var box = document.getElementById("buildpro_about_policy_meta");
     if (!box) return;
@@ -47,8 +54,8 @@
         e.preventDefault();
         if (frame) frame.off && frame.off("select");
         frame = wp.media({
-          title: "Select Certification Image",
-          button: { text: "Use image" },
+          title: t("chooseImage", "Choose Image"),
+          button: { text: t("useImage", "Use Image") },
           multiple: false,
         });
         frame.on("select", function () {
@@ -63,7 +70,9 @@
               ? '<img src="' +
                 url +
                 '" style="max-width:120px;height:auto;border:1px solid #e5e7eb;border-radius:6px;">'
-              : '<div class="policy-cert-empty">No image</div>';
+              : '<div class="policy-cert-empty">' +
+                t("noImage", "No image") +
+                "</div>";
           }
         });
         frame.open();
@@ -74,7 +83,10 @@
         e.preventDefault();
         if (inputId) inputId.value = "0";
         if (preview)
-          preview.innerHTML = '<div class="policy-cert-empty">No image</div>';
+          preview.innerHTML =
+            '<div class="policy-cert-empty">' +
+            t("noImage", "No image") +
+            "</div>";
       });
     }
   }
@@ -88,7 +100,9 @@
       var item = document.createElement("div");
       item.className = "policy-item";
       item.innerHTML =
-        "<p><label>Icon Image</label></p>" +
+        "<p><label>" +
+        t("iconImage", "Icon Image") +
+        "</label></p>" +
         '<div class="policy-icon-preview" id="policy_icon_preview_' +
         idx +
         '"></div>' +
@@ -104,17 +118,27 @@
         '][icon_url]" value="">' +
         '<p><button type="button" class="button policy-select-image" data-idx="' +
         idx +
-        '">Select Image</button> ' +
+        '">' +
+        t("chooseImage", "Choose Image") +
+        "</button> " +
         '<button type="button" class="button policy-remove-image" data-idx="' +
         idx +
-        '">Remove</button></p>' +
-        '<p><label>Title<br><input type="text" class="widefat" name="buildpro_about_policy_items[' +
+        '">' +
+        t("remove", "Remove") +
+        "</button></p>" +
+        "<p><label>" +
+        t("title", "Title") +
+        '<br><input type="text" class="widefat" name="buildpro_about_policy_items[' +
         idx +
         '][title]" value=""></label></p>' +
-        '<p><label>Description<br><textarea class="widefat" rows="3" name="buildpro_about_policy_items[' +
+        "<p><label>" +
+        t("description", "Description") +
+        '<br><textarea class="widefat" rows="3" name="buildpro_about_policy_items[' +
         idx +
         '][desc]"></textarea></label></p>' +
-        '<p><button type="button" class="button remove-policy-item">Remove</button></p>';
+        '<p><button type="button" class="button remove-policy-item">' +
+        t("remove", "Remove") +
+        "</button></p>";
       wrap.appendChild(item);
     }
     if (addBtn) {
@@ -135,8 +159,8 @@
             mediaFrame.off && mediaFrame.off("select");
           }
           mediaFrame = wp.media({
-            title: "Select Warranty Icon",
-            button: { text: "Use image" },
+            title: t("chooseImage", "Choose Image"),
+            button: { text: t("useImage", "Use Image") },
             multiple: false,
             library: { type: "image" },
           });
@@ -156,7 +180,9 @@
                 ? '<img src="' +
                   thumbUrl +
                   '" style="max-width:60px;height:auto;border-radius:6px;border:1px solid #e5e7eb;">'
-                : '<div class="policy-icon-empty">No image</div>';
+                : '<div class="policy-icon-empty">' +
+                  t("noImage", "No image") +
+                  "</div>";
             }
             var inputUrl = document.getElementById("policy_icon_url_" + idx);
             if (inputUrl) inputUrl.value = thumbUrl || "";
@@ -173,7 +199,10 @@
           if (inputId) inputId.value = "0";
           if (inputUrl) inputUrl.value = "";
           if (preview)
-            preview.innerHTML = '<div class="policy-icon-empty">No image</div>';
+            preview.innerHTML =
+              '<div class="policy-icon-empty">' +
+              t("noImage", "No image") +
+              "</div>";
           return;
         }
         if (target.classList.contains("remove-policy-item")) {
@@ -194,7 +223,9 @@
       var item = document.createElement("div");
       item.className = "policy-cert-item";
       item.innerHTML =
-        "<p><label>Image</label></p>" +
+        "<p><label>" +
+        t("image", "Image") +
+        "</label></p>" +
         '<div class="policy-cert-preview" id="policy_cert_preview_' +
         idx +
         '"></div>' +
@@ -210,20 +241,32 @@
         '][image_url]" value="">' +
         '<p><button type="button" class="button policy-cert-select" data-idx="' +
         idx +
-        '">Select Image</button> ' +
+        '">' +
+        t("chooseImage", "Choose Image") +
+        "</button> " +
         '<button type="button" class="button policy-cert-remove" data-idx="' +
         idx +
-        '">Remove</button></p>' +
-        '<p><label>URL<br><input type="text" class="widefat" name="buildpro_about_policy_certifications[' +
+        '">' +
+        t("remove", "Remove") +
+        "</button></p>" +
+        "<p><label>" +
+        t("url", "URL") +
+        '<br><input type="text" class="widefat" name="buildpro_about_policy_certifications[' +
         idx +
         '][url]" value=""></label></p>' +
-        '<p><label>Title<br><input type="text" class="widefat" name="buildpro_about_policy_certifications[' +
+        "<p><label>" +
+        t("title", "Title") +
+        '<br><input type="text" class="widefat" name="buildpro_about_policy_certifications[' +
         idx +
         '][title]" value=""></label></p>' +
-        '<p><label>Description<br><textarea class="widefat" rows="3" name="buildpro_about_policy_certifications[' +
+        "<p><label>" +
+        t("description", "Description") +
+        '<br><textarea class="widefat" rows="3" name="buildpro_about_policy_certifications[' +
         idx +
         '][desc]"></textarea></label></p>' +
-        '<p><button type="button" class="button remove-policy-cert">Remove</button></p>';
+        '<p><button type="button" class="button remove-policy-cert">' +
+        t("remove", "Remove") +
+        "</button></p>";
       wrap.appendChild(item);
     }
     if (addBtn) {
@@ -244,8 +287,8 @@
             mediaFrame.off && mediaFrame.off("select");
           }
           mediaFrame = wp.media({
-            title: "Select Certification Image",
-            button: { text: "Use image" },
+            title: t("chooseImage", "Choose Image"),
+            button: { text: t("useImage", "Use Image") },
             multiple: false,
             library: { type: "image" },
           });
@@ -269,7 +312,9 @@
                 ? '<img src="' +
                   thumbUrl +
                   '" style="max-width:120px;height:auto;border:1px solid #e5e7eb;border-radius:6px;">'
-                : '<div class="policy-cert-empty">No image</div>';
+                : '<div class="policy-cert-empty">' +
+                  t("noImage", "No image") +
+                  "</div>";
             }
           });
           mediaFrame.open();
@@ -286,7 +331,10 @@
           if (inputId) inputId.value = "0";
           if (inputUrl) inputUrl.value = "";
           if (preview)
-            preview.innerHTML = '<div class="policy-cert-empty">No image</div>';
+            preview.innerHTML =
+              '<div class="policy-cert-empty">' +
+              t("noImage", "No image") +
+              "</div>";
           return;
         }
         if (target.classList.contains("remove-policy-cert")) {

@@ -11,7 +11,7 @@ if (!function_exists('buildpro_about_banner_add_meta_box')) {
         }
         add_meta_box(
             'buildpro_about_banner_meta',
-            'About Us: Banner',
+            esc_html__('About Us: Banner', 'buildpro'),
             'buildpro_about_banner_render_meta_box',
             'page',
             'normal',
@@ -25,6 +25,9 @@ if (!function_exists('buildpro_about_banner_render_meta_box')) {
     function buildpro_about_banner_render_meta_box($post)
     {
         wp_nonce_field('buildpro_about_banner_meta_save', 'buildpro_about_banner_meta_nonce');
+        if (function_exists('buildpro_about_us_admin_print_i18n')) {
+            buildpro_about_us_admin_print_i18n();
+        }
         wp_enqueue_media();
         $enabled = get_post_meta($post->ID, 'buildpro_about_banner_enabled', true);
         $text = get_post_meta($post->ID, 'buildpro_about_banner_text', true);

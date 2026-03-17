@@ -7,11 +7,11 @@
 function render_about_us_page_tabs()
 {
     $tabs = [
-        'buildpro_about_banner_meta' => 'Banner',
-        'buildpro_about_core_values_meta' => 'Core Values',
-        'buildpro_about_leader_meta' => 'Leader',
-        'buildpro_about_policy_meta' => 'Policy',
-        'buildpro_about_contact_meta' => 'Contact'
+        'buildpro_about_banner_meta' => __('Banner', 'buildpro'),
+        'buildpro_about_core_values_meta' => __('Core Values', 'buildpro'),
+        'buildpro_about_leader_meta' => __('Leader', 'buildpro'),
+        'buildpro_about_policy_meta' => __('Policy', 'buildpro'),
+        'buildpro_about_contact_meta' => __('Contact', 'buildpro')
     ];
 
     echo '<div class="buildpro-admin-tabs" style="margin:0;padding:8px 0;">';
@@ -19,7 +19,7 @@ function render_about_us_page_tabs()
     $first = true;
     foreach ($tabs as $target => $label) {
         $active_class = $first ? ' is-active' : '';
-        echo '<button type="button" class="button buildpro-admin-tab' . $active_class . '" data-target="' . $target . '">' . $label . '</button> ';
+        echo '<button type="button" class="button buildpro-admin-tab' . esc_attr($active_class) . '" data-target="' . esc_attr($target) . '">' . esc_html($label) . '</button> ';
         $first = false;
     }
 

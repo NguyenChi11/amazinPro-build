@@ -11,7 +11,7 @@ function buildpro_services_add_meta_box($post_type, $post)
     }
     add_meta_box(
         'buildpro_services_meta',
-        'Services',
+        esc_html__('Services', 'buildpro'),
         'buildpro_services_render_meta_box',
         'page',
         'normal',

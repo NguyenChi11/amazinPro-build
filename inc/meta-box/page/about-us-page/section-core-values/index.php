@@ -11,7 +11,7 @@ if (!function_exists('buildpro_about_core_values_add_meta_box')) {
         }
         add_meta_box(
             'buildpro_about_core_values_meta',
-            'About Us: Core Values',
+            esc_html__('About Us: Core Values', 'buildpro'),
             'buildpro_about_core_values_render_meta_box',
             'page',
             'normal',
@@ -25,6 +25,9 @@ if (!function_exists('buildpro_about_core_values_render_meta_box')) {
     function buildpro_about_core_values_render_meta_box($post)
     {
         wp_nonce_field('buildpro_about_core_values_meta_save', 'buildpro_about_core_values_meta_nonce');
+        if (function_exists('buildpro_about_us_admin_print_i18n')) {
+            buildpro_about_us_admin_print_i18n();
+        }
         $enabled = get_post_meta($post->ID, 'buildpro_about_core_values_enabled', true);
         $enabled = $enabled === '' ? 1 : (int) $enabled;
         $title = get_post_meta($post->ID, 'buildpro_about_core_values_title', true);

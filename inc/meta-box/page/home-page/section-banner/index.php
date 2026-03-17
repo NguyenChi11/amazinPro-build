@@ -11,7 +11,7 @@ function buildpro_banner_add_meta_box($post_type, $post)
     }
     add_meta_box(
         'buildpro_banner_meta',
-        'Banner',
+        esc_html__('Banner', 'buildpro'),
         'buildpro_banner_render_meta_box',
         'page',
         'normal',

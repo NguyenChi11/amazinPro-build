@@ -1,4 +1,9 @@
 (function () {
+  var i18n = window.buildproHomeAdminI18n || {};
+  function t(key, fallback) {
+    return typeof i18n[key] !== "undefined" ? i18n[key] : fallback || key;
+  }
+
   var wrapper = document.getElementById("buildpro-banner-wrapper");
   var addBtn = document.getElementById("buildpro-banner-add");
   var tpl = document.getElementById("buildpro-banner-row-template");
@@ -25,8 +30,8 @@
         e.preventDefault();
         if (!frame) {
           frame = wp.media({
-            title: "Choose Image",
-            button: { text: "Use Image" },
+            title: t("chooseImage", "Choose Image"),
+            button: { text: t("useImage", "Use Image") },
             multiple: false,
           });
         }
@@ -50,7 +55,10 @@
       removeImgBtn.addEventListener("click", function (e) {
         e.preventDefault();
         input.value = "";
-        preview.innerHTML = "";
+        preview.innerHTML =
+          "<span style='color:#888'>" +
+          t("noImageSelected", "No image selected") +
+          "</span>";
       });
     }
     function openLinkPicker() {
@@ -170,7 +178,10 @@
         preview.innerHTML =
           "<img src='" + item.thumb_url + "' style='max-height:80px;'>";
       } else {
-        preview.innerHTML = "<span style='color:#888'>No image selected</span>";
+        preview.innerHTML =
+          "<span style='color:#888'>" +
+          t("noImageSelected", "No image selected") +
+          "</span>";
       }
     }
     if (typeInput) {
@@ -211,7 +222,8 @@
   function updateEnabledStateText() {
     if (!enabledState || !enabledInput) return;
     var val = parseInt(enabledInput.value || "1", 10) || 0;
-    enabledState.textContent = val === 1 ? "Displaying" : "Hidden";
+    enabledState.textContent =
+      val === 1 ? t("displaying", "Displaying") : t("hidden", "Hidden");
   }
   if (enabledInput) {
     enabledInput.value =

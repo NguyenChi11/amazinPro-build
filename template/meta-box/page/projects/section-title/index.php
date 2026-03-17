@@ -1,11 +1,11 @@
 <div class="buildpro-block">
-    <h3>Projects Title</h3>
+    <h3><?php echo esc_html__('Projects Title', 'buildpro'); ?></h3>
     <p class="buildpro-row">
-        <label>Title</label>
+        <label><?php echo esc_html__('Title', 'buildpro'); ?></label>
         <input type="text" class="regular-text" name="projects_title" value="<?php echo esc_attr($title); ?>">
     </p>
     <p class="buildpro-row">
-        <label>Description</label>
+        <label><?php echo esc_html__('Description', 'buildpro'); ?></label>
         <textarea class="large-text" rows="4" name="projects_description"><?php echo esc_textarea($desc); ?></textarea>
     </p>
 </div>

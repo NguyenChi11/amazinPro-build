@@ -12,7 +12,7 @@ if (!function_exists('buildpro_portfolio_add_meta_box')) {
         }
         add_meta_box(
             'buildpro_portfolio_meta',
-            'Portfolio',
+            esc_html__('Projects', 'buildpro'),
             'buildpro_portfolio_render_meta_box',
             'page',
             'normal',

@@ -1,4 +1,11 @@
 (function () {
+  var i18n = window.buildproAboutUsAdminI18n || {};
+  function t(key, fallback) {
+    return Object.prototype.hasOwnProperty.call(i18n, key)
+      ? i18n[key]
+      : fallback;
+  }
+
   function initTabs() {
     var box = document.getElementById("buildpro_about_leader_meta");
     if (!box) return;
@@ -52,7 +59,9 @@
       item.className = "leader-item";
 
       item.innerHTML =
-        "<p><label>Icon Image</label></p>" +
+        "<p><label>" +
+        t("iconImage", "Icon Image") +
+        "</label></p>" +
         '<input type="hidden" id="buildpro_about_leader_image_id_' +
         idx +
         '" ' +
@@ -65,27 +74,41 @@
         "  <!-- empty initially --></div>" +
         '<button type="button" class="button buildpro_about_leader_image_select" data-idx="' +
         idx +
-        '">Select Image</button>' +
+        '">' +
+        t("chooseImage", "Choose Image") +
+        "</button>" +
         '<button type="button" class="button buildpro_about_leader_image_remove" data-idx="' +
         idx +
-        '">Remove</button>' +
-        '<p><label>Name<br><input type="text" class="widefat" ' +
+        '">' +
+        t("remove", "Remove") +
+        "</button>" +
+        "<p><label>" +
+        t("name", "Name") +
+        '<br><input type="text" class="widefat" ' +
         '           name="buildpro_about_leader_items[' +
         idx +
         '][name]" value=""></label></p>' +
-        '<p><label>Position<br><input type="text" class="widefat" ' +
+        "<p><label>" +
+        t("position", "Position") +
+        '<br><input type="text" class="widefat" ' +
         '           name="buildpro_about_leader_items[' +
         idx +
         '][position]" value=""></label></p>' +
-        '<p><label>Description<br><input type="text" class="widefat" ' +
+        "<p><label>" +
+        t("description", "Description") +
+        '<br><input type="text" class="widefat" ' +
         '           name="buildpro_about_leader_items[' +
         idx +
         '][description]" value=""></label></p>' +
-        '<p><label>URL<br><input type="text" class="widefat" ' +
+        "<p><label>" +
+        t("url", "URL") +
+        '<br><input type="text" class="widefat" ' +
         '           name="buildpro_about_leader_items[' +
         idx +
         '][url]" value=""></label></p>' +
-        '<p><button type="button" class="button remove-leader">Remove</button></p>';
+        '<p><button type="button" class="button remove-leader">' +
+        t("remove", "Remove") +
+        "</button></p>";
 
       wrap.appendChild(item);
     }
@@ -118,8 +141,8 @@
           }
 
           mediaFrame = wp.media({
-            title: "Chọn ảnh đại diện cho Leader",
-            button: { text: "Sử dụng ảnh này" },
+            title: t("chooseImage", "Choose Image"),
+            button: { text: t("useImage", "Use Image") },
             multiple: false,
             library: { type: "image" },
           });

@@ -4,9 +4,51 @@ if (! defined('_S_VERSION')) {
     define('_S_VERSION', '1.0.0');
 }
 
+/**
+ * Force wp-admin to use Site Language (Settings → General) instead of the
+ * user's profile language, so theme i18n follows the site setting.
+ */
+function buildpro_determine_locale($locale)
+{
+    if (is_admin()) {
+        return get_locale();
+    }
+    return $locale;
+}
+add_filter('determine_locale', 'buildpro_determine_locale', 10, 1);
+
+/**
+ * Reload theme translations when locale changes at runtime.
+ */
+function buildpro_reload_textdomain_on_change_locale($locale)
+{
+    $domain = 'buildpro';
+    unload_textdomain($domain);
+    load_theme_textdomain($domain, trailingslashit(get_template_directory()) . 'languages');
+}
+add_action('change_locale', 'buildpro_reload_textdomain_on_change_locale', 10, 1);
+
 function buildpro_setup()
 {
-    load_theme_textdomain('buildpro', get_template_directory() . '/languages');
+    $domain = 'buildpro';
+    $lang_dir = trailingslashit(get_template_directory()) . 'languages';
+
+    load_theme_textdomain($domain, $lang_dir);
+
+    // Ensure the theme's own /languages MO takes precedence over any global
+    // wp-content/languages/themes copy.
+    $locale = function_exists('determine_locale') ? determine_locale() : get_locale();
+    $mofile = trailingslashit($lang_dir) . $domain . '-' . $locale . '.mo';
+    if (!file_exists($mofile) && strpos($locale, '_') !== false) {
+        $base = strtok($locale, '_');
+        $fallback = trailingslashit($lang_dir) . $domain . '-' . $base . '.mo';
+        if (file_exists($fallback)) {
+            $mofile = $fallback;
+        }
+    }
+    if (file_exists($mofile)) {
+        load_textdomain($domain, $mofile);
+    }
 
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');

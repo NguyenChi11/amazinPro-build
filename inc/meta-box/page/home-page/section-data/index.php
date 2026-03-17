@@ -11,7 +11,7 @@ function buildpro_data_add_meta_box($post_type, $post)
     }
     add_meta_box(
         'buildpro_data_meta',
-        'Data',
+        esc_html__('Data', 'buildpro'),
         'buildpro_data_render_meta_box',
         'page',
         'normal',

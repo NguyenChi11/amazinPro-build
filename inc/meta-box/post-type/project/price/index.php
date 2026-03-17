@@ -4,7 +4,7 @@ function buildpro_project_price_add_meta_box($post_type, $post)
     if ($post_type !== 'project') {
         return;
     }
-    add_meta_box('buildpro_project_tab_price', 'Price', 'buildpro_project_price_render_meta_box', 'project', 'normal', 'default');
+    add_meta_box('buildpro_project_tab_price', esc_html__('Price', 'buildpro'), 'buildpro_project_price_render_meta_box', 'project', 'normal', 'default');
 }
 add_action('add_meta_boxes', 'buildpro_project_price_add_meta_box', 10, 2);
 
@@ -17,6 +17,6 @@ function buildpro_project_price_render_meta_box($post)
     .buildpro-post-block .regular-text{width:100%;max-width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px}
     </style>';
     echo '<div id="buildpro_project_tab_price" class="buildpro-post-block">';
-    echo '<p class="buildpro-post-field"><label>Price</label><input type="text" name="price_project" class="regular-text" value="' . esc_attr($price) . '" placeholder="100"></p>';
+    echo '<p class="buildpro-post-field"><label>' . esc_html__('Price', 'buildpro') . '</label><input type="text" name="price_project" class="regular-text" value="' . esc_attr($price) . '" placeholder="100"></p>';
     echo '</div>';
 }

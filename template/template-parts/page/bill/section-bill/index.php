@@ -50,28 +50,30 @@ wp_enqueue_script(
     <div class="container">
         <div class="bill-section__header">
             <h1 class="bill-section__title"><?php esc_html_e('Bill Information', 'buildpro'); ?></h1>
-            <p class="bill-section__subtitle"><?php esc_html_e('Review your checkout information and submit confirmation.', 'buildpro'); ?></p>
+            <p class="bill-section__subtitle">
+                <?php esc_html_e('Review your checkout information and submit confirmation.', 'buildpro'); ?></p>
         </div>
 
         <?php if (!empty($submit_error)) : ?>
-            <div class="bill-alert bill-alert--error"><?php echo esc_html($submit_error); ?></div>
+        <div class="bill-alert bill-alert--error"><?php echo esc_html($submit_error); ?></div>
         <?php endif; ?>
 
         <?php if ($submit_success) : ?>
-            <div class="bill-success-popup" id="bill-success-popup"
-                data-home-url="<?php echo esc_url($home_redirect_url); ?>">
-                <div class="bill-success-popup__backdrop" data-popup-close="1"></div>
-                <div class="bill-success-popup__dialog" role="dialog" aria-modal="true"
-                    aria-labelledby="bill-success-title">
-                    <h2 class="bill-success-popup__title" id="bill-success-title"><?php esc_html_e('Order Placed Successfully', 'buildpro'); ?></h2>
-                    <p class="bill-success-popup__text">
-                        <?php printf(esc_html__('Order #%s has been successfully created.', 'buildpro'), esc_html($created_order_id)); ?>
-                    </p>
-                    <button type="button" class="bill-success-popup__btn" id="bill-success-close-btn" data-popup-close="1">
-                        <?php esc_html_e('Close', 'buildpro'); ?>
-                    </button>
-                </div>
+        <div class="bill-success-popup" id="bill-success-popup"
+            data-home-url="<?php echo esc_url($home_redirect_url); ?>">
+            <div class="bill-success-popup__backdrop" data-popup-close="1"></div>
+            <div class="bill-success-popup__dialog" role="dialog" aria-modal="true"
+                aria-labelledby="bill-success-title">
+                <h2 class="bill-success-popup__title" id="bill-success-title">
+                    <?php esc_html_e('Order Placed Successfully', 'buildpro'); ?></h2>
+                <p class="bill-success-popup__text">
+                    <?php printf(esc_html__('Order #%s has been successfully created.', 'buildpro'), esc_html($created_order_id)); ?>
+                </p>
+                <button type="button" class="bill-success-popup__btn" id="bill-success-close-btn" data-popup-close="1">
+                    <?php esc_html_e('Close', 'buildpro'); ?>
+                </button>
             </div>
+        </div>
         <?php endif; ?>
 
         <div class="bill-layout">
@@ -156,30 +158,32 @@ wp_enqueue_script(
 
                     <div class="bill-order-items">
                         <?php if (empty($cart_items)) : ?>
-                            <p class="bill-order-empty"><?php esc_html_e('Your cart is currently empty.', 'buildpro'); ?></p>
+                        <p class="bill-order-empty"><?php esc_html_e('Your cart is currently empty.', 'buildpro'); ?>
+                        </p>
                         <?php else : ?>
-                            <?php foreach ($cart_items as $item) :
+                        <?php foreach ($cart_items as $item) :
                                 $product  = $item['data'];
                                 $qty      = intval($item['quantity']);
                                 $price    = floatval($product->get_price());
                                 $name     = $product->get_name();
                                 $img_url  = get_the_post_thumbnail_url($item['product_id'], 'thumbnail');
                             ?>
-                                <div class="bill-order-item">
-                                    <div class="bill-order-item__image">
-                                        <?php if ($img_url) : ?>
-                                            <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($name); ?>">
-                                        <?php else : ?>
-                                            <div class="bill-order-item__placeholder"></div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="bill-order-item__meta">
-                                        <p class="bill-order-item__name"><?php echo esc_html($name); ?></p>
-                                        <p class="bill-order-item__qty"><?php printf(esc_html__('Qty: %s', 'buildpro'), esc_html($qty)); ?></p>
-                                    </div>
-                                    <p class="bill-order-item__total"><?php echo $bp_price($price * $qty); ?></p>
-                                </div>
-                            <?php endforeach; ?>
+                        <div class="bill-order-item">
+                            <div class="bill-order-item__image">
+                                <?php if ($img_url) : ?>
+                                <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($name); ?>">
+                                <?php else : ?>
+                                <div class="bill-order-item__placeholder"></div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="bill-order-item__meta">
+                                <p class="bill-order-item__name"><?php echo esc_html($name); ?></p>
+                                <p class="bill-order-item__qty">
+                                    <?php printf(esc_html__('Qty: %s', 'buildpro'), esc_html($qty)); ?></p>
+                            </div>
+                            <p class="bill-order-item__total"><?php echo $bp_price($price * $qty); ?></p>
+                        </div>
+                        <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
 

@@ -10,7 +10,7 @@ function buildpro_about_leader_add_meta_box($post_type, $post)
     }
     add_meta_box(
         "buildpro_about_leader_meta",
-        "About Us : Leader",
+        esc_html__('About Us: Leader', 'buildpro'),
         "buildpro_about_leader_render_meta_box",
         'page',
         "normal",
@@ -22,6 +22,9 @@ add_action("add_meta_boxes", "buildpro_about_leader_add_meta_box", 10, 2);
 function buildpro_about_leader_render_meta_box($post)
 {
     wp_nonce_field('buildpro_about_leader_meta_save', 'buildpro_about_leader_meta_nonce');
+    if (function_exists('buildpro_about_us_admin_print_i18n')) {
+        buildpro_about_us_admin_print_i18n();
+    }
     $enabled = get_post_meta($post->ID, 'buildpro_about_leader_enabled', true);
     $enabled = $enabled === '' ? 1 : (int) $enabled;
     $title = get_post_meta($post->ID, 'buildpro_about_leader_title', true);

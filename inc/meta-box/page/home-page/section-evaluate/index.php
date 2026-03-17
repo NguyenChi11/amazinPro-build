@@ -12,7 +12,7 @@ if (!function_exists('buildpro_evaluate_add_meta_box')) {
         }
         add_meta_box(
             'buildpro_evaluate_meta',
-            'Evaluate',
+            esc_html__('Evaluate', 'buildpro'),
             'buildpro_evaluate_render_meta_box',
             'page',
             'normal',

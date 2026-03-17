@@ -1,4 +1,6 @@
 (function () {
+  var i18n = window.buildproPostI18n || {};
+
   var selectBtn = document.getElementById("buildpro_post_select_banner");
   var removeBtn = document.getElementById("buildpro_post_remove_banner");
   var input = document.getElementById("buildpro_post_banner_id");
@@ -9,9 +11,9 @@
       e.preventDefault();
       if (!frame) {
         frame = wp.media({
-          title: "Select banner photo",
+          title: i18n.selectBannerPhoto || "Select banner photo",
           button: {
-            text: "Use photo",
+            text: i18n.usePhoto || "Use photo",
           },
           multiple: false,
           library: {
@@ -38,7 +40,10 @@
     removeBtn.addEventListener("click", function (e) {
       e.preventDefault();
       input.value = "";
-      preview.innerHTML = '<span style="color:#888">No banner selected</span>';
+      preview.innerHTML =
+        '<span style="color:#888">' +
+        (i18n.noBannerSelected || "No banner selected") +
+        "</span>";
     });
   }
 })();
@@ -78,6 +83,8 @@
 })();
 
 (function () {
+  var i18n = window.buildproPostI18n || {};
+
   var addBtn = document.getElementById("buildpro_post_add_gallery");
   var box = document.getElementById("buildpro_post_quote_gallery");
   var frame;
@@ -86,9 +93,9 @@
       e.preventDefault();
       if (!frame) {
         frame = wp.media({
-          title: "Select image",
+          title: i18n.selectImage || "Select image",
           button: {
-            text: "Add",
+            text: i18n.add || "Add",
           },
           multiple: true,
           library: {
@@ -157,9 +164,15 @@
       temp.innerHTML =
         '<input type="text" name="buildpro_post_quote_kv[' +
         idx +
-        '][key]" placeholder="Key" class="regular-text"><input type="text" name="buildpro_post_quote_kv[' +
+        '][key]" placeholder="' +
+        (i18n.key || "Key") +
+        '" class="regular-text"><input type="text" name="buildpro_post_quote_kv[' +
         idx +
-        '][value]" placeholder="Value" class="regular-text"><button type="button" class="button remove-kv">Remove</button>';
+        '][value]" placeholder="' +
+        (i18n.value || "Value") +
+        '" class="regular-text"><button type="button" class="button remove-kv">' +
+        (i18n.remove || "Remove") +
+        "</button>";
       wrap.appendChild(temp);
       bindRow(temp);
     });

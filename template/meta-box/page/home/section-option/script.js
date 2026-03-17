@@ -1,4 +1,9 @@
 (function () {
+  var i18n = window.buildproHomeAdminI18n || {};
+  function t(key, fallback) {
+    return typeof i18n[key] !== "undefined" ? i18n[key] : fallback || key;
+  }
+
   var wrapper = document.getElementById("buildpro-option-wrapper");
   var addBtn = document.getElementById("buildpro-option-add");
   var tpl = document.getElementById("buildpro-option-row-template");
@@ -21,8 +26,8 @@
         e.preventDefault();
         if (!frame) {
           frame = wp.media({
-            title: "Select Option Icon",
-            button: { text: "Use Icon" },
+            title: t("selectOptionIcon", "Select Option Icon"),
+            button: { text: t("useIcon", "Use Icon") },
             multiple: false,
           });
         }
@@ -46,7 +51,10 @@
       removeIconBtn.addEventListener("click", function (e) {
         e.preventDefault();
         input.value = "";
-        preview.innerHTML = "";
+        preview.innerHTML =
+          "<span style='color:#888'>" +
+          t("noIconSelected", "No icon selected") +
+          "</span>";
       });
     }
     if (removeRowBtn) {
@@ -76,7 +84,10 @@
         preview.innerHTML =
           "<img src='" + item.thumb_url + "' style='max-height:80px;'>";
       } else {
-        preview.innerHTML = "<span style='color:#888'>No Icon Selected</span>";
+        preview.innerHTML =
+          "<span style='color:#888'>" +
+          t("noIconSelected", "No icon selected") +
+          "</span>";
       }
     }
     if (textInput) {
@@ -105,7 +116,8 @@
   function updateEnabledStateText() {
     if (!enabledState || !enabledInput) return;
     var val = parseInt(enabledInput.value || "1", 10) || 0;
-    enabledState.textContent = val === 1 ? "Enabled" : "Disabled";
+    enabledState.textContent =
+      val === 1 ? t("enabled", "Enabled") : t("disabled", "Disabled");
   }
   if (enabledInput) {
     enabledInput.value =

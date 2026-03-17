@@ -565,18 +565,91 @@ msgstr ""
 msgid "Navigate to %s"
 msgstr ""
 
+#: inc/meta-box/post-type/post/index.php:11
+msgid "Post Details"
+msgstr ""
+
+#: inc/meta-box/post-type/post/index.php:19
+#: inc/meta-box/post-type/post/paragraph/index.php:7
+msgid "Paragraph"
+msgstr ""
+
+#: inc/meta-box/post-type/post/index.php:22
+#: inc/meta-box/post-type/post/quote/index.php:7
+msgid "Quote"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:52
+msgid "Title"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:53
+msgid "Image Description"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:54
+msgid "Quote Repeater"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:58
+msgid "Add image"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:63
+msgid "Add row"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:28
+msgid "Select image"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:29
+msgid "Add"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:58
+msgid "Key"
+msgstr ""
+
+#: inc/meta-box/post-type/post/quote/index.php:58
+msgid "Value"
+msgstr ""
+
+#: inc/meta-box/post-type/post/description/index.php:7
+#: inc/meta-box/post-type/post/description/index.php:20
+#: template/meta-box/post-type/post/section-description/template.php:3
+msgid "Description"
+msgstr ""
+
+#: inc/meta-box/post-type/post/banner/index.php:7
+msgid "Banner"
+msgstr ""
+
+#: inc/meta-box/post-type/post/banner/index.php:18
+msgid "Select banner photo"
+msgstr ""
+
+#: inc/meta-box/post-type/post/banner/index.php:19
+msgid "Use photo"
+msgstr ""
+
+#: inc/meta-box/post-type/post/banner/index.php:31
 #: template/meta-box/post-type/post/section-banner/index.php:1
 msgid "Banner Image"
 msgstr ""
 
+#: inc/meta-box/post-type/post/banner/index.php:33
 #: template/meta-box/post-type/post/section-banner/index.php:1
 msgid "Select photo"
 msgstr ""
 
+#: inc/meta-box/post-type/post/banner/index.php:34
 #: template/meta-box/post-type/post/section-banner/index.php:1
 msgid "Remove photo"
 msgstr ""
 
+#: inc/meta-box/post-type/post/banner/index.php:20
+#: inc/meta-box/post-type/post/banner/index.php:40
 #: template/meta-box/post-type/post/section-banner/index.php:1
 msgid "No banner selected"
 msgstr ""

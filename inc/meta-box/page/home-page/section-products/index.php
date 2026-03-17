@@ -11,7 +11,7 @@ function buildpro_materials_add_meta_box($post_type, $post)
     }
     add_meta_box(
         'buildpro_materials_meta',
-        'Materials',
+        esc_html__('Products', 'buildpro'),
         'buildpro_materials_render_meta_box',
         'page',
         'normal',

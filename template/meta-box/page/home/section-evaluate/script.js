@@ -1,4 +1,9 @@
 (function () {
+  var i18n = window.buildproHomeAdminI18n || {};
+  function t(key, fallback) {
+    return typeof i18n[key] !== "undefined" ? i18n[key] : fallback || key;
+  }
+
   var enabledInput = document.getElementById("buildpro_evaluate_enabled");
   var disableBtn = document.getElementById("buildpro_evaluate_disable_btn");
   var enableBtn = document.getElementById("buildpro_evaluate_enable_btn");
@@ -6,10 +11,14 @@
   function updateEnabledStateText() {
     if (!enabledState || !enabledInput) return;
     var val = parseInt(enabledInput.value || "1", 10) || 0;
-    enabledState.textContent = val === 1 ? "Displaying" : "Hidden";
+    enabledState.textContent =
+      val === 1 ? t("displaying", "Displaying") : t("hidden", "Hidden");
   }
   if (typeof window.buildproEvaluateState !== "undefined") {
-    if (enabledInput && typeof window.buildproEvaluateState.enabled !== "undefined") {
+    if (
+      enabledInput &&
+      typeof window.buildproEvaluateState.enabled !== "undefined"
+    ) {
       enabledInput.value = String(window.buildproEvaluateState.enabled);
     }
   }
@@ -46,8 +55,8 @@
       selBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var frame = wp.media({
-          title: "Select a photo",
-          button: { text: "Use this photo" },
+          title: t("selectAPhoto", "Select a photo"),
+          button: { text: t("useThisPhoto", "Use this photo") },
           multiple: false,
           library: { type: "image" },
         });
@@ -66,7 +75,9 @@
         e.preventDefault();
         input.value = "";
         prev.innerHTML =
-          '<span style="color:#888">No photo selected yet</span>';
+          '<span style="color:#888">' +
+          t("noPhotoSelectedYet", "No photo selected yet") +
+          "</span>";
       });
     }
   }
@@ -86,24 +97,40 @@
         '">' +
         '<div class="buildpro-evaluate-grid">' +
         '<div class="buildpro-evaluate-col">' +
-        '<p class="buildpro-evaluate-field"><label>Avatar</label><input type="hidden" class="evaluate-avatar-id" name="buildpro_evaluate_items[' +
+        '<p class="buildpro-evaluate-field"><label>' +
+        t("avatar", "Avatar") +
+        '</label><input type="hidden" class="evaluate-avatar-id" name="buildpro_evaluate_items[' +
         idx +
-        '][avatar_id]" value=""> <button type="button" class="button evaluate-select-avatar">Select photo</button> <button type="button" class="button evaluate-remove-avatar">Remove photo</button></p>' +
-        '<div class="evaluate-avatar-preview"><span style="color:#888">Chưa chọn ảnh</span></div>' +
+        '][avatar_id]" value=""> <button type="button" class="button evaluate-select-avatar">' +
+        t("selectPhoto", "Select photo") +
+        '</button> <button type="button" class="button evaluate-remove-avatar">' +
+        t("removePhoto", "Remove photo") +
+        "</button></p>" +
+        '<div class="evaluate-avatar-preview"><span style="color:#888">' +
+        t("noPhotoSelectedYet", "No photo selected yet") +
+        "</span></div>" +
         "</div>" +
         '<div class="buildpro-evaluate-col">' +
-        '<p class="buildpro-evaluate-field"><label>Name</label><input type="text" name="buildpro_evaluate_items[' +
+        '<p class="buildpro-evaluate-field"><label>' +
+        t("name", "Name") +
+        '</label><input type="text" name="buildpro_evaluate_items[' +
         idx +
         '][name]" class="regular-text" value=""></p>' +
-        '<p class="buildpro-evaluate-field"><label>Position</label><input type="text" name="buildpro_evaluate_items[' +
+        '<p class="buildpro-evaluate-field"><label>' +
+        t("position", "Position") +
+        '</label><input type="text" name="buildpro_evaluate_items[' +
         idx +
         '][position]" class="regular-text" value=""></p>' +
-        '<p class="buildpro-evaluate-field"><label>Description</label><textarea name="buildpro_evaluate_items[' +
+        '<p class="buildpro-evaluate-field"><label>' +
+        t("description", "Description") +
+        '</label><textarea name="buildpro_evaluate_items[' +
         idx +
         '][description]" rows="4" class="large-text"></textarea></p>' +
         "</div>" +
         "</div>" +
-        '<div class="buildpro-evaluate-actions"><button type="button" class="button evaluate-remove-row">Xóa</button></div>' +
+        '<div class="buildpro-evaluate-actions"><button type="button" class="button evaluate-remove-row">' +
+        t("remove", "Remove") +
+        "</button></div>" +
         "</div>";
       var temp = document.createElement("div");
       temp.innerHTML = html;

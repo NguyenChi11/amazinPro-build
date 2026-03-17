@@ -10,7 +10,7 @@ function buildpro_about_contact_add_meta_box($post_type, $post)
     }
     add_meta_box(
         "buildpro_about_contact_meta",
-        "About Us : Contact",
+        esc_html__('About Us: Contact', 'buildpro'),
         "buildpro_about_contact_render_meta_box",
         'page',
         "normal",
@@ -22,6 +22,9 @@ add_action("add_meta_boxes", "buildpro_about_contact_add_meta_box", 10, 2);
 function buildpro_about_contact_render_meta_box($post)
 {
     wp_nonce_field("buildpro_about_contact_meta_save", "buildpro_about_contact_meta_nonce");
+    if (function_exists('buildpro_about_us_admin_print_i18n')) {
+        buildpro_about_us_admin_print_i18n();
+    }
     $enabled = get_post_meta($post->ID, 'buildpro_about_contact_enabled', true);
     $enabled = $enabled === '' ? 1 : (int) $enabled;
     $title = get_post_meta($post->ID, "buildpro_about_contact_title", true);

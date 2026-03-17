@@ -4,16 +4,16 @@
 <div id="buildpro_about_core_values_meta" class="buildpro-post-block">
     <div class="buildpro-admin-tabs">
         <button type="button" class="button buildpro-about-core-values-tab is-active"
-            data-target="buildpro_about_core_values_tab_content">Content</button>
+            data-target="buildpro_about_core_values_tab_content"><?php echo esc_html__('Content', 'buildpro'); ?></button>
         <button type="button" class="button buildpro-about-core-values-tab"
-            data-target="buildpro_about_core_values_tab_items">Items</button>
+            data-target="buildpro_about_core_values_tab_items"><?php echo esc_html__('Items', 'buildpro'); ?></button>
     </div>
     <div id="buildpro_about_core_values_tab_content">
         <p><label><input type="checkbox" name="buildpro_about_core_values_enabled" value="1"
-                    <?php checked($enabled, 1); ?>> Enable</label></p>
-        <p><label>Title<br><input type="text" class="widefat" name="buildpro_about_core_values_title"
+                    <?php checked($enabled, 1); ?>> <?php echo esc_html__('Enabled', 'buildpro'); ?></label></p>
+        <p><label><?php echo esc_html__('Title', 'buildpro'); ?><br><input type="text" class="widefat" name="buildpro_about_core_values_title"
                     value="<?php echo esc_attr($title); ?>"></label></p>
-        <p><label>Description</label></p>
+        <p><label><?php echo esc_html__('Description', 'buildpro'); ?></label></p>
         <?php
         ob_start();
         wp_editor($desc, 'buildpro_about_core_values_description_editor', array(
@@ -36,9 +36,9 @@
                     $it_desc = isset($it['description']) ? (string)$it['description'] : '';
                     $it_url = isset($it['url']) ? (string)$it['url'] : ''; ?>
                     <div class="core-value-item">
-                        <p><label>Icon Image</label></p>
+                        <p><label><?php echo esc_html__('Icon Image', 'buildpro'); ?></label></p>
                         <div class="cv-icon-preview" id="cv_icon_preview_<?php echo $i; ?>">
-                            <?php echo $icon_url ? '<img src="' . esc_url($icon_url) . '" style="max-width:60px;height:auto;border-radius:6px;border:1px solid #e5e7eb;">' : '<div class="cv-icon-empty">No image</div>'; ?>
+                            <?php echo $icon_url ? '<img src="' . esc_url($icon_url) . '" style="max-width:60px;height:auto;border-radius:6px;border:1px solid #e5e7eb;">' : '<div class="cv-icon-empty">' . esc_html__('No image', 'buildpro') . '</div>'; ?>
                         </div>
                         <input type="hidden" id="cv_icon_id_<?php echo $i; ?>"
                             name="buildpro_about_core_values_items[<?php echo $i; ?>][icon_id]"
@@ -47,24 +47,23 @@
                             name="buildpro_about_core_values_items[<?php echo $i; ?>][icon_url]"
                             value="<?php echo esc_attr($icon_url); ?>">
                         <p>
-                            <button type="button" class="button cv-select-image" data-idx="<?php echo $i; ?>">Select
-                                Image</button>
-                            <button type="button" class="button cv-remove-image" data-idx="<?php echo $i; ?>">Remove</button>
+                            <button type="button" class="button cv-select-image" data-idx="<?php echo $i; ?>"><?php echo esc_html__('Choose Image', 'buildpro'); ?></button>
+                            <button type="button" class="button cv-remove-image" data-idx="<?php echo $i; ?>"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
                         </p>
-                        <p><label>Title<br><input type="text" class="widefat"
+                        <p><label><?php echo esc_html__('Title', 'buildpro'); ?><br><input type="text" class="widefat"
                                     name="buildpro_about_core_values_items[<?php echo $i; ?>][title]"
                                     value="<?php echo esc_attr($it_title); ?>"></label></p>
-                        <p><label>Description<br><textarea class="widefat" rows="3"
+                        <p><label><?php echo esc_html__('Description', 'buildpro'); ?><br><textarea class="widefat" rows="3"
                                     name="buildpro_about_core_values_items[<?php echo $i; ?>][description]"><?php echo esc_textarea($it_desc); ?></textarea></label>
                         </p>
-                        <p><label>URL<br><input type="text" class="widefat"
+                        <p><label><?php echo esc_html__('URL', 'buildpro'); ?><br><input type="text" class="widefat"
                                     name="buildpro_about_core_values_items[<?php echo $i; ?>][url]"
                                     value="<?php echo esc_attr($it_url); ?>"></label></p>
-                        <p><button type="button" class="button remove-core-value">Remove</button></p>
+                        <p><button type="button" class="button remove-core-value"><?php echo esc_html__('Remove', 'buildpro'); ?></button></p>
                     </div>
             <?php }
             } ?>
         </div>
-        <p><button type="button" class="button" id="buildpro_add_core_value_item">Add Item</button></p>
+        <p><button type="button" class="button" id="buildpro_add_core_value_item"><?php echo esc_html__('Add Item', 'buildpro'); ?></button></p>
     </div>
 </div>

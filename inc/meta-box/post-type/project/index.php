@@ -12,7 +12,7 @@ function buildpro_project_cpt_meta_box_add($post_type, $post)
     if ($post_type !== 'project') {
         return;
     }
-    add_meta_box('buildpro_project_cpt_group', 'Project Details', 'buildpro_project_cpt_meta_box_render', 'project', 'normal', 'high');
+    add_meta_box('buildpro_project_cpt_group', esc_html__('Project Details', 'buildpro'), 'buildpro_project_cpt_meta_box_render', 'project', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'buildpro_project_cpt_meta_box_add', 10, 2);
 
@@ -20,14 +20,14 @@ function buildpro_project_cpt_meta_box_render($post)
 {
     wp_nonce_field('buildpro_project_meta_save', 'buildpro_project_meta_nonce');
     echo '<div class="buildpro-admin-tabs" style="margin:0;padding:8px 0;">'
-        . '<button type="button" class="button buildpro-admin-tab is-active" data-target="buildpro_project_tab_banner">Image Banner</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_location">Location</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_about">About Project</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_standards">Standards</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_infomations">Infomations</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_price">Price</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_datetime">Date Time</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_gallery">Gallery</button>'
+        . '<button type="button" class="button buildpro-admin-tab is-active" data-target="buildpro_project_tab_banner">' . esc_html__('Banner Image', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_location">' . esc_html__('Location', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_about">' . esc_html__('About Project', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_standards">' . esc_html__('Standards', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_infomations">' . esc_html__('Information', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_price">' . esc_html__('Price', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_datetime">' . esc_html__('Date Time', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_project_tab_gallery">' . esc_html__('Gallery', 'buildpro') . '</button>'
         . '</div>';
     echo '<script>
     (function(){

@@ -1,4 +1,11 @@
 (function () {
+  var i18n = window.buildproAboutUsAdminI18n || {};
+  function t(key, fallback) {
+    return Object.prototype.hasOwnProperty.call(i18n, key)
+      ? i18n[key]
+      : fallback;
+  }
+
   function initTabs() {
     var box = document.getElementById("buildpro_about_contact_meta");
     if (!box) return;
@@ -42,22 +49,27 @@
     if (!box || typeof wp === "undefined" || !wp.media) return;
     var uploadBtn = box.querySelector(".buildpro-map-upload");
     var removeBtn = box.querySelector(".buildpro-map-remove");
-    var input = box.querySelector('input[name="buildpro_about_contact_form_map_image_id"]');
+    var input = box.querySelector(
+      'input[name="buildpro_about_contact_form_map_image_id"]',
+    );
     var img = box.querySelector(".buildpro-image-wrap img");
     if (!uploadBtn || !input || !img) return;
 
     uploadBtn.addEventListener("click", function (e) {
       e.preventDefault();
       var frame = wp.media({
-        title: "Select Map Image",
-        button: { text: "Use this image" },
+        title: t("chooseImage", "Choose Image"),
+        button: { text: t("useImage", "Use Image") },
         library: { type: "image" },
         multiple: false,
       });
       frame.on("select", function () {
         var attachment = frame.state().get("selection").first().toJSON();
         input.value = attachment.id;
-        img.src = attachment.sizes && attachment.sizes.thumbnail ? attachment.sizes.thumbnail.url : attachment.url;
+        img.src =
+          attachment.sizes && attachment.sizes.thumbnail
+            ? attachment.sizes.thumbnail.url
+            : attachment.url;
       });
       frame.open();
     });

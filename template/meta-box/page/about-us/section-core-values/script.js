@@ -1,4 +1,11 @@
 (function () {
+  var i18n = window.buildproAboutUsAdminI18n || {};
+  function t(key, fallback) {
+    return Object.prototype.hasOwnProperty.call(i18n, key)
+      ? i18n[key]
+      : fallback;
+  }
+
   function initTabs() {
     var box = document.getElementById("buildpro_about_core_values_meta");
     if (!box) return;
@@ -37,10 +44,14 @@
       var div = document.createElement("div");
       div.className = "core-value-item";
       div.innerHTML =
-        "<p><label>Icon Image</label></p>" +
+        "<p><label>" +
+        t("iconImage", "Icon Image") +
+        "</label></p>" +
         '<div class="cv-icon-preview" id="cv_icon_preview_' +
         idx +
-        '"><div class="cv-icon-empty">No image</div></div>' +
+        '"><div class="cv-icon-empty">' +
+        t("noImage", "No image") +
+        "</div></div>" +
         '<input type="hidden" id="cv_icon_id_' +
         idx +
         '" name="buildpro_about_core_values_items[' +
@@ -53,19 +64,31 @@
         '][icon_url]" value="">' +
         '<p><button type="button" class="button cv-select-image" data-idx="' +
         idx +
-        '">Select Image</button> <button type="button" class="button cv-remove-image" data-idx="' +
+        '">' +
+        t("chooseImage", "Choose Image") +
+        '</button> <button type="button" class="button cv-remove-image" data-idx="' +
         idx +
-        '">Remove</button></p>' +
-        '<p><label>Title<br><input type="text" class="widefat" name="buildpro_about_core_values_items[' +
+        '">' +
+        t("remove", "Remove") +
+        "</button></p>" +
+        "<p><label>" +
+        t("title", "Title") +
+        '<br><input type="text" class="widefat" name="buildpro_about_core_values_items[' +
         idx +
         '][title]" value=""></label></p>' +
-        '<p><label>Description<br><textarea class="widefat" rows="3" name="buildpro_about_core_values_items[' +
+        "<p><label>" +
+        t("description", "Description") +
+        '<br><textarea class="widefat" rows="3" name="buildpro_about_core_values_items[' +
         idx +
         '][description]"></textarea></label></p>' +
-        '<p><label>URL<br><input type="text" class="widefat" name="buildpro_about_core_values_items[' +
+        "<p><label>" +
+        t("url", "URL") +
+        '<br><input type="text" class="widefat" name="buildpro_about_core_values_items[' +
         idx +
         '][url]" value=""></label></p>' +
-        '<p><button type="button" class="button remove-core-value">Remove</button></p>';
+        '<p><button type="button" class="button remove-core-value">' +
+        t("remove", "Remove") +
+        "</button></p>";
       wrap.appendChild(div);
     }
     if (add) add.addEventListener("click", addItem);
@@ -81,8 +104,8 @@
             frame.off && frame.off("select");
           }
           frame = wp.media({
-            title: "Select Image",
-            button: { text: "Use image" },
+            title: t("chooseImage", "Choose Image"),
+            button: { text: t("useImage", "Use Image") },
             multiple: false,
           });
           frame.on("select", function () {
@@ -111,7 +134,10 @@
           if (inputId) inputId.value = "0";
           if (inputUrl) inputUrl.value = "";
           if (preview)
-            preview.innerHTML = '<div class="cv-icon-empty">No image</div>';
+            preview.innerHTML =
+              '<div class="cv-icon-empty">' +
+              t("noImage", "No image") +
+              "</div>";
           return;
         }
         if (e.target && e.target.classList.contains("remove-core-value")) {

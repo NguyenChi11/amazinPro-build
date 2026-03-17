@@ -7,14 +7,14 @@
 function render_home_page_tabs()
 {
     $tabs = [
-        'buildpro_banner_meta' => 'Banner',
-        'buildpro_option_meta' => 'Option',
-        'buildpro_data_meta' => 'Data',
-        'buildpro_materials_meta' => 'Products',
-        'buildpro_services_meta' => 'Services',
-        'buildpro_evaluate_meta' => 'Evaluate',
-        'buildpro_portfolio_meta' => 'Portfolio',
-        'buildpro_post_section_meta' => 'Post'
+        'buildpro_banner_meta' => esc_html__('Banner', 'buildpro'),
+        'buildpro_option_meta' => esc_html__('Option', 'buildpro'),
+        'buildpro_data_meta' => esc_html__('Data', 'buildpro'),
+        'buildpro_materials_meta' => esc_html__('Products', 'buildpro'),
+        'buildpro_services_meta' => esc_html__('Services', 'buildpro'),
+        'buildpro_evaluate_meta' => esc_html__('Evaluate', 'buildpro'),
+        'buildpro_portfolio_meta' => esc_html__('Projects', 'buildpro'),
+        'buildpro_post_section_meta' => esc_html__('Post', 'buildpro')
     ];
 
     echo '<div class="buildpro-admin-tabs" style="margin:0;padding:8px 0;">';
@@ -22,7 +22,7 @@ function render_home_page_tabs()
     $first = true;
     foreach ($tabs as $target => $label) {
         $active_class = $first ? ' is-active' : '';
-        echo '<button type="button" class="button buildpro-admin-tab' . $active_class . '" data-target="' . $target . '">' . $label . '</button> ';
+        echo '<button type="button" class="button buildpro-admin-tab' . $active_class . '" data-target="' . esc_attr($target) . '">' . $label . '</button> ';
         $first = false;
     }
 

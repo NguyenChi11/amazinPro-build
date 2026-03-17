@@ -639,18 +639,390 @@ msgstr "Ảnh tiêu chuẩn"
 msgid "Navigate to %s"
 msgstr "Đi tới %s"
 
+#: inc/meta-box/post-type/post/index.php:11
+msgid "Post Details"
+msgstr "Chi tiết bài viết"
+
+#: inc/meta-box/post-type/post/index.php:19
+#: inc/meta-box/post-type/post/paragraph/index.php:7
+msgid "Paragraph"
+msgstr "Đoạn văn"
+
+#: inc/meta-box/post-type/post/index.php:22
+#: inc/meta-box/post-type/post/quote/index.php:7
+msgid "Quote"
+msgstr "Trích dẫn"
+
+#: inc/meta-box/post-type/post/quote/index.php:52
+msgid "Title"
+msgstr "Tiêu đề"
+
+#: inc/meta-box/post-type/post/quote/index.php:53
+msgid "Image Description"
+msgstr "Mô tả hình ảnh"
+
+#: inc/meta-box/post-type/post/quote/index.php:54
+msgid "Quote Repeater"
+msgstr "Danh sách trích dẫn"
+
+#: inc/meta-box/post-type/post/quote/index.php:58
+msgid "Add image"
+msgstr "Thêm ảnh"
+
+#: inc/meta-box/post-type/post/quote/index.php:63
+msgid "Add row"
+msgstr "Thêm hàng"
+
+#: inc/meta-box/post-type/post/quote/index.php:28
+msgid "Select image"
+msgstr "Chọn ảnh"
+
+#: inc/meta-box/post-type/post/quote/index.php:29
+msgid "Add"
+msgstr "Thêm"
+
+#: inc/meta-box/post-type/post/quote/index.php:58
+msgid "Key"
+msgstr "Khóa"
+
+#: inc/meta-box/post-type/post/quote/index.php:58
+msgid "Value"
+msgstr "Giá trị"
+
+#: inc/meta-box/post-type/post/description/index.php:7
+#: inc/meta-box/post-type/post/description/index.php:20
+#: template/meta-box/post-type/post/section-description/template.php:3
+msgid "Description"
+msgstr "Mô tả"
+
+#: inc/meta-box/post-type/post/banner/index.php:7
+msgid "Banner"
+msgstr "Banner"
+
+#: inc/meta-box/post-type/post/banner/index.php:18
+msgid "Select banner photo"
+msgstr "Chọn ảnh banner"
+
+#: inc/meta-box/post-type/post/banner/index.php:19
+msgid "Use photo"
+msgstr "Dùng ảnh"
+
+#: inc/meta-box/post-type/post/banner/index.php:31
 #: template/meta-box/post-type/post/section-banner/index.php:1
 msgid "Banner Image"
 msgstr "Ảnh banner"
 
+#: inc/meta-box/post-type/post/banner/index.php:33
 #: template/meta-box/post-type/post/section-banner/index.php:1
 msgid "Select photo"
 msgstr "Chọn ảnh"
 
+#: inc/meta-box/post-type/post/banner/index.php:34
 #: template/meta-box/post-type/post/section-banner/index.php:1
 msgid "Remove photo"
 msgstr "Xóa ảnh"
 
+#: inc/meta-box/post-type/post/banner/index.php:20
+#: inc/meta-box/post-type/post/banner/index.php:40
 #: template/meta-box/post-type/post/section-banner/index.php:1
 msgid "No banner selected"
 msgstr "Chưa chọn banner"
+
+#: inc/meta-box/post-type/project/index.php:1
+msgid "Project Details"
+msgstr "Chi tiết dự án"
+
+#: inc/meta-box/post-type/project/index.php:1
+msgid "Information"
+msgstr "Thông tin"
+
+#: inc/meta-box/post-type/project/index.php:1
+msgid "Date Time"
+msgstr "Ngày giờ"
+
+#: inc/meta-box/post-type/project/price/index.php:1
+msgid "Price"
+msgstr "Giá"
+
+#: inc/meta-box/post-type/project/gallery/index.php:1
+msgid "Clear gallery"
+msgstr "Xóa thư viện"
+
+#: inc/meta-box/post-type/project/about/index.php:1
+msgid "About Project"
+msgstr "Về dự án"
+
+#: inc/meta-box/post-type/project/about/index.php:1
+msgid "About Image"
+msgstr "Ảnh giới thiệu"
+
+#: template/meta-box/page/home/home-page.php:1
+msgid "Home Page"
+msgstr "Trang chủ"
+
+msgid "Home Banner Status"
+msgstr "Trạng thái banner trang chủ"
+
+msgid "Disable Banner"
+msgstr "Tắt banner"
+
+msgid "Enable Banner"
+msgstr "Bật banner"
+
+msgid "Banner Content"
+msgstr "Nội dung banner"
+
+msgid "No image selected"
+msgstr "Chưa chọn ảnh"
+
+msgid "Type"
+msgstr "Loại"
+
+msgid "Text"
+msgstr "Văn bản"
+
+msgid "Link"
+msgstr "Liên kết"
+
+msgid "Link URL"
+msgstr "Đường dẫn URL"
+
+msgid "Choose Link"
+msgstr "Chọn liên kết"
+
+msgid "Link Title"
+msgstr "Tiêu đề liên kết"
+
+msgid "Button text"
+msgstr "Văn bản nút"
+
+msgid "Link Target"
+msgstr "Mở liên kết"
+
+msgid "Default"
+msgstr "Mặc định"
+
+msgid "Open in new tab"
+msgstr "Mở trong tab mới"
+
+msgid "Add row"
+msgstr "Thêm dòng"
+
+msgid "Section Data Status"
+msgstr "Trạng thái mục dữ liệu"
+
+msgid "Add Section"
+msgstr "Thêm mục"
+
+msgid "Remove Section"
+msgstr "Xóa mục"
+
+msgid "Section Option Status"
+msgstr "Trạng thái mục tùy chọn"
+
+msgid "Disable Section"
+msgstr "Tắt mục"
+
+msgid "Enable Section"
+msgstr "Bật mục"
+
+msgid "No icon selected"
+msgstr "Chưa chọn biểu tượng"
+
+msgid "Post Section Status"
+msgstr "Trạng thái mục bài viết"
+
+msgid "Disable Post"
+msgstr "Tắt bài viết"
+
+msgid "Enable Post"
+msgstr "Bật bài viết"
+
+msgid "LATEST POSTS"
+msgstr "BÀI VIẾT MỚI NHẤT"
+
+msgid "Products Section Status"
+msgstr "Trạng thái mục sản phẩm"
+
+msgid "Section Title"
+msgstr "Tiêu đề mục"
+
+msgid "Section Description"
+msgstr "Mô tả mục"
+
+msgid "MATERIALS"
+msgstr "VẬT LIỆU"
+
+msgid "Short description"
+msgstr "Mô tả ngắn"
+
+msgid "Projects Section Status"
+msgstr "Trạng thái mục dự án"
+
+msgid "PROJECTS"
+msgstr "DỰ ÁN"
+
+msgid "Services Section Status"
+msgstr "Trạng thái mục dịch vụ"
+
+msgid "CORE SERVICES"
+msgstr "DỊCH VỤ CỐT LÕI"
+
+msgid "Comprehensive construction solutions"
+msgstr "Giải pháp xây dựng toàn diện"
+
+msgid "Same Tab"
+msgstr "Cùng tab"
+
+msgid "Evaluate Status"
+msgstr "Trạng thái mục đánh giá"
+
+msgid "No photo selected yet"
+msgstr "Chưa chọn ảnh"
+
+msgid "Displaying"
+msgstr "Đang hiển thị"
+
+msgid "Hidden"
+msgstr "Đang ẩn"
+
+msgid "Enabled"
+msgstr "Bật"
+
+msgid "Disabled"
+msgstr "Tắt"
+
+msgid "Choose Image"
+msgstr "Chọn ảnh"
+
+msgid "Use Image"
+msgstr "Dùng ảnh"
+
+msgid "Select Option Icon"
+msgstr "Chọn biểu tượng"
+
+msgid "Use Icon"
+msgstr "Dùng biểu tượng"
+
+msgid "Select a photo"
+msgstr "Chọn ảnh"
+
+msgid "Use this photo"
+msgstr "Dùng ảnh này"
+
+msgid "About Us"
+msgstr "Về chúng tôi"
+
+msgid "About Us: Banner"
+msgstr "Về chúng tôi: Banner"
+
+msgid "About Us: Core Values"
+msgstr "Về chúng tôi: Giá trị cốt lõi"
+
+msgid "About Us: Leader"
+msgstr "Về chúng tôi: Lãnh đạo"
+
+msgid "About Us: Policy"
+msgstr "Về chúng tôi: Chính sách"
+
+msgid "About Us: Contact"
+msgstr "Về chúng tôi: Liên hệ"
+
+msgid "Core Values"
+msgstr "Giá trị cốt lõi"
+
+msgid "Leader"
+msgstr "Lãnh đạo"
+
+msgid "Content"
+msgstr "Nội dung"
+
+msgid "Facts"
+msgstr "Số liệu"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "Items"
+msgstr "Danh sách"
+
+msgid "Certification"
+msgstr "Chứng chỉ"
+
+msgid "Warranty"
+msgstr "Bảo hành"
+
+msgid "Certifications"
+msgstr "Chứng chỉ"
+
+msgid "Left Title"
+msgstr "Tiêu đề bên trái"
+
+msgid "Right Title"
+msgstr "Tiêu đề bên phải"
+
+msgid "Warranty Description"
+msgstr "Mô tả bảo hành"
+
+msgid "General Contractor"
+msgstr "Tổng thầu"
+
+msgid "Image"
+msgstr "Hình ảnh"
+
+msgid "No image"
+msgstr "Không có ảnh"
+
+msgid "Label"
+msgstr "Nhãn"
+
+msgid "Add Fact"
+msgstr "Thêm số liệu"
+
+msgid "Add Item"
+msgstr "Thêm mục"
+
+msgid "Add Certification"
+msgstr "Thêm chứng chỉ"
+
+msgid "Icon Image"
+msgstr "Ảnh biểu tượng"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Name"
+msgstr "Tên"
+
+msgid "Position"
+msgstr "Chức vụ"
+
+msgid "Map Image"
+msgstr "Ảnh bản đồ"
+
+msgid "Projects Page"
+msgstr "Trang dự án"
+
+msgid "Projects Title"
+msgstr "Tiêu đề dự án"
+
+msgid "Option"
+msgstr "Tùy chọn"
+
+msgid "Data"
+msgstr "Dữ liệu"
+
+msgid "Products"
+msgstr "Sản phẩm"
+
+msgid "Services"
+msgstr "Dịch vụ"
+
+msgid "Evaluate"
+msgstr "Đánh giá"
+
+msgid "Projects"
+msgstr "Dự án"
+
+msgid "Post"
+msgstr "Bài viết"

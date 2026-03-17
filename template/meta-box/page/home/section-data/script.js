@@ -1,4 +1,9 @@
 (function () {
+  var i18n = window.buildproHomeAdminI18n || {};
+  function t(key, fallback) {
+    return typeof i18n[key] !== "undefined" ? i18n[key] : fallback || key;
+  }
+
   var wrapper = document.getElementById("buildpro-data-wrapper");
   var addBtn = document.getElementById("buildpro-data-add");
   var tpl = document.getElementById("buildpro-data-row-template");
@@ -54,7 +59,8 @@
   function updateEnabledStateText() {
     if (!enabledState || !enabledInput) return;
     var val = parseInt(enabledInput.value || "1", 10) || 0;
-    enabledState.textContent = val === 1 ? "Displaying" : "Hidden";
+    enabledState.textContent =
+      val === 1 ? t("displaying", "Displaying") : t("hidden", "Hidden");
   }
   if (enabledInput) {
     enabledInput.value =

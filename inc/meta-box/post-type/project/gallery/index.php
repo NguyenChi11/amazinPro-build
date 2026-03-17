@@ -4,7 +4,7 @@ function buildpro_project_gallery_add_meta_box($post_type, $post)
     if ($post_type !== 'project') {
         return;
     }
-    add_meta_box('buildpro_project_tab_gallery', 'Gallery', 'buildpro_project_gallery_render_meta_box', 'project', 'normal', 'default');
+    add_meta_box('buildpro_project_tab_gallery', esc_html__('Gallery', 'buildpro'), 'buildpro_project_gallery_render_meta_box', 'project', 'normal', 'default');
 }
 add_action('add_meta_boxes', 'buildpro_project_gallery_add_meta_box', 10, 2);
 
@@ -13,6 +13,15 @@ function buildpro_project_gallery_render_meta_box($post)
     wp_enqueue_media();
     $gallery_raw = get_post_meta($post->ID, 'project_gallery_ids', true);
     $gallery_ids = is_array($gallery_raw) ? $gallery_raw : (is_string($gallery_raw) ? array_filter(array_map('intval', explode(',', $gallery_raw))) : array());
+
+    $i18n = wp_json_encode([
+        'selectImage'  => __('Select image', 'buildpro'),
+        'add'          => __('Add', 'buildpro'),
+        'addImage'     => __('Add image', 'buildpro'),
+        'clearGallery' => __('Clear gallery', 'buildpro'),
+        'remove'       => __('Remove', 'buildpro'),
+    ]);
+
     echo '<style>
     .buildpro-post-block{background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.05);padding:16px;margin-top:8px}
     .material-gallery{display:flex;gap:10px;flex-wrap:wrap}
@@ -21,18 +30,19 @@ function buildpro_project_gallery_render_meta_box($post)
     .material-gallery-remove{position:absolute;top:4px;right:4px;background:#ef4444;color:#fff;border:none;border-radius:50%;width:22px;height:22px;line-height:22px;text-align:center;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,0.2)}
     </style>';
     echo '<div id="buildpro_project_tab_gallery" class="buildpro-post-block">';
-    echo '<p class="buildpro-post-field"><input type="hidden" id="buildpro_project_gallery_ids" name="project_gallery_ids" value="' . esc_attr(implode(',', $gallery_ids)) . '"> <button type="button" class="button button-primary" id="buildpro_project_add_gallery">Add photo</button> <button type="button" class="button" id="buildpro_project_clear_gallery">Clear gallery</button></p>';
+    echo '<p class="buildpro-post-field"><input type="hidden" id="buildpro_project_gallery_ids" name="project_gallery_ids" value="' . esc_attr(implode(',', $gallery_ids)) . '"> <button type="button" class="button button-primary" id="buildpro_project_add_gallery">' . esc_html__('Add image', 'buildpro') . '</button> <button type="button" class="button" id="buildpro_project_clear_gallery">' . esc_html__('Clear gallery', 'buildpro') . '</button></p>';
     echo '<div class="material-gallery" id="buildpro_project_gallery_wrap">';
     foreach ($gallery_ids as $gid) {
         $gthumb = wp_get_attachment_image_url($gid, 'thumbnail');
         if ($gthumb) {
-            echo '<div class="material-gallery-item" data-id="' . esc_attr($gid) . '"><img src="' . esc_url($gthumb) . '"><button type="button" class="button-link material-gallery-remove" aria-label="Remove">×</button></div>';
+            echo '<div class="material-gallery-item" data-id="' . esc_attr($gid) . '"><img src="' . esc_url($gthumb) . '"><button type="button" class="button-link material-gallery-remove" aria-label="' . esc_attr__('Remove', 'buildpro') . '">×</button></div>';
         }
     }
     echo '</div>';
     echo '</div>';
     echo '<script>
     (function(){
+        var i18n = ' . $i18n . ';
         var addBtn = document.getElementById("buildpro_project_add_gallery");
         var clearBtn = document.getElementById("buildpro_project_clear_gallery");
         var input = document.getElementById("buildpro_project_gallery_ids");
@@ -58,7 +68,7 @@ function buildpro_project_gallery_render_meta_box($post)
                     var btn = document.createElement("button");
                     btn.type = "button";
                     btn.className = "button-link material-gallery-remove";
-                    btn.setAttribute("aria-label","Remove");
+                    btn.setAttribute("aria-label", i18n.remove);
                     btn.textContent = "×";
                     div.appendChild(img);
                     div.appendChild(btn);
@@ -77,7 +87,7 @@ function buildpro_project_gallery_render_meta_box($post)
         if(addBtn){
             addBtn.addEventListener("click", function(e){
                 e.preventDefault();
-                if(!frame){ frame = wp.media({ frame: "select", title: "Add photo to gallery", button: { text: "Add to gallery" }, multiple: "add", library: { type: "image" } }); }
+                if(!frame){ frame = wp.media({ frame: "select", title: i18n.selectImage, button: { text: i18n.add }, multiple: "add", library: { type: "image" } }); }
                 if(typeof frame.off === "function"){ frame.off("select"); }
                 frame.on("select", function(){
                     var selection = frame.state().get("selection").toArray().map(function(m){ return m.toJSON(); });

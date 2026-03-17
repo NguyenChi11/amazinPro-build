@@ -8,7 +8,7 @@ function buildpro_post_group_meta_box_add($post_type, $post)
     if ($post_type !== 'post') {
         return;
     }
-    add_meta_box('buildpro_post_group', 'Post Details', 'buildpro_post_group_meta_box_render', 'post', 'normal', 'high');
+    add_meta_box('buildpro_post_group', esc_html__('Post Details', 'buildpro'), 'buildpro_post_group_meta_box_render', 'post', 'normal', 'high');
 }
 add_action('add_meta_boxes', 'buildpro_post_group_meta_box_add', 10, 2);
 
@@ -16,10 +16,10 @@ function buildpro_post_group_meta_box_render($post)
 {
     wp_nonce_field('buildpro_post_meta_save', 'buildpro_post_meta_nonce');
     echo '<div class="buildpro-admin-tabs" style="margin:0;padding:8px 0;">'
-        . '<button type="button" class="button buildpro-admin-tab is-active" data-target="buildpro_post_tab_banner">Banner</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_post_tab_desc">Description</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_post_tab_paragraph">Paragraph</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_post_tab_quote">Quote</button>'
+        . '<button type="button" class="button buildpro-admin-tab is-active" data-target="buildpro_post_tab_banner">' . esc_html__('Banner', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_post_tab_desc">' . esc_html__('Description', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_post_tab_paragraph">' . esc_html__('Paragraph', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_post_tab_quote">' . esc_html__('Quote', 'buildpro') . '</button>'
         . '</div>';
     echo '<script>
     (function(){
