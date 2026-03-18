@@ -45,7 +45,7 @@ if ($rows && is_array($rows)) {
 $icon_right = 212;
 ?>
 <?php $style = ($service_enabled !== 1 || empty($service_items)) ? ' style="display:none"' : ''; ?>
-<section class="section-services" <?php echo $style; ?>>
+<section class="section-services" data-aos="fade-up" <?php echo $style; ?>>
     <?php if (is_customize_preview()): ?>
         <div class="section-services__hover-outline"></div>
     <?php endif; ?>

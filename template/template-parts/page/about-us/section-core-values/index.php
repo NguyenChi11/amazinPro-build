@@ -24,7 +24,7 @@ $items = $use_mod ? get_theme_mod('buildpro_about_core_values_items', array()) :
 $items = is_array($items) ? $items : array();
 if ($enabled && !empty($items)) :
 ?>
-    <section class="about-core-values" <?php echo empty($items) ? ' data-auto="1"' : ''; ?> data-i18n-view-details="<?php echo esc_attr__('View Details', 'buildpro'); ?>">
+    <section class="about-core-values" data-aos="fade-up" <?php echo empty($items) ? ' data-auto="1"' : ''; ?> data-i18n-view-details="<?php echo esc_attr__('View Details', 'buildpro'); ?>">
         <?php if (is_customize_preview()) : ?>
             <div class="core-values__hover-outline" aria-hidden="true"></div>
         <?php endif; ?>

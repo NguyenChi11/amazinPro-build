@@ -1,4 +1,4 @@
-<section class="product-section-products">
+<section class="product-section-products" data-aos="fade-up">
     <div class="product-section-products__left">
         <div class="product-section-products__title">
             <h2 class="product-section-products__title-text">

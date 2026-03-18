@@ -38,6 +38,12 @@ body {
   padding: 0;
 }
 
+html.aos-enabled,
+body.aos-enabled {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
 section {
   position: relative;
 }

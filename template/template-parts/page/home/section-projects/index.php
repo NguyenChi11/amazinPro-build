@@ -70,7 +70,7 @@ if ($query->have_posts()) {
     wp_reset_postdata();
 }
 ?>
-<section class="section-portfolio">
+<section class="section-portfolio" data-aos="fade-up">
     <?php if (is_customize_preview()): ?>
         <div class="section-portfolio__hover-outline"></div>
 

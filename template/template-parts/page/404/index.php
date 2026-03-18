@@ -3,7 +3,7 @@ $home_url = home_url('/');
 $contact_url = home_url('/contact/');
 ?>
 
-<section class="error-404-page">
+<section class="error-404-page" data-aos="fade-up">
     <div class="error-404-container">
         <h1 class="error-404-title"><?php esc_html_e('Error 404?', 'buildpro'); ?></h1>
         <h2 class="error-404-subtitle"><?php esc_html_e('Page Not Found', 'buildpro'); ?></h2>

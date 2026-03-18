@@ -15,7 +15,7 @@ $summary_regular = isset($cart_page_data['summary_regular']) ? floatval($cart_pa
 $summary_sale = isset($cart_page_data['summary_sale']) ? floatval($cart_page_data['summary_sale']) : 0.0;
 ?>
 
-<section class="cart-section">
+<section class="cart-section" data-aos="fade-up">
     <div class="container">
         <div class="cart-section__wrapper">
 

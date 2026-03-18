@@ -1,4 +1,4 @@
-<section class="blog-section-blog">
+<section class="blog-section-blog" data-aos="fade-up">
     <div class="blog-section-blog__left">
         <?php
         $paged = max(1, get_query_var('paged') ? (int) get_query_var('paged') : (get_query_var('page') ? (int) get_query_var('page') : 1));

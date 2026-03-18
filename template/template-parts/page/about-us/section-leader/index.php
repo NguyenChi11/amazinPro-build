@@ -11,7 +11,7 @@ $items = $use_mod ? get_theme_mod('buildpro_about_leader_items', array()) : get_
 $items = is_array($items) ? $items : array();
 if ($enabled && (!empty($items) || is_customize_preview())) :
 ?>
-    <section class="about-leader" <?php echo empty($items) ? ' data-auto="1"' : ''; ?>>
+    <section class="about-leader" data-aos="fade-up" <?php echo empty($items) ? ' data-auto="1"' : ''; ?>>
         <?php if (is_customize_preview()) : ?>
             <div class="leader__hover-outline" aria-hidden="true"></div>
         <?php endif; ?>

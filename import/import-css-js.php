@@ -48,7 +48,48 @@ function wp_enqueue_custom_assets()
 {
     $version = WP_DEBUG ? time() : wp_get_theme()->get('Version');
 
+    $is_aos_context = (
+        is_front_page()
+        || is_page_template('home-page.php')
+        || is_page_template('about-us-page.php')
+        || is_page_template('about-page.php')
+        || is_page_template('blogs-page.php')
+        || is_page_template('projects-page.php')
+        || is_page_template('products-page.php')
+        || is_page_template('cart-page.php')
+        || is_page_template('checkout-page.php')
+        || is_page_template('bill-page.php')
+        || is_404()
+    );
+
     $wp_enqueue_mapping = [
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-aos',
+            'src' => 'https://unpkg.com/aos@2.3.4/dist/aos.css',
+            'deps' => [],
+            'ver' => '2.3.4',
+            'in_footer' => false,
+            'condition' => $is_aos_context,
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-aos',
+            'src' => 'https://unpkg.com/aos@2.3.4/dist/aos.js',
+            'deps' => [],
+            'ver' => '2.3.4',
+            'in_footer' => true,
+            'condition' => $is_aos_context,
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-aos-init',
+            'src' => get_theme_file_uri('assets/js/aos-init.js'),
+            'deps' => ['buildpro-aos'],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => $is_aos_context && file_exists(get_theme_file_path('assets/js/aos-init.js')),
+        ],
         [
             'type' => 'style',
             'handle' => 'buildpro-style',

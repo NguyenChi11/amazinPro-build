@@ -49,7 +49,7 @@ if (empty($section_banner_houses)) {
 }
 ?>
 
-<section class="section-banner"
+<section class="section-banner" data-aos="fade-up"
     data-i18n-view-about-us="<?php echo esc_attr__('View About Us', 'buildpro'); ?>"
     data-i18n-right-arrow="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>"
     data-arrow-icon-src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>">

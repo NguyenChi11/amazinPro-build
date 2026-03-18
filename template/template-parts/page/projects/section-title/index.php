@@ -39,7 +39,7 @@ if ($title === '' && $desc === '') {
     }
 }
 ?>
-<section class="project--section-title">
+<section class="project--section-title" data-aos="fade-up">
     <?php if (is_customize_preview()): ?>
         <div class="project--section-title__hover-outline"></div>
         <div class="project--section-title__customize-shortcut">

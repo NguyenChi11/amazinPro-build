@@ -29,55 +29,55 @@ if (!$use_mod) {
 }
 if ($enabled) :
 ?>
-<section class="about-contact">
-    <?php if (is_customize_preview()) : ?>
-    <div class="contact__hover-outline" aria-hidden="true"></div>
-    <?php endif; ?>
-    <div class="about-contact__inner">
-        <?php if ($title !== '') : ?>
-        <h2 class="about-contact__title"><?php echo esc_html($title); ?></h2>
+    <section class="about-contact" data-aos="fade-up">
+        <?php if (is_customize_preview()) : ?>
+            <div class="contact__hover-outline" aria-hidden="true"></div>
         <?php endif; ?>
-        <?php if ($text !== '') : ?>
-        <p class="about-contact__desc"><?php echo esc_html($text); ?></p>
-        <?php endif; ?>
-        <div class="about-contact__grid">
-            <?php if ($address !== '') : ?>
-            <div class="about-contact__card">
-                <div class="about-contact__icon">
-                    <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_building.png')); ?>"
-                        alt="">
-                </div>
-                <div class="about-contact__content">
-                    <div class="about-contact__label"><?php esc_html_e('Office Address', 'buildpro'); ?></div>
-                    <div class="about-contact__value"><?php echo esc_html($address); ?></div>
-                </div>
-            </div>
+        <div class="about-contact__inner">
+            <?php if ($title !== '') : ?>
+                <h2 class="about-contact__title"><?php echo esc_html($title); ?></h2>
             <?php endif; ?>
-            <?php if ($phone !== '') : ?>
-            <div class="about-contact__card">
-                <div class="about-contact__icon">
-                    <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_phone_ft.png')); ?>"
-                        alt="">
-                </div>
-                <div class="about-contact__content">
-                    <div class="about-contact__label"><?php esc_html_e('Phone Number', 'buildpro'); ?></div>
-                    <div class="about-contact__value"><?php echo esc_html($phone); ?></div>
-                </div>
-            </div>
+            <?php if ($text !== '') : ?>
+                <p class="about-contact__desc"><?php echo esc_html($text); ?></p>
             <?php endif; ?>
-            <?php if ($email !== '') : ?>
-            <div class="about-contact__card">
-                <div class="about-contact__icon">
-                    <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_email_ft.png')); ?>"
-                        alt="">
-                </div>
-                <div class="about-contact__content">
-                    <div class="about-contact__label"><?php esc_html_e('Official Email', 'buildpro'); ?></div>
-                    <div class="about-contact__value"><?php echo esc_html($email); ?></div>
-                </div>
+            <div class="about-contact__grid">
+                <?php if ($address !== '') : ?>
+                    <div class="about-contact__card">
+                        <div class="about-contact__icon">
+                            <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_building.png')); ?>"
+                                alt="">
+                        </div>
+                        <div class="about-contact__content">
+                            <div class="about-contact__label"><?php esc_html_e('Office Address', 'buildpro'); ?></div>
+                            <div class="about-contact__value"><?php echo esc_html($address); ?></div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($phone !== '') : ?>
+                    <div class="about-contact__card">
+                        <div class="about-contact__icon">
+                            <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_phone_ft.png')); ?>"
+                                alt="">
+                        </div>
+                        <div class="about-contact__content">
+                            <div class="about-contact__label"><?php esc_html_e('Phone Number', 'buildpro'); ?></div>
+                            <div class="about-contact__value"><?php echo esc_html($phone); ?></div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($email !== '') : ?>
+                    <div class="about-contact__card">
+                        <div class="about-contact__icon">
+                            <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_email_ft.png')); ?>"
+                                alt="">
+                        </div>
+                        <div class="about-contact__content">
+                            <div class="about-contact__label"><?php esc_html_e('Official Email', 'buildpro'); ?></div>
+                            <div class="about-contact__value"><?php echo esc_html($email); ?></div>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
-            <?php endif; ?>
         </div>
-    </div>
-</section>
+    </section>
 <?php endif; ?>

@@ -79,7 +79,7 @@ if (empty($evaluate_items)) {
     return;
 }
 ?>
-<section class="section-evaluate">
+<section class="section-evaluate" data-aos="fade-up">
     <?php if (is_customize_preview()): ?>
         <div class="section-evaluate__hover-outline"></div>
         <script>

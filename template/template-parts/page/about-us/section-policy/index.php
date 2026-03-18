@@ -52,7 +52,7 @@ foreach ($items as $it) {
 }
 if ($enabled) :
 ?>
-    <section class="about-policy">
+    <section class="about-policy" data-aos="fade-up">
         <?php if (is_customize_preview()) : ?>
             <div class="policy__hover-outline" aria-hidden="true"></div>
         <?php endif; ?>

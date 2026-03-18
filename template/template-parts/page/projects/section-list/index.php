@@ -35,7 +35,7 @@ if ($q->have_posts()) {
     wp_reset_postdata();
 }
 ?>
-<section class="project--section-list">
+<section class="project--section-list" data-aos="fade-up">
     <div class="section-portfolio__list">
         <?php foreach ($items as $item): ?>
             <a class="section-portfolio__item" href="<?php echo esc_url($item['link_url']); ?>"

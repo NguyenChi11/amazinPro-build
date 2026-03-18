@@ -61,7 +61,7 @@ if (empty($posts)) {
     return;
 }
 ?>
-<section class="section-post">
+<section class="section-post" data-aos="fade-up">
     <?php if (is_customize_preview()): ?>
         <div class="section-post__hover-outline"></div>
     <?php endif; ?>

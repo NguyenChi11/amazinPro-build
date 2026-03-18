@@ -63,7 +63,7 @@ if (empty($items) && !is_customize_preview()) {
 }
 ?>
 <?php $style = $materials_enabled !== 1 ? ' style="display:none"' : ''; ?>
-<section class="section-product" <?php echo $style; ?>>
+<section class="section-product" data-aos="fade-up" <?php echo $style; ?>>
     <?php if (is_customize_preview()): ?>
         <div class="section-product__hover-outline"></div>
 

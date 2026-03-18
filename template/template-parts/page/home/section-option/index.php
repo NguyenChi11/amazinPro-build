@@ -46,8 +46,7 @@ if ($count > 0 && $count < $min_count) {
 $no_items = empty($section_option_items);
 $style = $enabled !== 1 ? ' style="display:none"' : '';
 ?>
-<section class="section-option"
-    data-i18n-icon="<?php echo esc_attr__('icon', 'buildpro'); ?>"
+<section class="section-option" data-aos="fade-up" data-i18n-icon="<?php echo esc_attr__('icon', 'buildpro'); ?>"
     <?php echo $style; ?><?php echo $no_items ? ' data-no-fallback="1" style="display:none"' : ''; ?>>
     <?php if (is_customize_preview()): ?>
         <div class="section-option__hover-outline"></div>
@@ -80,7 +79,8 @@ $style = $enabled !== 1 ? ' style="display:none"' : '';
                             }
                             ?>
                             <?php if ($icon_src): ?>
-                                <img src="<?php echo esc_url($icon_src); ?>" class="section-option__item-icon-image" alt="<?php echo esc_attr__('icon', 'buildpro'); ?>">
+                                <img src="<?php echo esc_url($icon_src); ?>" class="section-option__item-icon-image"
+                                    alt="<?php echo esc_attr__('icon', 'buildpro'); ?>">
                             <?php endif; ?>
                         </div>
                         <h3 class="section-option__item-text"><?php echo $section_option_item['text']; ?></h3>
