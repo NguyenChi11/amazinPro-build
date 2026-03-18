@@ -3,21 +3,7 @@ if (post_password_required()) {
     return;
 }
 ?>
-<?php
-$buildpro_comments_css_rel = '/template/template-parts/comment-product/style.css';
-$buildpro_comments_css = get_template_directory_uri() . $buildpro_comments_css_rel;
-$buildpro_comments_css_ver = file_exists(get_theme_file_path($buildpro_comments_css_rel))
-    ? (string) filemtime(get_theme_file_path($buildpro_comments_css_rel))
-    : null;
-echo '<link rel="stylesheet" href="' . esc_url(add_query_arg('ver', $buildpro_comments_css_ver, $buildpro_comments_css)) . '" media="all" />';
 
-$buildpro_comments_js_rel = '/template/template-parts/comment-product/script.js';
-$buildpro_comments_js = get_template_directory_uri() . $buildpro_comments_js_rel;
-$buildpro_comments_js_ver = file_exists(get_theme_file_path($buildpro_comments_js_rel))
-    ? (string) filemtime(get_theme_file_path($buildpro_comments_js_rel))
-    : null;
-echo '<script src="' . esc_url(add_query_arg('ver', $buildpro_comments_js_ver, $buildpro_comments_js)) . '" defer></script>';
-?>
 
 <div id="comments" class="comments-area">
     <div class="comments-shell">
@@ -52,7 +38,7 @@ echo '<script src="' . esc_url(add_query_arg('ver', $buildpro_comments_js_ver, $
                 'next_text' => __('Newer comments →', 'buildpro'),
             ]); ?>
 
-            <div class="comments-stream" id="comments-stream" data-chunk="20">
+            <div class="comments-stream" id="comments-stream" data-chunk="20" data-order="<?php echo esc_attr((string) get_option('comment_order', 'asc')); ?>" role="region" aria-label="<?php echo esc_attr__('Comments', 'buildpro'); ?>">
                 <ol class="comment-list" id="comments-list">
                     <?php
                     if (!function_exists('buildpro_comment_callback')) {
@@ -129,7 +115,7 @@ echo '<script src="' . esc_url(add_query_arg('ver', $buildpro_comments_js_ver, $
         ];
 
         comment_form([
-            'class_form'           => 'comment-form fb-comment-form',
+            'class_form'           => 'comment-form buildpro-comment-form',
             'fields'               => $buildpro_comment_fields,
             'title_reply'          => __('Write a comment', 'buildpro'),
             'title_reply_before'   => '<h3 class="comments-form-title">',

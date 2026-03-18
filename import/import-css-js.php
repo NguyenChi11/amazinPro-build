@@ -65,7 +65,16 @@ function wp_enqueue_custom_assets()
             'deps' => [],
             'ver' => $version,
             'in_footer' => false,
-            'condition' => file_exists(get_theme_file_path('/template-parts/comment-product/style.css'))
+            'condition' => is_singular() && file_exists(get_theme_file_path('template/template-parts/comment-product/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-comment-product-script',
+            'src' => get_theme_file_uri('template/template-parts/comment-product/script.js'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => is_singular() && file_exists(get_theme_file_path('template/template-parts/comment-product/script.js'))
         ],
         [
             'type' => 'style',

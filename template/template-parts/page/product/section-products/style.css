@@ -36,27 +36,124 @@
   margin-top: 2.5rem;
 }
 .psp-cat-group {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #eef2f7;
+  border-radius: 16px;
+  padding: 0.875rem 0.875rem 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.psp-cat-group__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.psp-cat-group__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.psp-cat-group__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+}
+
+.psp-cat-group__label {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.psp-cat-group__toggle {
+  appearance: none;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #374151;
+  border-radius: 999px;
+  height: 32px;
+  padding: 0 0.75rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.psp-cat-group__toggle:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.psp-cat-group__toggle:active {
+  transform: translateY(0);
+}
+
+.psp-cat-group__toggle:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.55);
+  outline-offset: 3px;
+}
+
+.psp-cat-group__list {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.625rem;
-  width: 100%;
-  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Collapse by height (JS toggles data-collapsed) */
+.psp-cat-group__list[data-collapsed="1"] {
+  --psp-collapsed-rows: 2;
+  max-height: calc((32px + 0.5rem) * var(--psp-collapsed-rows));
+  overflow: hidden;
+}
+
+.psp-cat-group__list[data-collapsed="1"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+  pointer-events: none;
 }
 .psp-chip {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: 0.5rem;
+  padding: 7px 12px;
   border: 1px solid #e5e7eb;
   border-radius: 999px;
   background: #fff;
   color: #111827;
   text-decoration: none;
-  transition: 0.2s;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+  will-change: transform;
 }
 .psp-chip:hover {
   border-color: #c7cdd6;
   background: #f9fafb;
+  transform: translateY(-1px);
 }
 .psp-chip__icon {
   width: 18px;
@@ -64,8 +161,9 @@
   object-fit: contain;
 }
 .psp-chip__text {
-  font-size: 14px;
-  line-height: 1;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.1;
 }
 
 .psp-chip--active {
@@ -75,6 +173,41 @@
 }
 .psp-chip--active .psp-chip__text {
   color: #ffffff;
+}
+
+.psp-chip--active:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.psp-chip--clear {
+  border-style: dashed;
+  color: #374151;
+  background: #ffffff;
+}
+
+.psp-chip--all {
+  border-style: dashed;
+}
+
+.psp-chip--clear:hover {
+  border-color: #9ca3af;
+}
+
+.psp-chip:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.55);
+  outline-offset: 3px;
+}
+
+.product-section-products.psp-is-loading {
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .psp-chip,
+  .psp-cat-group__toggle {
+    transition: none;
+  }
 }
 
 .product-section-products__right {
@@ -206,23 +339,37 @@
   }
 
   .psp-cat-group {
-    flex-direction: row;
+    padding: 0.75rem;
+    border-radius: 14px;
+  }
+
+  .psp-cat-group__toggle {
+    display: none;
+  }
+
+  .psp-cat-group__list {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    gap: 0.5rem;
     padding-bottom: 0.25rem;
   }
 
-  .psp-cat-group::-webkit-scrollbar {
+  .psp-cat-group__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .psp-cat-group__list[data-collapsed="1"] {
+    max-height: none;
+  }
+
+  .psp-cat-group__list[data-collapsed="1"]::after {
     display: none;
   }
 
   .psp-chip {
     flex-shrink: 0;
     padding: 6px 10px;
-    font-size: 13px;
   }
 
   .psp-chip__icon {
@@ -231,7 +378,7 @@
   }
 
   .psp-chip__text {
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
 
   .psp-search__input {

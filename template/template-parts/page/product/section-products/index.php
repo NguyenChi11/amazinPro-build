@@ -25,6 +25,16 @@
             $sel_cat   = isset($_GET['category']) ? sanitize_text_field(wp_unslash($_GET['category'])) : '';
             $sel_tag   = isset($_GET['tag']) ? sanitize_text_field(wp_unslash($_GET['tag'])) : '';
             $keyword   = isset($_GET['q']) ? sanitize_text_field(wp_unslash($_GET['q'])) : '';
+
+            $psp_initial_visible = (int) apply_filters('buildpro_product_filters_initial_visible', 8);
+            if ($psp_initial_visible <= 0) {
+                $psp_initial_visible = 8;
+            }
+            $psp_terms_max = (int) apply_filters('buildpro_product_filters_terms_max', 50);
+            if ($psp_terms_max <= 0) {
+                $psp_terms_max = 50;
+            }
+
             foreach ($maps as $tax => $cfg) {
                 if (!taxonomy_exists($tax)) {
                     continue;
@@ -32,12 +42,54 @@
                 $terms = get_terms(array(
                     'taxonomy' => $tax,
                     'hide_empty' => true,
-                    'number' => 8,
+                    'number' => $psp_terms_max,
+                    'orderby' => 'count',
+                    'order' => 'DESC',
                 ));
                 if (is_wp_error($terms) || empty($terms)) {
                     continue;
                 }
-                echo '<div class="psp-cat-group psp-cat-group--' . esc_attr($tax) . '">';
+
+                $group_id = 'psp-cat-group-' . sanitize_html_class($tax);
+                $has_more = count($terms) > $psp_initial_visible;
+
+                echo '<div class="psp-cat-group psp-cat-group--' . esc_attr($tax) . '" data-tax="' . esc_attr($tax) . '">';
+                echo '  <div class="psp-cat-group__head">';
+                echo '    <div class="psp-cat-group__meta">';
+                echo '      <img class="psp-cat-group__icon" src="' . esc_url($cfg['icon']) . '" alt="' . esc_attr($cfg['label']) . '">';
+                echo '      <span class="psp-cat-group__label">' . esc_html($cfg['label']) . '</span>';
+                echo '    </div>';
+                if ($has_more) {
+                    echo '    <button type="button" class="psp-cat-group__toggle" aria-expanded="false" aria-controls="' . esc_attr($group_id) . '" data-more-label="' . esc_attr__('More', 'buildpro') . '" data-less-label="' . esc_attr__('Less', 'buildpro') . '">' . esc_html__('More', 'buildpro') . '</button>';
+                }
+                echo '  </div>';
+                echo '  <div id="' . esc_attr($group_id) . '" class="psp-cat-group__list" data-collapsed="' . ($has_more ? '1' : '0') . '" style="--psp-initial-visible:' . (int) $psp_initial_visible . '">';
+
+                // Always render an "All" chip for each taxonomy group
+                $is_all_active = ($tax === 'product_brand' && $sel_brand === '')
+                    || ($tax === 'product_cat' && $sel_cat === '')
+                    || ($tax === 'product_tag' && $sel_tag === '');
+
+                $args_clear = array();
+                if ($keyword !== '') {
+                    $args_clear['q'] = $keyword;
+                }
+                if ($sel_brand !== '' && $tax !== 'product_brand') {
+                    $args_clear['brand'] = $sel_brand;
+                }
+                if ($sel_cat !== '' && $tax !== 'product_cat') {
+                    $args_clear['category'] = $sel_cat;
+                }
+                if ($sel_tag !== '' && $tax !== 'product_tag') {
+                    $args_clear['tag'] = $sel_tag;
+                }
+                if ($current_paged > 1) {
+                    $args_clear[$pagination_key] = $current_paged;
+                }
+                $link_clear = add_query_arg($args_clear, $current_url);
+
+                $aria_all = $is_all_active ? ' aria-current="true"' : '';
+
                 foreach ($terms as $t) {
                     $is_active = ($tax === 'product_brand' && $sel_brand === $t->slug)
                         || ($tax === 'product_cat' && $sel_cat === $t->slug)
@@ -73,11 +125,12 @@
                     }
                     $link = add_query_arg($args_out, $current_url);
                     $cls = 'psp-chip' . ($is_active ? ' psp-chip--active' : '');
-                    echo '<a class="' . esc_attr($cls) . '" href="' . esc_url($link) . '">';
-                    echo '<img class="psp-chip__icon" src="' . esc_url($cfg['icon']) . '" alt="' . esc_attr($cfg['label']) . '">';
+                    $aria_current = $is_active ? ' aria-current="true"' : '';
+                    echo '<a class="' . esc_attr($cls) . '" href="' . esc_url($link) . '"' . $aria_current . '>';
                     echo '<span class="psp-chip__text">' . esc_html($t->name) . '</span>';
                     echo '</a>';
                 }
+                echo '  </div>';
                 echo '</div>';
             }
             ?>
@@ -86,7 +139,8 @@
     <div class="product-section-products__right">
         <div class="product-section-products__product-search">
             <form class="psp-search" role="search" method="get" action="<?php echo esc_url(get_permalink()); ?>">
-                <label class="screen-reader-text" for="psp-search-input"><?php esc_html_e('Search products', 'buildpro'); ?></label>
+                <label class="screen-reader-text"
+                    for="psp-search-input"><?php esc_html_e('Search products', 'buildpro'); ?></label>
                 <span class="psp-search__icon" aria-hidden="true">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
