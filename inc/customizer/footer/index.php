@@ -277,8 +277,40 @@ function buildpro_footer_customize_preview_js()
         filemtime(get_theme_file_path('template/customize/footer/script.js')),
         true
     );
+
+    buildpro_footer_add_inline_i18n('buildpro-footer-preview');
 }
 add_action('customize_preview_init', 'buildpro_footer_customize_preview_js');
+
+function buildpro_footer_add_inline_i18n(string $handle)
+{
+    $i18n = array(
+        'linkUrl'         => __('Link URL', 'buildpro'),
+        'chooseLink'      => __('Choose Link', 'buildpro'),
+        'linkTitle'       => __('Link Title', 'buildpro'),
+        'linkTarget'      => __('Link Target', 'buildpro'),
+        'sameTab'         => __('Same Tab', 'buildpro'),
+        'openInNewTab'    => __('Open in new tab', 'buildpro'),
+        'remove'          => __('Remove', 'buildpro'),
+        'addItem'         => __('Add Item', 'buildpro'),
+        'icon'            => __('Icon', 'buildpro'),
+        'selectPhoto'     => __('Select photo', 'buildpro'),
+        'removePhoto'     => __('Remove photo', 'buildpro'),
+        'noImageSelected' => __('No image selected', 'buildpro'),
+        'chooseImage'     => __('Choose Image', 'buildpro'),
+        'selectImage'     => __('Choose Image', 'buildpro'),
+        'useImage'        => __('Use Image', 'buildpro'),
+        'selectIconTitle' => __('Select photo', 'buildpro'),
+        'page'            => __('Page', 'buildpro'),
+        'post'            => __('Post', 'buildpro'),
+    );
+
+    wp_add_inline_script(
+        $handle,
+        'window.buildproFooterI18n = ' . wp_json_encode($i18n) . ';',
+        'before'
+    );
+}
 
 function buildpro_footer_customize_controls_enqueue()
 {
@@ -299,12 +331,14 @@ function buildpro_footer_customize_controls_enqueue()
         filemtime(get_theme_file_path('template/customize/footer/script.js')),
         true
     );
+
+    buildpro_footer_add_inline_i18n('buildpro-customize-script');
 }
 add_action('customize_controls_enqueue_scripts', 'buildpro_footer_customize_controls_enqueue');
 
 function buildpro_footer_admin_menu()
 {
-    add_theme_page('Footer', 'Footer', 'edit_theme_options', 'buildpro-footer', 'buildpro_footer_admin_page');
+    add_theme_page(__('Footer', 'buildpro'), __('Footer', 'buildpro'), 'edit_theme_options', 'buildpro-footer', 'buildpro_footer_admin_page');
 }
 add_action('admin_menu', 'buildpro_footer_admin_menu');
 
@@ -330,6 +364,8 @@ function buildpro_footer_admin_enqueue($hook)
         filemtime(get_theme_file_path('template/customize/footer/script.js')),
         true
     );
+
+    buildpro_footer_add_inline_i18n('buildpro-customize-script');
 }
 add_action('admin_enqueue_scripts', 'buildpro_footer_admin_enqueue');
 
@@ -360,7 +396,7 @@ function buildpro_footer_admin_page()
 function buildpro_handle_footer_save()
 {
     if (!current_user_can('edit_theme_options')) {
-        wp_die('Not allowed');
+        wp_die(esc_html__('Not allowed', 'buildpro'));
     }
     check_admin_referer('buildpro_footer_save');
     $banner_image_id = isset($_POST['footer_banner_image_id']) ? absint($_POST['footer_banner_image_id']) : 0;

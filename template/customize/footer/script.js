@@ -4,6 +4,25 @@
    Customizer renders the control DOM.
    ============================================================ */
 (function () {
+  var footerI18n =
+    window.buildproFooterI18n &&
+    typeof window.buildproFooterI18n === "object" &&
+    window.buildproFooterI18n
+      ? window.buildproFooterI18n
+      : {};
+  function t(key, fallback) {
+    var val = footerI18n ? footerI18n[key] : null;
+    return typeof val === "string" && val ? val : fallback;
+  }
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   /* ── helpers ─────────────────────────────────────────────── */
   function getListWrap() {
     return document.getElementById("customizer-footer-list-pages-wrapper");
@@ -130,14 +149,28 @@
         var div = document.createElement("div");
         div.className = "buildpro-block";
         div.innerHTML =
-          '<p class="buildpro-field"><label>Link URL</label>' +
+          '<p class="buildpro-field"><label>' +
+          escHtml(t("linkUrl", "Link URL")) +
+          "</label>" +
           '<input type="url" class="regular-text" data-field="url" value="" placeholder="https://..."> ' +
-          '<button type="button" class="button choose-link">Choose link</button></p>' +
-          '<p class="buildpro-field"><label>Link Title</label>' +
+          '<button type="button" class="button choose-link">' +
+          escHtml(t("chooseLink", "Choose Link")) +
+          "</button></p>" +
+          '<p class="buildpro-field"><label>' +
+          escHtml(t("linkTitle", "Link Title")) +
+          "</label>" +
           '<input type="text" class="regular-text" data-field="title" value=""></p>' +
-          '<p class="buildpro-field"><label>Link Target</label>' +
-          '<select data-field="target"><option value="">Same Tab</option><option value="_blank">Open New Tab</option></select></p>' +
-          '<div class="buildpro-actions"><button type="button" class="button remove-row">Remove Item</button></div>';
+          '<p class="buildpro-field"><label>' +
+          escHtml(t("linkTarget", "Link Target")) +
+          "</label>" +
+          '<select data-field="target"><option value="">' +
+          escHtml(t("sameTab", "Same Tab")) +
+          '</option><option value="_blank">' +
+          escHtml(t("openInNewTab", "Open in new tab")) +
+          "</option></select></p>" +
+          '<div class="buildpro-actions"><button type="button" class="button remove-row">' +
+          escHtml(t("remove", "Remove")) +
+          "</button></div>";
         wrap.appendChild(div);
         collectListPages();
         return;
@@ -151,19 +184,41 @@
         var div = document.createElement("div");
         div.className = "buildpro-block";
         div.innerHTML =
-          '<p class="buildpro-field"><label>Icon</label>' +
+          '<p class="buildpro-field"><label>' +
+          escHtml(t("icon", "Icon")) +
+          "</label>" +
           '<input type="hidden" class="regular-text" data-field="icon_id" value="0"> ' +
-          '<button type="button" class="button select-contact-icon">Selected photo</button> ' +
-          '<button type="button" class="button remove-contact-icon">Remove photo</button></p>' +
-          '<div class="image-preview contact-icon-preview"><span style="color:#888">No Image Selected</span></div>' +
-          '<p class="buildpro-field"><label>Link URL</label>' +
+          '<button type="button" class="button select-contact-icon">' +
+          escHtml(t("selectPhoto", "Select photo")) +
+          "</button> " +
+          '<button type="button" class="button remove-contact-icon">' +
+          escHtml(t("removePhoto", "Remove photo")) +
+          "</button></p>" +
+          '<div class="image-preview contact-icon-preview"><span style="color:#888">' +
+          escHtml(t("noImageSelected", "No image selected")) +
+          "</span></div>" +
+          '<p class="buildpro-field"><label>' +
+          escHtml(t("linkUrl", "Link URL")) +
+          "</label>" +
           '<input type="url" class="regular-text" data-field="url" value="" placeholder="https://..."> ' +
-          '<button type="button" class="button choose-link">Choose link</button></p>' +
-          '<p class="buildpro-field"><label>Link Title</label>' +
+          '<button type="button" class="button choose-link">' +
+          escHtml(t("chooseLink", "Choose Link")) +
+          "</button></p>" +
+          '<p class="buildpro-field"><label>' +
+          escHtml(t("linkTitle", "Link Title")) +
+          "</label>" +
           '<input type="text" class="regular-text" data-field="title" value=""></p>' +
-          '<p class="buildpro-field"><label>Link Target</label>' +
-          '<select data-field="target"><option value="">Same Tab</option><option value="_blank">Open New Tab</option></select></p>' +
-          '<div class="buildpro-actions"><button type="button" class="button remove-row">Remove Item</button></div>';
+          '<p class="buildpro-field"><label>' +
+          escHtml(t("linkTarget", "Link Target")) +
+          "</label>" +
+          '<select data-field="target"><option value="">' +
+          escHtml(t("sameTab", "Same Tab")) +
+          '</option><option value="_blank">' +
+          escHtml(t("openInNewTab", "Open in new tab")) +
+          "</option></select></p>" +
+          '<div class="buildpro-actions"><button type="button" class="button remove-row">' +
+          escHtml(t("remove", "Remove")) +
+          "</button></div>";
         wrap.appendChild(div);
         collectContactLinks();
         return;
@@ -213,7 +268,7 @@
         if (!window.wp || typeof window.wp.media !== "function") return;
         if (!row._iconFrame) {
           row._iconFrame = wp.media({
-            title: "Select Icon",
+            title: t("selectIconTitle", "Select Icon"),
             multiple: false,
             library: { type: "image" },
           });
@@ -233,7 +288,9 @@
                 "";
               preview.innerHTML = imgUrl
                 ? '<img src="' + imgUrl + '" style="max-height:80px;">'
-                : '<span style="color:#888">No Image Selected</span>';
+                : '<span style="color:#888">' +
+                  escHtml(t("noImageSelected", "No image selected")) +
+                  "</span>";
             }
             collectContactLinks();
           });
@@ -257,7 +314,9 @@
         }
         if (preview) {
           preview.innerHTML =
-            '<span style="color:#888">No Image Selected</span>';
+            '<span style="color:#888">' +
+            escHtml(t("noImageSelected", "No image selected")) +
+            "</span>";
         }
         collectContactLinks();
       }
@@ -267,6 +326,25 @@
 })();
 
 (function (wp) {
+  var footerI18n =
+    window.buildproFooterI18n &&
+    typeof window.buildproFooterI18n === "object" &&
+    window.buildproFooterI18n
+      ? window.buildproFooterI18n
+      : {};
+  function t(key, fallback) {
+    var val = footerI18n ? footerI18n[key] : null;
+    return typeof val === "string" && val ? val : fallback;
+  }
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   /* Admin page only — skip when inside WP Customizer */
   if (window.wp && window.wp.customize) return;
   (function () {
@@ -307,8 +385,8 @@
           }
           if (!frame) {
             frame = window.wp.media({
-              title: "Choose image",
-              button: { text: "Use image" },
+              title: t("chooseImage", "Choose image"),
+              button: { text: t("useImage", "Use image") },
               multiple: false,
             });
             frame.on("select", function () {
@@ -340,7 +418,9 @@
           if (input) input.value = "";
           if (preview)
             preview.innerHTML =
-              "<span style='color:#888'>No image selected</span>";
+              "<span style='color:#888'>" +
+              escHtml(t("noImageSelected", "No image selected")) +
+              "</span>";
         });
       }
     }
@@ -431,7 +511,7 @@
             title:
               it.title && it.title.rendered
                 ? it.title.rendered
-                : it.slug || "Page",
+                : it.slug || t("page", "Page"),
             url: it.link,
             type: "PAGE",
             date: new Date(it.date),
@@ -442,7 +522,7 @@
             title:
               it.title && it.title.rendered
                 ? it.title.rendered
-                : it.slug || "Post",
+                : it.slug || t("post", "Post"),
             url: it.link,
             type: "POST",
             date: new Date(it.date),
@@ -465,7 +545,7 @@
                   title:
                     it.title && it.title.rendered
                       ? it.title.rendered
-                      : it.slug || "Page",
+                      : it.slug || t("page", "Page"),
                   url: it.link,
                   type: "PAGE",
                 };
@@ -482,7 +562,7 @@
                   title:
                     it.title && it.title.rendered
                       ? it.title.rendered
-                      : it.slug || "Post",
+                      : it.slug || t("post", "Post"),
                   url: it.link,
                   type: "POST",
                 };
@@ -597,8 +677,8 @@
           if (!window.wp || typeof window.wp.media !== "function") return;
           if (!iconFrame) {
             iconFrame = window.wp.media({
-              title: "Select Image",
-              button: { text: "Use Image" },
+              title: t("selectImage", "Select Image"),
+              button: { text: t("useImage", "Use Image") },
               multiple: false,
             });
             iconFrame.on("select", function () {
@@ -626,7 +706,9 @@
           if (iconInput) iconInput.value = "";
           if (iconPreview)
             iconPreview.innerHTML =
-              "<span style='color:#888'>No Image Selected</span>";
+              "<span style='color:#888'>" +
+              escHtml(t("noImageSelected", "No image selected")) +
+              "</span>";
         });
       }
     }
@@ -651,16 +733,30 @@
           "<div class='buildpro-block' data-index='" +
           idx +
           "'>" +
-          "  <p class='buildpro-field'><label>Link URL</label><input type='url' name='footer_list_pages[" +
+          "  <p class='buildpro-field'><label>" +
+          escHtml(t("linkUrl", "Link URL")) +
+          "</label><input type='url' name='footer_list_pages[" +
           idx +
-          "][url]' class='regular-text' value='' placeholder='https://...'> <button type='button' class='button choose-link'>Choose Link</button></p>" +
-          "  <p class='buildpro-field'><label>Link Title</label><input type='text' name='footer_list_pages[" +
+          "][url]' class='regular-text' value='' placeholder='https://...'> <button type='button' class='button choose-link'>" +
+          escHtml(t("chooseLink", "Choose Link")) +
+          "</button></p>" +
+          "  <p class='buildpro-field'><label>" +
+          escHtml(t("linkTitle", "Link Title")) +
+          "</label><input type='text' name='footer_list_pages[" +
           idx +
           "][title]' class='regular-text' value=''></p>" +
-          "  <p class='buildpro-field'><label>Link Target</label><select name='footer_list_pages[" +
+          "  <p class='buildpro-field'><label>" +
+          escHtml(t("linkTarget", "Link Target")) +
+          "</label><select name='footer_list_pages[" +
           idx +
-          "][target]'><option value=''>Same Tab</option><option value='_blank'>Open New Tab</option></select></p>" +
-          "  <div class='buildpro-actions'><button type='button' class='button remove-row'>Remove Item</button></div>" +
+          "][target]'><option value=''>" +
+          escHtml(t("sameTab", "Same Tab")) +
+          "</option><option value='_blank'>" +
+          escHtml(t("openInNewTab", "Open in new tab")) +
+          "</option></select></p>" +
+          "  <div class='buildpro-actions'><button type='button' class='button remove-row'>" +
+          escHtml(t("remove", "Remove")) +
+          "</button></div>" +
           "</div>";
         var temp = document.createElement("div");
         temp.innerHTML = html;
@@ -680,20 +776,42 @@
           "<div class='buildpro-block' data-index='" +
           idx +
           "'>" +
-          "  <p class='buildpro-field'><label>Icon</label><input type='hidden' name='footer_contact_links[" +
+          "  <p class='buildpro-field'><label>" +
+          escHtml(t("icon", "Icon")) +
+          "</label><input type='hidden' name='footer_contact_links[" +
           idx +
-          "][icon_id]' value=''> <button type='button' class='button select-contact-icon'>Selected photo</button> <button type='button' class='button remove-contact-icon'>Remove photo</button></p>" +
-          "  <div class='image-preview contact-icon-preview'><span style='color:#888'>No Image Selected</span></div>" +
-          "  <p class='buildpro-field'><label>Link URL</label><input type='url' name='footer_contact_links[" +
+          "][icon_id]' value=''> <button type='button' class='button select-contact-icon'>" +
+          escHtml(t("selectPhoto", "Select photo")) +
+          "</button> <button type='button' class='button remove-contact-icon'>" +
+          escHtml(t("removePhoto", "Remove photo")) +
+          "</button></p>" +
+          "  <div class='image-preview contact-icon-preview'><span style='color:#888'>" +
+          escHtml(t("noImageSelected", "No image selected")) +
+          "</span></div>" +
+          "  <p class='buildpro-field'><label>" +
+          escHtml(t("linkUrl", "Link URL")) +
+          "</label><input type='url' name='footer_contact_links[" +
           idx +
-          "][url]' class='regular-text' value='' placeholder='https://...'> <button type='button' class='button choose-link'>Choose Link</button></p>" +
-          "  <p class='buildpro-field'><label>Link Title</label><input type='text' name='footer_contact_links[" +
+          "][url]' class='regular-text' value='' placeholder='https://...'> <button type='button' class='button choose-link'>" +
+          escHtml(t("chooseLink", "Choose Link")) +
+          "</button></p>" +
+          "  <p class='buildpro-field'><label>" +
+          escHtml(t("linkTitle", "Link Title")) +
+          "</label><input type='text' name='footer_contact_links[" +
           idx +
           "][title]' class='regular-text' value=''></p>" +
-          "  <p class='buildpro-field'><label>Link Target</label><select name='footer_contact_links[" +
+          "  <p class='buildpro-field'><label>" +
+          escHtml(t("linkTarget", "Link Target")) +
+          "</label><select name='footer_contact_links[" +
           idx +
-          "][target]'><option value=''>Same Tab</option><option value='_blank'>Open New Tab</option></select></p>" +
-          "  <div class='buildpro-actions'><button type='button' class='button remove-row'>Remove Item</button></div>" +
+          "][target]'><option value=''>" +
+          escHtml(t("sameTab", "Same Tab")) +
+          "</option><option value='_blank'>" +
+          escHtml(t("openInNewTab", "Open in new tab")) +
+          "</option></select></p>" +
+          "  <div class='buildpro-actions'><button type='button' class='button remove-row'>" +
+          escHtml(t("remove", "Remove")) +
+          "</button></div>" +
           "</div>";
         var temp = document.createElement("div");
         temp.innerHTML = html;

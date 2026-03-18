@@ -256,6 +256,10 @@ function buildpro_about_policy_customize_register($wp_customize)
             null,
             true
         );
+
+        if (function_exists('buildpro_about_us_add_inline_i18n')) {
+            buildpro_about_us_add_inline_i18n('buildpro-about-policy-script');
+        }
         $default_about = 0;
         $pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'about-page.php', 'number' => 1));
         if (!empty($pages)) {

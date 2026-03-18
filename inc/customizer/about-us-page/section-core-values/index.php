@@ -62,10 +62,10 @@ if (!function_exists('buildpro_about_core_values_customize_register')) {
                         echo '<p class="description">' . esc_html($this->description) . '</p>';
                     }
                     if (empty($this->button_url)) {
-                        echo '<p>' . esc_html__('Không tìm thấy trang About Us dùng template about-page.php', 'buildpro') . '</p>';
+                        echo '<p>' . esc_html__('Could not find an About Us page using template about-us-page.php or about-page.php.', 'buildpro') . '</p>';
                         return;
                     }
-                    $text = $this->button_text ? $this->button_text : __('Mở trang chỉnh sửa', 'buildpro');
+                    $text = $this->button_text ? $this->button_text : __('Open edit page', 'buildpro');
                     echo '<a class="button button-primary" href="' . esc_url($this->button_url) . '" target="_blank" rel="noopener">' . esc_html($text) . '</a>';
                 }
             }
@@ -151,7 +151,7 @@ if (!function_exists('buildpro_about_core_values_customize_register')) {
         if (class_exists('BuildPro_Customize_Button_Control')) {
             $wp_customize->add_control(new BuildPro_Customize_Button_Control($wp_customize, 'buildpro_about_core_values_edit_link', array(
                 'label' => __('Edit About Us Page', 'buildpro'),
-                'description' => __('Mở trang About Us để chỉnh sửa meta box.', 'buildpro'),
+                'description' => __('Open the About Us page to edit meta box.', 'buildpro'),
                 'section' => 'buildpro_about_core_values_section',
                 'button_url' => $edit_url,
                 'button_text' => __('Edit About Us', 'buildpro'),
@@ -227,7 +227,7 @@ if (!function_exists('buildpro_about_core_values_customize_register')) {
         if (class_exists('BuildPro_About_CoreValues_Repeater_Control')) {
             $wp_customize->add_control(new BuildPro_About_CoreValues_Repeater_Control($wp_customize, 'buildpro_about_core_values_items', array(
                 'label' => __('Core Values Items', 'buildpro'),
-                'description' => __('Quản lý danh sách icon/title/description/url.', 'buildpro'),
+                'description' => __('Manage core values items (icon, title, description, URL).', 'buildpro'),
                 'section' => 'buildpro_about_core_values_section',
             )));
         }
@@ -256,6 +256,10 @@ if (!function_exists('buildpro_about_core_values_customize_register')) {
                 null,
                 true
             );
+
+            if (function_exists('buildpro_about_us_add_inline_i18n')) {
+                buildpro_about_us_add_inline_i18n('buildpro-about-core-values-script');
+            }
             $default_about = 0;
             $pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'about-page.php', 'number' => 1));
             if (!empty($pages)) {

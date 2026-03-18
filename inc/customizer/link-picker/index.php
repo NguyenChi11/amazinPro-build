@@ -20,7 +20,7 @@ if (!class_exists('BuildPro_Customize_Button_Control') && class_exists('WP_Custo
         {
             if (empty($this->button_url)) {
                 echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
-                echo '<p>' . esc_html__('Không tìm thấy trang Trang chủ dùng template home-page.php', 'buildpro') . '</p>';
+                echo '<p>' . esc_html__('Could not find a Home page using template home-page.php.', 'buildpro') . '</p>';
                 return;
             }
 
@@ -31,7 +31,7 @@ if (!class_exists('BuildPro_Customize_Button_Control') && class_exists('WP_Custo
 
             $text = $this->button_text
                 ? $this->button_text
-                : __('Mở trang chỉnh sửa', 'buildpro');
+                : __('Open edit page', 'buildpro');
 
             echo '<a class="button button-primary" href="' . esc_url($this->button_url) . '" target="_blank" rel="noopener">'
                 . esc_html($text)
@@ -99,6 +99,17 @@ function buildpro_link_picker_enqueue_assets()
         array('customize-controls'),
         null,
         true
+    );
+
+    $i18n = array(
+        'noResults' => __('No results found.', 'buildpro'),
+        'select' => __('Select', 'buildpro'),
+        'loading' => __('Loading...', 'buildpro'),
+    );
+    wp_add_inline_script(
+        'buildpro-link-picker-script',
+        'window.buildproLinkPickerI18n = ' . wp_json_encode($i18n) . ';',
+        'before'
     );
 }
 add_action('customize_controls_enqueue_scripts', 'buildpro_link_picker_enqueue_assets');

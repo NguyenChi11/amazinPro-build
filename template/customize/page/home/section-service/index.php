@@ -20,57 +20,57 @@
     ?>
         <div class="buildpro-services-row" data-index="<?php echo esc_attr($index); ?>">
             <div class="buildpro-services-header">
-                <span class="buildpro-services-label"><?php echo $title ? esc_html($title) : 'Item ' . ($index + 1); ?></span>
+                <span class="buildpro-services-label"><?php echo $title ? esc_html($title) : sprintf(esc_html__('Item %d', 'buildpro'), $index + 1); ?></span>
                 <span class="buildpro-services-arrow">&#9660;</span>
             </div>
             <div class="buildpro-services-body" style="display:none">
                 <div class="buildpro-services-grid">
                     <div class="buildpro-services-block">
-                        <h4>Icon</h4>
+                        <h4><?php echo esc_html__('Icon', 'buildpro'); ?></h4>
                         <div class="buildpro-services-field">
                             <input type="hidden" class="services-icon-id" data-field="icon_id"
                                 value="<?php echo esc_attr($icon_id); ?>">
-                            <button type="button" class="button select-services-icon">Select icon</button>
-                            <button type="button" class="button remove-services-icon">Remove icon</button>
+                            <button type="button" class="button select-services-icon"><?php echo esc_html__('Select icon', 'buildpro'); ?></button>
+                            <button type="button" class="button remove-services-icon"><?php echo esc_html__('Remove icon', 'buildpro'); ?></button>
                         </div>
                         <div class="services-icon-preview">
-                            <?php echo $thumb ? '<img src="' . esc_url($thumb) . '" style="max-height:80px;">' : '<span style="color:#888">Chưa chọn icon</span>'; ?>
+                            <?php echo $thumb ? '<img src="' . esc_url($thumb) . '" style="max-height:80px;">' : '<span style="color:#888">' . esc_html__('No icon selected', 'buildpro') . '</span>'; ?>
                         </div>
                     </div>
                     <div class="buildpro-services-block">
-                        <h4>Content</h4>
+                        <h4><?php echo esc_html__('Content', 'buildpro'); ?></h4>
                         <p class="buildpro-services-field">
-                            <label>Title</label>
+                            <label><?php echo esc_html__('Title', 'buildpro'); ?></label>
                             <input type="text" class="regular-text" data-field="title" value="<?php echo esc_attr($title); ?>">
                         </p>
                         <p class="buildpro-services-field">
-                            <label>Description</label>
+                            <label><?php echo esc_html__('Description', 'buildpro'); ?></label>
                             <textarea rows="4" class="large-text"
                                 data-field="description"><?php echo esc_textarea($desc); ?></textarea>
                         </p>
-                        <h4>Link</h4>
+                        <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
                         <p class="buildpro-services-field">
-                            <label>Link URL</label>
+                            <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
                             <input type="url" class="regular-text" data-field="link_url"
                                 value="<?php echo esc_attr($link_url); ?>" placeholder="https://...">
-                            <button type="button" class="button choose-link">Choose link</button>
+                            <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                         </p>
                         <p class="buildpro-services-field">
-                            <label>Link Title</label>
+                            <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
                             <input type="text" class="regular-text" data-field="link_title"
-                                value="<?php echo esc_attr($link_title); ?>" placeholder="View Details">
+                                value="<?php echo esc_attr($link_title); ?>" placeholder="<?php echo esc_attr__('View Details', 'buildpro'); ?>">
                         </p>
                         <p class="buildpro-services-field">
-                            <label>Link Target</label>
+                            <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
                             <select class="regular-select" data-field="link_target">
-                                <option value="" <?php selected($link_target, '', true); ?>>Default</option>
-                                <option value="_blank" <?php selected($link_target, '_blank', true); ?>>Open in new tab</option>
+                                <option value="" <?php selected($link_target, '', true); ?>><?php echo esc_html__('Default', 'buildpro'); ?></option>
+                                <option value="_blank" <?php selected($link_target, '_blank', true); ?>><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
                             </select>
                         </p>
                     </div>
                 </div>
                 <div class="buildpro-services-actions">
-                    <button type="button" class="button remove-services-row">Remove item</button>
+                    <button type="button" class="button remove-services-row"><?php echo esc_html__('Remove item', 'buildpro'); ?></button>
                 </div>
             </div><!-- /.buildpro-services-body -->
         </div>
@@ -79,5 +79,5 @@
     }
     ?>
     <span id="buildpro_service_enabled_state" style="align-self:center;color:#374151"></span>
-    <button type="button" class="button button-primary" id="buildpro-services-add">Add item</button>
+    <button type="button" class="button button-primary" id="buildpro-services-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>
 </div>

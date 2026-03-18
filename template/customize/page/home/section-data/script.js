@@ -1,4 +1,13 @@
 (function () {
+  var i18n = window.buildproHomeI18n || {};
+  function t(key, fallback) {
+    return i18n && i18n[key] ? i18n[key] : fallback;
+  }
+  function formatItem(n) {
+    var fmt = t("itemFormat", "Item %d");
+    return String(fmt).replace(/%d/, String(n));
+  }
+
   function init() {
     var hidden = document.getElementById("buildpro-data-data");
     var wrapper = document.getElementById("buildpro-data-wrapper");
@@ -73,23 +82,33 @@
         idx +
         '">' +
         '  <div class="buildpro-data-header">' +
-        '    <span class="buildpro-data-label">Item ' +
-        (idx + 1) +
+        '    <span class="buildpro-data-label">' +
+        formatItem(idx + 1) +
         "</span>" +
         '    <span class="buildpro-data-arrow">&#9660;</span>' +
         "  </div>" +
         '  <div class="buildpro-data-body" style="display:block">' +
         '    <div class="buildpro-data-grid">' +
         '      <div class="buildpro-data-block">' +
-        "        <h4>Number</h4>" +
-        '        <p class="buildpro-data-field"><label>Number</label><input type="text" class="regular-text" data-field="number" value=""></p>' +
+        "        <h4>" +
+        t("number", "Number") +
+        "</h4>" +
+        '        <p class="buildpro-data-field"><label>' +
+        t("number", "Number") +
+        '</label><input type="text" class="regular-text" data-field="number" value=""></p>' +
         "      </div>" +
         '      <div class="buildpro-data-block">' +
-        "        <h4>Text</h4>" +
-        '        <p class="buildpro-data-field"><label>Text</label><input type="text" class="regular-text" data-field="text" value=""></p>' +
+        "        <h4>" +
+        t("text", "Text") +
+        "</h4>" +
+        '        <p class="buildpro-data-field"><label>' +
+        t("text", "Text") +
+        '</label><input type="text" class="regular-text" data-field="text" value=""></p>' +
         "      </div>" +
         "    </div>" +
-        '    <div class="buildpro-data-actions"><button type="button" class="button remove-data-row">Delete item</button></div>' +
+        '    <div class="buildpro-data-actions"><button type="button" class="button remove-data-row">' +
+        t("removeItem", "Remove item") +
+        "</button></div>" +
         "  </div>" +
         "</div>";
       var temp = document.createElement("div");

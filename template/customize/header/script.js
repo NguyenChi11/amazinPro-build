@@ -1,6 +1,17 @@
 (function (wp) {
   if (typeof window === "undefined") return;
 
+  var headerI18n =
+    window.buildproHeaderI18n &&
+    typeof window.buildproHeaderI18n === "object" &&
+    window.buildproHeaderI18n
+      ? window.buildproHeaderI18n
+      : {};
+  function t(key, fallback) {
+    var val = headerI18n ? headerI18n[key] : null;
+    return typeof val === "string" && val ? val : fallback;
+  }
+
   var selectBtn = document.getElementById("select_header_logo");
   var removeBtn = document.getElementById("remove_header_logo");
   var input = document.getElementById("header_logo");
@@ -15,8 +26,8 @@
         return;
       }
       frame = wp.media({
-        title: "Select Header Logo",
-        button: { text: "Use Image" },
+        title: t("mediaTitle", "Select Header Logo"),
+        button: { text: t("useImage", "Use Image") },
         multiple: false,
       });
       frame.on("select", function () {

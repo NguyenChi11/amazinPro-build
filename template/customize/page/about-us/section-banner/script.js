@@ -1,4 +1,26 @@
 (function ($, api) {
+  var I18N = (window && window.buildproAboutUsI18n) || {};
+  function t(key, fallback) {
+    var v = I18N && typeof I18N[key] === "string" ? I18N[key] : "";
+    return v || fallback || "";
+  }
+  function sprintf(template) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    var i = 0;
+    return String(template).replace(/%[sd]/g, function () {
+      var val = args[i++];
+      return val === undefined || val === null ? "" : String(val);
+    });
+  }
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   function init(container) {
     var $root = $(container);
     var $list = $root.find(".buildpro-about-facts-list");
@@ -7,8 +29,17 @@
     var MAX = 4;
     var $limitNote = $root.find(".buildpro-about-facts-limit");
     if ($limitNote.length === 0) {
+      var limitText = sprintf(
+        t(
+          "limitNote",
+          "Only up to %d items will be saved; extra items will not be saved.",
+        ),
+        MAX,
+      );
       $limitNote = $(
-        '<p class="description buildpro-about-facts-limit" style="display:none">Chỉ lưu tối đa 4 mục; mục vượt quá sẽ không được lưu.</p>',
+        '<p class="description buildpro-about-facts-limit" style="display:none">' +
+          escHtml(limitText) +
+          "</p>",
       );
       $limitNote.insertBefore($addBtn.closest("p"));
     }
@@ -57,9 +88,10 @@
       updateAddState(items.length);
       items.forEach(function (it, idx) {
         var $item = $('<div class="buildpro-about-fact"></div>');
+        var itemFallback = sprintf(t("itemLabel", "Item %d"), idx + 1);
         var $factHeader = $(
           '<div class="fact-accordion-header"><span class="fact-accordion-label">' +
-            (it.label || "Item " + (idx + 1)) +
+            escHtml(it.label || itemFallback) +
             '</span><span class="fact-accordion-arrow">&#9660;</span></div>',
         );
         var $factBody = $(
@@ -74,13 +106,19 @@
             .css("transform", isOpen ? "rotate(-90deg)" : "rotate(0deg)");
         });
         var $label = $(
-          '<p><label>Label<br><input type="text" class="widefat"></label></p>',
+          "<p><label>" +
+            escHtml(t("label", "Label")) +
+            '<br><input type="text" class="widefat"></label></p>',
         );
         var $value = $(
-          '<p><label>Value<br><input type="text" class="widefat"></label></p>',
+          "<p><label>" +
+            escHtml(t("value", "Value")) +
+            '<br><input type="text" class="widefat"></label></p>',
         );
         var $remove = $(
-          '<p><button type="button" class="button remove-fact">Remove</button></p>',
+          '<p><button type="button" class="button remove-fact">' +
+            escHtml(t("remove", "Remove")) +
+            "</button></p>",
         );
         $label.find("input").val(it.label || "");
         $value.find("input").val(it.value || "");

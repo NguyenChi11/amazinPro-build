@@ -1,13 +1,12 @@
 <div class="buildpro-link-popup">
-    <p class="buildpro-banner-field"><label>URL</label><input type="url" id="buildpro-link-url" class="regular-text"
+    <p class="buildpro-banner-field"><label><?php echo esc_html__('URL', 'buildpro'); ?></label><input type="url" id="buildpro-link-url" class="regular-text"
             placeholder="https://..."></p>
-    <p class="buildpro-banner-field"><label>Text</label><input type="text" id="buildpro-link-text" class="regular-text"
-            placeholder="Link text"></p>
-    <p class="buildpro-banner-field"><label><input type="checkbox" id="buildpro-link-target"> Open in new tab
-            (_blank)</label></p>
-    <h4>Or link to existing content</h4>
-    <p class="buildpro-banner-field"><label>Search</label><input type="text" id="buildpro-link-search"
-            class="regular-text" placeholder="Enter keyword..."></p>
+    <p class="buildpro-banner-field"><label><?php echo esc_html__('Text', 'buildpro'); ?></label><input type="text" id="buildpro-link-text" class="regular-text"
+            placeholder="<?php echo esc_attr__('Link text', 'buildpro'); ?>"></p>
+    <p class="buildpro-banner-field"><label><input type="checkbox" id="buildpro-link-target"> <?php echo esc_html__('Open in new tab (_blank)', 'buildpro'); ?></label></p>
+    <h4><?php echo esc_html__('Or link to existing content', 'buildpro'); ?></h4>
+    <p class="buildpro-banner-field"><label><?php echo esc_html__('Search', 'buildpro'); ?></label><input type="text" id="buildpro-link-search"
+            class="regular-text" placeholder="<?php echo esc_attr__('Enter keyword...', 'buildpro'); ?>"></p>
     <?php
     $__items = array();
     $__pages = get_pages(array('number' => 0));
@@ -49,13 +48,13 @@
                 $t = isset($__it['title']) ? $__it['title'] : '';
                 $u = isset($__it['url']) ? $__it['url'] : '';
                 $ty = isset($__it['type']) ? $__it['type'] : '';
-                echo '<div class="result"><div><div>' . esc_html($t) . ($ty ? '<span class="chip">' . esc_html(strtoupper($ty)) . '</span>' : '') . '</div><div class="meta">' . esc_html($u) . '</div></div><div><button type="button" class="button buildpro-link-pick" data-url="' . esc_url($u) . '" data-title="' . esc_attr($t) . '">Choose</button></div></div>';
+                echo '<div class="result"><div><div>' . esc_html($t) . ($ty ? '<span class="chip">' . esc_html(strtoupper($ty)) . '</span>' : '') . '</div><div class="meta">' . esc_html($u) . '</div></div><div><button type="button" class="button buildpro-link-pick" data-url="' . esc_url($u) . '" data-title="' . esc_attr($t) . '">' . esc_html__('Select', 'buildpro') . '</button></div></div>';
             }
         } else {
-            echo '<p style="color:#888;margin:6px">No results found</p>';
+            echo '<p style="color:#888;margin:6px">' . esc_html__('No results found.', 'buildpro') . '</p>';
         } ?>
     </div>
-    <div class="actions"><button type="button" class="button button-primary" id="buildpro-link-apply">Apply</button>
-        <button type="button" class="button" id="buildpro-link-close">Close</button>
+    <div class="actions"><button type="button" class="button button-primary" id="buildpro-link-apply"><?php echo esc_html__('Apply', 'buildpro'); ?></button>
+        <button type="button" class="button" id="buildpro-link-close"><?php echo esc_html__('Close', 'buildpro'); ?></button>
     </div>
 </div>

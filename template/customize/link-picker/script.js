@@ -1,4 +1,25 @@
 (function () {
+  var buildproLinkPickerI18n =
+    window.buildproLinkPickerI18n &&
+    typeof window.buildproLinkPickerI18n === "object" &&
+    window.buildproLinkPickerI18n
+      ? window.buildproLinkPickerI18n
+      : {};
+
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function t(key, fallback) {
+    var val = buildproLinkPickerI18n ? buildproLinkPickerI18n[key] : null;
+    return typeof val === "string" && val ? val : fallback;
+  }
+
   /* ── helpers ───────────────────────────────────────────────── */
   function normalizeTitle(t) {
     if (!t) return "";
@@ -57,7 +78,9 @@
     if (!results) return;
     if (!items || !items.length) {
       results.innerHTML =
-        "<p style='color:#8c8f94;padding:10px'>No results found.</p>";
+        "<p style='color:#8c8f94;padding:10px'>" +
+        escHtml(t("noResults", "No results found.")) +
+        "</p>";
       return;
     }
     results.innerHTML = items
@@ -86,7 +109,7 @@
           ' data-title="' +
           title.replace(/"/g, "&quot;") +
           '">' +
-          "Select" +
+          escHtml(t("select", "Select")) +
           "</button>" +
           "</div>"
         );
@@ -98,7 +121,9 @@
   function loadDefault(results) {
     if (results) {
       results.innerHTML =
-        "<p style='color:#8c8f94;padding:10px'>Loading\u2026</p>";
+        "<p style='color:#8c8f94;padding:10px'>" +
+        escHtml(t("loading", "Loading...")) +
+        "</p>";
     }
     Promise.all([
       fetchAll("/wp-json/wp/v2/pages?_fields=title,link").then(function (l) {

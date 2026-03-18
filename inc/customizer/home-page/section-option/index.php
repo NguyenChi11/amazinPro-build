@@ -190,6 +190,10 @@ function buildpro_option_enqueue_assets()
         null,
         true
     );
+
+    if (function_exists('buildpro_home_add_inline_i18n')) {
+        buildpro_home_add_inline_i18n('buildpro-option-script');
+    }
 }
 add_action('customize_controls_enqueue_scripts', 'buildpro_option_enqueue_assets');
 function buildpro_option_sync_customizer_to_meta()

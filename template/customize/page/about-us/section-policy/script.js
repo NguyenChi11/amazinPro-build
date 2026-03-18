@@ -1,5 +1,27 @@
 /* global jQuery */
 (function ($) {
+  var I18N = (window && window.buildproAboutUsI18n) || {};
+  function t(key, fallback) {
+    var v = I18N && typeof I18N[key] === "string" ? I18N[key] : "";
+    return v || fallback || "";
+  }
+  function sprintf(template) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    var i = 0;
+    return String(template).replace(/%[sd]/g, function () {
+      var val = args[i++];
+      return val === undefined || val === null ? "" : String(val);
+    });
+  }
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   function init(el) {
     var wrap = el.find(".buildpro-about-policy-repeater");
     if (!wrap.length) return;
@@ -92,15 +114,24 @@
         return;
       }
       if (!items || items.length === 0) {
+        var addText = t("addItem", "Add Item");
         list.append(
-          '<p class="description">No items. Click "Add Item" to add.</p>',
+          '<p class="description">' +
+            escHtml(
+              sprintf(
+                t("noItemsHelp", 'No items. Click "%s" to add.'),
+                addText,
+              ),
+            ) +
+            "</p>",
         );
       }
       items.forEach(function (it, idx) {
         var row = $('<div class="policy-item-row"/>');
+        var itemFallback = sprintf(t("itemLabel", "Item %d"), idx + 1);
         var policyHeader = $(
           '<div class="policy-accordion-header"><span class="policy-accordion-label">' +
-            (it.title || "Item " + (idx + 1)) +
+            escHtml(it.title || itemFallback) +
             '</span><span class="policy-accordion-arrow">&#9660;</span></div>',
         );
         var policyBody = $(
@@ -122,7 +153,9 @@
             ? '<img src="' +
               previewUrl +
               '" style="max-width:2.75rem;height:auto;border-radius:0.625rem;border:1px solid #e5e7eb;" />'
-            : '<div class="policy-image-empty">No image</div>') +
+            : '<div class="policy-image-empty">' +
+              escHtml(t("noImageSelected", "No image selected")) +
+              "</div>") +
           "</div>";
         var idVal = type === "certs" ? it.image_id || 0 : it.icon_id || 0;
         var imgControls =
@@ -130,31 +163,45 @@
           '<input type="hidden" class="policy-image-id" value="' +
           idVal +
           '">' +
-          '<button type="button" class="button button-secondary policy-select-image">Select Image</button> ' +
-          '<button type="button" class="button policy-remove-image">Remove</button>' +
+          '<button type="button" class="button button-secondary policy-select-image">' +
+          escHtml(t("chooseImage", "Choose Image")) +
+          "</button> " +
+          '<button type="button" class="button policy-remove-image">' +
+          escHtml(t("remove", "Remove")) +
+          "</button>" +
           "</div>";
-        policyBody.append("<p><label>Image</label></p>");
+        policyBody.append(
+          "<p><label>" + escHtml(t("image", "Image")) + "</label></p>",
+        );
         policyBody.append(preview);
         policyBody.append(imgControls);
         if (type === "certs") {
           policyBody.append(
-            '<p><label>URL<br><input type="text" class="widefat policy-url" value="' +
+            "<p><label>" +
+              escHtml(t("url", "URL")) +
+              '<br><input type="text" class="widefat policy-url" value="' +
               (it.url || "") +
               '"></label></p>',
           );
         }
         policyBody.append(
-          '<p><label>Title<br><input type="text" class="widefat policy-title" value="' +
+          "<p><label>" +
+            escHtml(t("title", "Title")) +
+            '<br><input type="text" class="widefat policy-title" value="' +
             (it.title || "") +
             '"></label></p>',
         );
         policyBody.append(
-          '<p><label>Description<br><textarea class="widefat policy-desc" rows="3">' +
+          "<p><label>" +
+            escHtml(t("description", "Description")) +
+            '<br><textarea class="widefat policy-desc" rows="3">' +
             (it.desc || "") +
             "</textarea></label></p>",
         );
         policyBody.append(
-          '<p><button type="button" class="button remove-policy-row">Remove</button></p>',
+          '<p><button type="button" class="button remove-policy-row">' +
+            escHtml(t("remove", "Remove")) +
+            "</button></p>",
         );
         row.on("click", ".policy-select-image", function (e) {
           e.preventDefault();
@@ -162,8 +209,8 @@
             frame.off("select");
           }
           frame = wp.media({
-            title: "Select Image",
-            button: { text: "Use image" },
+            title: t("chooseImage", "Choose Image"),
+            button: { text: t("useImage", "Use image") },
             multiple: false,
           });
           frame.on("select", function () {

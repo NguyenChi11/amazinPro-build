@@ -26,29 +26,29 @@ if (isset($buildpro_control_type) && $buildpro_control_type === 'footer-list-pag
         ?>
             <div class="buildpro-block" data-index="<?= esc_attr($index) ?>">
                 <p class="buildpro-field">
-                    <label>Link URL</label>
+                    <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
                     <input type="url" class="regular-text" data-field="url" value="<?= esc_attr($lp_url) ?>" placeholder="https://...">
-                    <button type="button" class="button choose-link">Choose link</button>
+                    <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                 </p>
                 <p class="buildpro-field">
-                    <label>Link Title</label>
+                    <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
                     <input type="text" class="regular-text" data-field="title" value="<?= esc_attr($lp_title) ?>">
                 </p>
                 <p class="buildpro-field">
-                    <label>Link Target</label>
+                    <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
                     <select data-field="target">
-                        <option value="" <?= selected($lp_target, '', false) ?>>Same Tab</option>
-                        <option value="_blank" <?= selected($lp_target, '_blank', false) ?>>Open New Tab</option>
+                        <option value="" <?= selected($lp_target, '', false) ?>><?php echo esc_html__('Same Tab', 'buildpro'); ?></option>
+                        <option value="_blank" <?= selected($lp_target, '_blank', false) ?>><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
                     </select>
                 </p>
                 <div class="buildpro-actions">
-                    <button type="button" class="button remove-row">Remove Item</button>
+                    <button type="button" class="button remove-row"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
                 </div>
             </div>
         <?php $index++;
         endforeach; ?>
     </div>
-    <button type="button" class="button button-primary" id="customizer-footer-list-pages-add">Add item</button>
+    <button type="button" class="button button-primary" id="customizer-footer-list-pages-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>
 
 <?php elseif (isset($buildpro_control_type) && $buildpro_control_type === 'footer-contact-links') : ?>
     <span class="customize-control-title"><?= esc_html($label) ?></span>
@@ -67,37 +67,37 @@ if (isset($buildpro_control_type) && $buildpro_control_type === 'footer-list-pag
         ?>
             <div class="buildpro-block" data-index="<?= esc_attr($index) ?>">
                 <p class="buildpro-field">
-                    <label>Icon</label>
+                    <label><?php echo esc_html__('Icon', 'buildpro'); ?></label>
                     <input type="hidden" class="regular-text" data-field="icon_id" value="<?= esc_attr($cl_icon_id) ?>">
-                    <button type="button" class="button select-contact-icon">Selected photo</button>
-                    <button type="button" class="button remove-contact-icon">Remove photo</button>
+                    <button type="button" class="button select-contact-icon"><?php echo esc_html__('Select photo', 'buildpro'); ?></button>
+                    <button type="button" class="button remove-contact-icon"><?php echo esc_html__('Remove photo', 'buildpro'); ?></button>
                 </p>
                 <div class="image-preview contact-icon-preview">
-                    <?= $cl_thumb ? '<img src="' . esc_url($cl_thumb) . '" style="max-height:80px;">' : '<span style="color:#888">No Image Selected</span>' ?>
+                    <?= $cl_thumb ? '<img src="' . esc_url($cl_thumb) . '" style="max-height:80px;">' : '<span style="color:#888">' . esc_html__('No image selected', 'buildpro') . '</span>' ?>
                 </div>
                 <p class="buildpro-field">
-                    <label>Link URL</label>
+                    <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
                     <input type="url" class="regular-text" data-field="url" value="<?= esc_attr($cl_url) ?>" placeholder="https://...">
-                    <button type="button" class="button choose-link">Choose link</button>
+                    <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                 </p>
                 <p class="buildpro-field">
-                    <label>Link Title</label>
+                    <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
                     <input type="text" class="regular-text" data-field="title" value="<?= esc_attr($cl_title) ?>">
                 </p>
                 <p class="buildpro-field">
-                    <label>Link Target</label>
+                    <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
                     <select data-field="target">
-                        <option value="" <?= selected($cl_target, '', false) ?>>Same Tab</option>
-                        <option value="_blank" <?= selected($cl_target, '_blank', false) ?>>Open New Tab</option>
+                        <option value="" <?= selected($cl_target, '', false) ?>><?php echo esc_html__('Same Tab', 'buildpro'); ?></option>
+                        <option value="_blank" <?= selected($cl_target, '_blank', false) ?>><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
                     </select>
                 </p>
                 <div class="buildpro-actions">
-                    <button type="button" class="button remove-row">Remove Item</button>
+                    <button type="button" class="button remove-row"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
                 </div>
             </div>
         <?php $index++;
         endforeach; ?>
     </div>
-    <button type="button" class="button button-primary" id="customizer-footer-contact-links-add">Add item</button>
+    <button type="button" class="button button-primary" id="customizer-footer-contact-links-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>
 
 <?php endif; ?>

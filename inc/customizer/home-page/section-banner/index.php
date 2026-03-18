@@ -321,5 +321,9 @@ function buildpro_banner_enqueue_assets()
         null,
         true
     );
+
+    if (function_exists('buildpro_home_add_inline_i18n')) {
+        buildpro_home_add_inline_i18n('buildpro-banner-script');
+    }
 }
 add_action('customize_controls_enqueue_scripts', 'buildpro_banner_enqueue_assets');

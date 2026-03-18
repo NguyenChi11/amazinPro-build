@@ -76,7 +76,41 @@ function compile_mo(array $entries, string $mo_file): int
     return $n;
 }
 
-$po = $argv[1];
-$mo = $argv[2];
-$n = compile_mo(parse_po(file_get_contents($po)), $mo);
-echo "OK: $n strings -> $mo\n";
+function compile_po_to_mo(string $po, string $mo): void
+{
+    $n = compile_mo(parse_po(file_get_contents($po)), $mo);
+    echo "OK: $n strings -> $mo\n";
+}
+
+// Usage:
+// - php compile-mo.php <input.po> <output.mo>
+// - php compile-mo.php            (compile all buildpro-*.po in this folder)
+if ($argc >= 3) {
+    $po = (string) $argv[1];
+    $mo = (string) $argv[2];
+    if ($po === '' || $mo === '') {
+        fwrite(STDERR, "ERR: Missing input/output path.\n");
+        exit(1);
+    }
+    compile_po_to_mo($po, $mo);
+    exit(0);
+}
+
+$dir = __DIR__;
+$poFiles = glob($dir . DIRECTORY_SEPARATOR . 'buildpro-*.po') ?: [];
+$poFiles = array_values(array_filter($poFiles, static function ($path) {
+    return is_string($path) && $path !== '' && stripos(basename($path), '.po') !== false;
+}));
+
+if (empty($poFiles)) {
+    fwrite(STDERR, "ERR: No buildpro-*.po files found in $dir\n");
+    exit(1);
+}
+
+foreach ($poFiles as $po) {
+    $mo = preg_replace('/\.po$/i', '.mo', $po);
+    if (!is_string($mo) || $mo === '') {
+        continue;
+    }
+    compile_po_to_mo($po, $mo);
+}

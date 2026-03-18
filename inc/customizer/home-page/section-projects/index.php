@@ -29,14 +29,14 @@ if (!function_exists('buildpro_portfolio_customize_register')) {
                 {
                     if (empty($this->button_url)) {
                         echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
-                        echo '<p>' . esc_html__('Không tìm thấy trang Trang chủ dùng template home-page.php', 'buildpro') . '</p>';
+                        echo '<p>' . esc_html__('Could not find a Home page using template home-page.php.', 'buildpro') . '</p>';
                         return;
                     }
                     echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
                     if (!empty($this->description)) {
                         echo '<p class="description">' . esc_html($this->description) . '</p>';
                     }
-                    $text = $this->button_text ? $this->button_text : __('Mở trang chỉnh sửa', 'buildpro');
+                    $text = $this->button_text ? $this->button_text : __('Open edit page', 'buildpro');
                     echo '<a class="button button-primary" href="' . esc_url($this->button_url) . '" target="_blank" rel="noopener">' . esc_html($text) . '</a>';
                 }
             }
@@ -159,6 +159,10 @@ if (!function_exists('buildpro_portfolio_enqueue_assets')) {
             null,
             true
         );
+
+        if (function_exists('buildpro_home_add_inline_i18n')) {
+            buildpro_home_add_inline_i18n('buildpro-portfolio-script');
+        }
     }
 } // end if !function_exists buildpro_portfolio_enqueue_assets
 add_action('customize_controls_enqueue_scripts', 'buildpro_portfolio_enqueue_assets');

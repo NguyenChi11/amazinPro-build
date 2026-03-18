@@ -20,11 +20,32 @@ add_filter('determine_locale', 'buildpro_determine_locale', 10, 1);
 /**
  * Reload theme translations when locale changes at runtime.
  */
+function buildpro_load_textdomain_precise(string $domain, string $lang_dir, ?string $locale = null): void
+{
+    load_theme_textdomain($domain, $lang_dir);
+
+    $locale = $locale ?: (function_exists('determine_locale') ? determine_locale() : get_locale());
+    $mofile = trailingslashit($lang_dir) . $domain . '-' . $locale . '.mo';
+
+    if (!file_exists($mofile) && strpos($locale, '_') !== false) {
+        $base = strtok($locale, '_');
+        $fallback = trailingslashit($lang_dir) . $domain . '-' . $base . '.mo';
+        if (file_exists($fallback)) {
+            $mofile = $fallback;
+        }
+    }
+
+    if (file_exists($mofile)) {
+        load_textdomain($domain, $mofile);
+    }
+}
+
 function buildpro_reload_textdomain_on_change_locale($locale)
 {
     $domain = 'buildpro';
+    $lang_dir = trailingslashit(get_template_directory()) . 'languages';
     unload_textdomain($domain);
-    load_theme_textdomain($domain, trailingslashit(get_template_directory()) . 'languages');
+    buildpro_load_textdomain_precise($domain, $lang_dir, (string) $locale);
 }
 add_action('change_locale', 'buildpro_reload_textdomain_on_change_locale', 10, 1);
 
@@ -33,22 +54,9 @@ function buildpro_setup()
     $domain = 'buildpro';
     $lang_dir = trailingslashit(get_template_directory()) . 'languages';
 
-    load_theme_textdomain($domain, $lang_dir);
-
     // Ensure the theme's own /languages MO takes precedence over any global
     // wp-content/languages/themes copy.
-    $locale = function_exists('determine_locale') ? determine_locale() : get_locale();
-    $mofile = trailingslashit($lang_dir) . $domain . '-' . $locale . '.mo';
-    if (!file_exists($mofile) && strpos($locale, '_') !== false) {
-        $base = strtok($locale, '_');
-        $fallback = trailingslashit($lang_dir) . $domain . '-' . $base . '.mo';
-        if (file_exists($fallback)) {
-            $mofile = $fallback;
-        }
-    }
-    if (file_exists($mofile)) {
-        load_textdomain($domain, $mofile);
-    }
+    buildpro_load_textdomain_precise($domain, $lang_dir);
 
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');

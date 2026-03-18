@@ -188,7 +188,7 @@ if (!function_exists('buildpro_services_customize_register')) {
             'sanitize_callback' => 'absint',
         ));
         $wp_customize->add_control('buildpro_service_enabled', array(
-            'label' => __('Hiển thị Section Services', 'buildpro'),
+            'label' => __('Enable Services', 'buildpro'),
             'section' => 'buildpro_services_section',
             'type' => 'checkbox',
         ));
@@ -288,6 +288,10 @@ if (!function_exists('buildpro_services_enqueue_assets')) {
             null,
             true
         );
+
+        if (function_exists('buildpro_home_add_inline_i18n')) {
+            buildpro_home_add_inline_i18n('buildpro-services-script');
+        }
     }
 } // end if !function_exists buildpro_services_enqueue_assets
 add_action('customize_controls_enqueue_scripts', 'buildpro_services_enqueue_assets');

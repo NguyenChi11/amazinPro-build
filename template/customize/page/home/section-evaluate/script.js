@@ -1,4 +1,13 @@
 (function () {
+  var i18n = window.buildproHomeI18n || {};
+  function t(key, fallback) {
+    return i18n && i18n[key] ? i18n[key] : fallback;
+  }
+  function formatItem(n) {
+    var fmt = t("itemFormat", "Item %d");
+    return String(fmt).replace(/%d/, String(n));
+  }
+
   function collectItems(itemsWrap) {
     var out = [];
     var rows = itemsWrap
@@ -69,8 +78,8 @@
         e.preventDefault();
         if (!wp || !wp.media) return;
         var frame = wp.media({
-          title: "Select a photo",
-          button: { text: "Use this photo" },
+          title: t("selectPhoto", "Select photo"),
+          button: { text: t("useThisPhoto", "Use this photo") },
           multiple: false,
           library: { type: "image" },
         });
@@ -90,7 +99,9 @@
         e.preventDefault();
         input.value = "";
         prev.innerHTML =
-          '<span style="color:#888">No photo selected yet</span>';
+          '<span style="color:#888">' +
+          t("noPhotoSelectedYet", "No photo selected yet") +
+          "</span>";
         write(document.getElementById("buildpro-evaluate-wrapper"));
       });
     }
@@ -147,22 +158,38 @@
           '<div class="buildpro-evaluate-row" data-index="' +
           idx +
           '">' +
-          '<div class="buildpro-evaluate-row-header"><span class="buildpro-evaluate-row-label">Item ' +
-          (idx + 1) +
+          '<div class="buildpro-evaluate-row-header"><span class="buildpro-evaluate-row-label">' +
+          formatItem(idx + 1) +
           '</span><span class="buildpro-evaluate-row-arrow">&#9660;</span></div>' +
           '<div class="buildpro-evaluate-row-body" style="display:block">' +
           '<div class="buildpro-evaluate-grid">' +
           '<div class="buildpro-evaluate-col">' +
-          '<p class="buildpro-evaluate-field"><label>Avatar</label><input type="hidden" class="evaluate-avatar-id" value=""> <button type="button" class="button evaluate-select-avatar">Select photo</button> <button type="button" class="button evaluate-remove-avatar">Remove photo</button></p>' +
-          '<div class="evaluate-avatar-preview"><span style="color:#888">Chưa chọn ảnh</span></div>' +
+          '<p class="buildpro-evaluate-field"><label>' +
+          t("avatar", "Avatar") +
+          '</label><input type="hidden" class="evaluate-avatar-id" value=""> <button type="button" class="button evaluate-select-avatar">' +
+          t("selectPhoto", "Select photo") +
+          '</button> <button type="button" class="button evaluate-remove-avatar">' +
+          t("removePhoto", "Remove photo") +
+          "</button></p>" +
+          '<div class="evaluate-avatar-preview"><span style="color:#888">' +
+          t("noPhotoSelectedYet", "No photo selected yet") +
+          "</span></div>" +
           "</div>" +
           '<div class="buildpro-evaluate-col">' +
-          '<p class="buildpro-evaluate-field"><label>Name</label><input type="text" class="regular-text" data-item="name" value=""></p>' +
-          '<p class="buildpro-evaluate-field"><label>Position</label><input type="text" class="regular-text" data-item="position" value=""></p>' +
-          '<p class="buildpro-evaluate-field"><label>Description</label><textarea rows="4" class="large-text" data-item="description"></textarea></p>' +
+          '<p class="buildpro-evaluate-field"><label>' +
+          t("name", "Name") +
+          '</label><input type="text" class="regular-text" data-item="name" value=""></p>' +
+          '<p class="buildpro-evaluate-field"><label>' +
+          t("position", "Position") +
+          '</label><input type="text" class="regular-text" data-item="position" value=""></p>' +
+          '<p class="buildpro-evaluate-field"><label>' +
+          t("description", "Description") +
+          '</label><textarea rows="4" class="large-text" data-item="description"></textarea></p>' +
           "</div>" +
           "</div>" +
-          '<div class="buildpro-evaluate-actions"><button type="button" class="button evaluate-remove-row">Xóa</button></div>' +
+          '<div class="buildpro-evaluate-actions"><button type="button" class="button evaluate-remove-row">' +
+          t("remove", "Remove") +
+          "</button></div>" +
           "</div>" +
           "</div>";
         var temp = document.createElement("div");

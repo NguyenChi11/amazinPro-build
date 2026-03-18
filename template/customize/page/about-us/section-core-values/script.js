@@ -1,5 +1,27 @@
 /* global jQuery */
 (function ($) {
+  var I18N = (window && window.buildproAboutUsI18n) || {};
+  function t(key, fallback) {
+    var v = I18N && typeof I18N[key] === "string" ? I18N[key] : "";
+    return v || fallback || "";
+  }
+  function sprintf(template) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    var i = 0;
+    return String(template).replace(/%[sd]/g, function () {
+      var val = args[i++];
+      return val === undefined || val === null ? "" : String(val);
+    });
+  }
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   function init(el) {
     var wrap = el.find(".buildpro-about-core-values-repeater");
     if (!wrap.length) return;
@@ -87,9 +109,10 @@
       list.empty();
       items.forEach(function (it, idx) {
         var row = $('<div class="core-value-item"/>');
+        var itemFallback = sprintf(t("itemLabel", "Item %d"), idx + 1);
         var cvHeader = $(
           '<div class="cv-accordion-header"><span class="cv-accordion-label">' +
-            (it.title || "Item " + (idx + 1)) +
+            escHtml(it.title || itemFallback) +
             '</span><span class="cv-accordion-arrow">&#9660;</span></div>',
         );
         var cvBody = $(
@@ -110,7 +133,9 @@
               ? '<img src="' +
                 previewUrl +
                 '" style="max-width:2.75rem;height:auto;border-radius:0.625rem;border:1px solid #e5e7eb;" />'
-              : '<div class="cv-icon-empty">No image</div>') +
+              : '<div class="cv-icon-empty">' +
+                escHtml(t("noImageSelected", "No image selected")) +
+                "</div>") +
             "</div>",
         );
         var imgControls =
@@ -118,29 +143,43 @@
           '<input type="hidden" class="cv-icon-id" value="' +
           (it.icon_id || 0) +
           '">' +
-          '<button type="button" class="button button-secondary cv-select-icon">Select Image</button> ' +
-          '<button type="button" class="button cv-remove-icon">Remove</button>' +
+          '<button type="button" class="button button-secondary cv-select-icon">' +
+          escHtml(t("chooseImage", "Choose Image")) +
+          "</button> " +
+          '<button type="button" class="button cv-remove-icon">' +
+          escHtml(t("remove", "Remove")) +
+          "</button>" +
           "</div>";
-        cvBody.append("<p><label>Icon Image</label></p>");
+        cvBody.append(
+          "<p><label>" + escHtml(t("iconImage", "Icon Image")) + "</label></p>",
+        );
         cvBody.append(preview);
         cvBody.append(imgControls);
         cvBody.append(
-          '<p><label>Title<br><input type="text" class="widefat cv-title" value="' +
+          "<p><label>" +
+            escHtml(t("title", "Title")) +
+            '<br><input type="text" class="widefat cv-title" value="' +
             (it.title || "") +
             '"></label></p>',
         );
         cvBody.append(
-          '<p><label>Description<br><textarea class="widefat cv-desc" rows="3">' +
+          "<p><label>" +
+            escHtml(t("description", "Description")) +
+            '<br><textarea class="widefat cv-desc" rows="3">' +
             (it.description || "") +
             "</textarea></label></p>",
         );
         cvBody.append(
-          '<p><label>URL<br><input type="text" class="widefat cv-url" value="' +
+          "<p><label>" +
+            escHtml(t("url", "URL")) +
+            '<br><input type="text" class="widefat cv-url" value="' +
             (it.url || "") +
             '"></label></p>',
         );
         cvBody.append(
-          '<p><button type="button" class="button remove-core-value">Remove</button></p>',
+          '<p><button type="button" class="button remove-core-value">' +
+            escHtml(t("remove", "Remove")) +
+            "</button></p>",
         );
         row.on("click", ".cv-select-icon", function (e) {
           e.preventDefault();
@@ -148,8 +187,8 @@
             frame.off("select");
           }
           frame = wp.media({
-            title: "Select Image",
-            button: { text: "Use image" },
+            title: t("chooseImage", "Choose Image"),
+            button: { text: t("useImage", "Use image") },
             multiple: false,
           });
           frame.on("select", function () {
@@ -247,7 +286,11 @@
           ) {
             wrap.data("buildpro-cv-fetching", true);
             var $list = wrap.find(".buildpro-about-core-values-list");
-            $list.html('<p style="color:#888">Đang tải dữ liệu...</p>');
+            $list.html(
+              '<p style="color:#888">' +
+                escHtml(t("loading", "Loading...")) +
+                "</p>",
+            );
             $.ajax({
               url: BuildProAboutCoreValues.ajax_url,
               method: "POST",

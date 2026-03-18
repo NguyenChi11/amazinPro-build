@@ -29,14 +29,14 @@ if (!function_exists('buildpro_projects_title_customize_register')) {
                 {
                     if (empty($this->button_url)) {
                         echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
-                        echo '<p>' . esc_html__('Không tìm thấy trang dùng template projects-page.php', 'buildpro') . '</p>';
+                        echo '<p>' . esc_html__('Could not find a Projects page using template projects-page.php.', 'buildpro') . '</p>';
                         return;
                     }
                     echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
                     if (!empty($this->description)) {
                         echo '<p class="description">' . esc_html($this->description) . '</p>';
                     }
-                    $text = $this->button_text ? $this->button_text : __('Mở trang chỉnh sửa', 'buildpro');
+                    $text = $this->button_text ? $this->button_text : __('Open edit page', 'buildpro');
                     echo '<a class="button button-primary" href="' . esc_url($this->button_url) . '" target="_blank" rel="noopener">' . esc_html($text) . '</a>';
                 }
             }

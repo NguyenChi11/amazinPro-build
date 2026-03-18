@@ -1,4 +1,13 @@
 (function () {
+  var i18n = window.buildproHomeI18n || {};
+  function t(key, fallback) {
+    return i18n && i18n[key] ? i18n[key] : fallback;
+  }
+  function formatItem(n) {
+    var fmt = t("itemFormat", "Item %d");
+    return String(fmt).replace(/%d/, String(n));
+  }
+
   function init() {
     var hidden = document.getElementById("buildpro-banner-data");
     var wrapper = document.getElementById("buildpro-banner-wrapper");
@@ -109,7 +118,9 @@
         if (!resultsBox) return;
         if (!items || !items.length) {
           resultsBox.innerHTML =
-            "<p style='color:#888;margin:6px'>No results found</p>";
+            "<p style='color:#888;margin:6px'>" +
+            t("noResultsFound", "No results found.") +
+            "</p>";
           return;
         }
         var html = items
@@ -213,8 +224,8 @@
           e.preventDefault();
           if (!frame) {
             frame = wp.media({
-              title: "Select image",
-              button: { text: "Use image" },
+              title: t("selectImage", "Select image"),
+              button: { text: t("useImage", "Use Image") },
               multiple: false,
             });
           }
@@ -239,7 +250,10 @@
         removeImgBtn.addEventListener("click", function (e) {
           e.preventDefault();
           input.value = "";
-          preview.innerHTML = "";
+          preview.innerHTML =
+            "<span style='color:#888'>" +
+            t("noImageSelected", "No image selected") +
+            "</span>";
           write();
         });
       }
@@ -273,8 +287,9 @@
       var tmpl = document.getElementById("buildpro-banner-template");
       var row = tmpl.content.cloneNode(true).firstElementChild;
       row.setAttribute("data-index", idx);
-      row.querySelector(".buildpro-banner-label").textContent =
-        "Item " + (idx + 1);
+      row.querySelector(".buildpro-banner-label").textContent = formatItem(
+        idx + 1,
+      );
       wrapper.appendChild(row);
       bindRow(row, true);
       write();

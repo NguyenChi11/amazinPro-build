@@ -1,4 +1,13 @@
 (function () {
+  var i18n = window.buildproHomeI18n || {};
+  function t(key, fallback) {
+    return i18n && i18n[key] ? i18n[key] : fallback;
+  }
+  function formatItem(n) {
+    var fmt = t("itemFormat", "Item %d");
+    return String(fmt).replace(/%d/, String(n));
+  }
+
   function init() {
     var hidden = document.getElementById("buildpro-services-data");
     var wrapper = document.getElementById("buildpro-services-wrapper");
@@ -119,8 +128,8 @@
           e.preventDefault();
           if (!frame) {
             frame = wp.media({
-              title: "Chọn icon",
-              button: { text: "Sử dụng" },
+              title: t("selectIcon", "Select icon"),
+              button: { text: t("use", "Use") },
               multiple: false,
               library: { type: "image" },
             });
@@ -146,7 +155,10 @@
         removeIconBtn.addEventListener("click", function (e) {
           e.preventDefault();
           input.value = "";
-          preview.innerHTML = "<span style='color:#888'>Chưa chọn icon</span>";
+          preview.innerHTML =
+            "<span style='color:#888'>" +
+            t("noIconSelected", "No icon selected") +
+            "</span>";
           write();
         });
       }
@@ -169,31 +181,61 @@
         '<div class="buildpro-services-row" data-index="' +
         idx +
         '">' +
-        '  <div class="buildpro-services-header"><span class="buildpro-services-label">Item ' +
-        (idx + 1) +
+        '  <div class="buildpro-services-header"><span class="buildpro-services-label">' +
+        formatItem(idx + 1) +
         '</span><span class="buildpro-services-arrow">&#9660;</span></div>' +
         '  <div class="buildpro-services-body" style="display:block">' +
         '  <div class="buildpro-services-grid">' +
         '    <div class="buildpro-services-block">' +
-        "      <h4>Icon</h4>" +
+        "      <h4>" +
+        t("icon", "Icon") +
+        "</h4>" +
         '      <div class="buildpro-services-field">' +
         '        <input type="hidden" class="services-icon-id" data-field="icon_id" value="">' +
-        '        <button type="button" class="button select-services-icon">Chọn icon</button>' +
-        '        <button type="button" class="button remove-services-icon">Xóa icon</button>' +
+        '        <button type="button" class="button select-services-icon">' +
+        t("selectIcon", "Select icon") +
+        "</button>" +
+        '        <button type="button" class="button remove-services-icon">' +
+        t("removeIcon", "Remove icon") +
+        "</button>" +
         "      </div>" +
-        '      <div class="services-icon-preview"><span style="color:#888">Chưa chọn icon</span></div>' +
+        '      <div class="services-icon-preview"><span style="color:#888">' +
+        t("noIconSelected", "No icon selected") +
+        "</span></div>" +
         "    </div>" +
         '    <div class="buildpro-services-block">' +
-        "      <h4>Nội dung</h4>" +
-        '      <p class="buildpro-services-field"><label>Title</label><input type="text" class="regular-text" data-field="title" value=""></p>' +
-        '      <p class="buildpro-services-field"><label>Description</label><textarea rows="4" class="large-text" data-field="description"></textarea></p>' +
-        "      <h4>Liên kết</h4>" +
-        '      <p class="buildpro-services-field"><label>Link URL</label><input type="url" class="regular-text" data-field="link_url" value="" placeholder="https://..."> <button type="button" class="button choose-link">Chọn link</button></p>' +
-        '      <p class="buildpro-services-field"><label>Link Title</label><input type="text" class="regular-text" data-field="link_title" value=""></p>' +
-        '      <p class="buildpro-services-field"><label>Link Target</label><select data-field="link_target"><option value="">Mặc định</option><option value="_blank">Mở tab mới</option></select></p>' +
+        "      <h4>" +
+        t("content", "Content") +
+        "</h4>" +
+        '      <p class="buildpro-services-field"><label>' +
+        t("title", "Title") +
+        '</label><input type="text" class="regular-text" data-field="title" value=""></p>' +
+        '      <p class="buildpro-services-field"><label>' +
+        t("description", "Description") +
+        '</label><textarea rows="4" class="large-text" data-field="description"></textarea></p>' +
+        "      <h4>" +
+        t("link", "Link") +
+        "</h4>" +
+        '      <p class="buildpro-services-field"><label>' +
+        t("linkUrl", "Link URL") +
+        '</label><input type="url" class="regular-text" data-field="link_url" value="" placeholder="https://..."> <button type="button" class="button choose-link">' +
+        t("chooseLink", "Choose Link") +
+        "</button></p>" +
+        '      <p class="buildpro-services-field"><label>' +
+        t("linkTitle", "Link Title") +
+        '</label><input type="text" class="regular-text" data-field="link_title" value=""></p>' +
+        '      <p class="buildpro-services-field"><label>' +
+        t("linkTarget", "Link Target") +
+        '</label><select data-field="link_target"><option value="">' +
+        t("default", "Default") +
+        '</option><option value="_blank">' +
+        t("openInNewTab", "Open in new tab") +
+        "</option></select></p>" +
         "    </div>" +
         "  </div>" +
-        '  <div class="buildpro-services-actions"><button type="button" class="button remove-services-row">Xóa mục</button></div>' +
+        '  <div class="buildpro-services-actions"><button type="button" class="button remove-services-row">' +
+        t("removeItem", "Remove item") +
+        "</button></div>" +
         "  </div>" +
         "</div>";
       var temp = document.createElement("div");

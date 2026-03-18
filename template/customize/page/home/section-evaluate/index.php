@@ -11,17 +11,17 @@ $rows  = isset($data['items']) && is_array($data['items']) ? $data['items'] : $i
     value="<?php echo esc_attr(wp_json_encode(array('title' => $title, 'text' => $text, 'desc' => $desc, 'items' => $rows))); ?>">
 <div id="buildpro-evaluate-wrapper">
     <div class="buildpro-evaluate-block">
-        <h4>Evaluate Title</h4>
+        <h4><?php echo esc_html__('Evaluate Title', 'buildpro'); ?></h4>
         <p class="buildpro-evaluate-field">
-            <label>Title</label>
+            <label><?php echo esc_html__('Title', 'buildpro'); ?></label>
             <input type="text" class="regular-text" data-field="title" value="<?php echo esc_attr($title); ?>">
         </p>
         <p class="buildpro-evaluate-field">
-            <label>Text</label>
+            <label><?php echo esc_html__('Text', 'buildpro'); ?></label>
             <input type="text" class="regular-text" data-field="text" value="<?php echo esc_attr($text); ?>">
         </p>
         <p class="buildpro-evaluate-field">
-            <label>Description</label>
+            <label><?php echo esc_html__('Description', 'buildpro'); ?></label>
             <textarea rows="4" class="large-text" data-field="desc"><?php echo esc_textarea($desc); ?></textarea>
         </p>
     </div>
@@ -37,33 +37,33 @@ $rows  = isset($data['items']) && is_array($data['items']) ? $data['items'] : $i
         ?>
             <div class="buildpro-evaluate-row" data-index="<?php echo esc_attr($index); ?>">
                 <div class="buildpro-evaluate-row-header">
-                    <span class="buildpro-evaluate-row-label"><?php echo $name ? esc_html($name) : 'Item ' . ($index + 1); ?></span>
+                    <span class="buildpro-evaluate-row-label"><?php echo $name ? esc_html($name) : sprintf(esc_html__('Item %d', 'buildpro'), $index + 1); ?></span>
                     <span class="buildpro-evaluate-row-arrow">&#9660;</span>
                 </div>
                 <div class="buildpro-evaluate-row-body" style="display:none">
                     <div class="buildpro-evaluate-grid">
                         <div class="buildpro-evaluate-col">
                             <p class="buildpro-evaluate-field">
-                                <label>Avatar</label>
+                                <label><?php echo esc_html__('Avatar', 'buildpro'); ?></label>
                                 <input type="hidden" class="evaluate-avatar-id" value="<?php echo esc_attr($avatar_id); ?>">
-                                <button type="button" class="button evaluate-select-avatar">Chọn ảnh</button>
-                                <button type="button" class="button evaluate-remove-avatar">Xóa ảnh</button>
+                                <button type="button" class="button evaluate-select-avatar"><?php echo esc_html__('Select photo', 'buildpro'); ?></button>
+                                <button type="button" class="button evaluate-remove-avatar"><?php echo esc_html__('Remove photo', 'buildpro'); ?></button>
                             </p>
                             <div class="evaluate-avatar-preview">
-                                <?php echo $thumb ? '<img src="' . esc_url($thumb) . '" style="max-height:112px">' : '<span style="color:#888">No photo selected yet</span>'; ?>
+                                <?php echo $thumb ? '<img src="' . esc_url($thumb) . '" style="max-height:112px">' : '<span style="color:#888">' . esc_html__('No photo selected yet', 'buildpro') . '</span>'; ?>
                             </div>
                         </div>
                         <div class="buildpro-evaluate-col">
-                            <p class="buildpro-evaluate-field"><label>Name</label><input type="text" class="regular-text"
-                                    data-item="name" value="<?php echo esc_attr($name); ?>" placeholder="Name"></p>
-                            <p class="buildpro-evaluate-field"><label>Position</label><input type="text" class="regular-text"
-                                    data-item="position" value="<?php echo esc_attr($position); ?>" placeholder="Position"></p>
-                            <p class="buildpro-evaluate-field"><label>Description</label><textarea rows="4" class="large-text"
+                            <p class="buildpro-evaluate-field"><label><?php echo esc_html__('Name', 'buildpro'); ?></label><input type="text" class="regular-text"
+                                    data-item="name" value="<?php echo esc_attr($name); ?>" placeholder="<?php echo esc_attr__('Name', 'buildpro'); ?>"></p>
+                            <p class="buildpro-evaluate-field"><label><?php echo esc_html__('Position', 'buildpro'); ?></label><input type="text" class="regular-text"
+                                    data-item="position" value="<?php echo esc_attr($position); ?>" placeholder="<?php echo esc_attr__('Position', 'buildpro'); ?>"></p>
+                            <p class="buildpro-evaluate-field"><label><?php echo esc_html__('Description', 'buildpro'); ?></label><textarea rows="4" class="large-text"
                                     data-item="description"
-                                    placeholder="Description"><?php echo esc_textarea($description); ?></textarea></p>
+                                    placeholder="<?php echo esc_attr__('Description', 'buildpro'); ?>"><?php echo esc_textarea($description); ?></textarea></p>
                         </div>
                     </div>
-                    <div class="buildpro-evaluate-actions"><button type="button" class="button evaluate-remove-row">Xóa</button>
+                    <div class="buildpro-evaluate-actions"><button type="button" class="button evaluate-remove-row"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
                     </div>
                 </div><!-- /.buildpro-evaluate-row-body -->
             </div>
@@ -71,9 +71,9 @@ $rows  = isset($data['items']) && is_array($data['items']) ? $data['items'] : $i
             $index++;
         }
         ?>
-        <button type="button" class="button" id="buildpro-evaluate-add">Add a row</button>
+        <button type="button" class="button" id="buildpro-evaluate-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>
     </div>
     <div class="buildpro-evaluate-actions"><button type="button" class="button button-primary"
-            id="buildpro-evaluate-apply">Apply</button></div>
-    <p class="description">Changes are previewed instantly. Click Publish to save.</p>
+            id="buildpro-evaluate-apply"><?php echo esc_html__('Apply', 'buildpro'); ?></button></div>
+    <p class="description"><?php echo esc_html__('Changes are previewed instantly. Click Publish to save.', 'buildpro'); ?></p>
 </div>

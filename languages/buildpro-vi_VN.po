@@ -769,6 +769,107 @@ msgstr "Tắt banner"
 msgid "Enable Banner"
 msgstr "Bật banner"
 
+# Home (Customizer)
+msgid "Home Page: Banner"
+msgstr "Trang chủ: Banner"
+
+msgid "Banner Items"
+msgstr "Danh sách banner"
+
+msgid "Add/Edit Banner items to display on the Front Page."
+msgstr "Thêm/Sửa các mục banner để hiển thị trên trang chủ."
+
+msgid "Show Navigation Buttons"
+msgstr "Hiển thị nút điều hướng"
+
+# Home (Customizer) - Other sections
+msgid "Home Page: Option"
+msgstr "Trang chủ: Tùy chọn"
+
+msgid "Enable Section Option"
+msgstr "Bật mục tùy chọn"
+
+msgid "Option Items"
+msgstr "Danh sách tùy chọn"
+
+msgid "Add/Edit Option items to display on the home page."
+msgstr "Thêm/Sửa các mục tùy chọn để hiển thị trên trang chủ."
+
+msgid "Home Page: Data"
+msgstr "Trang chủ: Dữ liệu"
+
+msgid "Enable Section Data"
+msgstr "Bật mục dữ liệu"
+
+msgid "Data Items"
+msgstr "Danh sách dữ liệu"
+
+msgid "Add/Edit Data items to display on the home page."
+msgstr "Thêm/Sửa các mục dữ liệu để hiển thị trên trang chủ."
+
+msgid "Home Page: Evaluate"
+msgstr "Trang chủ: Đánh giá"
+
+msgid "Enable Evaluate"
+msgstr "Bật đánh giá"
+
+msgid "Evaluate Content"
+msgstr "Nội dung đánh giá"
+
+msgid "Edit Evaluate section content for Front Page."
+msgstr "Chỉnh sửa nội dung phần đánh giá cho trang chủ."
+
+msgid "Home Page: Portfolio"
+msgstr "Trang chủ: Portfolio"
+
+msgid "Enable Portfolio"
+msgstr "Bật Portfolio"
+
+msgid "Portfolio Content"
+msgstr "Nội dung Portfolio"
+
+msgid "Edit Portfolio title and description for Front Page."
+msgstr "Chỉnh sửa tiêu đề và mô tả Portfolio cho trang chủ."
+
+msgid "Home Page: Services"
+msgstr "Trang chủ: Dịch vụ"
+
+msgid "Enable Services"
+msgstr "Bật dịch vụ"
+
+msgid "Services Title"
+msgstr "Tiêu đề dịch vụ"
+
+msgid "Services Description"
+msgstr "Mô tả dịch vụ"
+
+msgid "Services Items"
+msgstr "Danh sách dịch vụ"
+
+msgid "Add/Edit Services Items to display on the home page."
+msgstr "Thêm/Sửa các mục dịch vụ để hiển thị trên trang chủ."
+
+msgid "Home Page: Post"
+msgstr "Trang chủ: Bài viết"
+
+msgid "Post Section Content"
+msgstr "Nội dung mục bài viết"
+
+msgid "Edit Post section content for Front Page."
+msgstr "Chỉnh sửa nội dung mục bài viết cho trang chủ."
+
+msgid "Home Page: Product"
+msgstr "Trang chủ: Sản phẩm"
+
+msgid "Enable Product"
+msgstr "Bật sản phẩm"
+
+msgid "Materials Title"
+msgstr "Tiêu đề vật liệu"
+
+msgid "Materials Description"
+msgstr "Mô tả vật liệu"
+
 msgid "Banner Content"
 msgstr "Nội dung banner"
 
@@ -828,6 +929,22 @@ msgstr "Bật mục"
 
 msgid "No icon selected"
 msgstr "Chưa chọn biểu tượng"
+
+# Home (Customizer) — missing shared UI strings
+msgid "Select icon"
+msgstr "Chọn biểu tượng"
+
+msgid "Remove icon"
+msgstr "Xóa biểu tượng"
+
+msgid "Choose icon"
+msgstr "Chọn biểu tượng"
+
+msgid "Use"
+msgstr "Sử dụng"
+
+msgid "Remove item"
+msgstr "Xóa mục"
 
 msgid "Post Section Status"
 msgstr "Trạng thái mục bài viết"
@@ -1006,6 +1123,38 @@ msgstr "Trang dự án"
 msgid "Projects Title"
 msgstr "Tiêu đề dự án"
 
+# Projects Page (Customizer)
+msgid "Title Projects"
+msgstr "Tiêu đề trang Dự án"
+
+msgid "Edit the title and description of the Projects page."
+msgstr "Chỉnh sửa tiêu đề và mô tả của trang Dự án."
+
+msgid "Edit Projects Page"
+msgstr "Chỉnh sửa trang Dự án"
+
+msgid "Open the Projects page editor."
+msgstr "Mở trình chỉnh sửa trang Dự án."
+
+msgid "Could not find a Projects page using template projects-page.php."
+msgstr "Không tìm thấy trang Dự án dùng mẫu projects-page.php."
+
+msgid "Changes are displayed directly in the preview. Publish to save."
+msgstr "Thay đổi sẽ hiển thị trực tiếp ở phần xem trước. Nhấn Đăng để lưu."
+
+# Preview Page (Customizer)
+msgid "Preview Page"
+msgstr "Trang xem trước"
+
+msgid "Select the page to preview in the Customizer. The sidebar will update accordingly."
+msgstr "Chọn trang để xem trước trong Customizer. Thanh bên sẽ cập nhật tương ứng."
+
+msgid "Accept"
+msgstr "Xác nhận"
+
+msgid "— Select Preview Page —"
+msgstr "— Chọn trang xem trước —"
+
 msgid "Option"
 msgstr "Tùy chọn"
 
@@ -1026,3 +1175,202 @@ msgstr "Dự án"
 
 msgid "Post"
 msgstr "Bài viết"
+
+msgid "Link text"
+msgstr "Văn bản liên kết"
+
+msgid "Open in new tab (_blank)"
+msgstr "Mở trong tab mới (_blank)"
+
+msgid "Or link to existing content"
+msgstr "Hoặc liên kết tới nội dung có sẵn"
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
+msgid "Enter keyword..."
+msgstr "Nhập từ khóa..."
+
+msgid "Select"
+msgstr "Chọn"
+
+msgid "No results found."
+msgstr "Không tìm thấy kết quả."
+
+msgid "Apply"
+msgstr "Áp dụng"
+
+msgid "Loading..."
+msgstr "Đang tải..."
+
+msgid "Could not find a Home page using template home-page.php."
+msgstr "Không tìm thấy trang Home sử dụng mẫu home-page.php."
+
+msgid "Open edit page"
+msgstr "Mở trang chỉnh sửa"
+
+msgid "Link Picker"
+msgstr "Chọn liên kết"
+
+msgid "List of pages and posts to select as links."
+msgstr "Danh sách trang và bài viết để chọn làm liên kết."
+
+msgid "Header"
+msgstr "Đầu trang"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Select Header Logo"
+msgstr "Chọn logo đầu trang"
+
+msgid "Not allowed"
+msgstr "Không được phép"
+
+msgid "Footer"
+msgstr "Chân trang"
+
+msgid "Banner Background"
+msgstr "Nền banner"
+
+msgid "Contact Location"
+msgstr "Địa chỉ liên hệ"
+
+msgid "Contact Phone"
+msgstr "Số điện thoại liên hệ"
+
+msgid "Contact Email"
+msgstr "Email liên hệ"
+
+msgid "Contact Time"
+msgstr "Thời gian liên hệ"
+
+msgid "Footer Pages"
+msgstr "Liên kết chân trang"
+
+msgid "Add/Edit footer pages links."
+msgstr "Thêm/Sửa liên kết trang ở chân trang."
+
+msgid "Footer Contact Links"
+msgstr "Liên kết liên hệ chân trang"
+
+msgid "Add/Edit contact links with icons."
+msgstr "Thêm/Sửa liên kết liên hệ kèm biểu tượng."
+
+msgid "Create Build Text"
+msgstr "Văn bản Create Build"
+
+msgid "Policy Text"
+msgstr "Văn bản chính sách"
+
+msgid "Policy Link"
+msgstr "Liên kết chính sách"
+
+msgid "Store as JSON: url/title/target via control UI"
+msgstr "Lưu dạng JSON: url/title/target qua giao diện điều khiển"
+
+msgid "Servicer Text"
+msgstr "Văn bản dịch vụ"
+
+msgid "Servicer Link"
+msgstr "Liên kết dịch vụ"
+
+msgid "Information"
+msgstr "Thông tin"
+
+msgid "List Page"
+msgstr "Danh sách trang"
+
+msgid "Contact"
+msgstr "Liên hệ"
+
+msgid "Contact Link"
+msgstr "Liên kết liên hệ"
+
+msgid "Create Build"
+msgstr "Create Build"
+
+msgid "Policy"
+msgstr "Chính sách"
+
+msgid "Servicer"
+msgstr "Dịch vụ"
+
+msgid "Location"
+msgstr "Địa chỉ"
+
+msgid "Phone"
+msgstr "Điện thoại"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Time"
+msgstr "Thời gian"
+
+msgid "Source"
+msgstr "Nguồn"
+
+msgid "All"
+msgstr "Tất cả"
+
+msgid "Page"
+msgstr "Trang"
+
+msgid "Cancel"
+msgstr "Hủy"
+
+msgid "Icon"
+msgstr "Biểu tượng"
+
+# About Us (Customizer)
+msgid "Could not find an About Us page using template about-us-page.php or about-page.php."
+msgstr "Không tìm thấy trang About Us sử dụng mẫu about-us-page.php hoặc about-page.php."
+
+msgid "Open the About Us page to edit meta box."
+msgstr "Mở trang About Us để chỉnh sửa meta box."
+
+msgid "Manage label/value pairs displayed in About Us."
+msgstr "Quản lý các cặp nhãn/giá trị hiển thị ở About Us."
+
+msgid "Manage About Us facts (label & value). Use the buttons to add or remove items."
+msgstr "Quản lý các mục Facts (nhãn & giá trị) của About Us. Dùng nút để thêm hoặc xóa mục."
+
+msgid "Manage leader items (image, name, position, description, URL)."
+msgstr "Quản lý danh sách Leader (hình ảnh, tên, chức vụ, mô tả, URL)."
+
+msgid "Manage core values items (icon, title, description, URL)."
+msgstr "Quản lý danh sách Core Values (biểu tượng, tiêu đề, mô tả, URL)."
+
+msgid "Use the fields below in this section to update Contact information."
+msgstr "Sử dụng các trường bên dưới để cập nhật thông tin liên hệ."
+
+msgid "Only up to %d items will be saved; extra items will not be saved."
+msgstr "Chỉ lưu tối đa %d mục; các mục vượt quá sẽ không được lưu."
+
+msgid "No items. Click \"%s\" to add."
+msgstr "Chưa có mục nào. Nhấn \"%s\" để thêm."
+
+msgid "Item %d"
+msgstr "Mục %d"
+
+msgid "Evaluate Title"
+msgstr "Tiêu đề đánh giá"
+
+msgid "Portfolio Title"
+msgstr "Tiêu đề dự án"
+
+msgid "Post Section"
+msgstr "Mục bài viết"
+
+msgid "Configure the title and description of the Products section."
+msgstr "Cấu hình tiêu đề và mô tả của mục Sản phẩm."
+
+msgid "Changes will be displayed immediately in the Preview."
+msgstr "Thay đổi sẽ hiển thị ngay trong phần Xem trước."
+
+msgid "Click Publish to save to the home page."
+msgstr "Nhấn Xuất bản để lưu vào trang chủ."
+
+msgid "Changes are previewed instantly. Click Publish to save."
+msgstr "Thay đổi được xem trước ngay lập tức. Nhấn Xuất bản để lưu."

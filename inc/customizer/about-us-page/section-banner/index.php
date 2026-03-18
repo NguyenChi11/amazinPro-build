@@ -29,14 +29,14 @@ if (!function_exists('buildpro_about_banner_customize_register')) {
                 {
                     if (empty($this->button_url)) {
                         echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
-                        echo '<p>' . esc_html__('Không tìm thấy trang About Us dùng template about-page.php', 'buildpro') . '</p>';
+                        echo '<p>' . esc_html__('Could not find an About Us page using template about-us-page.php or about-page.php.', 'buildpro') . '</p>';
                         return;
                     }
                     echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
                     if (!empty($this->description)) {
                         echo '<p class="description">' . esc_html($this->description) . '</p>';
                     }
-                    $text = $this->button_text ? $this->button_text : __('Mở trang chỉnh sửa', 'buildpro');
+                    $text = $this->button_text ? $this->button_text : __('Open edit page', 'buildpro');
                     echo '<a class="button button-primary" href="' . esc_url($this->button_url) . '" target="_blank" rel="noopener">' . esc_html($text) . '</a>';
                 }
             }
@@ -113,7 +113,7 @@ if (!function_exists('buildpro_about_banner_customize_register')) {
         if (class_exists('BuildPro_Customize_Button_Control')) {
             $wp_customize->add_control(new BuildPro_Customize_Button_Control($wp_customize, 'buildpro_about_banner_edit_link', array(
                 'label' => __('Edit About Us Page', 'buildpro'),
-                'description' => __('Mở trang About Us để chỉnh sửa meta box.', 'buildpro'),
+                'description' => __('Open the About Us page to edit meta box.', 'buildpro'),
                 'section' => 'buildpro_about_banner_section',
                 'button_url' => $edit_url,
                 'button_text' => __('Edit About Us', 'buildpro'),
@@ -171,7 +171,7 @@ if (!function_exists('buildpro_about_banner_customize_register')) {
         if (class_exists('BuildPro_About_Facts_Repeater_Control')) {
             $wp_customize->add_control(new BuildPro_About_Facts_Repeater_Control($wp_customize, 'buildpro_about_banner_facts', array(
                 'label' => __('Facts', 'buildpro'),
-                'description' => __('Quản lý các cặp Label/Value hiển thị ở About Us.', 'buildpro'),
+                'description' => __('Manage label/value pairs displayed in About Us.', 'buildpro'),
                 'section' => 'buildpro_about_banner_section',
             )));
         }
@@ -221,6 +221,10 @@ if (!function_exists('buildpro_about_banner_customize_register')) {
                 null,
                 true
             );
+
+            if (function_exists('buildpro_about_us_add_inline_i18n')) {
+                buildpro_about_us_add_inline_i18n('buildpro-about-banner-facts-script');
+            }
             $default_about = 0;
             $pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'about-us-page.php', 'number' => 1));
             if (!empty($pages)) {

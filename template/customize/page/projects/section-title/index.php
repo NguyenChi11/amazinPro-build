@@ -8,13 +8,13 @@ $desc  = isset($data['description']) ? sanitize_textarea_field($data['descriptio
 <div id="buildpro-projects-title-wrapper">
     <div class="buildpro-projects-title-block">
         <p class="buildpro-projects-title-field">
-            <label>Title</label>
+            <label><?php esc_html_e('Title', 'buildpro'); ?></label>
             <input type="text" class="regular-text" data-field="title" value="<?php echo esc_attr($title); ?>">
         </p>
         <p class="buildpro-projects-title-field">
-            <label>Description</label>
+            <label><?php esc_html_e('Description', 'buildpro'); ?></label>
             <textarea rows="4" class="large-text" data-field="description"><?php echo esc_textarea($desc); ?></textarea>
         </p>
     </div>
-    <p class="description">Changes are displayed directly in the preview. Publish to save.</p>
+    <p class="description"><?php echo esc_html__('Changes are displayed directly in the preview. Publish to save.', 'buildpro'); ?></p>
 </div>
