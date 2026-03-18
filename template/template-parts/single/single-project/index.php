@@ -28,27 +28,27 @@ get_template_part('template/template-parts/breadcrums/index');
 ?>
 
 <article class="single-project-detail" id="project-<?php echo esc_attr($pid); ?>">
-    <header class="single-project__header">
+    <header class="single-project__header" data-aos="fade-up">
         <?php if (!empty($banner_url)) : ?>
-        <div class="single-project__banner">
-            <img src="<?php echo esc_url($banner_url); ?>" alt="<?php echo esc_attr(get_the_title($pid)); ?>">
-        </div>
+            <div class="single-project__banner">
+                <img src="<?php echo esc_url($banner_url); ?>" alt="<?php echo esc_attr(get_the_title($pid)); ?>">
+            </div>
         <?php endif; ?>
         <div class="single-project__title-container">
             <?php if (!empty($contruction_terms) && !is_wp_error($contruction_terms)) : ?>
-            <div class="single-project__taxonomy">
-                <div class="single-project__taxonomy-list">
-                    <?php foreach ($contruction_terms as $term) :
+                <div class="single-project__taxonomy">
+                    <div class="single-project__taxonomy-list">
+                        <?php foreach ($contruction_terms as $term) :
                             $t_name = isset($term->name) ? $term->name : '';
                             $t_link = get_term_link($term);
                             if ($t_name === '' || is_wp_error($t_link)) continue;
                         ?>
-                    <a class="single-project__taxonomy-chip" href="<?php echo esc_url($t_link); ?>">
-                        <?php echo esc_html($t_name); ?>
-                    </a>
-                    <?php endforeach; ?>
+                            <a class="single-project__taxonomy-chip" href="<?php echo esc_url($t_link); ?>">
+                                <?php echo esc_html($t_name); ?>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
             <h1 class="single-project__title"><?php echo esc_html(get_the_title($pid)); ?></h1>
             <div class="single-project__meta">
@@ -63,36 +63,36 @@ get_template_part('template/template-parts/breadcrums/index');
                     </span>
                 </div>
                 <?php if ($location !== '') : ?>
-                <div class="single-project--title__items">
-                    <i class="fa-regular fa-map single-project__icon" aria-hidden="true"></i>
-                    <span class="single-project__text"><?php echo esc_html($location); ?></span>
-                </div>
+                    <div class="single-project--title__items">
+                        <i class="fa-regular fa-map single-project__icon" aria-hidden="true"></i>
+                        <span class="single-project__text"><?php echo esc_html($location); ?></span>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
     </header>
 
-    <section class="single-project__content">
+    <section class="single-project__content" data-aos="fade-up">
         <?php the_content(); ?>
     </section>
 
 
-    <section class="single-project__facts">
+    <section class="single-project__facts" data-aos="fade-up">
         <div class="single-project__facts-grid">
             <?php if ($total_area !== '') : ?>
-            <div class="single-project__fact-item"><span
-                    class="label"><?php esc_html_e('Total Area', 'buildpro'); ?></span><span
-                    class="value"><?php echo esc_html($total_area); ?></span></div>
+                <div class="single-project__fact-item"><span
+                        class="label"><?php esc_html_e('Total Area', 'buildpro'); ?></span><span
+                        class="value"><?php echo esc_html($total_area); ?></span></div>
             <?php endif; ?>
             <?php if ($completion !== '') : ?>
-            <div class="single-project__fact-item"><span
-                    class="label"><?php esc_html_e('Completion', 'buildpro'); ?></span><span
-                    class="value"><?php echo esc_html($completion); ?></span></div>
+                <div class="single-project__fact-item"><span
+                        class="label"><?php esc_html_e('Completion', 'buildpro'); ?></span><span
+                        class="value"><?php echo esc_html($completion); ?></span></div>
             <?php endif; ?>
             <?php if ($arch_style !== '') : ?>
-            <div class="single-project__fact-item"><span
-                    class="label"><?php esc_html_e('Architectural Style', 'buildpro'); ?></span><span
-                    class="value"><?php echo esc_html($arch_style); ?></span></div>
+                <div class="single-project__fact-item"><span
+                        class="label"><?php esc_html_e('Architectural Style', 'buildpro'); ?></span><span
+                        class="value"><?php echo esc_html($arch_style); ?></span></div>
             <?php endif; ?>
             <!-- <?php if ($datetime !== '') : ?>
                 <div class="single-project__fact-item"><span class="label">Date Time</span><span
@@ -106,64 +106,64 @@ get_template_part('template/template-parts/breadcrums/index');
     </section>
 
     <?php if ($about !== '') : ?>
-    <section class="single-project__about">
-        <div class="single-project__about-content"><?php echo apply_filters('the_content', $about); ?></div>
-        <?php if (!empty($about_image_url)) : ?>
-        <div class="single-project__about-image">
-            <img src="<?php echo esc_url($about_image_url); ?>" alt="<?php echo esc_attr(get_the_title($pid)); ?>">
-        </div>
-        <?php endif; ?>
-    </section>
+        <section class="single-project__about" data-aos="fade-up">
+            <div class="single-project__about-content"><?php echo apply_filters('the_content', $about); ?></div>
+            <?php if (!empty($about_image_url)) : ?>
+                <div class="single-project__about-image">
+                    <img src="<?php echo esc_url($about_image_url); ?>" alt="<?php echo esc_attr(get_the_title($pid)); ?>">
+                </div>
+            <?php endif; ?>
+        </section>
     <?php endif; ?>
 
 
 
     <?php if (!empty($gallery_ids)) : ?>
-    <section class="single-project__gallery">
-        <h2 class="single-project__section-title"><?php esc_html_e('Gallery', 'buildpro'); ?></h2>
-        <div class="single-project__gallery-items">
-            <?php foreach ($gallery_ids as $img_id) :
+        <section class="single-project__gallery" data-aos="fade-up">
+            <h2 class="single-project__section-title"><?php esc_html_e('Gallery', 'buildpro'); ?></h2>
+            <div class="single-project__gallery-items">
+                <?php foreach ($gallery_ids as $img_id) :
                     $u = wp_get_attachment_image_url((int) $img_id, 'large');
                     if (!$u) continue;
                 ?>
-            <figure class="single-project__gallery-item">
-                <img src="<?php echo esc_url($u); ?>" alt="<?php echo esc_attr__('Gallery image', 'buildpro'); ?>">
-            </figure>
-            <?php endforeach; ?>
-        </div>
-    </section>
+                    <figure class="single-project__gallery-item">
+                        <img src="<?php echo esc_url($u); ?>" alt="<?php echo esc_attr__('Gallery image', 'buildpro'); ?>">
+                    </figure>
+                <?php endforeach; ?>
+            </div>
+        </section>
     <?php endif; ?>
 
     <?php if (!empty($standards)) : ?>
-    <section class="single-project__standards">
-        <h2 class="single-project__section-title"><?php esc_html_e('Standards', 'buildpro'); ?></h2>
-        <div class="single-project__standards-list">
-            <?php foreach ($standards as $row) :
+        <section class="single-project__standards" data-aos="fade-up">
+            <h2 class="single-project__section-title"><?php esc_html_e('Standards', 'buildpro'); ?></h2>
+            <div class="single-project__standards-list">
+                <?php foreach ($standards as $row) :
                     $img_id = isset($row['image_id']) ? absint($row['image_id']) : 0;
                     $title  = isset($row['title']) ? sanitize_text_field($row['title']) : '';
                     $desc   = isset($row['description']) ? sanitize_text_field($row['description']) : '';
                     if (!$img_id && $title === '' && $desc === '') continue;
                     $thumb = $img_id ? wp_get_attachment_image_url($img_id, 'medium') : '';
                 ?>
-            <div class="single-project__standard-item">
-                <div class="single-project__standard-thumb">
-                    <?php if ($thumb) : ?>
-                    <img src="<?php echo esc_url($thumb); ?>"
-                        alt="<?php echo esc_attr__('Standard image', 'buildpro'); ?>">
-                    <?php endif; ?>
-                </div>
-                <div class="single-project__standard-content">
-                    <?php if ($title !== '') : ?>
-                    <h3 class="single-project__standard-title"><?php echo esc_html($title); ?></h3>
-                    <?php endif; ?>
-                    <?php if ($desc !== '') : ?>
-                    <p class="single-project__standard-desc"><?php echo esc_html($desc); ?></p>
-                    <?php endif; ?>
-                </div>
+                    <div class="single-project__standard-item">
+                        <div class="single-project__standard-thumb">
+                            <?php if ($thumb) : ?>
+                                <img src="<?php echo esc_url($thumb); ?>"
+                                    alt="<?php echo esc_attr__('Standard image', 'buildpro'); ?>">
+                            <?php endif; ?>
+                        </div>
+                        <div class="single-project__standard-content">
+                            <?php if ($title !== '') : ?>
+                                <h3 class="single-project__standard-title"><?php echo esc_html($title); ?></h3>
+                            <?php endif; ?>
+                            <?php if ($desc !== '') : ?>
+                                <p class="single-project__standard-desc"><?php echo esc_html($desc); ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
 
     <!-- <?php if ($information !== '') : ?>

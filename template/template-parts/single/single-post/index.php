@@ -22,7 +22,7 @@ get_template_part('template/template-parts/breadcrums/index');
 ?>
 
 <article class="single-post-detail" id="post-<?php echo esc_attr($pid); ?>">
-    <header class="single-post__header">
+    <header class="single-post__header" data-aos="fade-up">
         <?php if (!empty($banner_url)) : ?>
             <div class="single-post__banner">
                 <img src="<?php echo esc_url($banner_url); ?>" alt="<?php echo esc_attr(get_the_title($pid)); ?>">
@@ -50,18 +50,18 @@ get_template_part('template/template-parts/breadcrums/index');
         </div>
     </header>
 
-    <section class="single-post__content-paragraph">
+    <section class="single-post__content-paragraph" data-aos="fade-up">
         <?php the_content(); ?>
     </section>
 
-    <section class="single-post__paragraph">
+    <section class="single-post__paragraph" data-aos="fade-up">
         <div class="single-post-column"></div>
         <?php if (!empty($paragraph)) : ?>
             <div class="single-post__content"><?php echo wp_kses_post($paragraph); ?></div>
         <?php endif; ?>
     </section>
 
-    <section class="single-post__key__value">
+    <section class="single-post__key__value" data-aos="fade-up">
         <?php if (!empty($quote_title)) : ?>
             <h2 class="single-post__quote-title"><?php echo esc_html($quote_title); ?></h2>
         <?php endif; ?>
@@ -90,7 +90,7 @@ get_template_part('template/template-parts/breadcrums/index');
         <?php endif; ?>
     </section>
 
-    <section class="single-post__quote--gallery">
+    <section class="single-post__quote--gallery" data-aos="fade-up">
         <div class="single-post__quote--gallery__container">
             <?php if (!empty($quote_gallery)) : ?>
                 <div class="single-post__quote--gallery__items">

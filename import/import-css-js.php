@@ -59,6 +59,9 @@ function wp_enqueue_custom_assets()
         || is_page_template('cart-page.php')
         || is_page_template('checkout-page.php')
         || is_page_template('bill-page.php')
+        || is_singular('post')
+        || is_singular('product')
+        || is_singular('project')
         || is_404()
     );
 

@@ -45,22 +45,22 @@ get_template_part('template/template-parts/breadcrums/index');
 ?>
 
 <article class="single-product-detail" id="product-<?php echo esc_attr($pid); ?>">
-    <header class="single-product__header">
+    <header class="single-product__header" data-aos="fade-up">
         <div class="single-product__images-container">
             <!-- Main Swiper (ảnh lớn) -->
             <div class="swiper main-swiper">
                 <div class="swiper-wrapper">
                     <?php if (!empty($featured)) : ?>
-                    <div class="swiper-slide"><?php echo $featured; ?></div>
+                        <div class="swiper-slide"><?php echo $featured; ?></div>
                     <?php endif; ?>
 
                     <?php if (!empty($gallery_ids)) : ?>
-                    <?php foreach ($gallery_ids as $gid) :
+                        <?php foreach ($gallery_ids as $gid) :
                             $img = wp_get_attachment_image($gid, 'large');
                             if (!$img) continue;
                         ?>
-                    <div class="swiper-slide"><?php echo $img; ?></div>
-                    <?php endforeach; ?>
+                            <div class="swiper-slide"><?php echo $img; ?></div>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
                 <!-- Nếu muốn thêm nút prev/next (tùy chọn) -->
@@ -75,17 +75,17 @@ get_template_part('template/template-parts/breadcrums/index');
                         // Lấy featured thumbnail nhỏ hơn
                         $thumb_featured = get_the_post_thumbnail($pid, 'thumbnail'); // hoặc 'medium'
                         if ($thumb_featured) : ?>
-                    <div class="swiper-slide"><?php echo $thumb_featured; ?></div>
+                            <div class="swiper-slide"><?php echo $thumb_featured; ?></div>
                     <?php endif;
                     endif; ?>
 
                     <?php if (!empty($gallery_ids)) : ?>
-                    <?php foreach ($gallery_ids as $gid) :
+                        <?php foreach ($gallery_ids as $gid) :
                             $thumb_img = wp_get_attachment_image($gid, 'thumbnail'); // kích thước nhỏ cho thumbs
                             if (!$thumb_img) continue;
                         ?>
-                    <div class="swiper-slide"><?php echo $thumb_img; ?></div>
-                    <?php endforeach; ?>
+                            <div class="swiper-slide"><?php echo $thumb_img; ?></div>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
             </div>
@@ -96,12 +96,12 @@ get_template_part('template/template-parts/breadcrums/index');
                 <span
                     class="single-product__sku"><?php echo $sku ? sprintf(esc_html__('SKU: %s', 'buildpro'), esc_html($sku)) : ''; ?></span>
                 <?php if ($stock_qty !== null) : ?>
-                <span
-                    class="single-product__stock-qty"><?php printf(esc_html__('Qty: %s', 'buildpro'), (int)$stock_qty); ?></span>
+                    <span
+                        class="single-product__stock-qty"><?php printf(esc_html__('Qty: %s', 'buildpro'), (int)$stock_qty); ?></span>
                 <?php endif; ?>
                 <?php if ($avg_rating) : ?>
-                <span
-                    class="single-product__rating"><?php printf(esc_html__('%1$s / 5 (%2$s reviews)', 'buildpro'), esc_html($avg_rating), (int)$review_count); ?></span>
+                    <span
+                        class="single-product__rating"><?php printf(esc_html__('%1$s / 5 (%2$s reviews)', 'buildpro'), esc_html($avg_rating), (int)$review_count); ?></span>
                 <?php endif; ?>
             </div>
             <div class="single-product__meta-info">
@@ -111,21 +111,21 @@ get_template_part('template/template-parts/breadcrums/index');
                     $brands = wc_get_product_terms($pid, 'product_brand', array('fields' => 'names'));
                     if (! empty($brands) && ! is_wp_error($brands)) :
                 ?>
-                <div class="single-product__brand">
-                    <strong><?php esc_html_e('Brand:', 'buildpro'); ?></strong>
-                    <?php echo esc_html(implode(', ', $brands)); ?>
-                </div>
-                <?php
+                        <div class="single-product__brand">
+                            <strong><?php esc_html_e('Brand:', 'buildpro'); ?></strong>
+                            <?php echo esc_html(implode(', ', $brands)); ?>
+                        </div>
+                    <?php
                     endif;
                 } else {
                     // Fallback nếu không dùng taxonomy core (ví dụ custom field hoặc attribute 'pa_brand')
                     $brand_custom = $product->get_attribute('brand'); // hoặc get_post_meta($pid, 'brand', true);
                     if (! empty($brand_custom)) :
                     ?>
-                <div class="single-product__brand">
-                    <strong><?php esc_html_e('Brand:', 'buildpro'); ?></strong>
-                    <?php echo wp_kses_post($brand_custom); ?>
-                </div>
+                        <div class="single-product__brand">
+                            <strong><?php esc_html_e('Brand:', 'buildpro'); ?></strong>
+                            <?php echo wp_kses_post($brand_custom); ?>
+                        </div>
                 <?php
                     endif;
                 }
@@ -136,10 +136,10 @@ get_template_part('template/template-parts/breadcrums/index');
                 $cats_html = wc_get_product_category_list($pid, ' • ', '', '');
                 if (! empty($cats_html)) :
                 ?>
-                <div class="single-product__categories">
-                    <strong><?php esc_html_e('Category:', 'buildpro'); ?></strong>
-                    <?php echo wp_kses_post($cats_html); ?>
-                </div>
+                    <div class="single-product__categories">
+                        <strong><?php esc_html_e('Category:', 'buildpro'); ?></strong>
+                        <?php echo wp_kses_post($cats_html); ?>
+                    </div>
                 <?php endif; ?>
 
                 <?php
@@ -147,16 +147,16 @@ get_template_part('template/template-parts/breadcrums/index');
                 $tags_html = wc_get_product_tag_list($pid, ' • ', '', '');
                 if (! empty($tags_html)) :
                 ?>
-                <div class="single-product__tags">
-                    <strong><?php esc_html_e('Tags:', 'buildpro'); ?></strong> <?php echo wp_kses_post($tags_html); ?>
-                </div>
+                    <div class="single-product__tags">
+                        <strong><?php esc_html_e('Tags:', 'buildpro'); ?></strong> <?php echo wp_kses_post($tags_html); ?>
+                    </div>
                 <?php endif; ?>
             </div>
             <div class="single-product__description__container">
                 <h2 class="single-product__description__title"><?php esc_html_e('Key Features', 'buildpro'); ?></h2>
                 <div class="single-product__description">
                     <?php if (!empty($desc)) : ?>
-                    <div class="single-product__desc-content"><?php echo wp_kses_post(wpautop($desc)); ?></div>
+                        <div class="single-product__desc-content"><?php echo wp_kses_post(wpautop($desc)); ?></div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -214,21 +214,21 @@ get_template_part('template/template-parts/breadcrums/index');
     <div class="single-product__top">
         <div class="single-product__summary">
             <?php if (!empty($short_desc)) : ?>
-            <div class="single-product__short-desc"><?php echo wp_kses_post(wpautop($short_desc)); ?></div>
+                <div class="single-product__short-desc"><?php echo wp_kses_post(wpautop($short_desc)); ?></div>
             <?php endif; ?>
 
             <?php if (!empty($typical_range)) : ?>
-            <div class="single-product__typical">
-                <?php echo sprintf(esc_html__('Typical Range: %s', 'buildpro'), esc_html($typical_range)); ?></div>
+                <div class="single-product__typical">
+                    <?php echo sprintf(esc_html__('Typical Range: %s', 'buildpro'), esc_html($typical_range)); ?></div>
             <?php endif; ?>
         </div>
     </div>
     <div class="single-product__specs__container">
         <?php if (!empty($attributes)) : ?>
-        <section class="single-product__attributes">
-            <h2><?php esc_html_e('Engineering Specifications', 'buildpro'); ?></h2>
-            <div class="single-product__attr-list">
-                <?php foreach ($attributes as $attr) :
+            <section class="single-product__attributes" data-aos="fade-up">
+                <h2><?php esc_html_e('Engineering Specifications', 'buildpro'); ?></h2>
+                <div class="single-product__attr-list">
+                    <?php foreach ($attributes as $attr) :
                         if ($attr->is_taxonomy()) {
                             $taxonomy = $attr->get_name();
                             $terms = wc_get_product_terms($pid, $taxonomy, array('fields' => 'names'));
@@ -241,31 +241,31 @@ get_template_part('template/template-parts/breadcrums/index');
                         }
                         if ($label === '' && $value === '') continue;
                     ?>
-                <div class="single-product__attr-item">
-                    <span class="single-product__attr-name"><?php echo esc_html($label); ?></span>
-                    <span class="single-product__attr-value"><?php echo esc_html($value); ?></span>
+                        <div class="single-product__attr-item">
+                            <span class="single-product__attr-name"><?php echo esc_html($label); ?></span>
+                            <span class="single-product__attr-value"><?php echo esc_html($value); ?></span>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
+            </section>
         <?php endif; ?>
-        <section class="single-product__specs">
+        <section class="single-product__specs" data-aos="fade-up">
             <h2><?php esc_html_e('Specifications', 'buildpro'); ?></h2>
             <div class="single-product__spec-list">
                 <?php if ($length || $width || $height) : ?>
-                <div class="single-product__spec-item">
-                    <span><?php esc_html_e('Size', 'buildpro'); ?></span><span><?php echo esc_html(trim(($length ? $length . ' × ' : '') . ($width ? $width . ' × ' : '') . ($height ? $height : ''))); ?></span>
-                </div>
+                    <div class="single-product__spec-item">
+                        <span><?php esc_html_e('Size', 'buildpro'); ?></span><span><?php echo esc_html(trim(($length ? $length . ' × ' : '') . ($width ? $width . ' × ' : '') . ($height ? $height : ''))); ?></span>
+                    </div>
                 <?php endif; ?>
                 <?php if ($weight) : ?>
-                <div class="single-product__spec-item">
-                    <span><?php esc_html_e('Weight', 'buildpro'); ?></span><span><?php echo esc_html($weight); ?></span>
-                </div>
+                    <div class="single-product__spec-item">
+                        <span><?php esc_html_e('Weight', 'buildpro'); ?></span><span><?php echo esc_html($weight); ?></span>
+                    </div>
                 <?php endif; ?>
                 <?php if ($shipping_class) : ?>
-                <div class="single-product__spec-item">
-                    <span><?php esc_html_e('Shipping class', 'buildpro'); ?></span><span><?php echo esc_html($shipping_class); ?></span>
-                </div>
+                    <div class="single-product__spec-item">
+                        <span><?php esc_html_e('Shipping class', 'buildpro'); ?></span><span><?php echo esc_html($shipping_class); ?></span>
+                    </div>
                 <?php endif; ?>
                 <div class="single-product__spec-item">
                     <span><?php esc_html_e('Product Type', 'buildpro'); ?></span><span><?php echo esc_html($type); ?></span>
@@ -277,18 +277,18 @@ get_template_part('template/template-parts/breadcrums/index');
         </section>
     </div>
     <?php if (!empty($downloads)) : ?>
-    <section class="single-product__downloads">
-        <h2><?php esc_html_e('Downloads', 'buildpro'); ?></h2>
-        <ul class="single-product__download-list">
-            <?php foreach ($downloads as $d) :
+        <section class="single-product__downloads" data-aos="fade-up">
+            <h2><?php esc_html_e('Downloads', 'buildpro'); ?></h2>
+            <ul class="single-product__download-list">
+                <?php foreach ($downloads as $d) :
                     $name = $d->get_name();
                     $url = $d->get_file();
                 ?>
-            <li><a href="<?php echo esc_url($url); ?>" target="_blank"
-                    rel="noopener"><?php echo esc_html($name ?: $url); ?></a></li>
-            <?php endforeach; ?>
-        </ul>
-    </section>
+                    <li><a href="<?php echo esc_url($url); ?>" target="_blank"
+                            rel="noopener"><?php echo esc_html($name ?: $url); ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </section>
     <?php endif; ?>
 
     <?php
@@ -334,10 +334,10 @@ get_template_part('template/template-parts/breadcrums/index');
     $related_q = new WP_Query($related_args);
     if ($related_q->have_posts()) :
     ?>
-    <section class="single-product__related">
-        <h2 class="single-product__related-title"><?php esc_html_e('You might also like', 'buildpro'); ?></h2>
-        <div class="section-product__list">
-            <?php
+        <section class="single-product__related" data-aos="fade-up">
+            <h2 class="single-product__related-title"><?php esc_html_e('You might also like', 'buildpro'); ?></h2>
+            <div class="section-product__list">
+                <?php
                 while ($related_q->have_posts()) :
                     $related_q->the_post();
                     $rid    = get_the_ID();
@@ -352,37 +352,37 @@ get_template_part('template/template-parts/breadcrums/index');
                         }
                     }
                 ?>
-            <a class="section-product__item" href="<?php echo esc_url($rlink); ?>">
-                <div class="section-product__item-image">
-                    <?php if (!empty($rimg)) : ?>
-                    <img src="<?php echo esc_url($rimg); ?>" alt="<?php echo esc_attr($rtitle); ?>">
-                    <?php endif; ?>
-                </div>
-                <div class="section-product__item-content">
-                    <h3 class="section-product__item-title"><?php echo esc_html($rtitle); ?></h3>
-                    <div class="section-product__item-bottom">
-                        <p class="section-product__item-price">
-                            <?php if ($rprice !== '') : ?>
-                            <span>$</span><?php echo esc_html($rprice); ?><span>/<?php echo esc_html__('ton', 'buildpro'); ?></span>
+                    <a class="section-product__item" href="<?php echo esc_url($rlink); ?>">
+                        <div class="section-product__item-image">
+                            <?php if (!empty($rimg)) : ?>
+                                <img src="<?php echo esc_url($rimg); ?>" alt="<?php echo esc_attr($rtitle); ?>">
                             <?php endif; ?>
-                        </p>
-                        <button class="section-product__item-cta btn-add-to-cart"
-                            data-product-id="<?php echo esc_attr($rid); ?>"><?php echo esc_html__('Add to Cart', 'buildpro'); ?></button>
-                    </div>
-                </div>
-            </a>
-            <?php endwhile;
+                        </div>
+                        <div class="section-product__item-content">
+                            <h3 class="section-product__item-title"><?php echo esc_html($rtitle); ?></h3>
+                            <div class="section-product__item-bottom">
+                                <p class="section-product__item-price">
+                                    <?php if ($rprice !== '') : ?>
+                                        <span>$</span><?php echo esc_html($rprice); ?><span>/<?php echo esc_html__('ton', 'buildpro'); ?></span>
+                                    <?php endif; ?>
+                                </p>
+                                <button class="section-product__item-cta btn-add-to-cart"
+                                    data-product-id="<?php echo esc_attr($rid); ?>"><?php echo esc_html__('Add to Cart', 'buildpro'); ?></button>
+                            </div>
+                        </div>
+                    </a>
+                <?php endwhile;
                 wp_reset_postdata(); ?>
-        </div>
-    </section>
+            </div>
+        </section>
     <?php endif; ?>
 
     <?php if ($product && $product->get_reviews_allowed()) : ?>
-    <section class="single-product__reviews">
-        <?php
+        <section class="single-product__reviews" data-aos="fade-up">
+            <?php
             comments_template();
             ?>
-    </section>
+        </section>
     <?php endif; ?>
     <!-- <?php if (!empty($cats)) : ?>
         <div class="single-product__cats"><?php echo wp_kses_post($cats); ?></div>
