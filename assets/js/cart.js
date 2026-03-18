@@ -23,6 +23,8 @@
   }
 
   function addToCart(productId, btn) {
+    btn.classList.remove("is-added", "is-error");
+    btn.classList.add("is-adding");
     btn.disabled = true;
     var originalText = btn.textContent;
     btn.textContent = "Adding…";
@@ -50,22 +52,28 @@
       })
       .then(function (data) {
         btn.disabled = false;
+        btn.classList.remove("is-adding");
         if (data && !data.error) {
           btn.textContent = "Added ✓";
+          btn.classList.add("is-added");
           updateCartBadge(getCurrentCount() + 1); // Refresh mini cart dropdown
           if (typeof window.buildproRefreshMiniCart === "function") {
             window.buildproRefreshMiniCart(true);
           }
           setTimeout(function () {
             btn.textContent = originalText;
+            btn.classList.remove("is-added");
           }, 1500);
         } else {
           btn.textContent = originalText;
+          btn.classList.add("is-error");
         }
       })
       .catch(function () {
         btn.disabled = false;
+        btn.classList.remove("is-adding");
         btn.textContent = originalText;
+        btn.classList.add("is-error");
       });
   }
 

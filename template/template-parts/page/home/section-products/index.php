@@ -35,7 +35,7 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
             $title = get_the_title($post_id);
             $price = '';
             if (function_exists('wc_get_product')) {
-                $product = wc_get_product($post_id);
+                $product = call_user_func('wc_get_product', $post_id);
                 if ($product) {
                     $price = $product->get_price();
                 }
@@ -50,6 +50,16 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
         }
         wp_reset_postdata();
     }
+}
+
+// Avoid rendering broken/empty markup on the frontend.
+// Keep section available in Customizer preview for live editing.
+if ($materials_enabled !== 1 && !is_customize_preview()) {
+    return;
+}
+
+if (empty($items) && !is_customize_preview()) {
+    return;
 }
 ?>
 <?php $style = $materials_enabled !== 1 ? ' style="display:none"' : ''; ?>
@@ -80,31 +90,35 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
         <div class="swiper-wrapper">
             <?php foreach ($items as $item): ?>
                 <div class="swiper-slide">
-                    <a class="section-product__item" href="<?php echo esc_url($item['link']); ?>">
-                        <div class="section-product__item-image">
-                            <?php if (!empty($item['image'])): ?>
-                                <img src="<?php echo esc_url($item['image']); ?>" alt="<?php echo esc_attr($item['title']); ?>">
-                            <?php endif; ?>
-                        </div>
+                    <div class="section-product__item">
+                        <a class="section-product__item-link" href="<?php echo esc_url($item['link']); ?>"
+                            aria-label="<?php echo esc_attr($item['title']); ?>">
+                            <div class="section-product__item-image">
+                                <?php if (!empty($item['image'])): ?>
+                                    <img src="<?php echo esc_url($item['image']); ?>"
+                                        alt="<?php echo esc_attr($item['title']); ?>">
+                                <?php endif; ?>
+                            </div>
+                        </a>
                         <div class="section-product__item-content">
-                            <h3 class="section-product__item-title"><?php echo esc_html($item['title']); ?></h3>
+                            <a class="section-product__item-title-link" href="<?php echo esc_url($item['link']); ?>">
+                                <h3 class="section-product__item-title"><?php echo esc_html($item['title']); ?></h3>
+                            </a>
                             <div class="section-product__item-bottom">
                                 <p class="section-product__item-price">
                                     <span>$</span><?php echo esc_html($item['price']); ?><span>/<?php esc_html_e('ton', 'buildpro'); ?></span>
                                 </p>
-                                <button class="section-product__item-cta btn-add-to-cart" data-product-id="<?php echo esc_attr($item['id']); ?>"><?php esc_html_e('Add to Cart', 'buildpro'); ?></button>
+                                <button class="section-product__item-cta btn-add-to-cart" type="button"
+                                    data-product-id="<?php echo esc_attr($item['id']); ?>"><?php esc_html_e('Add to Cart', 'buildpro'); ?></button>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
         <div class="swiper-button-prev section-product__swiper-prev"></div>
         <div class="swiper-button-next section-product__swiper-next"></div>
     </div>
-    <?php if (empty($items)): ?>
-        <?php return; ?>
-    <?php endif; ?>
     <?php
     $products_page_url = '';
     $products_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'products-page.php', 'number' => 1));
@@ -113,11 +127,11 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
     }
     ?>
     <div class="section-portfolio__page-link">
-        <a class="section-portfolio__page-link-text"
-            href="<?php echo esc_url($products_page_url); ?>">
+        <a class="section-portfolio__page-link-text" href="<?php echo esc_url($products_page_url); ?>">
             <?php esc_html_e('View All Products', 'buildpro'); ?>
         </a>
         <img class="section-banner__item-button-icon"
-            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">
+            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>"
+            alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">
     </div>
 </section>

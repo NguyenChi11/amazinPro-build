@@ -64,7 +64,7 @@
 .about-contact__value {
   color: #4a5568;
 }
-@media (max-width: 1024px) {
+@media (max-width: 639.98px) {
   .about-contact__grid {
     grid-template-columns: 1fr;
   }

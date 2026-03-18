@@ -21,6 +21,31 @@ if (is_scalar($description_header)) {
 } else {
     $description_header = '';
 }
+
+$buildpro_quote_anchor = '#about-contact-form-inner';
+$buildpro_quote_url = home_url('/') . $buildpro_quote_anchor;
+try {
+    $buildpro_about_page_id = 0;
+    $buildpro_about_pages = get_pages(array(
+        'meta_key'   => '_wp_page_template',
+        'meta_value' => 'about-us-page.php',
+        'number'     => 1,
+    ));
+    if (empty($buildpro_about_pages)) {
+        $buildpro_about_pages = get_pages(array(
+            'meta_key'   => '_wp_page_template',
+            'meta_value' => 'about-page.php',
+            'number'     => 1,
+        ));
+    }
+    if (!empty($buildpro_about_pages)) {
+        $buildpro_about_page_id = (int) $buildpro_about_pages[0]->ID;
+    }
+    if ($buildpro_about_page_id > 0) {
+        $buildpro_quote_url = get_permalink($buildpro_about_page_id) . $buildpro_quote_anchor;
+    }
+} catch (Throwable $e) {
+}
 ?>
 
 <header id="masthead" class="site-header">
@@ -98,7 +123,7 @@ if (is_scalar($description_header)) {
                 </nav><!-- #site-navigation -->
             </div>
             <div class="header-nav-button-container">
-                <a href="#" class="header-nav-button">
+                <a href="<?php echo esc_url($buildpro_quote_url); ?>" class="header-nav-button">
                     <p><?php esc_html_e('Request a Quote', 'buildpro'); ?></p>
                 </a>
             </div>
@@ -167,7 +192,7 @@ if (is_scalar($description_header)) {
                         class="mobile-cart-count<?php echo $cart_count === 0 ? ' mobile-cart-count--hidden' : ''; ?>"><?php echo $cart_count; ?></span>
                 </a>
             </div>
-            <a href="#" class="header-nav-button">
+            <a href="<?php echo esc_url($buildpro_quote_url); ?>" class="header-nav-button">
                 <p><?php esc_html_e('Request a Quote', 'buildpro'); ?></p>
             </a>
         </div>

@@ -225,7 +225,7 @@
 
 @media (max-width: 1199.98px) {
   .about-contact-form {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 1.4rem;
     padding: 3.25rem 1.2rem 3.75rem;
   }
@@ -237,6 +237,7 @@
 
 @media (max-width: 767.98px) {
   .about-contact-form {
+    grid-template-columns: 1fr;
     padding: 2.5rem 1rem 3.1rem;
     gap: 1.15rem;
   }

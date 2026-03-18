@@ -2,19 +2,25 @@
  * Header Scripts located in template-parts/header/assets
  */
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Header component scripts loaded from template-parts");
-
   // Header logic here
   const header = document.querySelector(".site-header");
   if (header) {
-    // Example: Add scroll class
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 0) {
-        header.classList.add("is-scrolled");
-      } else {
-        header.classList.remove("is-scrolled");
-      }
-    });
+    // Add scroll class (throttled)
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        if (window.scrollY > 0) {
+          header.classList.add("is-scrolled");
+        } else {
+          header.classList.remove("is-scrolled");
+        }
+        ticking = false;
+      });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
   }
 
   const toggleBtn = document.querySelector(".mobile-menu-toggle");

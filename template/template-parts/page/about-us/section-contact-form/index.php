@@ -24,7 +24,7 @@ if (!$use_mod && $map_image_id <= 0) {
 $map_url = $map_image_id ? wp_get_attachment_image_url($map_image_id, 'full') : get_theme_file_uri('/assets/images/map.jpg');
 ?>
 <section class="about-contact-form">
-    <div class="about-contact-form__inner">
+    <div class="about-contact-form__inner" id="about-contact-form-inner">
         <h2 class="about-contact-form__title"><?php echo esc_html($title); ?></h2>
         <div class="about-contact-form__content">
             <?php

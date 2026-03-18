@@ -7,7 +7,7 @@ const projectsData = {
       id: 3001,
       title: "Commerce Tower",
       image: "/wp-content/themes/buildpro/assets/images/image_7.jpg",
-      location: "Quận 1, TP.HCM",
+      location: "WASHINGTON DC",
       about:
         "Modern commercial tower, optimized space and efficient use of resources.",
       standards: [
@@ -40,7 +40,7 @@ const projectsData = {
       id: 3002,
       title: "Residential Complex",
       image: "/wp-content/themes/buildpro/assets/images/image_9.jpg",
-      location: "Than An, Binh Duong",
+      location: "NEW YORK",
       about:
         "Modern residential complex, prioritizing convenience and sustainability.",
       standards: [
@@ -67,7 +67,7 @@ const projectsData = {
       id: 3003,
       title: "Retail Center",
       image: "/wp-content/themes/buildpro/assets/images/image_10.jpg",
-      location: "Danang",
+      location: "LOS ANGELES",
       about: "Retail center with open design, optimizing customer experience.",
       standards: [
         {
@@ -98,7 +98,7 @@ const projectsData = {
       id: 3004,
       title: "Premium Villa",
       image: "/wp-content/themes/buildpro/assets/images/image_4.jpg",
-      location: "Quang Ninh",
+      location: "WASHINGTON DC",
       about:
         "Premium villa with high-end materials and meticulous craftsmanship.",
       standards: [

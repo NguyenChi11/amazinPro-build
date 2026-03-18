@@ -272,8 +272,8 @@ msgstr "Xác nhận đơn hàng"
 msgid "Transaction secured &amp; encrypted"
 msgstr "Giao dịch được bảo mật &amp; mã hóa"
 
-#: template/template-parts/header/header.php:102
-#: template/template-parts/header/header.php:171
+#: template/template-parts/header/header.php:127
+#: template/template-parts/header/header.php:196
 msgid "Request a Quote"
 msgstr "Yêu cầu báo giá"
 
