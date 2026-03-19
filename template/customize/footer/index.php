@@ -19,8 +19,10 @@
                         <div class="buildpro-field">
                             <input type="hidden" id="footer_banner_image_id" name="footer_banner_image_id"
                                 value="<?= esc_attr($banner_image_id) ?>">
-                            <button type="button" class="button" id="select_footer_banner_image"><?php echo esc_html__('Choose Image', 'buildpro'); ?></button>
-                            <button type="button" class="button" id="remove_footer_banner_image"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
+                            <button type="button" class="button"
+                                id="select_footer_banner_image"><?php echo esc_html__('Choose Image', 'buildpro'); ?></button>
+                            <button type="button" class="button"
+                                id="remove_footer_banner_image"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
                         </div>
                         <div id="footer_banner_preview" class="image-preview">
                             <?= $banner_thumb ? '<img src="' . esc_url($banner_thumb) . '" style="max-height:80px;">' : '<span style="color:#888">' . esc_html__('No image selected', 'buildpro') . '</span>' ?>
@@ -79,44 +81,51 @@
                                 $cl_title = isset($cl['title']) ? sanitize_text_field($cl['title']) : '';
                                 $cl_target = isset($cl['target']) ? sanitize_text_field($cl['target']) : '';
                             ?>
-                                <div class="buildpro-block" data-index="<?= esc_attr($cl_index) ?>">
-                                    <p class="buildpro-field">
-                                        <label><?php echo esc_html__('Icon', 'buildpro'); ?></label>
-                                        <input type="hidden"
-                                            name="footer_contact_links[<?= esc_attr($cl_index) ?>][icon_id]"
-                                            value="<?= esc_attr($cl_icon_id) ?>">
-                                        <button type="button" class="button select-contact-icon"><?php echo esc_html__('Select photo', 'buildpro'); ?></button>
-                                        <button type="button" class="button remove-contact-icon"><?php echo esc_html__('Remove photo', 'buildpro'); ?></button>
-                                    </p>
-                                    <div class="image-preview contact-icon-preview">
-                                        <?= $cl_icon_thumb ? '<img src="' . esc_url($cl_icon_thumb) . '" style="max-height:80px;">' : '<span style="color:#888">' . esc_html__('No image selected', 'buildpro') . '</span>' ?>
-                                    </div>
-                                    <p class="buildpro-field">
-                                        <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
-                                        <input type="url" name="footer_contact_links[<?= esc_attr($cl_index) ?>][url]"
-                                            class="regular-text" value="<?= esc_attr($cl_url) ?>" placeholder="https://...">
-                                        <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
-                                    </p>
-                                    <p class="buildpro-field">
-                                        <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
-                                        <input type="text" name="footer_contact_links[<?= esc_attr($cl_index) ?>][title]"
-                                            class="regular-text" value="<?= esc_attr($cl_title) ?>">
-                                    </p>
-                                    <p class="buildpro-field">
-                                        <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-                                        <select name="footer_contact_links[<?= esc_attr($cl_index) ?>][target]">
-                                            <option value="" <?= selected($cl_target, '', false) ?>><?php echo esc_html__('Default', 'buildpro'); ?></option>
-                                            <option value="_blank" <?= selected($cl_target, '_blank', false) ?>><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
-                                        </select>
-                                    </p>
-                                    <div class="buildpro-actions">
-                                        <button type="button" class="button remove-row"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
-                                    </div>
+                            <div class="buildpro-block" data-index="<?= esc_attr($cl_index) ?>">
+                                <p class="buildpro-field">
+                                    <label><?php echo esc_html__('Icon', 'buildpro'); ?></label>
+                                    <input type="hidden"
+                                        name="footer_contact_links[<?= esc_attr($cl_index) ?>][icon_id]"
+                                        value="<?= esc_attr($cl_icon_id) ?>">
+                                    <button type="button"
+                                        class="button select-contact-icon"><?php echo esc_html__('Select photo', 'buildpro'); ?></button>
+                                    <button type="button"
+                                        class="button remove-contact-icon"><?php echo esc_html__('Remove photo', 'buildpro'); ?></button>
+                                </p>
+                                <div class="image-preview contact-icon-preview">
+                                    <?= $cl_icon_thumb ? '<img src="' . esc_url($cl_icon_thumb) . '" style="max-height:80px;">' : '<span style="color:#888">' . esc_html__('No image selected', 'buildpro') . '</span>' ?>
                                 </div>
+                                <p class="buildpro-field">
+                                    <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
+                                    <input type="url" name="footer_contact_links[<?= esc_attr($cl_index) ?>][url]"
+                                        class="regular-text" value="<?= esc_attr($cl_url) ?>" placeholder="https://...">
+                                    <button type="button"
+                                        class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
+                                </p>
+                                <p class="buildpro-field">
+                                    <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
+                                    <input type="text" name="footer_contact_links[<?= esc_attr($cl_index) ?>][title]"
+                                        class="regular-text" value="<?= esc_attr($cl_title) ?>">
+                                </p>
+                                <p class="buildpro-field">
+                                    <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
+                                    <select name="footer_contact_links[<?= esc_attr($cl_index) ?>][target]">
+                                        <option value="" <?= selected($cl_target, '', false) ?>>
+                                            <?php echo esc_html__('Default', 'buildpro'); ?></option>
+                                        <option value="_blank" <?= selected($cl_target, '_blank', false) ?>>
+                                            <?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
+                                    </select>
+                                </p>
+                                <div class="buildpro-actions">
+                                    <button type="button"
+                                        class="button remove-row"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
+                                </div>
+                            </div>
                             <?php $cl_index++;
                             endforeach; ?>
                         </div>
-                        <button type="button" class="button button-primary" id="footer-contact-links-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>
+                        <button type="button" class="button button-primary"
+                            id="footer-contact-links-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>
                     </div>
                 </div>
                 <div id="tab-create-build" class="buildpro-footer-section">
@@ -138,23 +147,26 @@
                                 value="<?= esc_attr($policy_text) ?>">
                         </p>
                         <p class="buildpro-field">
-                            <label>Link URL</label>
+                            <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
                             <input type="url" id="footer_policy_link_url" name="footer_policy_link[url]"
                                 class="regular-text" value="<?= esc_attr($policy_link['url']) ?>"
                                 placeholder="https://...">
                             <button type="button" class="button choose-link-single" data-url="#footer_policy_link_url"
-                                data-title="#footer_policy_link_title" data-target="#footer_policy_link_target"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
+                                data-title="#footer_policy_link_title"
+                                data-target="#footer_policy_link_target"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                         </p>
                         <p class="buildpro-field">
-                            <label>Link Title</label>
+                            <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
                             <input type="text" id="footer_policy_link_title" name="footer_policy_link[title]"
                                 class="regular-text" value="<?= esc_attr($policy_link['title']) ?>">
                         </p>
                         <p class="buildpro-field">
-                            <label>Link Target</label>
+                            <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
                             <select id="footer_policy_link_target" name="footer_policy_link[target]">
-                                <option value="" <?= selected($policy_link['target'], '', false) ?>><?php echo esc_html__('Default', 'buildpro'); ?></option>
-                                <option value="_blank" <?= selected($policy_link['target'], '_blank', false) ?>><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
+                                <option value="" <?= selected($policy_link['target'], '', false) ?>>
+                                    <?php echo esc_html__('Default', 'buildpro'); ?></option>
+                                <option value="_blank" <?= selected($policy_link['target'], '_blank', false) ?>>
+                                    <?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
                             </select>
                         </p>
                     </div>
@@ -168,7 +180,7 @@
                                 value="<?= esc_attr($servicer_text) ?>">
                         </p>
                         <p class="buildpro-field">
-                            <label>Link URL</label>
+                            <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
                             <input type="url" id="footer_servicer_link_url" name="footer_servicer_link[url]"
                                 class="regular-text" value="<?= esc_attr($servicer_link['url']) ?>"
                                 placeholder="https://...">
@@ -177,15 +189,17 @@
                                 data-target="#footer_servicer_link_target"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                         </p>
                         <p class="buildpro-field">
-                            <label>Link Title</label>
+                            <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
                             <input type="text" id="footer_servicer_link_title" name="footer_servicer_link[title]"
                                 class="regular-text" value="<?= esc_attr($servicer_link['title']) ?>">
                         </p>
                         <p class="buildpro-field">
-                            <label>Link Target</label>
+                            <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
                             <select id="footer_servicer_link_target" name="footer_servicer_link[target]">
-                                <option value="" <?= selected($servicer_link['target'], '', false) ?>><?php echo esc_html__('Default', 'buildpro'); ?></option>
-                                <option value="_blank" <?= selected($servicer_link['target'], '_blank', false) ?>><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
+                                <option value="" <?= selected($servicer_link['target'], '', false) ?>>
+                                    <?php echo esc_html__('Default', 'buildpro'); ?></option>
+                                <option value="_blank" <?= selected($servicer_link['target'], '_blank', false) ?>>
+                                    <?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
                             </select>
                         </p>
                     </div>
@@ -198,19 +212,24 @@
                 <div class="buildpro-custom-link-body">
                     <div class="buildpro-custom-link-grid">
                         <div>
-                            <p class="buildpro-custom-link-row"><label><?php echo esc_html__('URL', 'buildpro'); ?></label><input type="url"
+                            <p class="buildpro-custom-link-row">
+                                <label><?php echo esc_html__('URL', 'buildpro'); ?></label><input type="url"
                                     id="buildpro_custom_link_url" class="regular-text" placeholder="https://..."></p>
-                            <p class="buildpro-custom-link-row"><label><?php echo esc_html__('Link text', 'buildpro'); ?></label><input type="text"
+                            <p class="buildpro-custom-link-row">
+                                <label><?php echo esc_html__('Link text', 'buildpro'); ?></label><input type="text"
                                     id="buildpro_custom_link_title" class="regular-text" placeholder=""></p>
                             <p class="buildpro-custom-link-row"><label><input type="checkbox"
-                                        id="buildpro_custom_link_target"> <?php echo esc_html__('Open in new tab', 'buildpro'); ?></label></p>
+                                        id="buildpro_custom_link_target">
+                                    <?php echo esc_html__('Open in new tab', 'buildpro'); ?></label></p>
                         </div>
                         <div>
-                            <p class="buildpro-custom-link-row"><label><?php echo esc_html__('Search', 'buildpro'); ?></label><input type="search"
+                            <p class="buildpro-custom-link-row">
+                                <label><?php echo esc_html__('Search', 'buildpro'); ?></label><input type="search"
                                     id="buildpro_custom_link_search" class="regular-text"
                                     placeholder="<?php echo esc_attr__('Enter keyword...', 'buildpro'); ?>">
                             </p>
-                            <p class="buildpro-custom-link-row"><label><?php echo esc_html__('Source', 'buildpro'); ?></label><select
+                            <p class="buildpro-custom-link-row">
+                                <label><?php echo esc_html__('Source', 'buildpro'); ?></label><select
                                     id="buildpro_custom_link_source">
                                     <option value="all"><?php echo esc_html__('All', 'buildpro'); ?></option>
                                     <option value="page"><?php echo esc_html__('Page', 'buildpro'); ?></option>
@@ -221,8 +240,10 @@
                     </div>
                 </div>
                 <div class="buildpro-custom-link-actions">
-                    <button type="button" class="button" id="buildpro_custom_link_cancel"><?php echo esc_html__('Cancel', 'buildpro'); ?></button>
-                    <button type="button" class="button button-primary" id="buildpro_custom_link_apply"><?php echo esc_html__('Apply', 'buildpro'); ?></button>
+                    <button type="button" class="button"
+                        id="buildpro_custom_link_cancel"><?php echo esc_html__('Cancel', 'buildpro'); ?></button>
+                    <button type="button" class="button button-primary"
+                        id="buildpro_custom_link_apply"><?php echo esc_html__('Apply', 'buildpro'); ?></button>
                 </div>
             </div>
         </form>

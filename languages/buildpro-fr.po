@@ -1,0 +1,2409 @@
+# Copyright (C) 2026 AmazinPro_Team
+# This file is distributed under the same license as the Build Pro V2 package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Build Pro V2 1.1\n"
+"Report-Msgid-Bugs-To: https://amazinpro.com/\n"
+"POT-Creation-Date: 2026-03-19T03:02:04+00:00\n"
+"PO-Revision-Date: 2026-03-19T03:02:04+00:00\n"
+"Last-Translator: AmazinPro_Team <info@amazinpro.com>\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: buildpro\n"
+
+#: functions.php:75
+msgid "Primary"
+msgstr "Principal"
+
+#: import/plugin-activation.php:134
+msgid "Return to Required Plugins Installer"
+msgstr "Retour à l'installateur de plugins requis"
+
+#: import/plugin-activation.php:135
+msgid "Plugin activated successfully."
+msgstr "Plugin activé avec succès."
+
+#: import/plugin-activation.php:136
+msgid "The following plugin was activated successfully:"
+msgstr "Le plugin suivant a été activé avec succès :"
+
+#: import/plugin-activation.php:137
+msgid "No action taken. Plugin %1$s was already active."
+msgstr "Aucune action entreprise. Le plugin %1$s était déjà actif."
+
+#: import/plugin-activation.php:138
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr "Plugin non activé. Une version plus récente de %s est nécessaire pour ce thème. Veuillez mettre à jour le plugin."
+
+#: import/plugin-activation.php:139
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr "Tous les plugins ont été installés et activés avec succès. %1$s"
+
+#: import/plugin-activation.php:140
+msgid "Dismiss this notice"
+msgstr "Ignorer cette notification"
+
+#: import/plugin-activation.php:141
+msgid "There are one or more required or recommended plugins to install, update or activate."
+msgstr "Il y a un ou plusieurs plugins requis ou recommandés à installer, mettre à jour ou activer."
+
+#: import/plugin-activation.php:142
+msgid "Please contact the administrator of this site for help."
+msgstr "Veuillez contacter l'administrateur de ce site pour obtenir de l'aide."
+
+#: import/plugin-activation.php:84
+msgid "Install Required Plugins"
+msgstr "Installer les plugins requis"
+
+#: import/plugin-activation.php:85
+msgid "Install Plugins"
+msgstr "Installer les plugins"
+
+#: import/plugin-activation.php:86
+msgid "Installing Plugin: %s"
+msgstr "Installation du plugin : %s"
+
+#: import/plugin-activation.php:87
+msgid "Updating Plugin: %s"
+msgstr "Mise à jour du plugin : %s"
+
+#: import/plugin-activation.php:88
+msgid "Something went wrong with the plugin API."
+msgstr "Une erreur s'est produite avec l'API du plugin."
+
+#: inc/customizer/about-us-page/index.php:10
+#: inc/customizer/footer/index.php:271
+#: inc/customizer/home-page/index.php:10
+#: inc/meta-box/page/about-us-page/index.php:20
+#: inc/meta-box/page/home-page/index.php:54
+#: inc/meta-box/post-type/post/quote/index.php:26
+#: inc/meta-box/post-type/post/quote/index.php:60
+#: inc/meta-box/post-type/project/gallery/index.php:22
+#: inc/meta-box/post-type/project/gallery/index.php:38
+#: inc/meta-box/post-type/project/standards/index.php:20
+#: inc/meta-box/post-type/project/standards/index.php:46
+#: template/customize/footer/controls.php:63
+#: template/customize/footer/index.php:23
+#: template/customize/footer/index.php:113
+#: template/customize/header/index.php:15
+#: template/customize/page/home/section-evaluate/index.php:66
+#: template/meta-box/page/about-us/section-banner/index.php:46
+#: template/meta-box/page/about-us/section-banner/index.php:60
+#: template/meta-box/page/about-us/section-contact/index.php:30
+#: template/meta-box/page/about-us/section-core-values/index.php:51
+#: template/meta-box/page/about-us/section-core-values/index.php:62
+#: template/meta-box/page/about-us/section-leader/index.php:46
+#: template/meta-box/page/about-us/section-leader/index.php:59
+#: template/meta-box/page/about-us/section-policy/index.php:47
+#: template/meta-box/page/about-us/section-policy/index.php:58
+#: template/meta-box/page/about-us/section-policy/index.php:91
+#: template/meta-box/page/about-us/section-policy/index.php:99
+#: template/meta-box/page/home/section-banner/index.php:53
+#: template/meta-box/page/home/section-data/index.php:31
+#: template/meta-box/page/home/section-evaluate/index.php:41
+#: template/meta-box/page/home/section-evaluate/index.php:60
+#: template/meta-box/page/home/section-option/index.php:13
+#: template/meta-box/page/home/section-option/index.php:28
+#: template/meta-box/page/home/section-services/index.php:48
+#: template/meta-box/page/home/section-services/index.php:88
+#: template/meta-box/page/home/section-services/index.php:105
+#: template/meta-box/page/home/section-services/index.php:127
+#: template/meta-box/post-type/post/section-quote/template.php:42
+#: template/template-parts/header/cart/index.php:46
+#: template/template-parts/page/cart/section-cart/index.php:96
+msgid "Remove"
+msgstr "Supprimer"
+
+#: inc/customizer/about-us-page/index.php:11
+#: inc/customizer/footer/index.php:272
+#: inc/customizer/home-page/index.php:8
+#: inc/meta-box/page/about-us-page/index.php:27
+#: template/customize/footer/controls.php:70
+#: template/customize/footer/index.php:119
+#: template/customize/page/about-us/section-core-values/index.php:4
+#: template/customize/page/about-us/section-leader/index.php:4
+#: template/customize/page/about-us/section-policy/index.php:13
+#: template/customize/page/home/section-banner/index.php:86
+#: template/customize/page/home/section-data/index.php:47
+#: template/customize/page/home/section-evaluate/index.php:74
+#: template/customize/page/home/section-option/index.php:63
+#: template/customize/page/home/section-service/index.php:82
+#: template/meta-box/page/about-us/section-core-values/index.php:67
+#: template/meta-box/page/about-us/section-leader/index.php:64
+#: template/meta-box/page/about-us/section-policy/index.php:104
+msgid "Add Item"
+msgstr "Ajouter un élément"
+
+#: inc/customizer/about-us-page/index.php:12
+#: inc/meta-box/page/about-us-page/index.php:26
+#: template/customize/page/about-us/section-banner/index.php:4
+#: template/meta-box/page/about-us/section-banner/index.php:51
+msgid "Add Fact"
+msgstr "Ajouter un fait"
+
+#: inc/customizer/about-us-page/index.php:13
+#: inc/customizer/footer/index.php:277
+#: inc/customizer/footer/index.php:278
+#: inc/meta-box/page/about-us-page/index.php:18
+#: inc/meta-box/page/home-page/index.php:42
+#: template/customize/footer/index.php:22
+#: template/customize/header/index.php:14
+#: template/meta-box/page/about-us/section-banner/index.php:59
+#: template/meta-box/page/about-us/section-contact/index.php:29
+#: template/meta-box/page/about-us/section-core-values/index.php:50
+#: template/meta-box/page/about-us/section-leader/index.php:44
+#: template/meta-box/page/about-us/section-policy/index.php:46
+#: template/meta-box/page/about-us/section-policy/index.php:89
+msgid "Choose Image"
+msgstr "Choisir une image"
+
+#: inc/customizer/about-us-page/index.php:14
+msgid "Use image"
+msgstr "Utiliser l'image"
+
+#: inc/customizer/about-us-page/index.php:15
+#: inc/customizer/footer/index.php:276
+#: inc/customizer/home-page/index.php:22
+#: inc/meta-box/page/home-page/index.php:39
+#: template/customize/footer/controls.php:40
+#: template/customize/footer/index.php:26
+#: template/customize/footer/index.php:92
+#: template/customize/page/home/section-banner/index.php:35
+#: template/customize/page/home/section-banner/index.php:105
+#: template/meta-box/page/home/section-banner/index.php:27
+msgid "No image selected"
+msgstr "Aucune image sélectionnée"
+
+#: inc/customizer/about-us-page/index.php:16
+#: inc/customizer/home-page/index.php:12
+#: inc/meta-box/page/about-us-page/index.php:30
+#: template/customize/page/home/section-banner/index.php:27
+#: template/customize/page/home/section-banner/index.php:97
+#: template/meta-box/page/about-us/section-policy/index.php:35
+msgid "Image"
+msgstr "Image"
+
+#: inc/customizer/about-us-page/index.php:17
+#: inc/meta-box/page/about-us-page/index.php:29
+#: template/meta-box/page/about-us/section-core-values/index.php:39
+#: template/meta-box/page/about-us/section-leader/index.php:36
+#: template/meta-box/page/about-us/section-policy/index.php:79
+msgid "Icon Image"
+msgstr "Image de l'icône"
+
+#: inc/customizer/about-us-page/index.php:18
+#: inc/customizer/home-page/index.php:46
+#: inc/meta-box/page/about-us-page/index.php:33
+#: inc/meta-box/page/home-page/index.php:51
+#: template/customize/page/home/section-evaluate/index.php:57
+#: template/customize/page/home/section-evaluate/index.php:58
+#: template/meta-box/page/about-us/section-leader/index.php:47
+#: template/meta-box/page/home/section-evaluate/index.php:48
+#: template/meta-box/page/home/section-evaluate/index.php:50
+#: template/template-parts/comment-product/index.php:112
+msgid "Name"
+msgstr "Nom"
+
+#: inc/customizer/about-us-page/index.php:19
+#: inc/customizer/home-page/index.php:47
+#: inc/meta-box/page/about-us-page/index.php:34
+#: inc/meta-box/page/home-page/index.php:52
+#: template/customize/page/home/section-evaluate/index.php:59
+#: template/customize/page/home/section-evaluate/index.php:60
+#: template/meta-box/page/about-us/section-leader/index.php:50
+#: template/meta-box/page/home/section-evaluate/index.php:51
+#: template/meta-box/page/home/section-evaluate/index.php:53
+msgid "Position"
+msgstr "Poste"
+
+#: inc/customizer/about-us-page/index.php:20
+#: inc/customizer/about-us-page/section-banner/index.php:148
+#: inc/customizer/about-us-page/section-contact/index.php:104
+#: inc/customizer/about-us-page/section-core-values/index.php:198
+#: inc/customizer/footer/index.php:110
+#: inc/customizer/header/index.php:34
+#: inc/customizer/home-page/index.php:44
+#: inc/meta-box/page/about-us-page/index.php:23
+#: inc/meta-box/page/home-page/index.php:53
+#: inc/meta-box/post-type/post/description/index.php:7
+#: inc/meta-box/post-type/post/description/index.php:20
+#: inc/meta-box/post-type/post/index.php:20
+#: inc/meta-box/post-type/post/quote/index.php:45
+#: inc/meta-box/post-type/project/standards/index.php:24
+#: inc/meta-box/post-type/project/standards/index.php:45
+#: template/customize/footer/index.php:37
+#: template/customize/header/index.php:34
+#: template/customize/page/home/section-banner/index.php:44
+#: template/customize/page/home/section-banner/index.php:114
+#: template/customize/page/home/section-evaluate/index.php:24
+#: template/customize/page/home/section-evaluate/index.php:61
+#: template/customize/page/home/section-evaluate/index.php:63
+#: template/customize/page/home/section-option/index.php:47
+#: template/customize/page/home/section-post/index.php:17
+#: template/customize/page/home/section-post/index.php:19
+#: template/customize/page/home/section-projects/index.php:19
+#: template/customize/page/home/section-projects/index.php:21
+#: template/customize/page/home/section-service/index.php:47
+#: template/customize/page/projects/section-title/index.php:15
+#: template/meta-box/page/about-us/section-banner/index.php:20
+#: template/meta-box/page/about-us/section-core-values/index.php:16
+#: template/meta-box/page/about-us/section-core-values/index.php:56
+#: template/meta-box/page/about-us/section-leader/index.php:53
+#: template/meta-box/page/about-us/section-policy/index.php:55
+#: template/meta-box/page/about-us/section-policy/index.php:96
+#: template/meta-box/page/home/section-banner/index.php:36
+#: template/meta-box/page/home/section-evaluate/index.php:19
+#: template/meta-box/page/home/section-evaluate/index.php:20
+#: template/meta-box/page/home/section-evaluate/index.php:54
+#: template/meta-box/page/home/section-evaluate/index.php:57
+#: template/meta-box/page/home/section-option/index.php:24
+#: template/meta-box/page/home/section-post/index.php:20
+#: template/meta-box/page/home/section-post/index.php:22
+#: template/meta-box/page/home/section-projects/index.php:17
+#: template/meta-box/page/home/section-services/index.php:62
+#: template/meta-box/page/home/section-services/index.php:113
+#: template/meta-box/page/projects/section-title/index.php:8
+#: template/meta-box/post-type/post/section-description/template.php:3
+#: template/meta-box/post-type/post/section-post/template.php:3
+#: template/meta-box/post-type/post/section-quote/template.php:7
+msgid "Description"
+msgstr "Description"
+
+#: inc/customizer/about-us-page/index.php:21
+#: inc/meta-box/page/about-us-page/index.php:32
+#: template/customize/footer/index.php:201
+#: template/customize/link-picker/index.php:2
+#: template/meta-box/page/about-us/section-core-values/index.php:59
+#: template/meta-box/page/about-us/section-leader/index.php:56
+#: template/meta-box/page/about-us/section-policy/index.php:49
+msgid "URL"
+msgstr "URL"
+
+#: inc/customizer/about-us-page/index.php:22
+#: inc/customizer/about-us-page/section-banner/index.php:138
+#: inc/customizer/about-us-page/section-contact/index.php:103
+#: inc/customizer/about-us-page/section-core-values/index.php:188
+#: inc/customizer/about-us-page/section-leader/index.php:196
+#: inc/customizer/header/index.php:24
+#: inc/customizer/home-page/index.php:43
+#: inc/meta-box/page/about-us-page/index.php:21
+#: inc/meta-box/post-type/post/quote/index.php:44
+#: inc/meta-box/post-type/project/standards/index.php:23
+#: inc/meta-box/post-type/project/standards/index.php:44
+#: template/customize/header/index.php:25
+#: template/customize/page/home/section-evaluate/index.php:16
+#: template/customize/page/home/section-post/index.php:12
+#: template/customize/page/home/section-projects/index.php:16
+#: template/customize/page/home/section-service/index.php:43
+#: template/customize/page/projects/section-title/index.php:11
+#: template/meta-box/page/about-us/section-banner/index.php:18
+#: template/meta-box/page/about-us/section-contact/index.php:14
+#: template/meta-box/page/about-us/section-core-values/index.php:14
+#: template/meta-box/page/about-us/section-core-values/index.php:53
+#: template/meta-box/page/about-us/section-leader/index.php:15
+#: template/meta-box/page/about-us/section-policy/index.php:52
+#: template/meta-box/page/about-us/section-policy/index.php:93
+#: template/meta-box/page/home/section-evaluate/index.php:15
+#: template/meta-box/page/home/section-evaluate/index.php:16
+#: template/meta-box/page/home/section-post/index.php:15
+#: template/meta-box/page/home/section-services/index.php:57
+#: template/meta-box/page/home/section-services/index.php:111
+#: template/meta-box/page/projects/section-tabs/index.php:10
+#: template/meta-box/page/projects/section-title/index.php:4
+#: template/meta-box/post-type/post/section-quote/template.php:3
+msgid "Title"
+msgstr "Titre"
+
+#: inc/customizer/about-us-page/index.php:23
+#: inc/customizer/link-picker/index.php:107
+msgid "Loading..."
+msgstr "Chargement..."
+
+#: inc/customizer/about-us-page/index.php:24
+msgid "Only up to %d items will be saved; extra items will not be saved."
+msgstr "Seuls jusqu'à %d éléments seront enregistrés ; les éléments supplémentaires ne seront pas enregistrés."
+
+#: inc/customizer/about-us-page/index.php:25
+msgid "No items. Click \"%s\" to add."
+msgstr "Aucun élément. Cliquez sur \"%s\" pour en ajouter."
+
+#: inc/customizer/about-us-page/index.php:7
+#: inc/customizer/home-page/index.php:7
+#: template/customize/page/home/section-banner/index.php:21
+#: template/customize/page/home/section-data/index.php:15
+#: template/customize/page/home/section-evaluate/index.php:40
+#: template/customize/page/home/section-option/index.php:17
+#: template/customize/page/home/section-service/index.php:23
+msgid "Item %d"
+msgstr "Élément %d"
+
+#: inc/customizer/about-us-page/index.php:8
+#: inc/meta-box/page/about-us-page/index.php:25
+#: template/meta-box/page/about-us/section-banner/index.php:40
+msgid "Label"
+msgstr "Libellé"
+
+#: inc/customizer/about-us-page/index.php:9
+#: inc/meta-box/page/about-us-page/index.php:24
+#: inc/meta-box/post-type/post/quote/index.php:28
+#: inc/meta-box/post-type/post/quote/index.php:60
+#: template/meta-box/page/about-us/section-banner/index.php:43
+#: template/meta-box/post-type/post/section-quote/template.php:41
+msgid "Value"
+msgstr "Valeur"
+
+#: inc/customizer/about-us-page/section-banner/index.php:104
+#: inc/customizer/home-page/section-banner/index.php:207
+#: template/meta-box/page/home/section-banner/index.php:10
+msgid "Enable Banner"
+msgstr "Activer la bannière"
+
+#: inc/customizer/about-us-page/section-banner/index.php:115
+#: inc/customizer/about-us-page/section-contact/index.php:94
+#: inc/customizer/about-us-page/section-core-values/index.php:153
+#: inc/customizer/about-us-page/section-leader/index.php:151
+msgid "Edit About Us Page"
+msgstr "Modifier la page À propos de nous"
+
+#: inc/customizer/about-us-page/section-banner/index.php:116
+#: inc/customizer/about-us-page/section-contact/index.php:95
+#: inc/customizer/about-us-page/section-core-values/index.php:154
+#: inc/customizer/about-us-page/section-leader/index.php:152
+msgid "Open the About Us page to edit meta box."
+msgstr "Ouvrez la page À propos de nous pour modifier la zone de métadonnées."
+
+#: inc/customizer/about-us-page/section-banner/index.php:119
+#: inc/customizer/about-us-page/section-contact/index.php:98
+#: inc/customizer/about-us-page/section-core-values/index.php:157
+#: inc/customizer/about-us-page/section-leader/index.php:155
+msgid "Edit About Us"
+msgstr "Modifier À propos de nous"
+
+#: inc/customizer/about-us-page/section-banner/index.php:128
+#: inc/customizer/about-us-page/section-leader/index.php:206
+#: inc/customizer/home-page/index.php:42
+#: inc/meta-box/page/about-us-page/index.php:22
+#: template/customize/footer/index.php:126
+#: template/customize/footer/index.php:136
+#: template/customize/footer/index.php:166
+#: template/customize/link-picker/index.php:4
+#: template/customize/page/home/section-banner/index.php:42
+#: template/customize/page/home/section-banner/index.php:112
+#: template/customize/page/home/section-data/index.php:29
+#: template/customize/page/home/section-data/index.php:31
+#: template/customize/page/home/section-evaluate/index.php:20
+#: template/customize/page/home/section-option/index.php:42
+#: template/meta-box/page/about-us/section-banner/index.php:16
+#: template/meta-box/page/about-us/section-contact/index.php:16
+#: template/meta-box/page/about-us/section-leader/index.php:17
+#: template/meta-box/page/home/section-banner/index.php:34
+#: template/meta-box/page/home/section-data/index.php:26
+#: template/meta-box/page/home/section-data/index.php:27
+#: template/meta-box/page/home/section-evaluate/index.php:17
+#: template/meta-box/page/home/section-evaluate/index.php:18
+#: template/meta-box/page/home/section-option/index.php:22
+msgid "Text"
+msgstr "Texte"
+
+#: inc/customizer/about-us-page/section-banner/index.php:173
+#: template/meta-box/page/about-us/section-banner/index.php:9
+msgid "Facts"
+msgstr "Faits"
+
+#: inc/customizer/about-us-page/section-banner/index.php:174
+msgid "Manage label/value pairs displayed in About Us."
+msgstr "Gérer les paires libellé/valeur affichées dans À propos de nous."
+
+#: inc/customizer/about-us-page/section-banner/index.php:185
+#: inc/meta-box/post-type/post/banner/index.php:32
+#: inc/meta-box/post-type/project/banner/index.php:7
+#: inc/meta-box/post-type/project/banner/index.php:30
+#: inc/meta-box/post-type/project/index.php:23
+#: template/meta-box/page/home/section-banner/index.php:18
+#: template/meta-box/post-type/post/section-banner/index.php:3
+msgid "Banner Image"
+msgstr "Image de bannière"
+
+#: inc/customizer/about-us-page/section-banner/index.php:191
+msgid "Banner Image ID"
+msgstr "ID de l'image de bannière"
+
+#: inc/customizer/about-us-page/section-banner/index.php:32
+#: inc/customizer/about-us-page/section-contact/index.php:17
+#: inc/customizer/about-us-page/section-core-values/index.php:65
+#: inc/customizer/about-us-page/section-leader/index.php:66
+msgid "Could not find an About Us page using template about-us-page.php or about-page.php."
+msgstr "Impossible de trouver une page À propos de nous utilisant le modèle about-us-page.php ou about-page.php."
+
+#: inc/customizer/about-us-page/section-banner/index.php:39
+#: inc/customizer/about-us-page/section-contact/index.php:20
+#: inc/customizer/about-us-page/section-core-values/index.php:68
+#: inc/customizer/about-us-page/section-leader/index.php:69
+#: inc/customizer/home-page/section-evaluate/index.php:35
+#: inc/customizer/home-page/section-post/index.php:35
+#: inc/customizer/home-page/section-projects/index.php:39
+#: inc/customizer/link-picker/index.php:34
+#: inc/customizer/project-page/section-title/index.php:39
+msgid "Open edit page"
+msgstr "Ouvrir la page de modification"
+
+#: inc/customizer/about-us-page/section-banner/index.php:94
+#: inc/meta-box/page/about-us-page/section-banner/index.php:14
+msgid "About Us: Banner"
+msgstr "À propos de nous: Bannière"
+
+#: inc/customizer/about-us-page/section-contact/index.php:105
+#: template/meta-box/page/about-us/section-contact/index.php:35
+#: template/template-parts/page/bill/section-bill/index.php:99
+#: template/template-parts/page/checkout/section-checkout/index.php:101
+msgid "Address"
+msgstr "Adresse"
+
+#: inc/customizer/about-us-page/section-contact/index.php:106
+#: template/customize/footer/index.php:54
+#: template/meta-box/page/about-us/section-contact/index.php:37
+#: template/template-parts/page/about-us/section-contact-form/index.php:57
+msgid "Phone"
+msgstr "Téléphone"
+
+#: inc/customizer/about-us-page/section-contact/index.php:107
+#: template/customize/footer/index.php:59
+#: template/meta-box/page/about-us/section-contact/index.php:39
+#: template/template-parts/comment-product/index.php:113
+#: template/template-parts/page/about-us/section-contact-form/index.php:51
+msgid "Email"
+msgstr "E-mail"
+
+#: inc/customizer/about-us-page/section-contact/index.php:143
+#: template/meta-box/page/about-us/section-contact/index.php:23
+msgid "Map Image"
+msgstr "Image de carte"
+
+#: inc/customizer/about-us-page/section-contact/index.php:149
+msgid "Map Image ID"
+msgstr "ID de l'image de carte"
+
+#: inc/customizer/about-us-page/section-contact/index.php:64
+#: inc/meta-box/page/about-us-page/section-contact/index.php:13
+msgid "About Us: Contact"
+msgstr "À propos de nous: Contact"
+
+#: inc/customizer/about-us-page/section-contact/index.php:82
+msgid "Enable Contact"
+msgstr "Activer le contact"
+
+#: inc/customizer/about-us-page/section-core-values/index.php:115
+#: inc/meta-box/page/about-us-page/section-core-values/index.php:14
+msgid "About Us: Core Values"
+msgstr "À propos de nous: Valeurs principales"
+
+#: inc/customizer/about-us-page/section-core-values/index.php:142
+msgid "Enable Core Values"
+msgstr "Activer les valeurs principales"
+
+#: inc/customizer/about-us-page/section-core-values/index.php:229
+msgid "Core Values Items"
+msgstr "Éléments des valeurs principales"
+
+#: inc/customizer/about-us-page/section-core-values/index.php:230
+#: template/customize/page/about-us/section-core-values/index.php:2
+msgid "Manage core values items (icon, title, description, URL)."
+msgstr "Managez les éléments des valeurs principales (icône, titre, description, URL)."
+
+#: inc/customizer/about-us-page/section-leader/index.php:113
+#: inc/meta-box/page/about-us-page/section-leader/index.php:13
+msgid "About Us: Leader"
+msgstr "À propos de nous: Leader"
+
+#: inc/customizer/about-us-page/section-leader/index.php:140
+msgid "Enable Leader"
+msgstr "Activer le leader"
+
+#: inc/customizer/about-us-page/section-leader/index.php:216
+#: template/meta-box/page/about-us/section-leader/index.php:19
+#: template/template-parts/page/about-us/section-leader/index.php:32
+msgid "Core Executives"
+msgstr "Cadres principaux"
+
+#: inc/customizer/about-us-page/section-leader/index.php:226
+#: template/meta-box/page/about-us/section-leader/index.php:21
+#: template/template-parts/page/about-us/section-leader/index.php:38
+msgid "Total Workforce"
+msgstr "Main-d'œuvre totale"
+
+#: inc/customizer/about-us-page/section-leader/index.php:253
+msgid "Leader Items"
+msgstr "Éléments du leader"
+
+#: inc/customizer/about-us-page/section-leader/index.php:254
+#: template/customize/page/about-us/section-leader/index.php:2
+msgid "Manage leader items (image, name, position, description, URL)."
+msgstr "Gérer les éléments du leader (image, nom, poste, description, URL)."
+
+#: inc/customizer/about-us-page/section-policy/index.php:126
+msgid "Enable Policy"
+msgstr "Activer la politique"
+
+#: inc/customizer/about-us-page/section-policy/index.php:131
+#: template/meta-box/page/about-us/section-policy/index.php:15
+msgid "Left Title"
+msgstr "Titre de gauche"
+
+#: inc/customizer/about-us-page/section-policy/index.php:132
+#: template/meta-box/page/about-us/section-policy/index.php:17
+#: template/template-parts/page/about-us/section-policy/index.php:69
+msgid "Business Registration"
+msgstr "Enregistrement de l'entreprise"
+
+#: inc/customizer/about-us-page/section-policy/index.php:133
+#: template/meta-box/page/about-us/section-policy/index.php:20
+msgid "General Contractor"
+msgstr "Contractant général"
+
+#: inc/customizer/about-us-page/section-policy/index.php:134
+#: template/meta-box/page/about-us/section-policy/index.php:23
+#: template/template-parts/page/about-us/section-policy/index.php:81
+msgid "DUNS Number"
+msgstr "Numéro DUNS"
+
+#: inc/customizer/about-us-page/section-policy/index.php:135
+#: template/meta-box/page/about-us/section-policy/index.php:66
+msgid "Right Title"
+msgstr "Titre de droite"
+
+#: inc/customizer/about-us-page/section-policy/index.php:169
+#: template/meta-box/page/about-us/section-policy/index.php:68
+msgid "Warranty Description"
+msgstr "Description de la garantie"
+
+#: inc/customizer/about-us-page/section-policy/index.php:214
+#: template/meta-box/page/about-us/section-policy/index.php:25
+msgid "Certifications"
+msgstr "Certifications"
+
+#: inc/customizer/about-us-page/section-policy/index.php:215
+msgid "Manage certifications (image/url/title/desc)."
+msgstr "Gérer les certifications (image/URL/titre/description)."
+
+#: inc/customizer/about-us-page/section-policy/index.php:219
+msgid "Warranty Items"
+msgstr "Éléments de garantie"
+
+#: inc/customizer/about-us-page/section-policy/index.php:220
+msgid "Manage warranty items (icon/title/desc)."
+msgstr "Gérer les éléments de garantie (icône/titre/description)."
+
+#: inc/customizer/about-us-page/section-policy/index.php:96
+#: inc/meta-box/page/about-us-page/section-policy/index.php:13
+msgid "About Us: Policy"
+msgstr "À propos de nous: Politique"
+
+#: inc/customizer/footer/index.php:100
+msgid "Banner Background"
+msgstr "Arrière-plan de la bannière"
+
+#: inc/customizer/footer/index.php:121
+msgid "Contact Location"
+msgstr "Emplacement du contact"
+
+#: inc/customizer/footer/index.php:131
+msgid "Contact Phone"
+msgstr "Téléphone du contact"
+
+#: inc/customizer/footer/index.php:141
+msgid "Contact Email"
+msgstr "Email du contact"
+
+#: inc/customizer/footer/index.php:151
+msgid "Contact Time"
+msgstr "Heures de contact"
+
+#: inc/customizer/footer/index.php:162
+msgid "Footer Contact Links"
+msgstr "Liens de contact du pied de page"
+
+#: inc/customizer/footer/index.php:163
+msgid "Add/Edit contact links with icons."
+msgstr "Ajouter/Modifier les liens de contact avec des icônes."
+
+#: inc/customizer/footer/index.php:173
+msgid "Create Build Text"
+msgstr "Créer le texte de Build"
+
+#: inc/customizer/footer/index.php:183
+msgid "Policy Text"
+msgstr "Texte de la politique"
+
+#: inc/customizer/footer/index.php:194
+msgid "Policy Link"
+msgstr "Lien de la politique"
+
+#: inc/customizer/footer/index.php:195
+msgid "Choose link for Policy."
+msgstr "Choisir le lien pour la politique."
+
+#: inc/customizer/footer/index.php:205
+msgid "Servicer Text"
+msgstr "Texte du service"
+
+#: inc/customizer/footer/index.php:216
+msgid "Servicer Link"
+msgstr "Lien du service"
+
+#: inc/customizer/footer/index.php:217
+msgid "Choose link for Servicer."
+msgstr "Choisir le lien pour le service."
+
+#: inc/customizer/footer/index.php:265
+#: inc/customizer/home-page/index.php:48
+#: template/customize/footer/controls.php:43
+#: template/customize/footer/controls.php:88
+#: template/customize/footer/index.php:95
+#: template/customize/page/home/section-banner/index.php:48
+#: template/customize/page/home/section-banner/index.php:117
+#: template/customize/page/home/section-service/index.php:53
+#: template/meta-box/page/home/section-banner/index.php:39
+#: template/meta-box/page/home/section-services/index.php:68
+#: template/meta-box/page/home/section-services/index.php:116
+msgid "Link URL"
+msgstr "URL du lien"
+
+#: inc/customizer/footer/index.php:266
+#: inc/customizer/home-page/index.php:31
+#: template/customize/footer/controls.php:47
+#: template/customize/footer/controls.php:90
+#: template/customize/footer/index.php:98
+#: template/customize/footer/index.php:146
+#: template/customize/footer/index.php:177
+#: template/customize/footer/index.php:197
+#: template/customize/page/home/section-banner/index.php:51
+#: template/customize/page/home/section-banner/index.php:65
+#: template/customize/page/home/section-banner/index.php:119
+#: template/customize/page/home/section-banner/index.php:128
+#: template/customize/page/home/section-service/index.php:56
+#: template/meta-box/page/home/section-banner/index.php:41
+#: template/meta-box/page/home/section-services/index.php:71
+#: template/meta-box/page/home/section-services/index.php:118
+msgid "Choose Link"
+msgstr "Choisir un lien"
+
+#: inc/customizer/footer/index.php:267
+#: inc/customizer/home-page/index.php:49
+#: template/customize/footer/controls.php:50
+#: template/customize/footer/controls.php:93
+#: template/customize/footer/index.php:101
+#: template/customize/page/home/section-banner/index.php:54
+#: template/customize/page/home/section-banner/index.php:120
+#: template/customize/page/home/section-service/index.php:59
+#: template/meta-box/page/home/section-banner/index.php:43
+#: template/meta-box/page/home/section-services/index.php:74
+#: template/meta-box/page/home/section-services/index.php:119
+msgid "Link Title"
+msgstr "Titre du lien"
+
+#: inc/customizer/footer/index.php:268
+#: inc/customizer/home-page/index.php:50
+#: template/customize/footer/controls.php:54
+#: template/customize/footer/controls.php:97
+#: template/customize/footer/index.php:106
+#: template/customize/page/home/section-banner/index.php:58
+#: template/customize/page/home/section-banner/index.php:122
+#: template/customize/page/home/section-service/index.php:64
+#: template/meta-box/page/home/section-banner/index.php:46
+#: template/meta-box/page/home/section-services/index.php:79
+#: template/meta-box/page/home/section-services/index.php:121
+msgid "Link Target"
+msgstr "Cible du lien"
+
+#: inc/customizer/footer/index.php:269
+#: inc/customizer/home-page/index.php:32
+#: template/customize/footer/controls.php:57
+#: template/customize/page/home/section-banner/index.php:59
+#: template/customize/page/home/section-banner/index.php:123
+#: template/meta-box/page/home/section-services/index.php:81
+#: template/meta-box/page/home/section-services/index.php:122
+msgid "Same Tab"
+msgstr ""
+
+#: inc/customizer/footer/index.php:270
+#: inc/customizer/home-page/index.php:33
+#: template/customize/footer/controls.php:59
+#: template/customize/footer/controls.php:102
+#: template/customize/footer/index.php:109
+#: template/customize/footer/index.php:157
+#: template/customize/footer/index.php:188
+#: template/customize/footer/index.php:206
+#: template/customize/page/home/section-banner/index.php:60
+#: template/customize/page/home/section-banner/index.php:124
+#: template/customize/page/home/section-service/index.php:67
+#: template/meta-box/page/home/section-banner/index.php:49
+#: template/meta-box/page/home/section-services/index.php:82
+#: template/meta-box/page/home/section-services/index.php:123
+msgid "Open in new tab"
+msgstr "Ouvrir dans un nouvel onglet"
+
+#: inc/customizer/footer/index.php:273
+#: inc/customizer/home-page/index.php:15
+#: template/customize/footer/controls.php:32
+#: template/customize/footer/index.php:84
+#: template/customize/page/home/section-option/index.php:22
+#: template/customize/page/home/section-option/index.php:27
+#: template/customize/page/home/section-service/index.php:29
+#: template/meta-box/page/home/section-option/index.php:8
+#: template/meta-box/page/home/section-services/index.php:42
+#: template/meta-box/page/home/section-services/index.php:101
+msgid "Icon"
+msgstr "Icône"
+
+#: inc/customizer/footer/index.php:274
+#: inc/customizer/footer/index.php:280
+#: inc/customizer/home-page/index.php:20
+#: inc/meta-box/page/home-page/index.php:49
+#: inc/meta-box/post-type/post/banner/index.php:34
+#: inc/meta-box/post-type/project/about/index.php:33
+#: inc/meta-box/post-type/project/banner/index.php:30
+#: template/customize/footer/controls.php:35
+#: template/customize/footer/index.php:88
+#: template/customize/page/home/section-banner/index.php:31
+#: template/customize/page/home/section-banner/index.php:100
+#: template/customize/page/home/section-evaluate/index.php:49
+#: template/meta-box/page/home/section-banner/index.php:22
+#: template/meta-box/page/home/section-evaluate/index.php:40
+#: template/meta-box/page/home/section-option/index.php:12
+#: template/meta-box/page/home/section-services/index.php:47
+#: template/meta-box/page/home/section-services/index.php:104
+#: template/meta-box/post-type/post/section-banner/index.php:7
+msgid "Select photo"
+msgstr "Sélectionner une photo"
+
+#: inc/customizer/footer/index.php:275
+#: inc/customizer/home-page/index.php:21
+#: inc/meta-box/page/home-page/index.php:50
+#: inc/meta-box/post-type/post/banner/index.php:35
+#: inc/meta-box/post-type/project/about/index.php:33
+#: inc/meta-box/post-type/project/banner/index.php:30
+#: template/customize/footer/controls.php:37
+#: template/customize/footer/index.php:89
+#: template/customize/page/home/section-banner/index.php:32
+#: template/customize/page/home/section-banner/index.php:101
+#: template/customize/page/home/section-evaluate/index.php:50
+#: template/meta-box/page/home/section-banner/index.php:23
+#: template/meta-box/post-type/post/section-banner/index.php:9
+msgid "Remove photo"
+msgstr "Supprimer la photo"
+
+#: inc/customizer/footer/index.php:279
+#: inc/customizer/header/index.php:58
+#: inc/customizer/home-page/index.php:19
+#: inc/meta-box/page/about-us-page/index.php:19
+#: inc/meta-box/page/home-page/index.php:43
+msgid "Use Image"
+msgstr "Utiliser l'image"
+
+#: inc/customizer/footer/index.php:281
+#: template/customize/footer/index.php:216
+msgid "Page"
+msgstr "Page"
+
+#: inc/customizer/footer/index.php:282
+#: inc/meta-box/page/home-page/section-post/index.php:15
+#: template/customize/footer/index.php:217
+#: template/meta-box/page/home/section-tabs/index.php:17
+msgid "Post"
+msgstr "Article"
+
+#: inc/customizer/footer/index.php:374
+#: inc/customizer/header/index.php:131
+msgid "Not allowed"
+msgstr "Non autorisé"
+
+#: inc/customizer/footer/index.php:91
+#: inc/customizer/footer/index.php:318
+#: template/customize/footer/index.php:2
+msgid "Footer"
+msgstr "Pied de page"
+
+#: inc/customizer/header/index.php:14
+#: template/customize/header/index.php:10
+msgid "Logo"
+msgstr "Logo"
+
+#: inc/customizer/header/index.php:5
+#: inc/customizer/header/index.php:84
+#: template/customize/header/index.php:2
+msgid "Header"
+msgstr "En-tête"
+
+#: inc/customizer/header/index.php:57
+msgid "Select Header Logo"
+msgstr "Sélectionner le logo de l'en-tête"
+
+#: inc/customizer/home-page/index.php:13
+#: template/customize/page/home/section-banner/index.php:39
+#: template/customize/page/home/section-banner/index.php:109
+#: template/customize/page/home/section-option/index.php:23
+#: template/customize/page/home/section-option/index.php:40
+#: template/customize/page/home/section-service/index.php:41
+#: template/meta-box/page/about-us/section-banner/index.php:7
+#: template/meta-box/page/about-us/section-contact/index.php:7
+#: template/meta-box/page/about-us/section-core-values/index.php:7
+#: template/meta-box/page/about-us/section-leader/index.php:8
+#: template/meta-box/page/home/section-option/index.php:21
+#: template/meta-box/page/home/section-services/index.php:55
+#: template/meta-box/page/home/section-services/index.php:110
+msgid "Content"
+msgstr "Contenu"
+
+#: inc/customizer/home-page/index.php:14
+#: template/customize/page/home/section-banner/index.php:46
+#: template/customize/page/home/section-banner/index.php:116
+#: template/customize/page/home/section-service/index.php:51
+#: template/meta-box/page/home/section-banner/index.php:38
+#: template/meta-box/page/home/section-services/index.php:66
+#: template/meta-box/page/home/section-services/index.php:115
+msgid "Link"
+msgstr "Lien"
+
+#: inc/customizer/home-page/index.php:16
+#: inc/meta-box/page/home-page/index.php:48
+#: template/customize/page/home/section-evaluate/index.php:47
+#: template/meta-box/page/home/section-evaluate/index.php:36
+msgid "Avatar"
+msgstr "Avatar"
+
+#: inc/customizer/home-page/index.php:18
+#: inc/meta-box/post-type/post/quote/index.php:24
+#: inc/meta-box/post-type/project/about/index.php:19
+#: inc/meta-box/post-type/project/banner/index.php:18
+#: inc/meta-box/post-type/project/gallery/index.php:18
+#: inc/meta-box/post-type/project/standards/index.php:18
+msgid "Select image"
+msgstr "Sélectionner l'image"
+
+#: inc/customizer/home-page/index.php:23
+#: inc/meta-box/page/home-page/index.php:41
+#: template/customize/page/home/section-evaluate/index.php:53
+#: template/meta-box/page/home/section-evaluate/index.php:44
+msgid "No photo selected yet"
+msgstr "Aucune photo sélectionnée pour le moment"
+
+#: inc/customizer/home-page/index.php:25
+#: template/customize/page/home/section-option/index.php:31
+#: template/customize/page/home/section-service/index.php:33
+msgid "Select icon"
+msgstr "Sélectionner une icône"
+
+#: inc/customizer/home-page/index.php:26
+#: template/customize/page/home/section-option/index.php:32
+#: template/customize/page/home/section-service/index.php:34
+msgid "Remove icon"
+msgstr "Retirer l'icône"
+
+#: inc/customizer/home-page/index.php:27
+msgid "Choose icon"
+msgstr "Choisir une icône"
+
+#: inc/customizer/home-page/index.php:28
+msgid "Use"
+msgstr "Utiliser"
+
+#: inc/customizer/home-page/index.php:29
+#: inc/meta-box/page/home-page/index.php:40
+#: template/customize/page/home/section-option/index.php:36
+#: template/customize/page/home/section-service/index.php:37
+#: template/meta-box/page/home/section-option/index.php:17
+#: template/meta-box/page/home/section-services/index.php:51
+#: template/meta-box/page/home/section-services/index.php:107
+msgid "No icon selected"
+msgstr "Aucune icône sélectionnée"
+
+#: inc/customizer/home-page/index.php:34
+#: template/customize/link-picker/index.php:6
+#: template/customize/page/home/section-banner/index.php:71
+#: template/customize/page/home/section-banner/index.php:135
+msgid "Open in new tab (_blank)"
+msgstr "Ouvrir dans un nouvel onglet (_blank)"
+
+#: inc/customizer/home-page/index.php:35
+#: template/customize/footer/controls.php:99
+#: template/customize/footer/index.php:108
+#: template/customize/footer/index.php:156
+#: template/customize/footer/index.php:187
+#: template/customize/page/home/section-service/index.php:66
+#: template/meta-box/page/home/section-banner/index.php:48
+msgid "Default"
+msgstr "Par défaut"
+
+#: inc/customizer/home-page/index.php:36
+#: template/customize/link-picker/index.php:58
+#: template/customize/page/home/section-banner/index.php:73
+#: template/customize/page/home/section-banner/index.php:137
+#: template/template-parts/page/bill/section-bill/index.php:73
+msgid "Close"
+msgstr "Fermer"
+
+#: inc/customizer/home-page/index.php:37
+#: template/customize/page/home/section-banner/index.php:66
+#: template/customize/page/home/section-banner/index.php:129
+msgid "Search pages/posts"
+msgstr "Rechercher des pages/articles"
+
+#: inc/customizer/home-page/index.php:38
+#: template/customize/footer/index.php:211
+#: template/customize/link-picker/index.php:9
+#: template/customize/page/home/section-banner/index.php:67
+#: template/customize/page/home/section-banner/index.php:130
+msgid "Enter keyword..."
+msgstr "Saisissez un mot-clé..."
+
+#: inc/customizer/home-page/index.php:39
+#: inc/customizer/link-picker/index.php:105
+#: template/customize/link-picker/index.php:54
+msgid "No results found."
+msgstr "Aucun résultat trouvé."
+
+#: inc/customizer/home-page/index.php:41
+#: template/customize/page/home/section-data/index.php:21
+#: template/customize/page/home/section-data/index.php:23
+#: template/meta-box/page/home/section-data/index.php:21
+#: template/meta-box/page/home/section-data/index.php:22
+msgid "Number"
+msgstr "Nombre"
+
+#: inc/customizer/home-page/index.php:45
+#: template/customize/page/home/section-banner/index.php:40
+#: template/customize/page/home/section-banner/index.php:110
+#: template/meta-box/page/home/section-banner/index.php:32
+msgid "Type"
+msgstr "Type"
+
+#: inc/customizer/home-page/index.php:51
+#: template/customize/page/home/section-banner/index.php:56
+#: template/customize/page/home/section-banner/index.php:121
+#: template/meta-box/page/home/section-banner/index.php:45
+msgid "Button text"
+msgstr "Texte du bouton"
+
+#: inc/customizer/home-page/index.php:52
+#: template/customize/page/home/section-service/index.php:61
+#: template/meta-box/page/home/section-services/index.php:76
+#: template/template-parts/page/about-us/section-core-values/index.php:27
+#: template/template-parts/page/about-us/section-core-values/index.php:68
+#: template/template-parts/page/home/section-services/index.php:85
+msgid "View Details"
+msgstr "Voir les détails"
+
+#: inc/customizer/home-page/index.php:54
+#: template/customize/footer/index.php:225
+#: template/customize/link-picker/index.php:57
+#: template/customize/page/home/section-evaluate/index.php:77
+#: template/customize/page/home/section-projects/index.php:26
+msgid "Apply"
+msgstr "Appliquer"
+
+#: inc/customizer/home-page/index.php:55
+#: template/customize/page/home/section-evaluate/index.php:78
+#: template/customize/page/home/section-projects/index.php:27
+msgid "Changes are previewed instantly. Click Publish to save."
+msgstr "Les modifications sont prévisualisées instantanément. Cliquez sur Publier pour enregistrer."
+
+#: inc/customizer/home-page/index.php:56
+#: inc/meta-box/page/home-page/index.php:47
+msgid "Use this photo"
+msgstr "Utiliser cette photo"
+
+#: inc/customizer/home-page/index.php:9
+#: template/customize/page/home/section-banner/index.php:78
+#: template/customize/page/home/section-banner/index.php:142
+#: template/customize/page/home/section-data/index.php:38
+#: template/customize/page/home/section-option/index.php:54
+#: template/customize/page/home/section-service/index.php:73
+msgid "Remove item"
+msgstr "Retirer l'élément"
+
+#: inc/customizer/home-page/section-banner/index.php:195
+msgid "Home Page: Banner"
+msgstr "Page d'accueil : Bannière"
+
+#: inc/customizer/home-page/section-banner/index.php:220
+msgid "Banner Items"
+msgstr "Éléments de la bannière"
+
+#: inc/customizer/home-page/section-banner/index.php:221
+msgid "Add/Edit Banner items to display on the Front Page."
+msgstr "Ajouter/Modifier les éléments de bannière à afficher sur la page d'accueil."
+
+#: inc/customizer/home-page/section-banner/index.php:246
+msgid "Show Navigation Buttons"
+msgstr "Afficher les boutons de navigation"
+
+#: inc/customizer/home-page/section-data/index.php:122
+msgid "Home Page: Data"
+msgstr "Page d'accueil : Données"
+
+#: inc/customizer/home-page/section-data/index.php:132
+msgid "Enable Section Data"
+msgstr "Activer la section Données"
+
+#: inc/customizer/home-page/section-data/index.php:143
+msgid "Data Items"
+msgstr "Éléments de données"
+
+#: inc/customizer/home-page/section-data/index.php:144
+msgid "Add/Edit Data items to display on the home page."
+msgstr "Ajouter/Modifier les éléments de données à afficher sur la page d'accueil."
+
+#: inc/customizer/home-page/section-evaluate/index.php:101
+msgid "Enable Evaluate"
+msgstr "Activer l'évaluation"
+
+#: inc/customizer/home-page/section-evaluate/index.php:107
+msgid "Evaluate Content"
+msgstr "Contenu de l'évaluation"
+
+#: inc/customizer/home-page/section-evaluate/index.php:108
+msgid "Edit Evaluate section content for Front Page."
+msgstr "Éditez le contenu de la section Évaluation pour la page d'accueil."
+
+#: inc/customizer/home-page/section-evaluate/index.php:28
+#: inc/customizer/home-page/section-post/index.php:28
+#: inc/customizer/home-page/section-projects/index.php:32
+#: inc/customizer/link-picker/index.php:23
+msgid "Could not find a Home page using template home-page.php."
+msgstr "Impossible de trouver une page d'accueil utilisant le modèle home-page.php."
+
+#: inc/customizer/home-page/section-evaluate/index.php:86
+msgid "Home Page: Evaluate"
+msgstr "Page d'accueil : Évaluation"
+
+#: inc/customizer/home-page/section-option/index.php:129
+msgid "Home Page: Option"
+msgstr "Page d'accueil : Option"
+
+#: inc/customizer/home-page/section-option/index.php:139
+msgid "Enable Section Option"
+msgstr "Activer la section Option"
+
+#: inc/customizer/home-page/section-option/index.php:150
+msgid "Option Items"
+msgstr "Éléments d'option"
+
+#: inc/customizer/home-page/section-option/index.php:151
+msgid "Add/Edit Option items to display on the home page."
+msgstr "Ajouter/Modifier les éléments d'option à afficher sur la page d'accueil."
+
+#: inc/customizer/home-page/section-post/index.php:101
+#: template/meta-box/page/home/section-post/index.php:9
+msgid "Enable Post"
+msgstr "Activer l'article"
+
+#: inc/customizer/home-page/section-post/index.php:107
+msgid "Post Section Content"
+msgstr "Contenu de la section Article"
+
+#: inc/customizer/home-page/section-post/index.php:108
+msgid "Edit Post section content for Front Page."
+msgstr "Editez le contenu de la section Article pour la page d'accueil."
+
+#: inc/customizer/home-page/section-post/index.php:86
+msgid "Home Page: Post"
+msgstr "Page d'accueil : Article"
+
+#: inc/customizer/home-page/section-products/index.php:113
+msgid "Home Page: Product"
+msgstr "Page d'accueil : Produit"
+
+#: inc/customizer/home-page/section-products/index.php:124
+msgid "Enable Product"
+msgstr "Activer le produit"
+
+#: inc/customizer/home-page/section-products/index.php:135
+msgid "Materials Title"
+msgstr "Titre des matériaux"
+
+#: inc/customizer/home-page/section-products/index.php:146
+msgid "Materials Description"
+msgstr "Description des matériaux"
+
+#: inc/customizer/home-page/section-projects/index.php:102
+msgid "Enable Portfolio"
+msgstr "Activer le portfolio"
+
+#: inc/customizer/home-page/section-projects/index.php:113
+msgid "Portfolio Content"
+msgstr "Contenu du portfolio"
+
+#: inc/customizer/home-page/section-projects/index.php:114
+msgid "Edit Portfolio title and description for Front Page."
+msgstr "Éditez le titre et la description du portfolio pour la page d'accueil."
+
+#: inc/customizer/home-page/section-projects/index.php:92
+msgid "Home Page: Portfolio"
+msgstr "Page d'accueil : Portfolio"
+
+#: inc/customizer/home-page/section-service/index.php:180
+msgid "Home Page: Services"
+msgstr "Page d'accueil : Services"
+
+#: inc/customizer/home-page/section-service/index.php:191
+msgid "Enable Services"
+msgstr "Activer les services"
+
+#: inc/customizer/home-page/section-service/index.php:202
+msgid "Services Title"
+msgstr "Titre des services"
+
+#: inc/customizer/home-page/section-service/index.php:213
+msgid "Services Description"
+msgstr "Description des services"
+
+#: inc/customizer/home-page/section-service/index.php:225
+msgid "Services Items"
+msgstr "Éléments de services"
+
+#: inc/customizer/home-page/section-service/index.php:226
+msgid "Add/Edit Services Items to display on the home page."
+msgstr "Ajouter/Modifier les éléments de services à afficher sur la page d'accueil."
+
+#: inc/customizer/link-picker/index.php:106
+#: template/customize/link-picker/index.php:51
+msgid "Select"
+msgstr "Sélectionner"
+
+#: inc/customizer/link-picker/index.php:65
+#: inc/customizer/link-picker/index.php:78
+msgid "Link Picker"
+msgstr "Sélecteur de lien"
+
+#: inc/customizer/link-picker/index.php:79
+msgid "List of pages and posts to select as links."
+msgstr "Liste des pages et articles à sélectionner comme liens."
+
+#: inc/customizer/preview-page/index.php:22
+msgid "— Select Preview Page —"
+msgstr "— Sélectionnez la page de aperçu —"
+
+#: inc/customizer/preview-page/index.php:38
+msgid "Accept"
+msgstr "Accepter"
+
+#: inc/customizer/preview-page/index.php:45
+#: inc/customizer/preview-page/index.php:55
+msgid "Preview Page"
+msgstr "Page d'aperçu"
+
+#: inc/customizer/preview-page/index.php:56
+msgid "Select the page to preview in the Customizer. The sidebar will update accordingly."
+msgstr "Sélectionnez la page à apercevoir dans le Personnalisateur. La barre latérale se mettra à jour en conséquence."
+#: inc/customizer/project-page/section-title/index.php:32
+msgid "Could not find a Projects page using template projects-page.php."
+msgstr ""
+
+#: inc/customizer/project-page/section-title/index.php:74
+msgid "Title Projects"
+msgstr "Projets de titre"
+
+#: inc/customizer/project-page/section-title/index.php:85
+#: inc/meta-box/page/project-page/section-title/index.php:13
+#: template/meta-box/page/projects/section-title/index.php:2
+msgid "Projects Title"
+msgstr "Titre des projets"
+
+#: inc/customizer/project-page/section-title/index.php:86
+msgid "Edit the title and description of the Projects page."
+msgstr "Modifiez le titre et la description de la page Projets."
+
+#: inc/customizer/project-page/section-title/index.php:97
+#: inc/customizer/project-page/section-title/index.php:101
+msgid "Edit Projects Page"
+msgstr "Modifier la page Projets"
+
+#: inc/customizer/project-page/section-title/index.php:98
+msgid "Open the Projects page editor."
+msgstr "Ouvrir l'éditeur de la page Projets."
+
+#: inc/meta-box/page/about-us-page/index.php:28
+#: template/meta-box/page/about-us/section-policy/index.php:63
+msgid "Add Certification"
+msgstr "Ajouter une certification"
+
+#: inc/meta-box/page/about-us-page/index.php:31
+#: template/meta-box/page/about-us/section-core-values/index.php:41
+#: template/meta-box/page/about-us/section-policy/index.php:37
+#: template/meta-box/page/about-us/section-policy/index.php:81
+msgid "No image"
+msgstr "Aucune image"
+
+#: inc/meta-box/page/about-us-page/index.php:50
+msgid "About Us"
+msgstr "À propos de nous"
+
+#: inc/meta-box/page/home-page/index.php:21
+msgid "Home Page"
+msgstr "Page d'accueil"
+
+#: inc/meta-box/page/home-page/index.php:35
+msgid "Displaying"
+msgstr "Affichage"
+
+#: inc/meta-box/page/home-page/index.php:36
+msgid "Hidden"
+msgstr "Caché"
+
+#: inc/meta-box/page/home-page/index.php:37
+#: template/meta-box/page/about-us/section-banner/index.php:15
+#: template/meta-box/page/about-us/section-contact/index.php:13
+#: template/meta-box/page/about-us/section-core-values/index.php:13
+#: template/meta-box/page/about-us/section-leader/index.php:14
+#: template/meta-box/page/about-us/section-policy/index.php:14
+msgid "Enabled"
+msgstr "Activé"
+
+#: inc/meta-box/page/home-page/index.php:38
+msgid "Disabled"
+msgstr "Désactivé"
+
+#: inc/meta-box/page/home-page/index.php:44
+msgid "Select Option Icon"
+msgstr "Sélectionnez l'icône d'option"
+
+#: inc/meta-box/page/home-page/index.php:45
+msgid "Use Icon"
+msgstr "Utiliser l'icône"
+
+#: inc/meta-box/page/home-page/index.php:46
+msgid "Select a photo"
+msgstr "Sélectionnez une photo"
+
+#: inc/meta-box/page/home-page/index.php:55
+#: inc/meta-box/post-type/post/quote/index.php:63
+#: inc/meta-box/post-type/project/standards/index.php:21
+#: inc/meta-box/post-type/project/standards/index.php:52
+#: template/meta-box/page/home/section-banner/index.php:58
+#: template/meta-box/page/home/section-data/index.php:36
+#: template/meta-box/page/home/section-evaluate/index.php:67
+#: template/meta-box/page/home/section-option/index.php:44
+#: template/meta-box/page/home/section-services/index.php:96
+#: template/meta-box/post-type/post/section-quote/template.php:47
+msgid "Add row"
+msgstr "Ajouter une ligne"
+
+#: inc/meta-box/page/home-page/section-banner/index.php:14
+#: inc/meta-box/post-type/post/banner/index.php:7
+#: inc/meta-box/post-type/post/index.php:19
+#: template/customize/footer/index.php:4
+#: template/customize/footer/index.php:18
+#: template/meta-box/page/about-us/section-tabs/index.php:10
+#: template/meta-box/page/home/section-tabs/index.php:10
+#: template/meta-box/post-type/post/section-post/template.php:2
+msgid "Banner"
+msgstr "Bannière"
+
+#: inc/meta-box/page/home-page/section-data/index.php:14
+#: template/meta-box/page/home/section-tabs/index.php:12
+msgid "Data"
+msgstr "Données"
+
+#: inc/meta-box/page/home-page/section-evaluate/index.php:15
+#: template/meta-box/page/home/section-tabs/index.php:15
+msgid "Evaluate"
+msgstr "Évaluer"
+
+#: inc/meta-box/page/home-page/section-option/index.php:14
+#: template/meta-box/page/home/section-tabs/index.php:11
+msgid "Option"
+msgstr "Option"
+
+#: inc/meta-box/page/home-page/section-products/index.php:14
+#: template/meta-box/page/home/section-tabs/index.php:13
+msgid "Products"
+msgstr "Produits"
+
+#: inc/meta-box/page/home-page/section-projects/index.php:15
+#: template/meta-box/page/home/section-tabs/index.php:16
+msgid "Projects"
+msgstr "Projets"
+
+#: inc/meta-box/page/home-page/section-service/index.php:14
+#: template/meta-box/page/home/section-tabs/index.php:14
+msgid "Services"
+msgstr "Services"
+
+#: inc/meta-box/page/project-page/index.php:13
+msgid "Projects Page"
+msgstr "Page des projets"
+
+#: inc/meta-box/post-type/post/banner/index.php:17
+msgid "Select banner photo"
+msgstr "Sélectionnez une photo de bannière"
+
+#: inc/meta-box/post-type/post/banner/index.php:18
+#: inc/meta-box/post-type/project/about/index.php:20
+#: inc/meta-box/post-type/project/standards/index.php:19
+msgid "Use photo"
+msgstr "Utiliser la photo"
+
+#: inc/meta-box/post-type/post/banner/index.php:19
+#: inc/meta-box/post-type/post/banner/index.php:41
+#: inc/meta-box/post-type/project/about/index.php:21
+#: inc/meta-box/post-type/project/about/index.php:34
+#: inc/meta-box/post-type/project/banner/index.php:20
+#: inc/meta-box/post-type/project/banner/index.php:31
+#: inc/meta-box/post-type/project/standards/index.php:25
+#: inc/meta-box/post-type/project/standards/index.php:42
+#: template/meta-box/post-type/post/section-banner/index.php:15
+msgid "No banner selected"
+msgstr "Aucune bannière sélectionnée"
+
+#: inc/meta-box/post-type/post/index.php:11
+msgid "Post Details"
+msgstr "Détails de l'article"
+
+#: inc/meta-box/post-type/post/index.php:21
+#: inc/meta-box/post-type/post/paragraph/index.php:7
+#: template/meta-box/post-type/post/section-post/template.php:4
+msgid "Paragraph"
+msgstr "Paragraphe"
+
+#: inc/meta-box/post-type/post/index.php:22
+#: inc/meta-box/post-type/post/quote/index.php:7
+#: template/meta-box/post-type/post/section-post/template.php:5
+msgid "Quote"
+msgstr "Citation"
+
+#: inc/meta-box/post-type/post/quote/index.php:25
+#: inc/meta-box/post-type/project/banner/index.php:19
+#: inc/meta-box/post-type/project/gallery/index.php:19
+msgid "Add"
+msgstr "Ajouter"
+
+#: inc/meta-box/post-type/post/quote/index.php:27
+#: inc/meta-box/post-type/post/quote/index.php:60
+#: template/meta-box/post-type/post/section-quote/template.php:40
+msgid "Key"
+msgstr "Clé"
+
+#: inc/meta-box/post-type/post/quote/index.php:46
+#: template/meta-box/post-type/post/section-quote/template.php:11
+msgid "Image Description"
+msgstr "Description de l'image"
+
+#: inc/meta-box/post-type/post/quote/index.php:47
+#: inc/meta-box/post-type/project/gallery/index.php:7
+#: inc/meta-box/post-type/project/index.php:30
+#: template/meta-box/post-type/post/section-quote/template.php:15
+#: template/template-parts/single/single-project/index.php:123
+msgid "Gallery"
+msgstr "Galerie"
+
+#: inc/meta-box/post-type/post/quote/index.php:54
+#: inc/meta-box/post-type/project/gallery/index.php:20
+#: inc/meta-box/post-type/project/gallery/index.php:33
+#: inc/meta-box/post-type/project/standards/index.php:22
+#: inc/meta-box/post-type/project/standards/index.php:47
+#: template/meta-box/post-type/post/section-quote/template.php:28
+msgid "Add image"
+msgstr "Ajouter une image"
+
+#: inc/meta-box/post-type/post/quote/index.php:55
+#: template/meta-box/post-type/post/section-quote/template.php:31
+msgid "Quote Repeater"
+msgstr "Répéteur de citations"
+
+#: inc/meta-box/post-type/project/about/index.php:33
+msgid "About Image"
+msgstr "Image À Propos"
+
+#: inc/meta-box/post-type/project/about/index.php:7
+#: inc/meta-box/post-type/project/index.php:25
+msgid "About Project"
+msgstr "À Propos du Projet"
+
+#: inc/meta-box/post-type/project/datetime/index.php:7
+#: inc/meta-box/post-type/project/datetime/index.php:20
+#: inc/meta-box/post-type/project/index.php:29
+msgid "Date Time"
+msgstr "Date et heure"
+
+#: inc/meta-box/post-type/project/gallery/index.php:21
+#: inc/meta-box/post-type/project/gallery/index.php:33
+msgid "Clear gallery"
+msgstr "Vider la galerie"
+
+#: inc/meta-box/post-type/project/index.php:15
+msgid "Project Details"
+msgstr "Détails du projet"
+
+#: inc/meta-box/post-type/project/index.php:24
+#: inc/meta-box/post-type/project/location/index.php:7
+#: inc/meta-box/post-type/project/location/index.php:20
+#: template/customize/footer/index.php:49
+#: template/template-parts/page/home/section-projects/index.php:118
+#: template/template-parts/page/projects/section-list/index.php:59
+msgid "Location"
+msgstr "Adresse"
+
+#: inc/meta-box/post-type/project/index.php:26
+#: inc/meta-box/post-type/project/standards/index.php:7
+#: template/template-parts/single/single-project/index.php:139
+msgid "Standards"
+msgstr "Normes"
+
+#: inc/meta-box/post-type/project/index.php:27
+#: inc/meta-box/post-type/project/infomations/index.php:9
+#: template/customize/footer/index.php:5
+#: template/customize/footer/index.php:32
+msgid "Information"
+msgstr "Informations"
+
+#: inc/meta-box/post-type/project/index.php:28
+#: inc/meta-box/post-type/project/price/index.php:7
+#: inc/meta-box/post-type/project/price/index.php:20
+msgid "Price"
+msgstr "Prix"
+
+#: inc/meta-box/post-type/project/infomations/index.php:29
+#: template/template-parts/single/single-project/index.php:84
+msgid "Total Area"
+msgstr "Superficie totale"
+
+#: inc/meta-box/post-type/project/infomations/index.php:30
+#: template/template-parts/single/single-project/index.php:89
+msgid "Completion"
+msgstr "Achèvement"
+
+#: inc/meta-box/post-type/project/infomations/index.php:31
+#: template/template-parts/single/single-project/index.php:94
+msgid "Architectural Style"
+msgstr "Style architectural"
+
+#: search.php:13
+msgid "Search Results for: %s"
+msgstr "Résultats de recherche pour : %s"
+
+#: single.php:15
+msgid "Previous:"
+msgstr "Précédent :"
+
+#: single.php:16
+msgid "Next:"
+msgstr "Suivant :"
+
+#: template/customize/footer/index.php:10
+#: template/customize/footer/index.php:164
+msgid "Servicer"
+msgstr "Prestataire"
+
+#: template/customize/footer/index.php:203
+#: template/customize/link-picker/index.php:5
+msgid "Link text"
+msgstr "Texte du lien"
+
+#: template/customize/footer/index.php:209
+#: template/customize/link-picker/index.php:8
+msgid "Search"
+msgstr "Rechercher"
+
+#: template/customize/footer/index.php:213
+msgid "Source"
+msgstr "Source"
+
+#: template/customize/footer/index.php:215
+msgid "All"
+msgstr "Tout"
+
+#: template/customize/footer/index.php:224
+msgid "Cancel"
+msgstr "Annuler"
+
+#: template/customize/footer/index.php:6
+#: template/customize/footer/index.php:47
+#: template/meta-box/page/about-us/section-contact/index.php:9
+#: template/meta-box/page/about-us/section-tabs/index.php:14
+#: template/template-parts/footer/footer.php:77
+#: template/template-parts/footer/footer.php:172
+msgid "Contact"
+msgstr "Contact"
+
+#: template/customize/footer/index.php:64
+msgid "Time"
+msgstr "Heure"
+
+#: template/customize/footer/index.php:7
+#: template/customize/footer/index.php:72
+msgid "Contact Link"
+msgstr "Lien de contact"
+
+#: template/customize/footer/index.php:8
+#: template/customize/footer/index.php:124
+msgid "Create Build"
+msgstr "Créer une construction"
+
+#: template/customize/footer/index.php:9
+#: template/customize/footer/index.php:134
+#: template/meta-box/page/about-us/section-tabs/index.php:13
+#: template/template-parts/footer/footer.php:79
+#: template/template-parts/footer/footer.php:220
+msgid "Policy"
+msgstr "Politique"
+
+#: template/customize/link-picker/index.php:7
+msgid "Or link to existing content"
+msgstr "Ou lier au contenu existant"
+
+#: template/customize/page/about-us/section-banner/index.php:2
+msgid "Manage About Us facts (label & value). Use the buttons to add or remove items."
+msgstr "Gérez les informations « À propos de nous » (libellé et valeur). Utilisez les boutons pour ajouter ou supprimer des éléments."
+
+#: template/customize/page/about-us/section-contact/index.php:2
+msgid "Use the fields below in this section to update Contact information."
+msgstr "Utilisez les champs ci-dessous dans cette section pour mettre à jour les informations de contact."
+
+#: template/customize/page/about-us/section-policy/index.php:6
+msgid "Manage Certifications (image/url/title/desc)."
+msgstr "Gérez les certifications (image/url/titre/description)."
+
+#: template/customize/page/about-us/section-policy/index.php:8
+msgid "Manage Warranty Items (icon/title/desc)."
+msgstr "Gérez les éléments de garantie (icône/titre/description)."
+
+#: template/customize/page/home/section-evaluate/index.php:14
+msgid "Evaluate Title"
+msgstr "Titre de l'évaluation"
+
+#: template/customize/page/home/section-post/index.php:10
+msgid "Post Section"
+msgstr "Section des messages"
+
+#: template/customize/page/home/section-post/index.php:14
+#: template/meta-box/page/home/section-post/index.php:17
+msgid "LATEST POSTS"
+msgstr "DERNIERS ARTICLES"
+
+#: template/customize/page/home/section-products/index.php:5
+msgid "Configure the title and description of the Products section."
+msgstr "Configurez le titre et la description de la section Produits."
+
+#: template/customize/page/home/section-products/index.php:7
+msgid "Changes will be displayed immediately in the Preview."
+msgstr "Les modifications seront affichées immédiatement dans l'aperçu."
+
+#: template/customize/page/home/section-products/index.php:8
+msgid "Click Publish to save to the home page."
+msgstr "Cliquez sur Publier pour enregistrer sur la page d'accueil."
+
+#: template/customize/page/home/section-projects/index.php:14
+msgid "Portfolio Title"
+msgstr "Titre du portefeuille"
+
+#: template/customize/page/projects/section-title/index.php:19
+msgid "Changes are displayed directly in the preview. Publish to save."
+msgstr "Les modifications sont affichées directement dans l'aperçu. Publiez pour enregistrer."
+
+#: template/meta-box/page/about-us/section-banner/index.php:11
+msgid "Media"
+msgstr "Médias"
+
+#: template/meta-box/page/about-us/section-core-values/index.php:9
+#: template/meta-box/page/about-us/section-leader/index.php:10
+msgid "Items"
+msgstr "Éléments"
+
+#: template/meta-box/page/about-us/section-policy/index.php:10
+msgid "Warranty"
+msgstr "Garantie"
+
+#: template/meta-box/page/about-us/section-policy/index.php:8
+msgid "Certification"
+msgstr "Certification"
+
+#: template/meta-box/page/about-us/section-tabs/index.php:11
+msgid "Core Values"
+msgstr "Valeurs principales"
+
+#: template/meta-box/page/about-us/section-tabs/index.php:12
+msgid "Leader"
+msgstr "Leader"
+
+#: template/meta-box/page/home/section-banner/index.php:31
+msgid "Banner Content"
+msgstr "Contenu de la bannière"
+
+#: template/meta-box/page/home/section-banner/index.php:6
+msgid "Home Banner Status"
+msgstr "Statut de la bannière de la page d'accueil"
+
+#: template/meta-box/page/home/section-banner/index.php:9
+msgid "Disable Banner"
+msgstr "Désactiver la bannière"
+
+#: template/meta-box/page/home/section-data/index.php:11
+#: template/meta-box/page/home/section-products/index.php:8
+#: template/meta-box/page/home/section-services/index.php:10
+msgid "Remove Section"
+msgstr "Supprimer la section"
+
+#: template/meta-box/page/home/section-data/index.php:12
+#: template/meta-box/page/home/section-products/index.php:9
+#: template/meta-box/page/home/section-services/index.php:11
+msgid "Add Section"
+msgstr "Ajouter une section"
+
+#: template/meta-box/page/home/section-data/index.php:7
+msgid "Section Data Status"
+msgstr "Statut des données de la section"
+
+#: template/meta-box/page/home/section-evaluate/index.php:10
+#: template/meta-box/page/home/section-option/index.php:39
+#: template/meta-box/page/home/section-projects/index.php:10
+msgid "Enable Section"
+msgstr "Activer la section"
+
+#: template/meta-box/page/home/section-evaluate/index.php:6
+msgid "Evaluate Status"
+msgstr "Statut de l'évaluation"
+
+#: template/meta-box/page/home/section-evaluate/index.php:9
+#: template/meta-box/page/home/section-option/index.php:38
+#: template/meta-box/page/home/section-projects/index.php:9
+msgid "Disable Section"
+msgstr "Désactiver la section"
+
+#: template/meta-box/page/home/section-option/index.php:34
+msgid "Section Option Status"
+msgstr "Statut des options de la section"
+
+#: template/meta-box/page/home/section-post/index.php:5
+msgid "Post Section Status"
+msgstr "Statut de la section des articles"
+
+#: template/meta-box/page/home/section-post/index.php:8
+msgid "Disable Post"
+msgstr "Désactiver l'article"
+
+#: template/meta-box/page/home/section-products/index.php:15
+#: template/meta-box/page/home/section-projects/index.php:15
+#: template/meta-box/page/home/section-services/index.php:17
+msgid "Section Title"
+msgstr "Titre de la section"
+
+#: template/meta-box/page/home/section-products/index.php:17
+msgid "MATERIALS"
+msgstr "MATÉRIAUX"
+
+#: template/meta-box/page/home/section-products/index.php:20
+#: template/meta-box/page/home/section-services/index.php:22
+msgid "Section Description"
+msgstr "Description de la section"
+
+#: template/meta-box/page/home/section-products/index.php:22
+#: template/meta-box/page/home/section-projects/index.php:18
+msgid "Short description"
+msgstr "Courte description"
+
+#: template/meta-box/page/home/section-products/index.php:5
+msgid "Products Section Status"
+msgstr "Statut de la section produits"
+
+#: template/meta-box/page/home/section-projects/index.php:16
+msgid "PROJECTS"
+msgstr "PROJETS"
+
+#: template/meta-box/page/home/section-projects/index.php:6
+msgid "Projects Section Status"
+msgstr "Statut de la section projets"
+
+#: template/meta-box/page/home/section-services/index.php:19
+msgid "CORE SERVICES"
+msgstr "SERVICES PRINCIPAUX"
+
+#: template/meta-box/page/home/section-services/index.php:24
+msgid "Comprehensive construction solutions"
+msgstr "Des solutions constructives complètes"
+
+#: template/meta-box/page/home/section-services/index.php:6
+msgid "Services Section Status"
+msgstr "Statut de la section services"
+
+#: template/template-parts/breadcrums/index.php:23
+msgid "Navigate to %s"
+msgstr "Accédez à %s"
+
+#: template/template-parts/comment-product/index.php:104
+msgid "Comments have been closed."
+msgstr "Les commentaires sont fermés."
+
+#: template/template-parts/comment-product/index.php:112
+msgid "Your name"
+msgstr "Votre nom"
+
+#: template/template-parts/comment-product/index.php:113
+msgid "Your email"
+msgstr "Votre email"
+
+#: template/template-parts/comment-product/index.php:114
+msgid "Website"
+msgstr "Site web"
+
+#: template/template-parts/comment-product/index.php:114
+msgid "Website (optional)"
+msgstr "Site web (facultatif)"
+
+#: template/template-parts/comment-product/index.php:120
+msgid "Write a comment"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:124
+msgid "Be respectful and keep your comment concise."
+msgstr "Soyez respectueux et concis dans vos commentaires."
+
+#: template/template-parts/comment-product/index.php:126
+msgid "Submit"
+msgstr "Soumettre"
+
+#: template/template-parts/comment-product/index.php:128
+msgid "Comment"
+msgstr "Commentaire"
+
+#: template/template-parts/comment-product/index.php:128
+msgid "Write a public comment..."
+msgstr "Écrivez un commentaire public..."
+
+#: template/template-parts/comment-product/index.php:17
+msgid "comments “%s”"
+msgstr "commentaires « %s »"
+
+#: template/template-parts/comment-product/index.php:22
+msgid "%1$s comments “%2$s”"
+msgstr "%1$s commentaires « %2$s »"
+
+#: template/template-parts/comment-product/index.php:37
+#: template/template-parts/comment-product/index.php:99
+msgid "← Older comments"
+msgstr "← Commentaires plus anciens"
+
+#: template/template-parts/comment-product/index.php:38
+#: template/template-parts/comment-product/index.php:100
+msgid "Newer comments →"
+msgstr "Commentaires plus récents →"
+
+#: template/template-parts/comment-product/index.php:41
+msgid "Comments"
+msgstr "Commentaires"
+
+#: template/template-parts/comment-product/index.php:67
+msgid "Your comment is awaiting moderation."
+msgstr "Votre commentaire est en attente de modération."
+
+#: template/template-parts/footer/footer.php:73
+#: template/template-parts/footer/footer.php:133
+#: template/template-parts/page/about-us/section-contact-form/index.php:48
+msgid "Connect with us"
+msgstr "Connectez-vous avec nous"
+
+#: template/template-parts/footer/footer.php:75
+#: template/template-parts/footer/footer.php:155
+#: template/template-parts/header/header.php:148
+msgid "Menu"
+msgstr "Menu"
+
+#: template/template-parts/footer/footer.php:81
+#: template/template-parts/footer/footer.php:230
+msgid "Service"
+msgstr "Service"
+
+#: template/template-parts/footer/footer.php:83
+#: template/template-parts/footer/footer.php:119
+msgid "Footer Logo"
+msgstr "Logo du pied de page"
+
+#: template/template-parts/footer/footer.php:85
+#: template/template-parts/footer/footer.php:146
+#: template/template-parts/footer/footer.php:178
+#: template/template-parts/footer/footer.php:186
+#: template/template-parts/footer/footer.php:194
+#: template/template-parts/footer/footer.php:202
+#: template/template-parts/page/home/section-option/index.php:49
+#: template/template-parts/page/home/section-option/index.php:83
+msgid "icon"
+msgstr "Icône"
+
+#: template/template-parts/header/cart/index.php:20
+msgid "Your cart is empty"
+msgstr "Votre panier est vide"
+
+#: template/template-parts/header/cart/index.php:32
+#: template/template-parts/page/home/section-products/index.php:109
+#: template/template-parts/page/product/section-products/index.php:236
+#: template/template-parts/single/single-product/index.php:172
+#: template/template-parts/single/single-product/index.php:182
+#: template/template-parts/single/single-product/index.php:366
+msgid "ton"
+msgstr "tonne"
+
+#: template/template-parts/header/cart/index.php:55
+#: template/template-parts/page/cart/section-cart/index.php:81
+msgid "Unit: %s"
+msgstr "Unité : %s"
+
+#: template/template-parts/header/cart/index.php:61
+msgid "Decrease"
+msgstr "Diminuer"
+
+#: template/template-parts/header/cart/index.php:64
+msgid "Increase"
+msgstr "Augmenter"
+
+#: template/template-parts/header/cart/index.php:84
+msgid "Order total"
+msgstr "Total de la commande"
+
+#: template/template-parts/header/cart/index.php:9
+msgid "Your Cart"
+msgstr "Votre Panier"
+
+#: template/template-parts/header/cart/index.php:97
+#: template/template-parts/header/header.php:189
+msgid "View Cart"
+msgstr "Voir le Panier"
+
+#: template/template-parts/header/header.php:127
+#: template/template-parts/header/header.php:196
+msgid "Request a Quote"
+msgstr "Demander un devis"
+
+#: template/template-parts/header/header.php:135
+#: template/template-parts/header/header.php:188
+msgid "Cart"
+msgstr "Panier"
+
+#: template/template-parts/header/header.php:154
+msgid "Close Menu"
+msgstr "Fermer le menu"
+
+#: template/template-parts/page/404/index.php:11
+msgid "The page you are looking for might have been moved, removed, or is temporarily unavailable. We're building something better!"
+msgstr "La page que vous recherchez a peut-être été déplacée, supprimée ou est temporairement indisponible. Nous construisons quelque chose de mieux !"
+
+#: template/template-parts/page/404/index.php:14
+msgid "Back to Home"
+msgstr "Retour à l'accueil"
+
+#: template/template-parts/page/404/index.php:15
+msgid "Contact Support"
+msgstr "Contacter l'assistance"
+
+#: template/template-parts/page/404/index.php:8
+msgid "Error 404?"
+msgstr "Erreur 404 ?"
+
+#: template/template-parts/page/404/index.php:9
+msgid "Page Not Found"
+msgstr "Page introuvable"
+
+#: template/template-parts/page/about-us/section-contact-form/index.php:3
+msgid "Send an Inquiry"
+msgstr "Envoyer une demande"
+
+#: template/template-parts/page/about-us/section-contact-form/index.php:34
+msgid "Contact form is not ready yet."
+msgstr "Le formulaire de contact n'est pas encore prêt."
+
+#: template/template-parts/page/about-us/section-contact/index.php:51
+msgid "Office Address"
+msgstr "Adresse du bureau"
+
+#: template/template-parts/page/about-us/section-contact/index.php:63
+#: template/template-parts/page/bill/section-bill/index.php:91
+#: template/template-parts/page/checkout/section-checkout/index.php:83
+msgid "Phone Number"
+msgstr "Numéro de téléphone"
+
+#: template/template-parts/page/about-us/section-contact/index.php:75
+msgid "Official Email"
+msgstr "Email officiel"
+
+#: template/template-parts/page/about-us/section-leader/index.php:98
+msgid "View Profile"
+msgstr "Voir le profil"
+
+#: template/template-parts/page/about-us/section-policy/index.php:106
+msgid "View Certification"
+msgstr "Voir la certification"
+
+#: template/template-parts/page/about-us/section-policy/index.php:75
+msgid "General Contractor Lic"
+msgstr "Licence de maître d'ouvrage"
+
+#: template/template-parts/page/bill/section-bill/index.php:103
+#: template/template-parts/page/checkout/section-checkout/index.php:110
+msgid "City"
+msgstr "VILLE"
+
+#: template/template-parts/page/bill/section-bill/index.php:107
+#: template/template-parts/page/checkout/section-checkout/index.php:117
+msgid "ZIP / Postal Code"
+msgstr ""
+
+#: template/template-parts/page/bill/section-bill/index.php:111
+#: template/template-parts/page/checkout/section-checkout/index.php:125
+msgid "Country"
+msgstr "Pays"
+
+#: template/template-parts/page/bill/section-bill/index.php:115
+#: template/template-parts/page/checkout/section-checkout/index.php:151
+msgid "Payment Method"
+msgstr "Méthode de paiement"
+
+#: template/template-parts/page/bill/section-bill/index.php:119
+#: template/template-parts/page/checkout/section-checkout/index.php:141
+msgid "Order Notes"
+msgstr "Notes de commande"
+
+#: template/template-parts/page/bill/section-bill/index.php:138
+msgid "I confirm all bill information above is correct."
+msgstr "Je confirme que toutes les informations de la facture ci-dessus sont correctes."
+
+#: template/template-parts/page/bill/section-bill/index.php:146
+msgid "Submit Bill Confirmation"
+msgstr "Soumettre la confirmation de la facture"
+
+#: template/template-parts/page/bill/section-bill/index.php:157
+#: template/template-parts/page/checkout/section-checkout/index.php:430
+msgid "Order Summary"
+msgstr "Résumé de la commande"
+
+#: template/template-parts/page/bill/section-bill/index.php:161
+msgid "Your cart is currently empty."
+msgstr "Votre panier est actuellement vide."
+
+#: template/template-parts/page/bill/section-bill/index.php:182
+#: template/template-parts/page/checkout/section-checkout/index.php:462
+#: template/template-parts/single/single-product/index.php:100
+msgid "Qty: %s"
+msgstr "Qté : %s"
+
+#: template/template-parts/page/bill/section-bill/index.php:194
+#: template/template-parts/page/cart/section-cart/index.php:117
+#: template/template-parts/page/checkout/section-checkout/index.php:486
+msgid "Regular Price"
+msgstr "Prix régulier"
+
+#: template/template-parts/page/bill/section-bill/index.php:198
+#: template/template-parts/page/cart/section-cart/index.php:123
+#: template/template-parts/page/checkout/section-checkout/index.php:490
+msgid "Sale Price"
+msgstr "Prix de vente"
+
+#: template/template-parts/page/bill/section-bill/index.php:202
+#: template/template-parts/page/cart/section-cart/index.php:129
+#: template/template-parts/page/checkout/section-checkout/index.php:494
+msgid "You Save"
+msgstr "Vous économisez"
+
+#: template/template-parts/page/bill/section-bill/index.php:207
+#: template/template-parts/page/checkout/section-checkout/index.php:499
+msgid "Total"
+msgstr "Total"
+
+#: template/template-parts/page/bill/section-bill/index.php:52
+msgid "Bill Information"
+msgstr "Informations sur la facture"
+
+#: template/template-parts/page/bill/section-bill/index.php:54
+msgid "Review your checkout information and submit confirmation."
+msgstr "Vérifiez vos informations de paiement et envoyez la confirmation."
+
+#: template/template-parts/page/bill/section-bill/index.php:68
+msgid "Order Placed Successfully"
+msgstr "Ordre passé avec succès"
+
+#: template/template-parts/page/bill/section-bill/index.php:70
+msgid "Order #%s has been successfully created."
+msgstr "La commande #%s a été créée avec succès."
+
+#: template/template-parts/page/bill/section-bill/index.php:81
+msgid "Please confirm the bill information before submitting."
+msgstr "Veuillez confirmer les informations de la facture avant de soumettre."
+
+#: template/template-parts/page/bill/section-bill/index.php:82
+msgid "Submitting..."
+msgstr "Envoi en cours..."
+
+#: template/template-parts/page/bill/section-bill/index.php:83
+msgid "Customer Information"
+msgstr "Informations sur le client"
+
+#: template/template-parts/page/bill/section-bill/index.php:87
+#: template/template-parts/page/checkout/section-checkout/index.php:75
+msgid "Full Name"
+msgstr "Nom complet"
+
+#: template/template-parts/page/bill/section-bill/index.php:95
+#: template/template-parts/page/checkout/section-checkout/index.php:93
+msgid "Email Address"
+msgstr "Adresse e-mail"
+
+#: template/template-parts/page/blog/section-blog/index.php:150
+msgid "Trending Now"
+msgstr "Tendance actuelle"
+
+#: template/template-parts/page/blog/section-blog/index.php:151
+msgid "Trending"
+msgstr "Tendance"
+
+#: template/template-parts/page/blog/section-blog/index.php:24
+#: template/template-parts/page/blog/section-blog/index.php:156
+msgid "%s views"
+msgstr "%s vues"
+
+#: template/template-parts/page/blog/section-blog/index.php:41
+#: template/template-parts/page/home/section-post/index.php:95
+msgid "Read more"
+msgstr "Lire la suite"
+
+#: template/template-parts/page/blog/section-blog/index.php:42
+#: template/template-parts/page/home/section-banner/index.php:54
+#: template/template-parts/page/home/section-banner/index.php:97
+#: template/template-parts/page/home/section-banner/index.php:104
+#: template/template-parts/page/home/section-post/index.php:97
+#: template/template-parts/page/home/section-post/index.php:115
+#: template/template-parts/page/home/section-products/index.php:135
+#: template/template-parts/page/home/section-projects/index.php:141
+#: template/template-parts/page/home/section-services/index.php:87
+msgid "Right arrow"
+msgstr "Flèche droite"
+
+#: template/template-parts/page/cart/section-cart/index.php:112
+msgid "Cart Summary"
+msgstr "Résumé du panier"
+
+#: template/template-parts/page/cart/section-cart/index.php:135
+msgid "Discount"
+msgstr "Remise"
+
+#: template/template-parts/page/cart/section-cart/index.php:144
+msgid "Total Amount"
+msgstr "Montant total"
+
+#: template/template-parts/page/cart/section-cart/index.php:150
+msgid "Place Order"
+msgstr "Passer la commande"
+
+#: template/template-parts/page/cart/section-cart/index.php:152
+msgid "Prices include basic unloading at designated curb. Terms &amp; Conditions apply."
+msgstr "Les prix incluent le déchargement de base au bord du trottoir désigné. Des conditions générales s'appliquent."
+
+#: template/template-parts/page/cart/section-cart/index.php:25
+msgid "Shopping Cart"
+msgstr "Panier"
+
+#: template/template-parts/page/cart/section-cart/index.php:26
+msgid "Review your construction materials and adjust quantities for your project."
+msgstr "Vérifiez vos matériaux de construction et ajustez les quantités pour votre projet."
+
+#: template/template-parts/page/cart/section-cart/index.php:32
+#: template/template-parts/page/checkout/section-checkout/index.php:434
+msgid "Your cart is empty."
+msgstr "Votre panier est vide."
+
+#: template/template-parts/page/cart/section-cart/index.php:34
+msgid "Continue Shopping"
+msgstr "Continuer vos achats"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:128
+msgid "-- Select country --"
+msgstr "-- Sélectionnez un pays --"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:166
+msgid "Cash on Delivery"
+msgstr "Paiement à la livraison"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:188
+msgid "Credit Card"
+msgstr "Carte de crédit"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:198
+msgid "Bank Transfer"
+msgstr "Virement bancaire"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:216
+msgid "Pay in cash upon delivery. Our delivery staff will collect payment directly at your shipping address."
+msgstr "Payez en espèces à la livraison. Notre personnel de livraison encaissera le paiement directement à votre adresse de livraison."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:224
+msgid "Please prepare the exact amount to make the delivery process smoother."
+msgstr "Veuillez préparer le montant exact pour faciliter la livraison."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:243
+msgid "Continue with %s"
+msgstr "Continuer avec %s"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:251
+msgid "You will be redirected to PayPal and returned here after authorization."
+msgstr "Vous serez redirigé vers PayPal et revenu ici après l'autorisation."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:266
+msgid "Card Number"
+msgstr ""
+
+#: template/template-parts/page/checkout/section-checkout/index.php:274
+msgid "Expiry Date"
+msgstr "Date d'expiration"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:281
+msgid "CVV Code"
+msgstr "Code CVV"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:289
+msgid "Name on Card"
+msgstr "Nom sur la carte"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:300
+msgid "Card details are encrypted with 256-bit SSL"
+msgstr "Les détails de la carte sont chiffrés avec un SSL de 256 bits"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:322
+msgid "Bank"
+msgstr "Banque"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:329
+msgid "Account Name"
+msgstr "Nom du compte"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:336
+msgid "Account No."
+msgstr "Numéro de compte"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:340
+#: template/template-parts/page/checkout/section-checkout/index.php:356
+#: template/template-parts/page/checkout/section-checkout/index.php:372
+#: template/template-parts/page/checkout/section-checkout/index.php:389
+msgid "Copy"
+msgstr "Copier"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:351
+msgid "Sort Code"
+msgstr "Code de tri"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:367
+msgid "IBAN"
+msgstr "IBAN"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:384
+msgid "BIC / Swift"
+msgstr "BIC / Swift"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:407
+msgid "No bank account details have been configured yet. Please contact us for payment instructions."
+msgstr "Aucun détail de compte bancaire n'a été configuré pour le moment. Veuillez nous contacter pour obtenir les instructions de paiement."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:417
+msgid "Please use the exact reference code so your order can be processed quickly."
+msgstr "Veuillez utiliser le code de référence exact afin que votre commande puisse être traitée rapidement."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:464
+msgid "Regular:"
+msgstr "Régulier:"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:468
+msgid "Sale:"
+msgstr "Vente:"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:472
+msgid "You Save:"
+msgstr "Vous économisez:"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:505
+msgid "Bill Order"
+msgstr "Facturer la commande"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:519
+msgid "Transaction secured &amp; encrypted"
+msgstr "Transaction sécurisée et cryptée"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:57
+msgid "Checkout"
+msgstr "Caisse"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:59
+msgid "Complete your details to place the order."
+msgstr "Complétez vos coordonnées pour passer la commande."
+
+#: template/template-parts/page/checkout/section-checkout/index.php:69
+msgid "Shipping Information"
+msgstr "Informations d'expédition"
+
+#: template/template-parts/page/home/section-banner/index.php:53
+#: template/template-parts/page/home/section-banner/index.php:86
+msgid "View About Us"
+msgstr "Voir à propos de nous"
+
+#: template/template-parts/page/home/section-banner/index.php:61
+msgid "Edit Banner"
+msgstr "Éditer la bannière"
+
+#: template/template-parts/page/home/section-post/index.php:112
+msgid "View All Posts"
+msgstr "Voir tous les articles"
+
+#: template/template-parts/page/home/section-products/index.php:112
+#: template/template-parts/page/product/section-products/index.php:237
+#: template/template-parts/single/single-product/index.php:210
+#: template/template-parts/single/single-product/index.php:370
+msgid "Add to Cart"
+msgstr "Ajouter au panier"
+
+#: template/template-parts/page/home/section-products/index.php:131
+msgid "View All Products"
+msgstr "Voir tous les produits"
+
+#: template/template-parts/page/home/section-projects/index.php:138
+msgid "View All Projects"
+msgstr "Voir tous les projets"
+
+#: template/template-parts/page/home/section-projects/index.php:57
+msgid "View Project"
+msgstr "Voir le projet"
+
+#: template/template-parts/page/product/section-products/index.php:143
+msgid "Search products"
+msgstr ""
+
+#: template/template-parts/page/product/section-products/index.php:152
+msgid "Search materials, tools, or brands ..."
+msgstr "Rechercher des matériaux, outils ou marques ..."
+
+#: template/template-parts/page/product/section-products/index.php:17
+msgid "Brands"
+msgstr "Marques"
+
+#: template/template-parts/page/product/section-products/index.php:18
+msgid "Categories"
+msgstr "Catégories"
+
+#: template/template-parts/page/product/section-products/index.php:19
+msgid "Tags"
+msgstr "Étiquettes"
+
+#: template/template-parts/page/product/section-products/index.php:5
+msgid "Catalog"
+msgstr "Catalogue"
+
+#: template/template-parts/page/product/section-products/index.php:63
+msgid "Less"
+msgstr "Moins"
+
+#: template/template-parts/page/product/section-products/index.php:63
+msgid "More"
+msgstr "Plus"
+
+#: template/template-parts/page/product/section-products/index.php:8
+msgid "Construction Supplies"
+msgstr "Fournitures de construction"
+
+#: template/template-parts/page/projects/section-title/index.php:47
+msgid "Edit Title"
+msgstr "Editer le titre"
+
+#: template/template-parts/single/single-post/index.php:102
+#: template/template-parts/single/single-project/index.php:130
+msgid "Gallery image"
+msgstr "Image de la galerie"
+
+#: template/template-parts/single/single-post/index.php:78
+msgid "Check"
+msgstr "Vérifier"
+
+#: template/template-parts/single/single-product/index.php:104
+msgid "%1$s / 5 (%2$s reviews)"
+msgstr "%1$s / 5 (%2$s avis)"
+
+#: template/template-parts/single/single-product/index.php:115
+#: template/template-parts/single/single-product/index.php:126
+msgid "Brand:"
+msgstr "Marque:"
+
+#: template/template-parts/single/single-product/index.php:140
+msgid "Category:"
+msgstr "Catégorie:"
+
+#: template/template-parts/single/single-product/index.php:151
+msgid "Tags:"
+msgstr "Étiquettes:"
+
+#: template/template-parts/single/single-product/index.php:156
+msgid "Key Features"
+msgstr "Fonctionnalités principales"
+
+#: template/template-parts/single/single-product/index.php:191
+msgid "Start: %s"
+msgstr "Début: %s"
+
+#: template/template-parts/single/single-product/index.php:194
+msgid "End: %s"
+msgstr "Fin: %s"
+
+#: template/template-parts/single/single-product/index.php:203
+msgid "Decrease quantity"
+msgstr "Diminuer la quantité"
+
+#: template/template-parts/single/single-product/index.php:205
+msgid "Quantity"
+msgstr "Quantité"
+
+#: template/template-parts/single/single-product/index.php:207
+msgid "Increase quantity"
+msgstr "Augmenter la quantité "
+
+#: template/template-parts/single/single-product/index.php:222
+msgid "Typical Range: %s"
+msgstr " Gamme typique : %s"
+
+#: template/template-parts/single/single-product/index.php:229
+msgid "Engineering Specifications"
+msgstr "Spécifications techniques"
+
+#: template/template-parts/single/single-product/index.php:253
+msgid "Specifications"
+msgstr "Spécifications"
+
+#: template/template-parts/single/single-product/index.php:257
+msgid "Size"
+msgstr "Taille"
+
+#: template/template-parts/single/single-product/index.php:262
+msgid "Weight"
+msgstr "Poids"
+
+#: template/template-parts/single/single-product/index.php:267
+msgid "Shipping class"
+msgstr "Classe d'expédition"
+
+#: template/template-parts/single/single-product/index.php:271
+msgid "Product Type"
+msgstr "Type de produit"
+
+#: template/template-parts/single/single-product/index.php:274
+msgid "Stock Status"
+msgstr "Statut du stock"
+
+#: template/template-parts/single/single-product/index.php:281
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#: template/template-parts/single/single-product/index.php:338
+msgid "You might also like"
+msgstr "Vous pourriez aussi aimer"
+
+#: template/template-parts/single/single-product/index.php:97
+msgid "SKU: %s"
+msgstr "SKU: %s"
+
+#: template/template-parts/single/single-project/index.php:152
+msgid "Standard image"
+msgstr "Image standard"

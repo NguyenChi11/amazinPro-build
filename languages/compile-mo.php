@@ -3,37 +3,100 @@ function parse_po(string $content): array
 {
     $entries = [];
     $content = str_replace("\r\n", "\n", $content);
+    $content = str_replace("\r", "\n", $content);
     $blocks  = preg_split('/\n\n+/', $content);
     foreach ($blocks as $block) {
         $block = trim($block);
         if (empty($block)) continue;
+        $msgctxt = null;
         $msgid = null;
+        $msgid_plural = null;
         $msgstr = null;
-        $in_msgid = false;
-        $in_msgstr = false;
+        $msgstr_plural = [];
+        $state = null;
+        $pluralIndex = null;
         foreach (explode("\n", $block) as $line) {
             $line = trim($line);
             if (preg_match('/^#/', $line)) {
-                $in_msgid = $in_msgstr = false;
+                $state = null;
+                $pluralIndex = null;
                 continue;
             }
-            if (preg_match('/^msgid\s+"((?:[^"\\\\]|\\\\.)*)"$/', $line, $m)) {
-                $in_msgid = true;
-                $in_msgstr = false;
+            if (preg_match('/^msgctxt\s+"((?:[^"\\\\]|\\\\.)*)"$/', $line, $m)) {
+                $state = 'msgctxt';
+                $pluralIndex = null;
+                $msgctxt = $m[1];
+            } elseif (preg_match('/^msgid_plural\s+"((?:[^"\\\\]|\\\\.)*)"$/', $line, $m)) {
+                $state = 'msgid_plural';
+                $pluralIndex = null;
+                $msgid_plural = $m[1];
+            } elseif (preg_match('/^msgid\s+"((?:[^"\\\\]|\\\\.)*)"$/', $line, $m)) {
+                $state = 'msgid';
+                $pluralIndex = null;
                 $msgid = $m[1];
+            } elseif (preg_match('/^msgstr\[(\d+)\]\s+"((?:[^"\\\\]|\\\\.)*)"$/', $line, $m)) {
+                $state = 'msgstr_plural';
+                $pluralIndex = (int) $m[1];
+                $msgstr_plural[$pluralIndex] = $m[2];
             } elseif (preg_match('/^msgstr\s+"((?:[^"\\\\]|\\\\.)*)"$/', $line, $m)) {
-                $in_msgstr = true;
-                $in_msgid = false;
+                $state = 'msgstr';
+                $pluralIndex = null;
                 $msgstr = $m[1];
             } elseif (preg_match('/^"((?:[^"\\\\]|\\\\.)*)"$/', $line, $m)) {
-                if ($in_msgid) $msgid .= $m[1];
-                if ($in_msgstr) $msgstr .= $m[1];
+                if ($state === 'msgctxt') {
+                    $msgctxt .= $m[1];
+                } elseif ($state === 'msgid') {
+                    $msgid .= $m[1];
+                } elseif ($state === 'msgid_plural') {
+                    $msgid_plural .= $m[1];
+                } elseif ($state === 'msgstr') {
+                    $msgstr .= $m[1];
+                } elseif ($state === 'msgstr_plural' && $pluralIndex !== null) {
+                    $msgstr_plural[$pluralIndex] = ($msgstr_plural[$pluralIndex] ?? '') . $m[1];
+                }
             }
         }
-        if ($msgid === null || $msgstr === null) continue;
+        if ($msgid === null) {
+            continue;
+        }
+
+        $d_ctx = $msgctxt !== null ? stripcslashes($msgctxt) : null;
         $d_id = stripcslashes($msgid);
+
+        $keyBase = $d_ctx !== null ? ($d_ctx . "\x04" . $d_id) : $d_id;
+
+        if ($msgid_plural !== null) {
+            $d_plural = stripcslashes($msgid_plural);
+            $key = $keyBase . "\0" . $d_plural;
+
+            if (!empty($msgstr_plural)) {
+                ksort($msgstr_plural);
+            }
+            $parts = [];
+            $hasAny = false;
+            foreach ($msgstr_plural as $idx => $raw) {
+                $decoded = stripcslashes((string) $raw);
+                $parts[] = $decoded;
+                if ($decoded !== '') {
+                    $hasAny = true;
+                }
+            }
+            $value = implode("\0", $parts);
+
+            if ($d_id === '' || $hasAny) {
+                $entries[$key] = $value;
+            }
+            continue;
+        }
+
+        if ($msgstr === null) {
+            continue;
+        }
+
         $d_str = stripcslashes($msgstr);
-        if ($d_id === '' || $d_str !== '') $entries[$d_id] = $d_str;
+        if ($d_id === '' || $d_str !== '') {
+            $entries[$keyBase] = $d_str;
+        }
     }
     return $entries;
 }
@@ -58,8 +121,9 @@ function compile_mo(array $entries, string $mo_file): int
         $strs_meta[] = [strlen($s), $offset];
         $offset += strlen($s) + 1;
     }
+    // Standard GNU MO header. We don't emit a hash table.
     $mo  = pack('V', 0x950412de) . pack('V', 0) . pack('V', $n);
-    $mo .= pack('V', $ids_off) . pack('V', $strs_off) . pack('V', 0) . pack('V', $data_start);
+    $mo .= pack('V', $ids_off) . pack('V', $strs_off) . pack('V', 0) . pack('V', 0);
     foreach ($ids_meta  as [$l, $o]) {
         $mo .= pack('VV', $l, $o);
     }

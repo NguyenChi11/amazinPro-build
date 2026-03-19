@@ -1,0 +1,2410 @@
+# Copyright (C) 2026 AmazinPro_Team
+# This file is distributed under the same license as the Build Pro V2 package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Build Pro V2 1.1\n"
+"Report-Msgid-Bugs-To: https://amazinpro.com/\n"
+"POT-Creation-Date: 2026-03-19T03:02:04+00:00\n"
+"PO-Revision-Date: 2026-03-19T03:02:04+00:00\n"
+"Last-Translator: \n"
+"Language-Team: Chinese\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: buildpro\n"
+
+#: functions.php:75
+msgid "Primary"
+msgstr "主要"
+
+#: import/plugin-activation.php:134
+msgid "Return to Required Plugins Installer"
+msgstr "返回到所需插件安装程序"
+
+#: import/plugin-activation.php:135
+msgid "Plugin activated successfully."
+msgstr "插件激活成功。"
+
+#: import/plugin-activation.php:136
+msgid "The following plugin was activated successfully:"
+msgstr "以下插件已成功激活："
+
+#: import/plugin-activation.php:137
+msgid "No action taken. Plugin %1$s was already active."
+msgstr "未采取任何操作。插件 %1$s 已处于激活状态。"
+
+#: import/plugin-activation.php:138
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr "插件未激活。此主题需要更高版本的 %s。请更新插件。"
+
+#: import/plugin-activation.php:139
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr "所有插件已成功安装并激活。%1$s"
+
+#: import/plugin-activation.php:140
+msgid "Dismiss this notice"
+msgstr "忽略此通知"
+
+#: import/plugin-activation.php:141
+msgid "There are one or more required or recommended plugins to install, update or activate."
+msgstr "有一个或多个必需或推荐的插件需要安装、更新或激活。"
+
+#: import/plugin-activation.php:142
+msgid "Please contact the administrator of this site for help."
+msgstr "请联系本站管理员寻求帮助。"
+
+#: import/plugin-activation.php:84
+msgid "Install Required Plugins"
+msgstr "安装所需插件"
+
+#: import/plugin-activation.php:85
+msgid "Install Plugins"
+msgstr "安装插件"
+
+#: import/plugin-activation.php:86
+msgid "Installing Plugin: %s"
+msgstr "正在安装插件：%s"
+
+#: import/plugin-activation.php:87
+msgid "Updating Plugin: %s"
+msgstr "正在更新插件：%s"
+
+#: import/plugin-activation.php:88
+msgid "Something went wrong with the plugin API."
+msgstr "插件 API 出现问题。"
+
+#: inc/customizer/about-us-page/index.php:10
+#: inc/customizer/footer/index.php:271
+#: inc/customizer/home-page/index.php:10
+#: inc/meta-box/page/about-us-page/index.php:20
+#: inc/meta-box/page/home-page/index.php:54
+#: inc/meta-box/post-type/post/quote/index.php:26
+#: inc/meta-box/post-type/post/quote/index.php:60
+#: inc/meta-box/post-type/project/gallery/index.php:22
+#: inc/meta-box/post-type/project/gallery/index.php:38
+#: inc/meta-box/post-type/project/standards/index.php:20
+#: inc/meta-box/post-type/project/standards/index.php:46
+#: template/customize/footer/controls.php:63
+#: template/customize/footer/index.php:23
+#: template/customize/footer/index.php:113
+#: template/customize/header/index.php:15
+#: template/customize/page/home/section-evaluate/index.php:66
+#: template/meta-box/page/about-us/section-banner/index.php:46
+#: template/meta-box/page/about-us/section-banner/index.php:60
+#: template/meta-box/page/about-us/section-contact/index.php:30
+#: template/meta-box/page/about-us/section-core-values/index.php:51
+#: template/meta-box/page/about-us/section-core-values/index.php:62
+#: template/meta-box/page/about-us/section-leader/index.php:46
+#: template/meta-box/page/about-us/section-leader/index.php:59
+#: template/meta-box/page/about-us/section-policy/index.php:47
+#: template/meta-box/page/about-us/section-policy/index.php:58
+#: template/meta-box/page/about-us/section-policy/index.php:91
+#: template/meta-box/page/about-us/section-policy/index.php:99
+#: template/meta-box/page/home/section-banner/index.php:53
+#: template/meta-box/page/home/section-data/index.php:31
+#: template/meta-box/page/home/section-evaluate/index.php:41
+#: template/meta-box/page/home/section-evaluate/index.php:60
+#: template/meta-box/page/home/section-option/index.php:13
+#: template/meta-box/page/home/section-option/index.php:28
+#: template/meta-box/page/home/section-services/index.php:48
+#: template/meta-box/page/home/section-services/index.php:88
+#: template/meta-box/page/home/section-services/index.php:105
+#: template/meta-box/page/home/section-services/index.php:127
+#: template/meta-box/post-type/post/section-quote/template.php:42
+#: template/template-parts/header/cart/index.php:46
+#: template/template-parts/page/cart/section-cart/index.php:96
+msgid "Remove"
+msgstr "移除"
+
+#: inc/customizer/about-us-page/index.php:11
+#: inc/customizer/footer/index.php:272
+#: inc/customizer/home-page/index.php:8
+#: inc/meta-box/page/about-us-page/index.php:27
+#: template/customize/footer/controls.php:70
+#: template/customize/footer/index.php:119
+#: template/customize/page/about-us/section-core-values/index.php:4
+#: template/customize/page/about-us/section-leader/index.php:4
+#: template/customize/page/about-us/section-policy/index.php:13
+#: template/customize/page/home/section-banner/index.php:86
+#: template/customize/page/home/section-data/index.php:47
+#: template/customize/page/home/section-evaluate/index.php:74
+#: template/customize/page/home/section-option/index.php:63
+#: template/customize/page/home/section-service/index.php:82
+#: template/meta-box/page/about-us/section-core-values/index.php:67
+#: template/meta-box/page/about-us/section-leader/index.php:64
+#: template/meta-box/page/about-us/section-policy/index.php:104
+msgid "Add Item"
+msgstr "添加项目"
+
+#: inc/customizer/about-us-page/index.php:12
+#: inc/meta-box/page/about-us-page/index.php:26
+#: template/customize/page/about-us/section-banner/index.php:4
+#: template/meta-box/page/about-us/section-banner/index.php:51
+msgid "Add Fact"
+msgstr "添加事实"
+
+#: inc/customizer/about-us-page/index.php:13
+#: inc/customizer/footer/index.php:277
+#: inc/customizer/footer/index.php:278
+#: inc/meta-box/page/about-us-page/index.php:18
+#: inc/meta-box/page/home-page/index.php:42
+#: template/customize/footer/index.php:22
+#: template/customize/header/index.php:14
+#: template/meta-box/page/about-us/section-banner/index.php:59
+#: template/meta-box/page/about-us/section-contact/index.php:29
+#: template/meta-box/page/about-us/section-core-values/index.php:50
+#: template/meta-box/page/about-us/section-leader/index.php:44
+#: template/meta-box/page/about-us/section-policy/index.php:46
+#: template/meta-box/page/about-us/section-policy/index.php:89
+msgid "Choose Image"
+msgstr "选择图片"
+
+#: inc/customizer/about-us-page/index.php:14
+msgid "Use image"
+msgstr "使用图片"
+
+#: inc/customizer/about-us-page/index.php:15
+#: inc/customizer/footer/index.php:276
+#: inc/customizer/home-page/index.php:22
+#: inc/meta-box/page/home-page/index.php:39
+#: template/customize/footer/controls.php:40
+#: template/customize/footer/index.php:26
+#: template/customize/footer/index.php:92
+#: template/customize/page/home/section-banner/index.php:35
+#: template/customize/page/home/section-banner/index.php:105
+#: template/meta-box/page/home/section-banner/index.php:27
+msgid "No image selected"
+msgstr "未选择图片"
+
+#: inc/customizer/about-us-page/index.php:16
+#: inc/customizer/home-page/index.php:12
+#: inc/meta-box/page/about-us-page/index.php:30
+#: template/customize/page/home/section-banner/index.php:27
+#: template/customize/page/home/section-banner/index.php:97
+#: template/meta-box/page/about-us/section-policy/index.php:35
+msgid "Image"
+msgstr "图片"
+
+#: inc/customizer/about-us-page/index.php:17
+#: inc/meta-box/page/about-us-page/index.php:29
+#: template/meta-box/page/about-us/section-core-values/index.php:39
+#: template/meta-box/page/about-us/section-leader/index.php:36
+#: template/meta-box/page/about-us/section-policy/index.php:79
+msgid "Icon Image"
+msgstr "图标图片"
+
+#: inc/customizer/about-us-page/index.php:18
+#: inc/customizer/home-page/index.php:46
+#: inc/meta-box/page/about-us-page/index.php:33
+#: inc/meta-box/page/home-page/index.php:51
+#: template/customize/page/home/section-evaluate/index.php:57
+#: template/customize/page/home/section-evaluate/index.php:58
+#: template/meta-box/page/about-us/section-leader/index.php:47
+#: template/meta-box/page/home/section-evaluate/index.php:48
+#: template/meta-box/page/home/section-evaluate/index.php:50
+#: template/template-parts/comment-product/index.php:112
+msgid "Name"
+msgstr "名称"
+
+#: inc/customizer/about-us-page/index.php:19
+#: inc/customizer/home-page/index.php:47
+#: inc/meta-box/page/about-us-page/index.php:34
+#: inc/meta-box/page/home-page/index.php:52
+#: template/customize/page/home/section-evaluate/index.php:59
+#: template/customize/page/home/section-evaluate/index.php:60
+#: template/meta-box/page/about-us/section-leader/index.php:50
+#: template/meta-box/page/home/section-evaluate/index.php:51
+#: template/meta-box/page/home/section-evaluate/index.php:53
+msgid "Position"
+msgstr "职位"
+
+#: inc/customizer/about-us-page/index.php:20
+#: inc/customizer/about-us-page/section-banner/index.php:148
+#: inc/customizer/about-us-page/section-contact/index.php:104
+#: inc/customizer/about-us-page/section-core-values/index.php:198
+#: inc/customizer/footer/index.php:110
+#: inc/customizer/header/index.php:34
+#: inc/customizer/home-page/index.php:44
+#: inc/meta-box/page/about-us-page/index.php:23
+#: inc/meta-box/page/home-page/index.php:53
+#: inc/meta-box/post-type/post/description/index.php:7
+#: inc/meta-box/post-type/post/description/index.php:20
+#: inc/meta-box/post-type/post/index.php:20
+#: inc/meta-box/post-type/post/quote/index.php:45
+#: inc/meta-box/post-type/project/standards/index.php:24
+#: inc/meta-box/post-type/project/standards/index.php:45
+#: template/customize/footer/index.php:37
+#: template/customize/header/index.php:34
+#: template/customize/page/home/section-banner/index.php:44
+#: template/customize/page/home/section-banner/index.php:114
+#: template/customize/page/home/section-evaluate/index.php:24
+#: template/customize/page/home/section-evaluate/index.php:61
+#: template/customize/page/home/section-evaluate/index.php:63
+#: template/customize/page/home/section-option/index.php:47
+#: template/customize/page/home/section-post/index.php:17
+#: template/customize/page/home/section-post/index.php:19
+#: template/customize/page/home/section-projects/index.php:19
+#: template/customize/page/home/section-projects/index.php:21
+#: template/customize/page/home/section-service/index.php:47
+#: template/customize/page/projects/section-title/index.php:15
+#: template/meta-box/page/about-us/section-banner/index.php:20
+#: template/meta-box/page/about-us/section-core-values/index.php:16
+#: template/meta-box/page/about-us/section-core-values/index.php:56
+#: template/meta-box/page/about-us/section-leader/index.php:53
+#: template/meta-box/page/about-us/section-policy/index.php:55
+#: template/meta-box/page/about-us/section-policy/index.php:96
+#: template/meta-box/page/home/section-banner/index.php:36
+#: template/meta-box/page/home/section-evaluate/index.php:19
+#: template/meta-box/page/home/section-evaluate/index.php:20
+#: template/meta-box/page/home/section-evaluate/index.php:54
+#: template/meta-box/page/home/section-evaluate/index.php:57
+#: template/meta-box/page/home/section-option/index.php:24
+#: template/meta-box/page/home/section-post/index.php:20
+#: template/meta-box/page/home/section-post/index.php:22
+#: template/meta-box/page/home/section-projects/index.php:17
+#: template/meta-box/page/home/section-services/index.php:62
+#: template/meta-box/page/home/section-services/index.php:113
+#: template/meta-box/page/projects/section-title/index.php:8
+#: template/meta-box/post-type/post/section-description/template.php:3
+#: template/meta-box/post-type/post/section-post/template.php:3
+#: template/meta-box/post-type/post/section-quote/template.php:7
+msgid "Description"
+msgstr "描述"
+
+#: inc/customizer/about-us-page/index.php:21
+#: inc/meta-box/page/about-us-page/index.php:32
+#: template/customize/footer/index.php:201
+#: template/customize/link-picker/index.php:2
+#: template/meta-box/page/about-us/section-core-values/index.php:59
+#: template/meta-box/page/about-us/section-leader/index.php:56
+#: template/meta-box/page/about-us/section-policy/index.php:49
+msgid "URL"
+msgstr "URL"
+
+#: inc/customizer/about-us-page/index.php:22
+#: inc/customizer/about-us-page/section-banner/index.php:138
+#: inc/customizer/about-us-page/section-contact/index.php:103
+#: inc/customizer/about-us-page/section-core-values/index.php:188
+#: inc/customizer/about-us-page/section-leader/index.php:196
+#: inc/customizer/header/index.php:24
+#: inc/customizer/home-page/index.php:43
+#: inc/meta-box/page/about-us-page/index.php:21
+#: inc/meta-box/post-type/post/quote/index.php:44
+#: inc/meta-box/post-type/project/standards/index.php:23
+#: inc/meta-box/post-type/project/standards/index.php:44
+#: template/customize/header/index.php:25
+#: template/customize/page/home/section-evaluate/index.php:16
+#: template/customize/page/home/section-post/index.php:12
+#: template/customize/page/home/section-projects/index.php:16
+#: template/customize/page/home/section-service/index.php:43
+#: template/customize/page/projects/section-title/index.php:11
+#: template/meta-box/page/about-us/section-banner/index.php:18
+#: template/meta-box/page/about-us/section-contact/index.php:14
+#: template/meta-box/page/about-us/section-core-values/index.php:14
+#: template/meta-box/page/about-us/section-core-values/index.php:53
+#: template/meta-box/page/about-us/section-leader/index.php:15
+#: template/meta-box/page/about-us/section-policy/index.php:52
+#: template/meta-box/page/about-us/section-policy/index.php:93
+#: template/meta-box/page/home/section-evaluate/index.php:15
+#: template/meta-box/page/home/section-evaluate/index.php:16
+#: template/meta-box/page/home/section-post/index.php:15
+#: template/meta-box/page/home/section-services/index.php:57
+#: template/meta-box/page/home/section-services/index.php:111
+#: template/meta-box/page/projects/section-tabs/index.php:10
+#: template/meta-box/page/projects/section-title/index.php:4
+#: template/meta-box/post-type/post/section-quote/template.php:3
+msgid "Title"
+msgstr "标题"
+
+#: inc/customizer/about-us-page/index.php:23
+#: inc/customizer/link-picker/index.php:107
+msgid "Loading..."
+msgstr "加载中..."
+
+#: inc/customizer/about-us-page/index.php:24
+msgid "Only up to %d items will be saved; extra items will not be saved."
+msgstr "最多只会保存 %d 个项目；多余的项目不会被保存。"
+
+#: inc/customizer/about-us-page/index.php:25
+msgid "No items. Click \"%s\" to add."
+msgstr "没有项目。点击“%s”来添加。"
+
+#: inc/customizer/about-us-page/index.php:7
+#: inc/customizer/home-page/index.php:7
+#: template/customize/page/home/section-banner/index.php:21
+#: template/customize/page/home/section-data/index.php:15
+#: template/customize/page/home/section-evaluate/index.php:40
+#: template/customize/page/home/section-option/index.php:17
+#: template/customize/page/home/section-service/index.php:23
+msgid "Item %d"
+msgstr "项目 %d"
+
+#: inc/customizer/about-us-page/index.php:8
+#: inc/meta-box/page/about-us-page/index.php:25
+#: template/meta-box/page/about-us/section-banner/index.php:40
+msgid "Label"
+msgstr "标签"
+
+#: inc/customizer/about-us-page/index.php:9
+#: inc/meta-box/page/about-us-page/index.php:24
+#: inc/meta-box/post-type/post/quote/index.php:28
+#: inc/meta-box/post-type/post/quote/index.php:60
+#: template/meta-box/page/about-us/section-banner/index.php:43
+#: template/meta-box/post-type/post/section-quote/template.php:41
+msgid "Value"
+msgstr "值"
+
+#: inc/customizer/about-us-page/section-banner/index.php:104
+#: inc/customizer/home-page/section-banner/index.php:207
+#: template/meta-box/page/home/section-banner/index.php:10
+msgid "Enable Banner"
+msgstr "启用横幅"
+
+#: inc/customizer/about-us-page/section-banner/index.php:115
+#: inc/customizer/about-us-page/section-contact/index.php:94
+#: inc/customizer/about-us-page/section-core-values/index.php:153
+#: inc/customizer/about-us-page/section-leader/index.php:151
+msgid "Edit About Us Page"
+msgstr "编辑关于我们页面"
+
+#: inc/customizer/about-us-page/section-banner/index.php:116
+#: inc/customizer/about-us-page/section-contact/index.php:95
+#: inc/customizer/about-us-page/section-core-values/index.php:154
+#: inc/customizer/about-us-page/section-leader/index.php:152
+msgid "Open the About Us page to edit meta box."
+msgstr "打开关于我们页面以编辑元框。"
+
+#: inc/customizer/about-us-page/section-banner/index.php:119
+#: inc/customizer/about-us-page/section-contact/index.php:98
+#: inc/customizer/about-us-page/section-core-values/index.php:157
+#: inc/customizer/about-us-page/section-leader/index.php:155
+msgid "Edit About Us"
+msgstr "编辑关于我们"
+
+#: inc/customizer/about-us-page/section-banner/index.php:128
+#: inc/customizer/about-us-page/section-leader/index.php:206
+#: inc/customizer/home-page/index.php:42
+#: inc/meta-box/page/about-us-page/index.php:22
+#: template/customize/footer/index.php:126
+#: template/customize/footer/index.php:136
+#: template/customize/footer/index.php:166
+#: template/customize/link-picker/index.php:4
+#: template/customize/page/home/section-banner/index.php:42
+#: template/customize/page/home/section-banner/index.php:112
+#: template/customize/page/home/section-data/index.php:29
+#: template/customize/page/home/section-data/index.php:31
+#: template/customize/page/home/section-evaluate/index.php:20
+#: template/customize/page/home/section-option/index.php:42
+#: template/meta-box/page/about-us/section-banner/index.php:16
+#: template/meta-box/page/about-us/section-contact/index.php:16
+#: template/meta-box/page/about-us/section-leader/index.php:17
+#: template/meta-box/page/home/section-banner/index.php:34
+#: template/meta-box/page/home/section-data/index.php:26
+#: template/meta-box/page/home/section-data/index.php:27
+#: template/meta-box/page/home/section-evaluate/index.php:17
+#: template/meta-box/page/home/section-evaluate/index.php:18
+#: template/meta-box/page/home/section-option/index.php:22
+msgid "Text"
+msgstr "文本"
+
+#: inc/customizer/about-us-page/section-banner/index.php:173
+#: template/meta-box/page/about-us/section-banner/index.php:9
+msgid "Facts"
+msgstr "事实"
+
+#: inc/customizer/about-us-page/section-banner/index.php:174
+msgid "Manage label/value pairs displayed in About Us."
+msgstr "管理关于我们中显示的标签/值对。"
+
+#: inc/customizer/about-us-page/section-banner/index.php:185
+#: inc/meta-box/post-type/post/banner/index.php:32
+#: inc/meta-box/post-type/project/banner/index.php:7
+#: inc/meta-box/post-type/project/banner/index.php:30
+#: inc/meta-box/post-type/project/index.php:23
+#: template/meta-box/page/home/section-banner/index.php:18
+#: template/meta-box/post-type/post/section-banner/index.php:3
+msgid "Banner Image"
+msgstr "横幅图片"
+
+#: inc/customizer/about-us-page/section-banner/index.php:191
+msgid "Banner Image ID"
+msgstr "横幅图片 ID"
+
+#: inc/customizer/about-us-page/section-banner/index.php:32
+#: inc/customizer/about-us-page/section-contact/index.php:17
+#: inc/customizer/about-us-page/section-core-values/index.php:65
+#: inc/customizer/about-us-page/section-leader/index.php:66
+msgid "Could not find an About Us page using template about-us-page.php or about-page.php."
+msgstr "无法找到使用模板 about-us-page.php 或 about-page.php 的关于我们页面。"
+
+#: inc/customizer/about-us-page/section-banner/index.php:39
+#: inc/customizer/about-us-page/section-contact/index.php:20
+#: inc/customizer/about-us-page/section-core-values/index.php:68
+#: inc/customizer/about-us-page/section-leader/index.php:69
+#: inc/customizer/home-page/section-evaluate/index.php:35
+#: inc/customizer/home-page/section-post/index.php:35
+#: inc/customizer/home-page/section-projects/index.php:39
+#: inc/customizer/link-picker/index.php:34
+#: inc/customizer/project-page/section-title/index.php:39
+msgid "Open edit page"
+msgstr "打开编辑页面"
+
+#: inc/customizer/about-us-page/section-banner/index.php:94
+#: inc/meta-box/page/about-us-page/section-banner/index.php:14
+msgid "About Us: Banner"
+msgstr "关于我们：横幅"
+
+#: inc/customizer/about-us-page/section-contact/index.php:105
+#: template/meta-box/page/about-us/section-contact/index.php:35
+#: template/template-parts/page/bill/section-bill/index.php:99
+#: template/template-parts/page/checkout/section-checkout/index.php:101
+msgid "Address"
+msgstr "地址"
+
+#: inc/customizer/about-us-page/section-contact/index.php:106
+#: template/customize/footer/index.php:54
+#: template/meta-box/page/about-us/section-contact/index.php:37
+#: template/template-parts/page/about-us/section-contact-form/index.php:57
+msgid "Phone"
+msgstr "电话"
+
+#: inc/customizer/about-us-page/section-contact/index.php:107
+#: template/customize/footer/index.php:59
+#: template/meta-box/page/about-us/section-contact/index.php:39
+#: template/template-parts/comment-product/index.php:113
+#: template/template-parts/page/about-us/section-contact-form/index.php:51
+msgid "Email"
+msgstr "电子邮件"
+
+#: inc/customizer/about-us-page/section-contact/index.php:143
+#: template/meta-box/page/about-us/section-contact/index.php:23
+msgid "Map Image"
+msgstr "地图图片"
+
+#: inc/customizer/about-us-page/section-contact/index.php:149
+msgid "Map Image ID"
+msgstr "地图图片 ID"
+
+#: inc/customizer/about-us-page/section-contact/index.php:64
+#: inc/meta-box/page/about-us-page/section-contact/index.php:13
+msgid "About Us: Contact"
+msgstr "关于我们：联系方式"
+
+#: inc/customizer/about-us-page/section-contact/index.php:82
+msgid "Enable Contact"
+msgstr "启用联系方式"
+
+#: inc/customizer/about-us-page/section-core-values/index.php:115
+#: inc/meta-box/page/about-us-page/section-core-values/index.php:14
+msgid "About Us: Core Values"
+msgstr "关于我们：核心价值观"
+
+#: inc/customizer/about-us-page/section-core-values/index.php:142
+msgid "Enable Core Values"
+msgstr "启用核心价值观"
+
+#: inc/customizer/about-us-page/section-core-values/index.php:229
+msgid "Core Values Items"
+msgstr "核心价值观项目"
+
+#: inc/customizer/about-us-page/section-core-values/index.php:230
+#: template/customize/page/about-us/section-core-values/index.php:2
+msgid "Manage core values items (icon, title, description, URL)."
+msgstr "管理核心价值观项目（图标、标题、描述、URL）。"
+
+#: inc/customizer/about-us-page/section-leader/index.php:113
+#: inc/meta-box/page/about-us-page/section-leader/index.php:13
+msgid "About Us: Leader"
+msgstr "关于我们：领导团队"
+
+#: inc/customizer/about-us-page/section-leader/index.php:140
+msgid "Enable Leader"
+msgstr "启用领导团队"
+
+#: inc/customizer/about-us-page/section-leader/index.php:216
+#: template/meta-box/page/about-us/section-leader/index.php:19
+#: template/template-parts/page/about-us/section-leader/index.php:32
+msgid "Core Executives"
+msgstr "核心高管"
+
+#: inc/customizer/about-us-page/section-leader/index.php:226
+#: template/meta-box/page/about-us/section-leader/index.php:21
+#: template/template-parts/page/about-us/section-leader/index.php:38
+msgid "Total Workforce"
+msgstr "总员工数"
+
+#: inc/customizer/about-us-page/section-leader/index.php:253
+msgid "Leader Items"
+msgstr "领导团队项目"
+
+#: inc/customizer/about-us-page/section-leader/index.php:254
+#: template/customize/page/about-us/section-leader/index.php:2
+msgid "Manage leader items (image, name, position, description, URL)."
+msgstr "管理领导团队项目（图片、名称、职位、描述、URL）。"
+
+#: inc/customizer/about-us-page/section-policy/index.php:126
+msgid "Enable Policy"
+msgstr "启用政策"
+
+#: inc/customizer/about-us-page/section-policy/index.php:131
+#: template/meta-box/page/about-us/section-policy/index.php:15
+msgid "Left Title"
+msgstr "左侧标题"
+
+#: inc/customizer/about-us-page/section-policy/index.php:132
+#: template/meta-box/page/about-us/section-policy/index.php:17
+#: template/template-parts/page/about-us/section-policy/index.php:69
+msgid "Business Registration"
+msgstr "商业注册"
+
+#: inc/customizer/about-us-page/section-policy/index.php:133
+#: template/meta-box/page/about-us/section-policy/index.php:20
+msgid "General Contractor"
+msgstr "总承包商"
+
+#: inc/customizer/about-us-page/section-policy/index.php:134
+#: template/meta-box/page/about-us/section-policy/index.php:23
+#: template/template-parts/page/about-us/section-policy/index.php:81
+msgid "DUNS Number"
+msgstr "DUNS 号码"
+
+#: inc/customizer/about-us-page/section-policy/index.php:135
+#: template/meta-box/page/about-us/section-policy/index.php:66
+msgid "Right Title"
+msgstr "右侧标题"
+
+#: inc/customizer/about-us-page/section-policy/index.php:169
+#: template/meta-box/page/about-us/section-policy/index.php:68
+msgid "Warranty Description"
+msgstr "保修描述"
+
+#: inc/customizer/about-us-page/section-policy/index.php:214
+#: template/meta-box/page/about-us/section-policy/index.php:25
+msgid "Certifications"
+msgstr "认证"
+
+#: inc/customizer/about-us-page/section-policy/index.php:215
+msgid "Manage certifications (image/url/title/desc)."
+msgstr "管理认证（图片/URL/标题/描述）。"
+
+#: inc/customizer/about-us-page/section-policy/index.php:219
+msgid "Warranty Items"
+msgstr "保修项目"
+
+#: inc/customizer/about-us-page/section-policy/index.php:220
+msgid "Manage warranty items (icon/title/desc)."
+msgstr "管理保修项目（图标/标题/描述）。"
+
+#: inc/customizer/about-us-page/section-policy/index.php:96
+#: inc/meta-box/page/about-us-page/section-policy/index.php:13
+msgid "About Us: Policy"
+msgstr "关于我们：政策"
+
+#: inc/customizer/footer/index.php:100
+msgid "Banner Background"
+msgstr "横幅背景"
+
+#: inc/customizer/footer/index.php:121
+msgid "Contact Location"
+msgstr "联系位置"
+
+#: inc/customizer/footer/index.php:131
+msgid "Contact Phone"
+msgstr "联系电话"
+
+#: inc/customizer/footer/index.php:141
+msgid "Contact Email"
+msgstr "联系邮箱"
+
+#: inc/customizer/footer/index.php:151
+msgid "Contact Time"
+msgstr "联系时间"
+
+#: inc/customizer/footer/index.php:162
+msgid "Footer Contact Links"
+msgstr "页脚联系链接"
+
+#: inc/customizer/footer/index.php:163
+msgid "Add/Edit contact links with icons."
+msgstr "添加/编辑带图标的联系链接。"
+
+#: inc/customizer/footer/index.php:173
+msgid "Create Build Text"
+msgstr "创建构建文本"
+
+#: inc/customizer/footer/index.php:183
+msgid "Policy Text"
+msgstr "政策文本"
+
+#: inc/customizer/footer/index.php:194
+msgid "Policy Link"
+msgstr "政策链接"
+
+#: inc/customizer/footer/index.php:195
+msgid "Choose link for Policy."
+msgstr "选择政策的链接。"
+
+#: inc/customizer/footer/index.php:205
+msgid "Servicer Text"
+msgstr "服务商文本"
+
+#: inc/customizer/footer/index.php:216
+msgid "Servicer Link"
+msgstr "服务商链接"
+
+#: inc/customizer/footer/index.php:217
+msgid "Choose link for Servicer."
+msgstr "选择服务商的链接。"
+
+#: inc/customizer/footer/index.php:265
+#: inc/customizer/home-page/index.php:48
+#: template/customize/footer/controls.php:43
+#: template/customize/footer/controls.php:88
+#: template/customize/footer/index.php:95
+#: template/customize/page/home/section-banner/index.php:48
+#: template/customize/page/home/section-banner/index.php:117
+#: template/customize/page/home/section-service/index.php:53
+#: template/meta-box/page/home/section-banner/index.php:39
+#: template/meta-box/page/home/section-services/index.php:68
+#: template/meta-box/page/home/section-services/index.php:116
+msgid "Link URL"
+msgstr "链接 URL"
+
+#: inc/customizer/footer/index.php:266
+#: inc/customizer/home-page/index.php:31
+#: template/customize/footer/controls.php:47
+#: template/customize/footer/controls.php:90
+#: template/customize/footer/index.php:98
+#: template/customize/footer/index.php:146
+#: template/customize/footer/index.php:177
+#: template/customize/footer/index.php:197
+#: template/customize/page/home/section-banner/index.php:51
+#: template/customize/page/home/section-banner/index.php:65
+#: template/customize/page/home/section-banner/index.php:119
+#: template/customize/page/home/section-banner/index.php:128
+#: template/customize/page/home/section-service/index.php:56
+#: template/meta-box/page/home/section-banner/index.php:41
+#: template/meta-box/page/home/section-services/index.php:71
+#: template/meta-box/page/home/section-services/index.php:118
+msgid "Choose Link"
+msgstr "选择链接"
+
+#: inc/customizer/footer/index.php:267
+#: inc/customizer/home-page/index.php:49
+#: template/customize/footer/controls.php:50
+#: template/customize/footer/controls.php:93
+#: template/customize/footer/index.php:101
+#: template/customize/page/home/section-banner/index.php:54
+#: template/customize/page/home/section-banner/index.php:120
+#: template/customize/page/home/section-service/index.php:59
+#: template/meta-box/page/home/section-banner/index.php:43
+#: template/meta-box/page/home/section-services/index.php:74
+#: template/meta-box/page/home/section-services/index.php:119
+msgid "Link Title"
+msgstr "链接标题"
+
+#: inc/customizer/footer/index.php:268
+#: inc/customizer/home-page/index.php:50
+#: template/customize/footer/controls.php:54
+#: template/customize/footer/controls.php:97
+#: template/customize/footer/index.php:106
+#: template/customize/page/home/section-banner/index.php:58
+#: template/customize/page/home/section-banner/index.php:122
+#: template/customize/page/home/section-service/index.php:64
+#: template/meta-box/page/home/section-banner/index.php:46
+#: template/meta-box/page/home/section-services/index.php:79
+#: template/meta-box/page/home/section-services/index.php:121
+msgid "Link Target"
+msgstr "链接目标"
+
+#: inc/customizer/footer/index.php:269
+#: inc/customizer/home-page/index.php:32
+#: template/customize/footer/controls.php:57
+#: template/customize/page/home/section-banner/index.php:59
+#: template/customize/page/home/section-banner/index.php:123
+#: template/meta-box/page/home/section-services/index.php:81
+#: template/meta-box/page/home/section-services/index.php:122
+msgid "Same Tab"
+msgstr "同一标签页"
+
+#: inc/customizer/footer/index.php:270
+#: inc/customizer/home-page/index.php:33
+#: template/customize/footer/controls.php:59
+#: template/customize/footer/controls.php:102
+#: template/customize/footer/index.php:109
+#: template/customize/footer/index.php:157
+#: template/customize/footer/index.php:188
+#: template/customize/footer/index.php:206
+#: template/customize/page/home/section-banner/index.php:60
+#: template/customize/page/home/section-banner/index.php:124
+#: template/customize/page/home/section-service/index.php:67
+#: template/meta-box/page/home/section-banner/index.php:49
+#: template/meta-box/page/home/section-services/index.php:82
+#: template/meta-box/page/home/section-services/index.php:123
+msgid "Open in new tab"
+msgstr "在新标签页打开"
+
+#: inc/customizer/footer/index.php:273
+#: inc/customizer/home-page/index.php:15
+#: template/customize/footer/controls.php:32
+#: template/customize/footer/index.php:84
+#: template/customize/page/home/section-option/index.php:22
+#: template/customize/page/home/section-option/index.php:27
+#: template/customize/page/home/section-service/index.php:29
+#: template/meta-box/page/home/section-option/index.php:8
+#: template/meta-box/page/home/section-services/index.php:42
+#: template/meta-box/page/home/section-services/index.php:101
+msgid "Icon"
+msgstr "图标"
+
+#: inc/customizer/footer/index.php:274
+#: inc/customizer/footer/index.php:280
+#: inc/customizer/home-page/index.php:20
+#: inc/meta-box/page/home-page/index.php:49
+#: inc/meta-box/post-type/post/banner/index.php:34
+#: inc/meta-box/post-type/project/about/index.php:33
+#: inc/meta-box/post-type/project/banner/index.php:30
+#: template/customize/footer/controls.php:35
+#: template/customize/footer/index.php:88
+#: template/customize/page/home/section-banner/index.php:31
+#: template/customize/page/home/section-banner/index.php:100
+#: template/customize/page/home/section-evaluate/index.php:49
+#: template/meta-box/page/home/section-banner/index.php:22
+#: template/meta-box/page/home/section-evaluate/index.php:40
+#: template/meta-box/page/home/section-option/index.php:12
+#: template/meta-box/page/home/section-services/index.php:47
+#: template/meta-box/page/home/section-services/index.php:104
+#: template/meta-box/post-type/post/section-banner/index.php:7
+msgid "Select photo"
+msgstr "选择照片"
+
+#: inc/customizer/footer/index.php:275
+#: inc/customizer/home-page/index.php:21
+#: inc/meta-box/page/home-page/index.php:50
+#: inc/meta-box/post-type/post/banner/index.php:35
+#: inc/meta-box/post-type/project/about/index.php:33
+#: inc/meta-box/post-type/project/banner/index.php:30
+#: template/customize/footer/controls.php:37
+#: template/customize/footer/index.php:89
+#: template/customize/page/home/section-banner/index.php:32
+#: template/customize/page/home/section-banner/index.php:101
+#: template/customize/page/home/section-evaluate/index.php:50
+#: template/meta-box/page/home/section-banner/index.php:23
+#: template/meta-box/post-type/post/section-banner/index.php:9
+msgid "Remove photo"
+msgstr "移除照片"
+
+#: inc/customizer/footer/index.php:279
+#: inc/customizer/header/index.php:58
+#: inc/customizer/home-page/index.php:19
+#: inc/meta-box/page/about-us-page/index.php:19
+#: inc/meta-box/page/home-page/index.php:43
+msgid "Use Image"
+msgstr "使用图片"
+
+#: inc/customizer/footer/index.php:281
+#: template/customize/footer/index.php:216
+msgid "Page"
+msgstr "页面"
+
+#: inc/customizer/footer/index.php:282
+#: inc/meta-box/page/home-page/section-post/index.php:15
+#: template/customize/footer/index.php:217
+#: template/meta-box/page/home/section-tabs/index.php:17
+msgid "Post"
+msgstr "文章"
+
+#: inc/customizer/footer/index.php:374
+#: inc/customizer/header/index.php:131
+msgid "Not allowed"
+msgstr "不允许"
+
+#: inc/customizer/footer/index.php:91
+#: inc/customizer/footer/index.php:318
+#: template/customize/footer/index.php:2
+msgid "Footer"
+msgstr "页脚"
+
+#: inc/customizer/header/index.php:14
+#: template/customize/header/index.php:10
+msgid "Logo"
+msgstr "标志"
+
+#: inc/customizer/header/index.php:5
+#: inc/customizer/header/index.php:84
+#: template/customize/header/index.php:2
+msgid "Header"
+msgstr "头部"
+
+#: inc/customizer/header/index.php:57
+msgid "Select Header Logo"
+msgstr "选择头部标志"
+
+#: inc/customizer/home-page/index.php:13
+#: template/customize/page/home/section-banner/index.php:39
+#: template/customize/page/home/section-banner/index.php:109
+#: template/customize/page/home/section-option/index.php:23
+#: template/customize/page/home/section-option/index.php:40
+#: template/customize/page/home/section-service/index.php:41
+#: template/meta-box/page/about-us/section-banner/index.php:7
+#: template/meta-box/page/about-us/section-contact/index.php:7
+#: template/meta-box/page/about-us/section-core-values/index.php:7
+#: template/meta-box/page/about-us/section-leader/index.php:8
+#: template/meta-box/page/home/section-option/index.php:21
+#: template/meta-box/page/home/section-services/index.php:55
+#: template/meta-box/page/home/section-services/index.php:110
+msgid "Content"
+msgstr "内容"
+
+#: inc/customizer/home-page/index.php:14
+#: template/customize/page/home/section-banner/index.php:46
+#: template/customize/page/home/section-banner/index.php:116
+#: template/customize/page/home/section-service/index.php:51
+#: template/meta-box/page/home/section-banner/index.php:38
+#: template/meta-box/page/home/section-services/index.php:66
+#: template/meta-box/page/home/section-services/index.php:115
+msgid "Link"
+msgstr "链接"
+
+#: inc/customizer/home-page/index.php:16
+#: inc/meta-box/page/home-page/index.php:48
+#: template/customize/page/home/section-evaluate/index.php:47
+#: template/meta-box/page/home/section-evaluate/index.php:36
+msgid "Avatar"
+msgstr "头像"
+
+#: inc/customizer/home-page/index.php:18
+#: inc/meta-box/post-type/post/quote/index.php:24
+#: inc/meta-box/post-type/project/about/index.php:19
+#: inc/meta-box/post-type/project/banner/index.php:18
+#: inc/meta-box/post-type/project/gallery/index.php:18
+#: inc/meta-box/post-type/project/standards/index.php:18
+msgid "Select image"
+msgstr "选择图片"
+
+#: inc/customizer/home-page/index.php:23
+#: inc/meta-box/page/home-page/index.php:41
+#: template/customize/page/home/section-evaluate/index.php:53
+#: template/meta-box/page/home/section-evaluate/index.php:44
+msgid "No photo selected yet"
+msgstr "尚未选择照片"
+
+#: inc/customizer/home-page/index.php:25
+#: template/customize/page/home/section-option/index.php:31
+#: template/customize/page/home/section-service/index.php:33
+msgid "Select icon"
+msgstr "选择图标"
+
+#: inc/customizer/home-page/index.php:26
+#: template/customize/page/home/section-option/index.php:32
+#: template/customize/page/home/section-service/index.php:34
+msgid "Remove icon"
+msgstr "移除图标"
+
+#: inc/customizer/home-page/index.php:27
+msgid "Choose icon"
+msgstr "选择图标"
+
+#: inc/customizer/home-page/index.php:28
+msgid "Use"
+msgstr "使用"
+
+#: inc/customizer/home-page/index.php:29
+#: inc/meta-box/page/home-page/index.php:40
+#: template/customize/page/home/section-option/index.php:36
+#: template/customize/page/home/section-service/index.php:37
+#: template/meta-box/page/home/section-option/index.php:17
+#: template/meta-box/page/home/section-services/index.php:51
+#: template/meta-box/page/home/section-services/index.php:107
+msgid "No icon selected"
+msgstr "未选择图标"
+
+#: inc/customizer/home-page/index.php:34
+#: template/customize/link-picker/index.php:6
+#: template/customize/page/home/section-banner/index.php:71
+#: template/customize/page/home/section-banner/index.php:135
+msgid "Open in new tab (_blank)"
+msgstr "在新标签页打开 (_blank)"
+
+#: inc/customizer/home-page/index.php:35
+#: template/customize/footer/controls.php:99
+#: template/customize/footer/index.php:108
+#: template/customize/footer/index.php:156
+#: template/customize/footer/index.php:187
+#: template/customize/page/home/section-service/index.php:66
+#: template/meta-box/page/home/section-banner/index.php:48
+msgid "Default"
+msgstr "默认"
+
+#: inc/customizer/home-page/index.php:36
+#: template/customize/link-picker/index.php:58
+#: template/customize/page/home/section-banner/index.php:73
+#: template/customize/page/home/section-banner/index.php:137
+#: template/template-parts/page/bill/section-bill/index.php:73
+msgid "Close"
+msgstr "关闭"
+
+#: inc/customizer/home-page/index.php:37
+#: template/customize/page/home/section-banner/index.php:66
+#: template/customize/page/home/section-banner/index.php:129
+msgid "Search pages/posts"
+msgstr "搜索页面/文章"
+
+#: inc/customizer/home-page/index.php:38
+#: template/customize/footer/index.php:211
+#: template/customize/link-picker/index.php:9
+#: template/customize/page/home/section-banner/index.php:67
+#: template/customize/page/home/section-banner/index.php:130
+msgid "Enter keyword..."
+msgstr "输入关键词..."
+
+#: inc/customizer/home-page/index.php:39
+#: inc/customizer/link-picker/index.php:105
+#: template/customize/link-picker/index.php:54
+msgid "No results found."
+msgstr "未找到结果。"
+
+#: inc/customizer/home-page/index.php:41
+#: template/customize/page/home/section-data/index.php:21
+#: template/customize/page/home/section-data/index.php:23
+#: template/meta-box/page/home/section-data/index.php:21
+#: template/meta-box/page/home/section-data/index.php:22
+msgid "Number"
+msgstr "数字"
+
+#: inc/customizer/home-page/index.php:45
+#: template/customize/page/home/section-banner/index.php:40
+#: template/customize/page/home/section-banner/index.php:110
+#: template/meta-box/page/home/section-banner/index.php:32
+msgid "Type"
+msgstr "类型"
+
+#: inc/customizer/home-page/index.php:51
+#: template/customize/page/home/section-banner/index.php:56
+#: template/customize/page/home/section-banner/index.php:121
+#: template/meta-box/page/home/section-banner/index.php:45
+msgid "Button text"
+msgstr "按钮文本"
+
+#: inc/customizer/home-page/index.php:52
+#: template/customize/page/home/section-service/index.php:61
+#: template/meta-box/page/home/section-services/index.php:76
+#: template/template-parts/page/about-us/section-core-values/index.php:27
+#: template/template-parts/page/about-us/section-core-values/index.php:68
+#: template/template-parts/page/home/section-services/index.php:85
+msgid "View Details"
+msgstr "查看详情"
+
+#: inc/customizer/home-page/index.php:54
+#: template/customize/footer/index.php:225
+#: template/customize/link-picker/index.php:57
+#: template/customize/page/home/section-evaluate/index.php:77
+#: template/customize/page/home/section-projects/index.php:26
+msgid "Apply"
+msgstr "应用"
+
+#: inc/customizer/home-page/index.php:55
+#: template/customize/page/home/section-evaluate/index.php:78
+#: template/customize/page/home/section-projects/index.php:27
+msgid "Changes are previewed instantly. Click Publish to save."
+msgstr "更改立即在预览中显示。点击发布以保存。"
+
+#: inc/customizer/home-page/index.php:56
+#: inc/meta-box/page/home-page/index.php:47
+msgid "Use this photo"
+msgstr "使用此照片"
+
+#: inc/customizer/home-page/index.php:9
+#: template/customize/page/home/section-banner/index.php:78
+#: template/customize/page/home/section-banner/index.php:142
+#: template/customize/page/home/section-data/index.php:38
+#: template/customize/page/home/section-option/index.php:54
+#: template/customize/page/home/section-service/index.php:73
+msgid "Remove item"
+msgstr "移除项目"
+
+#: inc/customizer/home-page/section-banner/index.php:195
+msgid "Home Page: Banner"
+msgstr "首页：横幅"
+
+#: inc/customizer/home-page/section-banner/index.php:220
+msgid "Banner Items"
+msgstr "横幅项目"
+
+#: inc/customizer/home-page/section-banner/index.php:221
+msgid "Add/Edit Banner items to display on the Front Page."
+msgstr "添加/编辑要在首页显示的横幅项目。"
+
+#: inc/customizer/home-page/section-banner/index.php:246
+msgid "Show Navigation Buttons"
+msgstr "显示导航按钮"
+
+#: inc/customizer/home-page/section-data/index.php:122
+msgid "Home Page: Data"
+msgstr "首页：数据"
+
+#: inc/customizer/home-page/section-data/index.php:132
+msgid "Enable Section Data"
+msgstr "启用数据部分"
+
+#: inc/customizer/home-page/section-data/index.php:143
+msgid "Data Items"
+msgstr "数据项目"
+
+#: inc/customizer/home-page/section-data/index.php:144
+msgid "Add/Edit Data items to display on the home page."
+msgstr "添加/编辑要在首页显示的数据项目。"
+
+#: inc/customizer/home-page/section-evaluate/index.php:101
+msgid "Enable Evaluate"
+msgstr "启用评估"
+
+#: inc/customizer/home-page/section-evaluate/index.php:107
+msgid "Evaluate Content"
+msgstr "评估内容"
+
+#: inc/customizer/home-page/section-evaluate/index.php:108
+msgid "Edit Evaluate section content for Front Page."
+msgstr "编辑首页评估部分内容。"
+
+#: inc/customizer/home-page/section-evaluate/index.php:28
+#: inc/customizer/home-page/section-post/index.php:28
+#: inc/customizer/home-page/section-projects/index.php:32
+#: inc/customizer/link-picker/index.php:23
+msgid "Could not find a Home page using template home-page.php."
+msgstr "无法找到使用模板 home-page.php 的首页。"
+
+#: inc/customizer/home-page/section-evaluate/index.php:86
+msgid "Home Page: Evaluate"
+msgstr "首页：评估"
+
+#: inc/customizer/home-page/section-option/index.php:129
+msgid "Home Page: Option"
+msgstr "首页：选项"
+
+#: inc/customizer/home-page/section-option/index.php:139
+msgid "Enable Section Option"
+msgstr "启用选项部分"
+
+#: inc/customizer/home-page/section-option/index.php:150
+msgid "Option Items"
+msgstr "选项项目"
+
+#: inc/customizer/home-page/section-option/index.php:151
+msgid "Add/Edit Option items to display on the home page."
+msgstr "添加/编辑要在首页显示的选项项目。"
+
+#: inc/customizer/home-page/section-post/index.php:101
+#: template/meta-box/page/home/section-post/index.php:9
+msgid "Enable Post"
+msgstr "启用文章"
+
+#: inc/customizer/home-page/section-post/index.php:107
+msgid "Post Section Content"
+msgstr "文章部分内容"
+
+#: inc/customizer/home-page/section-post/index.php:108
+msgid "Edit Post section content for Front Page."
+msgstr "编辑首页文章部分内容。"
+
+#: inc/customizer/home-page/section-post/index.php:86
+msgid "Home Page: Post"
+msgstr "首页：文章"
+
+#: inc/customizer/home-page/section-products/index.php:113
+msgid "Home Page: Product"
+msgstr "首页：产品"
+
+#: inc/customizer/home-page/section-products/index.php:124
+msgid "Enable Product"
+msgstr "启用产品"
+
+#: inc/customizer/home-page/section-products/index.php:135
+msgid "Materials Title"
+msgstr "材料标题"
+
+#: inc/customizer/home-page/section-products/index.php:146
+msgid "Materials Description"
+msgstr "材料描述"
+
+#: inc/customizer/home-page/section-projects/index.php:102
+msgid "Enable Portfolio"
+msgstr "启用作品集"
+
+#: inc/customizer/home-page/section-projects/index.php:113
+msgid "Portfolio Content"
+msgstr "作品集内容"
+
+#: inc/customizer/home-page/section-projects/index.php:114
+msgid "Edit Portfolio title and description for Front Page."
+msgstr "编辑首页作品集标题和描述。"
+
+#: inc/customizer/home-page/section-projects/index.php:92
+msgid "Home Page: Portfolio"
+msgstr "首页：作品集"
+
+#: inc/customizer/home-page/section-service/index.php:180
+msgid "Home Page: Services"
+msgstr "首页：服务"
+
+#: inc/customizer/home-page/section-service/index.php:191
+msgid "Enable Services"
+msgstr "启用服务"
+
+#: inc/customizer/home-page/section-service/index.php:202
+msgid "Services Title"
+msgstr "服务标题"
+
+#: inc/customizer/home-page/section-service/index.php:213
+msgid "Services Description"
+msgstr "服务描述"
+
+#: inc/customizer/home-page/section-service/index.php:225
+msgid "Services Items"
+msgstr "服务项目"
+
+#: inc/customizer/home-page/section-service/index.php:226
+msgid "Add/Edit Services Items to display on the home page."
+msgstr "添加/编辑要在首页显示的服务项目。"
+
+#: inc/customizer/link-picker/index.php:106
+#: template/customize/link-picker/index.php:51
+msgid "Select"
+msgstr "选择"
+
+#: inc/customizer/link-picker/index.php:65
+#: inc/customizer/link-picker/index.php:78
+msgid "Link Picker"
+msgstr "链接选择器"
+
+#: inc/customizer/link-picker/index.php:79
+msgid "List of pages and posts to select as links."
+msgstr "用于选择为链接的页面和文章列表。"
+
+#: inc/customizer/preview-page/index.php:22
+msgid "— Select Preview Page —"
+msgstr "— 选择预览页面 —"
+
+#: inc/customizer/preview-page/index.php:38
+msgid "Accept"
+msgstr "接受"
+
+#: inc/customizer/preview-page/index.php:45
+#: inc/customizer/preview-page/index.php:55
+msgid "Preview Page"
+msgstr "预览页面"
+
+#: inc/customizer/preview-page/index.php:56
+msgid "Select the page to preview in the Customizer. The sidebar will update accordingly."
+msgstr "选择要在自定义器中预览的页面。侧边栏将相应更新。"
+
+#: inc/customizer/project-page/section-title/index.php:32
+msgid "Could not find a Projects page using template projects-page.php."
+msgstr "无法找到使用模板 projects-page.php 的项目页面。"
+
+#: inc/customizer/project-page/section-title/index.php:74
+msgid "Title Projects"
+msgstr "项目标题"
+
+#: inc/customizer/project-page/section-title/index.php:85
+#: inc/meta-box/page/project-page/section-title/index.php:13
+#: template/meta-box/page/projects/section-title/index.php:2
+msgid "Projects Title"
+msgstr "项目标题"
+
+#: inc/customizer/project-page/section-title/index.php:86
+msgid "Edit the title and description of the Projects page."
+msgstr "编辑项目页面的标题和描述。"
+
+#: inc/customizer/project-page/section-title/index.php:97
+#: inc/customizer/project-page/section-title/index.php:101
+msgid "Edit Projects Page"
+msgstr "编辑项目页面"
+
+#: inc/customizer/project-page/section-title/index.php:98
+msgid "Open the Projects page editor."
+msgstr "打开项目页面编辑器。"
+
+#: inc/meta-box/page/about-us-page/index.php:28
+#: template/meta-box/page/about-us/section-policy/index.php:63
+msgid "Add Certification"
+msgstr "添加认证"
+
+#: inc/meta-box/page/about-us-page/index.php:31
+#: template/meta-box/page/about-us/section-core-values/index.php:41
+#: template/meta-box/page/about-us/section-policy/index.php:37
+#: template/meta-box/page/about-us/section-policy/index.php:81
+msgid "No image"
+msgstr "无图片"
+
+#: inc/meta-box/page/about-us-page/index.php:50
+msgid "About Us"
+msgstr "关于我们"
+
+#: inc/meta-box/page/home-page/index.php:21
+msgid "Home Page"
+msgstr "首页"
+
+#: inc/meta-box/page/home-page/index.php:35
+msgid "Displaying"
+msgstr "显示中"
+
+#: inc/meta-box/page/home-page/index.php:36
+msgid "Hidden"
+msgstr "隐藏"
+
+#: inc/meta-box/page/home-page/index.php:37
+#: template/meta-box/page/about-us/section-banner/index.php:15
+#: template/meta-box/page/about-us/section-contact/index.php:13
+#: template/meta-box/page/about-us/section-core-values/index.php:13
+#: template/meta-box/page/about-us/section-leader/index.php:14
+#: template/meta-box/page/about-us/section-policy/index.php:14
+msgid "Enabled"
+msgstr "已启用"
+
+#: inc/meta-box/page/home-page/index.php:38
+msgid "Disabled"
+msgstr "已禁用"
+
+#: inc/meta-box/page/home-page/index.php:44
+msgid "Select Option Icon"
+msgstr "选择选项图标"
+
+#: inc/meta-box/page/home-page/index.php:45
+msgid "Use Icon"
+msgstr "使用图标"
+
+#: inc/meta-box/page/home-page/index.php:46
+msgid "Select a photo"
+msgstr "选择照片"
+
+#: inc/meta-box/page/home-page/index.php:55
+#: inc/meta-box/post-type/post/quote/index.php:63
+#: inc/meta-box/post-type/project/standards/index.php:21
+#: inc/meta-box/post-type/project/standards/index.php:52
+#: template/meta-box/page/home/section-banner/index.php:58
+#: template/meta-box/page/home/section-data/index.php:36
+#: template/meta-box/page/home/section-evaluate/index.php:67
+#: template/meta-box/page/home/section-option/index.php:44
+#: template/meta-box/page/home/section-services/index.php:96
+#: template/meta-box/post-type/post/section-quote/template.php:47
+msgid "Add row"
+msgstr "添加行"
+
+#: inc/meta-box/page/home-page/section-banner/index.php:14
+#: inc/meta-box/post-type/post/banner/index.php:7
+#: inc/meta-box/post-type/post/index.php:19
+#: template/customize/footer/index.php:4
+#: template/customize/footer/index.php:18
+#: template/meta-box/page/about-us/section-tabs/index.php:10
+#: template/meta-box/page/home/section-tabs/index.php:10
+#: template/meta-box/post-type/post/section-post/template.php:2
+msgid "Banner"
+msgstr "横幅"
+
+#: inc/meta-box/page/home-page/section-data/index.php:14
+#: template/meta-box/page/home/section-tabs/index.php:12
+msgid "Data"
+msgstr "数据"
+
+#: inc/meta-box/page/home-page/section-evaluate/index.php:15
+#: template/meta-box/page/home/section-tabs/index.php:15
+msgid "Evaluate"
+msgstr "评估"
+
+#: inc/meta-box/page/home-page/section-option/index.php:14
+#: template/meta-box/page/home/section-tabs/index.php:11
+msgid "Option"
+msgstr "选项"
+
+#: inc/meta-box/page/home-page/section-products/index.php:14
+#: template/meta-box/page/home/section-tabs/index.php:13
+msgid "Products"
+msgstr "产品"
+
+#: inc/meta-box/page/home-page/section-projects/index.php:15
+#: template/meta-box/page/home/section-tabs/index.php:16
+msgid "Projects"
+msgstr "项目"
+
+#: inc/meta-box/page/home-page/section-service/index.php:14
+#: template/meta-box/page/home/section-tabs/index.php:14
+msgid "Services"
+msgstr "服务"
+
+#: inc/meta-box/page/project-page/index.php:13
+msgid "Projects Page"
+msgstr "项目页面"
+
+#: inc/meta-box/post-type/post/banner/index.php:17
+msgid "Select banner photo"
+msgstr "选择横幅照片"
+
+#: inc/meta-box/post-type/post/banner/index.php:18
+#: inc/meta-box/post-type/project/about/index.php:20
+#: inc/meta-box/post-type/project/standards/index.php:19
+msgid "Use photo"
+msgstr "使用照片"
+
+#: inc/meta-box/post-type/post/banner/index.php:19
+#: inc/meta-box/post-type/post/banner/index.php:41
+#: inc/meta-box/post-type/project/about/index.php:21
+#: inc/meta-box/post-type/project/about/index.php:34
+#: inc/meta-box/post-type/project/banner/index.php:20
+#: inc/meta-box/post-type/project/banner/index.php:31
+#: inc/meta-box/post-type/project/standards/index.php:25
+#: inc/meta-box/post-type/project/standards/index.php:42
+#: template/meta-box/post-type/post/section-banner/index.php:15
+msgid "No banner selected"
+msgstr "未选择横幅"
+
+#: inc/meta-box/post-type/post/index.php:11
+msgid "Post Details"
+msgstr "文章详情"
+
+#: inc/meta-box/post-type/post/index.php:21
+#: inc/meta-box/post-type/post/paragraph/index.php:7
+#: template/meta-box/post-type/post/section-post/template.php:4
+msgid "Paragraph"
+msgstr "段落"
+
+#: inc/meta-box/post-type/post/index.php:22
+#: inc/meta-box/post-type/post/quote/index.php:7
+#: template/meta-box/post-type/post/section-post/template.php:5
+msgid "Quote"
+msgstr "引用"
+
+#: inc/meta-box/post-type/post/quote/index.php:25
+#: inc/meta-box/post-type/project/banner/index.php:19
+#: inc/meta-box/post-type/project/gallery/index.php:19
+msgid "Add"
+msgstr "添加"
+
+#: inc/meta-box/post-type/post/quote/index.php:27
+#: inc/meta-box/post-type/post/quote/index.php:60
+#: template/meta-box/post-type/post/section-quote/template.php:40
+msgid "Key"
+msgstr "键"
+
+#: inc/meta-box/post-type/post/quote/index.php:46
+#: template/meta-box/post-type/post/section-quote/template.php:11
+msgid "Image Description"
+msgstr "图片描述"
+
+#: inc/meta-box/post-type/post/quote/index.php:47
+#: inc/meta-box/post-type/project/gallery/index.php:7
+#: inc/meta-box/post-type/project/index.php:30
+#: template/meta-box/post-type/post/section-quote/template.php:15
+#: template/template-parts/single/single-project/index.php:123
+msgid "Gallery"
+msgstr "画廊"
+
+#: inc/meta-box/post-type/post/quote/index.php:54
+#: inc/meta-box/post-type/project/gallery/index.php:20
+#: inc/meta-box/post-type/project/gallery/index.php:33
+#: inc/meta-box/post-type/project/standards/index.php:22
+#: inc/meta-box/post-type/project/standards/index.php:47
+#: template/meta-box/post-type/post/section-quote/template.php:28
+msgid "Add image"
+msgstr "添加图片"
+
+#: inc/meta-box/post-type/post/quote/index.php:55
+#: template/meta-box/post-type/post/section-quote/template.php:31
+msgid "Quote Repeater"
+msgstr "引用重复器"
+
+#: inc/meta-box/post-type/project/about/index.php:33
+msgid "About Image"
+msgstr "关于图片"
+
+#: inc/meta-box/post-type/project/about/index.php:7
+#: inc/meta-box/post-type/project/index.php:25
+msgid "About Project"
+msgstr "关于项目"
+
+#: inc/meta-box/post-type/project/datetime/index.php:7
+#: inc/meta-box/post-type/project/datetime/index.php:20
+#: inc/meta-box/post-type/project/index.php:29
+msgid "Date Time"
+msgstr "日期时间"
+
+#: inc/meta-box/post-type/project/gallery/index.php:21
+#: inc/meta-box/post-type/project/gallery/index.php:33
+msgid "Clear gallery"
+msgstr "清除画廊"
+
+#: inc/meta-box/post-type/project/index.php:15
+msgid "Project Details"
+msgstr "项目详情"
+
+#: inc/meta-box/post-type/project/index.php:24
+#: inc/meta-box/post-type/project/location/index.php:7
+#: inc/meta-box/post-type/project/location/index.php:20
+#: template/customize/footer/index.php:49
+#: template/template-parts/page/home/section-projects/index.php:118
+#: template/template-parts/page/projects/section-list/index.php:59
+msgid "Location"
+msgstr "位置"
+
+#: inc/meta-box/post-type/project/index.php:26
+#: inc/meta-box/post-type/project/standards/index.php:7
+#: template/template-parts/single/single-project/index.php:139
+msgid "Standards"
+msgstr "标准"
+
+#: inc/meta-box/post-type/project/index.php:27
+#: inc/meta-box/post-type/project/infomations/index.php:9
+#: template/customize/footer/index.php:5
+#: template/customize/footer/index.php:32
+msgid "Information"
+msgstr "信息"
+
+#: inc/meta-box/post-type/project/index.php:28
+#: inc/meta-box/post-type/project/price/index.php:7
+#: inc/meta-box/post-type/project/price/index.php:20
+msgid "Price"
+msgstr "价格"
+
+#: inc/meta-box/post-type/project/infomations/index.php:29
+#: template/template-parts/single/single-project/index.php:84
+msgid "Total Area"
+msgstr "总面积"
+
+#: inc/meta-box/post-type/project/infomations/index.php:30
+#: template/template-parts/single/single-project/index.php:89
+msgid "Completion"
+msgstr "完成"
+
+#: inc/meta-box/post-type/project/infomations/index.php:31
+#: template/template-parts/single/single-project/index.php:94
+msgid "Architectural Style"
+msgstr "建筑风格"
+
+#: search.php:13
+msgid "Search Results for: %s"
+msgstr "搜索结果：%s"
+
+#: single.php:15
+msgid "Previous:"
+msgstr "上一页："
+
+#: single.php:16
+msgid "Next:"
+msgstr "下一页："
+
+#: template/customize/footer/index.php:10
+#: template/customize/footer/index.php:164
+msgid "Servicer"
+msgstr "服务商"
+
+#: template/customize/footer/index.php:203
+#: template/customize/link-picker/index.php:5
+msgid "Link text"
+msgstr "链接文本"
+
+#: template/customize/footer/index.php:209
+#: template/customize/link-picker/index.php:8
+msgid "Search"
+msgstr "搜索"
+
+#: template/customize/footer/index.php:213
+msgid "Source"
+msgstr "来源"
+
+#: template/customize/footer/index.php:215
+msgid "All"
+msgstr "全部"
+
+#: template/customize/footer/index.php:224
+msgid "Cancel"
+msgstr "取消"
+
+#: template/customize/footer/index.php:6
+#: template/customize/footer/index.php:47
+#: template/meta-box/page/about-us/section-contact/index.php:9
+#: template/meta-box/page/about-us/section-tabs/index.php:14
+#: template/template-parts/footer/footer.php:77
+#: template/template-parts/footer/footer.php:172
+msgid "Contact"
+msgstr "联系"
+
+#: template/customize/footer/index.php:64
+msgid "Time"
+msgstr "时间"
+
+#: template/customize/footer/index.php:7
+#: template/customize/footer/index.php:72
+msgid "Contact Link"
+msgstr "联系链接"
+
+#: template/customize/footer/index.php:8
+#: template/customize/footer/index.php:124
+msgid "Create Build"
+msgstr "创建构建"
+
+#: template/customize/footer/index.php:9
+#: template/customize/footer/index.php:134
+#: template/meta-box/page/about-us/section-tabs/index.php:13
+#: template/template-parts/footer/footer.php:79
+#: template/template-parts/footer/footer.php:220
+msgid "Policy"
+msgstr "政策"
+
+#: template/customize/link-picker/index.php:7
+msgid "Or link to existing content"
+msgstr "或链接到现有内容"
+
+#: template/customize/page/about-us/section-banner/index.php:2
+msgid "Manage About Us facts (label & value). Use the buttons to add or remove items."
+msgstr "管理关于我们事实（标签 & 值）。使用按钮添加或移除项目。"
+
+#: template/customize/page/about-us/section-contact/index.php:2
+msgid "Use the fields below in this section to update Contact information."
+msgstr "使用本节下面的字段更新联系信息。"
+
+#: template/customize/page/about-us/section-policy/index.php:6
+msgid "Manage Certifications (image/url/title/desc)."
+msgstr "管理认证（图片/url/标题/描述）。"
+
+#: template/customize/page/about-us/section-policy/index.php:8
+msgid "Manage Warranty Items (icon/title/desc)."
+msgstr "管理保修项目（图标/标题/描述）。"
+
+#: template/customize/page/home/section-evaluate/index.php:14
+msgid "Evaluate Title"
+msgstr "评估标题"
+
+#: template/customize/page/home/section-post/index.php:10
+msgid "Post Section"
+msgstr "文章部分"
+
+#: template/customize/page/home/section-post/index.php:14
+#: template/meta-box/page/home/section-post/index.php:17
+msgid "LATEST POSTS"
+msgstr "最新文章"
+
+#: template/customize/page/home/section-products/index.php:5
+msgid "Configure the title and description of the Products section."
+msgstr "配置产品部分的标题和描述。"
+
+#: template/customize/page/home/section-products/index.php:7
+msgid "Changes will be displayed immediately in the Preview."
+msgstr "更改将立即在预览中显示。"
+
+#: template/customize/page/home/section-products/index.php:8
+msgid "Click Publish to save to the home page."
+msgstr "点击发布以保存到首页。"
+
+#: template/customize/page/home/section-projects/index.php:14
+msgid "Portfolio Title"
+msgstr "作品集标题"
+
+#: template/customize/page/projects/section-title/index.php:19
+msgid "Changes are displayed directly in the preview. Publish to save."
+msgstr "更改直接在预览中显示。发布以保存。"
+
+#: template/meta-box/page/about-us/section-banner/index.php:11
+msgid "Media"
+msgstr "媒体"
+
+#: template/meta-box/page/about-us/section-core-values/index.php:9
+#: template/meta-box/page/about-us/section-leader/index.php:10
+msgid "Items"
+msgstr "项目"
+
+#: template/meta-box/page/about-us/section-policy/index.php:10
+msgid "Warranty"
+msgstr "保修"
+
+#: template/meta-box/page/about-us/section-policy/index.php:8
+msgid "Certification"
+msgstr "认证"
+
+#: template/meta-box/page/about-us/section-tabs/index.php:11
+msgid "Core Values"
+msgstr "核心价值观"
+
+#: template/meta-box/page/about-us/section-tabs/index.php:12
+msgid "Leader"
+msgstr "领导者"
+
+#: template/meta-box/page/home/section-banner/index.php:31
+msgid "Banner Content"
+msgstr "横幅内容"
+
+#: template/meta-box/page/home/section-banner/index.php:6
+msgid "Home Banner Status"
+msgstr "首页横幅状态"
+
+#: template/meta-box/page/home/section-banner/index.php:9
+msgid "Disable Banner"
+msgstr "禁用横幅"
+
+#: template/meta-box/page/home/section-data/index.php:11
+#: template/meta-box/page/home/section-products/index.php:8
+#: template/meta-box/page/home/section-services/index.php:10
+msgid "Remove Section"
+msgstr "移除部分"
+
+#: template/meta-box/page/home/section-data/index.php:12
+#: template/meta-box/page/home/section-products/index.php:9
+#: template/meta-box/page/home/section-services/index.php:11
+msgid "Add Section"
+msgstr "添加部分"
+
+#: template/meta-box/page/home/section-data/index.php:7
+msgid "Section Data Status"
+msgstr "部分数据状态"
+
+#: template/meta-box/page/home/section-evaluate/index.php:10
+#: template/meta-box/page/home/section-option/index.php:39
+#: template/meta-box/page/home/section-projects/index.php:10
+msgid "Enable Section"
+msgstr "启用部分"
+
+#: template/meta-box/page/home/section-evaluate/index.php:6
+msgid "Evaluate Status"
+msgstr "评估状态"
+
+#: template/meta-box/page/home/section-evaluate/index.php:9
+#: template/meta-box/page/home/section-option/index.php:38
+#: template/meta-box/page/home/section-projects/index.php:9
+msgid "Disable Section"
+msgstr "禁用部分"
+
+#: template/meta-box/page/home/section-option/index.php:34
+msgid "Section Option Status"
+msgstr "部分选项状态"
+
+#: template/meta-box/page/home/section-post/index.php:5
+msgid "Post Section Status"
+msgstr "文章部分状态"
+
+#: template/meta-box/page/home/section-post/index.php:8
+msgid "Disable Post"
+msgstr "禁用文章"
+
+#: template/meta-box/page/home/section-products/index.php:15
+#: template/meta-box/page/home/section-projects/index.php:15
+#: template/meta-box/page/home/section-services/index.php:17
+msgid "Section Title"
+msgstr "部分标题"
+
+#: template/meta-box/page/home/section-products/index.php:17
+msgid "MATERIALS"
+msgstr "材料"
+
+#: template/meta-box/page/home/section-products/index.php:20
+#: template/meta-box/page/home/section-services/index.php:22
+msgid "Section Description"
+msgstr "部分描述"
+
+#: template/meta-box/page/home/section-products/index.php:22
+#: template/meta-box/page/home/section-projects/index.php:18
+msgid "Short description"
+msgstr "简短描述"
+
+#: template/meta-box/page/home/section-products/index.php:5
+msgid "Products Section Status"
+msgstr "产品部分状态"
+
+#: template/meta-box/page/home/section-projects/index.php:16
+msgid "PROJECTS"
+msgstr "项目"
+
+#: template/meta-box/page/home/section-projects/index.php:6
+msgid "Projects Section Status"
+msgstr "项目部分状态"
+
+#: template/meta-box/page/home/section-services/index.php:19
+msgid "CORE SERVICES"
+msgstr "核心服务"
+
+#: template/meta-box/page/home/section-services/index.php:24
+msgid "Comprehensive construction solutions"
+msgstr "全面的建筑解决方案"
+
+#: template/meta-box/page/home/section-services/index.php:6
+msgid "Services Section Status"
+msgstr "服务部分状态"
+
+#: template/template-parts/breadcrums/index.php:23
+msgid "Navigate to %s"
+msgstr "导航到 %s"
+
+#: template/template-parts/comment-product/index.php:104
+msgid "Comments have been closed."
+msgstr "评论已关闭。"
+
+#: template/template-parts/comment-product/index.php:112
+msgid "Your name"
+msgstr "您的姓名"
+
+#: template/template-parts/comment-product/index.php:113
+msgid "Your email"
+msgstr "您的电子邮件"
+
+#: template/template-parts/comment-product/index.php:114
+msgid "Website"
+msgstr "网站"
+
+#: template/template-parts/comment-product/index.php:114
+msgid "Website (optional)"
+msgstr "网站（可选）"
+
+#: template/template-parts/comment-product/index.php:120
+msgid "Write a comment"
+msgstr "写评论"
+
+#: template/template-parts/comment-product/index.php:124
+msgid "Be respectful and keep your comment concise."
+msgstr "请尊重他人并保持评论简洁。"
+
+#: template/template-parts/comment-product/index.php:126
+msgid "Submit"
+msgstr "提交"
+
+#: template/template-parts/comment-product/index.php:128
+msgid "Comment"
+msgstr "评论"
+
+#: template/template-parts/comment-product/index.php:128
+msgid "Write a public comment..."
+msgstr "写一条公开评论..."
+
+#: template/template-parts/comment-product/index.php:17
+msgid "comments “%s”"
+msgstr "评论 “%s”"
+
+#: template/template-parts/comment-product/index.php:22
+msgid "%1$s comments “%2$s”"
+msgstr "%1$s 条评论 “%2$s”"
+
+#: template/template-parts/comment-product/index.php:37
+#: template/template-parts/comment-product/index.php:99
+msgid "← Older comments"
+msgstr "← 较早的评论"
+
+#: template/template-parts/comment-product/index.php:38
+#: template/template-parts/comment-product/index.php:100
+msgid "Newer comments →"
+msgstr "较新的评论 →"
+
+#: template/template-parts/comment-product/index.php:41
+msgid "Comments"
+msgstr "评论"
+
+#: template/template-parts/comment-product/index.php:67
+msgid "Your comment is awaiting moderation."
+msgstr "您的评论正在等待审核。"
+
+#: template/template-parts/footer/footer.php:73
+#: template/template-parts/footer/footer.php:133
+#: template/template-parts/page/about-us/section-contact-form/index.php:48
+msgid "Connect with us"
+msgstr "与我们联系"
+
+#: template/template-parts/footer/footer.php:75
+#: template/template-parts/footer/footer.php:155
+#: template/template-parts/header/header.php:148
+msgid "Menu"
+msgstr "菜单"
+
+#: template/template-parts/footer/footer.php:81
+#: template/template-parts/footer/footer.php:230
+msgid "Service"
+msgstr "服务"
+
+#: template/template-parts/footer/footer.php:83
+#: template/template-parts/footer/footer.php:119
+msgid "Footer Logo"
+msgstr "页脚标志"
+
+#: template/template-parts/footer/footer.php:85
+#: template/template-parts/footer/footer.php:146
+#: template/template-parts/footer/footer.php:178
+#: template/template-parts/footer/footer.php:186
+#: template/template-parts/footer/footer.php:194
+#: template/template-parts/footer/footer.php:202
+#: template/template-parts/page/home/section-option/index.php:49
+#: template/template-parts/page/home/section-option/index.php:83
+msgid "icon"
+msgstr "图标"
+
+#: template/template-parts/header/cart/index.php:20
+msgid "Your cart is empty"
+msgstr "您的购物车是空的"
+
+#: template/template-parts/header/cart/index.php:32
+#: template/template-parts/page/home/section-products/index.php:109
+#: template/template-parts/page/product/section-products/index.php:236
+#: template/template-parts/single/single-product/index.php:172
+#: template/template-parts/single/single-product/index.php:182
+#: template/template-parts/single/single-product/index.php:366
+msgid "ton"
+msgstr "吨"
+
+#: template/template-parts/header/cart/index.php:55
+#: template/template-parts/page/cart/section-cart/index.php:81
+msgid "Unit: %s"
+msgstr "单位：%s"
+
+#: template/template-parts/header/cart/index.php:61
+msgid "Decrease"
+msgstr "减少"
+
+#: template/template-parts/header/cart/index.php:64
+msgid "Increase"
+msgstr "增加"
+
+#: template/template-parts/header/cart/index.php:84
+msgid "Order total"
+msgstr "订单总计"
+
+#: template/template-parts/header/cart/index.php:9
+msgid "Your Cart"
+msgstr "您的购物车"
+
+#: template/template-parts/header/cart/index.php:97
+#: template/template-parts/header/header.php:189
+msgid "View Cart"
+msgstr "查看购物车"
+
+#: template/template-parts/header/header.php:127
+#: template/template-parts/header/header.php:196
+msgid "Request a Quote"
+msgstr "请求报价"
+
+#: template/template-parts/header/header.php:135
+#: template/template-parts/header/header.php:188
+msgid "Cart"
+msgstr "购物车"
+
+#: template/template-parts/header/header.php:154
+msgid "Close Menu"
+msgstr "关闭菜单"
+
+#: template/template-parts/page/404/index.php:11
+msgid "The page you are looking for might have been moved, removed, or is temporarily unavailable. We're building something better!"
+msgstr "您要查找的页面可能已移动、删除或暂时不可用。我们正在构建更好的东西！"
+
+#: template/template-parts/page/404/index.php:14
+msgid "Back to Home"
+msgstr "返回首页"
+
+#: template/template-parts/page/404/index.php:15
+msgid "Contact Support"
+msgstr "联系支持"
+
+#: template/template-parts/page/404/index.php:8
+msgid "Error 404?"
+msgstr "错误 404？"
+
+#: template/template-parts/page/404/index.php:9
+msgid "Page Not Found"
+msgstr "页面未找到"
+
+#: template/template-parts/page/about-us/section-contact-form/index.php:3
+msgid "Send an Inquiry"
+msgstr "发送询问"
+
+#: template/template-parts/page/about-us/section-contact-form/index.php:34
+msgid "Contact form is not ready yet."
+msgstr "联系表单尚未准备好。"
+
+#: template/template-parts/page/about-us/section-contact/index.php:51
+msgid "Office Address"
+msgstr "办公地址"
+
+#: template/template-parts/page/about-us/section-contact/index.php:63
+#: template/template-parts/page/bill/section-bill/index.php:91
+#: template/template-parts/page/checkout/section-checkout/index.php:83
+msgid "Phone Number"
+msgstr "电话号码"
+
+#: template/template-parts/page/about-us/section-contact/index.php:75
+msgid "Official Email"
+msgstr "官方邮箱"
+
+#: template/template-parts/page/about-us/section-leader/index.php:98
+msgid "View Profile"
+msgstr "查看简介"
+
+#: template/template-parts/page/about-us/section-policy/index.php:106
+msgid "View Certification"
+msgstr "查看认证"
+
+#: template/template-parts/page/about-us/section-policy/index.php:75
+msgid "General Contractor Lic"
+msgstr "总承包商执照"
+
+#: template/template-parts/page/bill/section-bill/index.php:103
+#: template/template-parts/page/checkout/section-checkout/index.php:110
+msgid "City"
+msgstr "城市"
+
+#: template/template-parts/page/bill/section-bill/index.php:107
+#: template/template-parts/page/checkout/section-checkout/index.php:117
+msgid "ZIP / Postal Code"
+msgstr "邮政编码"
+
+#: template/template-parts/page/bill/section-bill/index.php:111
+#: template/template-parts/page/checkout/section-checkout/index.php:125
+msgid "Country"
+msgstr "国家"
+
+#: template/template-parts/page/bill/section-bill/index.php:115
+#: template/template-parts/page/checkout/section-checkout/index.php:151
+msgid "Payment Method"
+msgstr "支付方式"
+
+#: template/template-parts/page/bill/section-bill/index.php:119
+#: template/template-parts/page/checkout/section-checkout/index.php:141
+msgid "Order Notes"
+msgstr "订单备注"
+
+#: template/template-parts/page/bill/section-bill/index.php:138
+msgid "I confirm all bill information above is correct."
+msgstr "我确认以上所有账单信息正确。"
+
+#: template/template-parts/page/bill/section-bill/index.php:146
+msgid "Submit Bill Confirmation"
+msgstr "提交账单确认"
+
+#: template/template-parts/page/bill/section-bill/index.php:157
+#: template/template-parts/page/checkout/section-checkout/index.php:430
+msgid "Order Summary"
+msgstr "订单摘要"
+
+#: template/template-parts/page/bill/section-bill/index.php:161
+msgid "Your cart is currently empty."
+msgstr "您的购物车目前为空。"
+
+#: template/template-parts/page/bill/section-bill/index.php:182
+#: template/template-parts/page/checkout/section-checkout/index.php:462
+#: template/template-parts/single/single-product/index.php:100
+msgid "Qty: %s"
+msgstr "数量：%s"
+
+#: template/template-parts/page/bill/section-bill/index.php:194
+#: template/template-parts/page/cart/section-cart/index.php:117
+#: template/template-parts/page/checkout/section-checkout/index.php:486
+msgid "Regular Price"
+msgstr "常规价格"
+
+#: template/template-parts/page/bill/section-bill/index.php:198
+#: template/template-parts/page/cart/section-cart/index.php:123
+#: template/template-parts/page/checkout/section-checkout/index.php:490
+msgid "Sale Price"
+msgstr "促销价格"
+
+#: template/template-parts/page/bill/section-bill/index.php:202
+#: template/template-parts/page/cart/section-cart/index.php:129
+#: template/template-parts/page/checkout/section-checkout/index.php:494
+msgid "You Save"
+msgstr "您节省"
+
+#: template/template-parts/page/bill/section-bill/index.php:207
+#: template/template-parts/page/checkout/section-checkout/index.php:499
+msgid "Total"
+msgstr "总计"
+
+#: template/template-parts/page/bill/section-bill/index.php:52
+msgid "Bill Information"
+msgstr "账单信息"
+
+#: template/template-parts/page/bill/section-bill/index.php:54
+msgid "Review your checkout information and submit confirmation."
+msgstr "查看您的结账信息并提交确认。"
+
+#: template/template-parts/page/bill/section-bill/index.php:68
+msgid "Order Placed Successfully"
+msgstr "订单下单成功"
+
+#: template/template-parts/page/bill/section-bill/index.php:70
+msgid "Order #%s has been successfully created."
+msgstr "订单 #%s 已成功创建。"
+
+#: template/template-parts/page/bill/section-bill/index.php:81
+msgid "Please confirm the bill information before submitting."
+msgstr "提交前请确认账单信息。"
+
+#: template/template-parts/page/bill/section-bill/index.php:82
+msgid "Submitting..."
+msgstr "提交中..."
+
+#: template/template-parts/page/bill/section-bill/index.php:83
+msgid "Customer Information"
+msgstr "客户信息"
+
+#: template/template-parts/page/bill/section-bill/index.php:87
+#: template/template-parts/page/checkout/section-checkout/index.php:75
+msgid "Full Name"
+msgstr "全名"
+
+#: template/template-parts/page/bill/section-bill/index.php:95
+#: template/template-parts/page/checkout/section-checkout/index.php:93
+msgid "Email Address"
+msgstr "电子邮件地址"
+
+#: template/template-parts/page/blog/section-blog/index.php:150
+msgid "Trending Now"
+msgstr "现在热门"
+
+#: template/template-parts/page/blog/section-blog/index.php:151
+msgid "Trending"
+msgstr "热门"
+
+#: template/template-parts/page/blog/section-blog/index.php:24
+#: template/template-parts/page/blog/section-blog/index.php:156
+msgid "%s views"
+msgstr "%s 次浏览"
+
+#: template/template-parts/page/blog/section-blog/index.php:41
+#: template/template-parts/page/home/section-post/index.php:95
+msgid "Read more"
+msgstr "阅读更多"
+
+#: template/template-parts/page/blog/section-blog/index.php:42
+#: template/template-parts/page/home/section-banner/index.php:54
+#: template/template-parts/page/home/section-banner/index.php:97
+#: template/template-parts/page/home/section-banner/index.php:104
+#: template/template-parts/page/home/section-post/index.php:97
+#: template/template-parts/page/home/section-post/index.php:115
+#: template/template-parts/page/home/section-products/index.php:135
+#: template/template-parts/page/home/section-projects/index.php:141
+#: template/template-parts/page/home/section-services/index.php:87
+msgid "Right arrow"
+msgstr "右箭头"
+
+#: template/template-parts/page/cart/section-cart/index.php:112
+msgid "Cart Summary"
+msgstr "购物车摘要"
+
+#: template/template-parts/page/cart/section-cart/index.php:135
+msgid "Discount"
+msgstr "折扣"
+
+#: template/template-parts/page/cart/section-cart/index.php:144
+msgid "Total Amount"
+msgstr "总金额"
+
+#: template/template-parts/page/cart/section-cart/index.php:150
+msgid "Place Order"
+msgstr "下订单"
+
+#: template/template-parts/page/cart/section-cart/index.php:152
+msgid "Prices include basic unloading at designated curb. Terms &amp; Conditions apply."
+msgstr "价格包括在指定路边的基本卸货。条款与条件适用。"
+
+#: template/template-parts/page/cart/section-cart/index.php:25
+msgid "Shopping Cart"
+msgstr "购物车"
+
+#: template/template-parts/page/cart/section-cart/index.php:26
+msgid "Review your construction materials and adjust quantities for your project."
+msgstr "查看您的建筑材料并为您的项目调整数量。"
+
+#: template/template-parts/page/cart/section-cart/index.php:32
+#: template/template-parts/page/checkout/section-checkout/index.php:434
+msgid "Your cart is empty."
+msgstr "您的购物车是空的。"
+
+#: template/template-parts/page/cart/section-cart/index.php:34
+msgid "Continue Shopping"
+msgstr "继续购物"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:128
+msgid "-- Select country --"
+msgstr "-- 选择国家 --"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:166
+msgid "Cash on Delivery"
+msgstr "货到付款"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:188
+msgid "Credit Card"
+msgstr "信用卡"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:198
+msgid "Bank Transfer"
+msgstr "银行转账"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:216
+msgid "Pay in cash upon delivery. Our delivery staff will collect payment directly at your shipping address."
+msgstr "送货时现金支付。我们的送货人员将在您的送货地址直接收取款项。"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:224
+msgid "Please prepare the exact amount to make the delivery process smoother."
+msgstr "请准备好确切金额，以使送货过程更顺畅。"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:243
+msgid "Continue with %s"
+msgstr "继续使用 %s"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:251
+msgid "You will be redirected to PayPal and returned here after authorization."
+msgstr "您将被重定向到 PayPal，授权后返回此处。"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:266
+msgid "Card Number"
+msgstr "卡号"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:274
+msgid "Expiry Date"
+msgstr "到期日期"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:281
+msgid "CVV Code"
+msgstr "CVV 码"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:289
+msgid "Name on Card"
+msgstr "卡上姓名"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:300
+msgid "Card details are encrypted with 256-bit SSL"
+msgstr "卡片详情已使用 256 位 SSL 加密"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:322
+msgid "Bank"
+msgstr "银行"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:329
+msgid "Account Name"
+msgstr "账户名称"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:336
+msgid "Account No."
+msgstr "账户号码"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:340
+#: template/template-parts/page/checkout/section-checkout/index.php:356
+#: template/template-parts/page/checkout/section-checkout/index.php:372
+#: template/template-parts/page/checkout/section-checkout/index.php:389
+msgid "Copy"
+msgstr "复制"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:351
+msgid "Sort Code"
+msgstr "排序代码"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:367
+msgid "IBAN"
+msgstr "IBAN"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:384
+msgid "BIC / Swift"
+msgstr "BIC / Swift"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:407
+msgid "No bank account details have been configured yet. Please contact us for payment instructions."
+msgstr "尚未配置银行账户详情。请联系我们获取支付说明。"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:417
+msgid "Please use the exact reference code so your order can be processed quickly."
+msgstr "请使用确切的参考代码，以便您的订单能快速处理。"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:464
+msgid "Regular:"
+msgstr "常规："
+
+#: template/template-parts/page/checkout/section-checkout/index.php:468
+msgid "Sale:"
+msgstr "促销："
+
+#: template/template-parts/page/checkout/section-checkout/index.php:472
+msgid "You Save:"
+msgstr "您节省："
+
+#: template/template-parts/page/checkout/section-checkout/index.php:505
+msgid "Bill Order"
+msgstr "账单订单"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:519
+msgid "Transaction secured &amp; encrypted"
+msgstr "交易安全且加密"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:57
+msgid "Checkout"
+msgstr "结账"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:59
+msgid "Complete your details to place the order."
+msgstr "完成您的详细信息以下订单。"
+
+#: template/template-parts/page/checkout/section-checkout/index.php:69
+msgid "Shipping Information"
+msgstr "运输信息"
+
+#: template/template-parts/page/home/section-banner/index.php:53
+#: template/template-parts/page/home/section-banner/index.php:86
+msgid "View About Us"
+msgstr "查看关于我们"
+
+#: template/template-parts/page/home/section-banner/index.php:61
+msgid "Edit Banner"
+msgstr "编辑横幅"
+
+#: template/template-parts/page/home/section-post/index.php:112
+msgid "View All Posts"
+msgstr "查看所有文章"
+
+#: template/template-parts/page/home/section-products/index.php:112
+#: template/template-parts/page/product/section-products/index.php:237
+#: template/template-parts/single/single-product/index.php:210
+#: template/template-parts/single/single-product/index.php:370
+msgid "Add to Cart"
+msgstr "添加到购物车"
+
+#: template/template-parts/page/home/section-products/index.php:131
+msgid "View All Products"
+msgstr "查看所有产品"
+
+#: template/template-parts/page/home/section-projects/index.php:138
+msgid "View All Projects"
+msgstr "查看所有项目"
+
+#: template/template-parts/page/home/section-projects/index.php:57
+msgid "View Project"
+msgstr "查看项目"
+
+#: template/template-parts/page/product/section-products/index.php:143
+msgid "Search products"
+msgstr "搜索产品"
+
+#: template/template-parts/page/product/section-products/index.php:152
+msgid "Search materials, tools, or brands ..."
+msgstr "搜索材料、工具或品牌 ..."
+
+#: template/template-parts/page/product/section-products/index.php:17
+msgid "Brands"
+msgstr "品牌"
+
+#: template/template-parts/page/product/section-products/index.php:18
+msgid "Categories"
+msgstr "类别"
+
+#: template/template-parts/page/product/section-products/index.php:19
+msgid "Tags"
+msgstr "标签"
+
+#: template/template-parts/page/product/section-products/index.php:5
+msgid "Catalog"
+msgstr "目录"
+
+#: template/template-parts/page/product/section-products/index.php:63
+msgid "Less"
+msgstr "更少"
+
+#: template/template-parts/page/product/section-products/index.php:63
+msgid "More"
+msgstr "更多"
+
+#: template/template-parts/page/product/section-products/index.php:8
+msgid "Construction Supplies"
+msgstr "建筑用品"
+
+#: template/template-parts/page/projects/section-title/index.php:47
+msgid "Edit Title"
+msgstr "编辑标题"
+
+#: template/template-parts/single/single-post/index.php:102
+#: template/template-parts/single/single-project/index.php:130
+msgid "Gallery image"
+msgstr "画廊图片"
+
+#: template/template-parts/single/single-post/index.php:78
+msgid "Check"
+msgstr "检查"
+
+#: template/template-parts/single/single-product/index.php:104
+msgid "%1$s / 5 (%2$s reviews)"
+msgstr "%1$s / 5 (%2$s 条评论)"
+
+#: template/template-parts/single/single-product/index.php:115
+#: template/template-parts/single/single-product/index.php:126
+msgid "Brand:"
+msgstr "品牌："
+
+#: template/template-parts/single/single-product/index.php:140
+msgid "Category:"
+msgstr "类别："
+
+#: template/template-parts/single/single-product/index.php:151
+msgid "Tags:"
+msgstr "标签："
+
+#: template/template-parts/single/single-product/index.php:156
+msgid "Key Features"
+msgstr "关键特性"
+
+#: template/template-parts/single/single-product/index.php:191
+msgid "Start: %s"
+msgstr "开始：%s"
+
+#: template/template-parts/single/single-product/index.php:194
+msgid "End: %s"
+msgstr "结束：%s"
+
+#: template/template-parts/single/single-product/index.php:203
+msgid "Decrease quantity"
+msgstr "减少数量"
+
+#: template/template-parts/single/single-product/index.php:205
+msgid "Quantity"
+msgstr "数量"
+
+#: template/template-parts/single/single-product/index.php:207
+msgid "Increase quantity"
+msgstr "增加数量"
+
+#: template/template-parts/single/single-product/index.php:222
+msgid "Typical Range: %s"
+msgstr "典型范围：%s"
+
+#: template/template-parts/single/single-product/index.php:229
+msgid "Engineering Specifications"
+msgstr "工程规格"
+
+#: template/template-parts/single/single-product/index.php:253
+msgid "Specifications"
+msgstr "规格"
+
+#: template/template-parts/single/single-product/index.php:257
+msgid "Size"
+msgstr "尺寸"
+
+#: template/template-parts/single/single-product/index.php:262
+msgid "Weight"
+msgstr "重量"
+
+#: template/template-parts/single/single-product/index.php:267
+msgid "Shipping class"
+msgstr "运输类别"
+
+#: template/template-parts/single/single-product/index.php:271
+msgid "Product Type"
+msgstr "产品类型"
+
+#: template/template-parts/single/single-product/index.php:274
+msgid "Stock Status"
+msgstr "库存状态"
+
+#: template/template-parts/single/single-product/index.php:281
+msgid "Downloads"
+msgstr "下载"
+
+#: template/template-parts/single/single-product/index.php:338
+msgid "You might also like"
+msgstr "您可能还喜欢"
+
+#: template/template-parts/single/single-product/index.php:97
+msgid "SKU: %s"
+msgstr "SKU：%s"
+
+#: template/template-parts/single/single-project/index.php:152
+msgid "Standard image"
+msgstr "标准图片"

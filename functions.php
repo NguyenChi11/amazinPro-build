@@ -22,6 +22,11 @@ add_filter('determine_locale', 'buildpro_determine_locale', 10, 1);
  */
 function buildpro_load_textdomain_precise(string $domain, string $lang_dir, ?string $locale = null): void
 {
+    // Ensure we always load the most up-to-date MO from this theme.
+    // WordPress may consider a domain already loaded (e.g. via global
+    // wp-content/languages/themes), and then skip reloading.
+    unload_textdomain($domain);
+
     load_theme_textdomain($domain, $lang_dir);
 
     $locale = $locale ?: (function_exists('determine_locale') ? determine_locale() : get_locale());
