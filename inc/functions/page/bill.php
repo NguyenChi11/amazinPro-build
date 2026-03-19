@@ -78,7 +78,7 @@ if (!function_exists('buildpro_bill_get_gateway_data')) {
 
         $payment_options = [
             'cod' => ['label' => 'Cash on Delivery'],
-            'card' => ['label' => 'Credit Card'],
+            // 'card' => ['label' => 'Credit Card'],
             'bank' => ['label' => 'Bank Transfer'],
         ];
         if ($paypal_enabled) {
