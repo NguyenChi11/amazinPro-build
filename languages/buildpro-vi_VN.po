@@ -1374,3 +1374,270 @@ msgstr "Nhấn Xuất bản để lưu vào trang chủ."
 
 msgid "Changes are previewed instantly. Click Publish to save."
 msgstr "Thay đổi được xem trước ngay lập tức. Nhấn Xuất bản để lưu."
+
+#: import/plugin-activation.php:134
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#: import/plugin-activation.php:135
+msgid "Plugin activated successfully."
+msgstr ""
+
+#: import/plugin-activation.php:136
+msgid "The following plugin was activated successfully:"
+msgstr ""
+
+#: import/plugin-activation.php:137
+msgid "No action taken. Plugin %1$s was already active."
+msgstr ""
+
+#: import/plugin-activation.php:138
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr ""
+
+#: import/plugin-activation.php:139
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: import/plugin-activation.php:140
+msgid "Dismiss this notice"
+msgstr ""
+
+#: import/plugin-activation.php:141
+msgid "There are one or more required or recommended plugins to install, update or activate."
+msgstr ""
+
+#: import/plugin-activation.php:142
+msgid "Please contact the administrator of this site for help."
+msgstr ""
+
+#: import/plugin-activation.php:84
+msgid "Install Required Plugins"
+msgstr ""
+
+#: import/plugin-activation.php:85
+msgid "Install Plugins"
+msgstr ""
+
+#: import/plugin-activation.php:86
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#: import/plugin-activation.php:87
+msgid "Updating Plugin: %s"
+msgstr ""
+
+#: import/plugin-activation.php:88
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#: inc/customizer/about-us-page/index.php:14
+msgid "Use image"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-banner/index.php:115
+#: inc/customizer/about-us-page/section-contact/index.php:94
+#: inc/customizer/about-us-page/section-core-values/index.php:153
+#: inc/customizer/about-us-page/section-leader/index.php:151
+msgid "Edit About Us Page"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-banner/index.php:119
+#: inc/customizer/about-us-page/section-contact/index.php:98
+#: inc/customizer/about-us-page/section-core-values/index.php:157
+#: inc/customizer/about-us-page/section-leader/index.php:155
+msgid "Edit About Us"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-banner/index.php:191
+msgid "Banner Image ID"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-contact/index.php:149
+msgid "Map Image ID"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-contact/index.php:82
+msgid "Enable Contact"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-core-values/index.php:142
+msgid "Enable Core Values"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-core-values/index.php:229
+msgid "Core Values Items"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-leader/index.php:140
+msgid "Enable Leader"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-leader/index.php:253
+msgid "Leader Items"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-policy/index.php:126
+msgid "Enable Policy"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-policy/index.php:215
+msgid "Manage certifications (image/url/title/desc)."
+msgstr ""
+
+#: inc/customizer/about-us-page/section-policy/index.php:219
+msgid "Warranty Items"
+msgstr ""
+
+#: inc/customizer/about-us-page/section-policy/index.php:220
+msgid "Manage warranty items (icon/title/desc)."
+msgstr ""
+
+#: inc/customizer/footer/index.php:195
+msgid "Choose link for Policy."
+msgstr ""
+
+#: inc/customizer/footer/index.php:217
+msgid "Choose link for Servicer."
+msgstr ""
+
+#: inc/customizer/home-page/index.php:16
+#: inc/meta-box/page/home-page/index.php:48
+#: template/customize/page/home/section-evaluate/index.php:47
+#: template/meta-box/page/home/section-evaluate/index.php:36
+msgid "Avatar"
+msgstr ""
+
+#: inc/customizer/home-page/index.php:37
+#: template/customize/page/home/section-banner/index.php:66
+#: template/customize/page/home/section-banner/index.php:129
+msgid "Search pages/posts"
+msgstr ""
+
+#: inc/customizer/home-page/index.php:41
+#: template/customize/page/home/section-data/index.php:21
+#: template/customize/page/home/section-data/index.php:23
+#: template/meta-box/page/home/section-data/index.php:21
+#: template/meta-box/page/home/section-data/index.php:22
+msgid "Number"
+msgstr ""
+
+#: search.php:13
+msgid "Search Results for: %s"
+msgstr ""
+
+#: single.php:15
+msgid "Previous:"
+msgstr ""
+
+#: single.php:16
+msgid "Next:"
+msgstr ""
+
+#: template/customize/page/about-us/section-policy/index.php:6
+msgid "Manage Certifications (image/url/title/desc)."
+msgstr ""
+
+#: template/customize/page/about-us/section-policy/index.php:8
+msgid "Manage Warranty Items (icon/title/desc)."
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:104
+msgid "Comments have been closed."
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:112
+msgid "Your name"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:113
+msgid "Your email"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:114
+msgid "Website"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:114
+msgid "Website (optional)"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:120
+msgid "Write a comment"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:124
+msgid "Be respectful and keep your comment concise."
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:126
+msgid "Submit"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:128
+msgid "Comment"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:128
+msgid "Write a public comment..."
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:17
+msgid "comments “%s”"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:22
+msgid "%1$s comments “%2$s”"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:37
+#: template/template-parts/comment-product/index.php:99
+msgid "← Older comments"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:38
+#: template/template-parts/comment-product/index.php:100
+msgid "Newer comments →"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:41
+msgid "Comments"
+msgstr ""
+
+#: template/template-parts/comment-product/index.php:67
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: template/template-parts/page/product/section-products/index.php:63
+msgid "Less"
+msgstr ""
+
+#: template/template-parts/page/product/section-products/index.php:63
+msgid "More"
+msgstr ""
+
+#: template/template-parts/single/single-product/index.php:104
+msgid "%1$s / 5 (%2$s reviews)"
+msgstr ""
+
+#: template/template-parts/single/single-product/index.php:115
+#: template/template-parts/single/single-product/index.php:126
+msgid "Brand:"
+msgstr ""
+
+#: template/template-parts/single/single-product/index.php:140
+msgid "Category:"
+msgstr ""
+
+#: template/template-parts/single/single-product/index.php:151
+msgid "Tags:"
+msgstr ""
+
+#: template/template-parts/single/single-product/index.php:156
+msgid "Key Features"
+msgstr ""
+
+#: template/template-parts/single/single-product/index.php:97
+msgid "SKU: %s"
+msgstr ""
+

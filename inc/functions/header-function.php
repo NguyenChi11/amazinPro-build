@@ -32,7 +32,7 @@ function buildpro_admin_maybe_import_header()
     if ($logo || $title !== '' || $desc !== '') {
         return;
     }
-    $header_demo_file = get_theme_file_path('/inc/import/data-demo/header-demo.php');
+    $header_demo_file = get_theme_file_path('/import/data-demo/header-demo.php');
     if (file_exists($header_demo_file)) {
         require_once $header_demo_file;
         if (function_exists('buildpro_import_header_demo')) {

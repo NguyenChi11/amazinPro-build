@@ -29,10 +29,16 @@ function buildpro_import_about_us_contact_demo($target_id = 0)
     if ($about_id <= 0) {
         return;
     }
-    $existing = get_post_meta($about_id, 'buildpro_about_contact_items', true);
-    if (is_array($existing) && !empty($existing)) {
+
+    $existing_title = (string) get_post_meta($about_id, 'buildpro_about_contact_title', true);
+    $existing_text = (string) get_post_meta($about_id, 'buildpro_about_contact_text', true);
+    $existing_address = (string) get_post_meta($about_id, 'buildpro_about_contact_address', true);
+    $existing_phone = (string) get_post_meta($about_id, 'buildpro_about_contact_phone', true);
+    $existing_email = (string) get_post_meta($about_id, 'buildpro_about_contact_email', true);
+    if ($existing_title !== '' || $existing_text !== '' || $existing_address !== '' || $existing_phone !== '' || $existing_email !== '') {
         return;
     }
+
     if (!function_exists('buildpro_import_parse_js')) {
         return;
     }

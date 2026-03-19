@@ -127,10 +127,10 @@ wp_localize_script(
                                 required>
                                 <option value=""><?php esc_html_e('-- Select country --', 'buildpro'); ?></option>
                                 <?php foreach ($wc_countries as $code => $name) : ?>
-                                    <option value="<?php echo esc_attr($code); ?>"
-                                        <?php selected($code, $wc_base_country); ?>>
-                                        <?php echo esc_html($name); ?>
-                                    </option>
+                                <option value="<?php echo esc_attr($code); ?>"
+                                    <?php selected($code, $wc_base_country); ?>>
+                                    <?php echo esc_html($name); ?>
+                                </option>
                                 <?php endforeach; ?>
                             </select>
                             <span class="checkout-form__error" data-for="co-country"></span>
@@ -167,14 +167,14 @@ wp_localize_script(
                         </button>
 
                         <?php if ($paypal_enabled) : ?>
-                            <button class="payment-tab" role="tab" data-target="tab-paypal" aria-selected="false">
-                                <span class="payment-tab__icon payment-tab__icon--paypal">
-                                    <img class="paypal__image"
-                                        src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
-                                        alt="PayPal">
-                                </span>
-                                <span class="payment-tab__label"><?php echo esc_html($paypal_title); ?></span>
-                            </button>
+                        <!-- <button class="payment-tab" role="tab" data-target="tab-paypal" aria-selected="false">
+                            <span class="payment-tab__icon payment-tab__icon--paypal">
+                                <img class="paypal__image"
+                                    src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
+                                    alt="PayPal">
+                            </span>
+                            <span class="payment-tab__label"><?php echo esc_html($paypal_title); ?></span>
+                        </button>
                         <?php endif; ?>
 
                         <button class="payment-tab" role="tab" data-target="tab-card" aria-selected="false">
@@ -186,7 +186,7 @@ wp_localize_script(
                                 </svg>
                             </span>
                             <span class="payment-tab__label"><?php esc_html_e('Credit Card', 'buildpro'); ?></span>
-                        </button>
+                        </button> -->
 
                         <button class="payment-tab" role="tab" data-target="tab-bank" aria-selected="false">
                             <span class="payment-tab__icon">
@@ -227,7 +227,7 @@ wp_localize_script(
 
                         <!-- PayPal -->
                         <?php if ($paypal_enabled) : ?>
-                            <div class="payment-panel" id="tab-paypal" role="tabpanel">
+                        <!-- <div class="payment-panel" id="tab-paypal" role="tabpanel">
                                 <div class="payment-panel__icon-wrap payment-panel__icon-wrap--paypal">
                                     <img class="paypal__image"
                                         src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
@@ -250,11 +250,11 @@ wp_localize_script(
                                     </svg>
                                     <?php esc_html_e('You will be redirected to PayPal and returned here after authorization.', 'buildpro'); ?>
                                 </div>
-                            </div>
+                            </div> -->
                         <?php endif; ?>
 
                         <!-- Credit card -->
-                        <div class="payment-panel" id="tab-card" role="tabpanel">
+                        <!-- <div class="payment-panel" id="tab-card" role="tabpanel">
                             <div class="payment-panel__card-brands">
                                 <span class="card-brand card-brand--visa">VISA</span>
                                 <span class="card-brand card-brand--mc">MC</span>
@@ -299,7 +299,7 @@ wp_localize_script(
                                 </svg>
                                 <?php esc_html_e('Card details are encrypted with 256-bit SSL', 'buildpro'); ?>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Bank transfer -->
                         <div class="payment-panel" id="tab-bank" role="tabpanel">
@@ -307,7 +307,7 @@ wp_localize_script(
                             </p>
 
                             <?php if (!empty($bacs_accounts)) : ?>
-                                <?php foreach ($bacs_accounts as $i => $account) :
+                            <?php foreach ($bacs_accounts as $i => $account) :
                                     $acct_name   = isset($account['account_name'])   ? trim($account['account_name'])   : '';
                                     $acct_number = isset($account['account_number']) ? trim($account['account_number']) : '';
                                     $bank_name   = isset($account['bank_name'])      ? trim($account['bank_name'])      : '';
@@ -316,96 +316,96 @@ wp_localize_script(
                                     $bic         = isset($account['bic'])            ? trim($account['bic'])            : '';
                                     $copy_id     = 'bank-acct-' . $i;
                                 ?>
-                                    <div class="bank-info<?php echo $i > 0 ? ' bank-info--extra' : ''; ?>">
-                                        <?php if ($bank_name) : ?>
-                                            <div class="bank-info__row">
-                                                <span class="bank-info__label"><?php esc_html_e('Bank', 'buildpro'); ?></span>
-                                                <span class="bank-info__value"><?php echo esc_html($bank_name); ?></span>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($acct_name) : ?>
-                                            <div class="bank-info__row">
-                                                <span
-                                                    class="bank-info__label"><?php esc_html_e('Account Name', 'buildpro'); ?></span>
-                                                <span class="bank-info__value"><?php echo esc_html($acct_name); ?></span>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($acct_number) : ?>
-                                            <div class="bank-info__row">
-                                                <span
-                                                    class="bank-info__label"><?php esc_html_e('Account No.', 'buildpro'); ?></span>
-                                                <span class="bank-info__value bank-info__value--copy"
-                                                    id="<?php echo esc_attr($copy_id); ?>"><?php echo esc_html($acct_number); ?></span>
-                                                <button class="bank-info__copy-btn" data-copy="<?php echo esc_attr($copy_id); ?>"
-                                                    title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
-                                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                                        <path
-                                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($sort_code) : ?>
-                                            <div class="bank-info__row">
-                                                <span class="bank-info__label"><?php esc_html_e('Sort Code', 'buildpro'); ?></span>
-                                                <span class="bank-info__value bank-info__value--copy"
-                                                    id="<?php echo esc_attr($copy_id . '-sort'); ?>"><?php echo esc_html($sort_code); ?></span>
-                                                <button class="bank-info__copy-btn"
-                                                    data-copy="<?php echo esc_attr($copy_id . '-sort'); ?>"
-                                                    title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
-                                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                                        <path
-                                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($iban) : ?>
-                                            <div class="bank-info__row">
-                                                <span class="bank-info__label"><?php esc_html_e('IBAN', 'buildpro'); ?></span>
-                                                <span class="bank-info__value bank-info__value--copy"
-                                                    id="<?php echo esc_attr($copy_id . '-iban'); ?>"><?php echo esc_html($iban); ?></span>
-                                                <button class="bank-info__copy-btn"
-                                                    data-copy="<?php echo esc_attr($copy_id . '-iban'); ?>"
-                                                    title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
-                                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                                        <path
-                                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($bic) : ?>
-                                            <div class="bank-info__row">
-                                                <span
-                                                    class="bank-info__label"><?php esc_html_e('BIC / Swift', 'buildpro'); ?></span>
-                                                <span class="bank-info__value bank-info__value--copy"
-                                                    id="<?php echo esc_attr($copy_id . '-bic'); ?>"><?php echo esc_html($bic); ?></span>
-                                                <button class="bank-info__copy-btn"
-                                                    data-copy="<?php echo esc_attr($copy_id . '-bic'); ?>"
-                                                    title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
-                                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                                        <path
-                                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                <?php endforeach; ?>
-                            <?php else : ?>
-                                <div class="payment-panel__note">
-                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <?php esc_html_e('No bank account details have been configured yet. Please contact us for payment instructions.', 'buildpro'); ?>
+                            <div class="bank-info<?php echo $i > 0 ? ' bank-info--extra' : ''; ?>">
+                                <?php if ($bank_name) : ?>
+                                <div class="bank-info__row">
+                                    <span class="bank-info__label"><?php esc_html_e('Bank', 'buildpro'); ?></span>
+                                    <span class="bank-info__value"><?php echo esc_html($bank_name); ?></span>
                                 </div>
+                                <?php endif; ?>
+                                <?php if ($acct_name) : ?>
+                                <div class="bank-info__row">
+                                    <span
+                                        class="bank-info__label"><?php esc_html_e('Account Name', 'buildpro'); ?></span>
+                                    <span class="bank-info__value"><?php echo esc_html($acct_name); ?></span>
+                                </div>
+                                <?php endif; ?>
+                                <?php if ($acct_number) : ?>
+                                <div class="bank-info__row">
+                                    <span
+                                        class="bank-info__label"><?php esc_html_e('Account No.', 'buildpro'); ?></span>
+                                    <span class="bank-info__value bank-info__value--copy"
+                                        id="<?php echo esc_attr($copy_id); ?>"><?php echo esc_html($acct_number); ?></span>
+                                    <button class="bank-info__copy-btn" data-copy="<?php echo esc_attr($copy_id); ?>"
+                                        title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                            <path
+                                                d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <?php endif; ?>
+                                <?php if ($sort_code) : ?>
+                                <div class="bank-info__row">
+                                    <span class="bank-info__label"><?php esc_html_e('Sort Code', 'buildpro'); ?></span>
+                                    <span class="bank-info__value bank-info__value--copy"
+                                        id="<?php echo esc_attr($copy_id . '-sort'); ?>"><?php echo esc_html($sort_code); ?></span>
+                                    <button class="bank-info__copy-btn"
+                                        data-copy="<?php echo esc_attr($copy_id . '-sort'); ?>"
+                                        title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                            <path
+                                                d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <?php endif; ?>
+                                <?php if ($iban) : ?>
+                                <div class="bank-info__row">
+                                    <span class="bank-info__label"><?php esc_html_e('IBAN', 'buildpro'); ?></span>
+                                    <span class="bank-info__value bank-info__value--copy"
+                                        id="<?php echo esc_attr($copy_id . '-iban'); ?>"><?php echo esc_html($iban); ?></span>
+                                    <button class="bank-info__copy-btn"
+                                        data-copy="<?php echo esc_attr($copy_id . '-iban'); ?>"
+                                        title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                            <path
+                                                d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <?php endif; ?>
+                                <?php if ($bic) : ?>
+                                <div class="bank-info__row">
+                                    <span
+                                        class="bank-info__label"><?php esc_html_e('BIC / Swift', 'buildpro'); ?></span>
+                                    <span class="bank-info__value bank-info__value--copy"
+                                        id="<?php echo esc_attr($copy_id . '-bic'); ?>"><?php echo esc_html($bic); ?></span>
+                                    <button class="bank-info__copy-btn"
+                                        data-copy="<?php echo esc_attr($copy_id . '-bic'); ?>"
+                                        title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                            <path
+                                                d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            <?php endforeach; ?>
+                            <?php else : ?>
+                            <div class="payment-panel__note">
+                                <svg viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <?php esc_html_e('No bank account details have been configured yet. Please contact us for payment instructions.', 'buildpro'); ?>
+                            </div>
                             <?php endif; ?>
 
                             <div class="payment-panel__note">
@@ -431,9 +431,9 @@ wp_localize_script(
 
                     <div class="order-items" id="order-items">
                         <?php if (empty($cart_items)) : ?>
-                            <p class="order-items__empty"><?php esc_html_e('Your cart is empty.', 'buildpro'); ?></p>
+                        <p class="order-items__empty"><?php esc_html_e('Your cart is empty.', 'buildpro'); ?></p>
                         <?php else : ?>
-                            <?php foreach ($cart_items as $item) :
+                        <?php foreach ($cart_items as $item) :
                                 $product  = $item['data'];
                                 $qty      = intval($item['quantity']);
                                 $price    = floatval($product->get_price());
@@ -448,34 +448,34 @@ wp_localize_script(
                                 $name     = $product->get_name();
                                 $img_url  = get_the_post_thumbnail_url($item['product_id'], 'thumbnail');
                             ?>
-                                <div class="order-item">
-                                    <div class="order-item__image">
-                                        <?php if ($img_url) : ?>
-                                            <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($name); ?>">
-                                        <?php else : ?>
-                                            <div class="order-item__image-placeholder"></div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="order-item__info">
-                                        <p class="order-item__name"><?php echo esc_html($name); ?></p>
-                                        <p class="order-item__meta">
-                                            <?php printf(esc_html__('Qty: %s', 'buildpro'), esc_html($qty)); ?></p>
-                                        <p class="order-item__price-line order-item__price-line--regular">
-                                            <span><?php esc_html_e('Regular:', 'buildpro'); ?></span>
-                                            <span><?php echo $bp_price($regular_item_total); ?></span>
-                                        </p>
-                                        <p class="order-item__price-line order-item__price-line--sale">
-                                            <span><?php esc_html_e('Sale:', 'buildpro'); ?></span>
-                                            <span><?php echo $bp_price($sale_item_total); ?></span>
-                                        </p>
-                                        <p class="order-item__price-line order-item__price-line--save">
-                                            <span><?php esc_html_e('You Save:', 'buildpro'); ?></span>
-                                            <span><?php echo $bp_price($item_save_total); ?></span>
-                                        </p>
-                                    </div>
+                        <div class="order-item">
+                            <div class="order-item__image">
+                                <?php if ($img_url) : ?>
+                                <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($name); ?>">
+                                <?php else : ?>
+                                <div class="order-item__image-placeholder"></div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="order-item__info">
+                                <p class="order-item__name"><?php echo esc_html($name); ?></p>
+                                <p class="order-item__meta">
+                                    <?php printf(esc_html__('Qty: %s', 'buildpro'), esc_html($qty)); ?></p>
+                                <p class="order-item__price-line order-item__price-line--regular">
+                                    <span><?php esc_html_e('Regular:', 'buildpro'); ?></span>
+                                    <span><?php echo $bp_price($regular_item_total); ?></span>
+                                </p>
+                                <p class="order-item__price-line order-item__price-line--sale">
+                                    <span><?php esc_html_e('Sale:', 'buildpro'); ?></span>
+                                    <span><?php echo $bp_price($sale_item_total); ?></span>
+                                </p>
+                                <p class="order-item__price-line order-item__price-line--save">
+                                    <span><?php esc_html_e('You Save:', 'buildpro'); ?></span>
+                                    <span><?php echo $bp_price($item_save_total); ?></span>
+                                </p>
+                            </div>
 
-                                </div>
-                            <?php endforeach; ?>
+                        </div>
+                        <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
 

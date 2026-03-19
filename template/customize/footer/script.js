@@ -24,31 +24,26 @@
   }
 
   /* ── helpers ─────────────────────────────────────────────── */
-  function getListWrap() {
-    return document.getElementById("customizer-footer-list-pages-wrapper");
-  }
   function getCLWrap() {
     return document.getElementById("customizer-footer-contact-links-wrapper");
-  }
-  function getListInput() {
-    return document.querySelector(".footer-list-pages-json");
   }
   function getCLInput() {
     return document.querySelector(".footer-contact-links-json");
   }
 
-  function collectListPages() {
-    var wrap = getListWrap();
-    var input = getListInput();
+  function getSingleLinkInput(wrap) {
+    if (!wrap) return null;
+    return wrap.querySelector(".footer-single-link-json");
+  }
+
+  function collectSingleLink(wrap) {
+    var input = getSingleLinkInput(wrap);
     if (!wrap || !input) return;
-    var out = [];
-    wrap.querySelectorAll(".buildpro-block").forEach(function (row) {
-      out.push({
-        url: (row.querySelector('[data-field="url"]') || {}).value || "",
-        title: (row.querySelector('[data-field="title"]') || {}).value || "",
-        target: (row.querySelector('[data-field="target"]') || {}).value || "",
-      });
-    });
+    var out = {
+      url: (wrap.querySelector('[data-field="url"]') || {}).value || "",
+      title: (wrap.querySelector('[data-field="title"]') || {}).value || "",
+      target: (wrap.querySelector('[data-field="target"]') || {}).value || "",
+    };
     input.value = JSON.stringify(out);
     input.dispatchEvent(new Event("change", { bubbles: true }));
   }
@@ -104,12 +99,12 @@
     function (e) {
       var t = e.target;
       if (!t) return;
-      var wrap = t.closest("#customizer-footer-list-pages-wrapper");
-      if (wrap) {
-        collectListPages();
+      var single = t.closest(".buildpro-single-link-wrapper");
+      if (single) {
+        collectSingleLink(single);
         return;
       }
-      wrap = t.closest("#customizer-footer-contact-links-wrapper");
+      var wrap = t.closest("#customizer-footer-contact-links-wrapper");
       if (wrap) {
         collectContactLinks();
       }
@@ -122,12 +117,12 @@
     function (e) {
       var t = e.target;
       if (!t) return;
-      var wrap = t.closest("#customizer-footer-list-pages-wrapper");
-      if (wrap) {
-        collectListPages();
+      var single = t.closest(".buildpro-single-link-wrapper");
+      if (single) {
+        collectSingleLink(single);
         return;
       }
-      wrap = t.closest("#customizer-footer-contact-links-wrapper");
+      var wrap = t.closest("#customizer-footer-contact-links-wrapper");
       if (wrap) {
         collectContactLinks();
       }
@@ -140,41 +135,6 @@
     function (e) {
       var t = e.target;
       if (!t || !t.classList) return;
-
-      /* ── Add item – List Pages ── */
-      if (t.id === "customizer-footer-list-pages-add") {
-        e.preventDefault();
-        var wrap = getListWrap();
-        if (!wrap) return;
-        var div = document.createElement("div");
-        div.className = "buildpro-block";
-        div.innerHTML =
-          '<p class="buildpro-field"><label>' +
-          escHtml(t("linkUrl", "Link URL")) +
-          "</label>" +
-          '<input type="url" class="regular-text" data-field="url" value="" placeholder="https://..."> ' +
-          '<button type="button" class="button choose-link">' +
-          escHtml(t("chooseLink", "Choose Link")) +
-          "</button></p>" +
-          '<p class="buildpro-field"><label>' +
-          escHtml(t("linkTitle", "Link Title")) +
-          "</label>" +
-          '<input type="text" class="regular-text" data-field="title" value=""></p>' +
-          '<p class="buildpro-field"><label>' +
-          escHtml(t("linkTarget", "Link Target")) +
-          "</label>" +
-          '<select data-field="target"><option value="">' +
-          escHtml(t("sameTab", "Same Tab")) +
-          '</option><option value="_blank">' +
-          escHtml(t("openInNewTab", "Open in new tab")) +
-          "</option></select></p>" +
-          '<div class="buildpro-actions"><button type="button" class="button remove-row">' +
-          escHtml(t("remove", "Remove")) +
-          "</button></div>";
-        wrap.appendChild(div);
-        collectListPages();
-        return;
-      }
 
       /* ── Add item – Contact Links ── */
       if (t.id === "customizer-footer-contact-links-add") {
@@ -226,27 +186,27 @@
 
       /* ── Remove Item ── */
       if (t.classList.contains("remove-row")) {
-        var inLP = t.closest("#customizer-footer-list-pages-wrapper");
         var inCL = t.closest("#customizer-footer-contact-links-wrapper");
-        if (!inLP && !inCL) return;
+        if (!inCL) return;
         e.preventDefault();
         var row = t.closest(".buildpro-block");
         if (row) {
           row.parentNode.removeChild(row);
-          if (inLP) collectListPages();
-          else collectContactLinks();
+          collectContactLinks();
         }
         return;
       }
 
       /* ── Choose Link (navigate to Link Picker section) ── */
       if (t.classList.contains("choose-link")) {
-        var inLP = t.closest("#customizer-footer-list-pages-wrapper");
         var inCL = t.closest("#customizer-footer-contact-links-wrapper");
-        if (!inLP && !inCL) return;
+        var inSingle = t.closest(".buildpro-single-link-wrapper");
+        if (!inCL && !inSingle) return;
         e.preventDefault();
         e.stopImmediatePropagation();
-        var row = t.closest(".buildpro-block");
+        var row = inCL
+          ? t.closest(".buildpro-block")
+          : t.closest(".buildpro-single-link-wrapper");
         if (!row) return;
         navigateToLinkPicker(
           row.querySelector('[data-field="url"]'),
@@ -713,58 +673,11 @@
       }
     }
     Array.prototype.forEach.call(
-      document.querySelectorAll("#footer-list-pages-wrapper .buildpro-block"),
-      bindRow,
-    );
-    Array.prototype.forEach.call(
       document.querySelectorAll(
         "#footer-contact-links-wrapper .buildpro-block",
       ),
       bindRow,
     );
-    var addLP = document.getElementById("footer-list-pages-add");
-    if (addLP) {
-      addLP.addEventListener("click", function (e) {
-        e.preventDefault();
-        var wrapper = document.getElementById("footer-list-pages-wrapper");
-        var idx = wrapper.querySelectorAll(".buildpro-block").length;
-        var html =
-          "" +
-          "<div class='buildpro-block' data-index='" +
-          idx +
-          "'>" +
-          "  <p class='buildpro-field'><label>" +
-          escHtml(t("linkUrl", "Link URL")) +
-          "</label><input type='url' name='footer_list_pages[" +
-          idx +
-          "][url]' class='regular-text' value='' placeholder='https://...'> <button type='button' class='button choose-link'>" +
-          escHtml(t("chooseLink", "Choose Link")) +
-          "</button></p>" +
-          "  <p class='buildpro-field'><label>" +
-          escHtml(t("linkTitle", "Link Title")) +
-          "</label><input type='text' name='footer_list_pages[" +
-          idx +
-          "][title]' class='regular-text' value=''></p>" +
-          "  <p class='buildpro-field'><label>" +
-          escHtml(t("linkTarget", "Link Target")) +
-          "</label><select name='footer_list_pages[" +
-          idx +
-          "][target]'><option value=''>" +
-          escHtml(t("sameTab", "Same Tab")) +
-          "</option><option value='_blank'>" +
-          escHtml(t("openInNewTab", "Open in new tab")) +
-          "</option></select></p>" +
-          "  <div class='buildpro-actions'><button type='button' class='button remove-row'>" +
-          escHtml(t("remove", "Remove")) +
-          "</button></div>" +
-          "</div>";
-        var temp = document.createElement("div");
-        temp.innerHTML = html;
-        var row = temp.firstElementChild;
-        wrapper.appendChild(row);
-        bindRow(row);
-      });
-    }
     var addCL = document.getElementById("footer-contact-links-add");
     if (addCL) {
       addCL.addEventListener("click", function (e) {

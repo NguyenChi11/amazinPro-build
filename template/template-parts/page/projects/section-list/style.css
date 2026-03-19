@@ -1,5 +1,6 @@
 .project--section-list {
   padding: 0 3.75rem;
+  padding-bottom: 2rem;
 }
 .project--section-list .section-portfolio__list {
   display: grid;

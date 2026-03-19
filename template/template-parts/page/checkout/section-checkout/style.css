@@ -160,18 +160,18 @@
 
 .payment-tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.6rem;
   margin-bottom: 1.5rem;
 }
 
-.payment-tabs--count-3 {
+/* .payment-tabs--count-3 {
   grid-template-columns: repeat(3, 1fr);
 }
 
 .payment-tabs--count-4 {
   grid-template-columns: repeat(4, 1fr);
-}
+} */
 
 .payment-tab {
   display: flex;

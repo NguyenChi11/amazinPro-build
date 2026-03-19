@@ -1,8 +1,8 @@
 const footerData = {
   banner:
-    "/wp-content/themes/buildpro/assets/images/redux/banner/banner_ft.png",
+    "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_ft.png",
   information: {
-    logo: "/wp-content/themes/buildpro/assets/images/logo.png",
+    logo: "/wp-content/themes/build_pro_v2/assets/images/logo.png",
     title: "BuildPro",
     subTitle: "Better Building",
     description: "Short description about the brand in the footer.",
@@ -20,13 +20,13 @@ const footerData = {
   },
   contactLinks: [
     {
-      icon: "/wp-content/themes/buildpro/assets/images/icon/icon_building.png",
+      icon: "/wp-content/themes/build_pro_v2/assets/images/icon/icon_building.png",
       title: "Facebook",
       url: "Amazinsolution.com",
       target: "_blank",
     },
     {
-      icon: "/wp-content/themes/buildpro/assets/images/icon/icon_eye.png",
+      icon: "/wp-content/themes/build_pro_v2/assets/images/icon/icon_eye.png",
       title: "Zalo",
       url: "Amazinsolution.com",
       target: "_blank",

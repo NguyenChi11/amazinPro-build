@@ -189,10 +189,65 @@ function buildpro_import_copy_to_uploads($src_path)
 
 function buildpro_import_resolve_theme_path($url)
 {
-    $rel = preg_replace('#^/wp-content/themes/buildpro#', '', $url);
+    if (!is_string($url) || $url === '') {
+        return get_theme_file_path('/');
+    }
+
+    $path_part = $url;
+    if (preg_match('#^https?://#i', $url)) {
+        $parsed = parse_url($url);
+        if (is_array($parsed) && isset($parsed['path']) && is_string($parsed['path']) && $parsed['path'] !== '') {
+            $path_part = $parsed['path'];
+        }
+    }
+
+    $theme_dir = function_exists('get_template') ? (string) get_template() : '';
+    $rel = $path_part;
+    if ($theme_dir !== '') {
+        $pattern_current = '#^/wp-content/themes/' . preg_quote($theme_dir, '#') . '#';
+        $rel = preg_replace($pattern_current, '', $rel);
+    }
+    if ($rel === $path_part) {
+        // Back-compat with old demo data that used /wp-content/themes/buildpro/...
+        $rel = preg_replace('#^/wp-content/themes/buildpro#', '', $rel);
+    }
+
     $rel = '/' . ltrim($rel, '/');
-    $path = get_theme_file_path($rel);
-    return $path;
+    return get_theme_file_path($rel);
+}
+
+function buildpro_maybe_import_header_demo_once()
+{
+    if (get_option('buildpro_header_demo_imported') === '1') {
+        return;
+    }
+
+    $header_demo_file = get_theme_file_path('/import/data-demo/header-demo.php');
+    if (file_exists($header_demo_file)) {
+        require_once $header_demo_file;
+        if (function_exists('buildpro_import_header_demo')) {
+            buildpro_import_header_demo();
+        }
+    }
+
+    update_option('buildpro_header_demo_imported', '1');
+}
+
+function buildpro_maybe_import_about_us_contact_demo_once()
+{
+    if (get_option('buildpro_about_contact_demo_imported') === '1') {
+        return;
+    }
+
+    $about_contact_demo_file = get_theme_file_path('/import/data-demo/page/about-us/contact-about-us.php');
+    if (file_exists($about_contact_demo_file)) {
+        require_once $about_contact_demo_file;
+        if (function_exists('buildpro_import_about_us_contact_demo')) {
+            buildpro_import_about_us_contact_demo();
+            update_option('buildpro_about_contact_demo_imported', '1');
+            return;
+        }
+    }
 }
 
 function buildpro_has_published_content($post_type)
@@ -263,6 +318,11 @@ function buildpro_maybe_import_default_content()
         buildpro_create_pages_from_templates_once();
     }
 
+    // Header demo (logo/title/description) should be set on first import.
+    if (function_exists('buildpro_maybe_import_header_demo_once')) {
+        buildpro_maybe_import_header_demo_once();
+    }
+
     if (get_option('buildpro_default_content_imported') === '1') {
         $wc_active = class_exists('WooCommerce') || function_exists('wc_get_product');
         if (!$wc_active || get_option('buildpro_wc_default_content_imported') === '1') {
@@ -274,6 +334,11 @@ function buildpro_maybe_import_default_content()
                     buildpro_import_about_us_leader_demo();
                 }
             }
+
+            if (function_exists('buildpro_maybe_import_about_us_contact_demo_once')) {
+                buildpro_maybe_import_about_us_contact_demo_once();
+            }
+
             buildpro_backfill_demo_post_types_if_missing();
             return;
         }
@@ -357,6 +422,15 @@ function buildpro_maybe_import_default_content()
             buildpro_import_about_us_banner_demo();
         }
     }
+
+    $about_policy_demo_file = get_theme_file_path('/import/data-demo/page/about-us/policy-about-us.php');
+    if (file_exists($about_policy_demo_file)) {
+        require_once $about_policy_demo_file;
+        if (function_exists('buildpro_import_about_us_policy_demo')) {
+            buildpro_import_about_us_policy_demo();
+        }
+    }
+
     $about_core_values_demo_file = get_theme_file_path('/import/data-demo/page/about-us/core-value-about-us.php');
     if (file_exists($about_core_values_demo_file)) {
         require_once $about_core_values_demo_file;
@@ -364,6 +438,11 @@ function buildpro_maybe_import_default_content()
             buildpro_import_about_us_core_values_demo();
         }
     }
+
+    if (function_exists('buildpro_maybe_import_about_us_contact_demo_once')) {
+        buildpro_maybe_import_about_us_contact_demo_once();
+    }
+
     $about_leader_demo_file = get_theme_file_path('/import/data-demo/page/about-us/leader-about-us.php');
     if (file_exists($about_leader_demo_file)) {
         require_once $about_leader_demo_file;

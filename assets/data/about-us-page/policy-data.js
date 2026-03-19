@@ -6,7 +6,7 @@ const policyData = {
   items_certification: [
     {
       certification_image:
-        "/wp-content/themes/buildpro/assets/images/icon/certification.png",
+        "/wp-content/themes/build_pro_v2/assets/images/icon/certification.png",
       certification_url:
         "https://www.nyc.gov/assets/buildinginspection/downloads/pdf/nyc-building-inspection-certification.pdf",
       certification_title: "ISO 9001:2015 Certified",
@@ -15,7 +15,7 @@ const policyData = {
     },
     {
       certification_image:
-        "/wp-content/themes/buildpro/assets/images/icon/certification.png",
+        "/wp-content/themes/build_pro_v2/assets/images/icon/certification.png",
       certification_url:
         "https://www.nyc.gov/assets/buildinginspection/downloads/pdf/nyc-building-inspection-certification.pdf",
       certification_title: "ISO 14001:2015 Certified",
@@ -28,12 +28,13 @@ const policyData = {
     "We adhere to strict quality control protocols at every stage of development. Our dedicated Quality Assurance Manager ensures that all materials and workmanship meet or exceed industry standards.",
   items: [
     {
-      image: "/wp-content/themes/buildpro/assets/images/icon/icon_repair.png",
+      image:
+        "/wp-content/themes/build_pro_v2/assets/images/icon/icon_repair.png",
       title: "Structural Warranty",
       desc: "We offer a 10-year comprehensive warranty on all structural components for new commercial builds, backed by leading insurers.",
     },
     {
-      image: "/wp-content/themes/buildpro/assets/images/icon/icon_eye.png",
+      image: "/wp-content/themes/build_pro_v2/assets/images/icon/icon_eye.png",
       title: "On-Time Handover Guarantee",
       desc: "Our meticulous scheduling ensuring we meet handover deadlines, with regular progress reports provided to clients daily.",
     },

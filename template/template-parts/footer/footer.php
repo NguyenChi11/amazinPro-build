@@ -1,17 +1,31 @@
 <?php
 $description_ft = get_theme_mod('footer_information_description', '');
-$list_pages = get_theme_mod('footer_list_pages', array());
-$list_pages = is_array($list_pages) ? $list_pages : array();
+
+// Footer menu: follow the same WP nav menu used by the header (theme_location: menu-1).
+// Fallback to the legacy Customizer list when no menu is assigned.
 $footer_pages = array();
-foreach ($list_pages as $row) {
-    $url = isset($row['url']) ? $row['url'] : '';
-    $title = isset($row['title']) ? $row['title'] : '';
-    $target = isset($row['target']) ? $row['target'] : '';
-    $footer_pages[] = array(
-        'url' => $url,
-        'title' => $title,
-        'target' => $target,
-    );
+if (function_exists('has_nav_menu') && has_nav_menu('menu-1')) {
+    $locs = get_nav_menu_locations();
+    $menu_id = isset($locs['menu-1']) ? (int) $locs['menu-1'] : 0;
+    if ($menu_id > 0 && function_exists('wp_get_nav_menu_items')) {
+        $items = wp_get_nav_menu_items($menu_id);
+        if (is_array($items)) {
+            foreach ($items as $item) {
+                if (!is_object($item)) {
+                    continue;
+                }
+                // Keep footer clean: only top-level items.
+                if (!empty($item->menu_item_parent)) {
+                    continue;
+                }
+                $footer_pages[] = array(
+                    'url' => isset($item->url) ? (string) $item->url : '',
+                    'title' => isset($item->title) ? (string) $item->title : '',
+                    'target' => isset($item->target) ? (string) $item->target : '',
+                );
+            }
+        }
+    }
 }
 $contact_location = get_theme_mod('footer_contact_location', '');
 $contact_phone = get_theme_mod('footer_contact_phone', '');
@@ -55,13 +69,20 @@ if (!is_customize_preview() && !$has_data) {
     (function() {
         try {
             window.footerI18n = window.footerI18n || {};
-            window.footerI18n.connectWithUs = window.footerI18n.connectWithUs || <?php echo wp_json_encode(esc_html__('Connect with us', 'buildpro')); ?>;
-            window.footerI18n.menu = window.footerI18n.menu || <?php echo wp_json_encode(esc_html__('Menu', 'buildpro')); ?>;
-            window.footerI18n.contact = window.footerI18n.contact || <?php echo wp_json_encode(esc_html__('Contact', 'buildpro')); ?>;
-            window.footerI18n.policy = window.footerI18n.policy || <?php echo wp_json_encode(esc_html__('Policy', 'buildpro')); ?>;
-            window.footerI18n.service = window.footerI18n.service || <?php echo wp_json_encode(esc_html__('Service', 'buildpro')); ?>;
-            window.footerI18n.footerLogoAlt = window.footerI18n.footerLogoAlt || <?php echo wp_json_encode(esc_attr__('Footer Logo', 'buildpro')); ?>;
-            window.footerI18n.iconAlt = window.footerI18n.iconAlt || <?php echo wp_json_encode(esc_attr__('icon', 'buildpro')); ?>;
+            window.footerI18n.connectWithUs = window.footerI18n.connectWithUs ||
+                <?php echo wp_json_encode(esc_html__('Connect with us', 'buildpro')); ?>;
+            window.footerI18n.menu = window.footerI18n.menu ||
+                <?php echo wp_json_encode(esc_html__('Menu', 'buildpro')); ?>;
+            window.footerI18n.contact = window.footerI18n.contact ||
+                <?php echo wp_json_encode(esc_html__('Contact', 'buildpro')); ?>;
+            window.footerI18n.policy = window.footerI18n.policy ||
+                <?php echo wp_json_encode(esc_html__('Policy', 'buildpro')); ?>;
+            window.footerI18n.service = window.footerI18n.service ||
+                <?php echo wp_json_encode(esc_html__('Service', 'buildpro')); ?>;
+            window.footerI18n.footerLogoAlt = window.footerI18n.footerLogoAlt ||
+                <?php echo wp_json_encode(esc_attr__('Footer Logo', 'buildpro')); ?>;
+            window.footerI18n.iconAlt = window.footerI18n.iconAlt ||
+                <?php echo wp_json_encode(esc_attr__('icon', 'buildpro')); ?>;
         } catch (e) {}
     })();
 </script>
@@ -94,7 +115,8 @@ if (!is_customize_preview() && !$has_data) {
                         $header_sub = is_scalar($header_sub) ? trim((string)$header_sub) : '';
                         ?>
                         <?php if ($header_logo_url): ?>
-                            <img class="footer__logo" src="<?php echo esc_url($header_logo_url); ?>" alt="<?php esc_attr_e('Footer Logo', 'buildpro'); ?>">
+                            <img class="footer__logo" src="<?php echo esc_url($header_logo_url); ?>"
+                                alt="<?php esc_attr_e('Footer Logo', 'buildpro'); ?>">
                         <?php endif; ?>
                         <?php if (!empty($header_title)): ?>
                             <h3 class="footer__title"><?php echo esc_html($header_title); ?></h3>
@@ -120,7 +142,8 @@ if (!is_customize_preview() && !$has_data) {
                             <a class="footer__contact-link" href="<?php echo esc_url($c['url']); ?>"
                                 <?php echo $target_attr . $rel_attr; ?>>
                                 <?php if (!empty($c['icon_url'])): ?>
-                                    <img class="footer__contact-link-icon" src="<?php echo esc_url($c['icon_url']); ?>" alt="<?php esc_attr_e('icon', 'buildpro'); ?>">
+                                    <img class="footer__contact-link-icon" src="<?php echo esc_url($c['icon_url']); ?>"
+                                        alt="<?php esc_attr_e('icon', 'buildpro'); ?>">
                                 <?php endif; ?>
 
                             </a>

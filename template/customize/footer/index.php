@@ -3,7 +3,6 @@
         <h2 class="nav-tab-wrapper">
             <a href="#tab-banner" class="nav-tab nav-tab-active"><?php echo esc_html__('Banner', 'buildpro'); ?></a>
             <a href="#tab-information" class="nav-tab"><?php echo esc_html__('Information', 'buildpro'); ?></a>
-            <a href="#tab-list-page" class="nav-tab"><?php echo esc_html__('List Page', 'buildpro'); ?></a>
             <a href="#tab-contact" class="nav-tab"><?php echo esc_html__('Contact', 'buildpro'); ?></a>
             <a href="#tab-contact-link" class="nav-tab"><?php echo esc_html__('Contact Link', 'buildpro'); ?></a>
             <a href="#tab-create-build" class="nav-tab"><?php echo esc_html__('Create Build', 'buildpro'); ?></a>
@@ -41,45 +40,6 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div id="tab-list-page" class="buildpro-footer-section">
-                    <div class="buildpro-block">
-                        <h3><?php echo esc_html__('List Page', 'buildpro'); ?></h3>
-                        <div id="footer-list-pages-wrapper">
-                            <?php $lp_index = 0;
-                            foreach ($list_pages as $lp):
-                                $lp_url = isset($lp['url']) ? esc_url($lp['url']) : '';
-                                $lp_title = isset($lp['title']) ? sanitize_text_field($lp['title']) : '';
-                                $lp_target = isset($lp['target']) ? sanitize_text_field($lp['target']) : '';
-                            ?>
-                                <div class="buildpro-block" data-index="<?= esc_attr($lp_index) ?>">
-                                    <p class="buildpro-field">
-                                        <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
-                                        <input type="url" name="footer_list_pages[<?= esc_attr($lp_index) ?>][url]"
-                                            class="regular-text" value="<?= esc_attr($lp_url) ?>" placeholder="https://...">
-                                        <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
-                                    </p>
-                                    <p class="buildpro-field">
-                                        <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
-                                        <input type="text" name="footer_list_pages[<?= esc_attr($lp_index) ?>][title]"
-                                            class="regular-text" value="<?= esc_attr($lp_title) ?>">
-                                    </p>
-                                    <p class="buildpro-field">
-                                        <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-                                        <select name="footer_list_pages[<?= esc_attr($lp_index) ?>][target]">
-                                            <option value="" <?= selected($lp_target, '', false) ?>><?php echo esc_html__('Same Tab', 'buildpro'); ?></option>
-                                            <option value="_blank" <?= selected($lp_target, '_blank', false) ?>><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
-                                        </select>
-                                    </p>
-                                    <div class="buildpro-actions">
-                                        <button type="button" class="button remove-row"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
-                                    </div>
-                                </div>
-                            <?php $lp_index++;
-                            endforeach; ?>
-                        </div>
-                        <button type="button" class="button button-primary" id="footer-list-pages-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>
                     </div>
                 </div>
                 <div id="tab-contact" class="buildpro-footer-section">

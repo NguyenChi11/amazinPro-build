@@ -8,7 +8,6 @@ function buildpro_import_footer_demo()
         'footer_information_title',
         'footer_information_sub_title',
         'footer_information_description',
-        'footer_list_pages',
         'footer_contact_location',
         'footer_contact_phone',
         'footer_contact_email',
@@ -60,17 +59,6 @@ function buildpro_import_footer_demo()
         if (isset($info['description']) && is_string($info['description'])) {
             set_theme_mod('footer_information_description', (string)$info['description']);
         }
-    }
-    if (isset($data['pages']) && is_array($data['pages'])) {
-        $pages = array();
-        foreach ($data['pages'] as $p) {
-            $pages[] = array(
-                'title' => isset($p['title']) ? (string)$p['title'] : '',
-                'url' => isset($p['url']) ? esc_url_raw($p['url']) : '',
-                'target' => isset($p['target']) ? (string)$p['target'] : '',
-            );
-        }
-        set_theme_mod('footer_list_pages', $pages);
     }
     if (isset($data['contact']) && is_array($data['contact'])) {
         $ct = $data['contact'];

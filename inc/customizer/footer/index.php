@@ -1,20 +1,31 @@
 <?php
-if (!class_exists('BuildPro_Footer_List_Pages_Control') && class_exists('WP_Customize_Control')) {
-    class BuildPro_Footer_List_Pages_Control extends WP_Customize_Control
+if (!class_exists('BuildPro_Footer_Single_Link_Control') && class_exists('WP_Customize_Control')) {
+    class BuildPro_Footer_Single_Link_Control extends WP_Customize_Control
     {
-        public $type = 'buildpro_footer_list_pages';
+        public $type = 'buildpro_footer_single_link';
+
         public function render_content()
         {
-            $items                 = $this->value();
-            $items                 = is_array($items) ? $items : array();
-            $label                 = $this->label;
-            $description           = $this->description;
-            $link_attr             = $this->get_link();
-            $buildpro_control_type = 'footer-list-pages';
+            $item = $this->value();
+            if (is_string($item)) {
+                $decoded = json_decode($item, true);
+                if (is_array($decoded)) {
+                    $item = $decoded;
+                }
+            }
+            $item = is_array($item) ? $item : array();
+
+            $label = $this->label;
+            $description = $this->description;
+            $link_attr = $this->get_link();
+            $buildpro_control_type = 'footer-single-link';
+            $buildpro_single_link_id = $this->id;
+
             include get_theme_file_path('template/customize/footer/controls.php');
         }
     }
 }
+
 if (!class_exists('BuildPro_Footer_Contact_Links_Control') && class_exists('WP_Customize_Control')) {
     class BuildPro_Footer_Contact_Links_Control extends WP_Customize_Control
     {
@@ -29,29 +40,6 @@ if (!class_exists('BuildPro_Footer_Contact_Links_Control') && class_exists('WP_C
             $buildpro_control_type = 'footer-contact-links';
             include get_theme_file_path('template/customize/footer/controls.php');
         }
-    }
-}
-if (!function_exists('buildpro_footer_sanitize_list_pages')) {
-    function buildpro_footer_sanitize_list_pages($value)
-    {
-        if (is_string($value)) {
-            $decoded = json_decode($value, true);
-            if (is_array($decoded)) {
-                $value = $decoded;
-            }
-        }
-        if (!is_array($value)) {
-            return array();
-        }
-        $clean = array();
-        foreach ($value as $lp) {
-            $clean[] = array(
-                'url' => isset($lp['url']) ? esc_url_raw($lp['url']) : '',
-                'title' => isset($lp['title']) ? sanitize_text_field($lp['title']) : '',
-                'target' => isset($lp['target']) ? sanitize_text_field($lp['target']) : '',
-            );
-        }
-        return $clean;
     }
 }
 if (!function_exists('buildpro_footer_sanitize_contact_links')) {
@@ -164,18 +152,6 @@ function buildpro_footer_customize_register($wp_customize)
         'section' => 'buildpro_footer_section',
         'type' => 'text',
     ));
-    $wp_customize->add_setting('footer_list_pages', array(
-        'default' => array(),
-        'transport' => 'postMessage',
-        'sanitize_callback' => 'buildpro_footer_sanitize_list_pages',
-    ));
-    if (class_exists('BuildPro_Footer_List_Pages_Control')) {
-        $wp_customize->add_control(new BuildPro_Footer_List_Pages_Control($wp_customize, 'footer_list_pages', array(
-            'label' => __('Footer Pages', 'buildpro'),
-            'description' => __('Add/Edit footer pages links.', 'buildpro'),
-            'section' => 'buildpro_footer_section',
-        )));
-    }
     $wp_customize->add_setting('footer_contact_links', array(
         'default' => array(),
         'transport' => 'postMessage',
@@ -213,12 +189,13 @@ function buildpro_footer_customize_register($wp_customize)
         'transport' => 'postMessage',
         'sanitize_callback' => 'buildpro_footer_sanitize_link',
     ));
-    $wp_customize->add_control('footer_policy_link', array(
-        'label' => __('Policy Link', 'buildpro'),
-        'section' => 'buildpro_footer_section',
-        'type' => 'text',
-        'description' => __('Store as JSON: url/title/target via control UI', 'buildpro'),
-    ));
+    if (class_exists('BuildPro_Footer_Single_Link_Control')) {
+        $wp_customize->add_control(new BuildPro_Footer_Single_Link_Control($wp_customize, 'footer_policy_link', array(
+            'label' => __('Policy Link', 'buildpro'),
+            'description' => __('Choose link for Policy.', 'buildpro'),
+            'section' => 'buildpro_footer_section',
+        )));
+    }
     $wp_customize->add_setting('footer_servicer_text', array(
         'default' => '',
         'transport' => 'postMessage',
@@ -234,19 +211,19 @@ function buildpro_footer_customize_register($wp_customize)
         'transport' => 'postMessage',
         'sanitize_callback' => 'buildpro_footer_sanitize_link',
     ));
-    $wp_customize->add_control('footer_servicer_link', array(
-        'label' => __('Servicer Link', 'buildpro'),
-        'section' => 'buildpro_footer_section',
-        'type' => 'text',
-        'description' => __('Store as JSON: url/title/target via control UI', 'buildpro'),
-    ));
+    if (class_exists('BuildPro_Footer_Single_Link_Control')) {
+        $wp_customize->add_control(new BuildPro_Footer_Single_Link_Control($wp_customize, 'footer_servicer_link', array(
+            'label' => __('Servicer Link', 'buildpro'),
+            'description' => __('Choose link for Servicer.', 'buildpro'),
+            'section' => 'buildpro_footer_section',
+        )));
+    }
     if (isset($wp_customize->selective_refresh)) {
         $wp_customize->selective_refresh->add_partial('buildpro_footer_all', array(
             'selector' => '.site-footer',
             'settings' => array(
                 'footer_banner_image_id',
                 'footer_information_description',
-                'footer_list_pages',
                 'footer_contact_location',
                 'footer_contact_phone',
                 'footer_contact_email',
@@ -374,8 +351,6 @@ function buildpro_footer_admin_page()
     $banner_image_id = get_theme_mod('footer_banner_image_id', 0);
     $banner_thumb = $banner_image_id ? wp_get_attachment_image_url($banner_image_id, 'thumbnail') : '';
     $info_description = get_theme_mod('footer_information_description', '');
-    $list_pages = get_theme_mod('footer_list_pages', array());
-    $list_pages = is_array($list_pages) ? $list_pages : array();
     $contact_location = get_theme_mod('footer_contact_location', '');
     $contact_phone = get_theme_mod('footer_contact_phone', '');
     $contact_email = get_theme_mod('footer_contact_email', '');
@@ -401,15 +376,6 @@ function buildpro_handle_footer_save()
     check_admin_referer('buildpro_footer_save');
     $banner_image_id = isset($_POST['footer_banner_image_id']) ? absint($_POST['footer_banner_image_id']) : 0;
     $info_description = isset($_POST['footer_information_description']) ? sanitize_textarea_field($_POST['footer_information_description']) : '';
-    $list_pages = isset($_POST['footer_list_pages']) && is_array($_POST['footer_list_pages']) ? $_POST['footer_list_pages'] : array();
-    $clean_lp = array();
-    foreach ($list_pages as $lp) {
-        $clean_lp[] = array(
-            'url' => isset($lp['url']) ? esc_url_raw($lp['url']) : '',
-            'title' => isset($lp['title']) ? sanitize_text_field($lp['title']) : '',
-            'target' => isset($lp['target']) ? sanitize_text_field($lp['target']) : '',
-        );
-    }
     $contact_location = isset($_POST['footer_contact_location']) ? sanitize_text_field($_POST['footer_contact_location']) : '';
     $contact_phone = isset($_POST['footer_contact_phone']) ? sanitize_text_field($_POST['footer_contact_phone']) : '';
     $contact_email = isset($_POST['footer_contact_email']) ? sanitize_email($_POST['footer_contact_email']) : '';
@@ -441,7 +407,6 @@ function buildpro_handle_footer_save()
     );
     set_theme_mod('footer_banner_image_id', $banner_image_id);
     set_theme_mod('footer_information_description', $info_description);
-    set_theme_mod('footer_list_pages', $clean_lp);
     set_theme_mod('footer_contact_location', $contact_location);
     set_theme_mod('footer_contact_phone', $contact_phone);
     set_theme_mod('footer_contact_email', $contact_email);

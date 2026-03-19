@@ -37,14 +37,17 @@ function buildpro_cf7_demo_form_content()
         'Industrial Development',
         'Other'
     );
-    $select = implode('" "', $options);
+    $quoted_choices = array_map(static function ($label) {
+        return '"' . $label . '"';
+    }, $options);
+    $choices = implode(' ', $quoted_choices);
     $form = '';
-    $form .= '<div class="contact-form__grid">';
+    $form .= '<div class="contact-form__grid"><!-- buildpro-demo-form-v3 -->';
     $form .= '<p class="contact-form__field"><label class="contact-form__label">Full name</label>[text* your-name class:contact-form__input placeholder "John Doe"]</p>';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Email Address</label>[email* your-email class:contact-form__input placeholder "support@amazinpro.com"]</p>';
+    $form .= '<p class="contact-form__field"><label class="contact-form__label">Email Address</label>[email* your-email class:contact-form__input placeholder "contact@amazinpro.com"]</p>';
     $form .= '<p class="contact-form__field"><label class="contact-form__label">Phone Number</label>[tel your-phone class:contact-form__input placeholder "(+84)349582808"]</p>';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Project Type</label>[select* project-type class:contact-form__input include_blank "' . $select . '"]</p>';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Project Type</label>[textarea your-message class:contact-form__input placeholder "Tell us about your project requirements . . ."]</p>';
+    $form .= '<p class="contact-form__field"><label class="contact-form__label">Project Type</label>[select* project-type class:contact-form__input ' . $choices . ']</p>';
+    $form .= '<p class="contact-form__field"><label class="contact-form__label">Message</label>[textarea your-message class:contact-form__input placeholder "Tell us about your project requirements . . ."]</p>';
     $form .= '<p class="contact-form__actions">[submit class:contact-form__submit "Submit Request"]</p>';
     $form .= '</div>';
     return $form;
@@ -78,6 +81,8 @@ function buildpro_cf7_update_form_if_needed($form_id = 0)
         strpos($content, 'contact-form__input') === false
         || strpos($content, 'contact-form__submit') === false
         || strpos($content, 'contact-form__grid') === false
+        || strpos($content, 'buildpro-demo-form-v3') === false
+        || strpos($content, '[select* project-type') === false
     );
     if ($needs_update) {
         update_post_meta($fid, '_form', buildpro_cf7_demo_form_content());

@@ -1,17 +1,17 @@
 const banners = [
   {
     image:
-      "/wp-content/themes/buildpro/assets/images/redux/banner/banner_1.jpg",
+      "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_1.jpg",
     type: "commerce",
     text: "Construction solutions for businesses",
     description:
       "Optimize design and construction for modern office buildings.",
     linkUrl: "/about",
-    linkTitle: "Read more",
+    linkTitle: "View services",
   },
   {
     image:
-      "/wp-content/themes/buildpro/assets/images/redux/banner/banner_2.jpg",
+      "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
     type: "residential",
     text: "Modern residential design",
     description: "Beautiful, safe, and energy-efficient home designs.",
@@ -20,7 +20,7 @@ const banners = [
   },
   {
     image:
-      "/wp-content/themes/buildpro/assets/images/redux/banner/banner_3.jpg",
+      "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
     type: "commercial",
     text: "Modern commercial architecture",
     description:

@@ -1,5 +1,7 @@
 .single-project-detail {
   width: 100%;
+
+  margin: 0 auto;
   padding: 0 3.75rem;
 }
 
@@ -21,9 +23,22 @@
 .single-project__header {
   position: relative;
   width: 100%;
-  height: 50rem;
+  height: 34rem;
   overflow: hidden;
   border-radius: 1.25rem;
+}
+
+.single-project__header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.25) 45%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
 }
 
 .single-project__banner {
@@ -46,32 +61,47 @@
   width: 100%;
   padding: 1.25rem 2.5rem;
   color: rgba(255, 255, 255, 1);
-  width: 90rem;
+  z-index: 1;
 }
 
 .single-project__taxonomy-list {
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
 .single-project__taxonomy-chip {
+  display: inline-flex;
+  align-items: center;
   font-family: "Poppins", sans-serif;
-  font-size: 1.125rem;
+  font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.5rem;
   margin: 0;
-  border-radius: 0.625rem;
-  background-color: rgba(197, 128, 75, 1);
+  border-radius: 999px;
+  background-color: rgba(197, 128, 75, 0.95);
   color: rgba(247, 251, 255, 1);
-  padding: 0.75rem 4rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  transition:
+    transform 0.12s ease,
+    background 0.18s ease;
+}
+
+.single-project__taxonomy-chip:hover {
+  transform: translateY(-1px);
+  background-color: rgba(197, 128, 75, 1);
 }
 
 .single-project__title {
   font-family: "Inter", sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
-  line-height: 3.5rem;
+  line-height: 1.2;
   margin: 0;
   margin-bottom: 1.875rem;
 }
@@ -80,22 +110,28 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 .single-project--title__items {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
 }
 
 .single-project__icon {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
 }
 
 .single-project__text {
   font-family: "Poppins", sans-serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
   margin: 0;
 }
 
@@ -117,8 +153,9 @@
   margin: 0;
   margin-bottom: 1rem;
   font-family: "Poppins", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 500;
+  line-height: 1.85;
   color: rgba(0, 0, 0, 1);
 }
 
@@ -191,54 +228,57 @@
 }
 
 .single-project__facts-grid {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
 }
 .single-project__fact-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: 1.25rem;
+  gap: 0.5rem;
+  padding: 1.25rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(229, 231, 235, 1);
+  background: rgba(255, 255, 255, 1);
 }
 
 .single-project__fact-item .label {
   font-family: "Poppins", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
   margin: 0;
   color: rgba(126, 132, 139, 1);
 }
 
 .single-project__fact-item .value {
   font-family: "Poppins", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.25;
   margin: 0;
   color: rgba(147, 88, 43, 1);
 }
 
 .single-project__about {
-  display: flex;
-  align-items: center; /* Căn giữa theo chiều dọc cho cân đối */
-  justify-content: space-between;
-  gap: 4rem; /* Khoảng cách lớn giữa text và ảnh */
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: 2.5rem;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 3rem auto 0;
   border-radius: 1.5rem;
-  margin-top: 4rem;
 }
 
 .single-project__about-content {
   flex: 1; /* Text chiếm không gian linh hoạt */
-  max-width: 55%; /* Giữ text không quá dài */
+  max-width: 100%;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-size: 1.5rem; /* Giữ kích thước lớn như cũ */
-  line-height: 1.75; /* Dễ đọc, thoáng */
+  font-size: 1.125rem;
+  line-height: 1.85;
   color: rgba(0, 0, 0, 1); /* Màu xám đậm sang trọng */
 }
 
@@ -254,8 +294,8 @@
 
 .single-project__about-image {
   flex: 1;
-  max-width: 45%; /* Ảnh chiếm ~45% để cân bằng */
-  height: 45.25rem; /* Giữ chiều cao cao cấp như cũ */
+  max-width: 100%;
+  height: 24rem;
   overflow: hidden; /* Ẩn phần thừa */
   border-radius: 1.5rem; /* Bo góc mềm mại hơn */
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); /* Shadow sâu hơn cho chiều sâu */
@@ -280,19 +320,19 @@
    ========================================================================== */
 
 .single-project__gallery {
-  padding: 5rem 2rem;
-  background: #f8f9fa; /* nền sáng nhẹ, sạch sẽ */
-  max-width: 1600px;
+  padding: 3rem 0;
+  background: transparent;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 .single-project__section-title {
   font-family: "Poppins", sans-serif;
-  font-size: 3.5rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 800;
   color: #1a1a1a;
   text-align: center;
-  margin: 0 0 4rem;
+  margin: 0 0 2rem;
   letter-spacing: -0.02em;
   position: relative;
 }
@@ -303,8 +343,8 @@
   bottom: -1rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 4px;
+  width: 96px;
+  height: 3px;
   background: linear-gradient(
     to right,
     #d4af37,
@@ -316,8 +356,8 @@
 
 .single-project__gallery-items {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cột trên desktop */
-  gap: 2.5rem; /* khoảng cách lớn, thoáng */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
 }
 
 .single-project__gallery-item {
@@ -362,14 +402,48 @@
 .single-project__gallery-item:hover::after {
   opacity: 1;
 }
+
+/* ===== Responsive: tablet ===== */
+@media (max-width: 1023.98px) {
+  .single-project-detail {
+    padding: 0 1.75rem;
+  }
+
+  .single-project__header {
+    height: 24rem;
+    border-radius: 1rem;
+  }
+
+  .single-project__title-container {
+    padding: 1.1rem 1.25rem;
+  }
+
+  .single-project__title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .single-project__gallery-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .single-project__about {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .single-project__about-image {
+    height: 18rem;
+  }
+}
 /* ==========================================================================
    Single Project Standards - Luxury Villa Style (tương tự Gallery)
    ========================================================================== */
 
 .single-project__standards {
-  padding: 5rem 2rem;
-  background: #f8f9fa; /* nền sáng nhẹ, sạch sẽ như gallery */
-  max-width: 1600px;
+  padding: 3rem 0;
+  background: transparent;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -499,23 +573,31 @@
 
 /* ===== Responsive: mobile ===== */
 @media (max-width: 639.98px) {
+  .single-project-detail {
+    padding: 0 1rem;
+  }
+
   .single-project__title-container {
-    padding: 1rem;
+    padding: 0.9rem 0.9rem 1rem;
     width: 100%;
   }
+
   .single-project__taxonomy-list {
-    gap: 0.75rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: fit-content;
+    gap: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 0.25rem;
   }
+
   .single-project__taxonomy-chip {
-    font-size: 0.625rem;
-    padding: 0.5rem 2rem;
-    line-height: normal;
-  }
-  .single-project-detail {
-    padding: 0 1.25rem;
+    font-size: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    line-height: 1.15;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .single-project__back {
@@ -524,37 +606,57 @@
   }
 
   .single-project__title_back {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 
   .single-project__section-title {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .single-project__section-title::after {
+    width: 64px;
+    height: 3px;
+    bottom: -0.75rem;
   }
 
   .single-project__header {
     margin-bottom: 1.25rem;
+    height: 14rem;
+    border-radius: 0.75rem;
   }
 
   .single-project__title {
-    font-size: 1rem;
+    font-size: 0.75rem;
     line-height: 1.3;
-    margin-bottom: 0.75rem;
-    margin-top: 0.75rem;
+    margin: 0.25rem 0;
   }
   .single-project__icon {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
 
   .single-project__text {
-    font-size: 0.875rem;
+    font-size: 0.625rem;
     line-height: 1.25;
   }
 
   .single-project__meta {
-    flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+  }
+
+  .single-project--title__items {
+    padding: 0.2rem 0.4rem;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .single-project__text {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .single-project__facts {
@@ -573,26 +675,26 @@
   }
 
   .single-project__fact-item .label {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
 
   .single-project__fact-item .value {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 
   .single-project__about-content {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.7;
   }
 
   .single-project__content p {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.7;
   }
 
   .single-project__about {
-    flex-direction: column;
-    margin-top: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 1.5rem;
     gap: 1.25rem;
   }
 
@@ -601,9 +703,17 @@
     max-width: 100%;
   }
 
+  .single-project__about-image {
+    height: 14rem;
+  }
+
   .single-project__gallery-items {
     grid-template-columns: 1fr;
     gap: 0.75rem;
+  }
+
+  .single-project__gallery-item {
+    aspect-ratio: 16 / 10;
   }
 
   .single-project__standards {
