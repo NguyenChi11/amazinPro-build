@@ -53,6 +53,69 @@ function buildpro_cf7_demo_form_content()
     return $form;
 }
 
+function buildpro_cf7_demo_form_mail(): array
+{
+    return array(
+        'active' => true,
+        'recipient' => '[_site_admin_email]',
+        // Use site admin email as sender to reduce SPF/DMARC issues.
+        'sender' => '[_site_title] <[_site_admin_email]>',
+        'subject' => '[_site_title] — Contact: [your-name]',
+        'additional_headers' => "Reply-To: [your-email]\n",
+        'body' => "Name: [your-name]\n"
+            . "Email: [your-email]\n"
+            . "Phone: [your-phone]\n"
+            . "Project Type: [project-type]\n\n"
+            . "Message:\n[your-message]\n\n"
+            . "--\n"
+            . "Sent from [_site_title] ([_site_url])\n"
+            . "[buildpro-demo-mail-v1]",
+        'attachments' => '',
+        'use_html' => false,
+        'exclude_blank' => true,
+    );
+}
+
+function buildpro_cf7_demo_form_mail_2(): array
+{
+    return array(
+        // Auto-reply to the sender.
+        'active' => true,
+        'recipient' => '[your-email]',
+        'sender' => '[_site_title] <[_site_admin_email]>',
+        'subject' => 'Thanks for contacting [_site_title]',
+        'additional_headers' => "Reply-To: [_site_admin_email]\n",
+        'body' => "Hi [your-name],\n\n"
+            . "Thanks for reaching out to [_site_title]. We've received your message and will get back to you as soon as possible.\n\n"
+            . "Your message:\n[your-message]\n\n"
+            . "--\n"
+            . "[_site_title] ([_site_url])\n"
+            . "[buildpro-demo-mail2-v1]",
+        'attachments' => '',
+        'use_html' => false,
+        'exclude_blank' => true,
+    );
+}
+
+function buildpro_cf7_update_mail_if_needed(int $form_id): void
+{
+    if ($form_id <= 0) {
+        return;
+    }
+
+    $mail = get_post_meta($form_id, '_mail', true);
+    $needs_update = (!is_array($mail) || empty($mail['body']) || strpos((string) $mail['body'], '[buildpro-demo-mail-v1]') === false);
+    if ($needs_update) {
+        update_post_meta($form_id, '_mail', buildpro_cf7_demo_form_mail());
+    }
+
+    $mail2 = get_post_meta($form_id, '_mail_2', true);
+    $needs_update2 = (!is_array($mail2) || empty($mail2['body']) || strpos((string) $mail2['body'], '[buildpro-demo-mail2-v1]') === false);
+    if ($needs_update2) {
+        update_post_meta($form_id, '_mail_2', buildpro_cf7_demo_form_mail_2());
+    }
+}
+
 function buildpro_cf7_find_form_id()
 {
     $saved = buildpro_cf7_get_saved_form_id();
@@ -87,6 +150,7 @@ function buildpro_cf7_update_form_if_needed($form_id = 0)
     if ($needs_update) {
         update_post_meta($fid, '_form', buildpro_cf7_demo_form_content());
     }
+    buildpro_cf7_update_mail_if_needed($fid);
     return $fid;
 }
 
@@ -107,6 +171,8 @@ function buildpro_cf7_create_form()
     ));
     if ($post_id && !is_wp_error($post_id)) {
         add_post_meta($post_id, '_form', buildpro_cf7_demo_form_content(), true);
+        add_post_meta($post_id, '_mail', buildpro_cf7_demo_form_mail(), true);
+        add_post_meta($post_id, '_mail_2', buildpro_cf7_demo_form_mail_2(), true);
         buildpro_cf7_save_form_id($post_id);
         return (int) $post_id;
     }
