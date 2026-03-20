@@ -61,17 +61,19 @@ function buildpro_cf7_demo_form_mail(): array
         // Use site admin email as sender to reduce SPF/DMARC issues.
         'sender' => '[_site_title] <[_site_admin_email]>',
         'subject' => '[_site_title] — Contact: [your-name]',
-        'additional_headers' => "Reply-To: [your-email]\n",
-        'body' => "Name: [your-name]\n"
-            . "Email: [your-email]\n"
-            . "Phone: [your-phone]\n"
-            . "Project Type: [project-type]\n\n"
-            . "Message:\n[your-message]\n\n"
-            . "--\n"
-            . "Sent from [_site_title] ([_site_url])\n"
-            . "[buildpro-demo-mail-v1]",
+        'additional_headers' => "Reply-To: [your-email]\nContent-Type: text/html; charset=UTF-8\n",
+        'body' => "<h2>New contact request</h2>\n"
+            . "<p><strong>Full name:</strong> [your-name]<br>\n"
+            . "<strong>Email:</strong> <a href=\"mailto:[your-email]\">[your-email]</a><br>\n"
+            . "<strong>Phone:</strong> [your-phone]<br>\n"
+            . "<strong>Project type:</strong> [project-type]</p>\n"
+            . "<h3>Message</h3>\n"
+            . "<div>[your-message]</div>\n"
+            . "<hr>\n"
+            . "<p>Sent from <a href=\"[_site_url]\">[_site_title]</a></p>\n"
+            . "[buildpro-demo-mail-html-v1]",
         'attachments' => '',
-        'use_html' => false,
+        'use_html' => true,
         'exclude_blank' => true,
     );
 }
@@ -84,15 +86,16 @@ function buildpro_cf7_demo_form_mail_2(): array
         'recipient' => '[your-email]',
         'sender' => '[_site_title] <[_site_admin_email]>',
         'subject' => 'Thanks for contacting [_site_title]',
-        'additional_headers' => "Reply-To: [_site_admin_email]\n",
-        'body' => "Hi [your-name],\n\n"
-            . "Thanks for reaching out to [_site_title]. We've received your message and will get back to you as soon as possible.\n\n"
-            . "Your message:\n[your-message]\n\n"
-            . "--\n"
-            . "[_site_title] ([_site_url])\n"
-            . "[buildpro-demo-mail2-v1]",
+        'additional_headers' => "Reply-To: [_site_admin_email]\nContent-Type: text/html; charset=UTF-8\n",
+        'body' => "<p>Hi [your-name],</p>\n"
+            . "<p>Thanks for reaching out to <strong>[_site_title]</strong>. We've received your message and will get back to you as soon as possible.</p>\n"
+            . "<h3>Your message</h3>\n"
+            . "<div>[your-message]</div>\n"
+            . "<hr>\n"
+            . "<p>[_site_title] — <a href=\"[_site_url]\">[_site_url]</a></p>\n"
+            . "[buildpro-demo-mail2-html-v1]",
         'attachments' => '',
-        'use_html' => false,
+        'use_html' => true,
         'exclude_blank' => true,
     );
 }
@@ -104,13 +107,29 @@ function buildpro_cf7_update_mail_if_needed(int $form_id): void
     }
 
     $mail = get_post_meta($form_id, '_mail', true);
-    $needs_update = (!is_array($mail) || empty($mail['body']) || strpos((string) $mail['body'], '[buildpro-demo-mail-v1]') === false);
+    $needs_update = (
+        !is_array($mail)
+        || empty($mail['active'])
+        || $mail['active'] !== true
+        || empty($mail['body'])
+        || empty($mail['use_html'])
+        || $mail['use_html'] !== true
+        || strpos((string) $mail['body'], '[buildpro-demo-mail-html-v1]') === false
+    );
     if ($needs_update) {
         update_post_meta($form_id, '_mail', buildpro_cf7_demo_form_mail());
     }
 
     $mail2 = get_post_meta($form_id, '_mail_2', true);
-    $needs_update2 = (!is_array($mail2) || empty($mail2['body']) || strpos((string) $mail2['body'], '[buildpro-demo-mail2-v1]') === false);
+    $needs_update2 = (
+        !is_array($mail2)
+        || empty($mail2['active'])
+        || $mail2['active'] !== true
+        || empty($mail2['body'])
+        || empty($mail2['use_html'])
+        || $mail2['use_html'] !== true
+        || strpos((string) $mail2['body'], '[buildpro-demo-mail2-html-v1]') === false
+    );
     if ($needs_update2) {
         update_post_meta($form_id, '_mail_2', buildpro_cf7_demo_form_mail_2());
     }
@@ -353,6 +372,45 @@ function buildpro_cf7_force_store_to_flamingo($contact_form, $result = array())
 
 add_action('wpcf7_submit', 'buildpro_cf7_force_store_to_flamingo', 20, 2);
 
+function buildpro_cf7_has_smtp_configured(): bool
+{
+    // WP Mail SMTP (WPForms) stores settings in `wp_mail_smtp` option.
+    $wpms = get_option('wp_mail_smtp', array());
+    if (is_array($wpms)) {
+        $mailer = '';
+        if (isset($wpms['mail']) && is_array($wpms['mail']) && isset($wpms['mail']['mailer'])) {
+            $mailer = (string) $wpms['mail']['mailer'];
+        }
+
+        // If a non-default mailer is selected, assume SMTP sending is configured.
+        if ($mailer !== '' && $mailer !== 'mail') {
+            return true;
+        }
+
+        // Some installs may still use `smtp` mailer with separate settings.
+        if (
+            isset($wpms['smtp'])
+            && is_array($wpms['smtp'])
+            && !empty($wpms['smtp']['host'])
+            && !empty($wpms['smtp']['port'])
+        ) {
+            return true;
+        }
+    }
+
+    // Fallback: if plugin is present, allow sending (user can then see real mail errors).
+    if (
+        defined('WPMS_PLUGIN_VER')
+        || class_exists('WPMailSMTP\\WP')
+        || class_exists('WPMailSMTP\\Core\\WP')
+        || class_exists('WPMailSMTP\\Options')
+    ) {
+        return true;
+    }
+
+    return false;
+}
+
 function buildpro_cf7_skip_mail_for_demo_form($skip_mail, $contact_form)
 {
     if (!buildpro_cf7_is_active() || !is_object($contact_form) || !method_exists($contact_form, 'id')) {
@@ -370,6 +428,11 @@ function buildpro_cf7_skip_mail_for_demo_form($skip_mail, $contact_form)
 
     $env = function_exists('wp_get_environment_type') ? wp_get_environment_type() : 'production';
     if (!in_array($env, array('local', 'development'), true)) {
+        return $skip_mail;
+    }
+
+    // If SMTP is configured, allow sending even on local/dev.
+    if (buildpro_cf7_has_smtp_configured()) {
         return $skip_mail;
     }
 

@@ -24,7 +24,7 @@ add_action('tgmpa_register', 'buildpro_register_required_plugins');
 /**
  * Register required plugins for BuildPro theme
  *
- * Auto install: Flamingo, Contact Form 7, Classic Editor, WooCommerce
+ * Auto install: Flamingo, Contact Form 7, WP Mail SMTP, Classic Editor, WooCommerce
  */
 function buildpro_register_required_plugins()
 {
@@ -46,6 +46,13 @@ function buildpro_register_required_plugins()
         array(
             'name'     => 'Flamingo',
             'slug'     => 'flamingo',
+            'required' => true,
+        ),
+
+        // WP Mail SMTP - SMTP mailer for reliable sending
+        array(
+            'name'     => 'WP Mail SMTP',
+            'slug'     => 'wp-mail-smtp',
             'required' => true,
         ),
 
