@@ -7,12 +7,158 @@ if (!function_exists('buildpro_bill_get_value_from_request')) {
     }
 }
 
+if (!function_exists('buildpro_bill_get_snapshot_session_key')) {
+    function buildpro_bill_get_snapshot_session_key()
+    {
+        return 'buildpro_bill_cart_snapshot_v1';
+    }
+}
+
+if (!function_exists('buildpro_bill_is_from_checkout')) {
+    function buildpro_bill_is_from_checkout()
+    {
+        return buildpro_bill_get_value_from_request('bp_from_checkout', '') === '1';
+    }
+}
+
+if (!function_exists('buildpro_bill_make_snapshot_from_cart')) {
+    function buildpro_bill_make_snapshot_from_cart($cart_items)
+    {
+        $snapshot = [];
+        foreach ($cart_items as $item) {
+            $product_id = isset($item['product_id']) ? (int) $item['product_id'] : 0;
+            $variation_id = isset($item['variation_id']) ? (int) $item['variation_id'] : 0;
+            $qty = isset($item['quantity']) ? (int) $item['quantity'] : 0;
+            if ($product_id <= 0 || $qty <= 0) {
+                continue;
+            }
+            $snapshot[] = [
+                'product_id' => $product_id,
+                'variation_id' => $variation_id,
+                'quantity' => $qty,
+            ];
+        }
+        return $snapshot;
+    }
+}
+
+if (!function_exists('buildpro_bill_expand_snapshot_items')) {
+    function buildpro_bill_expand_snapshot_items($snapshot)
+    {
+        $items = [];
+        if (empty($snapshot) || !is_array($snapshot)) {
+            return $items;
+        }
+
+        foreach ($snapshot as $row) {
+            $product_id = isset($row['product_id']) ? (int) $row['product_id'] : 0;
+            $variation_id = isset($row['variation_id']) ? (int) $row['variation_id'] : 0;
+            $qty = isset($row['quantity']) ? (int) $row['quantity'] : 0;
+            if ($product_id <= 0 || $qty <= 0) {
+                continue;
+            }
+
+            $product = null;
+            if ($variation_id > 0 && function_exists('wc_get_product')) {
+                $product = wc_get_product($variation_id);
+            }
+            if (!$product && function_exists('wc_get_product')) {
+                $product = wc_get_product($product_id);
+            }
+            if (!$product) {
+                continue;
+            }
+
+            $items[] = [
+                'data' => $product,
+                'product_id' => $product_id,
+                'variation_id' => $variation_id,
+                'quantity' => $qty,
+            ];
+        }
+
+        return $items;
+    }
+}
+
+if (!function_exists('buildpro_bill_get_cart_snapshot')) {
+    function buildpro_bill_get_cart_snapshot()
+    {
+        if (!function_exists('WC') || !WC() || !isset(WC()->session)) {
+            return [];
+        }
+        $key = buildpro_bill_get_snapshot_session_key();
+        $snapshot = WC()->session->get($key);
+        return is_array($snapshot) ? $snapshot : [];
+    }
+}
+
+if (!function_exists('buildpro_bill_set_cart_snapshot')) {
+    function buildpro_bill_set_cart_snapshot($snapshot)
+    {
+        if (!function_exists('WC') || !WC() || !isset(WC()->session)) {
+            return;
+        }
+        WC()->session->set(buildpro_bill_get_snapshot_session_key(), is_array($snapshot) ? $snapshot : []);
+    }
+}
+
+if (!function_exists('buildpro_bill_clear_cart_snapshot')) {
+    function buildpro_bill_clear_cart_snapshot()
+    {
+        if (!function_exists('WC') || !WC() || !isset(WC()->session)) {
+            return;
+        }
+        WC()->session->set(buildpro_bill_get_snapshot_session_key(), []);
+    }
+}
+
+// When arriving on Bill page from Checkout, snapshot cart items into session and empty the cart
+// BEFORE the header renders, so the header cart is reset while Bill can still show the snapshot.
+if (!function_exists('buildpro_bill_prime_snapshot_and_empty_cart')) {
+    function buildpro_bill_prime_snapshot_and_empty_cart()
+    {
+        if (!function_exists('is_page_template') || !is_page_template('bill-page.php')) {
+            return;
+        }
+        if (!function_exists('WC') || !WC() || !isset(WC()->cart) || !WC()->cart) {
+            return;
+        }
+        if (!isset(WC()->session)) {
+            return;
+        }
+
+        $from_checkout = buildpro_bill_is_from_checkout();
+        $snapshot = buildpro_bill_get_cart_snapshot();
+
+        if ($from_checkout && empty($snapshot)) {
+            $cart_items = WC()->cart->get_cart();
+            $snapshot = buildpro_bill_make_snapshot_from_cart($cart_items);
+            buildpro_bill_set_cart_snapshot($snapshot);
+        }
+
+        if (!empty($snapshot)) {
+            WC()->cart->empty_cart();
+        }
+    }
+}
+
+add_action('template_redirect', 'buildpro_bill_prime_snapshot_and_empty_cart', 1);
+
 if (!function_exists('buildpro_bill_get_cart_items')) {
     function buildpro_bill_get_cart_items()
     {
         $wc_active = function_exists('WC') && WC()->cart;
-        $cart_items = $wc_active ? WC()->cart->get_cart() : [];
-        return [$wc_active, $cart_items];
+        if (!$wc_active) {
+            return [$wc_active, []];
+        }
+
+        $snapshot = buildpro_bill_get_cart_snapshot();
+        if (!empty($snapshot)) {
+            return [$wc_active, buildpro_bill_expand_snapshot_items($snapshot)];
+        }
+
+        return [$wc_active, WC()->cart->get_cart()];
     }
 }
 
@@ -257,6 +403,7 @@ if (!function_exists('buildpro_bill_create_order')) {
 
             if ($submit_success && $wc_active) {
                 WC()->cart->empty_cart();
+                buildpro_bill_clear_cart_snapshot();
             }
 
             if (!$submit_success) {

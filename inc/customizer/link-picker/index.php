@@ -105,6 +105,7 @@ function buildpro_link_picker_enqueue_assets()
         'noResults' => __('No results found.', 'buildpro'),
         'select' => __('Select', 'buildpro'),
         'loading' => __('Loading...', 'buildpro'),
+        'directOpenNotice' => __('Link Picker is used from other sections. Please use the “Choose Link” button in the relevant tab to pick a link.', 'buildpro'),
     );
     wp_add_inline_script(
         'buildpro-link-picker-script',

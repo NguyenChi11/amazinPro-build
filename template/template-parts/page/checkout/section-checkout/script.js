@@ -430,6 +430,9 @@
         ).trim(),
       );
       params.set("payment", paymentMap[methodTab] || "cod");
+      // Mark that Bill page was reached from the Checkout flow.
+      // The Bill page uses this to snapshot cart items and reset the header cart.
+      params.set("bp_from_checkout", "1");
 
       submitBtn.classList.add("is-loading");
       submitBtn.textContent = "Redirecting to Bill...";

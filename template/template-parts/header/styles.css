@@ -953,7 +953,7 @@ body.mobile-sidebar-open {
   }
 
   .header-logo-desc {
-    display: none; /* Hide description on very small screens */
+    /* display: none;  */
   }
 
   .header-nav-button-cart {

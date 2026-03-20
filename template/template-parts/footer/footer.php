@@ -59,7 +59,57 @@ $service_ft = get_theme_mod('footer_servicer_text', '');
 $link_server = get_theme_mod('footer_servicer_link', array('url' => '', 'title' => '', 'target' => ''));
 $service_url = is_array($link_server) ? ($link_server['url'] ?? '') : '';
 $service_target = is_array($link_server) ? ($link_server['target'] ?? '') : '';
-$has_data = ($background_url || $description_ft || !empty($footer_pages) || $contact_location || $contact_phone || $contact_email || $contact_time || !empty($contact_links) || $create_build_text || $policy_ft || $policy_url || $service_ft || $service_url);
+
+// Footer Services: reuse the Services items from the Home page section.
+// Only output Title + Link URL.
+$footer_services = array();
+if (function_exists('get_post_meta') && function_exists('get_pages')) {
+    $home_id = (int) get_option('page_on_front');
+    if ($home_id > 0) {
+        $tpl = function_exists('get_page_template_slug') ? get_page_template_slug($home_id) : '';
+        if ($tpl !== 'home-page.php') {
+            $home_id = 0;
+        }
+    }
+    if ($home_id <= 0) {
+        $home_pages = get_pages(array(
+            'meta_key'   => '_wp_page_template',
+            'meta_value' => 'home-page.php',
+            'number'     => 1,
+        ));
+        if (!empty($home_pages) && !empty($home_pages[0]->ID)) {
+            $home_id = (int) $home_pages[0]->ID;
+        }
+    }
+
+    $rows = array();
+    if ($home_id > 0) {
+        $rows = get_post_meta($home_id, 'buildpro_service_items', true);
+    }
+    if (is_customize_preview()) {
+        $mods = get_theme_mod('buildpro_service_items', array());
+        if (is_array($mods) && !empty($mods)) {
+            $rows = $mods;
+        }
+    }
+
+    if (is_array($rows)) {
+        foreach ($rows as $row) {
+            $title = isset($row['title']) ? trim((string) $row['title']) : '';
+            $url = isset($row['link_url']) ? trim((string) $row['link_url']) : '';
+            if ($url === '') {
+                continue;
+            }
+            $footer_services[] = array(
+                'title' => $title,
+                'url' => $url,
+                'target' => isset($row['link_target']) ? trim((string) $row['link_target']) : '',
+            );
+        }
+    }
+}
+
+$has_data = ($background_url || $description_ft || !empty($footer_pages) || !empty($footer_services) || $contact_location || $contact_phone || $contact_email || $contact_time || !empty($contact_links) || $create_build_text || $policy_ft || $policy_url || $service_ft || $service_url);
 if (!is_customize_preview() && !$has_data) {
     return;
 }
@@ -168,6 +218,23 @@ if (!is_customize_preview() && !$has_data) {
                     </div>
                 <?php endif; ?>
             </div>
+            <?php if (!empty($footer_services)) : ?>
+                <div class="footer__services_wrapper">
+                    <h3 class="footer__pages-title"><?php esc_html_e('Services', 'buildpro'); ?></h3>
+                    <div class="footer__pages">
+                        <?php foreach ($footer_services as $svc) :
+                            $target_attr = !empty($svc['target']) ? ' target="' . esc_attr($svc['target']) . '"' : '';
+                            $rel_attr = (!empty($svc['target']) && $svc['target'] === '_blank') ? ' rel="noopener"' : '';
+                            $label = !empty($svc['title']) ? $svc['title'] : $svc['url'];
+                        ?>
+                            <a class="footer__page-link" href="<?php echo esc_url($svc['url']); ?>"
+                                <?php echo $target_attr . $rel_attr; ?>>
+                                <?php echo esc_html($label); ?>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
             <div class="footer__contact">
                 <h3 class="footer__contact-title"><?php esc_html_e('Contact', 'buildpro'); ?></h3>
                 <div class="footer__contact-info">
@@ -210,26 +277,28 @@ if (!is_customize_preview() && !$has_data) {
             <?php if (!empty($create_build_text)): ?>
                 <span class="footer__create"><?php echo esc_html($create_build_text); ?></span>
             <?php endif; ?>
-            <?php if (!empty($policy_ft) || !empty($policy_url)): ?>
-                <?php
-                $target_attr = !empty($policy_target) ? ' target="' . esc_attr($policy_target) . '"' : '';
-                $rel_attr = (!empty($policy_target) && $policy_target === '_blank') ? ' rel="noopener"' : '';
-                ?>
-                <a class="footer__policy" href="<?php echo esc_url($policy_url ?: '#'); ?>"
-                    <?php echo $target_attr . $rel_attr; ?>>
-                    <?php echo esc_html($policy_ft ?: __('Policy', 'buildpro')); ?>
-                </a>
-            <?php endif; ?>
-            <?php if (!empty($service_ft) || !empty($service_url)): ?>
-                <?php
-                $target_attr = !empty($service_target) ? ' target="' . esc_attr($service_target) . '"' : '';
-                $rel_attr = (!empty($service_target) && $service_target === '_blank') ? ' rel="noopener"' : '';
-                ?>
-                <a class="footer__service" href="<?php echo esc_url($service_url ?: '#'); ?>"
-                    <?php echo $target_attr . $rel_attr; ?>>
-                    <?php echo esc_html($service_ft ?: __('Service', 'buildpro')); ?>
-                </a>
-            <?php endif; ?>
+            <div class="footer__bottom-right">
+                <?php if (!empty($policy_ft) || !empty($policy_url)): ?>
+                    <?php
+                    $target_attr = !empty($policy_target) ? ' target="' . esc_attr($policy_target) . '"' : '';
+                    $rel_attr = (!empty($policy_target) && $policy_target === '_blank') ? ' rel="noopener"' : '';
+                    ?>
+                    <a class="footer__policy" href="<?php echo esc_url($policy_url ?: '#'); ?>"
+                        <?php echo $target_attr . $rel_attr; ?>>
+                        <?php echo esc_html($policy_ft ?: __('Policy', 'buildpro')); ?>
+                    </a>
+                <?php endif; ?>
+                <?php if (!empty($service_ft) || !empty($service_url)): ?>
+                    <?php
+                    $target_attr = !empty($service_target) ? ' target="' . esc_attr($service_target) . '"' : '';
+                    $rel_attr = (!empty($service_target) && $service_target === '_blank') ? ' rel="noopener"' : '';
+                    ?>
+                    <a class="footer__service" href="<?php echo esc_url($service_url ?: '#'); ?>"
+                        <?php echo $target_attr . $rel_attr; ?>>
+                        <?php echo esc_html($service_ft ?: __('Service', 'buildpro')); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </footer><!-- #colophon -->

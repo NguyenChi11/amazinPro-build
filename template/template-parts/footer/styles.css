@@ -50,8 +50,9 @@
 }
 
 .footer__logo {
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 0.25rem;
 }
 
 .footer__title {
@@ -123,6 +124,14 @@
   min-height: 25rem;
 }
 
+.footer__services_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  min-height: 25rem;
+}
+
 .footer__pages {
   display: flex;
   flex-direction: column;
@@ -134,6 +143,16 @@
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5rem;
+}
+
+.footer__page-link {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer__page-link:hover {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footer__contact {
@@ -211,13 +230,19 @@
 /* Footer Bottom Styles for Desktop */
 .footer__bottom {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   gap: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 2rem;
+}
+
+.footer__bottom-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .footer__create,
@@ -271,6 +296,7 @@
 
   .footer__brand,
   .footer__pages_wrapper,
+  .footer__services_wrapper,
   .footer__contact {
     min-height: auto;
     width: 100%;

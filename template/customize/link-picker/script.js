@@ -20,6 +20,30 @@
     return typeof val === "string" && val ? val : fallback;
   }
 
+  function ensureDirectOpenNotice(visible) {
+    var wrap = document.querySelector(".buildpro-link-popup");
+    if (!wrap) return;
+
+    var id = "buildpro-link-picker-direct-notice";
+    var note = document.getElementById(id);
+    if (!note) {
+      note = document.createElement("div");
+      note.id = id;
+      note.className = "notice notice-warning inline";
+      note.setAttribute("role", "status");
+      note.style.margin = "0 0 12px";
+      note.style.padding = "8px 10px";
+      note.style.boxSizing = "border-box";
+      note.textContent = t(
+        "directOpenNotice",
+        "Link Picker is used from other sections. Please use the “Choose Link” button in the relevant tab to pick a link.",
+      );
+      wrap.insertBefore(note, wrap.firstChild);
+    }
+
+    note.style.display = visible ? "block" : "none";
+  }
+
   /* ── helpers ───────────────────────────────────────────────── */
   function normalizeTitle(t) {
     if (!t) return "";
@@ -272,9 +296,14 @@
     if (urlField._blpBound) return; // already bound to this exact element
     urlField._blpBound = true;
 
+    // If user opened Link Picker directly (no target), show a notice.
+    // When opened via other sections (Choose Link), hide it.
+    ensureDirectOpenNotice(!window.buildproLinkTarget);
+
     /* Pre-fill fields from the banner row that opened us */
     var tgt = window.buildproLinkTarget;
     if (tgt) {
+      ensureDirectOpenNotice(false);
       if (tgt.currentUrl !== undefined && urlField)
         urlField.value = tgt.currentUrl;
       if (tgt.currentTitle !== undefined && textField)
