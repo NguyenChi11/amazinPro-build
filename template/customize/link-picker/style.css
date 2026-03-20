@@ -28,6 +28,10 @@
   color: #646970;
 }
 
+.buildpro-banner-field input[type="url"] {
+  margin-bottom: 0.25rem;
+}
+
 .buildpro-banner-field input[type="url"],
 .buildpro-banner-field input[type="text"],
 #buildpro-link-search {

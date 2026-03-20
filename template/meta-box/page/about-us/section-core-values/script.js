@@ -39,6 +39,71 @@
     var wrap = document.getElementById("buildpro_about_core_values_items_wrap");
     var add = document.getElementById("buildpro_add_core_value_item");
     var frame = null;
+
+    function openLinkPicker(urlInput) {
+      if (!urlInput) return;
+      var wpLinkObj =
+        typeof wpLink !== "undefined" &&
+        wpLink &&
+        typeof wpLink.open === "function"
+          ? wpLink
+          : window.wp &&
+              window.wp.link &&
+              typeof window.wp.link.open === "function"
+            ? window.wp.link
+            : null;
+      if (!wpLinkObj) return;
+
+      try {
+        wpLinkObj.open();
+      } catch (e) {
+        return;
+      }
+
+      var urlField = document.getElementById("wp-link-url");
+      if (urlField) {
+        urlField.value = urlInput.value || "";
+      }
+
+      var originalUpdate =
+        typeof wpLinkObj.update === "function" ? wpLinkObj.update : null;
+      if (originalUpdate) {
+        wpLinkObj.update = function () {
+          try {
+            if (urlField) urlInput.value = urlField.value || "";
+          } catch (e) {}
+          try {
+            if (typeof wpLinkObj.close === "function") wpLinkObj.close();
+          } catch (e) {}
+          wpLinkObj.update = originalUpdate;
+        };
+      }
+
+      var submit = document.getElementById("wp-link-submit");
+      var handler = function (ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        if (ev && ev.stopPropagation) ev.stopPropagation();
+        if (ev && ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+
+        try {
+          if (urlField) urlInput.value = urlField.value || "";
+        } catch (e) {}
+        try {
+          if (typeof wpLinkObj.close === "function") wpLinkObj.close();
+        } catch (e) {}
+
+        if (submit) submit.removeEventListener("click", handler, true);
+      };
+      if (submit) {
+        submit.addEventListener("click", handler, true);
+      }
+    }
+
+    function isUrlInput(el) {
+      if (!el || el.tagName !== "INPUT") return false;
+      var n = el.getAttribute("name") || "";
+      return /\[url\]$/.test(n);
+    }
     function addItem() {
       var idx = wrap.querySelectorAll(".core-value-item").length;
       var div = document.createElement("div");
@@ -94,6 +159,11 @@
     if (add) add.addEventListener("click", addItem);
     if (wrap) {
       wrap.addEventListener("click", function (e) {
+        if (e && e.target && isUrlInput(e.target)) {
+          e.preventDefault();
+          openLinkPicker(e.target);
+          return;
+        }
         if (e.target && e.target.classList.contains("cv-select-image")) {
           e.preventDefault();
           var idx = parseInt(e.target.getAttribute("data-idx"), 10) || 0;

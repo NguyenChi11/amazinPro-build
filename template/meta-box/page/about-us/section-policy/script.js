@@ -35,6 +35,86 @@
       });
     });
   }
+
+  function initUrlPickers() {
+    var box = document.getElementById("buildpro_about_policy_meta");
+    if (!box) return;
+
+    function isUrlInput(el) {
+      if (!el || el.tagName !== "INPUT") return false;
+      var n = el.getAttribute("name") || "";
+      // Certifications repeater uses [url]; also allow legacy single field.
+      return (
+        /\[url\]$/.test(n) || n === "buildpro_about_policy_certification_url"
+      );
+    }
+
+    function openLinkPicker(urlInput) {
+      if (!urlInput) return;
+      var wpLinkObj =
+        typeof wpLink !== "undefined" &&
+        wpLink &&
+        typeof wpLink.open === "function"
+          ? wpLink
+          : window.wp &&
+              window.wp.link &&
+              typeof window.wp.link.open === "function"
+            ? window.wp.link
+            : null;
+      if (!wpLinkObj) return;
+
+      try {
+        wpLinkObj.open();
+      } catch (e) {
+        return;
+      }
+
+      var urlField = document.getElementById("wp-link-url");
+      if (urlField) {
+        urlField.value = urlInput.value || "";
+      }
+
+      var originalUpdate =
+        typeof wpLinkObj.update === "function" ? wpLinkObj.update : null;
+      if (originalUpdate) {
+        wpLinkObj.update = function () {
+          try {
+            if (urlField) urlInput.value = urlField.value || "";
+          } catch (e) {}
+          try {
+            if (typeof wpLinkObj.close === "function") wpLinkObj.close();
+          } catch (e) {}
+          wpLinkObj.update = originalUpdate;
+        };
+      }
+
+      var submit = document.getElementById("wp-link-submit");
+      var handler = function (ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        if (ev && ev.stopPropagation) ev.stopPropagation();
+        if (ev && ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+        try {
+          if (urlField) urlInput.value = urlField.value || "";
+        } catch (e) {}
+        try {
+          if (typeof wpLinkObj.close === "function") wpLinkObj.close();
+        } catch (e) {}
+        if (submit) submit.removeEventListener("click", handler, true);
+      };
+      if (submit) {
+        submit.addEventListener("click", handler, true);
+      }
+    }
+
+    box.addEventListener("click", function (e) {
+      var target = e && e.target ? e.target : null;
+      if (!target) return;
+      if (isUrlInput(target)) {
+        e.preventDefault();
+        openLinkPicker(target);
+      }
+    });
+  }
   function initCertImage() {
     var selectBtn = document.getElementById(
       "buildpro_about_policy_cert_select",
@@ -348,12 +428,14 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () {
       initTabs();
+      initUrlPickers();
       initCertImage();
       initItems();
       initCertRepeater();
     });
   } else {
     initTabs();
+    initUrlPickers();
     initCertImage();
     initItems();
     initCertRepeater();

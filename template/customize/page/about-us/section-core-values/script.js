@@ -32,6 +32,21 @@
     var input = wrap.find(".buildpro-about-core-values-input");
     var frame = null;
     var api = window.wp && window.wp.customize ? window.wp.customize : null;
+
+    function openLinkPicker(urlInputEl) {
+      if (!urlInputEl) return;
+      window.buildproLinkTarget = {
+        sectionId: "buildpro_about_core_values_section",
+        urlInput: urlInputEl,
+        currentUrl: urlInputEl.value || "",
+      };
+      if (api && typeof api.section === "function") {
+        var s = api.section("buildpro_link_picker_section");
+        if (s && typeof s.expand === "function") {
+          s.expand();
+        }
+      }
+    }
     function getItems() {
       try {
         var v = input.val();
@@ -229,6 +244,12 @@
           setItems(items2);
           var t = row.find(".cv-title").val();
           if (t) cvHeader.find(".cv-accordion-label").text(t);
+        });
+
+        row.on("click", ".cv-url", function (e) {
+          if (e && e.preventDefault) e.preventDefault();
+          if (e && e.stopPropagation) e.stopPropagation();
+          openLinkPicker(this);
         });
         row.on("click", ".remove-core-value", function (e) {
           e.preventDefault();

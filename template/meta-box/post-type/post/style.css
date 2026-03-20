@@ -47,6 +47,8 @@
   margin-right: 6px;
   background: #f3f4f6;
   border-color: #e5e7eb;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 .buildpro-admin-tabs .button.is-active {

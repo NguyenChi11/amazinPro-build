@@ -43,6 +43,9 @@ if (!function_exists('buildpro_about_core_values_admin_enqueue')) {
     {
         if ($hook === 'post.php' || $hook === 'post-new.php') {
             wp_enqueue_media();
+            // Enable WordPress Insert/edit link modal for URL fields.
+            wp_enqueue_script('wplink');
+            wp_enqueue_style('wp-link');
             wp_enqueue_style(
                 'buildpro-about-us-core-values-admin',
                 get_theme_file_uri('template/meta-box/page/about-us/section-core-values/style.css'),

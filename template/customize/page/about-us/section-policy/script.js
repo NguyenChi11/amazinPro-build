@@ -31,6 +31,21 @@
     var didFetch = false;
     var api = window.wp && window.wp.customize ? window.wp.customize : null;
     var type = wrap.attr("data-type") === "certs" ? "certs" : "items";
+
+    function openLinkPicker(urlInputEl) {
+      if (!urlInputEl) return;
+      window.buildproLinkTarget = {
+        sectionId: "buildpro_about_policy_section",
+        urlInput: urlInputEl,
+        currentUrl: urlInputEl.value || "",
+      };
+      if (api && typeof api.section === "function") {
+        var s = api.section("buildpro_link_picker_section");
+        if (s && typeof s.expand === "function") {
+          s.expand();
+        }
+      }
+    }
     function getItems() {
       try {
         var v = input.val();
@@ -263,6 +278,14 @@
           var t = row.find(".policy-title").val();
           if (t) policyHeader.find(".policy-accordion-label").text(t);
         });
+
+        if (type === "certs") {
+          row.on("click", ".policy-url", function (e) {
+            if (e && e.preventDefault) e.preventDefault();
+            if (e && e.stopPropagation) e.stopPropagation();
+            openLinkPicker(this);
+          });
+        }
         row.on("click", ".remove-policy-row", function (e) {
           e.preventDefault();
           var items2 = getItems();

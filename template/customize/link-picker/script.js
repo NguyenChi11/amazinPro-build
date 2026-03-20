@@ -221,21 +221,35 @@
     var targetBlank = targetToggle ? !!targetToggle.checked : false;
     var tgt = window.buildproLinkTarget;
 
+    function dispatchBubbling(el, type) {
+      if (!el) return;
+      try {
+        el.dispatchEvent(new Event(type, { bubbles: true }));
+        return;
+      } catch (e) {}
+      try {
+        // Legacy fallback
+        var ev = document.createEvent("Event");
+        ev.initEvent(type, true, true);
+        el.dispatchEvent(ev);
+      } catch (e2) {}
+    }
+
     if (tgt) {
       var sectionId = tgt.sectionId || "";
       if (tgt.urlInput) {
         tgt.urlInput.value = url;
-        tgt.urlInput.dispatchEvent(new Event("input"));
-        tgt.urlInput.dispatchEvent(new Event("change"));
+        dispatchBubbling(tgt.urlInput, "input");
+        dispatchBubbling(tgt.urlInput, "change");
       }
       if (tgt.titleInput) {
         tgt.titleInput.value = title;
-        tgt.titleInput.dispatchEvent(new Event("input"));
-        tgt.titleInput.dispatchEvent(new Event("change"));
+        dispatchBubbling(tgt.titleInput, "input");
+        dispatchBubbling(tgt.titleInput, "change");
       }
       if (tgt.targetSelect) {
         tgt.targetSelect.value = targetBlank ? "_blank" : "";
-        tgt.targetSelect.dispatchEvent(new Event("change"));
+        dispatchBubbling(tgt.targetSelect, "change");
       }
       window.buildproLinkTarget = null;
       goBackToSection(sectionId);

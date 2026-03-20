@@ -49,6 +49,9 @@ function buildpro_about_policy_admin_enqueue($hook)
 {
     if ($hook === 'post.php' || $hook === 'post-new.php') {
         wp_enqueue_media();
+        // Enable WordPress Insert/edit link modal for URL fields.
+        wp_enqueue_script('wplink');
+        wp_enqueue_style('wp-link');
         wp_enqueue_style(
             'buildpro-about-us-policy-admin',
             get_theme_file_uri('template/meta-box/page/about-us/section-policy/style.css'),
