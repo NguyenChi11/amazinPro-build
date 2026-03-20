@@ -47,6 +47,7 @@ function buildpro_cf7_demo_form_content()
     $form .= '<p class="contact-form__field"><label class="contact-form__label">Email Address</label>[email* your-email class:contact-form__input placeholder "contact@amazinpro.com"]</p>';
     $form .= '<p class="contact-form__field"><label class="contact-form__label">Phone Number</label>[tel your-phone class:contact-form__input placeholder "(+84)349582808"]</p>';
     $form .= '<p class="contact-form__field"><label class="contact-form__label">Project Type</label>[select* project-type class:contact-form__input ' . $choices . ']</p>';
+    $form .= '<p class="contact-form__field"><label class="contact-form__label">Subject</label>[text your-subject class:contact-form__input placeholder "Subject email?"]</p>';
     $form .= '<p class="contact-form__field"><label class="contact-form__label">Message</label>[textarea your-message class:contact-form__input placeholder "Tell us about your project requirements . . ."]</p>';
     $form .= '<p class="contact-form__actions">[submit class:contact-form__submit "Submit Request"]</p>';
     $form .= '</div>';
@@ -65,6 +66,7 @@ function buildpro_cf7_demo_form_mail(): array
         'body' => "<h2>New contact request</h2>\n"
             . "<p><strong>Full name:</strong> [your-name]<br>\n"
             . "<strong>Email:</strong> <a href=\"mailto:[your-email]\">[your-email]</a><br>\n"
+            . "<strong>Subject:</strong> [your-subject]<br>\n"
             . "<strong>Phone:</strong> [your-phone]<br>\n"
             . "<strong>Project type:</strong> [project-type]</p>\n"
             . "<h3>Message</h3>\n"
@@ -89,6 +91,7 @@ function buildpro_cf7_demo_form_mail_2(): array
         'additional_headers' => "Reply-To: [_site_admin_email]\nContent-Type: text/html; charset=UTF-8\n",
         'body' => "<p>Hi [your-name],</p>\n"
             . "<p>Thanks for reaching out to <strong>[_site_title]</strong>. We've received your message and will get back to you as soon as possible.</p>\n"
+            . "<p><strong>Subject:</strong> [your-subject]</p>\n"
             . "<h3>Your message</h3>\n"
             . "<div>[your-message]</div>\n"
             . "<hr>\n"
@@ -165,6 +168,7 @@ function buildpro_cf7_update_form_if_needed($form_id = 0)
         || strpos($content, 'contact-form__grid') === false
         || strpos($content, 'buildpro-demo-form-v3') === false
         || strpos($content, '[select* project-type') === false
+        || strpos($content, 'your-subject') === false
     );
     if ($needs_update) {
         update_post_meta($fid, '_form', buildpro_cf7_demo_form_content());
@@ -286,9 +290,28 @@ function buildpro_cf7_set_flamingo_subject_from_sender($args)
         return $args;
     }
 
+    // Prefer an explicit subject field (if provided by the form).
+    if (isset($args['fields']) && is_array($args['fields'])) {
+        $explicit_subject = '';
+        if (!empty($args['fields']['your-subject'])) {
+            $explicit_subject = is_string($args['fields']['your-subject']) ? trim($args['fields']['your-subject']) : '';
+        } elseif (!empty($args['fields']['subject'])) {
+            $explicit_subject = is_string($args['fields']['subject']) ? trim($args['fields']['subject']) : '';
+        }
+
+        if ($explicit_subject !== '') {
+            $args['subject'] = $explicit_subject;
+            return $args;
+        }
+    }
+
     $from_email = isset($args['from_email']) ? (string) $args['from_email'] : '';
     $current_subject = isset($args['subject']) ? (string) $args['subject'] : '';
-    $args['subject'] = buildpro_cf7_subject_from_sender_email($from_email, $current_subject);
+
+    // Only synthesize a subject from sender when no subject exists.
+    if (trim($current_subject) === '') {
+        $args['subject'] = buildpro_cf7_subject_from_sender_email($from_email, $current_subject);
+    }
 
     return $args;
 }
@@ -333,8 +356,6 @@ function buildpro_cf7_force_store_to_flamingo($contact_form, $result = array())
     if ($subject === '') {
         $subject = sprintf('Form submission: %s', $contact_form->title());
     }
-
-    $subject = buildpro_cf7_subject_from_sender_email($email, $subject);
 
     if ($email !== '' && is_email($email) && method_exists('Flamingo_Contact', 'add')) {
         Flamingo_Contact::add(array(
