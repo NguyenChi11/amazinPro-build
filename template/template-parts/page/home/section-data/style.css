@@ -13,6 +13,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 0;
 }
 .section-data__item-number {
   margin: 0;
@@ -27,6 +28,17 @@
   font-size: 1.25rem;
   font-weight: 400;
   color: rgba(126, 132, 139, 1);
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  text-align: center;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2; /* số dòng muốn hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .section-data__hover-outline {

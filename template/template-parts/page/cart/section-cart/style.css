@@ -31,12 +31,22 @@
   color: #111827;
   margin: 0 0 0.4rem;
   line-height: 1.2;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-section__subtitle {
   font-size: 0.9rem;
   color: #6b7280;
   margin: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 /* Items list */
@@ -56,6 +66,7 @@
   align-items: center;
   gap: 1rem;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.07);
+  min-width: 0;
 }
 
 .cart-item__check {
@@ -96,9 +107,16 @@
   font-weight: 700;
   color: #111827;
   margin: 0 0 0.25rem;
-  white-space: nowrap;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+  line-clamp: 2;
 }
 
 .cart-item__unit {
@@ -106,6 +124,11 @@
   color: #9ca3af;
   margin: 0 0 0.75rem;
   font-style: italic;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-item__short-desc {
@@ -118,6 +141,11 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-item__pricing {
@@ -213,13 +241,17 @@
   gap: 2.75rem;
   flex-shrink: 0;
   min-width: 6rem;
+  max-width: 100%;
 }
 
 .cart-item__price {
   font-size: 1.05rem;
   font-weight: 700;
   color: #111827;
-  white-space: nowrap;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .cart-item__remove {
@@ -231,7 +263,10 @@
   gap: 0.5rem;
   cursor: pointer;
   transition: opacity 0.15s;
-  white-space: nowrap;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   background-color: unset;
   border: none;
 }
@@ -330,6 +365,9 @@
   margin: 0 0 0.625rem;
   line-height: 1.55;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-notes__saved-actions {
@@ -450,6 +488,9 @@
 
 .cart-section__empty p {
   margin: 0 0 1rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-section__shop-link {
@@ -462,6 +503,9 @@
   text-decoration: none;
   font-size: 0.875rem;
   transition: background 0.15s;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .cart-section__shop-link:hover {
@@ -492,6 +536,7 @@
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
+  min-width: 0;
 }
 
 .cart-summary__icon {
@@ -504,6 +549,12 @@
   font-weight: 700;
   margin: 0;
   color: #111827;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 /* Rows */
@@ -517,15 +568,28 @@
 .cart-summary__row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 1rem;
   font-size: 0.9375rem;
   color: #6b7280;
+  min-width: 0;
+}
+
+.cart-summary__row > span:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-summary__val {
   font-weight: 600;
   color: #111827;
   white-space: nowrap;
+  flex: 0 0 auto;
+  max-width: 100%;
 }
 
 .cart-summary__val--discount {
@@ -601,6 +665,9 @@
   margin: 0 0 0.25rem;
   min-height: 1.2em;
   color: #4ade80;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-summary__coupon-msg--error {
@@ -626,6 +693,12 @@
   font-size: 1.0625rem;
   font-weight: 700;
   color: #111827;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-summary__total-val {
@@ -657,6 +730,11 @@
   margin-bottom: 1.125rem;
   font-family: inherit;
   box-sizing: border-box;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .cart-summary__btn:hover {
@@ -670,6 +748,9 @@
   text-align: center;
   margin: 0;
   line-height: 1.6;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 /* ============================================================
@@ -746,12 +827,10 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .cart-item__name {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: initial;
     line-height: 1.35;
   }
 

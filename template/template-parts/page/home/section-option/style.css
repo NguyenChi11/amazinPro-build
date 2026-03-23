@@ -24,6 +24,7 @@
   background-color: #fff;
   border-radius: 1.25rem;
   box-shadow: 4px 4px 20px 0px rgba(7, 59, 111, 0.15);
+  min-width: 0;
 }
 
 .section-option__item-icon {
@@ -44,6 +45,17 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: rgba(0, 0, 0, 1);
+  line-height: 1.625rem; /* 100% */
+  letter-spacing: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* số dòng muốn hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .section-option__item-description {
@@ -55,6 +67,15 @@
   letter-spacing: 0;
   text-align: justify;
   margin: 0rem;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* số dòng muốn hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .section-option__hover-outline {

@@ -58,6 +58,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  margin-top: 1rem;
 }
 .section-evaluate__item-avatar img {
   width: 3rem;
@@ -73,7 +74,16 @@
   line-height: 2rem; /* 100% */
   letter-spacing: 0;
   text-align: justify;
-  height: 11.25rem; /* 180px */
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4; /* số dòng muốn hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   opacity: 1;
   margin-bottom: 0;
 }
@@ -158,7 +168,8 @@
   color: rgba(19, 127, 236, 1);
   margin: 0rem;
   margin-bottom: 1rem;
-  overflow-wrap: break-word;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
   white-space: normal;
@@ -172,7 +183,8 @@
   color: #000;
   margin: 0rem;
   margin-bottom: 2rem;
-  overflow-wrap: break-word;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
   white-space: normal;
@@ -186,7 +198,8 @@
   color: rgba(126, 132, 139, 1);
   margin: 0rem;
   text-align: justify;
-  overflow-wrap: break-word;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
   white-space: normal;

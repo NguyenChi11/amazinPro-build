@@ -16,6 +16,10 @@
   align-items: start;
 }
 
+.about-contact-form * {
+  min-width: 0;
+}
+
 .about-contact-form__inner,
 .about-contact-form__connect {
   background: var(--cf-bg);
@@ -35,6 +39,11 @@
   font-weight: 800;
   color: var(--cf-text);
   margin: 0 0 1.25rem;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .about-contact-form__title::after {
@@ -319,6 +328,11 @@
   font-size: 0.8125rem;
   padding: 0.75rem 1rem !important;
   border-radius: 0.75rem;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .about-contact-form .wpcf7 form .wpcf7-form-control-wrap {
@@ -392,6 +406,11 @@
   font-size: 0.86rem;
   color: var(--cf-text);
   line-height: 1.5;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .about-contact-form__connect {
@@ -406,6 +425,11 @@
   margin: 0 0 0.75rem;
   padding-bottom: 0.65rem;
   border-bottom: 1px solid #f0f0f0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .about-contact-form__connect-list {

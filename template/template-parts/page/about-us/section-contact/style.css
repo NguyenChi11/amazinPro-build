@@ -21,11 +21,20 @@
   font-size: 2rem;
   line-height: 1.2;
   margin: 0 0 0.5rem;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 .about-contact__desc {
   color: #718096;
   margin-bottom: 1.25rem;
   max-width: 56rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 .about-contact__grid {
   display: grid;
@@ -51,15 +60,29 @@
   align-items: center;
   justify-content: center;
 }
+min-width: 0;
 .about-contact__icon img {
+  .about-contact__content {
+    min-width: 0;
+  }
   width: 1.5rem;
   height: 1.5rem;
   object-fit: contain;
 }
+max-width: 100%;
+white-space: normal;
+overflow-wrap: anywhere;
+word-break: break-word;
+hyphens: auto;
 .about-contact__label {
   font-weight: 700;
   color: #1a202c;
   margin-bottom: 0.25rem;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 .about-contact__value {
   color: #4a5568;

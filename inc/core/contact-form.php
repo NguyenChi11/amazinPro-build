@@ -463,3 +463,25 @@ function buildpro_cf7_skip_mail_for_demo_form($skip_mail, $contact_form)
 }
 
 add_filter('wpcf7_skip_mail', 'buildpro_cf7_skip_mail_for_demo_form', 20, 2);
+
+/**
+ * Remove Flamingo Inbound Messages "Meta" metabox from the edit screen.
+ *
+ * Flamingo registers this box with id `inboundmetadiv` (title "Meta") on the
+ * admin page whose screen id is typically `flamingo_page_flamingo_inbound`.
+ */
+function buildpro_remove_flamingo_inbound_meta_metabox(): void
+{
+    if (!is_admin() || !function_exists('get_current_screen')) {
+        return;
+    }
+
+    $screen = get_current_screen();
+    if (!$screen || empty($screen->id) || $screen->id !== 'flamingo_page_flamingo_inbound') {
+        return;
+    }
+
+    remove_meta_box('inboundmetadiv', $screen->id, 'normal');
+}
+
+add_action('load-flamingo_page_flamingo_inbound', 'buildpro_remove_flamingo_inbound_meta_metabox', 20, 0);

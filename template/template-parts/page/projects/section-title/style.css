@@ -12,8 +12,14 @@
   color: #000;
   opacity: 1;
   margin: 0;
-  width: 63.25rem;
+  width: 100%;
+  max-width: 63.25rem;
+  min-width: 0;
   margin-bottom: 2.5rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .project--section-title__desc {
@@ -25,7 +31,13 @@
   color: rgba(126, 132, 139, 1);
   opacity: 1;
   margin: 0;
-  width: 63.25rem;
+  width: 100%;
+  max-width: 63.25rem;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 /* Overlay outline + shortcut (match banner pattern) */
@@ -82,13 +94,15 @@
     line-height: 1.75rem;
     letter-spacing: 0;
     margin: 0;
-    width: 20.25rem;
+    width: 100%;
+    max-width: 100%;
     margin-bottom: 0.5rem;
   }
   .project--section-title__desc {
     font-size: 0.625rem;
     letter-spacing: 0;
     line-height: normal;
-    width: 20.25rem;
+    width: 100%;
+    max-width: 100%;
   }
 }
