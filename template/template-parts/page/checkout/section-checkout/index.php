@@ -10,6 +10,8 @@ $total = isset($checkout_data['total']) ? $checkout_data['total'] : 0.0;
 $wc_countries = isset($checkout_data['wc_countries']) ? $checkout_data['wc_countries'] : [];
 $wc_base_country = isset($checkout_data['wc_base_country']) ? $checkout_data['wc_base_country'] : '';
 $paypal_enabled = isset($checkout_data['paypal_enabled']) ? $checkout_data['paypal_enabled'] : false;
+$ppcp_available = isset($checkout_data['ppcp_available']) ? (bool) $checkout_data['ppcp_available'] : false;
+$ppcp_gateway_id = isset($checkout_data['ppcp_gateway_id']) ? $checkout_data['ppcp_gateway_id'] : 'ppcp-gateway';
 $paypal_title = isset($checkout_data['paypal_title']) ? $checkout_data['paypal_title'] : 'PayPal';
 $paypal_description = isset($checkout_data['paypal_description']) ? $checkout_data['paypal_description'] : '';
 $payment_tab_count = isset($checkout_data['payment_tab_count']) ? $checkout_data['payment_tab_count'] : 3;
@@ -28,6 +30,19 @@ $checkout_localize = isset($checkout_data['checkout_localize']) ? $checkout_data
     'paypalEnabled' => $paypal_enabled,
     'paypalMethodId' => $paypal_gateway_id,
     'paypalTitle' => $paypal_title,
+];
+
+$bp_ppcp_debug_enabled = function_exists('buildpro_ppcp_is_debug_enabled')
+    ? buildpro_ppcp_is_debug_enabled()
+    : (is_user_logged_in()
+        && (current_user_can('manage_woocommerce') || current_user_can('administrator'))
+        && isset($_GET['bp_ppcp_debug']));
+$bp_ppcp_force_style = $bp_ppcp_debug_enabled && isset($_GET['bp_ppcp_force_style']);
+
+// Pass debug flags to JS (no secrets).
+$checkout_localize['ppcpDebug'] = [
+    'enabled' => $bp_ppcp_debug_enabled,
+    'forceStyle' => $bp_ppcp_force_style,
 ];
 
 wp_enqueue_style(
@@ -67,7 +82,8 @@ wp_localize_script(
                 <!-- Billing info -->
                 <div class="checkout-card">
                     <h2 class="checkout-card__title"><?php esc_html_e('Shipping Information', 'buildpro'); ?></h2>
-                    <form class="checkout-form checkout woocommerce-checkout" id="checkout-form" method="post" novalidate>
+                    <form class="checkout-form checkout woocommerce-checkout" id="checkout-form" method="post"
+                        novalidate>
 
                         <!-- Hidden WooCommerce fields (used by WooCommerce PayPal Payments Smart Buttons) -->
                         <input type="hidden" id="billing_first_name" name="billing_first_name" value="">
@@ -89,12 +105,17 @@ wp_localize_script(
 
                         <input type="hidden" name="woocommerce-process-checkout-nonce"
                             value="<?php echo esc_attr($checkout_localize['nonce']); ?>">
-                        <input type="hidden" name="_wpnonce" value="<?php echo esc_attr($checkout_localize['nonce']); ?>">
-                        <input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr(parse_url($checkout_localize['referer'], PHP_URL_PATH) ?: '/'); ?>">
+                        <input type="hidden" name="_wpnonce"
+                            value="<?php echo esc_attr($checkout_localize['nonce']); ?>">
+                        <input type="hidden" name="_wp_http_referer"
+                            value="<?php echo esc_attr(parse_url($checkout_localize['referer'], PHP_URL_PATH) ?: '/'); ?>">
                         <input type="hidden" name="terms" value="on">
                         <input type="hidden" name="terms-field" value="1">
 
-                        <?php if (!empty($paypal_gateway_id)) : ?>
+                        <?php if ($ppcp_available) : ?>
+                            <input type="radio" name="payment_method" value="<?php echo esc_attr($ppcp_gateway_id); ?>"
+                                checked style="display:none">
+                        <?php elseif (!empty($paypal_gateway_id)) : ?>
                             <input type="radio" name="payment_method" value="<?php echo esc_attr($paypal_gateway_id); ?>"
                                 checked style="display:none">
                         <?php endif; ?>
@@ -268,9 +289,65 @@ wp_localize_script(
 
                                 <div class="woocommerce-notices-wrapper"></div>
 
-                                <?php if ($paypal_gateway_id === 'ppcp-gateway') : ?>
+                                <?php if ($ppcp_available) : ?>
                                     <div class="bp-paypal-smart-buttons">
-                                        <?php do_action('woocommerce_review_order_after_payment'); ?>
+                                        <?php
+                                        // WooCommerce PayPal Payments renders both the PayPal Smart Buttons and the
+                                        // optional "Standard Card Button" (Debit/Credit) on this checkout hook.
+                                        // In our custom checkout UI, the PayPal tab should show PayPal (+ Pay Later)
+                                        // only, so we strip the card-button wrapper from the rendered HTML.
+                                        ob_start();
+                                        do_action('woocommerce_review_order_after_payment');
+                                        $ppcp_html = (string) ob_get_clean();
+
+                                        // Remove only the "Standard Card Button" wrapper.
+                                        // Regex here can easily get greedy and wipe both wrappers, so we prefer DOM.
+                                        if (class_exists('DOMDocument')) {
+                                            $dom = new DOMDocument();
+                                            $previous_use_errors = libxml_use_internal_errors(true);
+
+                                            $dom->loadHTML(
+                                                '<!doctype html><html><head><meta charset="utf-8"></head><body>' . $ppcp_html . '</body></html>',
+                                                LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+                                            );
+
+                                            $card_target = $dom->getElementById('ppc-button-ppcp-card-button-gateway');
+                                            if ($card_target instanceof DOMElement) {
+                                                $node = $card_target;
+                                                while ($node && $node instanceof DOMElement) {
+                                                    $class_attr = (string) $node->getAttribute('class');
+                                                    if (strpos(' ' . $class_attr . ' ', ' ppc-button-wrapper ') !== false) {
+                                                        if ($node->parentNode) {
+                                                            $node->parentNode->removeChild($node);
+                                                        }
+                                                        break;
+                                                    }
+                                                    $node = $node->parentNode;
+                                                }
+                                            }
+
+                                            $body = $dom->getElementsByTagName('body')->item(0);
+                                            if ($body) {
+                                                $ppcp_html = '';
+                                                foreach ($body->childNodes as $child) {
+                                                    $ppcp_html .= $dom->saveHTML($child);
+                                                }
+                                            }
+
+                                            libxml_clear_errors();
+                                            libxml_use_internal_errors($previous_use_errors);
+                                        } else {
+                                            // Fallback: match a wrapper that contains the card target, without crossing into other wrappers.
+                                            $ppcp_html = preg_replace(
+                                                '#<div\s+class="ppc-button-wrapper"[^>]*>(?:(?!<div\s+class="ppc-button-wrapper").)*<div\s+id="ppc-button-ppcp-card-button-gateway"[^>]*></div>(?:(?!<div\s+class="ppc-button-wrapper").)*</div>#s',
+                                                '',
+                                                $ppcp_html
+                                            );
+                                        }
+
+                                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                        echo $ppcp_html;
+                                        ?>
                                     </div>
 
                                     <!-- Required by WooCommerce PayPal Payments JS: it clicks #place_order after approval -->
@@ -284,6 +361,69 @@ wp_localize_script(
                                         <?php echo esc_html(sprintf(__('Continue with %s', 'buildpro'), $paypal_title)); ?>
                                     </button>
                                 <?php endif; ?>
+
+                                <?php if ($bp_ppcp_debug_enabled) : ?>
+                                    <?php
+                                    $ppcp_settings = (array) get_option('woocommerce-ppcp-settings', []);
+                                    $ppcp_styling = (array) get_option('woocommerce-ppcp-data-styling', []);
+                                    $classic_checkout = isset($ppcp_styling['classic_checkout']) ? $ppcp_styling['classic_checkout'] : null;
+                                    if (is_object($classic_checkout) && method_exists($classic_checkout, 'to_array')) {
+                                        $classic_checkout = $classic_checkout->to_array();
+                                    }
+                                    if (!is_array($classic_checkout)) {
+                                        $classic_checkout = [];
+                                    }
+
+                                    $style_is_enqueued = function_exists('wp_style_is') ? wp_style_is('gateway', 'enqueued') : false;
+                                    $script_is_enqueued = function_exists('wp_script_is') ? wp_script_is('ppcp-smart-button', 'enqueued') : false;
+
+                                    $selected_method = '';
+                                    if (!empty($_POST['payment_method'])) {
+                                        $selected_method = (string) $_POST['payment_method'];
+                                    } elseif (!empty($ppcp_gateway_id) && $ppcp_available) {
+                                        $selected_method = $ppcp_gateway_id;
+                                    } else {
+                                        $selected_method = $paypal_gateway_id;
+                                    }
+
+                                    $safe_settings = [
+                                        'smart_button_enable_styling_per_location' => $ppcp_settings['smart_button_enable_styling_per_location'] ?? null,
+                                        'smart_button_locations' => $ppcp_settings['smart_button_locations'] ?? null,
+                                        'pay_later_button_enabled' => $ppcp_settings['pay_later_button_enabled'] ?? null,
+                                        'pay_later_button_locations' => $ppcp_settings['pay_later_button_locations'] ?? null,
+                                        // These may or may not exist depending on plugin version/migration.
+                                        'button_general_layout' => $ppcp_settings['button_general_layout'] ?? null,
+                                        'button_general_color' => $ppcp_settings['button_general_color'] ?? null,
+                                        'button_general_shape' => $ppcp_settings['button_general_shape'] ?? null,
+                                        'button_general_label' => $ppcp_settings['button_general_label'] ?? null,
+                                        'button_general_tagline' => $ppcp_settings['button_general_tagline'] ?? null,
+                                        'button_checkout_layout' => $ppcp_settings['button_checkout_layout'] ?? null,
+                                        'button_checkout_color' => $ppcp_settings['button_checkout_color'] ?? null,
+                                        'button_checkout_shape' => $ppcp_settings['button_checkout_shape'] ?? null,
+                                        'button_checkout_label' => $ppcp_settings['button_checkout_label'] ?? null,
+                                        'button_checkout_tagline' => $ppcp_settings['button_checkout_tagline'] ?? null,
+                                    ];
+                                    ?>
+                                    <pre class="bp-ppcp-debug"
+                                        style="margin-top:12px; padding:10px; border:1px solid #ddd; background:#fff; max-width:100%; overflow:auto; font-size:12px; line-height:1.4;">
+                                        PPCP Debug (temporary)
+                                        - ppcp_available: <?php echo $ppcp_available ? 'true' : 'false'; ?>
+                                        - paypal_gateway_id (detected): <?php echo esc_html($paypal_gateway_id ?: '(empty)'); ?>
+                                        - ppcp_gateway_id: <?php echo esc_html($ppcp_gateway_id ?: '(empty)'); ?>
+                                        - selected_method (theme hidden radio): <?php echo esc_html($selected_method ?: '(empty)'); ?>
+                                        - is_checkout(): <?php echo function_exists('is_checkout') && is_checkout() ? 'true' : 'false'; ?>
+                                        - woocommerce_paypal_payments_context(filter): <?php echo esc_html((string) apply_filters('woocommerce_paypal_payments_context', '')); ?>
+                                        - assets enqueued: style[gateway]=<?php echo $style_is_enqueued ? 'yes' : 'no'; ?>, script[ppcp-smart-button]=<?php echo $script_is_enqueued ? 'yes' : 'no'; ?>
+                                        - force style param: <?php echo $bp_ppcp_force_style ? 'on' : 'off'; ?>
+
+                                        WooCommerce PayPal Payments settings (sanitized):
+                                        <?php echo esc_html(wp_json_encode($safe_settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); ?>
+
+                                        woocommerce-ppcp-data-styling.classic_checkout:
+                                        <?php echo esc_html(wp_json_encode($classic_checkout, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); ?>
+                                    </pre>
+                                <?php endif; ?>
+
                                 <div class="payment-panel__note">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"

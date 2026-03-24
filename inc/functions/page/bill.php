@@ -7,6 +7,143 @@ if (!function_exists('buildpro_bill_get_value_from_request')) {
     }
 }
 
+if (!function_exists('buildpro_bill_get_order_from_request')) {
+    function buildpro_bill_get_order_from_request()
+    {
+        if (!function_exists('wc_get_order')) {
+            return null;
+        }
+
+        $order_id = (int) buildpro_bill_get_value_from_request('bp_order_id', '0');
+        $order_key = buildpro_bill_get_value_from_request('key', '');
+        if ($order_id <= 0 || $order_key === '') {
+            return null;
+        }
+
+        $order = wc_get_order($order_id);
+        if (!$order || !method_exists($order, 'get_order_key')) {
+            return null;
+        }
+
+        if ((string) $order->get_order_key() !== (string) $order_key) {
+            return null;
+        }
+
+        return $order;
+    }
+}
+
+if (!function_exists('buildpro_bill_map_payment_method_to_bill_key')) {
+    function buildpro_bill_map_payment_method_to_bill_key(string $method_id): string
+    {
+        $method_id = strtolower($method_id);
+        if ($method_id === 'cod') {
+            return 'cod';
+        }
+        if ($method_id === 'bacs') {
+            return 'bank';
+        }
+        if (strpos($method_id, 'ppcp') !== false || strpos($method_id, 'paypal') !== false) {
+            return 'paypal';
+        }
+        return '';
+    }
+}
+
+if (!function_exists('buildpro_bill_build_data_from_order')) {
+    function buildpro_bill_build_data_from_order($order, array $wc_countries, array $payment_options): array
+    {
+        $items = [];
+        $regular_total_raw = 0.0;
+        $sale_total_raw = 0.0;
+        $total = 0.0;
+
+        if (is_object($order) && method_exists($order, 'get_items')) {
+            foreach ($order->get_items('line_item') as $item) {
+                if (!is_object($item) || !method_exists($item, 'get_product')) {
+                    continue;
+                }
+                $product = $item->get_product();
+                if (!$product) {
+                    continue;
+                }
+                $qty = method_exists($item, 'get_quantity') ? (int) $item->get_quantity() : 0;
+                if ($qty <= 0) {
+                    continue;
+                }
+
+                $product_id = method_exists($item, 'get_product_id') ? (int) $item->get_product_id() : (int) $product->get_id();
+                $variation_id = method_exists($item, 'get_variation_id') ? (int) $item->get_variation_id() : 0;
+
+                $items[] = [
+                    'data' => $product,
+                    'product_id' => $product_id,
+                    'variation_id' => $variation_id,
+                    'quantity' => $qty,
+                ];
+
+                if (method_exists($item, 'get_subtotal')) {
+                    $regular_total_raw += (float) $item->get_subtotal();
+                }
+                if (method_exists($item, 'get_total')) {
+                    $sale_total_raw += (float) $item->get_total();
+                }
+            }
+        }
+
+        if (is_object($order) && method_exists($order, 'get_total')) {
+            $total = (float) $order->get_total();
+        }
+
+        $first_name = is_object($order) && method_exists($order, 'get_billing_first_name') ? (string) $order->get_billing_first_name() : '';
+        $last_name = is_object($order) && method_exists($order, 'get_billing_last_name') ? (string) $order->get_billing_last_name() : '';
+        $fullname = trim($first_name . ' ' . $last_name);
+
+        $country = is_object($order) && method_exists($order, 'get_billing_country') ? (string) $order->get_billing_country() : '';
+        $country_label = '';
+        if ($country !== '' && !empty($wc_countries) && isset($wc_countries[$country])) {
+            $country_label = (string) $wc_countries[$country];
+        }
+
+        $method_id = is_object($order) && method_exists($order, 'get_payment_method') ? (string) $order->get_payment_method() : '';
+        $payment_key = buildpro_bill_map_payment_method_to_bill_key($method_id);
+        if ($payment_key === '' || !isset($payment_options[$payment_key])) {
+            // Fallback to any label we have.
+            if (!empty($payment_options)) {
+                $keys = array_keys($payment_options);
+                $payment_key = (string) ($keys[0] ?? 'cod');
+            } else {
+                $payment_key = 'cod';
+            }
+        }
+
+        $note = is_object($order) && method_exists($order, 'get_customer_note') ? (string) $order->get_customer_note() : '';
+
+        $form_data = [
+            'fullname' => $fullname,
+            'phone' => is_object($order) && method_exists($order, 'get_billing_phone') ? (string) $order->get_billing_phone() : '',
+            'email' => is_object($order) && method_exists($order, 'get_billing_email') ? (string) $order->get_billing_email() : '',
+            'address' => is_object($order) && method_exists($order, 'get_billing_address_1') ? (string) $order->get_billing_address_1() : '',
+            'city' => is_object($order) && method_exists($order, 'get_billing_city') ? (string) $order->get_billing_city() : '',
+            'zip' => is_object($order) && method_exists($order, 'get_billing_postcode') ? (string) $order->get_billing_postcode() : '',
+            'country' => $country,
+            'country_label' => $country_label,
+            'note' => $note,
+            'payment' => $payment_key,
+        ];
+
+        return [
+            'cart_items' => $items,
+            'regular_total_raw' => $regular_total_raw,
+            'sale_total_raw' => $sale_total_raw,
+            'you_save_raw' => max(0, $regular_total_raw - $sale_total_raw),
+            'total' => $total,
+            'form_data' => $form_data,
+            'order_id' => is_object($order) && method_exists($order, 'get_id') ? (int) $order->get_id() : 0,
+        ];
+    }
+}
+
 if (!function_exists('buildpro_bill_get_snapshot_session_key')) {
     function buildpro_bill_get_snapshot_session_key()
     {
@@ -199,28 +336,13 @@ if (!function_exists('buildpro_bill_get_totals')) {
 if (!function_exists('buildpro_bill_get_gateway_data')) {
     function buildpro_bill_get_gateway_data()
     {
-        $available_gateways = [];
-        if (function_exists('WC') && WC()->payment_gateways()) {
-            $available_gateways = WC()->payment_gateways()->get_available_payment_gateways();
-        }
+        $core = function_exists('buildpro_payment_get_gateway_data') ? buildpro_payment_get_gateway_data() : [];
 
-        $paypal_enabled = false;
-        $paypal_gateway_id = '';
-        $paypal_gateway_title = 'PayPal';
-
-        foreach ($available_gateways as $gateway_id => $gateway_obj) {
-            if (strpos($gateway_id, 'paypal') !== false || strpos($gateway_id, 'ppcp') !== false) {
-                $paypal_enabled = true;
-                $paypal_gateway_id = $gateway_id;
-                if (is_object($gateway_obj) && method_exists($gateway_obj, 'get_title')) {
-                    $paypal_gateway_title = wp_strip_all_tags($gateway_obj->get_title());
-                }
-                break;
-            }
-        }
-
-        $bacs_settings = get_option('woocommerce_bacs_settings', []);
-        $bacs_enabled = isset($bacs_settings['enabled']) && $bacs_settings['enabled'] === 'yes';
+        $available_gateways = isset($core['available_gateways']) && is_array($core['available_gateways']) ? $core['available_gateways'] : [];
+        $paypal_enabled = !empty($core['paypal_enabled']);
+        $paypal_gateway_id = isset($core['paypal_gateway_id']) ? (string) $core['paypal_gateway_id'] : '';
+        $paypal_gateway_title = isset($core['paypal_title']) && $core['paypal_title'] !== '' ? (string) $core['paypal_title'] : 'PayPal';
+        $bacs_enabled = !empty($core['bacs_enabled']);
 
         $payment_options = [
             'cod' => ['label' => 'Cash on Delivery'],
@@ -228,7 +350,7 @@ if (!function_exists('buildpro_bill_get_gateway_data')) {
             'bank' => ['label' => 'Bank Transfer'],
         ];
         if ($paypal_enabled) {
-            $payment_options['paypal'] = ['label' => 'PayPal'];
+            $payment_options['paypal'] = ['label' => $paypal_gateway_title];
         }
         if (!$bacs_enabled) {
             unset($payment_options['bank']);
@@ -454,10 +576,40 @@ if (!function_exists('buildpro_bill_process_submit')) {
 if (!function_exists('buildpro_bill_get_page_data')) {
     function buildpro_bill_get_page_data()
     {
-        list($wc_active, $cart_items) = buildpro_bill_get_cart_items();
-        $totals = buildpro_bill_get_totals($cart_items);
         list($wc_countries, $wc_base_country) = buildpro_bill_get_country_data();
         $gateway_data = buildpro_bill_get_gateway_data();
+
+        // Order-view mode: used when redirecting here after a successful PayPal payment.
+        $order = buildpro_bill_get_order_from_request();
+        if ($order) {
+            $order_data = buildpro_bill_build_data_from_order($order, $wc_countries, $gateway_data['payment_options']);
+            return [
+                'wc_active' => function_exists('WC') && WC()->cart,
+                'cart_items' => $order_data['cart_items'],
+                'regular_total_raw' => $order_data['regular_total_raw'],
+                'sale_total_raw' => $order_data['sale_total_raw'],
+                'you_save_raw' => $order_data['you_save_raw'],
+                'total' => $order_data['total'],
+                'wc_countries' => $wc_countries,
+                'wc_base_country' => $wc_base_country,
+                'available_gateways' => $gateway_data['available_gateways'],
+                'paypal_enabled' => $gateway_data['paypal_enabled'],
+                'bacs_enabled' => $gateway_data['bacs_enabled'],
+                'payment_options' => $gateway_data['payment_options'],
+                'paypal_gateway_id' => $gateway_data['paypal_gateway_id'],
+                'paypal_gateway_title' => $gateway_data['paypal_gateway_title'],
+                'bp_price' => buildpro_bill_get_price_formatter(),
+                'form_data' => $order_data['form_data'],
+                'submit_success' => true,
+                'submit_error' => '',
+                'created_order_id' => $order_data['order_id'],
+                'home_redirect_url' => home_url('/'),
+                'is_order_view' => true,
+            ];
+        }
+
+        list($wc_active, $cart_items) = buildpro_bill_get_cart_items();
+        $totals = buildpro_bill_get_totals($cart_items);
 
         $form_data = buildpro_bill_get_initial_form_data($wc_base_country);
         $form_data = buildpro_bill_normalize_form_data($form_data, $wc_countries, $gateway_data['payment_options']);
@@ -494,6 +646,7 @@ if (!function_exists('buildpro_bill_get_page_data')) {
             'submit_error' => $submit_error,
             'created_order_id' => $created_order_id,
             'home_redirect_url' => home_url('/'),
+            'is_order_view' => false,
         ];
     }
 }

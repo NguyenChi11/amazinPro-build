@@ -176,7 +176,7 @@
   font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.18);
+  box-shadow: 0 0.625rem 1.375rem rgba(15, 118, 110, 0.18);
   transition:
     filter 0.18s,
     transform 0.08s,
@@ -192,15 +192,15 @@
 }
 
 .bill-success-popup__btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 8px 18px rgba(15, 118, 110, 0.16);
+  transform: translateY(0.0625rem);
+  box-shadow: 0 0.5rem 1.125rem rgba(15, 118, 110, 0.16);
 }
 
 .bill-success-popup__btn:focus-visible {
   outline: none;
   box-shadow:
-    0 10px 22px rgba(15, 118, 110, 0.18),
-    0 0 0 3px rgba(15, 118, 110, 0.22);
+    0 0.625rem 1.375rem rgba(15, 118, 110, 0.18),
+    0 0 0 0.1875rem rgba(15, 118, 110, 0.22);
 }
 
 @media (max-width: 480px) {
@@ -437,7 +437,7 @@
 
 .bill-submit-btn:hover {
   filter: brightness(1.07);
-  transform: translateY(-1px);
+  transform: translateY(-0.0625rem);
 }
 
 .bill-submit-btn svg {

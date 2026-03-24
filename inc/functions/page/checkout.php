@@ -52,66 +52,6 @@ if (!function_exists('buildpro_checkout_get_country_data')) {
     }
 }
 
-if (!function_exists('buildpro_checkout_get_gateway_data')) {
-    function buildpro_checkout_get_gateway_data()
-    {
-        $available_gateways = [];
-        if (function_exists('WC') && WC()->payment_gateways()) {
-            $available_gateways = WC()->payment_gateways()->get_available_payment_gateways();
-        }
-
-        $paypal_gateway = null;
-        $paypal_gateway_id = '';
-
-        $preferred_paypal_ids = ['ppcp-gateway', 'paypal', 'ppec_paypal'];
-        foreach ($preferred_paypal_ids as $gateway_id) {
-            if (!empty($available_gateways[$gateway_id])) {
-                $paypal_gateway = $available_gateways[$gateway_id];
-                $paypal_gateway_id = $gateway_id;
-                break;
-            }
-        }
-
-        if (!$paypal_gateway && !empty($available_gateways)) {
-            foreach ($available_gateways as $gateway_id => $gateway_obj) {
-                if (strpos($gateway_id, 'paypal') !== false || strpos($gateway_id, 'ppcp') !== false) {
-                    $paypal_gateway = $gateway_obj;
-                    $paypal_gateway_id = $gateway_id;
-                    break;
-                }
-            }
-        }
-
-        $paypal_enabled = !empty($paypal_gateway_id);
-        $paypal_title = $paypal_enabled ? wp_strip_all_tags($paypal_gateway->get_title()) : 'PayPal';
-        $paypal_description = $paypal_enabled
-            ? wp_kses_post(wpautop(wptexturize($paypal_gateway->get_description())))
-            : 'PayPal is currently unavailable. Please enable a PayPal gateway in WooCommerce settings.';
-
-        $payment_tab_count = $paypal_enabled ? 4 : 3;
-
-        $bacs_settings = get_option('woocommerce_bacs_settings', []);
-        $bacs_enabled = isset($bacs_settings['enabled']) && $bacs_settings['enabled'] === 'yes';
-        $bacs_title = isset($bacs_settings['title']) ? $bacs_settings['title'] : 'Bank Transfer';
-        $bacs_desc = isset($bacs_settings['description']) ? $bacs_settings['description'] : 'Make your payment directly into our bank account. Please use your Order ID as the payment reference.';
-        $bacs_accounts = get_option('woocommerce_bacs_accounts', []);
-
-        return [
-            'available_gateways' => $available_gateways,
-            'paypal_gateway' => $paypal_gateway,
-            'paypal_gateway_id' => $paypal_gateway_id,
-            'paypal_enabled' => $paypal_enabled,
-            'paypal_title' => $paypal_title,
-            'paypal_description' => $paypal_description,
-            'payment_tab_count' => $payment_tab_count,
-            'bacs_enabled' => $bacs_enabled,
-            'bacs_title' => $bacs_title,
-            'bacs_desc' => $bacs_desc,
-            'bacs_accounts' => $bacs_accounts,
-        ];
-    }
-}
-
 if (!function_exists('buildpro_checkout_get_bill_page_url')) {
     function buildpro_checkout_get_bill_page_url()
     {
@@ -166,6 +106,8 @@ if (!function_exists('buildpro_checkout_get_page_data')) {
             'wc_countries' => $wc_countries,
             'wc_base_country' => $wc_base_country,
             'available_gateways' => $gateway_data['available_gateways'],
+            'ppcp_available' => $gateway_data['ppcp_available'],
+            'ppcp_gateway_id' => $gateway_data['ppcp_gateway_id'],
             'paypal_gateway' => $gateway_data['paypal_gateway'],
             'paypal_gateway_id' => $gateway_data['paypal_gateway_id'],
             'paypal_enabled' => $gateway_data['paypal_enabled'],
@@ -190,16 +132,3 @@ if (!function_exists('buildpro_checkout_get_page_data')) {
         ];
     }
 }
-
-// Ensure WooCommerce PayPal Payments smart buttons treat our custom Checkout Page template
-// as a checkout context, so its JS reads from `form.checkout`.
-add_action('wp', function () {
-    if (!function_exists('is_page_template') || !is_page_template('checkout-page.php')) {
-        return;
-    }
-
-    add_filter('woocommerce_is_checkout', '__return_true', 99);
-    add_filter('woocommerce_paypal_payments_context', function ($context) {
-        return 'checkout';
-    }, 99);
-}, 20);

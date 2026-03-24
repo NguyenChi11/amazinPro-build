@@ -1,6 +1,37 @@
 (function () {
   "use strict";
 
+  var ppcpDebug =
+    typeof window.bpCheckout === "object" && window.bpCheckout
+      ? window.bpCheckout.ppcpDebug
+      : null;
+
+  function logPpcpDebug(label, payload) {
+    if (!ppcpDebug || !ppcpDebug.enabled) return;
+    try {
+      console.log("[PPCP DEBUG] " + label, payload);
+    } catch (e) {
+      // no-op
+    }
+  }
+
+  if (ppcpDebug && ppcpDebug.enabled) {
+    logPpcpDebug("init", {
+      forceStyle: Boolean(ppcpDebug.forceStyle),
+      hasPayPalCommerceGateway: Boolean(window.PayPalCommerceGateway),
+      context: window.PayPalCommerceGateway
+        ? window.PayPalCommerceGateway.context
+        : undefined,
+      style:
+        window.PayPalCommerceGateway && window.PayPalCommerceGateway.button
+          ? window.PayPalCommerceGateway.button.style
+          : undefined,
+      urlParams: window.PayPalCommerceGateway
+        ? window.PayPalCommerceGateway.url_params
+        : undefined,
+    });
+  }
+
   /* ============================================================
      Payment Tabs
      ============================================================ */
@@ -43,6 +74,12 @@
         window.PayPalCommerceGateway.button &&
         window.PayPalCommerceGateway.button.wrapper
       ) {
+        logPpcpDebug("tab-paypal activated", {
+          context: window.PayPalCommerceGateway.context,
+          style: window.PayPalCommerceGateway.button.style,
+          urlParams: window.PayPalCommerceGateway.url_params,
+          wrapper: window.PayPalCommerceGateway.button.wrapper,
+        });
         window
           .jQuery(window.PayPalCommerceGateway.button.wrapper)
           .trigger("ppcp-reload-buttons");
@@ -288,6 +325,9 @@
     postData.append("terms", "on");
     postData.append("terms-field", "1");
     postData.append("woocommerce_checkout_update_totals", "");
+    // Mark this checkout request as coming from the BuildPro custom checkout flow.
+    // Used server-side to adjust post-payment redirect (PayPal -> Bill page).
+    postData.append("bp_checkout_flow", "1");
     return postData;
   }
 
@@ -574,6 +614,30 @@
       // Mark that Bill page was reached from the Checkout flow.
       // The Bill page uses this to snapshot cart items and reset the header cart.
       params.set("bp_from_checkout", "1");
+
+      // PayPal should redirect to Bill ONLY after successful payment.
+      // So on PayPal tab, guide user to complete PayPal payment instead of redirecting now.
+      if (methodTab === "tab-paypal") {
+        syncWooHiddenFields();
+
+        // If PPCP smart buttons are present, scroll them into view.
+        var smartButtons = document.querySelector(".bp-paypal-smart-buttons");
+        if (smartButtons) {
+          smartButtons.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+
+        // If theme fallback button exists (when smart buttons aren't available), trigger it.
+        var fallbackBtn = document.getElementById("bp-paypal-pay-btn");
+        if (fallbackBtn) {
+          fallbackBtn.click();
+          return;
+        }
+
+        alert(
+          "Please complete the PayPal payment to continue. You will be redirected to the Bill page after a successful payment.",
+        );
+        return;
+      }
 
       submitBtn.classList.add("is-loading");
       submitBtn.textContent = "Redirecting to Bill...";

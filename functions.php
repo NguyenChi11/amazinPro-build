@@ -114,6 +114,7 @@ require get_template_directory() . '/inc/meta-box/page/about-us-page/index.php';
 
 require get_template_directory() . '/inc/core/contact-form.php';
 require get_template_directory() . '/inc/core/woocomerce-function.php';
+require get_template_directory() . '/inc/core/payment.php';
 require get_template_directory() . '/inc/functions/cart-function.php';
 require get_template_directory() . '/inc/functions/page/cart.php';
 require get_template_directory() . '/inc/functions/page/bill.php';

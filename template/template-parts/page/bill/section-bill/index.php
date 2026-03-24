@@ -28,6 +28,7 @@ $submit_success = isset($bill_data['submit_success']) ? $bill_data['submit_succe
 $submit_error = isset($bill_data['submit_error']) ? $bill_data['submit_error'] : '';
 $created_order_id = isset($bill_data['created_order_id']) ? $bill_data['created_order_id'] : 0;
 $home_redirect_url = isset($bill_data['home_redirect_url']) ? $bill_data['home_redirect_url'] : home_url('/');
+$is_order_view = !empty($bill_data['is_order_view']);
 
 $payment_label = isset($payment_options[$form_data['payment']]['label']) ? $payment_options[$form_data['payment']]['label'] : '-';
 
@@ -132,24 +133,26 @@ wp_enqueue_script(
                 <input type="hidden" name="note" value="<?php echo esc_attr($form_data['note']); ?>">
                 <input type="hidden" name="payment" value="<?php echo esc_attr($form_data['payment']); ?>">
 
-                <label class="bill-agree">
-                    <input type="checkbox" id="bill-agree" name="bill_agree" value="1"
-                        <?php checked($submit_success); ?>>
-                    <span><?php esc_html_e('I confirm all bill information above is correct.', 'buildpro'); ?></span>
-                </label>
-                <span class="bill-form__error" data-for="bill-agree"></span>
+                <?php if (!$is_order_view) : ?>
+                    <label class="bill-agree">
+                        <input type="checkbox" id="bill-agree" name="bill_agree" value="1"
+                            <?php checked($submit_success); ?>>
+                        <span><?php esc_html_e('I confirm all bill information above is correct.', 'buildpro'); ?></span>
+                    </label>
+                    <span class="bill-form__error" data-for="bill-agree"></span>
 
-                <?php wp_nonce_field('bp_bill_confirm', 'bp_bill_nonce'); ?>
-                <input type="hidden" name="bp_bill_confirm_submit" value="1">
+                    <?php wp_nonce_field('bp_bill_confirm', 'bp_bill_nonce'); ?>
+                    <input type="hidden" name="bp_bill_confirm_submit" value="1">
 
-                <button type="submit" class="bill-submit-btn" id="bill-submit-btn">
-                    <?php esc_html_e('Submit Bill Confirmation', 'buildpro'); ?>
-                    <svg viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
+                    <button type="submit" class="bill-submit-btn" id="bill-submit-btn">
+                        <?php esc_html_e('Submit Bill Confirmation', 'buildpro'); ?>
+                        <svg viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                <?php endif; ?>
             </form>
 
             <aside class="bill-summary-stack">
