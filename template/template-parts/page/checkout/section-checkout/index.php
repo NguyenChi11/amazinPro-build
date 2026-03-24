@@ -67,7 +67,37 @@ wp_localize_script(
                 <!-- Billing info -->
                 <div class="checkout-card">
                     <h2 class="checkout-card__title"><?php esc_html_e('Shipping Information', 'buildpro'); ?></h2>
-                    <form class="checkout-form" id="checkout-form" novalidate>
+                    <form class="checkout-form checkout woocommerce-checkout" id="checkout-form" method="post" novalidate>
+
+                        <!-- Hidden WooCommerce fields (used by WooCommerce PayPal Payments Smart Buttons) -->
+                        <input type="hidden" id="billing_first_name" name="billing_first_name" value="">
+                        <input type="hidden" id="billing_last_name" name="billing_last_name" value="">
+                        <input type="hidden" id="billing_email" name="billing_email" value="">
+                        <input type="hidden" id="billing_phone" name="billing_phone" value="">
+                        <input type="hidden" id="billing_address_1" name="billing_address_1" value="">
+                        <input type="hidden" id="billing_city" name="billing_city" value="">
+                        <input type="hidden" id="billing_postcode" name="billing_postcode" value="">
+                        <input type="hidden" id="billing_country" name="billing_country" value="">
+
+                        <input type="hidden" id="shipping_first_name" name="shipping_first_name" value="">
+                        <input type="hidden" id="shipping_last_name" name="shipping_last_name" value="">
+                        <input type="hidden" id="shipping_address_1" name="shipping_address_1" value="">
+                        <input type="hidden" id="shipping_city" name="shipping_city" value="">
+                        <input type="hidden" id="shipping_postcode" name="shipping_postcode" value="">
+                        <input type="hidden" id="shipping_country" name="shipping_country" value="">
+                        <input type="hidden" name="ship_to_different_address" value="0">
+
+                        <input type="hidden" name="woocommerce-process-checkout-nonce"
+                            value="<?php echo esc_attr($checkout_localize['nonce']); ?>">
+                        <input type="hidden" name="_wpnonce" value="<?php echo esc_attr($checkout_localize['nonce']); ?>">
+                        <input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr(parse_url($checkout_localize['referer'], PHP_URL_PATH) ?: '/'); ?>">
+                        <input type="hidden" name="terms" value="on">
+                        <input type="hidden" name="terms-field" value="1">
+
+                        <?php if (!empty($paypal_gateway_id)) : ?>
+                            <input type="radio" name="payment_method" value="<?php echo esc_attr($paypal_gateway_id); ?>"
+                                checked style="display:none">
+                        <?php endif; ?>
 
                         <div class="checkout-form__row">
                             <div class="checkout-form__group">
@@ -167,17 +197,17 @@ wp_localize_script(
                         </button>
 
                         <?php if ($paypal_enabled) : ?>
-                            <!-- <button class="payment-tab" role="tab" data-target="tab-paypal" aria-selected="false">
-                            <span class="payment-tab__icon payment-tab__icon--paypal">
-                                <img class="paypal__image"
-                                    src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
-                                    alt="PayPal">
-                            </span>
-                            <span class="payment-tab__label"><?php echo esc_html($paypal_title); ?></span>
-                        </button> -->
+                            <button class="payment-tab" role="tab" data-target="tab-paypal" aria-selected="false">
+                                <span class="payment-tab__icon payment-tab__icon--paypal">
+                                    <img class="paypal__image"
+                                        src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
+                                        alt="PayPal">
+                                </span>
+                                <span class="payment-tab__label"><?php echo esc_html($paypal_title); ?></span>
+                            </button>
                         <?php endif; ?>
 
-                        <!-- <button class="payment-tab" role="tab" data-target="tab-card" aria-selected="false">
+                        <button class="payment-tab" role="tab" data-target="tab-card" aria-selected="false">
                             <span class="payment-tab__icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -186,7 +216,7 @@ wp_localize_script(
                                 </svg>
                             </span>
                             <span class="payment-tab__label"><?php esc_html_e('Credit Card', 'buildpro'); ?></span>
-                        </button>  -->
+                        </button>
 
                         <button class="payment-tab" role="tab" data-target="tab-bank" aria-selected="false">
                             <span class="payment-tab__icon">
@@ -227,7 +257,7 @@ wp_localize_script(
 
                         <!-- PayPal -->
                         <?php if ($paypal_enabled) : ?>
-                            <!-- <div class="payment-panel" id="tab-paypal" role="tabpanel">
+                            <div class="payment-panel" id="tab-paypal" role="tabpanel">
                                 <div class="payment-panel__icon-wrap payment-panel__icon-wrap--paypal">
                                     <img class="paypal__image"
                                         src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
@@ -235,13 +265,25 @@ wp_localize_script(
                                 </div>
                                 <div class="payment-panel__desc payment-panel__desc--left">
                                     <?php echo $paypal_description; ?></div>
-                                <button type="button" id="bp-paypal-pay-btn" class="payment-panel__paypal-btn">
-                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                                        <path
-                                            d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.217a.77.77 0 0 1 .761-.645h6.747c2.37 0 4.062.643 4.859 1.863.378.578.521 1.183.44 1.851a5.14 5.14 0 0 1-.031.382c-.583 3.147-2.633 4.553-5.987 4.553H9.79a.77.77 0 0 0-.76.652l-.876 5.55a.641.641 0 0 1-.633.541zm9.415-13.48c-.01.06-.019.121-.03.182-.71 3.651-3.169 5.357-7.264 5.357h-1.87a.64.64 0 0 0-.633.541l-1.05 6.652h3.303a.641.641 0 0 0 .633-.54l.877-5.551a.77.77 0 0 1 .76-.652h1.944c3.061 0 4.967-1.234 5.508-3.988.252-1.294-.003-2.233-.678-2.9a4.066 4.066 0 0 0-.5-.101z" />
-                                    </svg>
-                                    <?php echo esc_html(sprintf(__('Continue with %s', 'buildpro'), $paypal_title)); ?>
-                                </button>
+
+                                <div class="woocommerce-notices-wrapper"></div>
+
+                                <?php if ($paypal_gateway_id === 'ppcp-gateway') : ?>
+                                    <div class="bp-paypal-smart-buttons">
+                                        <?php do_action('woocommerce_review_order_after_payment'); ?>
+                                    </div>
+
+                                    <!-- Required by WooCommerce PayPal Payments JS: it clicks #place_order after approval -->
+                                    <button type="button" id="place_order" style="display:none"></button>
+                                <?php else : ?>
+                                    <button type="button" id="bp-paypal-pay-btn" class="payment-panel__paypal-btn">
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                            <path
+                                                d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.217a.77.77 0 0 1 .761-.645h6.747c2.37 0 4.062.643 4.859 1.863.378.578.521 1.183.44 1.851a5.14 5.14 0 0 1-.031.382c-.583 3.147-2.633 4.553-5.987 4.553H9.79a.77.77 0 0 0-.76.652l-.876 5.55a.641.641 0 0 1-.633.541zm9.415-13.48c-.01.06-.019.121-.03.182-.71 3.651-3.169 5.357-7.264 5.357h-1.87a.64.64 0 0 0-.633.541l-1.05 6.652h3.303a.641.641 0 0 0 .633-.54l.877-5.551a.77.77 0 0 1 .76-.652h1.944c3.061 0 4.967-1.234 5.508-3.988.252-1.294-.003-2.233-.678-2.9a4.066 4.066 0 0 0-.5-.101z" />
+                                        </svg>
+                                        <?php echo esc_html(sprintf(__('Continue with %s', 'buildpro'), $paypal_title)); ?>
+                                    </button>
+                                <?php endif; ?>
                                 <div class="payment-panel__note">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -250,11 +292,11 @@ wp_localize_script(
                                     </svg>
                                     <?php esc_html_e('You will be redirected to PayPal and returned here after authorization.', 'buildpro'); ?>
                                 </div>
-                            </div> -->
+                            </div>
                         <?php endif; ?>
 
                         <!-- Credit card -->
-                        <!-- <div class="payment-panel" id="tab-card" role="tabpanel">
+                        <div class="payment-panel" id="tab-card" role="tabpanel">
                             <div class="payment-panel__card-brands">
                                 <span class="card-brand card-brand--visa">VISA</span>
                                 <span class="card-brand card-brand--mc">MC</span>
@@ -299,7 +341,7 @@ wp_localize_script(
                                 </svg>
                                 <?php esc_html_e('Card details are encrypted with 256-bit SSL', 'buildpro'); ?>
                             </div>
-                        </div> -->
+                        </div>
 
                         <!-- Bank transfer -->
                         <div class="payment-panel" id="tab-bank" role="tabpanel">

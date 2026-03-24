@@ -33,6 +33,20 @@
       if (panel) {
         panel.classList.add("payment-panel--active");
       }
+
+      // If PayPal smart buttons are used, the container might be hidden when the page loads.
+      // Trigger the plugin to re-render/re-measure when the PayPal tab becomes visible.
+      if (
+        target === "tab-paypal" &&
+        window.jQuery &&
+        window.PayPalCommerceGateway &&
+        window.PayPalCommerceGateway.button &&
+        window.PayPalCommerceGateway.button.wrapper
+      ) {
+        window
+          .jQuery(window.PayPalCommerceGateway.button.wrapper)
+          .trigger("ppcp-reload-buttons");
+      }
     });
   });
 
@@ -277,6 +291,57 @@
     return postData;
   }
 
+  function setHiddenValue(selector, value) {
+    var el = document.querySelector(selector);
+    if (!el) return;
+    el.value = value;
+  }
+
+  function syncWooHiddenFields() {
+    var fullname = (
+      (document.getElementById("co-fullname") || { value: "" }).value || ""
+    ).trim();
+    var nameParts = fullname.split(/\s+/);
+    var firstName = nameParts[0] || fullname;
+    var lastName =
+      nameParts.length > 1 ? nameParts.slice(1).join(" ") : firstName;
+
+    var email = (
+      (document.getElementById("co-email") || { value: "" }).value || ""
+    ).trim();
+    var phone = (
+      (document.getElementById("co-phone") || { value: "" }).value || ""
+    ).trim();
+    var address1 = (
+      (document.getElementById("co-address") || { value: "" }).value || ""
+    ).trim();
+    var city = (
+      (document.getElementById("co-city") || { value: "" }).value || ""
+    ).trim();
+    var postcode = (
+      (document.getElementById("co-zip") || { value: "" }).value || ""
+    ).trim();
+    var country = (
+      (document.getElementById("co-country") || { value: "" }).value || ""
+    ).trim();
+
+    setHiddenValue("#billing_first_name", firstName);
+    setHiddenValue("#billing_last_name", lastName);
+    setHiddenValue("#billing_email", email);
+    setHiddenValue("#billing_phone", phone);
+    setHiddenValue("#billing_address_1", address1);
+    setHiddenValue("#billing_city", city);
+    setHiddenValue("#billing_postcode", postcode);
+    setHiddenValue("#billing_country", country);
+
+    setHiddenValue("#shipping_first_name", firstName);
+    setHiddenValue("#shipping_last_name", lastName);
+    setHiddenValue("#shipping_address_1", address1);
+    setHiddenValue("#shipping_city", city);
+    setHiddenValue("#shipping_postcode", postcode);
+    setHiddenValue("#shipping_country", country);
+  }
+
   function parseCheckoutErrorMessage(json) {
     var raw = json && json.messages ? String(json.messages) : "";
     var plain = raw
@@ -320,6 +385,8 @@
         return;
       }
 
+      syncWooHiddenFields();
+
       if (!paypalEnabled || !paypalMethodId) {
         alert(
           "PayPal is currently unavailable. Please choose another payment method.",
@@ -359,6 +426,80 @@
           console.error("[PayPal Checkout]", err);
           bpPaypalPayBtn.disabled = false;
           bpPaypalPayBtn.textContent = "Continue with " + paypalMethodTitle;
+          alert("Connection error. Please try again.");
+        });
+    });
+  }
+
+  // Keep hidden WooCommerce fields in sync for Smart Buttons.
+  [
+    "co-fullname",
+    "co-phone",
+    "co-email",
+    "co-address",
+    "co-city",
+    "co-zip",
+    "co-country",
+  ].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener("input", syncWooHiddenFields);
+    el.addEventListener("change", syncWooHiddenFields);
+  });
+  syncWooHiddenFields();
+
+  // WooCommerce PayPal Payments triggers #place_order click after approval.
+  // Our checkout page uses an AJAX submit; bridge the click to our existing flow.
+  var placeOrderBtn = document.getElementById("place_order");
+  if (placeOrderBtn) {
+    placeOrderBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      // Validate visible billing form.
+      if (!validateForm()) {
+        var firstError = document.querySelector(
+          ".checkout-form__input.is-invalid",
+        );
+        if (firstError)
+          firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
+      syncWooHiddenFields();
+
+      // Only handle PayPal Payments gateway; otherwise do nothing.
+      var selected = document.querySelector(
+        'input[name="payment_method"]:checked',
+      );
+      var selectedMethod = selected ? String(selected.value || "") : "";
+      if (!selectedMethod || selectedMethod.indexOf("ppcp-") !== 0) {
+        return;
+      }
+
+      submitPaypalCheckout()
+        .then(function (raw) {
+          var json;
+          try {
+            json = JSON.parse(raw);
+          } catch (err) {
+            throw new Error(
+              "Invalid checkout response: " + String(raw).slice(0, 220),
+            );
+          }
+
+          if (json.result === "success" && json.redirect) {
+            window.location.href = json.redirect;
+            return;
+          }
+          if (json && json.reload) {
+            window.location.reload();
+            return;
+          }
+
+          alert(parseCheckoutErrorMessage(json));
+        })
+        .catch(function (err) {
+          console.error("[PayPal Place Order]", err);
           alert("Connection error. Please try again.");
         });
     });

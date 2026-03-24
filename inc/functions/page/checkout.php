@@ -190,3 +190,16 @@ if (!function_exists('buildpro_checkout_get_page_data')) {
         ];
     }
 }
+
+// Ensure WooCommerce PayPal Payments smart buttons treat our custom Checkout Page template
+// as a checkout context, so its JS reads from `form.checkout`.
+add_action('wp', function () {
+    if (!function_exists('is_page_template') || !is_page_template('checkout-page.php')) {
+        return;
+    }
+
+    add_filter('woocommerce_is_checkout', '__return_true', 99);
+    add_filter('woocommerce_paypal_payments_context', function ($context) {
+        return 'checkout';
+    }, 99);
+}, 20);
