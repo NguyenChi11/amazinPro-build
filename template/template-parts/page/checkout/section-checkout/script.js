@@ -39,7 +39,9 @@
   const panels = document.querySelectorAll(".payment-panel");
 
   tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
+    tab.addEventListener("click", function (event) {
+      event.preventDefault();
+
       if (
         tab.hasAttribute("disabled") ||
         tab.getAttribute("aria-disabled") === "true"
@@ -65,25 +67,31 @@
         panel.classList.add("payment-panel--active");
       }
 
+      if (target === "tab-cod") {
+        setPaymentMethodSelected(codMethodId);
+        setCheckoutFlowFlag("0");
+      }
+
+      if (target === "tab-bank") {
+        setPaymentMethodSelected(bankMethodId);
+        setCheckoutFlowFlag("0");
+      }
+
+      if (target === "tab-card") {
+        setPaymentMethodSelected(wcpayMethodId);
+        setCheckoutFlowFlag("0");
+      }
+
       // If PayPal smart buttons are used, the container might be hidden when the page loads.
       // Trigger the plugin to re-render/re-measure when the PayPal tab becomes visible.
-      if (
-        target === "tab-paypal" &&
-        window.jQuery &&
-        window.PayPalCommerceGateway &&
-        window.PayPalCommerceGateway.button &&
-        window.PayPalCommerceGateway.button.wrapper
-      ) {
-        logPpcpDebug("tab-paypal activated", {
-          context: window.PayPalCommerceGateway.context,
-          style: window.PayPalCommerceGateway.button.style,
-          urlParams: window.PayPalCommerceGateway.url_params,
-          wrapper: window.PayPalCommerceGateway.button.wrapper,
-        });
-        window
-          .jQuery(window.PayPalCommerceGateway.button.wrapper)
-          .trigger("ppcp-reload-buttons");
+      if (target === "tab-paypal") {
+        setPaymentMethodSelected(paypalMethodId);
+        setCheckoutFlowFlag("0");
+        syncWooHiddenFields();
+        reloadPpcpButtons();
       }
+
+      updateSubmitButtonForMethod(target);
     });
   });
 
@@ -91,7 +99,9 @@
      Copy to clipboard buttons
      ============================================================ */
   document.querySelectorAll(".bank-info__copy-btn").forEach(function (btn) {
-    btn.addEventListener("click", function () {
+    btn.addEventListener("click", function (event) {
+      event.preventDefault();
+
       const targetId = btn.dataset.copy;
       const el = document.getElementById(targetId);
       if (!el) return;
@@ -157,7 +167,17 @@
      Form validation & submit
      ============================================================ */
   var submitBtn = document.getElementById("checkout-submit-btn");
-  var form = document.getElementById("checkout-form");
+
+  function updateSubmitButtonForMethod(target) {
+    if (!submitBtn) return;
+
+    if (target === "tab-paypal") {
+      submitBtn.style.display = "none";
+      return;
+    }
+
+    submitBtn.style.display = "";
+  }
 
   var requiredFields = [
     { id: "co-fullname", label: "Full Name" },
@@ -242,93 +262,211 @@
     return valid;
   }
 
-  // "Pay with PayPal" button
-  var bpPaypalPayBtn = document.getElementById("bp-paypal-pay-btn");
+  // PPCP Smart Buttons / wallets are handled by the plugin scripts.
   var checkoutConfig =
     typeof window.bpCheckout === "object" && window.bpCheckout
       ? window.bpCheckout
       : {};
-  var paypalMethodId = checkoutConfig.paypalMethodId || "";
-  var paypalMethodTitle = checkoutConfig.paypalTitle || "PayPal";
   var billUrl = checkoutConfig.billUrl || "";
-  var paypalEnabled = Boolean(
-    paypalMethodId &&
-    (checkoutConfig.paypalEnabled === true ||
-      checkoutConfig.paypalEnabled === "1" ||
-      checkoutConfig.paypalEnabled === 1),
-  );
+  var paypalMethodId = checkoutConfig.paypalMethodId || "ppcp-gateway";
+  var wcpayMethodId = checkoutConfig.wcpayMethodId || "woocommerce_payments";
+  var codMethodId = checkoutConfig.codMethodId || "cod";
+  var bankMethodId = checkoutConfig.bankMethodId || "bacs";
 
-  function getCheckoutPayload(paymentMethodId, paymentMethodTitle) {
-    var fullname = (
-      (document.getElementById("co-fullname") || { value: "" }).value || ""
-    ).trim();
-    var nameParts = fullname.split(/\s+/);
-    var firstName = nameParts[0] || fullname;
-    var lastName =
-      nameParts.length > 1 ? nameParts.slice(1).join(" ") : firstName;
-    var billingAddress1 = (
-      (document.getElementById("co-address") || { value: "" }).value || ""
-    ).trim();
-    var billingCity = (
-      (document.getElementById("co-city") || { value: "" }).value || ""
-    ).trim();
-    var billingPostcode = (
-      (document.getElementById("co-zip") || { value: "" }).value || ""
-    ).trim();
-    var billingCountry = (
-      (document.getElementById("co-country") || { value: "" }).value || ""
-    ).trim();
+  function setCheckoutFlowFlag(value) {
+    setHiddenValue("#bp-checkout-flow", value);
+  }
 
-    var postData = new URLSearchParams();
-    postData.append("billing_first_name", firstName);
-    postData.append("billing_last_name", lastName);
-    postData.append(
-      "billing_email",
-      (
-        (document.getElementById("co-email") || { value: "" }).value || ""
-      ).trim(),
+  function notifyPaymentMethodSelected(methodId) {
+    if (!window.jQuery) {
+      return;
+    }
+    window.jQuery(document.body).trigger("payment_method_selected", [methodId]);
+  }
+
+  function setPaymentMethodSelected(methodId, options) {
+    if (!methodId) return;
+
+    options = options || {};
+    var triggerChange = Boolean(options.triggerChange);
+    var triggerWooSelectionEvent = options.triggerWooSelectionEvent !== false;
+
+    var methodInputs = document.querySelectorAll(
+      'input[name="payment_method"]',
     );
-    postData.append(
-      "billing_phone",
-      (
-        (document.getElementById("co-phone") || { value: "" }).value || ""
-      ).trim(),
+    if (!methodInputs.length) return;
+
+    var selectedInput = null;
+
+    methodInputs.forEach(function (input) {
+      var isTarget = input.value === methodId;
+      input.checked = isTarget;
+      if (isTarget) {
+        selectedInput = input;
+      }
+    });
+
+    if (!selectedInput) {
+      return;
+    }
+
+    if (triggerChange) {
+      if (window.jQuery) {
+        window.jQuery(selectedInput).trigger("change");
+      } else {
+        selectedInput.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+    }
+
+    if (triggerWooSelectionEvent) {
+      notifyPaymentMethodSelected(methodId);
+    }
+  }
+
+  function reloadPpcpButtons() {
+    if (!window.jQuery) {
+      return;
+    }
+
+    var selectors = [
+      "#ppc-button-ppcp-gateway",
+      "#ppc-button-ppcp-applepay",
+      "#ppc-button-ppcp-googlepay",
+    ];
+
+    selectors.forEach(function (selector) {
+      var el = document.querySelector(selector);
+      if (el) {
+        window.jQuery(el).trigger("ppcp-reload-buttons");
+      }
+    });
+
+    if (
+      window.PayPalCommerceGateway &&
+      window.PayPalCommerceGateway.button &&
+      window.PayPalCommerceGateway.button.wrapper
+    ) {
+      logPpcpDebug("reload ppcp buttons", {
+        context: window.PayPalCommerceGateway.context,
+        style: window.PayPalCommerceGateway.button.style,
+        urlParams: window.PayPalCommerceGateway.url_params,
+        wrapper: window.PayPalCommerceGateway.button.wrapper,
+      });
+      window
+        .jQuery(window.PayPalCommerceGateway.button.wrapper)
+        .trigger("ppcp-reload-buttons");
+    }
+  }
+
+  function parseCheckoutErrorMessage(result) {
+    if (result && typeof result.message === "string" && result.message.trim()) {
+      return result.message.trim();
+    }
+
+    if (
+      result &&
+      typeof result.messages === "string" &&
+      result.messages.trim()
+    ) {
+      var temp = document.createElement("div");
+      temp.innerHTML = result.messages;
+      var text = (temp.textContent || temp.innerText || "").trim();
+      if (text) {
+        return text;
+      }
+    }
+
+    return "Unable to initialize PayPal checkout. Please try again.";
+  }
+
+  function setSubmitButtonDefaultState() {
+    if (!submitBtn) return;
+    submitBtn.classList.remove("is-loading");
+    submitBtn.textContent = "Bill Order";
+  }
+
+  function submitPaypalInPopup() {
+    var checkoutForm = document.getElementById("checkout-form");
+    if (!checkoutForm || !checkoutConfig.ajaxUrl) {
+      alert("Checkout form is unavailable. Please refresh and try again.");
+      return;
+    }
+
+    var popup = window.open(
+      "",
+      "buildpro_paypal_checkout",
+      "popup=yes,width=1100,height=760,left=120,top=80,resizable=yes,scrollbars=yes",
     );
-    postData.append("billing_address_1", billingAddress1);
-    postData.append("billing_city", billingCity);
-    postData.append("billing_postcode", billingPostcode);
-    postData.append("billing_country", billingCountry);
-    postData.append(
-      "order_comments",
-      (
-        (document.getElementById("co-note") || { value: "" }).value || ""
-      ).trim(),
-    );
-    postData.append("payment_method", paymentMethodId);
-    postData.append("payment_method_title", paymentMethodTitle);
-    // Keep shipping synced with billing for gateways/hooks that validate shipping fields.
-    postData.append("ship_to_different_address", "0");
-    postData.append("shipping_first_name", firstName);
-    postData.append("shipping_last_name", lastName);
-    postData.append("shipping_address_1", billingAddress1);
-    postData.append("shipping_city", billingCity);
-    postData.append("shipping_postcode", billingPostcode);
-    postData.append("shipping_country", billingCountry);
-    // WooCommerce checkout expects this exact nonce field name.
-    postData.append(
-      "woocommerce-process-checkout-nonce",
-      checkoutConfig.nonce || "",
-    );
-    // Keep _wpnonce for compatibility with custom hooks in some installs.
-    postData.append("_wpnonce", checkoutConfig.nonce || "");
-    postData.append("_wp_http_referer", checkoutConfig.referer || "/");
-    postData.append("terms", "on");
-    postData.append("terms-field", "1");
-    postData.append("woocommerce_checkout_update_totals", "");
-    // Mark this checkout request as coming from the BuildPro custom checkout flow.
-    // Used server-side to adjust post-payment redirect (PayPal -> Bill page).
-    postData.append("bp_checkout_flow", "1");
-    return postData;
+
+    submitBtn.classList.add("is-loading");
+    submitBtn.textContent = "Opening PayPal...";
+
+    setPaymentMethodSelected(paypalMethodId);
+    setCheckoutFlowFlag("1");
+    syncWooHiddenFields();
+
+    var formData = new FormData(checkoutForm);
+    formData.set("payment_method", paypalMethodId);
+    formData.set("bp_checkout_flow", "1");
+    formData.set("terms", "on");
+    formData.set("terms-field", "1");
+
+    var params = new URLSearchParams();
+    formData.forEach(function (value, key) {
+      if (typeof value === "string") {
+        params.append(key, value);
+      }
+    });
+
+    fetch(checkoutConfig.ajaxUrl, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      body: params.toString(),
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("PayPal checkout request failed.");
+        }
+        return response.text();
+      })
+      .then(function (raw) {
+        var result;
+        try {
+          result = JSON.parse(raw);
+        } catch (error) {
+          throw new Error(
+            "Invalid checkout response. Please refresh and try again.",
+          );
+        }
+
+        if (!result || result.result !== "success" || !result.redirect) {
+          throw new Error(parseCheckoutErrorMessage(result));
+        }
+
+        if (popup && !popup.closed) {
+          popup.location.href = result.redirect;
+          popup.focus();
+        } else {
+          window.location.href = result.redirect;
+        }
+
+        setSubmitButtonDefaultState();
+      })
+      .catch(function (error) {
+        if (popup && !popup.closed) {
+          popup.close();
+        }
+        setCheckoutFlowFlag("0");
+        setSubmitButtonDefaultState();
+        alert(
+          error && error.message
+            ? error.message
+            : "Unable to open PayPal checkout.",
+        );
+      });
   }
 
   function setHiddenValue(selector, value) {
@@ -382,95 +520,6 @@
     setHiddenValue("#shipping_country", country);
   }
 
-  function parseCheckoutErrorMessage(json) {
-    var raw = json && json.messages ? String(json.messages) : "";
-    var plain = raw
-      .replace(/<[^>]*>/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-    return plain || "Could not process payment. Please try again.";
-  }
-
-  function submitPaypalCheckout() {
-    var ajaxUrl = checkoutConfig.ajaxUrl || "";
-    if (!ajaxUrl) {
-      alert("Checkout endpoint is missing. Please refresh and try again.");
-      return Promise.reject(new Error("Missing checkout AJAX URL"));
-    }
-
-    var postData = getCheckoutPayload(paypalMethodId, paypalMethodTitle);
-
-    return fetch(ajaxUrl, {
-      method: "POST",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-      body: postData.toString(),
-    }).then(function (res) {
-      return res.text();
-    });
-  }
-
-  if (bpPaypalPayBtn) {
-    bpPaypalPayBtn.addEventListener("click", function () {
-      // 1. Validate billing form first
-      if (!validateForm()) {
-        var firstError = document.querySelector(
-          ".checkout-form__input.is-invalid",
-        );
-        if (firstError)
-          firstError.scrollIntoView({ behavior: "smooth", block: "center" });
-        return;
-      }
-
-      syncWooHiddenFields();
-
-      if (!paypalEnabled || !paypalMethodId) {
-        alert(
-          "PayPal is currently unavailable. Please choose another payment method.",
-        );
-        return;
-      }
-
-      // Submit checkout with the actual WooCommerce PayPal gateway id.
-      bpPaypalPayBtn.disabled = true;
-      bpPaypalPayBtn.textContent = "Redirecting to PayPal...";
-
-      submitPaypalCheckout()
-        .then(function (raw) {
-          var json;
-          try {
-            json = JSON.parse(raw);
-          } catch (e) {
-            throw new Error("Invalid checkout response: " + raw.slice(0, 220));
-          }
-
-          if (json.result === "success" && json.redirect) {
-            window.location.href = json.redirect;
-            return;
-          }
-
-          if (json && json.reload) {
-            window.location.reload();
-            return;
-          } else {
-            bpPaypalPayBtn.disabled = false;
-            bpPaypalPayBtn.textContent = "Continue with " + paypalMethodTitle;
-            var msg = parseCheckoutErrorMessage(json);
-            alert(msg);
-          }
-        })
-        .catch(function (err) {
-          console.error("[PayPal Checkout]", err);
-          bpPaypalPayBtn.disabled = false;
-          bpPaypalPayBtn.textContent = "Continue with " + paypalMethodTitle;
-          alert("Connection error. Please try again.");
-        });
-    });
-  }
-
   // Keep hidden WooCommerce fields in sync for Smart Buttons.
   [
     "co-fullname",
@@ -488,64 +537,23 @@
   });
   syncWooHiddenFields();
 
-  // WooCommerce PayPal Payments triggers #place_order click after approval.
-  // Our checkout page uses an AJAX submit; bridge the click to our existing flow.
-  var placeOrderBtn = document.getElementById("place_order");
-  if (placeOrderBtn) {
-    placeOrderBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      // Validate visible billing form.
-      if (!validateForm()) {
-        var firstError = document.querySelector(
-          ".checkout-form__input.is-invalid",
-        );
-        if (firstError)
-          firstError.scrollIntoView({ behavior: "smooth", block: "center" });
-        return;
-      }
-
-      syncWooHiddenFields();
-
-      // Only handle PayPal Payments gateway; otherwise do nothing.
-      var selected = document.querySelector(
-        'input[name="payment_method"]:checked',
-      );
-      var selectedMethod = selected ? String(selected.value || "") : "";
-      if (!selectedMethod || selectedMethod.indexOf("ppcp-") !== 0) {
-        return;
-      }
-
-      submitPaypalCheckout()
-        .then(function (raw) {
-          var json;
-          try {
-            json = JSON.parse(raw);
-          } catch (err) {
-            throw new Error(
-              "Invalid checkout response: " + String(raw).slice(0, 220),
-            );
-          }
-
-          if (json.result === "success" && json.redirect) {
-            window.location.href = json.redirect;
-            return;
-          }
-          if (json && json.reload) {
-            window.location.reload();
-            return;
-          }
-
-          alert(parseCheckoutErrorMessage(json));
-        })
-        .catch(function (err) {
-          console.error("[PayPal Place Order]", err);
-          alert("Connection error. Please try again.");
-        });
+  // Keep custom submit button state usable if WC checkout returns errors.
+  if (window.jQuery && submitBtn) {
+    window.jQuery(document.body).on("checkout_error", function () {
+      setSubmitButtonDefaultState();
+      setCheckoutFlowFlag("0");
     });
   }
 
+  // NOTE: PPCP Smart Buttons handle order creation/approval via their own AJAX endpoints.
+  // This page keeps Woo hidden fields in sync so PPCP can read buyer data from the form.
+
   if (submitBtn) {
+    var initialActiveTab = document.querySelector(".payment-tab--active");
+    updateSubmitButtonForMethod(
+      initialActiveTab ? initialActiveTab.dataset.target : "tab-cod",
+    );
+
     submitBtn.addEventListener("click", function () {
       if (!validateForm()) return;
 
@@ -615,29 +623,41 @@
       // The Bill page uses this to snapshot cart items and reset the header cart.
       params.set("bp_from_checkout", "1");
 
-      // PayPal should redirect to Bill ONLY after successful payment.
-      // So on PayPal tab, guide user to complete PayPal payment instead of redirecting now.
+      // PayPal payments are handled by PPCP Smart Buttons in the PayPal tab.
       if (methodTab === "tab-paypal") {
-        syncWooHiddenFields();
+        return;
+      }
 
-        // If PPCP smart buttons are present, scroll them into view.
-        var smartButtons = document.querySelector(".bp-paypal-smart-buttons");
-        if (smartButtons) {
-          smartButtons.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-
-        // If theme fallback button exists (when smart buttons aren't available), trigger it.
-        var fallbackBtn = document.getElementById("bp-paypal-pay-btn");
-        if (fallbackBtn) {
-          fallbackBtn.click();
+      if (methodTab === "tab-card") {
+        if (!checkoutConfig.wcpayEnabled) {
+          alert(
+            "WooPayments credit card gateway is unavailable. Please choose another payment method.",
+          );
           return;
         }
 
-        alert(
-          "Please complete the PayPal payment to continue. You will be redirected to the Bill page after a successful payment.",
-        );
+        setPaymentMethodSelected(wcpayMethodId, { triggerChange: true });
+        setCheckoutFlowFlag("1");
+        syncWooHiddenFields();
+
+        submitBtn.classList.add("is-loading");
+        submitBtn.textContent = "Processing card...";
+
+        var checkoutForm = document.getElementById("checkout-form");
+        if (window.jQuery && checkoutForm) {
+          window.jQuery(checkoutForm).trigger("submit");
+        } else if (checkoutForm) {
+          checkoutForm.submit();
+        }
         return;
       }
+
+      if (methodTab === "tab-bank") {
+        setPaymentMethodSelected(bankMethodId);
+      } else {
+        setPaymentMethodSelected(codMethodId);
+      }
+      setCheckoutFlowFlag("0");
 
       submitBtn.classList.add("is-loading");
       submitBtn.textContent = "Redirecting to Bill...";

@@ -113,6 +113,10 @@ if (!function_exists('buildpro_checkout_get_page_data')) {
             'paypal_enabled' => $gateway_data['paypal_enabled'],
             'paypal_title' => $gateway_data['paypal_title'],
             'paypal_description' => $gateway_data['paypal_description'],
+            'wcpay_gateway' => $gateway_data['wcpay_gateway'],
+            'wcpay_gateway_id' => $gateway_data['wcpay_gateway_id'],
+            'wcpay_enabled' => $gateway_data['wcpay_enabled'],
+            'wcpay_title' => $gateway_data['wcpay_title'],
             'payment_tab_count' => $gateway_data['payment_tab_count'],
             'bacs_enabled' => $gateway_data['bacs_enabled'],
             'bacs_title' => $gateway_data['bacs_title'],
@@ -128,6 +132,10 @@ if (!function_exists('buildpro_checkout_get_page_data')) {
                 'paypalEnabled' => $gateway_data['paypal_enabled'],
                 'paypalMethodId' => $gateway_data['paypal_gateway_id'],
                 'paypalTitle' => $gateway_data['paypal_title'],
+                'wcpayEnabled' => $gateway_data['wcpay_enabled'],
+                'wcpayMethodId' => $gateway_data['wcpay_gateway_id'],
+                'codMethodId' => 'cod',
+                'bankMethodId' => 'bacs',
             ],
         ];
     }
