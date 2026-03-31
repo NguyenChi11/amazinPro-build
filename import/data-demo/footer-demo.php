@@ -106,4 +106,54 @@ function buildpro_import_footer_demo()
         set_theme_mod('footer_servicer_text', $st);
         set_theme_mod('footer_servicer_link', array('url' => $su, 'title' => $st, 'target' => ''));
     }
+
+    $policy_text = get_theme_mod('footer_policy_text', '');
+    if ($policy_text === '') {
+        $policy_text = (string) __('Policy', 'buildpro');
+        set_theme_mod('footer_policy_text', $policy_text);
+    }
+    $policy_id = 0;
+    $policy_pages = get_pages(array(
+        'meta_key' => '_wp_page_template',
+        'meta_value' => 'privacy-policy-page.php',
+        'number' => 1,
+    ));
+    if (!empty($policy_pages)) {
+        $policy_id = (int) $policy_pages[0]->ID;
+    } else {
+        $policy_page_obj = get_page_by_path('privacy-policy');
+        $policy_id = $policy_page_obj ? (int) $policy_page_obj->ID : 0;
+    }
+    if ($policy_id > 0) {
+        set_theme_mod('footer_policy_link', array(
+            'url' => get_permalink($policy_id),
+            'title' => $policy_text,
+            'target' => '',
+        ));
+    }
+
+    $service_text = get_theme_mod('footer_servicer_text', '');
+    if ($service_text === '') {
+        $service_text = (string) __('Service', 'buildpro');
+        set_theme_mod('footer_servicer_text', $service_text);
+    }
+    $terms_id = 0;
+    $terms_pages = get_pages(array(
+        'meta_key' => '_wp_page_template',
+        'meta_value' => 'terms-of-service-page.php',
+        'number' => 1,
+    ));
+    if (!empty($terms_pages)) {
+        $terms_id = (int) $terms_pages[0]->ID;
+    } else {
+        $terms_page_obj = get_page_by_path('terms-of-service');
+        $terms_id = $terms_page_obj ? (int) $terms_page_obj->ID : 0;
+    }
+    if ($terms_id > 0) {
+        set_theme_mod('footer_servicer_link', array(
+            'url' => get_permalink($terms_id),
+            'title' => $service_text,
+            'target' => '',
+        ));
+    }
 }

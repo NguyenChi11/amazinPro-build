@@ -78,7 +78,7 @@
       }
 
       if (target === "tab-card") {
-        setPaymentMethodSelected(wcpayMethodId);
+        setPaymentMethodSelected(wcpayMethodId, { triggerChange: true });
         setCheckoutFlowFlag("0");
       }
 

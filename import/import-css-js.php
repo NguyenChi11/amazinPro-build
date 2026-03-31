@@ -609,6 +609,42 @@ function wp_enqueue_custom_assets()
         ],
         [
             'type' => 'style',
+            'handle' => 'buildpro-privacy-policy-style',
+            'src' => get_theme_file_uri('template/template-parts/page/privacy-policy/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/privacy-policy/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-privacy-policy-script',
+            'src' => get_theme_file_uri('template/template-parts/page/privacy-policy/script.js'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/privacy-policy/script.js'))
+        ],
+        [
+            'type' => 'style',
+            'handle' => 'buildpro-terms-of-service-style',
+            'src' => get_theme_file_uri('template/template-parts/page/terms-of-service/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/terms-of-service/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-terms-of-service-script',
+            'src' => get_theme_file_uri('template/template-parts/page/terms-of-service/script.js'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/terms-of-service/script.js'))
+        ],
+        [
+            'type' => 'style',
             'handle' => 'buildpro-404-style',
             'src' => get_theme_file_uri('template/template-parts/page/404/style.css'),
             'deps' => [],

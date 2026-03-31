@@ -250,6 +250,40 @@ function buildpro_maybe_import_about_us_contact_demo_once()
     }
 }
 
+function buildpro_maybe_import_privacy_policy_demo_once()
+{
+    if (get_option('buildpro_privacy_policy_demo_imported') === '1') {
+        return;
+    }
+
+    $privacy_demo_file = get_theme_file_path('/import/data-demo/page/privacy-policy/privacy-policy.php');
+    if (file_exists($privacy_demo_file)) {
+        require_once $privacy_demo_file;
+        if (function_exists('buildpro_import_privacy_policy_demo')) {
+            buildpro_import_privacy_policy_demo();
+            update_option('buildpro_privacy_policy_demo_imported', '1');
+            return;
+        }
+    }
+}
+
+function buildpro_maybe_import_terms_of_service_demo_once()
+{
+    if (get_option('buildpro_terms_of_service_demo_imported') === '1') {
+        return;
+    }
+
+    $terms_demo_file = get_theme_file_path('/import/data-demo/page/term-of-service/term-of-service.php');
+    if (file_exists($terms_demo_file)) {
+        require_once $terms_demo_file;
+        if (function_exists('buildpro_import_terms_of_service_demo')) {
+            buildpro_import_terms_of_service_demo();
+            update_option('buildpro_terms_of_service_demo_imported', '1');
+            return;
+        }
+    }
+}
+
 function buildpro_has_published_content($post_type)
 {
     $q = new WP_Query(array(
@@ -321,6 +355,14 @@ function buildpro_maybe_import_default_content()
     // Header demo (logo/title/description) should be set on first import.
     if (function_exists('buildpro_maybe_import_header_demo_once')) {
         buildpro_maybe_import_header_demo_once();
+    }
+
+    if (function_exists('buildpro_maybe_import_privacy_policy_demo_once')) {
+        buildpro_maybe_import_privacy_policy_demo_once();
+    }
+
+    if (function_exists('buildpro_maybe_import_terms_of_service_demo_once')) {
+        buildpro_maybe_import_terms_of_service_demo_once();
     }
 
     if (get_option('buildpro_default_content_imported') === '1') {

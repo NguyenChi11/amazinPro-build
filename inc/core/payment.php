@@ -10,6 +10,12 @@ if (!function_exists('buildpro_payment_get_gateway_data')) {
             $available_gateways = WC()->payment_gateways()->get_available_payment_gateways();
         }
 
+        $cod_gateway = !empty($available_gateways['cod']) ? $available_gateways['cod'] : null;
+        $cod_enabled = !empty($cod_gateway);
+        $cod_title = ($cod_enabled && is_object($cod_gateway) && method_exists($cod_gateway, 'get_title'))
+            ? wp_strip_all_tags($cod_gateway->get_title())
+            : 'Cash on Delivery';
+
         $ppcp_gateway_id = 'ppcp-gateway';
         $ppcp_available = !empty($available_gateways[$ppcp_gateway_id]);
 
@@ -61,16 +67,31 @@ if (!function_exists('buildpro_payment_get_gateway_data')) {
             ? wp_strip_all_tags($wcpay_gateway->get_title())
             : 'Credit Card';
 
-        $payment_tab_count = $paypal_enabled ? 4 : 3;
-
+        $bacs_gateway = !empty($available_gateways['bacs']) ? $available_gateways['bacs'] : null;
         $bacs_settings = get_option('woocommerce_bacs_settings', []);
-        $bacs_enabled = isset($bacs_settings['enabled']) && $bacs_settings['enabled'] === 'yes';
-        $bacs_title = isset($bacs_settings['title']) ? $bacs_settings['title'] : 'Bank Transfer';
-        $bacs_desc = isset($bacs_settings['description']) ? $bacs_settings['description'] : 'Make your payment directly into our bank account. Please use your Order ID as the payment reference.';
+        $bacs_enabled = !empty($bacs_gateway);
+        $bacs_title = ($bacs_enabled && is_object($bacs_gateway) && method_exists($bacs_gateway, 'get_title'))
+            ? wp_strip_all_tags($bacs_gateway->get_title())
+            : (isset($bacs_settings['title']) ? $bacs_settings['title'] : 'Bank Transfer');
+        $bacs_desc = ($bacs_enabled && is_object($bacs_gateway) && method_exists($bacs_gateway, 'get_description'))
+            ? wp_kses_post(wpautop(wptexturize((string) $bacs_gateway->get_description())))
+            : (isset($bacs_settings['description']) ? $bacs_settings['description'] : 'Make your payment directly into our bank account. Please use your Order ID as the payment reference.');
         $bacs_accounts = get_option('woocommerce_bacs_accounts', []);
+
+        $payment_tab_count = count(array_filter([
+            $cod_enabled,
+            $paypal_enabled,
+            $wcpay_enabled,
+            $bacs_enabled,
+        ]));
+        if ($payment_tab_count < 1) {
+            $payment_tab_count = 1;
+        }
 
         return [
             'available_gateways' => $available_gateways,
+            'cod_enabled' => $cod_enabled,
+            'cod_title' => $cod_title,
             'ppcp_available' => $ppcp_available,
             'ppcp_gateway_id' => $ppcp_gateway_id,
             'paypal_gateway' => $paypal_gateway,
@@ -230,6 +251,8 @@ if (!function_exists('buildpro_ppcp_force_button_style_from_settings')) {
             return $data;
         }
 
+        // Keep native PPCP styling in normal mode.
+        // Only force style values when explicitly debugging.
         if (!buildpro_ppcp_is_debug_enabled() || !isset($_GET['bp_ppcp_force_style'])) {
             return $data;
         }
@@ -252,7 +275,7 @@ if (!function_exists('buildpro_ppcp_force_button_style_from_settings')) {
             $data['button']['style'] = array();
         }
 
-        foreach (array('layout', 'color', 'shape', 'label', 'tagline') as $key) {
+        foreach (array('layout', 'color', 'shape', 'label', 'tagline', 'height') as $key) {
             if (array_key_exists($key, $classic) && $classic[$key] !== null && $classic[$key] !== '') {
                 $data['button']['style'][$key] = $classic[$key];
             }

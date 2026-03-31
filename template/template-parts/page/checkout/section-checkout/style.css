@@ -405,26 +405,61 @@
 }
 
 /* PayPal Smart Buttons (WooCommerce PayPal Payments / PPCP)
-   Keep wrapper neutral and let the plugin/SDK control the button look.
+   Wrapper styles for custom checkout section while preserving PPCP-rendered buttons.
 */
+.bp-payment-wrapper {
+  margin-top: 1.25rem;
+}
+
+.bp-payment-title h3 {
+  margin: 0 0 0.625rem;
+  font-size: 1.125rem;
+  line-height: 1.35;
+}
+
 .bp-paypal-smart-buttons {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 0.5rem;
+  margin-top: 0.9375rem;
+  min-width: 0;
 }
 
 .bp-paypal-smart-buttons:empty {
   display: none;
 }
 
-.bp-paypal-smart-buttons [id^="ppc-button-"] {
-  display: block;
+.bp-paypal-payment-box {
+  margin: 0;
+  padding: 1.25rem;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.bp-payment-note {
+  margin-top: 0.625rem;
+  color: #666;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.bp-payment-error {
+  padding: 0.9375rem;
+  border-radius: 0.5rem;
+}
+
+.bp-paypal-smart-buttons .ppc-button-wrapper,
+.bp-paypal-smart-buttons [id^="ppc-button-"],
+.bp-paypal-smart-buttons .ppcp-button-apm {
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .bp-paypal-smart-buttons iframe {
   max-width: 100%;
+  border: 0;
 }
 
 /* ============================================================
@@ -530,6 +565,18 @@
   height: 0.9rem;
   color: #10b981;
   flex-shrink: 0;
+}
+
+.bp-wcpay-method > .screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ============================================================
@@ -1029,45 +1076,21 @@
   }
 }
 
-.payment-panel__paypal-container {
-  margin-top: 1rem;
-  border-top: 1px solid #e5e7eb;
-  padding-top: 1rem;
-}
-.payment-panel__paypal-container .payment_box {
-  display: block !important;
-  margin: 0;
-  padding: 0;
-}
-
-@media only screen and (min-width: 300px) {
-  /*
-    WooCommerce PayPal Payments (PPCP) Smart Buttons are rendered into:
-    - .ppc-button-wrapper
-    - #ppc-button-ppcp-gateway (and other #ppc-button-* containers)
-    The PayPal buttons themselves live inside iframes, so only the outer wrappers can be sized.
-  */
-  .bp-paypal-smart-buttons .ppc-button-wrapper,
-  .bp-paypal-smart-buttons [id^="ppc-button-"] {
-    width: 100% !important;
-    max-width: 40rem !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    box-sizing: border-box;
+@media (max-width: 767.98px) {
+  .payment-panel__icon-wrap--paypal {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.75rem;
   }
 
-  /* Backward-compatible: if a PayPal SDK container class exists, size it too. */
-  .bp-paypal-smart-buttons .paypal-button-container {
-    width: 100% !important;
-    max-width: 40rem !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    box-sizing: border-box;
+  .payment-panel#tab-paypal .payment-panel__desc {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin-bottom: 0.85rem;
   }
-  .paypal-button-label-container > .paypal-logo {
-    width: 0.75rem !important;
-  }
-  .paypal-button-label-container img {
-    width: 1.5rem !important;
+
+  .payment-panel#tab-paypal .payment-panel__note {
+    font-size: 0.76rem;
+    padding: 0.6rem 0.72rem;
   }
 }

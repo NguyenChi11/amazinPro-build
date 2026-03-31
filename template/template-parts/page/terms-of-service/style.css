@@ -1,0 +1,218 @@
+.terms-of-service {
+  overflow-x: hidden;
+}
+
+.terms-of-service::before {
+  width: 17.5rem;
+  height: 17.5rem;
+  top: -7.5rem;
+  left: -8.75rem;
+}
+
+.terms-of-service::after {
+  width: 22.5rem;
+  height: 22.5rem;
+  bottom: -11.25rem;
+  right: -10rem;
+}
+
+.terms-of-service__shell {
+  position: relative;
+  z-index: 1;
+  max-width: 68.75rem;
+  margin: 0 auto;
+}
+
+.terms-of-service__card {
+  background-color: #ffffff;
+  border-radius: 1.75rem;
+  padding: 3.5rem clamp(1.5rem, 5vw, 4.5rem);
+  box-shadow: 0 1.625rem 4.375rem rgba(15, 23, 42, 0.12);
+  border: 0.0625rem solid #eef2f7;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.terms-of-service__header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 0.0625rem solid #e2e8f0;
+}
+
+.terms-of-service__eyebrow {
+  margin: 0 0 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #ff782d;
+}
+
+.terms-of-service__title {
+  font-size: clamp(2.25rem, 3vw, 3rem);
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 1rem;
+}
+
+.terms-of-service__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.875rem;
+  background-color: #f1f5f9;
+  border-radius: 62.4375rem;
+  font-size: 0.875rem;
+  color: #475569;
+  margin-bottom: 1rem;
+}
+
+.terms-of-service__meta-label {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.terms-of-service__meta-value {
+  font-weight: 500;
+}
+
+.terms-of-service__lead {
+  font-size: 1.125rem;
+  color: #334155;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.terms-of-service__content {
+  color: #334155;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.terms-of-service__content h2,
+.terms-of-service__content h3,
+.terms-of-service__content h4 {
+  color: #0f172a;
+  margin: 2.25rem 0 0.75rem;
+  line-height: 1.3;
+}
+
+.terms-of-service__content h2 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  padding-top: 1.5rem;
+  border-top: 0.0625rem solid #e2e8f0;
+}
+
+.terms-of-service__content h2:first-child {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.terms-of-service__content h3 {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+}
+
+.terms-of-service__content h4 {
+  font-size: 1.125rem;
+}
+
+.terms-of-service__content p {
+  margin: 0 0 1rem;
+}
+
+.terms-of-service__content ul,
+.terms-of-service__content ol {
+  margin: 0 0 1rem 1.25rem;
+  padding: 0;
+}
+
+.terms-of-service__content li {
+  margin-bottom: 0.5rem;
+}
+
+.terms-of-service__content a {
+  color: #111111;
+  text-decoration: underline;
+  text-decoration-thickness: 0.125rem;
+  text-underline-offset: 0.25rem;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.terms-of-service__content a:hover,
+.terms-of-service__content a:focus {
+  color: #ff782d;
+  text-decoration-color: #ff782d;
+}
+
+.terms-of-service__content a:focus-visible {
+  outline: 0.125rem solid rgba(255, 120, 45, 0.4);
+  outline-offset: 0.1875rem;
+}
+
+.terms-of-service__content strong {
+  color: #0f172a;
+}
+
+.terms-of-service__content blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background-color: #f8fafc;
+  border-left: 0.25rem solid #ff782d;
+  color: #1e293b;
+}
+
+.terms-of-service__content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.terms-of-service__content th,
+.terms-of-service__content td {
+  border: 0.0625rem solid #e2e8f0;
+  padding: 0.75rem 0.875rem;
+  text-align: left;
+}
+
+.terms-of-service__content th {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.terms-of-service__content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+.terms-of-service__content hr {
+  border: 0;
+  border-top: 0.0625rem solid #e2e8f0;
+  margin: 2rem 0;
+}
+
+@media (max-width: 900px) {
+  .terms-of-service__card {
+    padding: 2.75rem clamp(1.25rem, 5vw, 3rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .terms-of-service {
+    padding: 4rem 1rem 5rem;
+  }
+
+  .terms-of-service__card {
+    border-radius: 1.125rem;
+    padding: 2rem 1.25rem;
+  }
+
+  .terms-of-service__header {
+    padding-bottom: 1.25rem;
+  }
+}

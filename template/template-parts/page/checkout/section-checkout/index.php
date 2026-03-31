@@ -18,12 +18,34 @@ $wcpay_gateway = isset($checkout_data['wcpay_gateway']) ? $checkout_data['wcpay_
 $wcpay_gateway_id = isset($checkout_data['wcpay_gateway_id']) ? $checkout_data['wcpay_gateway_id'] : 'woocommerce_payments';
 $wcpay_enabled = isset($checkout_data['wcpay_enabled']) ? (bool) $checkout_data['wcpay_enabled'] : false;
 $wcpay_title = isset($checkout_data['wcpay_title']) ? $checkout_data['wcpay_title'] : 'Credit Card';
-$payment_tab_count = isset($checkout_data['payment_tab_count']) ? $checkout_data['payment_tab_count'] : 3;
+$cod_enabled = isset($checkout_data['cod_enabled']) ? (bool) $checkout_data['cod_enabled'] : true;
+$cod_title = isset($checkout_data['cod_title']) ? $checkout_data['cod_title'] : 'Cash on Delivery';
 $bacs_enabled = isset($checkout_data['bacs_enabled']) ? (bool) $checkout_data['bacs_enabled'] : false;
+$bacs_title = isset($checkout_data['bacs_title']) ? $checkout_data['bacs_title'] : 'Bank Transfer';
 $bacs_desc = isset($checkout_data['bacs_desc']) ? $checkout_data['bacs_desc'] : '';
 $bacs_accounts = isset($checkout_data['bacs_accounts']) ? $checkout_data['bacs_accounts'] : [];
 $paypal_gateway_id = isset($checkout_data['paypal_gateway_id']) ? $checkout_data['paypal_gateway_id'] : '';
 $bill_page_url = isset($checkout_data['bill_page_url']) ? $checkout_data['bill_page_url'] : home_url('/bill-page/');
+
+$paypal_tab_enabled = $paypal_enabled && $ppcp_available;
+
+$enabled_payment_tabs = [];
+if ($cod_enabled) {
+    $enabled_payment_tabs[] = 'tab-cod';
+}
+if ($paypal_tab_enabled) {
+    $enabled_payment_tabs[] = 'tab-paypal';
+}
+if ($wcpay_enabled) {
+    $enabled_payment_tabs[] = 'tab-card';
+}
+if ($bacs_enabled) {
+    $enabled_payment_tabs[] = 'tab-bank';
+}
+
+$payment_tab_count = count($enabled_payment_tabs) > 0 ? count($enabled_payment_tabs) : 1;
+$active_payment_tab = $enabled_payment_tabs[0] ?? 'tab-cod';
+
 $bp_price = isset($checkout_data['bp_price']) ? $checkout_data['bp_price'] : function ($amount) {
     return '$' . number_format((float) $amount, 2);
 };
@@ -32,7 +54,7 @@ $checkout_localize = isset($checkout_data['checkout_localize']) ? $checkout_data
     'nonce' => wp_create_nonce('woocommerce-process_checkout'),
     'referer' => esc_url_raw('/'),
     'billUrl' => esc_url_raw($bill_page_url),
-    'paypalEnabled' => $paypal_enabled,
+    'paypalEnabled' => $paypal_tab_enabled,
     'paypalMethodId' => $paypal_gateway_id,
     'paypalTitle' => $paypal_title,
     'wcpayEnabled' => $wcpay_enabled,
@@ -124,19 +146,25 @@ wp_localize_script(
                         <input type="hidden" id="bp-checkout-flow" name="bp_checkout_flow" value="0">
 
                         <div style="display:none">
-                            <input type="radio" class="input-radio" id="payment_method_cod" name="payment_method"
-                                value="cod" checked>
-                            <input type="radio" class="input-radio" id="payment_method_bacs" name="payment_method"
-                                value="bacs">
-                            <?php if (!empty($paypal_gateway_id)) : ?>
+                            <?php if ($cod_enabled) : ?>
+                                <input type="radio" class="input-radio" id="payment_method_cod" name="payment_method"
+                                    value="cod" <?php checked($active_payment_tab, 'tab-cod'); ?>>
+                            <?php endif; ?>
+                            <?php if ($bacs_enabled) : ?>
+                                <input type="radio" class="input-radio" id="payment_method_bacs" name="payment_method"
+                                    value="bacs" <?php checked($active_payment_tab, 'tab-bank'); ?>>
+                            <?php endif; ?>
+                            <?php if ($paypal_tab_enabled && !empty($paypal_gateway_id)) : ?>
                                 <input type="radio" class="input-radio"
                                     id="payment_method_<?php echo esc_attr($paypal_gateway_id); ?>" name="payment_method"
-                                    value="<?php echo esc_attr($paypal_gateway_id); ?>">
+                                    value="<?php echo esc_attr($paypal_gateway_id); ?>"
+                                    <?php checked($active_payment_tab, 'tab-paypal'); ?>>
                             <?php endif; ?>
                             <?php if ($wcpay_enabled && !empty($wcpay_gateway_id)) : ?>
                                 <input type="radio" class="input-radio"
                                     id="payment_method_<?php echo esc_attr($wcpay_gateway_id); ?>" name="payment_method"
-                                    value="<?php echo esc_attr($wcpay_gateway_id); ?>">
+                                    value="<?php echo esc_attr($wcpay_gateway_id); ?>"
+                                    <?php checked($active_payment_tab, 'tab-card'); ?>>
                             <?php endif; ?>
                         </div>
 
@@ -226,21 +254,27 @@ wp_localize_script(
                         role="tablist">
 
                         <!-- Tab buttons -->
-                        <button type="button" class="payment-tab payment-tab--active" role="tab" data-target="tab-cod"
-                            aria-selected="true">
-                            <span class="payment-tab__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="6" width="18" height="13" rx="2" />
-                                    <path d="M3 10h18" />
-                                    <circle cx="12" cy="15" r="2" />
-                                </svg>
-                            </span>
-                            <span class="payment-tab__label"><?php esc_html_e('Cash on Delivery', 'buildpro'); ?></span>
-                        </button>
+                        <?php if ($cod_enabled) : ?>
+                            <button type="button"
+                                class="payment-tab<?php echo $active_payment_tab === 'tab-cod' ? ' payment-tab--active' : ''; ?>"
+                                role="tab" data-target="tab-cod"
+                                aria-selected="<?php echo $active_payment_tab === 'tab-cod' ? 'true' : 'false'; ?>">
+                                <span class="payment-tab__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="6" width="18" height="13" rx="2" />
+                                        <path d="M3 10h18" />
+                                        <circle cx="12" cy="15" r="2" />
+                                    </svg>
+                                </span>
+                                <span class="payment-tab__label"><?php echo esc_html($cod_title); ?></span>
+                            </button>
+                        <?php endif; ?>
 
-                        <?php if ($paypal_enabled) : ?>
-                            <button type="button" class="payment-tab" role="tab" data-target="tab-paypal"
-                                aria-selected="false">
+                        <?php if ($paypal_tab_enabled) : ?>
+                            <button type="button"
+                                class="payment-tab<?php echo $active_payment_tab === 'tab-paypal' ? ' payment-tab--active' : ''; ?>"
+                                role="tab" data-target="tab-paypal"
+                                aria-selected="<?php echo $active_payment_tab === 'tab-paypal' ? 'true' : 'false'; ?>">
                                 <span class="payment-tab__icon payment-tab__icon--paypal">
                                     <img class="paypal__image"
                                         src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
@@ -250,28 +284,36 @@ wp_localize_script(
                             </button>
                         <?php endif; ?>
 
-                        <button type="button" class="payment-tab" role="tab" data-target="tab-card"
-                            aria-selected="false">
-                            <span class="payment-tab__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="2" y="5" width="20" height="14" rx="2" />
-                                    <path d="M2 10h20" />
-                                    <path d="M6 15h3M14 15h4" />
-                                </svg>
-                            </span>
-                            <span class="payment-tab__label"><?php echo esc_html($wcpay_title); ?></span>
-                        </button>
+                        <?php if ($wcpay_enabled) : ?>
+                            <button type="button"
+                                class="payment-tab<?php echo $active_payment_tab === 'tab-card' ? ' payment-tab--active' : ''; ?>"
+                                role="tab" data-target="tab-card"
+                                aria-selected="<?php echo $active_payment_tab === 'tab-card' ? 'true' : 'false'; ?>">
+                                <span class="payment-tab__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                                        <path d="M2 10h20" />
+                                        <path d="M6 15h3M14 15h4" />
+                                    </svg>
+                                </span>
+                                <span class="payment-tab__label"><?php echo esc_html($wcpay_title); ?></span>
+                            </button>
+                        <?php endif; ?>
 
-                        <button type="button" class="payment-tab" role="tab" data-target="tab-bank"
-                            aria-selected="false">
-                            <span class="payment-tab__icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                                    <polyline points="9 22 9 12 15 12 15 22" />
-                                </svg>
-                            </span>
-                            <span class="payment-tab__label"><?php esc_html_e('Bank Transfer', 'buildpro'); ?></span>
-                        </button>
+                        <?php if ($bacs_enabled) : ?>
+                            <button type="button"
+                                class="payment-tab<?php echo $active_payment_tab === 'tab-bank' ? ' payment-tab--active' : ''; ?>"
+                                role="tab" data-target="tab-bank"
+                                aria-selected="<?php echo $active_payment_tab === 'tab-bank' ? 'true' : 'false'; ?>">
+                                <span class="payment-tab__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                        <polyline points="9 22 9 12 15 12 15 22" />
+                                    </svg>
+                                </span>
+                                <span class="payment-tab__label"><?php echo esc_html($bacs_title); ?></span>
+                            </button>
+                        <?php endif; ?>
 
                     </div><!-- /payment-tabs -->
 
@@ -279,30 +321,34 @@ wp_localize_script(
                     <div class="payment-panels">
 
                         <!-- COD -->
-                        <div class="payment-panel payment-panel--active" id="tab-cod" role="tabpanel">
-                            <div class="payment-panel__icon-wrap">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <rect x="3" y="6" width="18" height="13" rx="2" />
-                                    <path d="M3 10h18" />
-                                    <circle cx="12" cy="15" r="2" />
-                                </svg>
+                        <?php if ($cod_enabled) : ?>
+                            <div class="payment-panel<?php echo $active_payment_tab === 'tab-cod' ? ' payment-panel--active' : ''; ?>"
+                                id="tab-cod" role="tabpanel">
+                                <div class="payment-panel__icon-wrap">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="6" width="18" height="13" rx="2" />
+                                        <path d="M3 10h18" />
+                                        <circle cx="12" cy="15" r="2" />
+                                    </svg>
+                                </div>
+                                <p class="payment-panel__desc">
+                                    <?php esc_html_e('Pay in cash upon delivery. Our delivery staff will collect payment directly at your shipping address.', 'buildpro'); ?>
+                                </p>
+                                <div class="payment-panel__note">
+                                    <svg viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <?php esc_html_e('Please prepare the exact amount to make the delivery process smoother.', 'buildpro'); ?>
+                                </div>
                             </div>
-                            <p class="payment-panel__desc">
-                                <?php esc_html_e('Pay in cash upon delivery. Our delivery staff will collect payment directly at your shipping address.', 'buildpro'); ?>
-                            </p>
-                            <div class="payment-panel__note">
-                                <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <?php esc_html_e('Please prepare the exact amount to make the delivery process smoother.', 'buildpro'); ?>
-                            </div>
-                        </div>
+                        <?php endif; ?>
 
                         <!-- PayPal -->
-                        <?php if ($paypal_enabled) : ?>
-                            <div class="payment-panel" id="tab-paypal" role="tabpanel">
+                        <?php if ($paypal_tab_enabled) : ?>
+                            <div class="payment-panel<?php echo $active_payment_tab === 'tab-paypal' ? ' payment-panel--active' : ''; ?>"
+                                id="tab-paypal" role="tabpanel">
                                 <div class="payment-panel__icon-wrap payment-panel__icon-wrap--paypal">
                                     <img class="paypal__image"
                                         src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
@@ -322,26 +368,41 @@ wp_localize_script(
 
                                 <div class="woocommerce-notices-wrapper"></div>
 
-                                <?php if ($ppcp_available) : ?>
-                                    <div class="bp-paypal-smart-buttons">
-                                        <?php
-                                        // Render the standard PPCP checkout button wrappers on our custom checkout.
-                                        do_action('woocommerce_review_order_after_payment');
-                                        ?>
+                                <div class="bp-payment-wrapper">
+                                    <?php if ($ppcp_available) : ?>
+                                        <div
+                                            class="payment_box payment_method_<?php echo esc_attr($ppcp_gateway_id); ?> bp-paypal-payment-box">
+                                            <div class="bp-payment-title">
+                                                <h3><?php esc_html_e('Pay with PayPal', 'buildpro'); ?></h3>
+                                            </div>
 
-                                        <div id="ppc-button-ppcp-applepay"></div>
-                                        <div id="ppc-button-ppcp-googlepay"></div>
-                                    </div>
-                                <?php else : ?>
-                                    <div class="payment-panel__note">
-                                        <svg viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <?php esc_html_e('WooCommerce PayPal Payments is unavailable for this checkout. Please check plugin settings and gateway status.', 'buildpro'); ?>
-                                    </div>
-                                <?php endif; ?>
+                                            <div class="bp-paypal-smart-buttons">
+                                                <?php
+                                                // Trigger PPCP renderer so the plugin outputs PayPal/Pay Later and APM buttons.
+                                                $ppcp_renderer_hook = apply_filters(
+                                                    'woocommerce_paypal_payments_checkout_button_renderer_hook',
+                                                    'woocommerce_review_order_after_payment'
+                                                );
+
+                                                if (is_string($ppcp_renderer_hook) && $ppcp_renderer_hook !== '') {
+                                                    do_action($ppcp_renderer_hook);
+                                                }
+                                                ?>
+                                            </div>
+
+                                            <div class="bp-payment-note">
+                                                <small>
+                                                    <?php esc_html_e('Secure payment via PayPal. You can pay with your PayPal account or card.', 'buildpro'); ?>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="woocommerce-error bp-payment-error">
+                                            <strong><?php esc_html_e('Payment unavailable:', 'buildpro'); ?></strong>
+                                            <?php esc_html_e('PayPal Payments is not available. Please check plugin settings or try another payment method.', 'buildpro'); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
 
                                 <?php if ($bp_ppcp_debug_enabled) : ?>
                                     <?php
@@ -397,7 +458,7 @@ wp_localize_script(
                                     }
                                     $bp_pay_later_for_checkout = $bp_pay_later_enabled && (empty($bp_pay_later_locations) || in_array('checkout', $bp_pay_later_locations, true));
                                     ?>
-                                    <pre class="bp-ppcp-debug" style="">
+                                    <pre class="bp-ppcp-debug">
                                         PPCP Debug (temporary)
                                         - ppcp_available: <?php echo $ppcp_available ? 'true' : 'false'; ?>
                                         - paypal_gateway_id (detected): <?php echo esc_html($paypal_gateway_id ?: '(empty)'); ?>
@@ -436,149 +497,167 @@ wp_localize_script(
                         <?php endif; ?>
 
                         <!-- Credit card -->
-                        <div class="payment-panel" id="tab-card" role="tabpanel">
-                            <?php if ($wcpay_enabled && is_object($wcpay_gateway) && method_exists($wcpay_gateway, 'payment_fields')) : ?>
-                                <div class="woocommerce-notices-wrapper"></div>
-                                <div class="bp-wcpay-fields">
-                                    <?php $wcpay_gateway->payment_fields(); ?>
-                                </div>
-                                <div class="payment-panel__secure">
-                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <?php esc_html_e('Card payment is handled securely by WooPayments.', 'buildpro'); ?>
-                                </div>
-                            <?php else : ?>
-                                <div class="payment-panel__note">
-                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <?php esc_html_e('WooPayments credit card gateway is unavailable. Please enable WooPayments in WooCommerce settings.', 'buildpro'); ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
+                        <?php if ($wcpay_enabled) : ?>
+                            <div class="payment-panel<?php echo $active_payment_tab === 'tab-card' ? ' payment-panel--active' : ''; ?>"
+                                id="tab-card" role="tabpanel">
+                                <?php if (is_object($wcpay_gateway) && method_exists($wcpay_gateway, 'payment_fields')) : ?>
+                                    <div class="woocommerce-notices-wrapper"></div>
+                                    <div
+                                        class="wc_payment_method payment_method_<?php echo esc_attr($wcpay_gateway_id); ?> bp-wcpay-method">
+                                        <label class="screen-reader-text"
+                                            for="payment_method_<?php echo esc_attr($wcpay_gateway_id); ?>">
+                                            <?php
+                                            $wcpay_label_text = method_exists($wcpay_gateway, 'get_title') ? $wcpay_gateway->get_title() : $wcpay_title;
+                                            $wcpay_label_icon = method_exists($wcpay_gateway, 'get_icon') ? $wcpay_gateway->get_icon() : '';
+                                            echo wp_kses_post(trim($wcpay_label_text . ' ' . $wcpay_label_icon));
+                                            ?>
+                                        </label>
+                                        <div
+                                            class="payment_box payment_method_<?php echo esc_attr($wcpay_gateway_id); ?> bp-wcpay-fields">
+                                            <?php $wcpay_gateway->payment_fields(); ?>
+                                        </div>
+                                    </div>
+                                    <div class="payment-panel__secure">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <?php esc_html_e('Card payment is handled securely by WooPayments.', 'buildpro'); ?>
+                                    </div>
+                                <?php else : ?>
+                                    <div class="payment-panel__note">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <?php esc_html_e('WooPayments credit card gateway is unavailable. Please enable WooPayments in WooCommerce settings.', 'buildpro'); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
 
                         <!-- Bank transfer -->
-                        <div class="payment-panel" id="tab-bank" role="tabpanel">
-                            <p class="payment-panel__desc"><?php echo wp_kses_post(wpautop(wptexturize($bacs_desc))); ?>
-                            </p>
+                        <?php if ($bacs_enabled) : ?>
+                            <div class="payment-panel<?php echo $active_payment_tab === 'tab-bank' ? ' payment-panel--active' : ''; ?>"
+                                id="tab-bank" role="tabpanel">
+                                <p class="payment-panel__desc"><?php echo wp_kses_post(wpautop(wptexturize($bacs_desc))); ?>
+                                </p>
 
-                            <?php if (!empty($bacs_accounts)) : ?>
-                                <?php foreach ($bacs_accounts as $i => $account) :
-                                    $acct_name   = isset($account['account_name'])   ? trim($account['account_name'])   : '';
-                                    $acct_number = isset($account['account_number']) ? trim($account['account_number']) : '';
-                                    $bank_name   = isset($account['bank_name'])      ? trim($account['bank_name'])      : '';
-                                    $sort_code   = isset($account['sort_code'])      ? trim($account['sort_code'])      : '';
-                                    $iban        = isset($account['iban'])           ? trim($account['iban'])           : '';
-                                    $bic         = isset($account['bic'])            ? trim($account['bic'])            : '';
-                                    $copy_id     = 'bank-acct-' . $i;
-                                ?>
-                                    <div class="bank-info<?php echo $i > 0 ? ' bank-info--extra' : ''; ?>">
-                                        <?php if ($bank_name) : ?>
-                                            <div class="bank-info__row">
-                                                <span class="bank-info__label"><?php esc_html_e('Bank', 'buildpro'); ?></span>
-                                                <span class="bank-info__value"><?php echo esc_html($bank_name); ?></span>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($acct_name) : ?>
-                                            <div class="bank-info__row">
-                                                <span
-                                                    class="bank-info__label"><?php esc_html_e('Account Name', 'buildpro'); ?></span>
-                                                <span class="bank-info__value"><?php echo esc_html($acct_name); ?></span>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($acct_number) : ?>
-                                            <div class="bank-info__row">
-                                                <span
-                                                    class="bank-info__label"><?php esc_html_e('Account No.', 'buildpro'); ?></span>
-                                                <span class="bank-info__value bank-info__value--copy"
-                                                    id="<?php echo esc_attr($copy_id); ?>"><?php echo esc_html($acct_number); ?></span>
-                                                <button type="button" class="bank-info__copy-btn"
-                                                    data-copy="<?php echo esc_attr($copy_id); ?>"
-                                                    title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
-                                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                                        <path
-                                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($sort_code) : ?>
-                                            <div class="bank-info__row">
-                                                <span class="bank-info__label"><?php esc_html_e('Sort Code', 'buildpro'); ?></span>
-                                                <span class="bank-info__value bank-info__value--copy"
-                                                    id="<?php echo esc_attr($copy_id . '-sort'); ?>"><?php echo esc_html($sort_code); ?></span>
-                                                <button type="button" class="bank-info__copy-btn"
-                                                    data-copy="<?php echo esc_attr($copy_id . '-sort'); ?>"
-                                                    title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
-                                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                                        <path
-                                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($iban) : ?>
-                                            <div class="bank-info__row">
-                                                <span class="bank-info__label"><?php esc_html_e('IBAN', 'buildpro'); ?></span>
-                                                <span class="bank-info__value bank-info__value--copy"
-                                                    id="<?php echo esc_attr($copy_id . '-iban'); ?>"><?php echo esc_html($iban); ?></span>
-                                                <button type="button" class="bank-info__copy-btn"
-                                                    data-copy="<?php echo esc_attr($copy_id . '-iban'); ?>"
-                                                    title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
-                                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                                        <path
-                                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($bic) : ?>
-                                            <div class="bank-info__row">
-                                                <span
-                                                    class="bank-info__label"><?php esc_html_e('BIC / Swift', 'buildpro'); ?></span>
-                                                <span class="bank-info__value bank-info__value--copy"
-                                                    id="<?php echo esc_attr($copy_id . '-bic'); ?>"><?php echo esc_html($bic); ?></span>
-                                                <button type="button" class="bank-info__copy-btn"
-                                                    data-copy="<?php echo esc_attr($copy_id . '-bic'); ?>"
-                                                    title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
-                                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                                        <path
-                                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        <?php endif; ?>
+                                <?php if (!empty($bacs_accounts)) : ?>
+                                    <?php foreach ($bacs_accounts as $i => $account) :
+                                        $acct_name   = isset($account['account_name'])   ? trim($account['account_name'])   : '';
+                                        $acct_number = isset($account['account_number']) ? trim($account['account_number']) : '';
+                                        $bank_name   = isset($account['bank_name'])      ? trim($account['bank_name'])      : '';
+                                        $sort_code   = isset($account['sort_code'])      ? trim($account['sort_code'])      : '';
+                                        $iban        = isset($account['iban'])           ? trim($account['iban'])           : '';
+                                        $bic         = isset($account['bic'])            ? trim($account['bic'])            : '';
+                                        $copy_id     = 'bank-acct-' . $i;
+                                    ?>
+                                        <div class="bank-info<?php echo $i > 0 ? ' bank-info--extra' : ''; ?>">
+                                            <?php if ($bank_name) : ?>
+                                                <div class="bank-info__row">
+                                                    <span class="bank-info__label"><?php esc_html_e('Bank', 'buildpro'); ?></span>
+                                                    <span class="bank-info__value"><?php echo esc_html($bank_name); ?></span>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($acct_name) : ?>
+                                                <div class="bank-info__row">
+                                                    <span
+                                                        class="bank-info__label"><?php esc_html_e('Account Name', 'buildpro'); ?></span>
+                                                    <span class="bank-info__value"><?php echo esc_html($acct_name); ?></span>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($acct_number) : ?>
+                                                <div class="bank-info__row">
+                                                    <span
+                                                        class="bank-info__label"><?php esc_html_e('Account No.', 'buildpro'); ?></span>
+                                                    <span class="bank-info__value bank-info__value--copy"
+                                                        id="<?php echo esc_attr($copy_id); ?>"><?php echo esc_html($acct_number); ?></span>
+                                                    <button type="button" class="bank-info__copy-btn"
+                                                        data-copy="<?php echo esc_attr($copy_id); ?>"
+                                                        title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
+                                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                                            <path
+                                                                d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($sort_code) : ?>
+                                                <div class="bank-info__row">
+                                                    <span class="bank-info__label"><?php esc_html_e('Sort Code', 'buildpro'); ?></span>
+                                                    <span class="bank-info__value bank-info__value--copy"
+                                                        id="<?php echo esc_attr($copy_id . '-sort'); ?>"><?php echo esc_html($sort_code); ?></span>
+                                                    <button type="button" class="bank-info__copy-btn"
+                                                        data-copy="<?php echo esc_attr($copy_id . '-sort'); ?>"
+                                                        title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
+                                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                                            <path
+                                                                d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($iban) : ?>
+                                                <div class="bank-info__row">
+                                                    <span class="bank-info__label"><?php esc_html_e('IBAN', 'buildpro'); ?></span>
+                                                    <span class="bank-info__value bank-info__value--copy"
+                                                        id="<?php echo esc_attr($copy_id . '-iban'); ?>"><?php echo esc_html($iban); ?></span>
+                                                    <button type="button" class="bank-info__copy-btn"
+                                                        data-copy="<?php echo esc_attr($copy_id . '-iban'); ?>"
+                                                        title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
+                                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                                            <path
+                                                                d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($bic) : ?>
+                                                <div class="bank-info__row">
+                                                    <span
+                                                        class="bank-info__label"><?php esc_html_e('BIC / Swift', 'buildpro'); ?></span>
+                                                    <span class="bank-info__value bank-info__value--copy"
+                                                        id="<?php echo esc_attr($copy_id . '-bic'); ?>"><?php echo esc_html($bic); ?></span>
+                                                    <button type="button" class="bank-info__copy-btn"
+                                                        data-copy="<?php echo esc_attr($copy_id . '-bic'); ?>"
+                                                        title="<?php esc_attr_e('Copy', 'buildpro'); ?>">
+                                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                                            <path
+                                                                d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <div class="payment-panel__note">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <?php esc_html_e('No bank account details have been configured yet. Please contact us for payment instructions.', 'buildpro'); ?>
                                     </div>
-                                <?php endforeach; ?>
-                            <?php else : ?>
+                                <?php endif; ?>
+
                                 <div class="payment-panel__note">
                                     <svg viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd"
                                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                             clip-rule="evenodd" />
                                     </svg>
-                                    <?php esc_html_e('No bank account details have been configured yet. Please contact us for payment instructions.', 'buildpro'); ?>
+                                    <?php esc_html_e('Please use the exact reference code so your order can be processed quickly.', 'buildpro'); ?>
                                 </div>
-                            <?php endif; ?>
-
-                            <div class="payment-panel__note">
-                                <svg viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <?php esc_html_e('Please use the exact reference code so your order can be processed quickly.', 'buildpro'); ?>
                             </div>
-                        </div>
+                        <?php endif; ?>
 
                     </div><!-- /payment-panels -->
 
