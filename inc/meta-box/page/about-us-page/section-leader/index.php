@@ -31,6 +31,14 @@ function buildpro_about_leader_render_meta_box($post)
     $text = get_post_meta($post->ID, 'buildpro_about_leader_text', true);
     $executives = get_post_meta($post->ID, 'buildpro_about_leader_executives', true);
     $workforce = get_post_meta($post->ID, 'buildpro_about_leader_workforce', true);
+    $executives_label = get_post_meta($post->ID, 'buildpro_about_leader_executives_label', true);
+    $workforce_label = get_post_meta($post->ID, 'buildpro_about_leader_workforce_label', true);
+    if (!is_string($executives_label) || $executives_label === '') {
+        $executives_label = __('Core Executives', 'buildpro');
+    }
+    if (!is_string($workforce_label) || $workforce_label === '') {
+        $workforce_label = __('Total Workforce', 'buildpro');
+    }
 
     $items = get_post_meta($post->ID, 'buildpro_about_leader_items', true);
     $items = is_array($items) ? array_values($items) : array();
@@ -42,17 +50,21 @@ function buildpro_about_leader_admin_enqueue($hook)
 {
     if ($hook === 'post.php' || $hook === 'post-new.php') {
         wp_enqueue_media();
+        $style_path = get_theme_file_path('template/meta-box/page/about-us/section-leader/style.css');
+        $script_path = get_theme_file_path('template/meta-box/page/about-us/section-leader/script.js');
+        $style_ver = file_exists($style_path) ? filemtime($style_path) : null;
+        $script_ver = file_exists($script_path) ? filemtime($script_path) : null;
         wp_enqueue_style(
             'buildpro-about-us-leader-admin',
             get_theme_file_uri('template/meta-box/page/about-us/section-leader/style.css'),
             array(),
-            null
+            $style_ver
         );
         wp_enqueue_script(
             'buildpro-about-us-leader-admin',
             get_theme_file_uri('template/meta-box/page/about-us/section-leader/script.js'),
             array('jquery'),
-            null,
+            $script_ver,
             true
         );
     }
@@ -77,7 +89,9 @@ function buildpro_save_about_leader_meta($post_id)
     $enabled = isset($_POST['buildpro_about_leader_enabled']) ? 1 : 0;
     $title = isset($_POST['buildpro_about_leader_title']) ? sanitize_text_field(wp_unslash($_POST['buildpro_about_leader_title'])) : '';
     $text = isset($_POST['buildpro_about_leader_text']) ? sanitize_text_field(wp_unslash($_POST['buildpro_about_leader_text'])) : '';
+    $executives_label = isset($_POST['buildpro_about_leader_executives_label']) ? sanitize_text_field(wp_unslash($_POST['buildpro_about_leader_executives_label'])) : '';
     $executives = isset($_POST['buildpro_about_leader_executives']) ? sanitize_text_field(wp_unslash($_POST['buildpro_about_leader_executives'])) : '';
+    $workforce_label = isset($_POST['buildpro_about_leader_workforce_label']) ? sanitize_text_field(wp_unslash($_POST['buildpro_about_leader_workforce_label'])) : '';
     $workforce = isset($_POST['buildpro_about_leader_workforce']) ? sanitize_text_field(wp_unslash($_POST['buildpro_about_leader_workforce'])) : '';
     $items = isset($_POST['buildpro_about_leader_items']) && is_array($_POST['buildpro_about_leader_items']) ? $_POST['buildpro_about_leader_items'] : array();
     $clean_items = array();
@@ -89,19 +103,24 @@ function buildpro_save_about_leader_meta($post_id)
             'position' => isset($it['position']) ? sanitize_text_field($it['position']) : '',
             'description' => isset($it['description']) ? sanitize_text_field($it['description']) : '',
             'url' => isset($it['url']) ? esc_url_raw($it['url']) : '',
+            'link_title' => isset($it['link_title']) ? sanitize_text_field($it['link_title']) : '',
         );
     }
     update_post_meta($post_id, 'buildpro_about_leader_enabled', $enabled);
     update_post_meta($post_id, 'buildpro_about_leader_title', $title);
     update_post_meta($post_id, 'buildpro_about_leader_text', $text);
     update_post_meta($post_id, 'buildpro_about_leader_executives', $executives);
+    update_post_meta($post_id, 'buildpro_about_leader_executives_label', $executives_label);
     update_post_meta($post_id, 'buildpro_about_leader_workforce', $workforce);
+    update_post_meta($post_id, 'buildpro_about_leader_workforce_label', $workforce_label);
     update_post_meta($post_id, 'buildpro_about_leader_items', array_values($clean_items));
     set_theme_mod('buildpro_about_leader_enabled', $enabled);
     set_theme_mod('buildpro_about_leader_title', $title);
     set_theme_mod('buildpro_about_leader_text', $text);
     set_theme_mod('buildpro_about_leader_executives', $executives);
+    set_theme_mod('buildpro_about_leader_executives_label', $executives_label);
     set_theme_mod('buildpro_about_leader_workforce', $workforce);
+    set_theme_mod('buildpro_about_leader_workforce_label', $workforce_label);
     set_theme_mod('buildpro_about_leader_items', array_values($clean_items));
 }
 add_action('save_post', 'buildpro_save_about_leader_meta');

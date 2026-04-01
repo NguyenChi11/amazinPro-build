@@ -40,7 +40,7 @@
     var add = document.getElementById("buildpro_add_core_value_item");
     var frame = null;
 
-    function openLinkPicker(urlInput) {
+    function openLinkPicker(urlInput, titleInput) {
       if (!urlInput) return;
       var wpLinkObj =
         typeof wpLink !== "undefined" &&
@@ -61,8 +61,12 @@
       }
 
       var urlField = document.getElementById("wp-link-url");
+      var textField = document.getElementById("wp-link-text");
       if (urlField) {
         urlField.value = urlInput.value || "";
+      }
+      if (textField && titleInput) {
+        textField.value = titleInput.value || "";
       }
 
       var originalUpdate =
@@ -71,6 +75,10 @@
         wpLinkObj.update = function () {
           try {
             if (urlField) urlInput.value = urlField.value || "";
+          } catch (e) {}
+          try {
+            if (textField && titleInput)
+              titleInput.value = textField.value || "";
           } catch (e) {}
           try {
             if (typeof wpLinkObj.close === "function") wpLinkObj.close();
@@ -89,6 +97,9 @@
           if (urlField) urlInput.value = urlField.value || "";
         } catch (e) {}
         try {
+          if (textField && titleInput) titleInput.value = textField.value || "";
+        } catch (e) {}
+        try {
           if (typeof wpLinkObj.close === "function") wpLinkObj.close();
         } catch (e) {}
 
@@ -103,6 +114,20 @@
       if (!el || el.tagName !== "INPUT") return false;
       var n = el.getAttribute("name") || "";
       return /\[url\]$/.test(n);
+    }
+
+    function getIdxFromName(name) {
+      var m = String(name || "").match(/\[(\d+)\]\[url\]$/);
+      return m ? parseInt(m[1], 10) : null;
+    }
+
+    function findTitleInputByIdx(idx) {
+      if (idx === null || idx === undefined) return null;
+      return wrap.querySelector(
+        'input[name="buildpro_about_core_values_items[' +
+          idx +
+          '][link_title]"]',
+      );
     }
     function addItem() {
       var idx = wrap.querySelectorAll(".core-value-item").length;
@@ -151,6 +176,16 @@
         '<br><input type="text" class="widefat" name="buildpro_about_core_values_items[' +
         idx +
         '][url]" value=""></label></p>' +
+        "<p><label>" +
+        t("linkTitle", "Link Title") +
+        '<br><input type="text" class="widefat" name="buildpro_about_core_values_items[' +
+        idx +
+        '][link_title]" value=""></label></p>' +
+        '<p><button type="button" class="button button-secondary cv-choose-link" data-idx="' +
+        idx +
+        '">' +
+        t("chooseLink", "Choose Link") +
+        "</button></p>" +
         '<p><button type="button" class="button remove-core-value">' +
         t("remove", "Remove") +
         "</button></p>";
@@ -161,7 +196,17 @@
       wrap.addEventListener("click", function (e) {
         if (e && e.target && isUrlInput(e.target)) {
           e.preventDefault();
-          openLinkPicker(e.target);
+          var idx = getIdxFromName(e.target.getAttribute("name"));
+          openLinkPicker(e.target, findTitleInputByIdx(idx));
+          return;
+        }
+        if (e.target && e.target.classList.contains("cv-choose-link")) {
+          e.preventDefault();
+          var idx2 = parseInt(e.target.getAttribute("data-idx"), 10);
+          var urlInput = wrap.querySelector(
+            'input[name="buildpro_about_core_values_items[' + idx2 + '][url]"]',
+          );
+          openLinkPicker(urlInput, findTitleInputByIdx(idx2));
           return;
         }
         if (e.target && e.target.classList.contains("cv-select-image")) {

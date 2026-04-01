@@ -49,6 +49,94 @@
     var addBtn = document.getElementById("buildpro_about_leader_add_item");
     var mediaFrame = null;
 
+    function openLinkPicker(urlInput, titleInput) {
+      if (!urlInput) return;
+      var wpLinkObj =
+        typeof wpLink !== "undefined" &&
+        wpLink &&
+        typeof wpLink.open === "function"
+          ? wpLink
+          : window.wp &&
+              window.wp.link &&
+              typeof window.wp.link.open === "function"
+            ? window.wp.link
+            : null;
+      if (!wpLinkObj) return;
+
+      try {
+        wpLinkObj.open();
+      } catch (e) {
+        return;
+      }
+
+      var urlField = document.getElementById("wp-link-url");
+      var textField = document.getElementById("wp-link-text");
+      if (urlField) {
+        urlField.value = urlInput.value || "";
+      }
+      if (textField && titleInput) {
+        textField.value = titleInput.value || "";
+      }
+
+      var originalUpdate =
+        typeof wpLinkObj.update === "function" ? wpLinkObj.update : null;
+      if (originalUpdate) {
+        wpLinkObj.update = function () {
+          try {
+            if (urlField) urlInput.value = urlField.value || "";
+          } catch (e) {}
+          try {
+            if (textField && titleInput)
+              titleInput.value = textField.value || "";
+          } catch (e) {}
+          try {
+            if (typeof wpLinkObj.close === "function") wpLinkObj.close();
+          } catch (e) {}
+          wpLinkObj.update = originalUpdate;
+        };
+      }
+
+      var submit = document.getElementById("wp-link-submit");
+      var handler = function (ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        if (ev && ev.stopPropagation) ev.stopPropagation();
+        if (ev && ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+
+        try {
+          if (urlField) urlInput.value = urlField.value || "";
+        } catch (e) {}
+        try {
+          if (textField && titleInput) titleInput.value = textField.value || "";
+        } catch (e) {}
+        try {
+          if (typeof wpLinkObj.close === "function") wpLinkObj.close();
+        } catch (e) {}
+
+        if (submit) submit.removeEventListener("click", handler, true);
+      };
+      if (submit) {
+        submit.addEventListener("click", handler, true);
+      }
+    }
+
+    function isUrlInput(el) {
+      if (!el || el.tagName !== "INPUT") return false;
+      var n = el.getAttribute("name") || "";
+      return /\[url\]$/.test(n);
+    }
+
+    function getIdxFromName(name) {
+      var m = String(name || "").match(/\[(\d+)\]\[url\]$/);
+      return m ? parseInt(m[1], 10) : null;
+    }
+
+    function findTitleInputByIdx(idx) {
+      if (idx === null || idx === undefined || !wrap) return null;
+      return wrap.querySelector(
+        'input[name="buildpro_about_leader_items[' + idx + '][link_title]"]',
+      );
+    }
+
     function addNewItem() {
       if (!wrap) return;
 
@@ -106,6 +194,17 @@
         '           name="buildpro_about_leader_items[' +
         idx +
         '][url]" value=""></label></p>' +
+        "<p><label>" +
+        t("linkTitle", "Link Title") +
+        '<br><input type="text" class="widefat" ' +
+        '           name="buildpro_about_leader_items[' +
+        idx +
+        '][link_title]" value=""></label></p>' +
+        '<p><button type="button" class="button button-secondary buildpro_about_leader_choose_link" data-idx="' +
+        idx +
+        '">' +
+        t("chooseLink", "Choose Link") +
+        "</button></p>" +
         '<p><button type="button" class="button remove-leader">' +
         t("remove", "Remove") +
         "</button></p>";
@@ -123,6 +222,28 @@
     if (wrap) {
       wrap.addEventListener("click", function (e) {
         var target = e.target;
+
+        // Click URL input -> open link picker
+        if (target && isUrlInput(target)) {
+          e.preventDefault();
+          var idxUrl = getIdxFromName(target.getAttribute("name"));
+          openLinkPicker(target, findTitleInputByIdx(idxUrl));
+          return;
+        }
+
+        // Choose Link button
+        if (
+          target &&
+          target.classList.contains("buildpro_about_leader_choose_link")
+        ) {
+          e.preventDefault();
+          var idxLink = parseInt(target.getAttribute("data-idx"), 10);
+          var urlInput = wrap.querySelector(
+            'input[name="buildpro_about_leader_items[' + idxLink + '][url]"]',
+          );
+          openLinkPicker(urlInput, findTitleInputByIdx(idxLink));
+          return;
+        }
 
         // Select Image
         if (target.classList.contains("buildpro_about_leader_image_select")) {

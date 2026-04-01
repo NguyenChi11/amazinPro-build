@@ -49,6 +49,7 @@
                         <p><label><?php echo esc_html__('URL', 'buildpro'); ?><br><input type="text" class="widefat"
                                     name="buildpro_about_policy_certifications[<?php echo $i; ?>][url]"
                                     value="<?php echo esc_attr($c_url); ?>"></label></p>
+                        <p><button type="button" class="button button-secondary policy-cert-choose-link" data-idx="<?php echo $i; ?>"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button></p>
                         <p><label><?php echo esc_html__('Title', 'buildpro'); ?><br><input type="text" class="widefat"
                                     name="buildpro_about_policy_certifications[<?php echo $i; ?>][title]"
                                     value="<?php echo esc_attr($c_title); ?>"></label></p>

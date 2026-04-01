@@ -34,7 +34,9 @@
                     $icon_url = $icon_id ? wp_get_attachment_image_url($icon_id, 'thumbnail') : (isset($it['icon_url']) ? (string)$it['icon_url'] : '');
                     $it_title = isset($it['title']) ? (string)$it['title'] : '';
                     $it_desc = isset($it['description']) ? (string)$it['description'] : '';
-                    $it_url = isset($it['url']) ? (string)$it['url'] : ''; ?>
+                    $it_url = isset($it['url']) ? (string)$it['url'] : '';
+                    $it_link_title = isset($it['link_title']) ? (string)$it['link_title'] : '';
+            ?>
                     <div class="core-value-item">
                         <p><label><?php echo esc_html__('Icon Image', 'buildpro'); ?></label></p>
                         <div class="cv-icon-preview" id="cv_icon_preview_<?php echo $i; ?>">
@@ -59,6 +61,10 @@
                         <p><label><?php echo esc_html__('URL', 'buildpro'); ?><br><input type="text" class="widefat"
                                     name="buildpro_about_core_values_items[<?php echo $i; ?>][url]"
                                     value="<?php echo esc_attr($it_url); ?>"></label></p>
+                        <p><label><?php echo esc_html__('Link Title', 'buildpro'); ?><br><input type="text" class="widefat"
+                                    name="buildpro_about_core_values_items[<?php echo $i; ?>][link_title]"
+                                    value="<?php echo esc_attr($it_link_title); ?>"></label></p>
+                        <p><button type="button" class="button button-secondary cv-choose-link" data-idx="<?php echo $i; ?>"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button></p>
                         <p><button type="button" class="button remove-core-value"><?php echo esc_html__('Remove', 'buildpro'); ?></button></p>
                     </div>
             <?php }

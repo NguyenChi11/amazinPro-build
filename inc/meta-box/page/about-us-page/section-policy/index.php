@@ -52,17 +52,21 @@ function buildpro_about_policy_admin_enqueue($hook)
         // Enable WordPress Insert/edit link modal for URL fields.
         wp_enqueue_script('wplink');
         wp_enqueue_style('wp-link');
+        $style_path = get_theme_file_path('template/meta-box/page/about-us/section-policy/style.css');
+        $script_path = get_theme_file_path('template/meta-box/page/about-us/section-policy/script.js');
+        $style_ver = file_exists($style_path) ? filemtime($style_path) : null;
+        $script_ver = file_exists($script_path) ? filemtime($script_path) : null;
         wp_enqueue_style(
             'buildpro-about-us-policy-admin',
             get_theme_file_uri('template/meta-box/page/about-us/section-policy/style.css'),
             array(),
-            null
+            $style_ver
         );
         wp_enqueue_script(
             'buildpro-about-us-policy-admin',
             get_theme_file_uri('template/meta-box/page/about-us/section-policy/script.js'),
             array('jquery'),
-            null,
+            $script_ver,
             true
         );
     }

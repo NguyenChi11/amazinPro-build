@@ -25,11 +25,30 @@
   function init(el) {
     var wrap = el.find(".buildpro-about-leader-repeater");
     if (!wrap.length) return;
+    if (wrap.data("buildpro-leader-init")) return;
+    wrap.data("buildpro-leader-init", true);
+
     var list = wrap.find(".buildpro-about-leader-list");
     var input = wrap.find(".buildpro-about-leader-input");
     var frame = null;
-    var didFetch = false;
     var api = window.wp && window.wp.customize ? window.wp.customize : null;
+
+    function openLinkPicker(urlInputEl, titleInputEl) {
+      if (!urlInputEl) return;
+      window.buildproLinkTarget = {
+        sectionId: "buildpro_about_leader_section",
+        urlInput: urlInputEl,
+        titleInput: titleInputEl,
+        currentUrl: urlInputEl.value || "",
+        currentTitle: titleInputEl ? titleInputEl.value || "" : "",
+      };
+      if (api && typeof api.section === "function") {
+        var s = api.section("buildpro_link_picker_section");
+        if (s && typeof s.expand === "function") {
+          s.expand();
+        }
+      }
+    }
     function getItems() {
       try {
         var v = input.val();
@@ -42,73 +61,36 @@
     }
     function setItems(items) {
       input.val(JSON.stringify(items || []));
-      input.trigger("change");
+      // Push array to WP setting API (matches Core Values behavior)
+      if (api && api.has && api.has("buildpro_about_leader_items")) {
+        try {
+          api("buildpro_about_leader_items").set(items || []);
+        } catch (e) {}
+      }
     }
     function render() {
       var items = getItems();
       list.empty();
-      if (
-        (!items || items.length === 0) &&
-        !didFetch &&
-        window.BuildProAboutLeader
-      ) {
-        didFetch = true;
-        $.ajax({
-          url: BuildProAboutLeader.ajax_url,
-          method: "POST",
-          dataType: "json",
-          data: {
-            action: "buildpro_get_about_leader",
-            nonce: BuildProAboutLeader.nonce,
-            page_id: BuildProAboutLeader.default_page_id || 0,
-          },
-        })
-          .done(function (resp) {
-            if (resp && resp.success && resp.data) {
-              var d = resp.data || {};
-              if (Array.isArray(d.items) && d.items.length) {
-                setItems(d.items);
-                items = d.items;
-              }
-              if (api) {
-                if (typeof d.title === "string") {
-                  api("buildpro_about_leader_title").set(d.title);
-                }
-                if (typeof d.text === "string") {
-                  api("buildpro_about_leader_text").set(d.text);
-                }
-                if (typeof d.executives === "string") {
-                  api("buildpro_about_leader_executives").set(d.executives);
-                }
-                if (typeof d.workforce === "string") {
-                  api("buildpro_about_leader_workforce").set(d.workforce);
-                }
-                if (typeof d.enabled !== "undefined") {
-                  api("buildpro_about_leader_enabled").set(
-                    !!parseInt(d.enabled, 10),
-                  );
-                }
-              }
-              list.empty();
-            }
-          })
-          .always(function () {
-            render();
-          });
-        return;
-      }
       items.forEach(function (it, idx) {
         var row = $('<div class="leader-item"/>');
         var itemFallback = sprintf(t("itemLabel", "Item %d"), idx + 1);
+        var openByDefault = idx === 0;
         var leaderHeader = $(
           '<div class="leader-accordion-header"><span class="leader-accordion-label">' +
             escHtml(it.name || itemFallback) +
             '</span><span class="leader-accordion-arrow">&#9660;</span></div>',
         );
         var leaderBody = $(
-          '<div class="leader-accordion-body" style="display:none"></div>',
+          '<div class="leader-accordion-body" style="display:' +
+            (openByDefault ? "block" : "none") +
+            '"></div>',
         );
         row.append(leaderHeader).append(leaderBody);
+        if (openByDefault) {
+          leaderHeader
+            .find(".leader-accordion-arrow")
+            .css("transform", "rotate(0deg)");
+        }
         leaderHeader.on("click", function () {
           var isOpen = leaderBody.css("display") !== "none";
           leaderBody.css("display", isOpen ? "none" : "block");
@@ -173,6 +155,18 @@
             '"></label></p>',
         );
         leaderBody.append(
+          "<p><label>" +
+            escHtml(t("linkTitle", "Link Title")) +
+            '<br><input type="text" class="widefat leader-link-title" value="' +
+            (it.link_title || "") +
+            '"></label></p>',
+        );
+        leaderBody.append(
+          '<p><button type="button" class="button button-secondary leader-choose-link">' +
+            escHtml(t("chooseLink", "Choose Link")) +
+            "</button></p>",
+        );
+        leaderBody.append(
           '<p><button type="button" class="button remove-leader">' +
             escHtml(t("remove", "Remove")) +
             "</button></p>",
@@ -221,10 +215,20 @@
           cur.position = row.find(".leader-position").val();
           cur.description = row.find(".leader-description").val();
           cur.url = row.find(".leader-url").val();
+          cur.link_title = row.find(".leader-link-title").val();
           items2[idx] = cur;
           setItems(items2);
           var n = row.find(".leader-name").val();
           if (n) leaderHeader.find(".leader-accordion-label").text(n);
+        });
+
+        row.on("click", ".leader-url, .leader-choose-link", function (e) {
+          if (e && e.preventDefault) e.preventDefault();
+          if (e && e.stopPropagation) e.stopPropagation();
+          openLinkPicker(
+            row.find(".leader-url").get(0),
+            row.find(".leader-link-title").get(0),
+          );
         });
         row.on("click", ".remove-leader", function (e) {
           e.preventDefault();
@@ -246,15 +250,109 @@
         position: "",
         description: "",
         url: "",
+        link_title: "",
       });
       setItems(items);
       render();
     });
+
     render();
   }
-  $(function () {
-    $(".customize-control").each(function () {
-      init($(this));
+
+  // Init via WP customize control embed (matches Core Values pattern)
+  var _wpApi = window.wp && window.wp.customize ? window.wp.customize : null;
+  if (_wpApi && _wpApi.control) {
+    _wpApi.control("buildpro_about_leader_items", function (ctrl) {
+      ctrl.deferred.embedded.done(function () {
+        var inputEl = ctrl.container.find(".buildpro-about-leader-input");
+
+        // Seed from in-memory setting first
+        var seeded = false;
+        if (_wpApi.has && _wpApi.has("buildpro_about_leader_items")) {
+          try {
+            var apiVal = _wpApi("buildpro_about_leader_items").get();
+            if (Array.isArray(apiVal) && apiVal.length > 0) {
+              inputEl.val(JSON.stringify(apiVal));
+              seeded = true;
+            }
+          } catch (e) {}
+        }
+
+        if (seeded) {
+          init(ctrl.container);
+          return;
+        }
+
+        // Otherwise fetch from server (post_meta) and sync settings
+        var wrap = ctrl.container.find(".buildpro-about-leader-repeater");
+        if (
+          !wrap.data("buildpro-leader-fetching") &&
+          window.BuildProAboutLeader
+        ) {
+          wrap.data("buildpro-leader-fetching", true);
+          var $list = wrap.find(".buildpro-about-leader-list");
+          $list.html(
+            '<p style="color:#888">' +
+              escHtml(t("loading", "Loading...")) +
+              "</p>",
+          );
+          $.ajax({
+            url: BuildProAboutLeader.ajax_url,
+            method: "POST",
+            dataType: "json",
+            data: {
+              action: "buildpro_get_about_leader",
+              nonce: BuildProAboutLeader.nonce,
+              page_id: BuildProAboutLeader.default_page_id || 0,
+            },
+          })
+            .done(function (resp) {
+              if (resp && resp.success && resp.data) {
+                var d = resp.data || {};
+                if (_wpApi) {
+                  try {
+                    if (typeof d.title === "string")
+                      _wpApi("buildpro_about_leader_title").set(d.title);
+                  } catch (e) {}
+                  try {
+                    if (typeof d.text === "string")
+                      _wpApi("buildpro_about_leader_text").set(d.text);
+                  } catch (e) {}
+                  try {
+                    if (typeof d.executives === "string")
+                      _wpApi("buildpro_about_leader_executives").set(
+                        d.executives,
+                      );
+                  } catch (e) {}
+                  try {
+                    if (typeof d.workforce === "string")
+                      _wpApi("buildpro_about_leader_workforce").set(
+                        d.workforce,
+                      );
+                  } catch (e) {}
+                  try {
+                    if (typeof d.enabled !== "undefined")
+                      _wpApi("buildpro_about_leader_enabled").set(
+                        !!parseInt(d.enabled, 10),
+                      );
+                  } catch (e) {}
+                  try {
+                    if (Array.isArray(d.items))
+                      _wpApi("buildpro_about_leader_items").set(d.items);
+                  } catch (e) {}
+                }
+                if (Array.isArray(d.items)) {
+                  inputEl.val(JSON.stringify(d.items));
+                }
+              }
+            })
+            .always(function () {
+              init(ctrl.container);
+            });
+        } else {
+          init(ctrl.container);
+        }
+      });
     });
-  });
+  }
 })(jQuery);

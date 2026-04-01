@@ -243,17 +243,22 @@ function buildpro_about_policy_customize_register($wp_customize)
         ));
     }
     add_action('customize_controls_enqueue_scripts', function () {
+        $style_path = get_theme_file_path('template/customize/page/about-us/section-policy/style.css');
+        $script_path = get_theme_file_path('template/customize/page/about-us/section-policy/script.js');
+        $style_ver = file_exists($style_path) ? filemtime($style_path) : null;
+        $script_ver = file_exists($script_path) ? filemtime($script_path) : null;
+
         wp_enqueue_style(
             'buildpro-about-policy-style',
             get_theme_file_uri('template/customize/page/about-us/section-policy/style.css'),
             array(),
-            null
+            $style_ver
         );
         wp_enqueue_script(
             'buildpro-about-policy-script',
             get_theme_file_uri('template/customize/page/about-us/section-policy/script.js'),
             array('customize-controls', 'jquery'),
-            null,
+            $script_ver,
             true
         );
 

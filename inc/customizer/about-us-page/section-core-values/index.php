@@ -243,17 +243,22 @@ if (!function_exists('buildpro_about_core_values_customize_register')) {
             ));
         }
         add_action('customize_controls_enqueue_scripts', function () {
+            $style_path = get_theme_file_path('template/customize/page/about-us/section-core-values/style.css');
+            $script_path = get_theme_file_path('template/customize/page/about-us/section-core-values/script.js');
+            $style_ver = file_exists($style_path) ? filemtime($style_path) : null;
+            $script_ver = file_exists($script_path) ? filemtime($script_path) : null;
+
             wp_enqueue_style(
                 'buildpro-about-core-values-style',
                 get_theme_file_uri('template/customize/page/about-us/section-core-values/style.css'),
                 array(),
-                null
+                $style_ver
             );
             wp_enqueue_script(
                 'buildpro-about-core-values-script',
                 get_theme_file_uri('template/customize/page/about-us/section-core-values/script.js'),
                 array('customize-controls', 'jquery'),
-                null,
+                $script_ver,
                 true
             );
 
@@ -314,6 +319,7 @@ if (!function_exists('buildpro_about_core_values_customize_register')) {
                     'title' => isset($item['title']) ? sanitize_text_field($item['title']) : '',
                     'description' => isset($item['description']) ? sanitize_textarea_field($item['description']) : '',
                     'url' => isset($item['url']) ? esc_url_raw($item['url']) : '',
+                    'link_title' => isset($item['link_title']) ? sanitize_text_field($item['link_title']) : '',
                 );
             }
             return array_values($clean);

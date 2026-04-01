@@ -47,6 +47,7 @@ if ($enabled && !empty($items)) :
                         $it_title = isset($it['title']) ? (string)$it['title'] : '';
                         $it_desc = isset($it['description']) ? (string)$it['description'] : '';
                         $it_url = isset($it['url']) ? (string)$it['url'] : '#';
+                        $it_link_title = isset($it['link_title']) ? (string)$it['link_title'] : '';
                         ?>
                         <div class="about-core-values__card">
                             <div class="about-core-values__icon">
@@ -65,7 +66,11 @@ if ($enabled && !empty($items)) :
                                 <p class="about-core-values__card-desc"><?php echo esc_html($it_desc); ?></p>
                             <?php endif; ?>
                             <a class="about-core-values__card-link" href="<?php echo esc_url($it_url); ?>">
-                                <span><?php esc_html_e('View Details', 'buildpro'); ?></span>
+                                <span>
+                                    <?php
+                                    echo esc_html($it_link_title !== '' ? $it_link_title : __('View Details', 'buildpro'));
+                                    ?>
+                                </span>
                                 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                             </a>
                         </div>

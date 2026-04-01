@@ -93,6 +93,7 @@ if (!function_exists('buildpro_save_about_core_values_meta')) {
                 'title' => isset($it['title']) ? sanitize_text_field($it['title']) : '',
                 'description' => isset($it['description']) ? sanitize_textarea_field($it['description']) : '',
                 'url' => isset($it['url']) ? esc_url_raw($it['url']) : '',
+                'link_title' => isset($it['link_title']) ? sanitize_text_field($it['link_title']) : '',
             );
         }
         update_post_meta($post_id, 'buildpro_about_core_values_enabled', $enabled);

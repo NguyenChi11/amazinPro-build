@@ -33,12 +33,14 @@
     var frame = null;
     var api = window.wp && window.wp.customize ? window.wp.customize : null;
 
-    function openLinkPicker(urlInputEl) {
+    function openLinkPicker(urlInputEl, titleInputEl) {
       if (!urlInputEl) return;
       window.buildproLinkTarget = {
         sectionId: "buildpro_about_core_values_section",
         urlInput: urlInputEl,
+        titleInput: titleInputEl,
         currentUrl: urlInputEl.value || "",
+        currentTitle: titleInputEl ? titleInputEl.value || "" : "",
       };
       if (api && typeof api.section === "function") {
         var s = api.section("buildpro_link_picker_section");
@@ -125,15 +127,21 @@
       items.forEach(function (it, idx) {
         var row = $('<div class="core-value-item"/>');
         var itemFallback = sprintf(t("itemLabel", "Item %d"), idx + 1);
+        var openByDefault = idx === 0;
         var cvHeader = $(
           '<div class="cv-accordion-header"><span class="cv-accordion-label">' +
             escHtml(it.title || itemFallback) +
             '</span><span class="cv-accordion-arrow">&#9660;</span></div>',
         );
         var cvBody = $(
-          '<div class="cv-accordion-body" style="display:none"></div>',
+          '<div class="cv-accordion-body" style="display:' +
+            (openByDefault ? "block" : "none") +
+            '"></div>',
         );
         row.append(cvHeader).append(cvBody);
+        if (openByDefault) {
+          cvHeader.find(".cv-accordion-arrow").css("transform", "rotate(0deg)");
+        }
         cvHeader.on("click", function () {
           var isOpen = cvBody.css("display") !== "none";
           cvBody.css("display", isOpen ? "none" : "block");
@@ -191,6 +199,20 @@
             (it.url || "") +
             '"></label></p>',
         );
+
+        cvBody.append(
+          "<p><label>" +
+            escHtml(t("linkTitle", "Link Title")) +
+            '<br><input type="text" class="widefat cv-link-title" value="' +
+            (it.link_title || "") +
+            '"></label></p>',
+        );
+
+        cvBody.append(
+          '<p><button type="button" class="button button-secondary cv-choose-link">' +
+            escHtml(t("chooseLink", "Choose Link")) +
+            "</button></p>",
+        );
         cvBody.append(
           '<p><button type="button" class="button remove-core-value">' +
             escHtml(t("remove", "Remove")) +
@@ -240,16 +262,20 @@
           cur.title = row.find(".cv-title").val();
           cur.description = row.find(".cv-desc").val();
           cur.url = row.find(".cv-url").val();
+          cur.link_title = row.find(".cv-link-title").val();
           items2[idx] = cur;
           setItems(items2);
           var t = row.find(".cv-title").val();
           if (t) cvHeader.find(".cv-accordion-label").text(t);
         });
 
-        row.on("click", ".cv-url", function (e) {
+        row.on("click", ".cv-url, .cv-choose-link", function (e) {
           if (e && e.preventDefault) e.preventDefault();
           if (e && e.stopPropagation) e.stopPropagation();
-          openLinkPicker(this);
+          openLinkPicker(
+            row.find(".cv-url").get(0),
+            row.find(".cv-link-title").get(0),
+          );
         });
         row.on("click", ".remove-core-value", function (e) {
           e.preventDefault();
@@ -270,6 +296,7 @@
         title: "",
         description: "",
         url: "",
+        link_title: "",
       });
       setItems(items);
       render();

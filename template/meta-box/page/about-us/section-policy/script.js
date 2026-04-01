@@ -49,7 +49,21 @@
       );
     }
 
-    function openLinkPicker(urlInput) {
+    function getIdxFromName(name) {
+      var m = String(name || "").match(/\[(\d+)\]\[url\]$/);
+      return m ? parseInt(m[1], 10) : null;
+    }
+
+    function findTitleInputByIdx(idx) {
+      if (idx === null || idx === undefined) return null;
+      return box.querySelector(
+        'input[name="buildpro_about_policy_certifications[' +
+          idx +
+          '][title]"]',
+      );
+    }
+
+    function openLinkPicker(urlInput, titleInput) {
       if (!urlInput) return;
       var wpLinkObj =
         typeof wpLink !== "undefined" &&
@@ -70,8 +84,12 @@
       }
 
       var urlField = document.getElementById("wp-link-url");
+      var textField = document.getElementById("wp-link-text");
       if (urlField) {
         urlField.value = urlInput.value || "";
+      }
+      if (textField && titleInput) {
+        textField.value = titleInput.value || "";
       }
 
       var originalUpdate =
@@ -80,6 +98,10 @@
         wpLinkObj.update = function () {
           try {
             if (urlField) urlInput.value = urlField.value || "";
+          } catch (e) {}
+          try {
+            if (textField && titleInput)
+              titleInput.value = textField.value || "";
           } catch (e) {}
           try {
             if (typeof wpLinkObj.close === "function") wpLinkObj.close();
@@ -97,6 +119,9 @@
           if (urlField) urlInput.value = urlField.value || "";
         } catch (e) {}
         try {
+          if (textField && titleInput) titleInput.value = textField.value || "";
+        } catch (e) {}
+        try {
           if (typeof wpLinkObj.close === "function") wpLinkObj.close();
         } catch (e) {}
         if (submit) submit.removeEventListener("click", handler, true);
@@ -109,9 +134,28 @@
     box.addEventListener("click", function (e) {
       var target = e && e.target ? e.target : null;
       if (!target) return;
+
+      if (target.classList.contains("policy-cert-choose-link")) {
+        e.preventDefault();
+        var idxBtn = parseInt(target.getAttribute("data-idx"), 10);
+        if (!isFinite(idxBtn)) return;
+        var urlInput = box.querySelector(
+          'input[name="buildpro_about_policy_certifications[' +
+            idxBtn +
+            '][url]"]',
+        );
+        openLinkPicker(urlInput, findTitleInputByIdx(idxBtn));
+        return;
+      }
+
       if (isUrlInput(target)) {
         e.preventDefault();
-        openLinkPicker(target);
+
+        // Certifications repeater: sync URL + Title
+        var name = target.getAttribute("name") || "";
+        var idx = /\[url\]$/.test(name) ? getIdxFromName(name) : null;
+        var titleInput = idx !== null ? findTitleInputByIdx(idx) : null;
+        openLinkPicker(target, titleInput);
       }
     });
   }
@@ -334,6 +378,11 @@
         '<br><input type="text" class="widefat" name="buildpro_about_policy_certifications[' +
         idx +
         '][url]" value=""></label></p>' +
+        '<p><button type="button" class="button button-secondary policy-cert-choose-link" data-idx="' +
+        idx +
+        '">' +
+        t("chooseLink", "Choose Link") +
+        "</button></p>" +
         "<p><label>" +
         t("title", "Title") +
         '<br><input type="text" class="widefat" name="buildpro_about_policy_certifications[' +

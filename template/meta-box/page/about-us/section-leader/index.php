@@ -12,14 +12,20 @@
     <div id="buildpro_about_leader_tab_content">
         <p><label><input type="checkbox" name="buildpro_about_leader_enabled" value="1"
                     <?php checked($enabled, 1); ?>><?php echo esc_html__('Enabled', 'buildpro'); ?></label></p>
-        <p><label><?php echo esc_html__('Title', 'buildpro'); ?><br><input type="text" class="widefat" name="buildpro_about_leader_title"
-                    value="<?php echo esc_attr($title); ?>"></label></p>
-        <p><label><?php echo esc_html__('Text', 'buildpro'); ?><br><input type="text" class="widefat" name="buildpro_about_leader_text"
-                    value="<?php echo esc_attr($text); ?>"></label></p>
-        <p><label><?php echo esc_html__('Core Executives', 'buildpro'); ?><br><input type="text" class="widefat" name="buildpro_about_leader_executives"
-                    value="<?php echo esc_attr($executives); ?>"></label></p>
-        <p><label><?php echo esc_html__('Total Workforce', 'buildpro'); ?><br><input type="text" class="widefat" name="buildpro_about_leader_workforce"
-                    value="<?php echo esc_attr($workforce); ?>"></label></p>
+        <p><label><?php echo esc_html__('Title', 'buildpro'); ?><br><input type="text" class="widefat"
+                    name="buildpro_about_leader_title" value="<?php echo esc_attr($title); ?>"></label></p>
+        <p><label><?php echo esc_html__('Text', 'buildpro'); ?><br><input type="text" class="widefat"
+                    name="buildpro_about_leader_text" value="<?php echo esc_attr($text); ?>"></label></p>
+        <p><label><?php echo esc_html__('Core Executives (Label)', 'buildpro'); ?><br><input type="text" class="widefat"
+                    name="buildpro_about_leader_executives_label"
+                    value="<?php echo esc_attr($executives_label); ?>"></label></p>
+        <p><label><?php echo esc_html__('Core Executives (Value)', 'buildpro'); ?><br><input type="text" class="widefat"
+                    name="buildpro_about_leader_executives" value="<?php echo esc_attr($executives); ?>"></label></p>
+        <p><label><?php echo esc_html__('Total Workforce (Label)', 'buildpro'); ?><br><input type="text" class="widefat"
+                    name="buildpro_about_leader_workforce_label"
+                    value="<?php echo esc_attr($workforce_label); ?>"></label></p>
+        <p><label><?php echo esc_html__('Total Workforce (Value)', 'buildpro'); ?><br><input type="text" class="widefat"
+                    name="buildpro_about_leader_workforce" value="<?php echo esc_attr($workforce); ?>"></label></p>
     </div>
     <div id="buildpro_about_leader_tab_items" style="display: none;">
         <div id="buildpro_about_leader_items_wraps">
@@ -30,7 +36,8 @@
                     $it_name = isset($it['name']) ? (string) $it['name'] : '';
                     $it_position = isset($it['position']) ? (string) $it['position'] : '';
                     $it_description = isset($it['description']) ? (string) $it['description'] : '';
-                    $it_url = isset($it['url']) ? (string) $it['url'] : ''; ?>
+                    $it_url = isset($it['url']) ? (string) $it['url'] : '';
+                    $it_link_title = isset($it['link_title']) ? (string) $it['link_title'] : ''; ?>
 
                     <div class="leader-item">
                         <p><label><?php echo esc_html__('Icon Image', 'buildpro'); ?></label></p>
@@ -56,11 +63,18 @@
                         <p><label><?php echo esc_html__('URL', 'buildpro'); ?><br><input type="text" class="widefat"
                                     name="buildpro_about_leader_items[<?php echo $i; ?>][url]"
                                     value="<?php echo esc_attr($it_url); ?>"></label></p>
-                        <p><button type="button" class="button remove-leader"><?php echo esc_html__('Remove', 'buildpro'); ?></button></p>
+                        <p><label><?php echo esc_html__('Link Title', 'buildpro'); ?><br><input type="text" class="widefat"
+                                    name="buildpro_about_leader_items[<?php echo $i; ?>][link_title]"
+                                    value="<?php echo esc_attr($it_link_title); ?>"></label></p>
+                        <p><button type="button" class="button button-secondary buildpro_about_leader_choose_link"
+                                data-idx="<?php echo $i; ?>"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button></p>
+                        <p><button type="button"
+                                class="button remove-leader"><?php echo esc_html__('Remove', 'buildpro'); ?></button></p>
                     </div>
             <?php }
             } ?>
         </div>
-        <p><button type="button" class="button" id="buildpro_about_leader_add_item"><?php echo esc_html__('Add Item', 'buildpro'); ?></button></p>
+        <p><button type="button" class="button"
+                id="buildpro_about_leader_add_item"><?php echo esc_html__('Add Item', 'buildpro'); ?></button></p>
     </div>
 </div>

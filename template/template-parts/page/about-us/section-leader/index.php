@@ -7,6 +7,10 @@ $title = $use_mod ? get_theme_mod('buildpro_about_leader_title', '') : get_post_
 $text = $use_mod ? get_theme_mod('buildpro_about_leader_text', '') : get_post_meta($pid, 'buildpro_about_leader_text', true);
 $executives = $use_mod ? get_theme_mod('buildpro_about_leader_executives', '') : get_post_meta($pid, 'buildpro_about_leader_executives', true);
 $workforce = $use_mod ? get_theme_mod('buildpro_about_leader_workforce', '') : get_post_meta($pid, 'buildpro_about_leader_workforce', true);
+$executives_label = $use_mod ? get_theme_mod('buildpro_about_leader_executives_label', __('Core Executives', 'buildpro')) : get_post_meta($pid, 'buildpro_about_leader_executives_label', true);
+$workforce_label = $use_mod ? get_theme_mod('buildpro_about_leader_workforce_label', __('Total Workforce', 'buildpro')) : get_post_meta($pid, 'buildpro_about_leader_workforce_label', true);
+$executives_label = is_string($executives_label) && $executives_label !== '' ? $executives_label : __('Core Executives', 'buildpro');
+$workforce_label = is_string($workforce_label) && $workforce_label !== '' ? $workforce_label : __('Total Workforce', 'buildpro');
 $items = $use_mod ? get_theme_mod('buildpro_about_leader_items', array()) : get_post_meta($pid, 'buildpro_about_leader_items', true);
 $items = is_array($items) ? $items : array();
 if ($enabled && (!empty($items) || is_customize_preview())) :
@@ -29,13 +33,13 @@ if ($enabled && (!empty($items) || is_customize_preview())) :
                     <?php if ($executives !== '') : ?>
                         <div class="about-leader__stat">
                             <div class="about-leader__stat-value"><?php echo esc_html($executives); ?></div>
-                            <div class="about-leader__stat-label"><?php esc_html_e('Core Executives', 'buildpro'); ?></div>
+                            <div class="about-leader__stat-label"><?php echo esc_html($executives_label); ?></div>
                         </div>
                     <?php endif; ?>
                     <?php if ($workforce !== '') : ?>
                         <div class="about-leader__stat">
                             <div class="about-leader__stat-value"><?php echo esc_html($workforce); ?></div>
-                            <div class="about-leader__stat-label"><?php esc_html_e('Total Workforce', 'buildpro'); ?></div>
+                            <div class="about-leader__stat-label"><?php echo esc_html($workforce_label); ?></div>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -51,6 +55,7 @@ if ($enabled && (!empty($items) || is_customize_preview())) :
                         $it_position = isset($it['position']) ? (string)$it['position'] : '';
                         $it_description = isset($it['description']) ? (string)$it['description'] : '';
                         $it_url = isset($it['url']) ? (string)$it['url'] : '';
+                        $it_link_title = isset($it['link_title']) ? (string)$it['link_title'] : '';
                         if ($icon_url || $it_name !== '' || $it_position !== '' || $it_description !== '' || $it_url !== '') {
                             $display[] = array(
                                 'icon_id' => $icon_id,
@@ -59,6 +64,7 @@ if ($enabled && (!empty($items) || is_customize_preview())) :
                                 'position' => $it_position,
                                 'description' => $it_description,
                                 'url' => $it_url,
+                                'link_title' => $it_link_title,
                             );
                         }
                         if (count($display) >= 3) {
@@ -74,8 +80,9 @@ if ($enabled && (!empty($items) || is_customize_preview())) :
                         $it_position = $it['position'];
                         $it_description = $it['description'];
                         $it_url = $it['url'];
+                        $it_link_title = isset($it['link_title']) ? (string) $it['link_title'] : '';
                     ?>
-                        <div class="about-leader__card">
+                        <a class="about-leader__card" href="<?php echo esc_url($it_url); ?>">
                             <div class="about-leader__avatar-wrap">
                                 <div class="about-leader__avatar-ring"></div>
                                 <?php if ($icon_url) : ?>
@@ -93,13 +100,7 @@ if ($enabled && (!empty($items) || is_customize_preview())) :
                             <?php if ($it_description !== '') : ?>
                                 <div class="about-leader__role"><?php echo esc_html($it_description); ?></div>
                             <?php endif; ?>
-                            <?php if ($it_url !== '') : ?>
-                                <a class="about-leader__link" href="<?php echo esc_url($it_url); ?>">
-                                    <span><?php esc_html_e('View Profile', 'buildpro'); ?></span>
-                                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                                </a>
-                            <?php endif; ?>
-                        </div>
+                        </a>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
