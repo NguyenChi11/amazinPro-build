@@ -159,7 +159,7 @@ function buildpro_footer_customize_register($wp_customize)
     ));
     if (class_exists('BuildPro_Footer_Contact_Links_Control')) {
         $wp_customize->add_control(new BuildPro_Footer_Contact_Links_Control($wp_customize, 'footer_contact_links', array(
-            'label' => __('Social Linkss', 'buildpro'),
+            'label' => __('Social Links', 'buildpro'),
             'description' => __('Add/Edit contact links with icons.', 'buildpro'),
             'section' => 'buildpro_footer_section',
         )));

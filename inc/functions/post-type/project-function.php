@@ -47,17 +47,17 @@ add_action('after_switch_theme', function () {
 function buildpro_register_project_taxonomies()
 {
     $labels = array(
-        'name'              => 'Project Contruction',
-        'singular_name'     => 'Project Contruction',
-        'search_items'      => 'Search Project Contruction',
-        'all_items'         => 'All Project Contruction',
-        'parent_item'       => 'Parent Project Contruction',
-        'parent_item_colon' => 'Parent Project Contruction:',
-        'edit_item'         => 'Edit Project Contruction',
-        'update_item'       => 'Update Project Contruction',
-        'add_new_item'      => 'Add New Project Contruction',
-        'new_item_name'     => 'New Project Contruction Name',
-        'menu_name'         => 'Project Contruction',
+        'name'              => 'Project Categories',
+        'singular_name'     => 'Project Category',
+        'search_items'      => 'Search Project Categories',
+        'all_items'         => 'All Project Categories',
+        'parent_item'       => 'Parent Project Category',
+        'parent_item_colon' => 'Parent Project Category:',
+        'edit_item'         => 'Edit Project Category',
+        'update_item'       => 'Update Project Category',
+        'add_new_item'      => 'Add New Project Category',
+        'new_item_name'     => 'New Project Category Name',
+        'menu_name'         => 'Project Categories',
     );
     $args = array(
         'hierarchical'      => true,

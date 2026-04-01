@@ -13,6 +13,7 @@ function buildpro_customize_register($wp_customize)
     $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'header_logo', array(
         'label' => __('Logo', 'buildpro'),
         'section' => 'buildpro_header_section',
+        'description' => __('Please use a square logo', 'buildpro'),
         'mime_type' => 'image',
     )));
     $wp_customize->add_setting('buildpro_header_title', array(
