@@ -88,7 +88,10 @@
         setPaymentMethodSelected(paypalMethodId);
         setCheckoutFlowFlag("0");
         syncWooHiddenFields();
-        reloadPpcpButtons();
+        // Small delay ensures the panel is visible before PPCP tries to measure
+        setTimeout(function () {
+          reloadPpcpButtons();
+        }, 50);
       }
 
       updateSubmitButtonForMethod(target);
@@ -328,33 +331,68 @@
       return;
     }
 
+    // Determine wrapper from PPCP localized data first, then fall back to known IDs.
+    var ppcpWrapper =
+      window.PayPalCommerceGateway &&
+      window.PayPalCommerceGateway.button &&
+      window.PayPalCommerceGateway.button.wrapper
+        ? window.PayPalCommerceGateway.button.wrapper
+        : "#ppc-button-ppcp-gateway";
+
     var selectors = [
+      ppcpWrapper,
       "#ppc-button-ppcp-gateway",
       "#ppc-button-ppcp-applepay",
       "#ppc-button-ppcp-googlepay",
     ];
 
-    selectors.forEach(function (selector) {
-      var el = document.querySelector(selector);
-      if (el) {
-        window.jQuery(el).trigger("ppcp-reload-buttons");
-      }
+    // De-duplicate
+    selectors = selectors.filter(function (s, i) {
+      return selectors.indexOf(s) === i;
     });
 
-    if (
-      window.PayPalCommerceGateway &&
-      window.PayPalCommerceGateway.button &&
-      window.PayPalCommerceGateway.button.wrapper
-    ) {
-      logPpcpDebug("reload ppcp buttons", {
-        context: window.PayPalCommerceGateway.context,
-        style: window.PayPalCommerceGateway.button.style,
-        urlParams: window.PayPalCommerceGateway.url_params,
-        wrapper: window.PayPalCommerceGateway.button.wrapper,
+    logPpcpDebug("reloadPpcpButtons", {
+      wrapper: ppcpWrapper,
+      context: window.PayPalCommerceGateway
+        ? window.PayPalCommerceGateway.context
+        : undefined,
+      style:
+        window.PayPalCommerceGateway && window.PayPalCommerceGateway.button
+          ? window.PayPalCommerceGateway.button.style
+          : undefined,
+    });
+
+    function triggerReload() {
+      selectors.forEach(function (selector) {
+        var el = document.querySelector(selector);
+        if (el) {
+          window.jQuery(el).trigger("ppcp-reload-buttons");
+          logPpcpDebug("triggered ppcp-reload-buttons on", selector);
+        }
       });
-      window
-        .jQuery(window.PayPalCommerceGateway.button.wrapper)
-        .trigger("ppcp-reload-buttons");
+
+      // Also trigger on the wrapper string directly (PPCP's preferred way).
+      if (
+        window.PayPalCommerceGateway &&
+        window.PayPalCommerceGateway.button &&
+        window.PayPalCommerceGateway.button.wrapper
+      ) {
+        window
+          .jQuery(window.PayPalCommerceGateway.button.wrapper)
+          .trigger("ppcp-reload-buttons");
+      }
+    }
+
+    // If the wrapper element is not yet in the DOM (PPCP renders it lazily),
+    // wait briefly and retry once — this handles the hidden-tab scenario where
+    // PPCP may not have mounted buttons on first render.
+    var wrapperEl = document.querySelector(ppcpWrapper);
+    if (!wrapperEl) {
+      setTimeout(function () {
+        triggerReload();
+      }, 150);
+    } else {
+      triggerReload();
     }
   }
 

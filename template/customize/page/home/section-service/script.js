@@ -39,8 +39,12 @@
         obj.link_url = urlInput && urlInput.value ? urlInput.value : "";
         obj.link_title =
           linkTitleInput && linkTitleInput.value ? linkTitleInput.value : "";
-        obj.link_target =
-          targetSelect && targetSelect.value ? targetSelect.value : "";
+        if (targetSelect && targetSelect.type === "checkbox") {
+          obj.link_target = targetSelect.checked ? "_blank" : "";
+        } else {
+          obj.link_target =
+            targetSelect && targetSelect.value ? targetSelect.value : "";
+        }
         data.push(obj);
       });
       hidden.value = JSON.stringify(data);
@@ -222,15 +226,13 @@
         t("chooseLink", "Choose Link") +
         "</button></p>" +
         '      <p class="buildpro-services-field"><label>' +
-        t("linkTitle", "Link Title") +
+        t("linkTitle", "Button Label") +
         '</label><input type="text" class="regular-text" data-field="link_title" value=""></p>' +
         '      <p class="buildpro-services-field"><label>' +
         t("linkTarget", "Link Target") +
-        '</label><select data-field="link_target"><option value="">' +
-        t("default", "Default") +
-        '</option><option value="_blank">' +
+        '</label><label class="checkbox-label"><input type="checkbox" data-field="link_target" value="_blank"> ' +
         t("openInNewTab", "Open in new tab") +
-        "</option></select></p>" +
+        "</label></p>" +
         "    </div>" +
         "  </div>" +
         '  <div class="buildpro-services-actions"><button type="button" class="button remove-services-row">' +

@@ -577,7 +577,7 @@ msgstr "Titre de droite"
 
 #: inc/customizer/about-us-page/section-policy/index.php:169
 #: template/meta-box/page/about-us/section-policy/index.php:68
-msgid "Warranty Description"
+msgid "Description"
 msgstr "Description de la garantie"
 
 #: inc/customizer/about-us-page/section-policy/index.php:214
@@ -590,11 +590,11 @@ msgid "Manage certifications (image/url/title/desc)."
 msgstr "Gérer les certifications (image/URL/titre/description)."
 
 #: inc/customizer/about-us-page/section-policy/index.php:219
-msgid "Warranty Items"
+msgid "Right Items"
 msgstr "Éléments de garantie"
 
 #: inc/customizer/about-us-page/section-policy/index.php:220
-msgid "Manage warranty items (icon/title/desc)."
+msgid "Manage Right Items (icon/title/desc)."
 msgstr "Gérer les éléments de garantie (icône/titre/description)."
 
 #: inc/customizer/about-us-page/section-policy/index.php:96
@@ -623,7 +623,7 @@ msgid "Contact Time"
 msgstr "Heures de contact"
 
 #: inc/customizer/footer/index.php:162
-msgid "Footer Contact Links"
+msgid "Social Linkss"
 msgstr "Liens de contact du pied de page"
 
 #: inc/customizer/footer/index.php:163
@@ -631,7 +631,7 @@ msgid "Add/Edit contact links with icons."
 msgstr "Ajouter/Modifier les liens de contact avec des icônes."
 
 #: inc/customizer/footer/index.php:173
-msgid "Create Build Text"
+msgid "Copyright Text"
 msgstr "Créer le texte de Build"
 
 #: inc/customizer/footer/index.php:183
@@ -647,11 +647,11 @@ msgid "Choose link for Policy."
 msgstr "Choisir le lien pour la politique."
 
 #: inc/customizer/footer/index.php:205
-msgid "Servicer Text"
+msgid "Service Text"
 msgstr "Texte du service"
 
 #: inc/customizer/footer/index.php:216
-msgid "Servicer Link"
+msgid "Service Link"
 msgstr "Lien du service"
 
 #: inc/customizer/footer/index.php:217
@@ -702,7 +702,7 @@ msgstr "Choisir un lien"
 #: template/meta-box/page/home/section-banner/index.php:43
 #: template/meta-box/page/home/section-services/index.php:74
 #: template/meta-box/page/home/section-services/index.php:119
-msgid "Link Title"
+msgid "Button Label"
 msgstr "Titre du lien"
 
 #: inc/customizer/footer/index.php:268
@@ -1568,7 +1568,7 @@ msgid "Manage Certifications (image/url/title/desc)."
 msgstr "Gérez les certifications (image/url/titre/description)."
 
 #: template/customize/page/about-us/section-policy/index.php:8
-msgid "Manage Warranty Items (icon/title/desc)."
+msgid "Manage Right Items (icon/title/desc)."
 msgstr "Gérez les éléments de garantie (icône/titre/description)."
 
 #: template/customize/page/home/section-evaluate/index.php:14

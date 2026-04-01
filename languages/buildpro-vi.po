@@ -891,7 +891,7 @@ msgstr "Đường dẫn URL"
 msgid "Choose Link"
 msgstr "Chọn liên kết"
 
-msgid "Link Title"
+msgid "Button Label"
 msgstr "Tiêu đề liên kết"
 
 msgid "Button text"
@@ -1078,7 +1078,7 @@ msgstr "Tiêu đề bên trái"
 msgid "Right Title"
 msgstr "Tiêu đề bên phải"
 
-msgid "Warranty Description"
+msgid "Description"
 msgstr "Mô tả bảo hành"
 
 msgid "General Contractor"
@@ -1251,13 +1251,13 @@ msgstr "Liên kết chân trang"
 msgid "Add/Edit footer pages links."
 msgstr "Thêm/Sửa liên kết trang ở chân trang."
 
-msgid "Footer Contact Links"
+msgid "Social Linkss"
 msgstr "Liên kết liên hệ chân trang"
 
 msgid "Add/Edit contact links with icons."
 msgstr "Thêm/Sửa liên kết liên hệ kèm biểu tượng."
 
-msgid "Create Build Text"
+msgid "Copyright Text"
 msgstr "Văn bản Create Build"
 
 msgid "Policy Text"
@@ -1269,10 +1269,10 @@ msgstr "Liên kết chính sách"
 msgid "Store as JSON: url/title/target via control UI"
 msgstr "Lưu dạng JSON: url/title/target qua giao diện điều khiển"
 
-msgid "Servicer Text"
+msgid "Service Text"
 msgstr "Văn bản dịch vụ"
 
-msgid "Servicer Link"
+msgid "Service Link"
 msgstr "Liên kết dịch vụ"
 
 msgid "Information"
@@ -1486,11 +1486,11 @@ msgid "Manage certifications (image/url/title/desc)."
 msgstr ""
 
 #: inc/customizer/about-us-page/section-policy/index.php:219
-msgid "Warranty Items"
+msgid "Right Items"
 msgstr ""
 
 #: inc/customizer/about-us-page/section-policy/index.php:220
-msgid "Manage warranty items (icon/title/desc)."
+msgid "Manage Right Items (icon/title/desc)."
 msgstr ""
 
 #: inc/customizer/footer/index.php:195
@@ -1539,7 +1539,7 @@ msgid "Manage Certifications (image/url/title/desc)."
 msgstr ""
 
 #: template/customize/page/about-us/section-policy/index.php:8
-msgid "Manage Warranty Items (icon/title/desc)."
+msgid "Manage Right Items (icon/title/desc)."
 msgstr ""
 
 #: template/template-parts/comment-product/index.php:104

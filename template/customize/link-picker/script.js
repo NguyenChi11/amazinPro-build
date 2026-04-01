@@ -272,8 +272,14 @@
         dispatchBubbling(tgt.titleInput, "change");
       }
       if (tgt.targetSelect) {
-        tgt.targetSelect.value = targetBlank ? "_blank" : "";
-        dispatchBubbling(tgt.targetSelect, "change");
+        if (tgt.targetSelect.type === "checkbox") {
+          tgt.targetSelect.checked = targetBlank;
+          dispatchBubbling(tgt.targetSelect, "input");
+          dispatchBubbling(tgt.targetSelect, "change");
+        } else {
+          tgt.targetSelect.value = targetBlank ? "_blank" : "";
+          dispatchBubbling(tgt.targetSelect, "change");
+        }
       }
       window.buildproLinkTarget = null;
       goBackToSection(sectionId);

@@ -15,6 +15,30 @@
     return;
   }
   var frame;
+
+  function getTargetControl(row) {
+    return row.querySelector(
+      "input[type='checkbox'][name$='[link_target]'], select[name$='[link_target]']",
+    );
+  }
+
+  function getTargetValue(control) {
+    if (!control) return "";
+    if (control.type === "checkbox") {
+      return control.checked ? "_blank" : "";
+    }
+    return control.value || "";
+  }
+
+  function setTargetValue(control, value) {
+    if (!control) return;
+    if (control.type === "checkbox") {
+      control.checked = value === "_blank";
+      return;
+    }
+    control.value = value || "";
+  }
+
   function bindRow(row) {
     var selectBtn = row.querySelector(".select-banner-image");
     var removeImgBtn = row.querySelector(".remove-banner-image");
@@ -24,7 +48,7 @@
     var linkBtn = row.querySelector(".choose-link");
     var urlInput = row.querySelector("input[name$='[link_url]']");
     var titleInput = row.querySelector("input[name$='[link_title]']");
-    var targetSelect = row.querySelector("select[name$='[link_target]']");
+    var targetControl = getTargetControl(row);
     if (selectBtn) {
       selectBtn.addEventListener("click", function (e) {
         e.preventDefault();
@@ -83,8 +107,8 @@
         textField.value =
           titleInput && titleInput.value ? titleInput.value : "";
       }
-      if (targetField && targetSelect) {
-        targetField.checked = targetSelect.value === "_blank";
+      if (targetField && targetControl) {
+        targetField.checked = getTargetValue(targetControl) === "_blank";
       }
       var originalUpdate =
         typeof wpLink !== "undefined" && typeof wpLink.update === "function"
@@ -98,8 +122,8 @@
           if (textField && titleInput) {
             titleInput.value = textField.value || "";
           }
-          if (targetField && targetSelect) {
-            targetSelect.value = targetField.checked ? "_blank" : "";
+          if (targetField && targetControl) {
+            setTargetValue(targetControl, targetField.checked ? "_blank" : "");
           }
           wpLink.close();
           wpLink.update = originalUpdate;
@@ -120,8 +144,8 @@
         if (textField && titleInput) {
           titleInput.value = textField.value || "";
         }
-        if (targetField && targetSelect) {
-          targetSelect.value = targetField.checked ? "_blank" : "";
+        if (targetField && targetControl) {
+          setTargetValue(targetControl, targetField.checked ? "_blank" : "");
         }
         if (
           typeof wpLink !== "undefined" &&
@@ -169,7 +193,7 @@
     var descInput = row.querySelector("textarea[name$='[description]']");
     var urlInput = row.querySelector("input[name$='[link_url]']");
     var titleInput = row.querySelector("input[name$='[link_title]']");
-    var targetSelect = row.querySelector("select[name$='[link_target]']");
+    var targetControl = getTargetControl(row);
     if (input) {
       input.value = item.image_id || "";
     }
@@ -199,9 +223,7 @@
     if (titleInput) {
       titleInput.value = item.link_title || "";
     }
-    if (targetSelect) {
-      targetSelect.value = item.link_target || "";
-    }
+    setTargetValue(targetControl, item.link_target || "");
   }
   var data = window.buildproBannerData || { items: [] };
   data.items.forEach(function (it, idx) {

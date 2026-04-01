@@ -113,7 +113,7 @@ wp_localize_script(
                 <!-- Billing info -->
                 <div class="checkout-card">
                     <h2 class="checkout-card__title"><?php esc_html_e('Shipping Information', 'buildpro'); ?></h2>
-                    <form class="checkout-form checkout woocommerce-checkout" id="checkout-form" method="post"
+                    <form class="checkout woocommerce-checkout" id="checkout-form" method="post"
                         novalidate>
 
                         <?php do_action('woocommerce_checkout_before_customer_details'); ?>
@@ -345,63 +345,75 @@ wp_localize_script(
                             </div>
                         <?php endif; ?>
 
-                        <!-- PayPal -->
                         <?php if ($paypal_tab_enabled) : ?>
                             <div class="payment-panel<?php echo $active_payment_tab === 'tab-paypal' ? ' payment-panel--active' : ''; ?>"
                                 id="tab-paypal" role="tabpanel">
-                                <div class="payment-panel__icon-wrap payment-panel__icon-wrap--paypal">
-                                    <img class="paypal__image"
-                                        src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
-                                        alt="PayPal">
-                                </div>
-                                <div class="payment-panel__desc payment-panel__desc--left">
-                                    <?php echo $paypal_description; ?></div>
 
-                                <div class="payment-panel__note">
-                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <?php esc_html_e('Use the PayPal button below to complete payment. Your order will be confirmed automatically after successful payment.', 'buildpro'); ?>
+                                <!-- PayPal header -->
+                                <div class="pp-panel__header">
+                                    <div class="pp-panel__logo">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon/paypal.png"
+                                            alt="PayPal" class="pp-panel__logo-img">
+                                        <span class="pp-panel__logo-label">PayPal</span>
+                                    </div>
+                                    <span class="pp-panel__badge">
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <?php esc_html_e('Secure', 'buildpro'); ?>
+                                    </span>
                                 </div>
 
+                                <!-- WooCommerce notices -->
                                 <div class="woocommerce-notices-wrapper"></div>
 
-                                <div class="bp-payment-wrapper">
+                                <!-- PPCP Smart Buttons area -->
+                                <div class="pp-panel__buttons">
                                     <?php if ($ppcp_available) : ?>
-                                        <div
-                                            class="payment_box payment_method_<?php echo esc_attr($ppcp_gateway_id); ?> bp-paypal-payment-box">
-                                            <div class="bp-payment-title">
-                                                <h3><?php esc_html_e('Pay with PayPal', 'buildpro'); ?></h3>
-                                            </div>
-
-                                            <div class="bp-paypal-smart-buttons">
-                                                <?php
-                                                // Trigger PPCP renderer so the plugin outputs PayPal/Pay Later and APM buttons.
-                                                $ppcp_renderer_hook = apply_filters(
-                                                    'woocommerce_paypal_payments_checkout_button_renderer_hook',
-                                                    'woocommerce_review_order_after_payment'
-                                                );
-
-                                                if (is_string($ppcp_renderer_hook) && $ppcp_renderer_hook !== '') {
-                                                    do_action($ppcp_renderer_hook);
-                                                }
-                                                ?>
-                                            </div>
-
-                                            <div class="bp-payment-note">
-                                                <small>
-                                                    <?php esc_html_e('Secure payment via PayPal. You can pay with your PayPal account or card.', 'buildpro'); ?>
-                                                </small>
-                                            </div>
-                                        </div>
+                                        <?php
+                                        /**
+                                         * Trigger PPCP renderer.
+                                         * Plugin outputs:
+                                         *   <div class="ppc-button-wrapper">
+                                         *     <div id="ppc-button-ppcp-gateway"></div>
+                                         *   </div>
+                                         * Height / shape / color / label are injected by the PayPal SDK
+                                         * based on WooCommerce > Payments > PayPal > Styling settings.
+                                         */
+                                        $ppcp_renderer_hook = apply_filters(
+                                            'woocommerce_paypal_payments_checkout_button_renderer_hook',
+                                            'woocommerce_review_order_after_payment'
+                                        );
+                                        if (is_string($ppcp_renderer_hook) && $ppcp_renderer_hook !== '') {
+                                            do_action($ppcp_renderer_hook);
+                                        }
+                                        ?>
                                     <?php else : ?>
-                                        <div class="woocommerce-error bp-payment-error">
-                                            <strong><?php esc_html_e('Payment unavailable:', 'buildpro'); ?></strong>
-                                            <?php esc_html_e('PayPal Payments is not available. Please check plugin settings or try another payment method.', 'buildpro'); ?>
+                                        <div class="pp-panel__error">
+                                            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <?php esc_html_e('PayPal is currently unavailable. Please try another payment method.', 'buildpro'); ?>
                                         </div>
                                     <?php endif; ?>
+                                </div>
+
+                                <!-- Divider + trust tagline -->
+                                <div class="pp-panel__footer">
+                                    <span class="pp-panel__divider"></span>
+                                    <span class="pp-panel__trust">
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <?php esc_html_e('Protected by PayPal Buyer Protection', 'buildpro'); ?>
+                                    </span>
+                                    <span class="pp-panel__divider"></span>
                                 </div>
 
                                 <?php if ($bp_ppcp_debug_enabled) : ?>
@@ -429,72 +441,48 @@ wp_localize_script(
                                     }
 
                                     $safe_settings = [
-                                        'smart_button_enable_styling_per_location' => $ppcp_settings['smart_button_enable_styling_per_location'] ?? null,
                                         'smart_button_locations' => $ppcp_settings['smart_button_locations'] ?? null,
-                                        'pay_later_button_enabled' => $ppcp_settings['pay_later_button_enabled'] ?? null,
-                                        'pay_later_button_locations' => $ppcp_settings['pay_later_button_locations'] ?? null,
-                                        // These may or may not exist depending on plugin version/migration.
-                                        'button_general_layout' => $ppcp_settings['button_general_layout'] ?? null,
-                                        'button_general_color' => $ppcp_settings['button_general_color'] ?? null,
-                                        'button_general_shape' => $ppcp_settings['button_general_shape'] ?? null,
-                                        'button_general_label' => $ppcp_settings['button_general_label'] ?? null,
-                                        'button_general_tagline' => $ppcp_settings['button_general_tagline'] ?? null,
                                         'button_checkout_layout' => $ppcp_settings['button_checkout_layout'] ?? null,
                                         'button_checkout_color' => $ppcp_settings['button_checkout_color'] ?? null,
                                         'button_checkout_shape' => $ppcp_settings['button_checkout_shape'] ?? null,
                                         'button_checkout_label' => $ppcp_settings['button_checkout_label'] ?? null,
                                         'button_checkout_tagline' => $ppcp_settings['button_checkout_tagline'] ?? null,
+                                        'button_checkout_height' => $ppcp_settings['button_checkout_height'] ?? null,
                                     ];
 
                                     $bp_is_custom_checkout_template = function_exists('buildpro_ppcp_is_custom_checkout_template')
                                         ? (buildpro_ppcp_is_custom_checkout_template() ? 'true' : 'false')
                                         : '(missing helper)';
-
-                                    $bp_pay_later_enabled_raw = $ppcp_settings['pay_later_button_enabled'] ?? null;
-                                    $bp_pay_later_enabled = ($bp_pay_later_enabled_raw === true || $bp_pay_later_enabled_raw === 'yes' || $bp_pay_later_enabled_raw === '1' || $bp_pay_later_enabled_raw === 1);
-                                    $bp_pay_later_locations = $ppcp_settings['pay_later_button_locations'] ?? [];
-                                    if (!is_array($bp_pay_later_locations)) {
-                                        $bp_pay_later_locations = [];
-                                    }
-                                    $bp_pay_later_for_checkout = $bp_pay_later_enabled && (empty($bp_pay_later_locations) || in_array('checkout', $bp_pay_later_locations, true));
                                     ?>
                                     <pre class="bp-ppcp-debug">
-                                        PPCP Debug (temporary)
-                                        - ppcp_available: <?php echo $ppcp_available ? 'true' : 'false'; ?>
-                                        - paypal_gateway_id (detected): <?php echo esc_html($paypal_gateway_id ?: '(empty)'); ?>
-                                        - ppcp_gateway_id: <?php echo esc_html($ppcp_gateway_id ?: '(empty)'); ?>
-                                        - selected_method (theme hidden radio): <?php echo esc_html($selected_method ?: '(empty)'); ?>
-                                        - is_checkout(): <?php echo function_exists('is_checkout') && is_checkout() ? 'true' : 'false'; ?>
-                                        - buildpro_ppcp_is_custom_checkout_template(): <?php echo esc_html($bp_is_custom_checkout_template); ?>
-                                        - woocommerce_paypal_payments_context(filter): <?php echo esc_html((string) apply_filters('woocommerce_paypal_payments_context', '')); ?>
-                                        - assets enqueued: style[gateway]=<?php echo $style_is_enqueued ? 'yes' : 'no'; ?>, script[ppcp-smart-button]=<?php echo $script_is_enqueued ? 'yes' : 'no'; ?>
-                                        - force style param: <?php echo $bp_ppcp_force_style ? 'on' : 'off'; ?>
-                                        - force pay later param: <?php echo (isset($_GET['bp_ppcp_force_pay_later']) ? 'on' : 'off'); ?>
+PPCP Debug
+- ppcp_available: <?php echo $ppcp_available ? 'true' : 'false'; ?>
 
-                                        Pay Later resolution (theme-side):
-                                        - enabled raw: <?php echo esc_html(is_scalar($bp_pay_later_enabled_raw) ? (string) $bp_pay_later_enabled_raw : gettype($bp_pay_later_enabled_raw)); ?>
-                                        - enabled bool: <?php echo $bp_pay_later_enabled ? 'true' : 'false'; ?>
-                                        - locations: <?php echo esc_html(wp_json_encode(array_values($bp_pay_later_locations))); ?>
-                                        - for checkout: <?php echo $bp_pay_later_for_checkout ? 'true' : 'false'; ?>
+- ppcp_gateway_id: <?php echo esc_html($ppcp_gateway_id ?: '(empty)'); ?>
 
-                                        WooCommerce PayPal Payments settings (sanitized):
-                                        <?php echo esc_html(wp_json_encode($safe_settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); ?>
+- is_checkout(): <?php echo function_exists('is_checkout') && is_checkout() ? 'true' : 'false'; ?>
 
-                                        woocommerce-ppcp-data-styling.classic_checkout:
-                                        <?php echo esc_html(wp_json_encode($classic_checkout, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); ?>
+- is_custom_checkout: <?php echo esc_html($bp_is_custom_checkout_template); ?>
+
+- ppcp_context(filter): <?php echo esc_html((string) apply_filters('woocommerce_paypal_payments_context', '')); ?>
+
+- style[gateway]: <?php echo $style_is_enqueued ? 'enqueued' : 'not enqueued'; ?>
+
+- script[ppcp-smart-button]: <?php echo $script_is_enqueued ? 'enqueued' : 'not enqueued'; ?>
+
+
+Checkout button settings:
+<?php echo esc_html(wp_json_encode($safe_settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); ?>
+
+classic_checkout styling:
+<?php echo esc_html(wp_json_encode($classic_checkout, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); ?>
                                     </pre>
                                 <?php endif; ?>
 
-                                <div class="payment-panel__note">
-                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <?php esc_html_e('You will be redirected to PayPal and returned here after authorization.', 'buildpro'); ?>
-                                </div>
                             </div>
                         <?php endif; ?>
+
+
 
                         <!-- Credit card -->
                         <?php if ($wcpay_enabled) : ?>

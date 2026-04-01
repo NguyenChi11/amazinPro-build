@@ -56,16 +56,16 @@
                             <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                         </p>
                         <p class="buildpro-services-field">
-                            <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
+                            <label><?php echo esc_html__('Button Label', 'buildpro'); ?></label>
                             <input type="text" class="regular-text" data-field="link_title"
                                 value="<?php echo esc_attr($link_title); ?>" placeholder="<?php echo esc_attr__('View Details', 'buildpro'); ?>">
                         </p>
                         <p class="buildpro-services-field">
                             <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-                            <select class="regular-select" data-field="link_target">
-                                <option value="" <?php selected($link_target, '', true); ?>><?php echo esc_html__('Default', 'buildpro'); ?></option>
-                                <option value="_blank" <?php selected($link_target, '_blank', true); ?>><?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
-                            </select>
+                        <div class="checkbox-label">
+                            <input type="checkbox" data-field="link_target" value="_blank" <?php checked($link_target, '_blank'); ?>>
+                            <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
+                        </div>
                         </p>
                     </div>
                 </div>

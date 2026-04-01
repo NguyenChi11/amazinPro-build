@@ -106,7 +106,8 @@ if (empty($items) && !is_customize_preview()) {
                             </a>
                             <div class="section-product__item-bottom">
                                 <p class="section-product__item-price">
-                                    <span>$</span><?php echo esc_html($item['price']); ?><span>/<?php esc_html_e('ton', 'buildpro'); ?></span>
+                                    <span>$</span><?php echo esc_html($item['price']); ?>
+                                    <!-- <span>/<?php esc_html_e('ton', 'buildpro'); ?></span> -->
                                 </p>
                                 <button class="section-product__item-cta btn-add-to-cart" type="button"
                                     data-product-id="<?php echo esc_attr($item['id']); ?>"><?php esc_html_e('Add to Cart', 'buildpro'); ?></button>

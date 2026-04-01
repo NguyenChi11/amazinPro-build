@@ -307,41 +307,67 @@ if (!function_exists('buildpro_ppcp_disable_standard_card_button_gateway')) {
 }
 
 if (!function_exists('buildpro_ppcp_adjust_for_custom_checkout_template')) {
-    // Ensure WooCommerce PayPal Payments smart buttons treat our custom Checkout Page template
-    // as a checkout context, so its JS reads from `form.checkout`.
+    /**
+     * Ensures WooCommerce PayPal Payments Smart Buttons treat our custom Checkout Page template
+     * as a true checkout context, so its JS reads from `form.checkout` and scripts are enqueued.
+     *
+     * Must run on `wp` (priority 1 — before wp_enqueue_scripts at priority 10) so that
+     * SmartButton::should_load_ppcp_script() sees the correct context.
+     */
     function buildpro_ppcp_adjust_for_custom_checkout_template()
     {
         if (!buildpro_ppcp_is_custom_checkout_template()) {
             return;
         }
 
+        // ── woocommerce_is_checkout ──────────────────────────────────────────
+        // Must be set before PPCP's context detection (runs on wp hook priority 10).
         if (!has_filter('woocommerce_is_checkout', '__return_true')) {
-            add_filter('woocommerce_is_checkout', '__return_true', 99);
+            add_filter('woocommerce_is_checkout', '__return_true', 1);
         }
 
+        // ── PPCP button context ──────────────────────────────────────────────
         if (!has_filter('woocommerce_paypal_payments_context', 'buildpro_ppcp_context_checkout')) {
             add_filter('woocommerce_paypal_payments_context', 'buildpro_ppcp_context_checkout', 99);
         }
 
+        // ── Force 'checkout' into smart_button_locations ─────────────────────
         if (!has_filter('woocommerce_paypal_payments_selected_button_locations', 'buildpro_ppcp_force_checkout_button_location')) {
             add_filter('woocommerce_paypal_payments_selected_button_locations', 'buildpro_ppcp_force_checkout_button_location', 999, 2);
         }
 
+        // ── Pay Later funding source adjustments ─────────────────────────────
         if (!has_filter('woocommerce_paypal_payments_localized_script_data', 'buildpro_ppcp_adjust_localized_script_data_for_pay_later')) {
             add_filter('woocommerce_paypal_payments_localized_script_data', 'buildpro_ppcp_adjust_localized_script_data_for_pay_later', 9990);
         }
 
+        // ── Button style override (debug mode only) ──────────────────────────
         if (!has_filter('woocommerce_paypal_payments_localized_script_data', 'buildpro_ppcp_force_button_style_from_settings')) {
             add_filter('woocommerce_paypal_payments_localized_script_data', 'buildpro_ppcp_force_button_style_from_settings', 999);
         }
 
+        // ── Remove Card Button gateway (we don't render it separately) ───────
         if (!has_filter('woocommerce_available_payment_gateways', 'buildpro_ppcp_disable_standard_card_button_gateway')) {
             add_filter('woocommerce_available_payment_gateways', 'buildpro_ppcp_disable_standard_card_button_gateway', 999);
         }
+
+        // ── Ensure PPCP JS sees context = 'checkout' in localized data ───────
+        // The plugin checks PayPalCommerceGateway.context on the JS side.
+        // Forcing the filter here guarantees the value is correct even if
+        // the plugin's Context class resolved to something else first.
+        add_filter('woocommerce_paypal_payments_localized_script_data', static function (array $data): array {
+            $data['context'] = 'checkout';
+            // Also ensure the button wrapper is pointing to the right container.
+            if (!isset($data['button']['wrapper'])) {
+                $data['button']['wrapper'] = '#ppc-button-ppcp-gateway';
+            }
+            return $data;
+        }, 10000);
     }
 }
 
-add_action('wp', 'buildpro_ppcp_adjust_for_custom_checkout_template', 20);
+// Run at priority 1 so our filters are in place before PPCP's `wp` hook at priority 10.
+add_action('wp', 'buildpro_ppcp_adjust_for_custom_checkout_template', 1);
 
 if (!function_exists('buildpro_payment_get_bill_page_url')) {
     function buildpro_payment_get_bill_page_url(): string

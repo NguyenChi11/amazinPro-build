@@ -203,7 +203,7 @@ function buildpro_about_leader_customize_register($wp_customize)
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('buildpro_about_leader_text', array(
-        'label' => __('Text', 'buildpro'),
+        'label' => __('Description', 'buildpro'),
         'section' => 'buildpro_about_leader_section',
         'type' => 'text',
     ));

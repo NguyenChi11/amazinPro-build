@@ -20,6 +20,12 @@ $service_items = [];
 $rows = get_post_meta($page_id, 'buildpro_service_items', true);
 if (is_customize_preview()) {
     $mods = get_theme_mod('buildpro_service_items', array());
+    if (is_string($mods)) {
+        $decoded = json_decode($mods, true);
+        if (is_array($decoded)) {
+            $mods = $decoded;
+        }
+    }
     if (is_array($mods) && !empty($mods)) {
         $rows = $mods;
     }
@@ -82,7 +88,10 @@ $icon_right = 212;
                     ?>
                     <a class="section-services__item-link" href="<?php echo esc_url($item['link_url']); ?>"
                         <?php echo $target_attr . $rel_attr; ?>>
-                        <?php echo esc_html__('View Details', 'buildpro'); ?>
+                        <?php
+                        $link_label = !empty($item['link_title']) ? $item['link_title'] : __('View Details', 'buildpro');
+                        echo esc_html($link_label);
+                        ?>
                         <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')); ?>"
                             alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>" class="section-services__item-link-icon">
                     </a>

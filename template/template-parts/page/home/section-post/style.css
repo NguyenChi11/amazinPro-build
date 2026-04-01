@@ -25,6 +25,7 @@
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
+  margin-bottom: 1.5rem;
 }
 .section-post__description {
   font-family: "Poppins", sans-serif;
@@ -39,7 +40,7 @@
   opacity: 1;
   color: rgba(126, 132, 139, 1);
   margin: 0;
-  margin-top: 1rem;
+
   margin-bottom: 3.75rem;
   white-space: normal;
   overflow-wrap: anywhere;

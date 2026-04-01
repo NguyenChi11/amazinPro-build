@@ -23,6 +23,14 @@
       .replace(/'/g, "&#039;");
   }
 
+  function readTargetValue(targetEl) {
+    if (!targetEl) return "";
+    if (targetEl.type === "checkbox") {
+      return targetEl.checked ? "_blank" : "";
+    }
+    return targetEl.value || "";
+  }
+
   /* ── helpers ─────────────────────────────────────────────── */
   function getCLWrap() {
     return document.getElementById("customizer-footer-contact-links-wrapper");
@@ -39,10 +47,11 @@
   function collectSingleLink(wrap) {
     var input = getSingleLinkInput(wrap);
     if (!wrap || !input) return;
+    var targetEl = wrap.querySelector('[data-field="target"]');
     var out = {
       url: (wrap.querySelector('[data-field="url"]') || {}).value || "",
       title: (wrap.querySelector('[data-field="title"]') || {}).value || "",
-      target: (wrap.querySelector('[data-field="target"]') || {}).value || "",
+      target: readTargetValue(targetEl),
     };
     input.value = JSON.stringify(out);
     input.dispatchEvent(new Event("change", { bubbles: true }));
@@ -55,11 +64,12 @@
     var out = [];
     wrap.querySelectorAll(".buildpro-block").forEach(function (row) {
       var icon = row.querySelector('[data-field="icon_id"]');
+      var targetEl = row.querySelector('[data-field="target"]');
       out.push({
         icon_id: icon ? parseInt(icon.value || 0, 10) : 0,
         url: (row.querySelector('[data-field="url"]') || {}).value || "",
         title: (row.querySelector('[data-field="title"]') || {}).value || "",
-        target: (row.querySelector('[data-field="target"]') || {}).value || "",
+        target: readTargetValue(targetEl),
       });
     });
     input.value = JSON.stringify(out);
@@ -69,7 +79,7 @@
   function navigateToLinkPicker(urlEl, titleEl, targetEl) {
     var url = urlEl ? urlEl.value || "" : "";
     var title = titleEl ? titleEl.value || "" : "";
-    var tgt = targetEl ? targetEl.value || "" : "";
+    var tgt = readTargetValue(targetEl);
     window.buildproLinkTarget = {
       urlInput: urlEl,
       titleInput: titleEl,
@@ -165,17 +175,15 @@
           escHtml(t("chooseLink", "Choose Link")) +
           "</button></p>" +
           '<p class="buildpro-field"><label>' +
-          escHtml(t("linkTitle", "Link Title")) +
+          escHtml(t("linkTitle", "Button Label")) +
           "</label>" +
           '<input type="text" class="regular-text" data-field="title" value=""></p>' +
           '<p class="buildpro-field"><label>' +
           escHtml(t("linkTarget", "Link Target")) +
           "</label>" +
-          '<select data-field="target"><option value="">' +
-          escHtml(t("sameTab", "Same Tab")) +
-          '</option><option value="_blank">' +
+          '<label><input type="checkbox" data-field="target" value="_blank"> ' +
           escHtml(t("openInNewTab", "Open in new tab")) +
-          "</option></select></p>" +
+          "</label></p>" +
           '<div class="buildpro-actions"><button type="button" class="button remove-row">' +
           escHtml(t("remove", "Remove")) +
           "</button></div>";
@@ -389,6 +397,24 @@
       "footer_banner_image_id",
       "footer_banner_preview",
     );
+
+    function readTargetValue(targetEl) {
+      if (!targetEl) return "";
+      if (targetEl.type === "checkbox") {
+        return targetEl.checked ? "_blank" : "";
+      }
+      return targetEl.value || "";
+    }
+
+    function writeTargetValue(targetEl, value) {
+      if (!targetEl) return;
+      if (targetEl.type === "checkbox") {
+        targetEl.checked = value === "_blank";
+        return;
+      }
+      targetEl.value = value || "";
+    }
+
     var customCtx = { urlInput: null, titleInput: null, targetSelect: null };
     function showCustom() {
       var b = document.getElementById("buildpro-custom-link-backdrop");
@@ -414,7 +440,7 @@
       if (titleEl)
         titleEl.value = titleInput && titleInput.value ? titleInput.value : "";
       if (targetEl)
-        targetEl.checked = targetSelect && targetSelect.value === "_blank";
+        targetEl.checked = readTargetValue(targetSelect) === "_blank";
       showCustom();
     }
     function applyCustom() {
@@ -426,7 +452,10 @@
       if (customCtx.titleInput && titleEl)
         customCtx.titleInput.value = titleEl.value || "";
       if (customCtx.targetSelect && targetEl)
-        customCtx.targetSelect.value = targetEl.checked ? "_blank" : "";
+        writeTargetValue(
+          customCtx.targetSelect,
+          targetEl.checked ? "_blank" : "",
+        );
       hideCustom();
     }
     function fetchJSON(u) {
@@ -579,9 +608,7 @@
       var row = btn.closest(".buildpro-block");
       var urlInput = row ? row.querySelector("input[name$='[url]']") : null;
       var titleInput = row ? row.querySelector("input[name$='[title]']") : null;
-      var targetSelect = row
-        ? row.querySelector("select[name$='[target]']")
-        : null;
+      var targetSelect = row ? row.querySelector("[name$='[target]']") : null;
       openCustomLinkPicker(urlInput, titleInput, targetSelect);
       return false;
     };
@@ -598,7 +625,7 @@
             ? row.querySelector("input[name$='[title]']")
             : null;
           var targetSelect = row
-            ? row.querySelector("select[name$='[target]']")
+            ? row.querySelector("[name$='[target]']")
             : null;
           openCustomLinkPicker(urlInput, titleInput, targetSelect);
         }
@@ -609,7 +636,7 @@
       var linkBtn = row.querySelector(".choose-link");
       var urlInput = row.querySelector("input[name$='[url]']");
       var titleInput = row.querySelector("input[name$='[title]']");
-      var targetSelect = row.querySelector("select[name$='[target]']");
+      var targetSelect = row.querySelector("[name$='[target]']");
       var removeRowBtn = row.querySelector(".remove-row");
       var selectIconBtn = row.querySelector(".select-contact-icon");
       var removeIconBtn = row.querySelector(".remove-contact-icon");
@@ -709,19 +736,17 @@
           escHtml(t("chooseLink", "Choose Link")) +
           "</button></p>" +
           "  <p class='buildpro-field'><label>" +
-          escHtml(t("linkTitle", "Link Title")) +
+          escHtml(t("linkTitle", "Button Label")) +
           "</label><input type='text' name='footer_contact_links[" +
           idx +
           "][title]' class='regular-text' value=''></p>" +
           "  <p class='buildpro-field'><label>" +
           escHtml(t("linkTarget", "Link Target")) +
-          "</label><select name='footer_contact_links[" +
+          "</label><div class='checkbox-label'><input type='checkbox' name='footer_contact_links[" +
           idx +
-          "][target]'><option value=''>" +
-          escHtml(t("sameTab", "Same Tab")) +
-          "</option><option value='_blank'>" +
+          "][target]' value='_blank'> " +
           escHtml(t("openInNewTab", "Open in new tab")) +
-          "</option></select></p>" +
+          "</div></p>" +
           "  <div class='buildpro-actions'><button type='button' class='button remove-row'>" +
           escHtml(t("remove", "Remove")) +
           "</button></div>" +

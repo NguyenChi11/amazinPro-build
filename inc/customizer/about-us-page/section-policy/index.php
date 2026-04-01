@@ -166,7 +166,7 @@ function buildpro_about_policy_customize_register($wp_customize)
         'sanitize_callback' => 'sanitize_textarea_field',
     ));
     $wp_customize->add_control('buildpro_about_policy_warranty_desc', array(
-        'label' => __('Warranty Description', 'buildpro'),
+        'label' => __('Description', 'buildpro'),
         'section' => 'buildpro_about_policy_section',
         'type' => 'textarea',
     ));
@@ -216,8 +216,8 @@ function buildpro_about_policy_customize_register($wp_customize)
             'section' => 'buildpro_about_policy_section',
         )));
         $wp_customize->add_control(new BuildPro_About_Policy_Repeater_Control($wp_customize, 'buildpro_about_policy_items', array(
-            'label' => __('Warranty Items', 'buildpro'),
-            'description' => __('Manage warranty items (icon/title/desc).', 'buildpro'),
+            'label' => __('Right Items', 'buildpro'),
+            'description' => __('Manage Right Items (icon/title/desc).', 'buildpro'),
             'section' => 'buildpro_about_policy_section',
         )));
     }

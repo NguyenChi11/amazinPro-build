@@ -65,7 +65,7 @@
     <div id="buildpro_about_policy_tab_items" style="display:none">
         <p><label><?php echo esc_html__('Right Title', 'buildpro'); ?><br><input type="text" class="widefat" name="buildpro_about_policy_title_right"
                     value="<?php echo esc_attr($title_right); ?>"></label></p>
-        <p><label><?php echo esc_html__('Warranty Description', 'buildpro'); ?><br><textarea class="widefat" rows="4"
+        <p><label><?php echo esc_html__('Description', 'buildpro'); ?><br><textarea class="widefat" rows="4"
                     name="buildpro_about_policy_warranty_desc"><?php echo esc_textarea($warranty_desc); ?></textarea></label>
         </p>
         <div id="buildpro_about_policy_items_wrap">

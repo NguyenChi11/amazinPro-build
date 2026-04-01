@@ -125,7 +125,7 @@ if (!function_exists('buildpro_about_banner_customize_register')) {
             'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control('buildpro_about_banner_text', array(
-            'label' => __('Text', 'buildpro'),
+            'label' => __('Section Label', 'buildpro'),
             'section' => 'buildpro_about_banner_section',
             'type' => 'text',
         ));

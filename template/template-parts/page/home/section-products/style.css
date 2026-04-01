@@ -91,9 +91,9 @@
 
 .section-product__item {
   background: #ffffff;
-  border: 1px solid #e8eef3;
+  border: 1px solid rgba(246, 247, 248, 1);
   border-radius: 0.75rem;
-  box-shadow: 0 10px 30px rgba(7, 59, 111, 0.12);
+  /* box-shadow: 0 10px 30px rgba(7, 59, 111, 0.12); */
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -107,7 +107,7 @@
 
 .section-product__item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 42px rgba(7, 59, 111, 0.18);
+  /* box-shadow: 0 18px 42px rgba(7, 59, 111, 0.18); */
 }
 
 .section-product__item:focus-within {

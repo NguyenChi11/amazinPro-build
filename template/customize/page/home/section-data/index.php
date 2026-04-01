@@ -12,7 +12,8 @@
     ?>
         <div class="buildpro-data-row" data-index="<?php echo esc_attr($index); ?>">
             <div class="buildpro-data-header">
-                <span class="buildpro-data-label"><?php echo $text ? esc_html($text) : sprintf(esc_html__('Item %d', 'buildpro'), $index + 1); ?></span>
+                <span
+                    class="buildpro-data-label"><?php echo $text ? esc_html($text) : sprintf(esc_html__('Item %d', 'buildpro'), $index + 1); ?></span>
                 <span class="buildpro-data-arrow">&#9660;</span>
             </div>
             <div class="buildpro-data-body" style="display:none">
@@ -20,7 +21,6 @@
                     <div class="buildpro-data-block">
                         <h4><?php echo esc_html__('Number', 'buildpro'); ?></h4>
                         <p class="buildpro-data-field">
-                            <label><?php echo esc_html__('Number', 'buildpro'); ?></label>
                             <input type="text" class="regular-text" data-field="number"
                                 value="<?php echo esc_attr($number); ?>">
                         </p>
@@ -28,14 +28,14 @@
                     <div class="buildpro-data-block">
                         <h4><?php echo esc_html__('Text', 'buildpro'); ?></h4>
                         <p class="buildpro-data-field">
-                            <label><?php echo esc_html__('Text', 'buildpro'); ?></label>
                             <input type="text" class="regular-text" data-field="text"
                                 value="<?php echo esc_attr($text); ?>">
                         </p>
                     </div>
                 </div>
                 <div class="buildpro-data-actions">
-                    <button type="button" class="button remove-data-row"><?php echo esc_html__('Remove item', 'buildpro'); ?></button>
+                    <button type="button"
+                        class="button remove-data-row"><?php echo esc_html__('Remove item', 'buildpro'); ?></button>
                 </div>
             </div><!-- /.buildpro-data-body -->
         </div>
@@ -44,4 +44,5 @@
     }
     ?>
 </div>
-<button type="button" class="button button-primary" id="buildpro-data-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>
+<button type="button" class="button button-primary"
+    id="buildpro-data-add"><?php echo esc_html__('Add Item', 'buildpro'); ?></button>

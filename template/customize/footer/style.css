@@ -147,3 +147,8 @@
   padding: 12px 16px;
   border-top: 1px solid #eee;
 }
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

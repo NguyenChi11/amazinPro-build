@@ -47,17 +47,15 @@ if (isset($buildpro_control_type) && $buildpro_control_type === 'footer-contact-
                         class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                 </p>
                 <p class="buildpro-field">
-                    <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
+                    <label><?php echo esc_html__('Button Label', 'buildpro'); ?></label>
                     <input type="text" class="regular-text" data-field="title" value="<?= esc_attr($cl_title) ?>">
                 </p>
                 <p class="buildpro-field">
                     <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-                    <select data-field="target">
-                        <option value="" <?= selected($cl_target, '', false) ?>>
-                            <?php echo esc_html__('Same Tab', 'buildpro'); ?></option>
-                        <option value="_blank" <?= selected($cl_target, '_blank', false) ?>>
-                            <?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
-                    </select>
+                <div class="checkbox-label">
+                    <input type="checkbox" data-field="target" value="_blank" <?php checked($cl_target, '_blank'); ?>>
+                    <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
+                </div>
                 </p>
                 <div class="buildpro-actions">
                     <button type="button" class="button remove-row"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
@@ -90,17 +88,15 @@ if (isset($buildpro_control_type) && $buildpro_control_type === 'footer-contact-
             <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
         </p>
         <p class="buildpro-field">
-            <label><?php echo esc_html__('Link Title', 'buildpro'); ?></label>
+            <label><?php echo esc_html__('Button Label', 'buildpro'); ?></label>
             <input type="text" class="regular-text" data-field="title" value="<?= esc_attr($title) ?>">
         </p>
         <p class="buildpro-field">
             <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-            <select data-field="target">
-                <option value="" <?= selected($target, '', false) ?>><?php echo esc_html__('Default', 'buildpro'); ?>
-                </option>
-                <option value="_blank" <?= selected($target, '_blank', false) ?>>
-                    <?php echo esc_html__('Open in new tab', 'buildpro'); ?></option>
-            </select>
+        <div class="checkbox-label">
+            <input type="checkbox" data-field="target" value="_blank" <?php checked($target, '_blank'); ?>>
+            <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
+        </div>
         </p>
     </div>
 

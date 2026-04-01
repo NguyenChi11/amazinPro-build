@@ -232,6 +232,7 @@ if (!function_exists('buildpro_services_customize_register')) {
             $wp_customize->selective_refresh->add_partial('buildpro_service_title', array(
                 'selector' => '.section-services',
                 'settings' => array('buildpro_service_title'),
+                'container_inclusive' => true,
                 'render_callback' => function () {
                     ob_start();
                     get_template_part('template/template-parts/page/home/section-services/index');
@@ -251,6 +252,7 @@ if (!function_exists('buildpro_services_customize_register')) {
             $wp_customize->selective_refresh->add_partial('buildpro_service_items', array(
                 'selector' => '.section-services',
                 'settings' => array('buildpro_service_items'),
+                'container_inclusive' => true,
                 'render_callback' => function () {
                     ob_start();
                     get_template_part('template/template-parts/page/home/section-services/index');

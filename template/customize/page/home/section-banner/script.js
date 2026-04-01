@@ -43,7 +43,13 @@
         obj.link_url = urlInput && urlInput.value ? urlInput.value : "";
         obj.link_title = titleInput && titleInput.value ? titleInput.value : "";
         obj.link_target =
-          targetSelect && targetSelect.value ? targetSelect.value : "";
+          targetSelect && targetSelect.type === "checkbox"
+            ? targetSelect.checked
+              ? "_blank"
+              : ""
+            : targetSelect && targetSelect.value
+              ? targetSelect.value
+              : "";
         data.push(obj);
       });
       hidden.value = JSON.stringify(data);
@@ -186,7 +192,11 @@
               titleInput.value = t.textContent || "";
             }
             if (targetSelect && panelTargetToggle) {
-              targetSelect.value = panelTargetToggle.checked ? "_blank" : "";
+              if (targetSelect.type === "checkbox") {
+                targetSelect.checked = !!panelTargetToggle.checked;
+              } else {
+                targetSelect.value = panelTargetToggle.checked ? "_blank" : "";
+              }
             }
             write();
             hideLinkPanel();

@@ -159,7 +159,7 @@ function buildpro_footer_customize_register($wp_customize)
     ));
     if (class_exists('BuildPro_Footer_Contact_Links_Control')) {
         $wp_customize->add_control(new BuildPro_Footer_Contact_Links_Control($wp_customize, 'footer_contact_links', array(
-            'label' => __('Footer Contact Links', 'buildpro'),
+            'label' => __('Social Linkss', 'buildpro'),
             'description' => __('Add/Edit contact links with icons.', 'buildpro'),
             'section' => 'buildpro_footer_section',
         )));
@@ -170,7 +170,7 @@ function buildpro_footer_customize_register($wp_customize)
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('footer_create_build_text', array(
-        'label' => __('Create Build Text', 'buildpro'),
+        'label' => __('Copyright Text', 'buildpro'),
         'section' => 'buildpro_footer_section',
         'type' => 'text',
     ));
@@ -202,7 +202,7 @@ function buildpro_footer_customize_register($wp_customize)
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('footer_servicer_text', array(
-        'label' => __('Servicer Text', 'buildpro'),
+        'label' => __('Service Text', 'buildpro'),
         'section' => 'buildpro_footer_section',
         'type' => 'text',
     ));
@@ -213,7 +213,7 @@ function buildpro_footer_customize_register($wp_customize)
     ));
     if (class_exists('BuildPro_Footer_Single_Link_Control')) {
         $wp_customize->add_control(new BuildPro_Footer_Single_Link_Control($wp_customize, 'footer_servicer_link', array(
-            'label' => __('Servicer Link', 'buildpro'),
+            'label' => __('Service Link', 'buildpro'),
             'description' => __('Choose link for Servicer.', 'buildpro'),
             'section' => 'buildpro_footer_section',
         )));
@@ -264,7 +264,7 @@ function buildpro_footer_add_inline_i18n(string $handle)
     $i18n = array(
         'linkUrl'         => __('Link URL', 'buildpro'),
         'chooseLink'      => __('Choose Link', 'buildpro'),
-        'linkTitle'       => __('Link Title', 'buildpro'),
+        'linkTitle'       => __('Button Label', 'buildpro'),
         'linkTarget'      => __('Link Target', 'buildpro'),
         'sameTab'         => __('Same Tab', 'buildpro'),
         'openInNewTab'    => __('Open in new tab', 'buildpro'),

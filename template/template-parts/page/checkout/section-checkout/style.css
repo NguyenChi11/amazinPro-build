@@ -121,8 +121,9 @@
   color: #ef4444;
 }
 .paypal__image {
-  width: 2.4rem;
+  width: 2.5rem;
   height: auto;
+  display: block;
 }
 
 .checkout-form__input {
@@ -315,10 +316,6 @@
   height: 1.8rem;
 }
 
-.payment-panel__icon-wrap--paypal {
-  background: #e8f0fe;
-  color: #003087;
-}
 
 .payment-panel__desc {
   font-size: 0.88rem;
@@ -404,63 +401,237 @@
   transform: none;
 }
 
-/* PayPal Smart Buttons (WooCommerce PayPal Payments / PPCP)
-   Wrapper styles for custom checkout section while preserving PPCP-rendered buttons.
-*/
-.bp-payment-wrapper {
-  margin-top: 1.25rem;
+/* ============================================================
+   PayPal Panel — Smart Buttons (PPCP)
+   Class prefix: pp-panel__*
+   All length values use rem. PPCP iframe dimensions (height,
+   shape, color, label) are controlled by PayPal SDK via the
+   WooCommerce > Payments > PayPal > Styling settings — the
+   theme intentionally does NOT override those properties.
+   ============================================================ */
+
+/* ── Header: logo + "Secure" badge ─────────────────────────── */
+.pp-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.bp-payment-title h3 {
-  margin: 0 0 0.625rem;
-  font-size: 1.125rem;
-  line-height: 1.35;
+.pp-panel__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.bp-paypal-smart-buttons {
-  width: 100%;
-  max-width: 100%;
-  margin-top: 0.9375rem;
-  min-width: 0;
+.pp-panel__logo-img {
+  width: 1.75rem;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
 }
 
-.bp-paypal-smart-buttons:empty {
+.pp-panel__logo-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #003087;
+  letter-spacing: -0.01em;
+}
+
+.pp-panel__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2rem;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.pp-panel__badge svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ── WC notices ─────────────────────────────────────────────── */
+#tab-paypal .woocommerce-notices-wrapper {
+  min-height: 0;
+  margin-bottom: 0.5rem;
+}
+
+#tab-paypal .woocommerce-notices-wrapper:empty {
   display: none;
 }
 
-.bp-paypal-payment-box {
-  margin: 0;
-  padding: 1.25rem;
-  border: 1px solid #eee;
-  border-radius: 0.75rem;
-  background: #fff;
+/* ── Buttons area ───────────────────────────────────────────── */
+/* This div directly wraps the PPCP renderer hook output.
+   PPCP outputs:
+     <div class="ppc-button-wrapper">
+       <div id="ppc-button-ppcp-gateway"></div>
+     </div>
+   The PayPal JS SDK injects iframes inside #ppc-button-ppcp-gateway.
+   Height / shape / color / label come from WP admin settings — we
+   must NOT hard-code them here so they remain user-configurable. */
+.pp-panel__buttons {
+  width: 100%;
+  min-width: 0;
 }
 
-.bp-payment-note {
-  margin-top: 0.625rem;
-  color: #666;
-  font-size: 0.8125rem;
-  line-height: 1.45;
-}
-
-.bp-payment-error {
-  padding: 0.9375rem;
-  border-radius: 0.5rem;
-}
-
-.bp-paypal-smart-buttons .ppc-button-wrapper,
-.bp-paypal-smart-buttons [id^="ppc-button-"],
-.bp-paypal-smart-buttons .ppcp-button-apm {
+.pp-panel__buttons .ppc-button-wrapper {
   width: 100%;
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
 }
 
-.bp-paypal-smart-buttons iframe {
+.pp-panel__buttons .ppc-button-wrapper iframe {
   max-width: 100%;
   border: 0;
+  display: block;
 }
+
+.pp-panel__buttons [id^="ppc-button-"] {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* APM buttons (Venmo, Bancontact …) */
+.pp-panel__buttons .ppcp-button-apm {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+}
+
+/* Pay Later messages block */
+.pp-panel__buttons .ppcp-messages {
+  margin-top: 0.5rem;
+  min-height: 1rem;
+}
+
+/* Loading spinner */
+.pp-panel__buttons .ppcp-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 0;
+}
+
+/* Hide empty wrapper (buttons not yet mounted) */
+.pp-panel__buttons .ppc-button-wrapper:empty {
+  display: none;
+}
+
+/* ── Error state ────────────────────────────────────────────── */
+.pp-panel__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.625rem;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  margin-top: 0.5rem;
+}
+
+.pp-panel__error svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  color: #dc2626;
+}
+
+/* ── Footer: divider + trust tagline ───────────────────────── */
+.pp-panel__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.pp-panel__divider {
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+  display: block;
+}
+
+.pp-panel__trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  color: #6b7280;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pp-panel__trust svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  flex-shrink: 0;
+  color: #10b981;
+}
+
+/* ── Debug pre block ────────────────────────────────────────── */
+.bp-ppcp-debug {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #1e293b;
+  color: #94a3b8;
+  font-size: 0.72rem;
+  border-radius: 0.5rem;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 767.98px) {
+  .pp-panel__header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.875rem;
+  }
+
+  .pp-panel__logo-img {
+    width: 1.5rem;
+  }
+
+  .pp-panel__logo-label {
+    font-size: 0.9rem;
+  }
+
+  .pp-panel__badge {
+    font-size: 0.67rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .pp-panel__trust {
+    font-size: 0.68rem;
+  }
+
+  .pp-panel__buttons .ppc-button-wrapper {
+    width: 100%;
+  }
+}
+
+
+
 
 /* ============================================================
    Credit Card Section Styling
@@ -1081,6 +1252,11 @@
     width: 3rem;
     height: 3rem;
     margin-bottom: 0.75rem;
+    border-radius: 0.625rem;
+  }
+
+  .payment-panel__icon-wrap--paypal .paypal__image {
+    width: 1.625rem;
   }
 
   .payment-panel#tab-paypal .payment-panel__desc {
@@ -1093,4 +1269,10 @@
     font-size: 0.76rem;
     padding: 0.6rem 0.72rem;
   }
+
+  /* Trên mobile, buttons PPCP chiếm toàn bộ chiều ngang */
+  .bp-payment-wrapper .ppc-button-wrapper {
+    width: 100%;
+  }
 }
+

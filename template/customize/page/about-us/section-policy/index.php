@@ -5,7 +5,7 @@
         if (strpos($this->id, 'certifications') !== false) {
             echo esc_html__('Manage Certifications (image/url/title/desc).', 'buildpro');
         } else {
-            echo esc_html__('Manage Warranty Items (icon/title/desc).', 'buildpro');
+            echo esc_html__('Manage Right Items (icon/title/desc).', 'buildpro');
         }
         ?>
     </p> -->
