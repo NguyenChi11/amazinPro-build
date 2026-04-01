@@ -1377,142 +1377,142 @@ msgstr "Thay đổi được xem trước ngay lập tức. Nhấn Xuất bản 
 
 #: import/plugin-activation.php:134
 msgid "Return to Required Plugins Installer"
-msgstr ""
+msgstr "Quay lại trang cài đặt plugin bắt buộc"
 
 #: import/plugin-activation.php:135
 msgid "Plugin activated successfully."
-msgstr ""
+msgstr "Đã kích hoạt plugin thành công."
 
 #: import/plugin-activation.php:136
 msgid "The following plugin was activated successfully:"
-msgstr ""
+msgstr "Plugin sau đã được kích hoạt thành công:"
 
 #: import/plugin-activation.php:137
 msgid "No action taken. Plugin %1$s was already active."
-msgstr ""
+msgstr "Không có thay đổi. Plugin %1$s đã được kích hoạt."
 
 #: import/plugin-activation.php:138
 msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
-msgstr ""
+msgstr "Không thể kích hoạt plugin. Theme này yêu cầu phiên bản %s cao hơn. Vui lòng cập nhật plugin."
 
 #: import/plugin-activation.php:139
 msgid "All plugins installed and activated successfully. %1$s"
-msgstr ""
+msgstr "Tất cả plugin đã được cài đặt và kích hoạt thành công. %1$s"
 
 #: import/plugin-activation.php:140
 msgid "Dismiss this notice"
-msgstr ""
+msgstr "Ẩn thông báo này"
 
 #: import/plugin-activation.php:141
 msgid "There are one or more required or recommended plugins to install, update or activate."
-msgstr ""
+msgstr "Có một hoặc nhiều plugin bắt buộc/được khuyến nghị cần cài đặt, cập nhật hoặc kích hoạt."
 
 #: import/plugin-activation.php:142
 msgid "Please contact the administrator of this site for help."
-msgstr ""
+msgstr "Vui lòng liên hệ quản trị viên của website để được hỗ trợ."
 
 #: import/plugin-activation.php:84
 msgid "Install Required Plugins"
-msgstr ""
+msgstr "Cài đặt plugin bắt buộc"
 
 #: import/plugin-activation.php:85
 msgid "Install Plugins"
-msgstr ""
+msgstr "Cài đặt plugin"
 
 #: import/plugin-activation.php:86
 msgid "Installing Plugin: %s"
-msgstr ""
+msgstr "Đang cài đặt plugin: %s"
 
 #: import/plugin-activation.php:87
 msgid "Updating Plugin: %s"
-msgstr ""
+msgstr "Đang cập nhật plugin: %s"
 
 #: import/plugin-activation.php:88
 msgid "Something went wrong with the plugin API."
-msgstr ""
+msgstr "Đã xảy ra lỗi với API của plugin."
 
 #: inc/customizer/about-us-page/index.php:14
 msgid "Use image"
-msgstr ""
+msgstr "Dùng ảnh"
 
 #: inc/customizer/about-us-page/section-banner/index.php:115
 #: inc/customizer/about-us-page/section-contact/index.php:94
 #: inc/customizer/about-us-page/section-core-values/index.php:153
 #: inc/customizer/about-us-page/section-leader/index.php:151
 msgid "Edit About Us Page"
-msgstr ""
+msgstr "Chỉnh sửa trang Giới thiệu"
 
 #: inc/customizer/about-us-page/section-banner/index.php:119
 #: inc/customizer/about-us-page/section-contact/index.php:98
 #: inc/customizer/about-us-page/section-core-values/index.php:157
 #: inc/customizer/about-us-page/section-leader/index.php:155
 msgid "Edit About Us"
-msgstr ""
+msgstr "Chỉnh sửa Giới thiệu"
 
 #: inc/customizer/about-us-page/section-banner/index.php:191
 msgid "Banner Image ID"
-msgstr ""
+msgstr "ID ảnh banner"
 
 #: inc/customizer/about-us-page/section-contact/index.php:149
 msgid "Map Image ID"
-msgstr ""
+msgstr "ID ảnh bản đồ"
 
 #: inc/customizer/about-us-page/section-contact/index.php:82
 msgid "Enable Contact"
-msgstr ""
+msgstr "Bật mục Liên hệ"
 
 #: inc/customizer/about-us-page/section-core-values/index.php:142
 msgid "Enable Core Values"
-msgstr ""
+msgstr "Bật mục Giá trị cốt lõi"
 
 #: inc/customizer/about-us-page/section-core-values/index.php:229
 msgid "Core Values Items"
-msgstr ""
+msgstr "Danh sách Giá trị cốt lõi"
 
 #: inc/customizer/about-us-page/section-leader/index.php:140
 msgid "Enable Leader"
-msgstr ""
+msgstr "Bật mục Lãnh đạo"
 
 #: inc/customizer/about-us-page/section-leader/index.php:253
 msgid "Leader Items"
-msgstr ""
+msgstr "Danh sách Lãnh đạo"
 
 #: inc/customizer/about-us-page/section-policy/index.php:126
 msgid "Enable Policy"
-msgstr ""
+msgstr "Bật mục Chính sách"
 
 #: inc/customizer/about-us-page/section-policy/index.php:215
 msgid "Manage certifications (image/url/title/desc)."
-msgstr ""
+msgstr "Quản lý chứng nhận (ảnh/URL/tiêu đề/mô tả)."
 
 #: inc/customizer/about-us-page/section-policy/index.php:219
 msgid "Right Items"
-msgstr ""
+msgstr "Mục bên phải"
 
 #: inc/customizer/about-us-page/section-policy/index.php:220
 msgid "Manage Right Items (icon/title/desc)."
-msgstr ""
+msgstr "Quản lý mục bên phải (biểu tượng/tiêu đề/mô tả)."
 
 #: inc/customizer/footer/index.php:195
 msgid "Choose link for Policy."
-msgstr ""
+msgstr "Chọn liên kết cho Chính sách."
 
 #: inc/customizer/footer/index.php:217
 msgid "Choose link for Servicer."
-msgstr ""
+msgstr "Chọn liên kết cho Dịch vụ."
 
 #: inc/customizer/home-page/index.php:16
 #: inc/meta-box/page/home-page/index.php:48
 #: template/customize/page/home/section-evaluate/index.php:47
 #: template/meta-box/page/home/section-evaluate/index.php:36
 msgid "Avatar"
-msgstr ""
+msgstr "Ảnh đại diện"
 
 #: inc/customizer/home-page/index.php:37
 #: template/customize/page/home/section-banner/index.php:66
 #: template/customize/page/home/section-banner/index.php:129
 msgid "Search pages/posts"
-msgstr ""
+msgstr "Tìm trang/bài viết"
 
 #: inc/customizer/home-page/index.php:41
 #: template/customize/page/home/section-data/index.php:21
@@ -1520,124 +1520,124 @@ msgstr ""
 #: template/meta-box/page/home/section-data/index.php:21
 #: template/meta-box/page/home/section-data/index.php:22
 msgid "Number"
-msgstr ""
+msgstr "Số"
 
 #: search.php:13
 msgid "Search Results for: %s"
-msgstr ""
+msgstr "Kết quả tìm kiếm cho: %s"
 
 #: single.php:15
 msgid "Previous:"
-msgstr ""
+msgstr "Trước:"
 
 #: single.php:16
 msgid "Next:"
-msgstr ""
+msgstr "Tiếp:"
 
 #: template/customize/page/about-us/section-policy/index.php:6
 msgid "Manage Certifications (image/url/title/desc)."
-msgstr ""
+msgstr "Quản lý chứng nhận (ảnh/URL/tiêu đề/mô tả)."
 
 #: template/customize/page/about-us/section-policy/index.php:8
 msgid "Manage Right Items (icon/title/desc)."
-msgstr ""
+msgstr "Quản lý mục bên phải (biểu tượng/tiêu đề/mô tả)."
 
 #: template/template-parts/comment-product/index.php:104
 msgid "Comments have been closed."
-msgstr ""
+msgstr "Bình luận đã được đóng."
 
 #: template/template-parts/comment-product/index.php:112
 msgid "Your name"
-msgstr ""
+msgstr "Tên của bạn"
 
 #: template/template-parts/comment-product/index.php:113
 msgid "Your email"
-msgstr ""
+msgstr "Email của bạn"
 
 #: template/template-parts/comment-product/index.php:114
 msgid "Website"
-msgstr ""
+msgstr "Trang web"
 
 #: template/template-parts/comment-product/index.php:114
 msgid "Website (optional)"
-msgstr ""
+msgstr "Trang web (không bắt buộc)"
 
 #: template/template-parts/comment-product/index.php:120
 msgid "Write a comment"
-msgstr ""
+msgstr "Viết bình luận"
 
 #: template/template-parts/comment-product/index.php:124
 msgid "Be respectful and keep your comment concise."
-msgstr ""
+msgstr "Vui lòng tôn trọng và viết bình luận ngắn gọn."
 
 #: template/template-parts/comment-product/index.php:126
 msgid "Submit"
-msgstr ""
+msgstr "Gửi"
 
 #: template/template-parts/comment-product/index.php:128
 msgid "Comment"
-msgstr ""
+msgstr "Bình luận"
 
 #: template/template-parts/comment-product/index.php:128
 msgid "Write a public comment..."
-msgstr ""
+msgstr "Viết bình luận công khai..."
 
 #: template/template-parts/comment-product/index.php:17
 msgid "comments “%s”"
-msgstr ""
+msgstr "bình luận “%s”"
 
 #: template/template-parts/comment-product/index.php:22
 msgid "%1$s comments “%2$s”"
-msgstr ""
+msgstr "%1$s bình luận “%2$s”"
 
 #: template/template-parts/comment-product/index.php:37
 #: template/template-parts/comment-product/index.php:99
 msgid "← Older comments"
-msgstr ""
+msgstr "← Bình luận cũ hơn"
 
 #: template/template-parts/comment-product/index.php:38
 #: template/template-parts/comment-product/index.php:100
 msgid "Newer comments →"
-msgstr ""
+msgstr "Bình luận mới hơn →"
 
 #: template/template-parts/comment-product/index.php:41
 msgid "Comments"
-msgstr ""
+msgstr "Bình luận"
 
 #: template/template-parts/comment-product/index.php:67
 msgid "Your comment is awaiting moderation."
-msgstr ""
+msgstr "Bình luận của bạn đang chờ được duyệt."
 
 #: template/template-parts/page/product/section-products/index.php:63
 msgid "Less"
-msgstr ""
+msgstr "Thu gọn"
 
 #: template/template-parts/page/product/section-products/index.php:63
 msgid "More"
-msgstr ""
+msgstr "Xem thêm"
 
 #: template/template-parts/single/single-product/index.php:104
 msgid "%1$s / 5 (%2$s reviews)"
-msgstr ""
+msgstr "%1$s / 5 (%2$s đánh giá)"
 
 #: template/template-parts/single/single-product/index.php:115
 #: template/template-parts/single/single-product/index.php:126
 msgid "Brand:"
-msgstr ""
+msgstr "Thương hiệu:"
 
 #: template/template-parts/single/single-product/index.php:140
 msgid "Category:"
-msgstr ""
+msgstr "Danh mục:"
 
 #: template/template-parts/single/single-product/index.php:151
 msgid "Tags:"
-msgstr ""
+msgstr "Thẻ:"
 
 #: template/template-parts/single/single-product/index.php:156
 msgid "Key Features"
-msgstr ""
+msgstr "Tính năng nổi bật"
 
 #: template/template-parts/single/single-product/index.php:97
 msgid "SKU: %s"
-msgstr ""
+msgstr "Mã SKU: %s"
 
