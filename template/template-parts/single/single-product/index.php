@@ -217,10 +217,10 @@ get_template_part('template/template-parts/breadcrums/index');
                 <div class="single-product__short-desc"><?php echo wp_kses_post(wpautop($short_desc)); ?></div>
             <?php endif; ?>
 
-            <?php if (!empty($typical_range)) : ?>
-                <div class="single-product__typical">
-                    <?php echo sprintf(esc_html__('Typical Range: %s', 'buildpro'), esc_html($typical_range)); ?></div>
-            <?php endif; ?>
+            <!-- <?php if (!empty($typical_range)) : ?>
+            <div class="single-product__typical">
+                <?php echo sprintf(esc_html__('Typical Range: %s', 'buildpro'), esc_html($typical_range)); ?></div>
+            <?php endif; ?> -->
         </div>
     </div>
     <div class="single-product__specs__container">

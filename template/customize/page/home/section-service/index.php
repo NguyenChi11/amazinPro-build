@@ -50,7 +50,7 @@
                         </p>
                         <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
                         <p class="buildpro-services-field">
-                            <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
+                            <label><?php echo esc_html__('Button URL', 'buildpro'); ?></label>
                             <input type="url" class="regular-text" data-field="link_url"
                                 value="<?php echo esc_attr($link_url); ?>" placeholder="https://...">
                             <button type="button" class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>

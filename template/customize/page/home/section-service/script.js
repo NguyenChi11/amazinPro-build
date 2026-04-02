@@ -221,7 +221,7 @@
         t("link", "Link") +
         "</h4>" +
         '      <p class="buildpro-services-field"><label>' +
-        t("linkUrl", "Link URL") +
+        t("linkUrl", "Button URL") +
         '</label><input type="url" class="regular-text" data-field="link_url" value="" placeholder="https://..."> <button type="button" class="button choose-link">' +
         t("chooseLink", "Choose Link") +
         "</button></p>" +

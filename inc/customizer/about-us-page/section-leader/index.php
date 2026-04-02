@@ -159,8 +159,8 @@ function buildpro_about_leader_customize_register($wp_customize)
     $text_default = '';
     $executives_default = '';
     $workforce_default = '';
-    $executives_label_default = __('Core Executives', 'buildpro');
-    $workforce_label_default = __('Total Workforce', 'buildpro');
+    $executives_label_default = __('Stat 1', 'buildpro');
+    $workforce_label_default = __('Stat 2', 'buildpro');
     $default_page_id = 0;
     if (isset($wp_customize) && $wp_customize instanceof WP_Customize_Manager) {
         $sel = $wp_customize->get_setting('buildpro_preview_page_id');
@@ -222,18 +222,18 @@ function buildpro_about_leader_customize_register($wp_customize)
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_text_field',
     ));
-    $wp_customize->add_control('buildpro_about_leader_executives', array(
-        'label' => __('Core Executives (Value)', 'buildpro'),
-        'section' => 'buildpro_about_leader_section',
-        'type' => 'text',
-    ));
     $wp_customize->add_setting('buildpro_about_leader_executives_label', array(
         'default' => $executives_label_default,
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('buildpro_about_leader_executives_label', array(
-        'label' => __('Core Executives (Label)', 'buildpro'),
+        'label' => __('Stat 1 (Label)', 'buildpro'),
+        'section' => 'buildpro_about_leader_section',
+        'type' => 'text',
+    ));
+    $wp_customize->add_control('buildpro_about_leader_executives', array(
+        'label' => __('Stat 1 (Value)', 'buildpro'),
         'section' => 'buildpro_about_leader_section',
         'type' => 'text',
     ));
@@ -242,18 +242,18 @@ function buildpro_about_leader_customize_register($wp_customize)
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_text_field',
     ));
-    $wp_customize->add_control('buildpro_about_leader_workforce', array(
-        'label' => __('Total Workforce (Value)', 'buildpro'),
-        'section' => 'buildpro_about_leader_section',
-        'type' => 'text',
-    ));
     $wp_customize->add_setting('buildpro_about_leader_workforce_label', array(
         'default' => $workforce_label_default,
         'transport' => 'postMessage',
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('buildpro_about_leader_workforce_label', array(
-        'label' => __('Total Workforce (Label)', 'buildpro'),
+        'label' => __('Stat 2 (Label)', 'buildpro'),
+        'section' => 'buildpro_about_leader_section',
+        'type' => 'text',
+    ));
+    $wp_customize->add_control('buildpro_about_leader_workforce', array(
+        'label' => __('Stat 2 (Value)', 'buildpro'),
         'section' => 'buildpro_about_leader_section',
         'type' => 'text',
     ));
@@ -480,13 +480,13 @@ function buildpro_about_leader_sync_customizer_to_meta($wp_customize_manager)
         $executives_val = get_theme_mod('buildpro_about_leader_executives', '');
     }
     if ($executives_label_val === null) {
-        $executives_label_val = get_theme_mod('buildpro_about_leader_executives_label', __('Core Executives', 'buildpro'));
+        $executives_label_val = get_theme_mod('buildpro_about_leader_executives_label', __('Stat 1', 'buildpro'));
     }
     if ($workforce_val === null) {
         $workforce_val = get_theme_mod('buildpro_about_leader_workforce', '');
     }
     if ($workforce_label_val === null) {
-        $workforce_label_val = get_theme_mod('buildpro_about_leader_workforce_label', __('Total Workforce', 'buildpro'));
+        $workforce_label_val = get_theme_mod('buildpro_about_leader_workforce_label', __('Stat 2', 'buildpro'));
     }
     if ($items_val === null) {
         $items_val = get_theme_mod('buildpro_about_leader_items', array());

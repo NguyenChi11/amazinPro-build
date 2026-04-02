@@ -45,7 +45,7 @@ if (!function_exists('buildpro_home_get_inline_i18n_data')) {
             'type' => __('Type', 'buildpro'),
             'name' => __('Name', 'buildpro'),
             'position' => __('Position', 'buildpro'),
-            'linkUrl' => __('Link URL', 'buildpro'),
+            'linkUrl' => __('URL', 'buildpro'),
             'linkTitle' => __('Button Label', 'buildpro'),
             'linkTarget' => __('Link Target', 'buildpro'),
             'buttonText' => __('Button text', 'buildpro'),

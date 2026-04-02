@@ -36,6 +36,16 @@ function buildpro_import_post_demo($target_id = 0)
             update_post_meta($home_id, 'description_post', $desc);
             set_theme_mod('description_post', $desc);
         }
+
+        // Also populate the Customizer bundle used by the preview template.
+        // Template reads: get_theme_mod('buildpro_post_data') with keys: title, desc.
+        if ($title !== '' || $desc !== '') {
+            $bundle = array(
+                'title' => $title,
+                'desc' => $desc,
+            );
+            set_theme_mod('buildpro_post_data', $bundle);
+        }
     }
     update_post_meta($home_id, 'buildpro_post_enabled', 1);
     set_theme_mod('buildpro_post_enabled', 1);

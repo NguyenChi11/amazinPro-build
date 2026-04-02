@@ -363,11 +363,11 @@ msgid "View Details"
 msgstr "Xem chi tiết"
 
 #: template/template-parts/page/about-us/section-leader/index.php:1
-msgid "Core Executives"
+msgid "Stat 1"
 msgstr "Lãnh đạo chủ chốt"
 
 #: template/template-parts/page/about-us/section-leader/index.php:1
-msgid "Total Workforce"
+msgid "Stat 2"
 msgstr "Tổng nhân sự"
 
 #: template/template-parts/page/about-us/section-leader/index.php:1

@@ -202,6 +202,22 @@ if (!function_exists('buildpro_post_get_default_data')) {
             $title = get_post_meta($page_id, 'title_post', true);
             $desc = get_post_meta($page_id, 'description_post', true);
         }
+
+        // If there is no saved meta yet (fresh install), fall back to demo data
+        // so the Customizer shows meaningful defaults like other Home sections.
+        if ($title === '' && $desc === '' && function_exists('buildpro_import_parse_js')) {
+            $data = buildpro_import_parse_js('/assets/data/post-data.js', 'postsData');
+            if (is_array($data)) {
+                $demo_title = isset($data['postsTitle']) ? (string) $data['postsTitle'] : '';
+                $demo_desc = isset($data['postsDescription']) ? (string) $data['postsDescription'] : '';
+                if ($demo_title !== '') {
+                    $title = $demo_title;
+                }
+                if ($demo_desc !== '') {
+                    $desc = $demo_desc;
+                }
+            }
+        }
         return array('title' => $title, 'desc' => $desc);
     }
 } // end if !function_exists buildpro_post_get_default_data

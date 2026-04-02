@@ -42,8 +42,9 @@
                         name="buildpro_banner_items[__INDEX__][description]" rows="4" class="large-text"></textarea>
                 </p>
                 <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
-                <p class="buildpro-banner-field"><label><?php echo esc_html__('Link URL', 'buildpro'); ?></label><input
-                        type="url" name="buildpro_banner_items[__INDEX__][link_url]" class="regular-text" value=""
+                <p class="buildpro-banner-field">
+                    <label><?php echo esc_html__('Button URL', 'buildpro'); ?></label><input type="url"
+                        name="buildpro_banner_items[__INDEX__][link_url]" class="regular-text" value=""
                         placeholder="https://..."> <button type="button"
                         class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
                 </p>

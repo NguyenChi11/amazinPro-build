@@ -70,7 +70,7 @@
                     </p>
                     <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
                     <p class="buildpro-service-field">
-                        <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
+                        <label><?php echo esc_html__('Button URL', 'buildpro'); ?></label>
                         <input type="url" name="buildpro_service_items[<?php echo esc_attr($index); ?>][link_url]"
                             class="regular-text" value="<?php echo esc_attr($link_url); ?>" placeholder="https://...">
                         <button type="button"
@@ -130,10 +130,12 @@
                         class="large-text" data-name="description"></textarea>
                 </p>
                 <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
-                <p class="buildpro-service-field"><label><?php echo esc_html__('Link URL', 'buildpro'); ?></label><input
-                        type="url" class="regular-text" data-name="link_url" value="" placeholder="https://..."> <button
+                <p class="buildpro-service-field">
+                    <label><?php echo esc_html__('Button URL', 'buildpro'); ?></label><input type="url"
+                        class="regular-text" data-name="link_url" value="" placeholder="https://..."> <button
                         type="button"
-                        class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button></p>
+                        class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
+                </p>
                 <p class="buildpro-service-field">
                     <label><?php echo esc_html__('Button Label', 'buildpro'); ?></label><input type="text"
                         class="regular-text" data-name="link_title" value="">

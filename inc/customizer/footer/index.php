@@ -262,7 +262,7 @@ add_action('customize_preview_init', 'buildpro_footer_customize_preview_js');
 function buildpro_footer_add_inline_i18n(string $handle)
 {
     $i18n = array(
-        'linkUrl'         => __('Link URL', 'buildpro'),
+        'linkUrl'         => __('URL', 'buildpro'),
         'chooseLink'      => __('Choose Link', 'buildpro'),
         'linkTitle'       => __('Button Label', 'buildpro'),
         'linkTarget'      => __('Link Target', 'buildpro'),

@@ -139,6 +139,7 @@
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
+  line-height: 1.4;
 }
 .about-policy__cert-link {
   display: inline-flex;
@@ -162,6 +163,7 @@
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
+  line-height: 1.6;
 }
 .about-policy__warranty-list {
   display: grid;
@@ -175,8 +177,7 @@
   min-width: 0;
 }
 .about-policy__warranty-icon {
-  width: 4rem;
-  height: 4rem;
+  padding: 1rem;
   border-radius: 0.625rem;
   background: #e6f0ff;
   display: flex;
@@ -219,6 +220,7 @@
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
+  line-height: 1.4;
 }
 @media (max-width: 639.98px) {
   .about-policy {

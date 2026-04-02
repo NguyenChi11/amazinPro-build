@@ -16,16 +16,16 @@
                     name="buildpro_about_leader_title" value="<?php echo esc_attr($title); ?>"></label></p>
         <p><label><?php echo esc_html__('Text', 'buildpro'); ?><br><input type="text" class="widefat"
                     name="buildpro_about_leader_text" value="<?php echo esc_attr($text); ?>"></label></p>
-        <p><label><?php echo esc_html__('Core Executives (Label)', 'buildpro'); ?><br><input type="text" class="widefat"
+        <p><label><?php echo esc_html__('Stat 1 (Value)', 'buildpro'); ?><br><input type="text" class="widefat"
+                    name="buildpro_about_leader_executives" value="<?php echo esc_attr($executives); ?>"></label></p>
+        <p><label><?php echo esc_html__('Stat 1 (Label)', 'buildpro'); ?><br><input type="text" class="widefat"
                     name="buildpro_about_leader_executives_label"
                     value="<?php echo esc_attr($executives_label); ?>"></label></p>
-        <p><label><?php echo esc_html__('Core Executives (Value)', 'buildpro'); ?><br><input type="text" class="widefat"
-                    name="buildpro_about_leader_executives" value="<?php echo esc_attr($executives); ?>"></label></p>
-        <p><label><?php echo esc_html__('Total Workforce (Label)', 'buildpro'); ?><br><input type="text" class="widefat"
+        <p><label><?php echo esc_html__('Stat 2 (Value)', 'buildpro'); ?><br><input type="text" class="widefat"
+                    name="buildpro_about_leader_workforce" value="<?php echo esc_attr($workforce); ?>"></label></p>
+        <p><label><?php echo esc_html__('Stat 2 (Label)', 'buildpro'); ?><br><input type="text" class="widefat"
                     name="buildpro_about_leader_workforce_label"
                     value="<?php echo esc_attr($workforce_label); ?>"></label></p>
-        <p><label><?php echo esc_html__('Total Workforce (Value)', 'buildpro'); ?><br><input type="text" class="widefat"
-                    name="buildpro_about_leader_workforce" value="<?php echo esc_attr($workforce); ?>"></label></p>
     </div>
     <div id="buildpro_about_leader_tab_items" style="display: none;">
         <div id="buildpro_about_leader_items_wraps">

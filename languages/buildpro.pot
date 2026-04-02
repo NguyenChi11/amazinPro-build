@@ -524,13 +524,13 @@ msgstr ""
 #: inc/customizer/about-us-page/section-leader/index.php:216
 #: template/meta-box/page/about-us/section-leader/index.php:19
 #: template/template-parts/page/about-us/section-leader/index.php:32
-msgid "Core Executives"
+msgid "Stat 1"
 msgstr ""
 
 #: inc/customizer/about-us-page/section-leader/index.php:226
 #: template/meta-box/page/about-us/section-leader/index.php:21
 #: template/template-parts/page/about-us/section-leader/index.php:38
-msgid "Total Workforce"
+msgid "Stat 2"
 msgstr ""
 
 #: inc/customizer/about-us-page/section-leader/index.php:253

@@ -441,8 +441,8 @@ if (!function_exists('buildpro_home_sections_order_customize_preview_assets')) {
         wp_enqueue_style('buildpro-home-sections-order-preview');
 
         $css = <<<'CSS'
-.buildpro-home-preview-sort-hint{outline:2px dashed rgba(0,0,0,.15);outline-offset:4px}
-.buildpro-home-preview-sort-hint{cursor:move}
+    .buildpro-home-preview-sort-hint{outline:2px dashed rgba(0,0,0,.15);outline-offset:4px}
+    .buildpro-home-preview-sort-hint{cursor:move}
     .buildpro-home-preview-sort-placeholder{background:rgba(0,0,0,.04);border:2px dashed rgba(0,0,0,.2);margin:0 0 12px;min-height:40px}
     .buildpro-home-preview-sort-helper{opacity:.9;box-shadow:0 6px 20px rgba(0,0,0,.12)}
 CSS;

@@ -34,10 +34,10 @@ function buildpro_about_leader_render_meta_box($post)
     $executives_label = get_post_meta($post->ID, 'buildpro_about_leader_executives_label', true);
     $workforce_label = get_post_meta($post->ID, 'buildpro_about_leader_workforce_label', true);
     if (!is_string($executives_label) || $executives_label === '') {
-        $executives_label = __('Core Executives', 'buildpro');
+        $executives_label = __('Stat 1', 'buildpro');
     }
     if (!is_string($workforce_label) || $workforce_label === '') {
-        $workforce_label = __('Total Workforce', 'buildpro');
+        $workforce_label = __('Stat 2', 'buildpro');
     }
 
     $items = get_post_meta($post->ID, 'buildpro_about_leader_items', true);

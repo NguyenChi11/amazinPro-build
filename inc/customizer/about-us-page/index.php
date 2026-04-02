@@ -18,7 +18,7 @@ if (!function_exists('buildpro_about_us_add_inline_i18n')) {
             'name' => __('Name', 'buildpro'),
             'position' => __('Position', 'buildpro'),
             'description' => __('Description', 'buildpro'),
-            'url' => __('URL', 'buildpro'),
+            'url' => __('Button Link', 'buildpro'),
             'title' => __('Title', 'buildpro'),
             'loading' => __('Loading...', 'buildpro'),
             'limitNote' => __('Only up to %d items will be saved; extra items will not be saved.', 'buildpro'),

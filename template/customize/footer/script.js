@@ -4,6 +4,13 @@
    Customizer renders the control DOM.
    ============================================================ */
 (function () {
+  function getWpRef() {
+    if (window.wp) return window.wp;
+    try {
+      if (window.parent && window.parent.wp) return window.parent.wp;
+    } catch (e) {}
+    return null;
+  }
   var footerI18n =
     window.buildproFooterI18n &&
     typeof window.buildproFooterI18n === "object" &&
@@ -36,7 +43,184 @@
     return document.getElementById("customizer-footer-contact-links-wrapper");
   }
   function getCLInput() {
-    return document.querySelector(".footer-contact-links-json");
+    return (
+      document.getElementById("buildpro-footer-contact-links-data") ||
+      document.querySelector(".footer-contact-links-json")
+    );
+  }
+
+  function initContactLinksRepeater() {
+    var wrap = getCLWrap();
+    var input = getCLInput();
+    var addBtn = document.getElementById("customizer-footer-contact-links-add");
+    var tmpl = document.getElementById(
+      "buildpro-footer-contact-links-template",
+    );
+    if (!wrap || !input || !addBtn || !tmpl) return;
+
+    function formatItem(n) {
+      return "Item " + String(n);
+    }
+
+    function updateRowLabel(row) {
+      if (!row || !row.querySelector) return;
+      var labelEl = row.querySelector(".buildpro-footer-row-label");
+      if (!labelEl) return;
+      var titleInput = row.querySelector('[data-field="title"]');
+      var title =
+        titleInput && titleInput.value ? String(titleInput.value).trim() : "";
+
+      var fallbackN = 1;
+      var wrapper =
+        row.closest && row.closest("#customizer-footer-contact-links-wrapper");
+      if (wrapper) {
+        var rows = wrapper.querySelectorAll(".buildpro-block");
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i] === row) {
+            fallbackN = i + 1;
+            break;
+          }
+        }
+      }
+      labelEl.textContent = title || formatItem(fallbackN);
+    }
+
+    function bindContactLinkRow(row) {
+      if (!row || !row.querySelector) return;
+      if (row.dataset && row.dataset.buildproRowBound === "1") return;
+      if (row.dataset) row.dataset.buildproRowBound = "1";
+
+      // Collapsible header/body
+      var header = row.querySelector(".buildpro-footer-row-header");
+      var body = row.querySelector(".buildpro-footer-row-body");
+      if (header && body) {
+        function toggleBody() {
+          var isOpen = body.style.display !== "none";
+          body.style.display = isOpen ? "none" : "block";
+          header.setAttribute("aria-expanded", isOpen ? "false" : "true");
+        }
+        header.addEventListener("click", toggleBody);
+        header.addEventListener("keydown", function (e) {
+          var key = e && e.key ? e.key : "";
+          if (key === "Enter" || key === " ") {
+            e.preventDefault();
+            toggleBody();
+          }
+        });
+      }
+
+      var selectBtn = row.querySelector(".select-contact-icon");
+      var removeBtn = row.querySelector(".remove-contact-icon");
+
+      var titleInput = row.querySelector('[data-field="title"]');
+      if (titleInput) {
+        titleInput.addEventListener("input", function () {
+          updateRowLabel(row);
+        });
+        titleInput.addEventListener("change", function () {
+          updateRowLabel(row);
+        });
+      }
+
+      if (selectBtn) {
+        selectBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (typeof e.stopImmediatePropagation === "function") {
+            e.stopImmediatePropagation();
+          }
+
+          var idInput = row.querySelector('[data-field="icon_id"]');
+          var preview = row.querySelector(".contact-icon-preview");
+          var wpRef = getWpRef();
+          if (!wpRef || typeof wpRef.media !== "function") return;
+
+          if (!row._iconFrame) {
+            row._iconFrame = wpRef.media({
+              title: t("selectIconTitle", "Select Icon"),
+              multiple: false,
+              library: { type: "image" },
+            });
+            row._iconFrame.on("select", function () {
+              var state = row._iconFrame.state && row._iconFrame.state();
+              var selection =
+                state && state.get ? state.get("selection") : null;
+              var first =
+                selection && selection.first ? selection.first() : null;
+              if (!first || !first.toJSON) return;
+              var file = first.toJSON();
+
+              if (idInput) {
+                idInput.value = String(file.id || 0);
+                idInput.dispatchEvent(new Event("input"));
+              }
+              if (preview) {
+                var imgUrl =
+                  (file &&
+                    file.sizes &&
+                    file.sizes.thumbnail &&
+                    file.sizes.thumbnail.url) ||
+                  file.url ||
+                  "";
+                preview.innerHTML = imgUrl
+                  ? '<img src="' + imgUrl + '" style="max-height:80px;">'
+                  : '<span style="color:#888">' +
+                    escHtml(t("noImageSelected", "No image selected")) +
+                    "</span>";
+              }
+              collectContactLinks();
+            });
+          }
+          row._iconFrame.open();
+        });
+      }
+
+      if (removeBtn) {
+        removeBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (typeof e.stopImmediatePropagation === "function") {
+            e.stopImmediatePropagation();
+          }
+
+          var idInput = row.querySelector('[data-field="icon_id"]');
+          var preview = row.querySelector(".contact-icon-preview");
+          if (idInput) {
+            idInput.value = "0";
+            idInput.dispatchEvent(new Event("input"));
+          }
+          if (preview) {
+            preview.innerHTML =
+              '<span style="color:#888">' +
+              escHtml(t("noImageSelected", "No image selected")) +
+              "</span>";
+          }
+          collectContactLinks();
+        });
+      }
+
+      // Initial label set
+      updateRowLabel(row);
+    }
+
+    wrap.querySelectorAll(".buildpro-block").forEach(bindContactLinkRow);
+    if (addBtn.dataset && addBtn.dataset.buildproBound === "1") {
+      return;
+    }
+    if (addBtn.dataset) {
+      addBtn.dataset.buildproBound = "1";
+    }
+    addBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      var node = tmpl.content.cloneNode(true);
+      wrap.appendChild(node);
+      var last = wrap.lastElementChild;
+      bindContactLinkRow(last);
+      collectContactLinks();
+    });
+
+    // Ensure the hidden JSON always reflects current DOM.
+    collectContactLinks();
   }
 
   function getSingleLinkInput(wrap) {
@@ -89,18 +273,52 @@
       currentTitle: title,
       currentTarget: tgt,
     };
+    var wpRef = getWpRef();
     if (
-      window.wp &&
-      wp.customize &&
-      typeof wp.customize.section === "function"
+      wpRef &&
+      wpRef.customize &&
+      typeof wpRef.customize.section === "function"
     ) {
-      var s = wp.customize.section("buildpro_link_picker_section");
+      var s = wpRef.customize.section("buildpro_link_picker_section");
       if (s && typeof s.expand === "function") {
         s.expand();
         return true;
       }
     }
     return false;
+  }
+
+  /* ── init (match Banner Items behavior) ──────────────────────────── */
+  function onReady() {
+    initContactLinksRepeater();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", onReady);
+  } else {
+    onReady();
+  }
+  var wpRef = getWpRef();
+  if (
+    wpRef &&
+    wpRef.customize &&
+    typeof wpRef.customize.section === "function"
+  ) {
+    var footerSection = wpRef.customize.section("buildpro_footer_section");
+    if (footerSection && footerSection.expanded) {
+      footerSection.expanded.bind(function (exp) {
+        if (exp) {
+          setTimeout(initContactLinksRepeater, 50);
+        }
+      });
+    }
+  }
+  var footerObs = new MutationObserver(function () {
+    if (getCLWrap() && getCLInput()) {
+      initContactLinksRepeater();
+    }
+  });
+  if (document.body) {
+    footerObs.observe(document.body, { childList: true, subtree: true });
   }
 
   /* ── global event delegation (works after Customizer renders DOM) ── */
@@ -144,60 +362,23 @@
     "click",
     function (e) {
       var t = e.target;
-      if (!t || !t.classList) return;
-
-      /* ── Add item – Contact Links ── */
-      if (t.id === "customizer-footer-contact-links-add") {
-        e.preventDefault();
-        var wrap = getCLWrap();
-        if (!wrap) return;
-        var div = document.createElement("div");
-        div.className = "buildpro-block";
-        div.innerHTML =
-          '<p class="buildpro-field"><label>' +
-          escHtml(t("icon", "Icon")) +
-          "</label>" +
-          '<input type="hidden" class="regular-text" data-field="icon_id" value="0"> ' +
-          '<button type="button" class="button select-contact-icon">' +
-          escHtml(t("selectPhoto", "Select photo")) +
-          "</button> " +
-          '<button type="button" class="button remove-contact-icon">' +
-          escHtml(t("removePhoto", "Remove photo")) +
-          "</button></p>" +
-          '<div class="image-preview contact-icon-preview"><span style="color:#888">' +
-          escHtml(t("noImageSelected", "No image selected")) +
-          "</span></div>" +
-          '<p class="buildpro-field"><label>' +
-          escHtml(t("linkUrl", "Link URL")) +
-          "</label>" +
-          '<input type="url" class="regular-text" data-field="url" value="" placeholder="https://..."> ' +
-          '<button type="button" class="button choose-link">' +
-          escHtml(t("chooseLink", "Choose Link")) +
-          "</button></p>" +
-          '<p class="buildpro-field"><label>' +
-          escHtml(t("linkTitle", "Button Label")) +
-          "</label>" +
-          '<input type="text" class="regular-text" data-field="title" value=""></p>' +
-          '<p class="buildpro-field"><label>' +
-          escHtml(t("linkTarget", "Link Target")) +
-          "</label>" +
-          '<label><input type="checkbox" data-field="target" value="_blank"> ' +
-          escHtml(t("openInNewTab", "Open in new tab")) +
-          "</label></p>" +
-          '<div class="buildpro-actions"><button type="button" class="button remove-row">' +
-          escHtml(t("remove", "Remove")) +
-          "</button></div>";
-        wrap.appendChild(div);
-        collectContactLinks();
-        return;
+      // In some browsers the click target can be a Text node.
+      if (t && t.nodeType === 3) {
+        t = t.parentElement;
       }
+      if (!t) return;
 
       /* ── Remove Item ── */
-      if (t.classList.contains("remove-row")) {
-        var inCL = t.closest("#customizer-footer-contact-links-wrapper");
+      var removeBtn =
+        t.closest &&
+        t.closest("#customizer-footer-contact-links-wrapper .remove-row");
+      if (removeBtn) {
+        var inCL = removeBtn.closest(
+          "#customizer-footer-contact-links-wrapper",
+        );
         if (!inCL) return;
         e.preventDefault();
-        var row = t.closest(".buildpro-block");
+        var row = removeBtn.closest(".buildpro-block");
         if (row) {
           row.parentNode.removeChild(row);
           collectContactLinks();
@@ -206,15 +387,18 @@
       }
 
       /* ── Choose Link (navigate to Link Picker section) ── */
-      if (t.classList.contains("choose-link")) {
-        var inCL = t.closest("#customizer-footer-contact-links-wrapper");
-        var inSingle = t.closest(".buildpro-single-link-wrapper");
+      var chooseLinkBtn = t.closest && t.closest(".choose-link");
+      if (chooseLinkBtn) {
+        var inCL = chooseLinkBtn.closest(
+          "#customizer-footer-contact-links-wrapper",
+        );
+        var inSingle = chooseLinkBtn.closest(".buildpro-single-link-wrapper");
         if (!inCL && !inSingle) return;
         e.preventDefault();
         e.stopImmediatePropagation();
         var row = inCL
-          ? t.closest(".buildpro-block")
-          : t.closest(".buildpro-single-link-wrapper");
+          ? chooseLinkBtn.closest(".buildpro-block")
+          : chooseLinkBtn.closest(".buildpro-single-link-wrapper");
         if (!row) return;
         navigateToLinkPicker(
           row.querySelector('[data-field="url"]'),
@@ -222,71 +406,6 @@
           row.querySelector('[data-field="target"]'),
         );
         return;
-      }
-
-      /* ── Select Contact Icon ── */
-      if (t.classList.contains("select-contact-icon")) {
-        var inCL = t.closest("#customizer-footer-contact-links-wrapper");
-        if (!inCL) return;
-        e.preventDefault();
-        var row = t.closest(".buildpro-block");
-        if (!row) return;
-        var idInput = row.querySelector('[data-field="icon_id"]');
-        var preview = row.querySelector(".contact-icon-preview");
-        if (!window.wp || typeof window.wp.media !== "function") return;
-        if (!row._iconFrame) {
-          row._iconFrame = wp.media({
-            title: t("selectIconTitle", "Select Icon"),
-            multiple: false,
-            library: { type: "image" },
-          });
-          row._iconFrame.on("select", function () {
-            var file = row._iconFrame.state().get("selection").first().toJSON();
-            if (idInput) {
-              idInput.value = String(file.id || 0);
-              idInput.dispatchEvent(new Event("input"));
-            }
-            if (preview) {
-              var imgUrl =
-                (file &&
-                  file.sizes &&
-                  file.sizes.thumbnail &&
-                  file.sizes.thumbnail.url) ||
-                file.url ||
-                "";
-              preview.innerHTML = imgUrl
-                ? '<img src="' + imgUrl + '" style="max-height:80px;">'
-                : '<span style="color:#888">' +
-                  escHtml(t("noImageSelected", "No image selected")) +
-                  "</span>";
-            }
-            collectContactLinks();
-          });
-        }
-        row._iconFrame.open();
-        return;
-      }
-
-      /* ── Remove Contact Icon ── */
-      if (t.classList.contains("remove-contact-icon")) {
-        var inCL = t.closest("#customizer-footer-contact-links-wrapper");
-        if (!inCL) return;
-        e.preventDefault();
-        var row = t.closest(".buildpro-block");
-        if (!row) return;
-        var idInput = row.querySelector('[data-field="icon_id"]');
-        var preview = row.querySelector(".contact-icon-preview");
-        if (idInput) {
-          idInput.value = "0";
-          idInput.dispatchEvent(new Event("input"));
-        }
-        if (preview) {
-          preview.innerHTML =
-            '<span style="color:#888">' +
-            escHtml(t("noImageSelected", "No image selected")) +
-            "</span>";
-        }
-        collectContactLinks();
       }
     },
     true,
@@ -729,7 +848,7 @@
           escHtml(t("noImageSelected", "No image selected")) +
           "</span></div>" +
           "  <p class='buildpro-field'><label>" +
-          escHtml(t("linkUrl", "Link URL")) +
+          escHtml(t("linkUrl", "URL")) +
           "</label><input type='url' name='footer_contact_links[" +
           idx +
           "][url]' class='regular-text' value='' placeholder='https://...'> <button type='button' class='button choose-link'>" +

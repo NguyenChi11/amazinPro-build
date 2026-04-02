@@ -7,9 +7,9 @@ $title = $use_mod ? get_theme_mod('buildpro_about_leader_title', '') : get_post_
 $text = $use_mod ? get_theme_mod('buildpro_about_leader_text', '') : get_post_meta($pid, 'buildpro_about_leader_text', true);
 $executives = $use_mod ? get_theme_mod('buildpro_about_leader_executives', '') : get_post_meta($pid, 'buildpro_about_leader_executives', true);
 $workforce = $use_mod ? get_theme_mod('buildpro_about_leader_workforce', '') : get_post_meta($pid, 'buildpro_about_leader_workforce', true);
-$executives_label = $use_mod ? get_theme_mod('buildpro_about_leader_executives_label', __('Core Executives', 'buildpro')) : get_post_meta($pid, 'buildpro_about_leader_executives_label', true);
+$executives_label = $use_mod ? get_theme_mod('buildpro_about_leader_executives_label', __('Core executives', 'buildpro')) : get_post_meta($pid, 'buildpro_about_leader_executives_label', true);
 $workforce_label = $use_mod ? get_theme_mod('buildpro_about_leader_workforce_label', __('Total Workforce', 'buildpro')) : get_post_meta($pid, 'buildpro_about_leader_workforce_label', true);
-$executives_label = is_string($executives_label) && $executives_label !== '' ? $executives_label : __('Core Executives', 'buildpro');
+$executives_label = is_string($executives_label) && $executives_label !== '' ? $executives_label : __('Core executives', 'buildpro');
 $workforce_label = is_string($workforce_label) && $workforce_label !== '' ? $workforce_label : __('Total Workforce', 'buildpro');
 $items = $use_mod ? get_theme_mod('buildpro_about_leader_items', array()) : get_post_meta($pid, 'buildpro_about_leader_items', true);
 $items = is_array($items) ? $items : array();

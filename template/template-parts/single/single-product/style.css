@@ -547,7 +547,7 @@
   background: #f8f9fa; /* nền xám nhạt nhẹ */
   padding: 0.9rem 1.2rem;
   border-radius: 0.625rem;
-  border-left: 4px solid #e63946; /* viền accent để nổi bật */
+  border-left: 4px solid #367fd3; /* viền accent để nổi bật */
   margin-top: 1rem;
   display: inline-block; /* chỉ rộng bằng nội dung */
 }

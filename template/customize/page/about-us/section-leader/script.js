@@ -149,7 +149,7 @@
         );
         leaderBody.append(
           "<p><label>" +
-            escHtml(t("url", "URL")) +
+            escHtml(t("url", "Button Link")) +
             '<br><input type="text" class="widefat leader-url" value="' +
             (it.url || "") +
             '"></label></p>',

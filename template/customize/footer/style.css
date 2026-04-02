@@ -47,6 +47,34 @@
   margin-bottom: 8px;
 }
 
+/* Collapsible items (Customizer: Footer → Social Links) */
+.buildpro-footer-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 12px;
+  margin: -12px -12px 10px;
+  border-bottom: 1px solid #eee;
+  background: #f7f7f7;
+}
+
+.buildpro-footer-row-label {
+  font-weight: 600;
+  color: #444;
+}
+
+.buildpro-footer-row-arrow {
+  transform: rotate(-90deg);
+  transition: transform 0.15s ease;
+}
+
+.buildpro-footer-row-header[aria-expanded="true"] .buildpro-footer-row-arrow {
+  transform: rotate(0deg);
+}
+
 /* Footer Admin styles */
 .buildpro-footer-section {
   display: none;

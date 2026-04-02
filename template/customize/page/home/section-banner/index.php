@@ -16,86 +16,86 @@ $items = is_array($items) ? $items : array();
         $link_target = isset($item['link_target']) ? sanitize_text_field($item['link_target']) : '';
         $thumb = $image_id ? wp_get_attachment_image_url($image_id, 'thumbnail') : '';
     ?>
-    <div class="buildpro-banner-row" data-index="<?php echo esc_attr($index); ?>">
-        <div class="buildpro-banner-header">
-            <span
-                class="buildpro-banner-label"><?php echo $text ? esc_html($text) : sprintf(esc_html__('Item %d', 'buildpro'), $index + 1); ?></span>
-            <span class="buildpro-banner-arrow">&#9660;</span>
-        </div>
-        <div class="buildpro-banner-body" style="display:none">
-            <div class="buildpro-banner-grid">
-                <div class="buildpro-banner-block">
-                    <h4><?php echo esc_html__('Image', 'buildpro'); ?></h4>
-                    <div class="buildpro-banner-field">
-                        <input type="hidden" class="banner-image-id" data-field="image_id"
-                            value="<?php echo esc_attr($image_id); ?>">
-                        <button type="button"
-                            class="button select-banner-image"><?php echo esc_html__('Select photo', 'buildpro'); ?></button>
-                        <button type="button"
-                            class="button remove-banner-image"><?php echo esc_html__('Remove photo', 'buildpro'); ?></button>
+        <div class="buildpro-banner-row" data-index="<?php echo esc_attr($index); ?>">
+            <div class="buildpro-banner-header">
+                <span
+                    class="buildpro-banner-label"><?php echo $text ? esc_html($text) : sprintf(esc_html__('Item %d', 'buildpro'), $index + 1); ?></span>
+                <span class="buildpro-banner-arrow">&#9660;</span>
+            </div>
+            <div class="buildpro-banner-body" style="display:none">
+                <div class="buildpro-banner-grid">
+                    <div class="buildpro-banner-block">
+                        <h4><?php echo esc_html__('Image', 'buildpro'); ?></h4>
+                        <div class="buildpro-banner-field">
+                            <input type="hidden" class="banner-image-id" data-field="image_id"
+                                value="<?php echo esc_attr($image_id); ?>">
+                            <button type="button"
+                                class="button select-banner-image"><?php echo esc_html__('Select photo', 'buildpro'); ?></button>
+                            <button type="button"
+                                class="button remove-banner-image"><?php echo esc_html__('Remove photo', 'buildpro'); ?></button>
+                        </div>
+                        <div class="banner-image-preview">
+                            <?php echo $thumb ? '<img src="' . esc_url($thumb) . '" style="max-height:80px;">' : '<span style="color:#888">' . esc_html__('No image selected', 'buildpro') . '</span>'; ?>
+                        </div>
                     </div>
-                    <div class="banner-image-preview">
-                        <?php echo $thumb ? '<img src="' . esc_url($thumb) . '" style="max-height:80px;">' : '<span style="color:#888">' . esc_html__('No image selected', 'buildpro') . '</span>'; ?>
-                    </div>
-                </div>
-                <div class="buildpro-banner-block">
-                    <h4><?php echo esc_html__('Content', 'buildpro'); ?></h4>
-                    <p class="buildpro-banner-field"><label><?php echo esc_html__('Type', 'buildpro'); ?></label><input
-                            type="text" class="regular-text" data-field="type" value="<?php echo esc_attr($type); ?>">
-                    </p>
-                    <p class="buildpro-banner-field"><label><?php echo esc_html__('Text', 'buildpro'); ?></label><input
-                            type="text" class="regular-text" data-field="text" value="<?php echo esc_attr($text); ?>">
-                    </p>
-                    <p class="buildpro-banner-field">
-                        <label><?php echo esc_html__('Description', 'buildpro'); ?></label><textarea rows="4"
-                            class="large-text" data-field="description"><?php echo esc_textarea($desc); ?></textarea>
-                    </p>
-                    <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
-                    <p class="buildpro-banner-field">
-                        <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
-                        <input type="url" class="regular-text" data-field="link_url"
-                            value="<?php echo esc_attr($link_url); ?>" placeholder="https://...">
-                        <button type="button"
-                            class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
-                    </p>
-                    <p class="buildpro-banner-field">
-                        <label><?php echo esc_html__('Button Label', 'buildpro'); ?></label>
-                        <input type="text" class="regular-text" data-field="link_title"
-                            value="<?php echo esc_attr($link_title); ?>"
-                            placeholder="<?php echo esc_attr__('Button text', 'buildpro'); ?>">
-                    </p>
-                    <p class="buildpro-banner-field">
-                        <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-                    <div class="checkbox-label">
-                        <input type="checkbox" data-field="link_target" value="_blank"
-                            <?php checked($link_target, '_blank'); ?>>
-                        <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
-                    </div>
-                    </p>
-                    <div class="buildpro-link-panel">
-                        <div class="buildpro-banner-block">
-                            <h4><?php echo esc_html__('Choose Link', 'buildpro'); ?></h4>
-                            <p class="buildpro-banner-field">
-                                <label><?php echo esc_html__('Search pages/posts', 'buildpro'); ?></label><input
-                                    type="text" class="regular-text buildpro-link-search"
-                                    placeholder="<?php echo esc_attr__('Enter keyword...', 'buildpro'); ?>">
-                            </p>
-                            <div class="buildpro-link-results">
-                            </div>
-                            <p class="buildpro-banner-field"><label><input type="checkbox" class="buildpro-link-target">
-                                    <?php echo esc_html__('Open in new tab (_blank)', 'buildpro'); ?></label></p>
-                            <div class="buildpro-banner-actions"><button type="button"
-                                    class="button buildpro-link-close"><?php echo esc_html__('Close', 'buildpro'); ?></button>
+                    <div class="buildpro-banner-block">
+                        <h4><?php echo esc_html__('Content', 'buildpro'); ?></h4>
+                        <p class="buildpro-banner-field"><label><?php echo esc_html__('Type', 'buildpro'); ?></label><input
+                                type="text" class="regular-text" data-field="type" value="<?php echo esc_attr($type); ?>">
+                        </p>
+                        <p class="buildpro-banner-field"><label><?php echo esc_html__('Text', 'buildpro'); ?></label><input
+                                type="text" class="regular-text" data-field="text" value="<?php echo esc_attr($text); ?>">
+                        </p>
+                        <p class="buildpro-banner-field">
+                            <label><?php echo esc_html__('Description', 'buildpro'); ?></label><textarea rows="4"
+                                class="large-text" data-field="description"><?php echo esc_textarea($desc); ?></textarea>
+                        </p>
+                        <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
+                        <p class="buildpro-banner-field">
+                            <label><?php echo esc_html__('Button URL', 'buildpro'); ?></label>
+                            <input type="url" class="regular-text" data-field="link_url"
+                                value="<?php echo esc_attr($link_url); ?>" placeholder="https://...">
+                            <button type="button"
+                                class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
+                        </p>
+                        <p class="buildpro-banner-field">
+                            <label><?php echo esc_html__('Button Label', 'buildpro'); ?></label>
+                            <input type="text" class="regular-text" data-field="link_title"
+                                value="<?php echo esc_attr($link_title); ?>"
+                                placeholder="<?php echo esc_attr__('Button text', 'buildpro'); ?>">
+                        </p>
+                        <p class="buildpro-banner-field">
+                            <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" data-field="link_target" value="_blank"
+                                <?php checked($link_target, '_blank'); ?>>
+                            <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
+                        </div>
+                        </p>
+                        <div class="buildpro-link-panel">
+                            <div class="buildpro-banner-block">
+                                <h4><?php echo esc_html__('Choose Link', 'buildpro'); ?></h4>
+                                <p class="buildpro-banner-field">
+                                    <label><?php echo esc_html__('Search pages/posts', 'buildpro'); ?></label><input
+                                        type="text" class="regular-text buildpro-link-search"
+                                        placeholder="<?php echo esc_attr__('Enter keyword...', 'buildpro'); ?>">
+                                </p>
+                                <div class="buildpro-link-results">
+                                </div>
+                                <p class="buildpro-banner-field"><label><input type="checkbox" class="buildpro-link-target">
+                                        <?php echo esc_html__('Open in new tab (_blank)', 'buildpro'); ?></label></p>
+                                <div class="buildpro-banner-actions"><button type="button"
+                                        class="button buildpro-link-close"><?php echo esc_html__('Close', 'buildpro'); ?></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="buildpro-banner-actions"><button type="button"
-                    class="button remove-banner-row"><?php echo esc_html__('Remove item', 'buildpro'); ?></button>
-            </div>
-        </div><!-- /.buildpro-banner-body -->
-    </div>
+                <div class="buildpro-banner-actions"><button type="button"
+                        class="button remove-banner-row"><?php echo esc_html__('Remove item', 'buildpro'); ?></button>
+                </div>
+            </div><!-- /.buildpro-banner-body -->
+        </div>
     <?php
         $index++;
     }
@@ -137,7 +137,7 @@ $items = is_array($items) ? $items : array();
                     </p>
                     <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
                     <p class="buildpro-banner-field">
-                        <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label><input type="url"
+                        <label><?php echo esc_html__('Button URL', 'buildpro'); ?></label><input type="url"
                             class="regular-text" data-field="link_url" value="" placeholder="https://..."> <button
                             type="button"
                             class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>

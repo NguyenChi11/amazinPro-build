@@ -96,7 +96,7 @@
                                         <?= $cl_icon_thumb ? '<img src="' . esc_url($cl_icon_thumb) . '" style="max-height:80px;">' : '<span style="color:#888">' . esc_html__('No image selected', 'buildpro') . '</span>' ?>
                                     </div>
                                     <p class="buildpro-field">
-                                        <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
+                                        <label><?php echo esc_html__('URL', 'buildpro'); ?></label>
                                         <input type="url" name="footer_contact_links[<?= esc_attr($cl_index) ?>][url]"
                                             class="regular-text" value="<?= esc_attr($cl_url) ?>" placeholder="https://...">
                                         <button type="button"
@@ -109,10 +109,12 @@
                                     </p>
                                     <p class="buildpro-field">
                                         <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-                                        <div class="checkbox-label">
-                                            <input type="checkbox" name="footer_contact_links[<?= esc_attr($cl_index) ?>][target]" value="_blank" <?php checked($cl_target, '_blank'); ?>>
-                                            <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
-                                        </div>
+                                    <div class="checkbox-label">
+                                        <input type="checkbox"
+                                            name="footer_contact_links[<?= esc_attr($cl_index) ?>][target]" value="_blank"
+                                            <?php checked($cl_target, '_blank'); ?>>
+                                        <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
+                                    </div>
                                     </p>
                                     <div class="buildpro-actions">
                                         <button type="button"
@@ -145,7 +147,7 @@
                                 value="<?= esc_attr($policy_text) ?>">
                         </p>
                         <p class="buildpro-field">
-                            <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
+                            <label><?php echo esc_html__('URL', 'buildpro'); ?></label>
                             <input type="url" id="footer_policy_link_url" name="footer_policy_link[url]"
                                 class="regular-text" value="<?= esc_attr($policy_link['url']) ?>"
                                 placeholder="https://...">
@@ -160,10 +162,11 @@
                         </p>
                         <p class="buildpro-field">
                             <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-                            <div class="checkbox-label">
-                                <input type="checkbox" id="footer_policy_link_target" name="footer_policy_link[target]" value="_blank" <?php checked($policy_link['target'], '_blank'); ?>>
-                                <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
-                            </div>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="footer_policy_link_target" name="footer_policy_link[target]"
+                                value="_blank" <?php checked($policy_link['target'], '_blank'); ?>>
+                            <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
+                        </div>
                         </p>
                     </div>
                 </div>
@@ -176,7 +179,7 @@
                                 value="<?= esc_attr($servicer_text) ?>">
                         </p>
                         <p class="buildpro-field">
-                            <label><?php echo esc_html__('Link URL', 'buildpro'); ?></label>
+                            <label><?php echo esc_html__('URL', 'buildpro'); ?></label>
                             <input type="url" id="footer_servicer_link_url" name="footer_servicer_link[url]"
                                 class="regular-text" value="<?= esc_attr($servicer_link['url']) ?>"
                                 placeholder="https://...">
@@ -191,10 +194,11 @@
                         </p>
                         <p class="buildpro-field">
                             <label><?php echo esc_html__('Link Target', 'buildpro'); ?></label>
-                            <div class="checkbox-label">
-                                <input type="checkbox" id="footer_servicer_link_target" name="footer_servicer_link[target]" value="_blank" <?php checked($servicer_link['target'], '_blank'); ?>>
-                                <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
-                            </div>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="footer_servicer_link_target" name="footer_servicer_link[target]"
+                                value="_blank" <?php checked($servicer_link['target'], '_blank'); ?>>
+                            <?php echo esc_html__('Open in new tab', 'buildpro'); ?>
+                        </div>
                         </p>
                     </div>
                 </div>
