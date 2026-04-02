@@ -43,7 +43,7 @@
                 </p>
                 <h4><?php echo esc_html__('Link', 'buildpro'); ?></h4>
                 <p class="buildpro-banner-field">
-                    <label><?php echo esc_html__('Button URL', 'buildpro'); ?></label><input type="url"
+                    <label><?php echo esc_html__('Button Link', 'buildpro'); ?></label><input type="url"
                         name="buildpro_banner_items[__INDEX__][link_url]" class="regular-text" value=""
                         placeholder="https://..."> <button type="button"
                         class="button choose-link"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
