@@ -1,2 +1,8 @@
-<?php get_template_part('template/template-parts/page/projects/section-title/index'); ?>
-<?php get_template_part('template/template-parts/page/projects/section-list/index'); ?>
+<?php
+if (function_exists('buildpro_render_project_sections')) {
+    buildpro_render_project_sections();
+    return;
+}
+
+get_template_part('template/template-parts/page/projects/section-title/index');
+get_template_part('template/template-parts/page/projects/section-list/index');

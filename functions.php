@@ -119,6 +119,8 @@ require get_template_directory() . '/inc/functions/cart-function.php';
 require get_template_directory() . '/inc/functions/page/cart.php';
 require get_template_directory() . '/inc/functions/page/bill.php';
 require get_template_directory() . '/inc/functions/page/checkout.php';
+require get_template_directory() . '/inc/functions/page/project.php';
+require get_template_directory() . '/inc/functions/page/about-us.php';
 
 require get_template_directory() . '/inc/functions/post-type/project-function.php';
 require get_template_directory() . '/inc/functions/post-type/post-function.php';

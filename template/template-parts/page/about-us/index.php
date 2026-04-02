@@ -1,4 +1,9 @@
 <?php
+if (function_exists('buildpro_render_about_sections')) {
+    buildpro_render_about_sections();
+    return;
+}
+
 get_template_part('template/template-parts/page/about-us/section-banner/index');
 get_template_part('template/template-parts/page/about-us/section-core-values/index');
 get_template_part('template/template-parts/page/about-us/section-leader/index');
