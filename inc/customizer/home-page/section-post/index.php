@@ -198,9 +198,11 @@ if (!function_exists('buildpro_post_get_default_data')) {
         }
         $title = '';
         $desc = '';
+        $view_all_text = '';
         if ($page_id) {
             $title = get_post_meta($page_id, 'title_post', true);
             $desc = get_post_meta($page_id, 'description_post', true);
+            $view_all_text = get_post_meta($page_id, 'buildpro_post_view_all_text', true);
         }
 
         // If there is no saved meta yet (fresh install), fall back to demo data
@@ -218,13 +220,16 @@ if (!function_exists('buildpro_post_get_default_data')) {
                 }
             }
         }
-        return array('title' => $title, 'desc' => $desc);
+        if (!is_string($view_all_text) || $view_all_text === '') {
+            $view_all_text = __('View All Posts', 'buildpro');
+        }
+        return array('title' => $title, 'desc' => $desc, 'view_all_text' => $view_all_text);
     }
 } // end if !function_exists buildpro_post_get_default_data
 if (!function_exists('buildpro_post_sanitize_data')) {
     function buildpro_post_sanitize_data($value)
     {
-        $out = array('title' => '', 'desc' => '');
+        $out = array('title' => '', 'desc' => '', 'view_all_text' => '');
         if (is_string($value)) {
             $decoded = json_decode($value, true);
             if (is_array($decoded)) {
@@ -236,6 +241,7 @@ if (!function_exists('buildpro_post_sanitize_data')) {
         }
         $out['title'] = isset($value['title']) ? sanitize_text_field($value['title']) : '';
         $out['desc'] = isset($value['desc']) ? sanitize_textarea_field($value['desc']) : '';
+        $out['view_all_text'] = isset($value['view_all_text']) ? sanitize_text_field($value['view_all_text']) : '';
         return $out;
     }
 } // end if !function_exists buildpro_post_sanitize_data
@@ -246,6 +252,7 @@ if (!function_exists('buildpro_post_sync_customizer_to_meta')) {
         $data = buildpro_post_sanitize_data($data);
         $title = isset($data['title']) ? $data['title'] : '';
         $desc  = isset($data['desc']) ? $data['desc'] : '';
+        $view_all_text = isset($data['view_all_text']) ? $data['view_all_text'] : '';
         $page_id = 0;
         if ($wp_customize_manager instanceof WP_Customize_Manager) {
             $setting = $wp_customize_manager->get_setting('buildpro_preview_page_id');
@@ -266,10 +273,12 @@ if (!function_exists('buildpro_post_sync_customizer_to_meta')) {
             foreach ($targets as $tid) {
                 update_post_meta($tid, 'title_post', $title);
                 update_post_meta($tid, 'description_post', $desc);
+                update_post_meta($tid, 'buildpro_post_view_all_text', $view_all_text);
                 update_post_meta($tid, 'buildpro_post_enabled', absint(get_theme_mod('buildpro_post_enabled', 1)));
             }
             set_theme_mod('title_post', $title);
             set_theme_mod('description_post', $desc);
+            set_theme_mod('buildpro_post_view_all_text', $view_all_text);
             set_theme_mod('buildpro_post_enabled', absint(get_theme_mod('buildpro_post_enabled', 1)));
         }
     }

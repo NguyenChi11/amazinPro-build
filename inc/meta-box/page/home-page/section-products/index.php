@@ -30,6 +30,7 @@ function buildpro_materials_render_meta_box($post)
     wp_nonce_field('buildpro_materials_meta_save', 'buildpro_materials_meta_nonce');
     $materials_title = get_post_meta($post->ID, 'materials_title', true);
     $materials_description = get_post_meta($post->ID, 'materials_description', true);
+    $materials_view_all_text = get_post_meta($post->ID, 'materials_view_all_text', true);
     $materials_enabled = get_post_meta($post->ID, 'materials_enabled', true);
     $materials_enabled = $materials_enabled === '' ? 1 : (int)$materials_enabled;
     $materials_enabled = absint(get_theme_mod('materials_enabled', $materials_enabled));
@@ -62,12 +63,15 @@ function buildpro_save_materials_meta($post_id)
     }
     $materials_title = isset($_POST['materials_title']) ? sanitize_text_field($_POST['materials_title']) : '';
     $materials_description = isset($_POST['materials_description']) ? sanitize_textarea_field($_POST['materials_description']) : '';
+    $materials_view_all_text = isset($_POST['materials_view_all_text']) ? sanitize_text_field($_POST['materials_view_all_text']) : '';
     $materials_enabled = isset($_POST['materials_enabled']) ? absint($_POST['materials_enabled']) : 1;
     update_post_meta($post_id, 'materials_title', $materials_title);
     update_post_meta($post_id, 'materials_description', $materials_description);
+    update_post_meta($post_id, 'materials_view_all_text', $materials_view_all_text);
     update_post_meta($post_id, 'materials_enabled', $materials_enabled);
     set_theme_mod('materials_title', $materials_title);
     set_theme_mod('materials_description', $materials_description);
+    set_theme_mod('materials_view_all_text', $materials_view_all_text);
     set_theme_mod('materials_enabled', $materials_enabled);
 }
 add_action('save_post_page', 'buildpro_save_materials_meta');

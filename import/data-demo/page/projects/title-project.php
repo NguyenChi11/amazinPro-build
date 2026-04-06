@@ -8,7 +8,8 @@ function buildpro_import_projects_title_demo()
     $page_id = (int)$pages[0]->ID;
     $title = get_post_meta($page_id, 'projects_title', true);
     $desc = get_post_meta($page_id, 'projects_description', true);
-    if ($title !== '' || $desc !== '') {
+    $view_all_text = get_post_meta($page_id, 'projects_view_all_text', true);
+    if ($title !== '' || $desc !== '' || $view_all_text !== '') {
         return;
     }
     $path = get_theme_file_path('/assets/data/project-title-data.js');
@@ -33,8 +34,11 @@ function buildpro_import_projects_title_demo()
     }
     $title = isset($data['title']) ? (string)$data['title'] : '';
     $desc = isset($data['description']) ? (string)$data['description'] : '';
+    $view_all_text = isset($data['viewAllText']) ? (string)$data['viewAllText'] : '';
     update_post_meta($page_id, 'projects_title', $title);
     update_post_meta($page_id, 'projects_description', $desc);
+    update_post_meta($page_id, 'projects_view_all_text', $view_all_text);
     set_theme_mod('projects_title', $title);
     set_theme_mod('projects_description', $desc);
+    set_theme_mod('projects_view_all_text', $view_all_text);
 }

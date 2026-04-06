@@ -84,6 +84,31 @@ function buildpro_product_customize_register($wp_customize)
             return '';
         }
     }
+    if (!function_exists('buildpro_product_get_default_view_all_text')) {
+        function buildpro_product_get_default_view_all_text()
+        {
+            $page_id = 0;
+            if (function_exists('wp_get_current_user')) {
+                global $wp_customize;
+                if ($wp_customize && $wp_customize instanceof WP_Customize_Manager) {
+                    $setting = $wp_customize->get_setting('buildpro_preview_page_id');
+                    if ($setting) {
+                        $page_id = absint($setting->value());
+                    }
+                }
+            }
+            if ($page_id <= 0) {
+                $page_id = buildpro_product_find_home_id();
+            }
+            if ($page_id) {
+                $text = get_post_meta($page_id, 'materials_view_all_text', true);
+                if (is_string($text) && $text !== '') {
+                    return $text;
+                }
+            }
+            return __('View All Products', 'buildpro');
+        }
+    }
     if (!function_exists('buildpro_product_get_default_enabled')) {
         function buildpro_product_get_default_enabled()
         {
@@ -148,6 +173,17 @@ function buildpro_product_customize_register($wp_customize)
         'type' => 'textarea',
     ));
 
+    $wp_customize->add_setting('materials_view_all_text', array(
+        'default' => buildpro_product_get_default_view_all_text(),
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('materials_view_all_text', array(
+        'label' => __('View All Button Text', 'buildpro'),
+        'section' => 'buildpro_product_section',
+        'type' => 'text',
+    ));
+
     if (isset($wp_customize->selective_refresh)) {
         $wp_customize->selective_refresh->add_partial('materials_title', array(
             'selector' => '.section-product',
@@ -171,6 +207,16 @@ function buildpro_product_customize_register($wp_customize)
         $wp_customize->selective_refresh->add_partial('materials_enabled', array(
             'selector' => '.section-product',
             'settings' => array('materials_enabled'),
+            'container_inclusive' => true,
+            'render_callback' => function () {
+                ob_start();
+                get_template_part('template/template-parts/page/home/section-products/index');
+                return ob_get_clean();
+            },
+        ));
+        $wp_customize->selective_refresh->add_partial('materials_view_all_text', array(
+            'selector' => '.section-product',
+            'settings' => array('materials_view_all_text'),
             'container_inclusive' => true,
             'render_callback' => function () {
                 ob_start();
@@ -223,6 +269,7 @@ if (!function_exists('buildpro_product_sync_customizer_to_meta')) {
         if ($page_id) {
             $title = get_theme_mod('materials_title', '');
             $desc = get_theme_mod('materials_description', '');
+            $view_all_text = get_theme_mod('materials_view_all_text', '');
             $enabled = absint(get_theme_mod('materials_enabled', 1));
             $targets = array();
             $targets[] = $page_id;
@@ -238,8 +285,10 @@ if (!function_exists('buildpro_product_sync_customizer_to_meta')) {
             foreach ($targets as $tid) {
                 update_post_meta($tid, 'materials_title', is_string($title) ? $title : '');
                 update_post_meta($tid, 'materials_description', is_string($desc) ? $desc : '');
+                update_post_meta($tid, 'materials_view_all_text', is_string($view_all_text) ? $view_all_text : '');
                 update_post_meta($tid, 'materials_enabled', $enabled);
             }
+            set_theme_mod('materials_view_all_text', is_string($view_all_text) ? $view_all_text : '');
         }
     }
 }

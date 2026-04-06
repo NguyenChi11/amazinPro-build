@@ -6,9 +6,10 @@ if (!is_array($data)) {
 }
 $title = isset($data['title']) ? sanitize_text_field($data['title']) : '';
 $desc  = isset($data['description']) ? sanitize_textarea_field($data['description']) : '';
+$view_all_text = isset($data['view_all_text']) ? sanitize_text_field($data['view_all_text']) : '';
 ?>
 <input type="hidden" id="buildpro-portfolio-data" <?php $this->link(); ?>
-    value="<?php echo esc_attr(wp_json_encode(array('title' => $title, 'description' => $desc))); ?>">
+    value="<?php echo esc_attr(wp_json_encode(array('title' => $title, 'description' => $desc, 'view_all_text' => $view_all_text))); ?>">
 <div id="buildpro-portfolio-wrapper">
     <div class="buildpro-portfolio-block">
         <h4><?php echo esc_html__('Portfolio Title', 'buildpro'); ?></h4>
@@ -20,6 +21,11 @@ $desc  = isset($data['description']) ? sanitize_textarea_field($data['descriptio
         <p class="buildpro-portfolio-field">
             <label><?php echo esc_html__('Description', 'buildpro'); ?></label>
             <textarea rows="4" class="large-text" data-field="description"><?php echo esc_textarea($desc); ?></textarea>
+        </p>
+        <p class="buildpro-portfolio-field">
+            <label><?php echo esc_html__('View All Button Text', 'buildpro'); ?></label>
+            <input type="text" class="regular-text" data-field="view_all_text" value="<?php echo esc_attr($view_all_text); ?>"
+                placeholder="<?php echo esc_attr__('View All Projects', 'buildpro'); ?>">
         </p>
     </div>
     <!-- <div class="buildpro-portfolio-actions"><button type="button" class="button button-primary"

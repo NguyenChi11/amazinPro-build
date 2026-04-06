@@ -4,9 +4,11 @@ $materials_enabled = get_post_meta($page_id, 'materials_enabled', true);
 $materials_enabled = $materials_enabled === '' ? 1 : (int)$materials_enabled;
 $materials_title = get_post_meta($page_id, 'materials_title', true);
 $materials_description = get_post_meta($page_id, 'materials_description', true);
+$materials_view_all_text = get_post_meta($page_id, 'materials_view_all_text', true);
 if (is_customize_preview()) {
     $mod_title = get_theme_mod('materials_title', $materials_title);
     $mod_desc = get_theme_mod('materials_description', $materials_description);
+    $mod_view_all_text = get_theme_mod('materials_view_all_text', $materials_view_all_text);
     $mod_enabled = get_theme_mod('materials_enabled', 1);
     $materials_enabled = (int)$mod_enabled;
     if ($mod_title !== '') {
@@ -15,6 +17,12 @@ if (is_customize_preview()) {
     if ($mod_desc !== '') {
         $materials_description = $mod_desc;
     }
+    if ($mod_view_all_text !== '') {
+        $materials_view_all_text = $mod_view_all_text;
+    }
+}
+if (!is_string($materials_view_all_text) || $materials_view_all_text === '') {
+    $materials_view_all_text = __('View All Products', 'buildpro');
 }
 
 $items = [];
@@ -129,7 +137,7 @@ if (empty($items) && !is_customize_preview()) {
     ?>
     <div class="section-portfolio__page-link">
         <a class="section-portfolio__page-link-text" href="<?php echo esc_url($products_page_url); ?>">
-            <?php esc_html_e('View All Products', 'buildpro'); ?>
+            <?php echo esc_html($materials_view_all_text); ?>
         </a>
         <img class="section-banner__item-button-icon"
             src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>"

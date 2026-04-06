@@ -2,6 +2,7 @@ const postsData = {
   postsTitle: "LATEST POSTS",
   postsDescription:
     "Latest news and articles about design, construction, and materials.",
+  postsViewAllText: "View All Posts",
   items: [
     {
       id: 2001,

@@ -16,4 +16,6 @@
             class="regular-text" value="<?php echo esc_attr($title); ?>" placeholder="<?php echo esc_attr__('PROJECTS', 'buildpro'); ?>"></p>
     <p class="buildpro-portfolio-field"><label><?php echo esc_html__('Description', 'buildpro'); ?></label><textarea name="projects_description" rows="4"
             class="large-text" placeholder="<?php echo esc_attr__('Short description', 'buildpro'); ?>"><?php echo esc_textarea($desc); ?></textarea></p>
+    <p class="buildpro-portfolio-field"><label><?php echo esc_html__('View All Button Text', 'buildpro'); ?></label><input type="text" name="projects_view_all_text"
+            class="regular-text" value="<?php echo esc_attr(isset($view_all_text) ? $view_all_text : ''); ?>" placeholder="<?php echo esc_attr__('View All Projects', 'buildpro'); ?>"></p>
 </div>

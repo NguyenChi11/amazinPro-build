@@ -7,16 +7,23 @@
     function write() {
       var titleInput = wrapper.querySelector("[data-field='title']");
       var descInput = wrapper.querySelector("[data-field='description']");
+      var viewAllTextInput = wrapper.querySelector(
+        "[data-field='view_all_text']",
+      );
       var obj = {
         title: titleInput && titleInput.value ? titleInput.value : "",
         description: descInput && descInput.value ? descInput.value : "",
+        view_all_text:
+          viewAllTextInput && viewAllTextInput.value
+            ? viewAllTextInput.value
+            : "",
       };
       hidden.value = JSON.stringify(obj);
       hidden.dispatchEvent(new Event("change"));
     }
     Array.prototype.forEach.call(
       wrapper.querySelectorAll(
-        "[data-field='title'],[data-field='description']",
+        "[data-field='title'],[data-field='description'],[data-field='view_all_text']",
       ),
       function (el) {
         el.addEventListener("input", write);

@@ -21,4 +21,10 @@
         <textarea name="materials_description" rows="4" class="large-text"
             placeholder="<?php echo esc_attr__('Short description', 'buildpro'); ?>"><?php echo esc_textarea($materials_description); ?></textarea>
     </p>
+    <p class="buildpro-materials-field">
+        <label><?php echo esc_html__('View All Button Text', 'buildpro'); ?></label>
+        <input type="text" name="materials_view_all_text" class="regular-text"
+            value="<?php echo esc_attr(isset($materials_view_all_text) ? $materials_view_all_text : ''); ?>"
+            placeholder="<?php echo esc_attr__('View All Products', 'buildpro'); ?>">
+    </p>
 </div>

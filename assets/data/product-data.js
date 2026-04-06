@@ -2,6 +2,7 @@ const ProductsData = {
   productsTitle: "Products",
   productsDescription:
     "High-quality building products for modern construction projects.",
+  productsViewAllText: "View All Products",
   items: [
     {
       id: 1001,

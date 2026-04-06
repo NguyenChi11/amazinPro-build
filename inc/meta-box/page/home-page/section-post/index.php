@@ -28,6 +28,7 @@ if (!function_exists('buildpro_post_section_render_meta_box')) {
         wp_nonce_field('buildpro_post_section_meta_save', 'buildpro_post_section_meta_nonce');
         $title = get_post_meta($post->ID, 'title_post', true);
         $desc = get_post_meta($post->ID, 'description_post', true);
+        $view_all_text = get_post_meta($post->ID, 'buildpro_post_view_all_text', true);
         $enabled = get_post_meta($post->ID, 'buildpro_post_enabled', true);
         $enabled = $enabled === '' ? 1 : (int) $enabled;
         wp_enqueue_style('buildpro-post-admin', get_theme_file_uri('template/meta-box/page/home/section-post/style.css'), array(), null);
@@ -51,12 +52,15 @@ if (!function_exists('buildpro_save_post_section_meta')) {
         }
         $title = isset($_POST['title_post']) ? sanitize_text_field($_POST['title_post']) : '';
         $desc = isset($_POST['description_post']) ? sanitize_textarea_field($_POST['description_post']) : '';
+        $view_all_text = isset($_POST['buildpro_post_view_all_text']) ? sanitize_text_field($_POST['buildpro_post_view_all_text']) : '';
         $enabled = isset($_POST['buildpro_post_enabled']) ? absint($_POST['buildpro_post_enabled']) : 1;
         update_post_meta($post_id, 'title_post', $title);
         update_post_meta($post_id, 'description_post', $desc);
+        update_post_meta($post_id, 'buildpro_post_view_all_text', $view_all_text);
         update_post_meta($post_id, 'buildpro_post_enabled', $enabled);
         set_theme_mod('title_post', $title);
         set_theme_mod('description_post', $desc);
+        set_theme_mod('buildpro_post_view_all_text', $view_all_text);
         set_theme_mod('buildpro_post_enabled', $enabled);
     }
 } // end if !function_exists buildpro_save_post_section_meta

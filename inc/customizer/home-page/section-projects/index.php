@@ -219,11 +219,16 @@ if (!function_exists('buildpro_portfolio_get_default_data')) {
         if ($page_id) {
             $title = get_post_meta($page_id, 'projects_title', true);
             $desc  = get_post_meta($page_id, 'projects_description', true);
+            $view_all_text = get_post_meta($page_id, 'projects_view_all_text', true);
             $title = is_string($title) ? $title : '';
             $desc  = is_string($desc) ? $desc : '';
-            return array('title' => $title, 'description' => $desc);
+            $view_all_text = is_string($view_all_text) ? $view_all_text : '';
+            if ($view_all_text === '') {
+                $view_all_text = __('View All Projects', 'buildpro');
+            }
+            return array('title' => $title, 'description' => $desc, 'view_all_text' => $view_all_text);
         }
-        return array('title' => '', 'description' => '');
+        return array('title' => '', 'description' => '', 'view_all_text' => __('View All Projects', 'buildpro'));
     }
 } // end if !function_exists buildpro_portfolio_get_default_data
 if (!function_exists('buildpro_portfolio_sanitize_data')) {
@@ -236,11 +241,12 @@ if (!function_exists('buildpro_portfolio_sanitize_data')) {
             }
         }
         if (!is_array($value)) {
-            return array('title' => '', 'description' => '');
+            return array('title' => '', 'description' => '', 'view_all_text' => '');
         }
         return array(
             'title' => isset($value['title']) ? sanitize_text_field($value['title']) : '',
             'description' => isset($value['description']) ? sanitize_textarea_field($value['description']) : '',
+            'view_all_text' => isset($value['view_all_text']) ? sanitize_text_field($value['view_all_text']) : '',
         );
     }
 } // end if !function_exists buildpro_portfolio_sanitize_data
@@ -251,6 +257,7 @@ if (!function_exists('buildpro_portfolio_sync_customizer_to_meta')) {
         $data = buildpro_portfolio_sanitize_data($data);
         $title = isset($data['title']) ? $data['title'] : '';
         $desc  = isset($data['description']) ? $data['description'] : '';
+        $view_all_text  = isset($data['view_all_text']) ? $data['view_all_text'] : '';
         $enabled = absint(get_theme_mod('buildpro_portfolio_enabled', 1));
         $page_id = 0;
         if ($wp_customize_manager instanceof WP_Customize_Manager) {
@@ -277,10 +284,12 @@ if (!function_exists('buildpro_portfolio_sync_customizer_to_meta')) {
             foreach ($targets as $tid) {
                 update_post_meta($tid, 'projects_title', $title);
                 update_post_meta($tid, 'projects_description', $desc);
+                update_post_meta($tid, 'projects_view_all_text', $view_all_text);
                 update_post_meta($tid, 'buildpro_portfolio_enabled', $enabled);
             }
             set_theme_mod('projects_title', $title);
             set_theme_mod('projects_description', $desc);
+            set_theme_mod('projects_view_all_text', $view_all_text);
             set_theme_mod('buildpro_portfolio_enabled', $enabled);
         }
     }

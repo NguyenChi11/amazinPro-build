@@ -2,6 +2,7 @@ const projectsData = {
   projectTitle: "PROJECTS",
   projectDescription:
     "Representative projects with clear location, quality standards, and premium materials.",
+  projectViewAllText: "View All Projects",
   items: [
     {
       id: 3001,

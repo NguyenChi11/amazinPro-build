@@ -6,6 +6,7 @@ $enabled = get_post_meta($page_id, 'buildpro_portfolio_enabled', true);
 $enabled = $enabled === '' ? 1 : (int)$enabled;
 $portfolio_title = get_post_meta($page_id, 'projects_title', true);
 $portfolio_desc = get_post_meta($page_id, 'projects_description', true);
+$portfolio_view_all_text = get_post_meta($page_id, 'projects_view_all_text', true);
 if (is_customize_preview()) {
     $enabled_mod = get_theme_mod('buildpro_portfolio_enabled', 1);
     $enabled = (int)$enabled_mod;
@@ -27,7 +28,18 @@ if (is_customize_preview()) {
                 $portfolio_desc = $mod_desc;
             }
         }
+        if (isset($data['view_all_text']) && $data['view_all_text'] !== '') {
+            $portfolio_view_all_text = $data['view_all_text'];
+        } else {
+            $mod_view_all_text = get_theme_mod('projects_view_all_text', '');
+            if ($mod_view_all_text !== '') {
+                $portfolio_view_all_text = $mod_view_all_text;
+            }
+        }
     }
+}
+if (!is_string($portfolio_view_all_text) || $portfolio_view_all_text === '') {
+    $portfolio_view_all_text = __('View All Projects', 'buildpro');
 }
 if ($enabled !== 1) {
     return;
@@ -135,7 +147,7 @@ if ($query->have_posts()) {
     ?>
     <div class="section-portfolio__page-link">
         <a class="section-portfolio__page-link-text" href="<?php echo esc_url($projects_page_url); ?>">
-            <?php esc_html_e('View All Projects', 'buildpro'); ?>
+            <?php echo esc_html($portfolio_view_all_text); ?>
         </a>
         <img class="section-banner__item-button-icon"
             src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">

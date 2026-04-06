@@ -23,6 +23,7 @@ function buildpro_import_product_demo($target_id = 0)
         $product_data = buildpro_import_parse_js('/assets/data/product-data.js', 'ProductsData');
         $pd_title = isset($product_data['productsTitle']) ? (string)$product_data['productsTitle'] : '';
         $pd_desc  = isset($product_data['productsDescription']) ? (string)$product_data['productsDescription'] : '';
+        $pd_view_all_text = isset($product_data['productsViewAllText']) ? (string)$product_data['productsViewAllText'] : '';
         if ($pd_title !== '') {
             update_post_meta($home_id, 'materials_title', $pd_title);
             set_theme_mod('materials_title', $pd_title);
@@ -30,6 +31,10 @@ function buildpro_import_product_demo($target_id = 0)
         if ($pd_desc !== '') {
             update_post_meta($home_id, 'materials_description', $pd_desc);
             set_theme_mod('materials_description', $pd_desc);
+        }
+        if ($pd_view_all_text !== '') {
+            update_post_meta($home_id, 'materials_view_all_text', $pd_view_all_text);
+            set_theme_mod('materials_view_all_text', $pd_view_all_text);
         }
     }
 

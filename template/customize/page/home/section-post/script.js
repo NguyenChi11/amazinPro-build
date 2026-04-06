@@ -4,9 +4,11 @@
     if (!hidden || !wrapper) return;
     var title = wrapper.querySelector('[data-field="title"]');
     var desc = wrapper.querySelector('[data-field="desc"]');
+    var viewAllText = wrapper.querySelector('[data-field="view_all_text"]');
     var obj = {
       title: title && title.value ? title.value : "",
       desc: desc && desc.value ? desc.value : "",
+      view_all_text: viewAllText && viewAllText.value ? viewAllText.value : "",
     };
     hidden.value = JSON.stringify(obj);
     hidden.dispatchEvent(new Event("input"));

@@ -21,4 +21,10 @@
         <textarea name="description_post" rows="4" class="large-text"
             placeholder="<?php echo esc_attr__('Description', 'buildpro'); ?>"><?php echo esc_textarea($desc); ?></textarea>
     </p>
+    <p class="buildpro-post-section-field">
+        <label><?php echo esc_html__('View All Button Text', 'buildpro'); ?></label>
+        <input type="text" name="buildpro_post_view_all_text" class="regular-text"
+            value="<?php echo esc_attr(isset($view_all_text) ? $view_all_text : ''); ?>"
+            placeholder="<?php echo esc_attr__('View All Posts', 'buildpro'); ?>">
+    </p>
 </div>

@@ -31,11 +31,13 @@ function buildpro_import_project_demo($target_id = 0)
     wp_reset_postdata();
     $title = '';
     $desc = '';
+    $view_all_text = '';
     if (function_exists('buildpro_import_parse_js')) {
         $data = buildpro_import_parse_js('/assets/data/project-data.js', 'projectsData');
         if (is_array($data)) {
             $title = isset($data['projectTitle']) ? (string)$data['projectTitle'] : '';
             $desc = isset($data['projectDescription']) ? (string)$data['projectDescription'] : '';
+            $view_all_text = isset($data['projectViewAllText']) ? (string)$data['projectViewAllText'] : '';
             if (isset($data['items']) && is_array($data['items'])) {
                 foreach ($data['items'] as $it) {
                     if (function_exists('buildpro_import_create_project')) {
@@ -47,8 +49,15 @@ function buildpro_import_project_demo($target_id = 0)
     }
     update_post_meta($home_id, 'projects_title', $title);
     update_post_meta($home_id, 'projects_description', $desc);
+    update_post_meta($home_id, 'projects_view_all_text', $view_all_text);
     update_post_meta($home_id, 'buildpro_portfolio_enabled', 1);
     set_theme_mod('projects_title', $title);
     set_theme_mod('projects_description', $desc);
+    set_theme_mod('projects_view_all_text', $view_all_text);
+    set_theme_mod('buildpro_portfolio_data', array(
+        'title' => $title,
+        'description' => $desc,
+        'view_all_text' => $view_all_text,
+    ));
     set_theme_mod('buildpro_portfolio_enabled', 1);
 }

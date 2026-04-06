@@ -28,6 +28,7 @@ function buildpro_import_post_demo($target_id = 0)
         }
         $title = isset($data['postsTitle']) ? (string)$data['postsTitle'] : '';
         $desc = isset($data['postsDescription']) ? (string)$data['postsDescription'] : '';
+        $view_all_text = isset($data['postsViewAllText']) ? (string)$data['postsViewAllText'] : '';
         if ($title !== '') {
             update_post_meta($home_id, 'title_post', $title);
             set_theme_mod('title_post', $title);
@@ -36,13 +37,18 @@ function buildpro_import_post_demo($target_id = 0)
             update_post_meta($home_id, 'description_post', $desc);
             set_theme_mod('description_post', $desc);
         }
+        if ($view_all_text !== '') {
+            update_post_meta($home_id, 'buildpro_post_view_all_text', $view_all_text);
+            set_theme_mod('buildpro_post_view_all_text', $view_all_text);
+        }
 
         // Also populate the Customizer bundle used by the preview template.
-        // Template reads: get_theme_mod('buildpro_post_data') with keys: title, desc.
-        if ($title !== '' || $desc !== '') {
+        // Template reads: get_theme_mod('buildpro_post_data') with keys: title, desc, view_all_text.
+        if ($title !== '' || $desc !== '' || $view_all_text !== '') {
             $bundle = array(
                 'title' => $title,
                 'desc' => $desc,
+                'view_all_text' => $view_all_text,
             );
             set_theme_mod('buildpro_post_data', $bundle);
         }

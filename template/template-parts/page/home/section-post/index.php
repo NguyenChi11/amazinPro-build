@@ -3,6 +3,7 @@ $enabled = get_post_meta(get_the_ID(), 'buildpro_post_enabled', true);
 $enabled = $enabled === '' ? 1 : (int) $enabled;
 $title = get_post_meta(get_the_ID(), 'title_post', true);
 $desc = get_post_meta(get_the_ID(), 'description_post', true);
+$view_all_text = get_post_meta(get_the_ID(), 'buildpro_post_view_all_text', true);
 if (is_customize_preview()) {
     $enabled_mod = get_theme_mod('buildpro_post_enabled', 1);
     $enabled = (int) $enabled_mod;
@@ -20,6 +21,9 @@ if (is_customize_preview()) {
         if (isset($bundle['desc'])) {
             $desc = $bundle['desc'];
         }
+        if (isset($bundle['view_all_text'])) {
+            $view_all_text = $bundle['view_all_text'];
+        }
     }
     $mod_title = get_theme_mod('title_post', '');
     if ($mod_title !== '') {
@@ -29,6 +33,13 @@ if (is_customize_preview()) {
     if ($mod_desc !== '') {
         $desc = $mod_desc;
     }
+    $mod_view_all = get_theme_mod('buildpro_post_view_all_text', '');
+    if ($mod_view_all !== '') {
+        $view_all_text = $mod_view_all;
+    }
+}
+if (!is_string($view_all_text) || $view_all_text === '') {
+    $view_all_text = __('View All Posts', 'buildpro');
 }
 if ($enabled !== 1) {
     return;
@@ -109,7 +120,7 @@ if (empty($posts)) {
     ?>
     <div class="section-portfolio__page-link">
         <a class="section-portfolio__page-link-text" href="<?php echo esc_url($blog_page_url); ?>">
-            <?php esc_html_e('View All Posts', 'buildpro'); ?>
+            <?php echo esc_html($view_all_text); ?>
         </a>
         <img class="section-banner__item-button-icon"
             src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">

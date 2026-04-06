@@ -28,6 +28,7 @@ if (!function_exists('buildpro_portfolio_render_meta_box')) {
         wp_nonce_field('buildpro_portfolio_meta_save', 'buildpro_portfolio_meta_nonce');
         $title = get_post_meta($post->ID, 'projects_title', true);
         $desc = get_post_meta($post->ID, 'projects_description', true);
+        $view_all_text = get_post_meta($post->ID, 'projects_view_all_text', true);
         $enabled = get_post_meta($post->ID, 'buildpro_portfolio_enabled', true);
         $enabled = $enabled === '' ? 1 : (int)$enabled;
         wp_enqueue_style('buildpro-portfolio-admin', get_theme_file_uri('template/meta-box/page/home/section-projects/style.css'), array(), null);
@@ -56,12 +57,15 @@ if (!function_exists('buildpro_save_portfolio_meta')) {
         }
         $title = isset($_POST['projects_title']) ? sanitize_text_field($_POST['projects_title']) : '';
         $desc = isset($_POST['projects_description']) ? sanitize_textarea_field($_POST['projects_description']) : '';
+        $view_all_text = isset($_POST['projects_view_all_text']) ? sanitize_text_field($_POST['projects_view_all_text']) : '';
         $enabled = isset($_POST['buildpro_portfolio_enabled']) ? absint($_POST['buildpro_portfolio_enabled']) : 1;
         update_post_meta($post_id, 'projects_title', $title);
         update_post_meta($post_id, 'projects_description', $desc);
+        update_post_meta($post_id, 'projects_view_all_text', $view_all_text);
         update_post_meta($post_id, 'buildpro_portfolio_enabled', $enabled);
         set_theme_mod('projects_title', $title);
         set_theme_mod('projects_description', $desc);
+        set_theme_mod('projects_view_all_text', $view_all_text);
         set_theme_mod('buildpro_portfolio_enabled', $enabled);
     }
 } // end if !function_exists buildpro_save_portfolio_meta
