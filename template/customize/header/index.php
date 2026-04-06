@@ -11,11 +11,13 @@
                     </th>
                     <td>
                         <input type="hidden" id="header_logo" name="header_logo" value="<?= esc_attr($logo_id) ?>" />
-                        <button type="button" class="button" id="select_header_logo"><?php echo esc_html__('Choose Image', 'buildpro'); ?></button>
-                        <button type="button" class="button" id="remove_header_logo"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
+                        <button type="button" class="button"
+                            id="select_header_logo"><?php echo esc_html__('Choose Image', 'buildpro'); ?></button>
+                        <button type="button" class="button"
+                            id="remove_header_logo"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
                         <div id="header_logo_preview">
                             <?php if ($logo_url): ?>
-                                <img src="<?= esc_url($logo_url) ?>" />
+                            <img src="<?= esc_url($logo_url) ?>" />
                             <?php endif; ?>
                         </div>
                     </td>
@@ -31,32 +33,28 @@
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="buildpro_header_description"><?php echo esc_html__('Description', 'buildpro'); ?></label>
+                        <label
+                            for="buildpro_header_quote_text"><?php echo esc_html__('Quote Button Text', 'buildpro'); ?></label>
                     </th>
                     <td>
-                        <textarea id="buildpro_header_description" name="buildpro_header_description" class="large-text"
-                            rows="4"><?= esc_textarea($desc) ?></textarea>
+                        <input type="text" id="buildpro_header_quote_text" name="buildpro_header_quote_text"
+                            class="regular-text" value="<?= esc_attr($quote_text) ?>" />
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="buildpro_header_quote_text"><?php echo esc_html__('Quote Button Text', 'buildpro'); ?></label>
+                        <label
+                            for="buildpro_header_quote_url"><?php echo esc_html__('Quote Button URL', 'buildpro'); ?></label>
                     </th>
                     <td>
-                        <input type="text" id="buildpro_header_quote_text" name="buildpro_header_quote_text" class="regular-text"
-                            value="<?= esc_attr($quote_text) ?>" />
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="buildpro_header_quote_url"><?php echo esc_html__('Quote Button URL', 'buildpro'); ?></label>
-                    </th>
-                    <td>
-                        <input type="url" id="buildpro_header_quote_url" name="buildpro_header_quote_url" class="regular-text"
-                            value="<?= esc_attr($quote_url) ?>" placeholder="https://example.com/contact" />
+                        <input type="url" id="buildpro_header_quote_url" name="buildpro_header_quote_url"
+                            class="regular-text" value="<?= esc_attr($quote_url) ?>"
+                            placeholder="https://example.com/contact" />
                         <button type="button" class="button choose-link-single" data-url="#buildpro_header_quote_url"
                             data-title="#buildpro_header_quote_text"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
-                        <p class="description"><?php echo esc_html__('Leave blank to use the About page contact anchor automatically.', 'buildpro'); ?></p>
+                        <p class="description">
+                            <?php echo esc_html__('Leave blank to use the About page contact anchor automatically.', 'buildpro'); ?>
+                        </p>
                     </td>
                 </tr>
             </tbody>
@@ -71,7 +69,8 @@
                     <div>
                         <p class="buildpro-custom-link-row">
                             <label><?php echo esc_html__('URL', 'buildpro'); ?></label>
-                            <input type="url" id="buildpro_custom_link_url" class="regular-text" placeholder="https://...">
+                            <input type="url" id="buildpro_custom_link_url" class="regular-text"
+                                placeholder="https://...">
                         </p>
                         <p class="buildpro-custom-link-row">
                             <label><?php echo esc_html__('Link text', 'buildpro'); ?></label>

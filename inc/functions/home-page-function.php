@@ -37,30 +37,41 @@ function buildpro_ensure_ordered_primary_menu()
         array('templates' => array('blogs-page.php', 'blog-page.php'), 'slugs' => array('blogs', 'blog', 'blog')),
         array('templates' => array('about-page.php', 'about-us-page.php'), 'slugs' => array('about', 'about-us', 'about-us')),
     );
+    $page_ids = array();
+    foreach ($targets as $t) {
+        $pid = buildpro_find_page_by_templates_or_slugs($t['templates'], $t['slugs']);
+        if ($pid > 0 && !in_array($pid, $page_ids, true)) {
+            $page_ids[] = $pid;
+        }
+    }
+
+    // Defer final bootstrap until target pages exist (e.g. after demo import).
+    if (empty($page_ids)) {
+        return false;
+    }
+
     $existing = wp_get_nav_menu_items($menu_id);
-    $existing_by_object = array();
     if (is_array($existing)) {
         foreach ($existing as $it) {
             if (!empty($it->ID)) {
                 wp_delete_post((int) $it->ID, true);
             }
         }
-        $existing_by_object = array();
     }
+
     $position = 1;
-    foreach ($targets as $t) {
-        $pid = buildpro_find_page_by_templates_or_slugs($t['templates'], $t['slugs']);
-        if ($pid > 0 && !isset($existing_by_object[$pid])) {
-            wp_update_nav_menu_item($menu_id, 0, array(
-                'menu-item-object-id' => $pid,
-                'menu-item-object' => 'page',
-                'menu-item-type' => 'post_type',
-                'menu-item-status' => 'publish',
-                'menu-item-position' => $position,
-            ));
-        }
+    foreach ($page_ids as $pid) {
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-object-id' => $pid,
+            'menu-item-object' => 'page',
+            'menu-item-type' => 'post_type',
+            'menu-item-status' => 'publish',
+            'menu-item-position' => $position,
+        ));
         $position++;
     }
+
+    return true;
 }
 function buildpro_bootstrap_primary_menu_once()
 {
@@ -68,8 +79,10 @@ function buildpro_bootstrap_primary_menu_once()
         return;
     }
 
-    buildpro_ensure_ordered_primary_menu();
-    update_option('buildpro_primary_menu_created', '1');
+    $created = buildpro_ensure_ordered_primary_menu();
+    if ($created) {
+        update_option('buildpro_primary_menu_created', '1');
+    }
 }
 
 add_action('after_switch_theme', 'buildpro_bootstrap_primary_menu_once', 20);

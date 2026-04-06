@@ -26,16 +26,6 @@ function buildpro_customize_register($wp_customize)
         'section' => 'buildpro_header_section',
         'type' => 'text',
     ));
-    $wp_customize->add_setting('buildpro_header_description', array(
-        'default' => '',
-        'transport' => 'postMessage',
-        'sanitize_callback' => 'sanitize_textarea_field',
-    ));
-    $wp_customize->add_control('buildpro_header_description', array(
-        'label' => __('Description', 'buildpro'),
-        'section' => 'buildpro_header_section',
-        'type' => 'textarea',
-    ));
     $wp_customize->add_setting('buildpro_header_quote_text', array(
         'default' => __('Request a Quote', 'buildpro'),
         'transport' => 'postMessage',

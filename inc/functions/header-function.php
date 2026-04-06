@@ -22,14 +22,10 @@ function buildpro_admin_maybe_import_header()
     }
     $logo = (int) get_theme_mod('header_logo', 0);
     $title = (string) get_theme_mod('buildpro_header_title', '');
-    $desc = (string) get_theme_mod('buildpro_header_description', '');
     if ($title === '') {
         $title = (string) get_theme_mod('header_text', '');
     }
-    if ($desc === '') {
-        $desc = (string) get_theme_mod('header_description', '');
-    }
-    if ($logo || $title !== '' || $desc !== '') {
+    if ($logo || $title !== '') {
         return;
     }
     $header_demo_file = get_theme_file_path('/import/data-demo/header-demo.php');
