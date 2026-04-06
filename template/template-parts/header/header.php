@@ -46,6 +46,26 @@ try {
     }
 } catch (Throwable $e) {
 }
+
+$buildpro_quote_text = get_theme_mod('buildpro_header_quote_text', '');
+if (is_scalar($buildpro_quote_text)) {
+    $buildpro_quote_text = trim((string)$buildpro_quote_text);
+} else {
+    $buildpro_quote_text = '';
+}
+if ($buildpro_quote_text === '') {
+    $buildpro_quote_text = __('Request a Quote', 'buildpro');
+}
+
+$buildpro_quote_url_mod = get_theme_mod('buildpro_header_quote_url', '');
+if (is_scalar($buildpro_quote_url_mod)) {
+    $buildpro_quote_url_mod = trim((string)$buildpro_quote_url_mod);
+} else {
+    $buildpro_quote_url_mod = '';
+}
+if ($buildpro_quote_url_mod !== '') {
+    $buildpro_quote_url = $buildpro_quote_url_mod;
+}
 ?>
 
 <header id="masthead" class="site-header">
@@ -73,6 +93,12 @@ try {
                             }
                             if (!window.headerData.description) {
                                 window.headerData.description = <?php echo wp_json_encode(get_bloginfo('description')); ?>;
+                            }
+                            if (!window.headerData.quoteText) {
+                                window.headerData.quoteText = <?php echo wp_json_encode($buildpro_quote_text); ?>;
+                            }
+                            if (!window.headerData.quoteUrl) {
+                                window.headerData.quoteUrl = <?php echo wp_json_encode($buildpro_quote_url); ?>;
                             }
                         } catch (e) {}
                     })();
@@ -124,7 +150,7 @@ try {
             </div>
             <div class="header-nav-button-container">
                 <a href="<?php echo esc_url($buildpro_quote_url); ?>" class="header-nav-button">
-                    <p><?php esc_html_e('Request a Quote', 'buildpro'); ?></p>
+                    <p><?php echo esc_html($buildpro_quote_text); ?></p>
                 </a>
             </div>
             <div class="header-cart-wrap">
@@ -193,7 +219,7 @@ try {
                 </a>
             </div>
             <a href="<?php echo esc_url($buildpro_quote_url); ?>" class="header-nav-button">
-                <p><?php esc_html_e('Request a Quote', 'buildpro'); ?></p>
+                <p><?php echo esc_html($buildpro_quote_text); ?></p>
             </a>
         </div>
     </div>

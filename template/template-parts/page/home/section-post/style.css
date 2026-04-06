@@ -20,18 +20,20 @@
   margin: 0rem;
   color: rgba(19, 127, 236, 1);
   border-bottom: 0.375rem solid rgba(19, 127, 236, 1);
+  display: inline-block;
+  line-height: 1.2;
+  padding-bottom: 0.25rem;
   max-width: 100%;
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
-  margin-bottom: 1.5rem;
 }
 .section-post__description {
   font-family: "Poppins", sans-serif;
   font-weight: 400; /* Regular */
   font-size: 1.125rem; /* 18px */
-  line-height: 1.625rem;
+  line-height: 1.55;
   letter-spacing: 0;
   text-align: center;
   width: 100%;
@@ -40,17 +42,12 @@
   opacity: 1;
   color: rgba(126, 132, 139, 1);
   margin: 0;
-
+  margin-top: 1rem;
   margin-bottom: 3.75rem;
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
-  display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3; /* số dòng muốn hiển thị */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .section-post__list {

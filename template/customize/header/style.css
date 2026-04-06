@@ -4,3 +4,76 @@
 #header_logo_preview img {
   max-height: 80px;
 }
+
+.choose-link-single {
+  margin-left: 8px;
+}
+
+#buildpro-custom-link-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 100000;
+  display: none;
+}
+
+#buildpro-custom-link-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 760px;
+  max-width: 95vw;
+  z-index: 100001;
+  display: none;
+}
+
+.buildpro-custom-link-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.buildpro-custom-link-body {
+  padding: 12px 16px;
+}
+
+.buildpro-custom-link-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.buildpro-custom-link-row {
+  margin: 8px 0;
+}
+
+#buildpro_custom_link_results {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  max-height: 360px;
+  overflow-y: auto;
+  margin-top: 8px;
+}
+
+.buildpro-custom-link-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f2f2f2;
+  cursor: pointer;
+}
+
+.buildpro-custom-link-item:hover {
+  background: #f7f7f7;
+}
+
+.buildpro-custom-link-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #eee;
+}

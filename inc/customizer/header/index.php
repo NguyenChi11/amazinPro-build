@@ -36,6 +36,27 @@ function buildpro_customize_register($wp_customize)
         'section' => 'buildpro_header_section',
         'type' => 'textarea',
     ));
+    $wp_customize->add_setting('buildpro_header_quote_text', array(
+        'default' => __('Request a Quote', 'buildpro'),
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('buildpro_header_quote_text', array(
+        'label' => __('Quote Button Text', 'buildpro'),
+        'section' => 'buildpro_header_section',
+        'type' => 'text',
+    ));
+    $wp_customize->add_setting('buildpro_header_quote_url', array(
+        'default' => '',
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('buildpro_header_quote_url', array(
+        'label' => __('Quote Button URL', 'buildpro'),
+        'description' => __('Leave blank to use the About page contact anchor automatically.', 'buildpro'),
+        'section' => 'buildpro_header_section',
+        'type' => 'url',
+    ));
     if (isset($wp_customize->selective_refresh)) {
         $wp_customize->selective_refresh->add_partial('header_logo', array(
             'selector' => '.header-logo',
@@ -57,6 +78,7 @@ function buildpro_header_print_i18n()
     $i18n = array(
         'mediaTitle' => __('Select Header Logo', 'buildpro'),
         'useImage'   => __('Use Image', 'buildpro'),
+        'chooseLink' => __('Choose Link', 'buildpro'),
     );
 
     wp_add_inline_script(
@@ -68,17 +90,37 @@ function buildpro_header_print_i18n()
 
 function buildpro_header_customize_preview_js()
 {
+    $script_path = get_theme_file_path('template/customize/header/script.js');
+    $script_ver = file_exists($script_path) ? filemtime($script_path) : null;
+
     wp_enqueue_script(
         'buildpro-header',
         get_theme_file_uri('template/customize/header/script.js'),
         array('customize-preview'),
-        null,
+        $script_ver,
         true
     );
 
     buildpro_header_print_i18n();
 }
 add_action('customize_preview_init', 'buildpro_header_customize_preview_js');
+
+function buildpro_header_customize_controls_js()
+{
+    $script_path = get_theme_file_path('template/customize/header/script.js');
+    $script_ver = file_exists($script_path) ? filemtime($script_path) : null;
+
+    wp_enqueue_script(
+        'buildpro-header',
+        get_theme_file_uri('template/customize/header/script.js'),
+        array('customize-controls'),
+        $script_ver,
+        true
+    );
+
+    buildpro_header_print_i18n();
+}
+add_action('customize_controls_enqueue_scripts', 'buildpro_header_customize_controls_js');
 
 function buildpro_header_admin_menu()
 {
@@ -92,6 +134,9 @@ function buildpro_header_admin_enqueue($hook)
         return;
     }
     wp_enqueue_media();
+    $script_path = get_theme_file_path('template/customize/header/script.js');
+    $script_ver = file_exists($script_path) ? filemtime($script_path) : null;
+
     wp_enqueue_style(
         'buildpro-header-style',
         get_theme_file_uri('template/customize/header/style.css'),
@@ -102,7 +147,7 @@ function buildpro_header_admin_enqueue($hook)
         'buildpro-header',
         get_theme_file_uri('template/customize/header/script.js'),
         array('jquery'),
-        null,
+        $script_ver,
         true
     );
 
@@ -121,6 +166,11 @@ function buildpro_header_admin_page()
     if ($desc === '') {
         $desc = get_theme_mod('header_description', '');
     }
+    $quote_text = get_theme_mod('buildpro_header_quote_text', '');
+    $quote_url = get_theme_mod('buildpro_header_quote_url', '');
+    if (!is_scalar($quote_text) || trim((string) $quote_text) === '') {
+        $quote_text = __('Request a Quote', 'buildpro');
+    }
     $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'thumbnail') : '';
 
     include get_theme_file_path('template/customize/header/index.php');
@@ -136,6 +186,8 @@ function buildpro_handle_header_save()
     $logo = absint($logo_raw);
     $text = isset($_POST['buildpro_header_title']) ? sanitize_text_field($_POST['buildpro_header_title']) : '';
     $desc = isset($_POST['buildpro_header_description']) ? sanitize_textarea_field($_POST['buildpro_header_description']) : '';
+    $quote_text = isset($_POST['buildpro_header_quote_text']) ? sanitize_text_field($_POST['buildpro_header_quote_text']) : '';
+    $quote_url = isset($_POST['buildpro_header_quote_url']) ? esc_url_raw($_POST['buildpro_header_quote_url']) : '';
     if ($logo_raw === "" || $logo === 0) {
         remove_theme_mod('header_logo');
     } else {
@@ -154,6 +206,16 @@ function buildpro_handle_header_save()
     } else {
         set_theme_mod('buildpro_header_description', $desc);
         remove_theme_mod('header_description');
+    }
+    if ($quote_text === '') {
+        remove_theme_mod('buildpro_header_quote_text');
+    } else {
+        set_theme_mod('buildpro_header_quote_text', $quote_text);
+    }
+    if ($quote_url === '') {
+        remove_theme_mod('buildpro_header_quote_url');
+    } else {
+        set_theme_mod('buildpro_header_quote_url', $quote_url);
     }
     wp_redirect(admin_url('themes.php?page=buildpro-header&updated=1'));
     exit;
