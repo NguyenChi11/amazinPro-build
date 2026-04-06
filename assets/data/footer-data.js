@@ -2,7 +2,7 @@ const footerData = {
   banner:
     "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_ft.png",
   information: {
-    logo: "/wp-content/themes/build_pro_v2/assets/images/logo.png",
+    logo: "/wp-content/themes/build_pro_v2/assets/images/Logo.png",
     title: "BuildPro",
     subTitle: "Better Building",
     description:

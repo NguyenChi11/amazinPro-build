@@ -56,7 +56,7 @@ function buildpro_customize_register($wp_customize)
                 if ($logo_id) {
                     return wp_get_attachment_image($logo_id, 'full', false, array('class' => ''));
                 }
-                return '<img src="' . esc_url(get_theme_file_uri('/assets/images/logo.png')) . '" alt="Logo" />';
+                return '<img src="' . esc_url(get_theme_file_uri('/assets/images/Logo.png')) . '" alt="Logo" />';
             },
         ));
     }
