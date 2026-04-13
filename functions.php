@@ -124,8 +124,10 @@ require get_template_directory() . '/inc/functions/page/about-us.php';
 
 require get_template_directory() . '/inc/functions/post-type/project-function.php';
 require get_template_directory() . '/inc/functions/post-type/post-function.php';
+require get_template_directory() . '/inc/functions/post-type/product-function.php';
 require get_template_directory() . '/inc/meta-box/post-type/post/index.php';
 require get_template_directory() . '/inc/meta-box/post-type/project/index.php';
+require get_template_directory() . '/inc/meta-box/post-type/product/index.php';
 
 
 function buildpro_svg_icon($name, $style = 'solid', $class = '')

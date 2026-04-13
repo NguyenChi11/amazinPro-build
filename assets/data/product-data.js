@@ -17,6 +17,9 @@ const ProductsData = {
       ],
       description:
         "Durable concrete mix suitable for foundations and slabs with consistent strength.",
+      bedroom: 3,
+      bathroom: 2,
+      area: 1250,
       gallery: [
         "/wp-content/themes/build_pro_v2/assets/images/image_1.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_2.jpg",
@@ -37,6 +40,9 @@ const ProductsData = {
       ],
       description:
         "High-tensile steel reinforcement bars for structural stability.",
+      bedroom: 4,
+      bathroom: 3,
+      area: 1680,
       gallery: [
         "/wp-content/themes/build_pro_v2/assets/images/image_3.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
@@ -57,6 +63,9 @@ const ProductsData = {
       ],
       description:
         "Energy-efficient insulation panels for thermal and acoustic performance.",
+      bedroom: 2,
+      bathroom: 2,
+      area: 980,
       gallery: [
         "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
