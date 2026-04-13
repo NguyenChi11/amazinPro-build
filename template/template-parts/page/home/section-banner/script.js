@@ -235,38 +235,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.querySelector(".section-banner__options");
-  var container = document.querySelector(".section-banner__options-swiper");
-  var wrapper = document.querySelector(
-    ".section-banner__options-swiper-wrapper",
+  var container = document.querySelector(
+    ".section-banner__options-swiper.mySwiper",
   );
+  var wrapper = container
+    ? container.querySelector(".section-banner__options-swiper-wrapper")
+    : null;
+  var pagination = container
+    ? container.querySelector(".section-banner__options-pagination")
+    : null;
   if (!container || !wrapper || typeof Swiper === "undefined") return;
-
-  var rootFontSize =
-    parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
-  var spacing = 3.75 * rootFontSize;
 
   var noFallback = root && root.getAttribute("data-no-fallback") === "1";
   if (noFallback) {
     wrapper.innerHTML = "";
+    if (pagination) pagination.innerHTML = "";
     return;
   }
 
-  new Swiper(container, {
+  var cardCount = wrapper.querySelectorAll(".swiper-slide").length;
+  if (!cardCount) return;
+
+  var swiper = new Swiper(container, {
     slidesPerView: 3,
-    spaceBetween: spacing,
-    loop: true,
-    speed: 6000,
-    autoplay: {
-      delay: 0,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: false,
-    },
+    spaceBetween: 30,
     freeMode: true,
-    freeModeMomentum: false,
+    pagination: pagination
+      ? {
+          el: pagination,
+          clickable: true,
+        }
+      : undefined,
     breakpoints: {
-      0: { slidesPerView: 1 },
-      640: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 },
+      0: { slidesPerView: 1, spaceBetween: 16 },
+      640: { slidesPerView: 2, spaceBetween: 20 },
+      1024: { slidesPerView: 3, spaceBetween: 30 },
     },
   });
 });

@@ -67,21 +67,6 @@ if ($option_rows && is_array($option_rows)) {
     }
 }
 
-$min_count = 6;
-$option_count = count($section_option_items);
-if ($option_count > 0 && $option_count < $min_count) {
-    $duplicated = $section_option_items;
-    while (count($duplicated) < $min_count) {
-        foreach ($section_option_items as $item) {
-            $duplicated[] = $item;
-            if (count($duplicated) >= $min_count) {
-                break;
-            }
-        }
-    }
-    $section_option_items = $duplicated;
-}
-
 if (empty($section_banner_houses)) {
     if (is_customize_preview()) {
 ?>
@@ -90,12 +75,16 @@ if (empty($section_banner_houses)) {
     }
     return;
 }
+
+$banner_bg = get_theme_file_uri('/assets/images/banner.png');
+$image_mask = get_theme_file_uri('/assets/images/image_bg.png');
 ?>
 
 <section class="section-banner" data-aos="fade-up"
     data-i18n-view-about-us="<?php echo esc_attr__('View About Us', 'buildpro'); ?>"
     data-i18n-right-arrow="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>"
-    data-arrow-icon-src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>">
+    data-arrow-icon-src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>"
+    style="--buildpro-banner-bg:url('<?php echo esc_url($banner_bg); ?>');--buildpro-image-mask:url('<?php echo esc_url($image_mask); ?>');">
     <div class="section-banner_container">
         <?php if (is_customize_preview()): ?>
             <div class="section-banner__hover-outline"></div>
@@ -169,21 +158,12 @@ if (empty($section_banner_houses)) {
             </div>
         </div>
     </div>
-    <div class="section-banner__pagination">
-        <div class="section-banner__pagination-container">
-            <?php foreach ($section_banner_houses as $i => $house): ?>
-                <button
-                    class="section-banner__page <?php echo $i === 0 ? 'pos-center active' : ($i === 1 ? 'pos-right' : 'pos-left'); ?>"
-                    disabled data-index="<?php echo esc_attr($i); ?>" aria-label="<?php echo esc_attr($house['type']); ?>">
-                    <span class="section-banner__page-dot"></span>
-                </button>
-            <?php endforeach; ?>
-        </div>
-    </div>
+
 
     <?php if ($option_enabled === 1 && !empty($section_option_items)): ?>
-        <div class="section-banner__options" data-aos="fade-up" data-i18n-icon="<?php echo esc_attr__('icon', 'buildpro'); ?>">
-            <div class="swiper section-banner__options-swiper">
+        <div class="section-banner__options" data-aos="fade-up"
+            data-i18n-icon="<?php echo esc_attr__('icon', 'buildpro'); ?>">
+            <div class="swiper section-banner__options-swiper mySwiper">
                 <div class="swiper-wrapper section-banner__options-swiper-wrapper">
                     <?php foreach ($section_option_items as $section_option_item): ?>
                         <div class="swiper-slide section-banner__options-swiper-item">
@@ -203,13 +183,16 @@ if (empty($section_banner_houses)) {
                                             alt="<?php echo esc_attr__('icon', 'buildpro'); ?>">
                                     <?php endif; ?>
                                 </div>
-                                <h3 class="section-banner__options-item-text"><?php echo esc_html($section_option_item['text']); ?></h3>
-                                <p class="section-banner__options-item-description"><?php echo esc_html($section_option_item['description']); ?>
+                                <h3 class="section-banner__options-item-text">
+                                    <?php echo esc_html($section_option_item['text']); ?></h3>
+                                <p class="section-banner__options-item-description">
+                                    <?php echo esc_html($section_option_item['description']); ?>
                                 </p>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <div class="swiper-pagination section-banner__options-pagination"></div>
             </div>
         </div>
     <?php elseif (is_customize_preview()): ?>
