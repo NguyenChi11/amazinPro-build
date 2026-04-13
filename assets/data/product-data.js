@@ -1,5 +1,5 @@
 const ProductsData = {
-  productsTitle: "Products",
+  productsTitle: "PRODUCTS",
   productsDescription:
     "High-quality building products for modern construction projects.",
   productsViewAllText: "View All Products",

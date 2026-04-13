@@ -1,4 +1,4 @@
-.section-product {
+﻿.section-product {
   padding: 0rem 3.75rem;
   padding-top: 5.625rem;
   display: flex;
@@ -15,7 +15,7 @@
 }
 
 .section-product__title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500; /* Medium */
   font-size: 2rem; /* 32px */
   margin: 0rem;
@@ -31,7 +31,7 @@
   hyphens: auto;
 }
 .section-product__description {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400; /* Regular */
   font-size: 1.125rem; /* 18px */
   line-height: 1.55;
@@ -176,7 +176,7 @@
 }
 
 .section-product__item-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 1.25rem;
   margin: 0;
@@ -300,7 +300,7 @@
 }
 
 .section-product__item-price {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0;
@@ -421,3 +421,4 @@
     top: 0.5rem;
   }
 }
+

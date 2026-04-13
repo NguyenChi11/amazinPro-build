@@ -1,4 +1,4 @@
-.about-us__section-banner {
+﻿.about-us__section-banner {
   padding: 5.625rem 3.75rem;
   display: flex;
   justify-content: space-between;
@@ -12,7 +12,7 @@
   min-width: 0;
 }
 .about-us__section-banner__left__text {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1rem;
@@ -27,7 +27,7 @@
 }
 
 .about-us__section-banner__left__title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 3.125rem;
   line-height: 3.75rem;
@@ -42,7 +42,7 @@
 }
 
 .about-us__section-banner__left__description {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 1.125rem;
   line-height: 1.5rem;
@@ -75,7 +75,7 @@
 }
 
 .about-us__section-banner__left__wrapper__item__text {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 1.125rem;
   line-height: 1rem;
@@ -89,7 +89,7 @@
   hyphens: auto;
 }
 .about-us__section-banner__left__wrapper__item__description {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 1.5rem;
@@ -115,14 +115,14 @@
   height: 47.375rem;
   border-radius: 1.875rem;
   box-shadow: 4px 4px 20px 0px rgba(7, 59, 111, 0.1);
-  overflow: hidden; /* nên dùng hidden thay vì clip */
+  overflow: hidden; /* nÃªn dÃ¹ng hidden thay vÃ¬ clip */
 }
 
 .about-us__section-banner__right__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block; /* tránh khoảng trắng dưới ảnh */
+  display: block; /* trÃ¡nh khoáº£ng tráº¯ng dÆ°á»›i áº£nh */
 }
 
 .about-us__section-banner {
@@ -222,3 +222,4 @@
     border-radius: 1.25rem;
   }
 }
+

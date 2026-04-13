@@ -25,10 +25,6 @@ add_filter('wp_resource_hints', 'my_add_preconnects', 10, 2);
 function wp_enqueue_lib()
 {
     // Fonts
-    wp_enqueue_style('font-Quicksand', 'https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap', [], THEME_VERSION);
-    wp_enqueue_style('font-Inter', 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap', [], THEME_VERSION);
-    wp_enqueue_style('font-Barlow', 'https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap', [], THEME_VERSION);
-    wp_enqueue_style('font-Poppins', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap', [], THEME_VERSION);
     wp_enqueue_style('font-Montserrat', 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap', [], THEME_VERSION);
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', [], THEME_VERSION);
 

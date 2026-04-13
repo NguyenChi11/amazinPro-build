@@ -1,4 +1,4 @@
-.single-product-detail {
+﻿.single-product-detail {
   width: 100%;
   margin: 0 auto;
   padding: 0 3.75rem 2.5rem;
@@ -42,7 +42,7 @@
   height: auto;
   display: block;
   object-fit: cover;
-  aspect-ratio: 4 / 3; /* hoặc điều chỉnh theo tỷ lệ ảnh thực tế của bạn, ví dụ 3/4, 1/1... */
+  aspect-ratio: 4 / 3; /* hoáº·c Ä‘iá»u chá»‰nh theo tá»· lá»‡ áº£nh thá»±c táº¿ cá»§a báº¡n, vÃ­ dá»¥ 3/4, 1/1... */
 }
 
 .single-product__gallery {
@@ -64,7 +64,7 @@
 
 .single-product__gallery-item:hover,
 .single-product__gallery-item.active {
-  /* nếu bạn thêm class active cho thumbnail đang chọn */
+  /* náº¿u báº¡n thÃªm class active cho thumbnail Ä‘ang chá»n */
   border-color: #2563eb;
   transform: scale(1.04);
 }
@@ -88,7 +88,7 @@
   height: auto;
   display: block;
   object-fit: cover;
-  aspect-ratio: 4 / 3; /* điều chỉnh theo tỷ lệ ảnh sản phẩm */
+  aspect-ratio: 4 / 3; /* Ä‘iá»u chá»‰nh theo tá»· lá»‡ áº£nh sáº£n pháº©m */
 }
 
 .thumbs-swiper {
@@ -106,7 +106,7 @@
 
 .thumbs-swiper .swiper-slide-thumb-active {
   opacity: 1;
-  border-color: #2563eb; /* màu nổi bật khi active */
+  border-color: #2563eb; /* mÃ u ná»•i báº­t khi active */
 }
 
 .thumbs-swiper .swiper-slide img {
@@ -116,7 +116,7 @@
   aspect-ratio: 1 / 1;
 }
 
-/* Bên phải - Thông tin */
+/* BÃªn pháº£i - ThÃ´ng tin */
 .single-product__info {
   flex: 1 1 45%;
   min-width: 23.75rem;
@@ -132,7 +132,7 @@
   margin: 0;
   color: #111827;
   width: 100%;
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .single-product__title + .single-product__meta {
@@ -157,17 +157,17 @@
   font-size: 0.95rem;
   line-height: 1.2;
   font-weight: 600;
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
-/* Description (nếu dùng cho brand/standard hoặc intro ngắn) */
+/* Description (náº¿u dÃ¹ng cho brand/standard hoáº·c intro ngáº¯n) */
 .single-product__description {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #374151;
 }
 
-/* Key Features - giả sử bạn sẽ thêm vào description hoặc section riêng */
+/* Key Features - giáº£ sá»­ báº¡n sáº½ thÃªm vÃ o description hoáº·c section riÃªng */
 .single-product__description ul {
   list-style: none;
   padding-left: 0;
@@ -182,7 +182,7 @@
 }
 
 .single-product__description li::before {
-  content: "•";
+  content: "â€¢";
   position: absolute;
   left: 0;
   color: #2563eb;
@@ -192,7 +192,7 @@
 
 /* Typical range */
 .typical-range {
-  /* thêm class này vào phần typical_range trong PHP */
+  /* thÃªm class nÃ y vÃ o pháº§n typical_range trong PHP */
   font-size: 1.25rem;
   font-weight: 600;
   color: #111827;
@@ -204,7 +204,7 @@
 
 /* Button Request a Quote */
 .request-quote-btn {
-  /* thêm class này cho button trong PHP */
+  /* thÃªm class nÃ y cho button trong PHP */
   display: inline-block;
   background: #2563eb;
   color: white;
@@ -225,7 +225,7 @@
 
 /* ========================
    SINGLE PRODUCT META INFO
-   Brand • Category • Tags (full rem version)
+   Brand â€¢ Category â€¢ Tags (full rem version)
    ======================== */
 
 .single-product__meta-info {
@@ -233,7 +233,7 @@
   border-radius: 0.75rem;
   border: 1px solid #e2e8f0;
   font-family:
-    "Inter",
+    "Montserrat",
     system-ui,
     -apple-system,
     sans-serif;
@@ -256,7 +256,7 @@
   line-height: 1.4;
   margin: 0;
   color: rgba(0, 0, 0, 1);
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .single-product__brand,
@@ -267,7 +267,7 @@
   gap: 0.75rem;
   margin-bottom: 0.75rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #e5e7eb; /* đường kẻ nhẹ phân cách */
+  border-bottom: 1px solid #e5e7eb; /* Ä‘Æ°á»ng káº» nháº¹ phÃ¢n cÃ¡ch */
 }
 
 .single-product__meta-info > *:last-child {
@@ -278,7 +278,7 @@
 
 .single-product__meta-info strong {
   font-weight: 600;
-  color: #1e293b; /* màu đậm cho label */
+  color: #1e293b; /* mÃ u Ä‘áº­m cho label */
   min-width: 6.25rem; /* ~100px */
   flex-shrink: 0;
 }
@@ -299,7 +299,7 @@
   transform: translateY(-0.0625rem);
 }
 
-/* Nếu có nhiều tag/category, tự động wrap đẹp */
+/* Náº¿u cÃ³ nhiá»u tag/category, tá»± Ä‘á»™ng wrap Ä‘áº¹p */
 .single-product__categories span,
 .single-product__tags span {
   display: inline-flex;
@@ -317,13 +317,7 @@
 
 .single-product__price__container {
   margin: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacOSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .single-product__price {
@@ -337,7 +331,7 @@
   gap: 0.5rem;
 }
 
-/* Giá gốc (regular price) khi có giảm giá */
+/* GiÃ¡ gá»‘c (regular price) khi cÃ³ giáº£m giÃ¡ */
 .single-product__price del,
 .woocommerce-Price-amount del {
   font-size: 1.3rem;
@@ -347,7 +341,7 @@
   opacity: 0.75;
 }
 
-/* Giá sale (ins) */
+/* GiÃ¡ sale (ins) */
 .single-product__price ins,
 .woocommerce-Price-amount ins {
   text-decoration: none;
@@ -413,7 +407,7 @@
   font-size: 1rem;
   font-weight: 600;
   color: #111827;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   outline: none;
   -moz-appearance: textfield;
 }
@@ -436,7 +430,7 @@
   border-radius: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
   transition:
     background 0.18s,
@@ -458,7 +452,7 @@
   transform: none;
 }
 
-/* Sale range (thời gian khuyến mãi) */
+/* Sale range (thá»i gian khuyáº¿n mÃ£i) */
 .single-product__sale-range {
   margin-top: 0.65rem;
   font-size: 0.95rem;
@@ -486,8 +480,8 @@
 }
 
 .single-product__summary {
-  max-width: 100%; /* giới hạn chiều rộng để dễ đọc */
-  margin: 0 auto; /* center nếu cần, hoặc bỏ nếu nằm lệch trái */
+  max-width: 100%; /* giá»›i háº¡n chiá»u rá»™ng Ä‘á»ƒ dá»… Ä‘á»c */
+  margin: 0 auto; /* center náº¿u cáº§n, hoáº·c bá» náº¿u náº±m lá»‡ch trÃ¡i */
 }
 
 .single-product__specs__container {
@@ -501,8 +495,8 @@
   padding-top: 2rem;
   font-size: 1.05rem;
   line-height: 1.875rem;
-  color: #333; /* tối, dễ đọc */
-  font-family: "Inter", sans-serif;
+  color: #333; /* tá»‘i, dá»… Ä‘á»c */
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
 }
 
@@ -532,35 +526,35 @@
 }
 
 .single-product__short-desc ul li::before {
-  content: "•";
-  color: #e63946; /* accent đỏ nổi bật, hoặc đổi thành màu thương hiệu */
+  content: "â€¢";
+  color: #e63946; /* accent Ä‘á» ná»•i báº­t, hoáº·c Ä‘á»•i thÃ nh mÃ u thÆ°Æ¡ng hiá»‡u */
   position: absolute;
   left: -1.2rem;
   font-size: 1.4rem;
 }
 
-/* Typical Range (phần "Typical Range: ...") */
+/* Typical Range (pháº§n "Typical Range: ...") */
 .single-product__typical {
   font-size: 1rem;
   font-weight: 500;
   color: #555;
-  background: #f8f9fa; /* nền xám nhạt nhẹ */
+  background: #f8f9fa; /* ná»n xÃ¡m nháº¡t nháº¹ */
   padding: 0.9rem 1.2rem;
   border-radius: 0.625rem;
-  border-left: 4px solid #367fd3; /* viền accent để nổi bật */
+  border-left: 4px solid #367fd3; /* viá»n accent Ä‘á»ƒ ná»•i báº­t */
   margin-top: 1rem;
-  display: inline-block; /* chỉ rộng bằng nội dung */
+  display: inline-block; /* chá»‰ rá»™ng báº±ng ná»™i dung */
 }
 
-/* Nếu typical range dài, cho phép wrap đẹp */
+/* Náº¿u typical range dÃ i, cho phÃ©p wrap Ä‘áº¹p */
 .single-product__typical br {
-  display: none; /* ẩn br nếu có, dùng flex thay thế */
+  display: none; /* áº©n br náº¿u cÃ³, dÃ¹ng flex thay tháº¿ */
 }
 
 .single-product__attributes {
   padding: 1.5rem;
   background: #ffffff;
-  border: 1px solid #e2e8f0; /* viền xám nhạt */
+  border: 1px solid #e2e8f0; /* viá»n xÃ¡m nháº¡t */
   border-radius: 0.5rem;
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -581,7 +575,7 @@
   display: table;
   width: 100%;
   border-collapse: collapse;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .single-product__attr-item {
@@ -597,9 +591,9 @@
 }
 
 .single-product__attr-name {
-  width: 40%; /* hoặc 35-45% tùy label dài */
+  width: 40%; /* hoáº·c 35-45% tÃ¹y label dÃ i */
   font-weight: 600;
-  color: #334155; /* xám đậm cho label */
+  color: #334155; /* xÃ¡m Ä‘áº­m cho label */
   text-align: left;
 }
 
@@ -609,16 +603,16 @@
   background: #ffffff;
 }
 
-/* Zebra stripe cho hàng chẵn */
+/* Zebra stripe cho hÃ ng cháºµn */
 .single-product__attr-item:nth-child(even) .single-product__attr-name,
 .single-product__attr-item:nth-child(even) .single-product__attr-value {
-  background: #f1f5f9; /* xám rất nhạt */
+  background: #f1f5f9; /* xÃ¡m ráº¥t nháº¡t */
 }
 
-/* Hover để nổi bật (tùy chọn, tăng tương tác) */
+/* Hover Ä‘á»ƒ ná»•i báº­t (tÃ¹y chá»n, tÄƒng tÆ°Æ¡ng tÃ¡c) */
 .single-product__attr-item:hover .single-product__attr-name,
 .single-product__attr-item:hover .single-product__attr-value {
-  background: #eff6ff; /* xanh nhạt nhẹ */
+  background: #eff6ff; /* xanh nháº¡t nháº¹ */
 }
 
 .single-product__specs {
@@ -645,7 +639,7 @@
   display: table;
   width: 100%;
   border-collapse: collapse;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .single-product__spec-item {
@@ -661,7 +655,7 @@
 }
 
 .single-product__spec-item span:first-child {
-  width: 40%; /* điều chỉnh nếu label dài hơn */
+  width: 40%; /* Ä‘iá»u chá»‰nh náº¿u label dÃ i hÆ¡n */
   font-weight: 600;
   color: #334155;
   text-align: left;
@@ -673,19 +667,19 @@
   background: #ffffff;
 }
 
-/* Zebra stripe cho hàng chẵn */
+/* Zebra stripe cho hÃ ng cháºµn */
 .single-product__spec-item:nth-child(even) span:first-child,
 .single-product__spec-item:nth-child(even) span:last-child {
   background: #f1f5f9;
 }
 
-/* Hover nhẹ để tương tác */
+/* Hover nháº¹ Ä‘á»ƒ tÆ°Æ¡ng tÃ¡c */
 .single-product__spec-item:hover span:first-child,
 .single-product__spec-item:hover span:last-child {
   background: #eff6ff;
 }
 
-/* Responsive: trên mobile stack dọc hơn */
+/* Responsive: trÃªn mobile stack dá»c hÆ¡n */
 @media (max-width: 768px) {
   /* 768px */
   .single-product__meta-info {

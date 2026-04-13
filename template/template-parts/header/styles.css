@@ -1,4 +1,4 @@
-/* Header Styles located in template-parts/header/assets */
+﻿/* Header Styles located in template-parts/header/assets */
 .site-header {
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
@@ -64,7 +64,7 @@
   font-weight: 900;
   color: #000;
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Montserrat";
 }
 
 .header-logo-desc {
@@ -120,7 +120,7 @@
   text-decoration: none;
   color: #333333;
   font-weight: 500;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 0.875rem;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
@@ -352,7 +352,7 @@
   color: #fff;
   font-size: 0.7rem;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   border-radius: 9999px;
   line-height: 1;
   transition: transform 0.2s ease;
@@ -381,7 +381,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: #fff;
-  font-family: "Poppins";
+  font-family: "Montserrat";
   line-height: 1.5rem;
 }
 
@@ -389,7 +389,7 @@
   display: none;
   background: none;
   border: none;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: #333333;
@@ -446,7 +446,7 @@
 
 .mobile-sidebar-header::before {
   content: "Menu";
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
   color: #1f2937;
@@ -515,7 +515,7 @@
   text-decoration: none;
   color: #374151;
   font-weight: 500;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   padding: 1rem 1.25rem;
   display: block;
@@ -530,7 +530,7 @@
 }
 
 .mobile-navigation a::after {
-  content: "→";
+  content: "â†’";
   position: absolute;
   right: 1.25rem;
   color: #9ca3af;
@@ -589,7 +589,7 @@
   border-radius: 0.75rem;
   text-decoration: none;
   color: #374151;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.2s ease;
@@ -624,7 +624,7 @@
   color: #fff;
   font-size: 0.625rem;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   border-radius: 50%;
   line-height: 1;
   border: 2px solid #ffffff;
@@ -655,7 +655,7 @@
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 body.mobile-sidebar-open {
@@ -681,7 +681,7 @@ body.mobile-sidebar-open {
   border-radius: 0.625rem;
   text-decoration: none;
   color: #333333;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.2s ease;
@@ -712,7 +712,7 @@ body.mobile-sidebar-open {
   color: #fff;
   font-size: 0.7rem;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   border-radius: 9999px;
   line-height: 1;
 }
@@ -1007,7 +1007,7 @@ body.mobile-sidebar-open {
     border: 1px solid #e5e7eb;
     padding: 0.75rem 1.25rem;
     border-radius: 0.75rem;
-    font-family: "Poppins", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 0.875rem;
     font-weight: 600;
     color: #374151;
@@ -1100,3 +1100,4 @@ body.mobile-sidebar-open {
     font-size: 0.75rem;
   }
 }
+

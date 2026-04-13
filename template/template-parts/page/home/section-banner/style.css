@@ -1,4 +1,4 @@
-.section-banner {
+﻿.section-banner {
   padding: 0rem 3.75rem;
   padding-top: 5.625rem;
   position: relative;
@@ -80,7 +80,7 @@
 }
 
 .section-banner__item-type {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.25rem;
   font-weight: 500;
   color: rgba(19, 127, 236, 1);
@@ -91,7 +91,7 @@
 }
 
 .section-banner__item-text {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 3.125rem;
   font-weight: 900;
   color: #000;
@@ -111,7 +111,7 @@
 }
 
 .section-banner__item-description {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.125rem;
   color: rgba(126, 132, 139, 1);
   line-height: 1.5rem;
@@ -135,7 +135,7 @@
   color: white;
   border: none;
   border-radius: 0.375rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -322,3 +322,4 @@
     top: 1rem;
   }
 }
+

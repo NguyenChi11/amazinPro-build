@@ -1,10 +1,10 @@
-.project--section-title {
+﻿.project--section-title {
   padding: 4.375rem 3.75rem;
   position: relative;
 }
 
 .project--section-title__title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 900;
   font-size: 3.125rem;
   line-height: 3.75rem;
@@ -23,7 +23,7 @@
 }
 
 .project--section-title__desc {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 1.125rem;
   line-height: 1.5rem;
@@ -106,3 +106,4 @@
     max-width: 100%;
   }
 }
+

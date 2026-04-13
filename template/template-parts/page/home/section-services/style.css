@@ -1,4 +1,4 @@
-.section-services {
+﻿.section-services {
   padding: 0rem 3.75rem;
   padding: 5.625rem 0rem;
   display: flex;
@@ -15,7 +15,7 @@
 }
 
 .section-services__title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500; /* Medium */
   font-size: 2rem; /* 32px */
   margin: 0rem;
@@ -31,7 +31,7 @@
   hyphens: auto;
 }
 .section-services__description {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400; /* Regular */
   font-size: 1.125rem; /* 18px */
   line-height: 1.55;
@@ -83,7 +83,7 @@
   height: 2rem;
 }
 .section-services__item-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700; /* Bold */
   font-size: 1.25rem; /* 20px */
   line-height: 1.625rem; /* 100% */
@@ -98,12 +98,12 @@
   hyphens: auto;
   display: -webkit-box;
   line-clamp: 1;
-  -webkit-line-clamp: 1; /* số dòng muốn hiển thị */
+  -webkit-line-clamp: 1; /* sá»‘ dÃ²ng muá»‘n hiá»ƒn thá»‹ */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .section-services__item-description {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400; /* Regular */
   font-size: 1.125rem; /* 18px */
   line-height: 1.625rem; /* 100% */
@@ -119,12 +119,12 @@
   hyphens: auto;
   display: -webkit-box;
   line-clamp: 4;
-  -webkit-line-clamp: 4; /* số dòng muốn hiển thị */
+  -webkit-line-clamp: 4; /* sá»‘ dÃ²ng muá»‘n hiá»ƒn thá»‹ */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .section-services__item-link {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700; /* Bold */
   font-size: 1.25rem; /* 20px */
   line-height: 1.625rem; /* 100% */
@@ -221,3 +221,4 @@
     top: 0.5rem;
   }
 }
+

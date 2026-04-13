@@ -1,4 +1,4 @@
-.section-data {
+﻿.section-data {
   padding: 4.25rem 8.25rem;
   background-color: rgba(220, 235, 255, 1);
   position: relative;
@@ -17,14 +17,14 @@
 }
 .section-data__item-number {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 3.125rem;
   font-weight: 900;
   color: rgba(19, 127, 236, 1);
 }
 .section-data__item-text {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.25rem;
   font-weight: 400;
   color: rgba(126, 132, 139, 1);
@@ -36,7 +36,7 @@
   text-align: center;
   display: -webkit-box;
   line-clamp: 2;
-  -webkit-line-clamp: 2; /* số dòng muốn hiển thị */
+  -webkit-line-clamp: 2; /* sá»‘ dÃ²ng muá»‘n hiá»ƒn thá»‹ */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -115,3 +115,4 @@
     top: 0.5rem;
   }
 }
+

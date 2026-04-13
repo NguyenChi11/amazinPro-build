@@ -1,4 +1,4 @@
-.about-contact {
+﻿.about-contact {
   background: #f5f8fc;
   padding: 0 3.75rem 4rem;
   position: relative;
@@ -8,14 +8,7 @@
   margin: 0 auto;
 }
 .about-contact__title {
-  font-family:
-    "Poppins",
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #111827;
   font-weight: 700;
   font-size: 2rem;

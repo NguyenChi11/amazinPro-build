@@ -1,4 +1,4 @@
-.section-post {
+﻿.section-post {
   padding: 5.375rem 3.75rem;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@
 }
 
 .section-post__title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500; /* Medium */
   font-size: 2rem; /* 32px */
   margin: 0rem;
@@ -30,7 +30,7 @@
   hyphens: auto;
 }
 .section-post__description {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400; /* Regular */
   font-size: 1.125rem; /* 18px */
   line-height: 1.55;
@@ -132,7 +132,7 @@
   height: 0.75rem;
 }
 .section-post__item-date {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400; /* Regular */
   font-size: 0.875rem;
   line-height: 1; /* 100% */
@@ -143,7 +143,7 @@
 }
 
 .section-post__item-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 1.25rem;
   margin: 0;
@@ -156,13 +156,13 @@
   hyphens: auto;
   display: -webkit-box;
   line-clamp: 2;
-  -webkit-line-clamp: 2; /* số dòng muốn hiển thị */
+  -webkit-line-clamp: 2; /* sá»‘ dÃ²ng muá»‘n hiá»ƒn thá»‹ */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .section-post__item-desc {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400; /* Regular */
   font-size: 1.125rem; /* 18px */
   line-height: 1; /* 100% */
@@ -178,7 +178,7 @@
   hyphens: auto;
   display: -webkit-box;
   line-clamp: 3;
-  -webkit-line-clamp: 3; /* số dòng muốn hiển thị */
+  -webkit-line-clamp: 3; /* sá»‘ dÃ²ng muá»‘n hiá»ƒn thá»‹ */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -190,7 +190,7 @@
   margin: 0rem 1rem;
 }
 .section-post__item-readmore {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500; /* Medium */
   font-size: 1.125rem; /* 18px */
   line-height: 1; /* 100% */
@@ -261,3 +261,4 @@
     top: 1rem;
   }
 }
+

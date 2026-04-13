@@ -1,12 +1,13 @@
-:root {
+﻿:root {
   --root-font-size: 1vw;
+  --buildpro-font-default: "Montserrat", sans-serif;
 }
 
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent; /* Hide apps in your browser. WebKit (Chrome, Safari) */
   -webkit-touch-callout: none; /* Disable text selection on iOS */
-  font-family: "Shopee Display", sans-serif;
+  font-family: var(--buildpro-font-default);
 }
 html {
   font-size: var(--root-font-size);
@@ -329,7 +330,7 @@ input[type="checkbox"] {
 }
 
 .grid-items__tags::before {
-  content: "Chủ Đề:";
+  content: "Chá»§ Äá»:";
   display: inline-block;
   color: var(--tm-main, #5b378f);
   font-size: 0.875rem;
@@ -426,7 +427,7 @@ input[type="checkbox"] {
 }
 
 .grid-items__filter-dropdown {
-  --font-family: SVN-Gotham;
+  --font-family: "Montserrat", sans-serif;
   --dropdown-trigger-padding: var(--Padding-Small, 0.75rem)
     var(--Padding-Medium, 1rem);
   --arrow-icon-size: 1.25rem;
@@ -459,7 +460,7 @@ input[type="checkbox"] {
 span[slot="placeholder"] {
   color: var(--Text-Text-Grey-87-body-text-1, rgba(0, 18, 36, 0.87));
   /* TEXT/MB/14/R */
-  font-family: SVN-Gotham;
+  font-family: "Montserrat", sans-serif;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 450;
@@ -772,7 +773,7 @@ span[slot="placeholder"] {
   border: 1px solid #d32131;
 }
 .component-button__text {
-  font-family: "Shopee Display", sans-serif;
+  font-family: var(--buildpro-font-default);
   font-style: normal;
   font-weight: 500;
   line-height: 140%;
@@ -935,4 +936,12 @@ html > body[data-scroll-locked] {
 .compound-overlay.active {
   opacity: 0;
   visibility: hidden;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--buildpro-font-default);
 }

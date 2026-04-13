@@ -1,4 +1,4 @@
-.single-project-detail {
+﻿.single-project-detail {
   width: 100%;
 
   margin: 0 auto;
@@ -75,7 +75,7 @@
 .single-project__taxonomy-chip {
   display: inline-flex;
   align-items: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.5rem;
@@ -98,7 +98,7 @@
 }
 
 .single-project__title {
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
   line-height: 1.2;
@@ -128,7 +128,7 @@
 }
 
 .single-project__text {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.25rem;
@@ -140,7 +140,7 @@
    ========================================================================== */
 
 .single-project__content {
-  max-width: 100%; /* hoặc giá trị bạn thích, ví dụ 1400px */
+  max-width: 100%; /* hoáº·c giÃ¡ trá»‹ báº¡n thÃ­ch, vÃ­ dá»¥ 1400px */
   margin: 0 auto;
   padding-top: 2rem;
   font-size: 1.125rem;
@@ -148,11 +148,11 @@
   color: #2d3748;
 }
 
-/* Text parts - giữ nguyên thứ tự, style đẹp hơn */
+/* Text parts - giá»¯ nguyÃªn thá»© tá»±, style Ä‘áº¹p hÆ¡n */
 .single-project__content p {
   margin: 0;
   margin-bottom: 1rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.85;
@@ -173,7 +173,7 @@
   margin: 1.4rem 0 1.4rem 1.8rem;
 }
 
-/* Ẩn float/align mặc định để tránh ảnh xen giữa text */
+/* áº¨n float/align máº·c Ä‘á»‹nh Ä‘á»ƒ trÃ¡nh áº£nh xen giá»¯a text */
 .single-project__content img,
 .single-project__content figure.wp-block-image,
 .single-project__content .wp-block-gallery,
@@ -185,31 +185,31 @@
   display: block !important;
 }
 
-/* Tất cả ảnh / figure ảnh sẽ xuất hiện SAU text và chiếm full width */
+/* Táº¥t cáº£ áº£nh / figure áº£nh sáº½ xuáº¥t hiá»‡n SAU text vÃ  chiáº¿m full width */
 .single-project__content figure.wp-block-image,
 .single-project__content .wp-block-image,
 .single-project__content img {
   width: 100% !important;
   max-width: 100% !important;
-  height: 24rem !important; /* chiều cao cố định 30rem */
-  margin: 2.5rem 0 !important; /* khoảng cách trên dưới mỗi ảnh */
+  height: 24rem !important; /* chiá»u cao cá»‘ Ä‘á»‹nh 30rem */
+  margin: 2.5rem 0 !important; /* khoáº£ng cÃ¡ch trÃªn dÆ°á»›i má»—i áº£nh */
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Ảnh bên trong sẽ cover toàn bộ khung (crop nếu cần) */
+/* áº¢nh bÃªn trong sáº½ cover toÃ n bá»™ khung (crop náº¿u cáº§n) */
 .single-project__content figure.wp-block-image img,
 .single-project__content .wp-block-image img,
 .single-project__content img {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover; /* cover → crop đẹp, giữ tỉ lệ */
+  object-fit: cover; /* cover â†’ crop Ä‘áº¹p, giá»¯ tá»‰ lá»‡ */
   object-position: center;
   display: block;
 }
 
-/* Gallery (nếu có nhiều ảnh trong 1 block) */
+/* Gallery (náº¿u cÃ³ nhiá»u áº£nh trong 1 block) */
 .single-project__content .wp-block-gallery {
   display: flex;
   flex-wrap: wrap;
@@ -245,7 +245,7 @@
 }
 
 .single-project__fact-item .label {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.2;
@@ -254,7 +254,7 @@
 }
 
 .single-project__fact-item .value {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.25;
@@ -273,44 +273,44 @@
 }
 
 .single-project__about-content {
-  flex: 1; /* Text chiếm không gian linh hoạt */
+  flex: 1; /* Text chiáº¿m khÃ´ng gian linh hoáº¡t */
   max-width: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 1.125rem;
   line-height: 1.85;
-  color: rgba(0, 0, 0, 1); /* Màu xám đậm sang trọng */
+  color: rgba(0, 0, 0, 1); /* MÃ u xÃ¡m Ä‘áº­m sang trá»ng */
 }
 
 .single-project__about-content p {
-  margin-bottom: 1.8rem; /* Khoảng cách đoạn văn thoải mái */
+  margin-bottom: 1.8rem; /* Khoáº£ng cÃ¡ch Ä‘oáº¡n vÄƒn thoáº£i mÃ¡i */
 }
 
 .single-project__about-content strong,
 .single-project__about-content b {
   font-weight: 700;
-  color: #1e3a8a; /* Màu xanh navy nhấn mạnh */
+  color: #1e3a8a; /* MÃ u xanh navy nháº¥n máº¡nh */
 }
 
 .single-project__about-image {
   flex: 1;
   max-width: 100%;
   height: 24rem;
-  overflow: hidden; /* Ẩn phần thừa */
-  border-radius: 1.5rem; /* Bo góc mềm mại hơn */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); /* Shadow sâu hơn cho chiều sâu */
+  overflow: hidden; /* áº¨n pháº§n thá»«a */
+  border-radius: 1.5rem; /* Bo gÃ³c má»m máº¡i hÆ¡n */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); /* Shadow sÃ¢u hÆ¡n cho chiá»u sÃ¢u */
   transition: transform 0.4s ease;
 }
 
 .single-project__about-image:hover {
-  transform: translateY(-8px); /* Hiệu ứng lift nhẹ khi hover */
+  transform: translateY(-8px); /* Hiá»‡u á»©ng lift nháº¹ khi hover */
 }
 
 .single-project__about-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ảnh cover đầy khung, crop đẹp */
-  object-position: center; /* Tập trung trung tâm */
+  object-fit: cover; /* áº¢nh cover Ä‘áº§y khung, crop Ä‘áº¹p */
+  object-position: center; /* Táº­p trung trung tÃ¢m */
   border-radius: 1.5rem;
   display: block;
 }
@@ -327,7 +327,7 @@
 }
 
 .single-project__section-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 2rem;
   font-weight: 800;
   color: #1a1a1a;
@@ -350,7 +350,7 @@
     #d4af37,
     #b8975e,
     #d4af37
-  ); /* vàng ánh kim luxury */
+  ); /* vÃ ng Ã¡nh kim luxury */
   border-radius: 2px;
 }
 
@@ -366,7 +366,7 @@
   border-radius: 1.25rem;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
   transition: all 0.4s ease;
-  aspect-ratio: 4 / 5; /* tỉ lệ dọc nhẹ, sang trọng */
+  aspect-ratio: 4 / 5; /* tá»‰ lá»‡ dá»c nháº¹, sang trá»ng */
 }
 
 .single-project__gallery-item:hover {
@@ -387,7 +387,7 @@
   transform: scale(1.08);
 }
 
-/* Overlay nhẹ khi hover (tạo cảm giác premium) */
+/* Overlay nháº¹ khi hover (táº¡o cáº£m giÃ¡c premium) */
 .single-project__gallery-item::after {
   content: "";
   position: absolute;
@@ -437,7 +437,7 @@
   }
 }
 /* ==========================================================================
-   Single Project Standards - Luxury Villa Style (tương tự Gallery)
+   Single Project Standards - Luxury Villa Style (tÆ°Æ¡ng tá»± Gallery)
    ========================================================================== */
 
 .single-project__standards {
@@ -448,7 +448,7 @@
 }
 
 .single-project__section-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 3.5rem;
   font-weight: 700;
   color: #1a1a1a;
@@ -471,7 +471,7 @@
     #d4af37,
     #b8975e,
     #d4af37
-  ); /* vàng ánh kim luxury */
+  ); /* vÃ ng Ã¡nh kim luxury */
   border-radius: 2px;
 }
 
@@ -480,8 +480,8 @@
   grid-template-columns: repeat(
     auto-fit,
     minmax(380px, 1fr)
-  ); /* responsive, tự động chia cột */
-  gap: 2.5rem; /* khoảng cách lớn, thoáng đãng */
+  ); /* responsive, tá»± Ä‘á»™ng chia cá»™t */
+  gap: 2.5rem; /* khoáº£ng cÃ¡ch lá»›n, thoÃ¡ng Ä‘Ã£ng */
 }
 
 .single-project__standard-item {
@@ -500,7 +500,7 @@
 }
 
 .single-project__standard-thumb {
-  height: 18rem; /* chiều cao ảnh cố định, cao cấp */
+  height: 18rem; /* chiá»u cao áº£nh cá»‘ Ä‘á»‹nh, cao cáº¥p */
   overflow: hidden;
   position: relative;
 }
@@ -517,7 +517,7 @@
   transform: scale(1.08);
 }
 
-/* Overlay nhẹ khi hover (giống gallery) */
+/* Overlay nháº¹ khi hover (giá»‘ng gallery) */
 .single-project__standard-thumb::after {
   content: "";
   position: absolute;
@@ -541,7 +541,7 @@
 }
 
 .single-project__standard-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
   color: #1a1a1a;
@@ -550,7 +550,7 @@
 }
 
 .single-project__standard-desc {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
   color: #4a5568;
@@ -558,12 +558,12 @@
   margin: 0;
 }
 
-/* Mobile - giữ nguyên full width, nhưng giảm chiều cao ảnh cho hợp lý */
+/* Mobile - giá»¯ nguyÃªn full width, nhÆ°ng giáº£m chiá»u cao áº£nh cho há»£p lÃ½ */
 @media (max-width: 768px) {
   .single-project__content figure.wp-block-image,
   .single-project__content .wp-block-image,
   .single-project__content img {
-    height: 20rem !important; /* hoặc 24rem, tùy bạn */
+    height: 20rem !important; /* hoáº·c 24rem, tÃ¹y báº¡n */
   }
 
   .single-project__content .wp-block-gallery img {
@@ -755,3 +755,4 @@
     padding: 2rem 0;
   }
 }
+

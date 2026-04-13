@@ -1,4 +1,4 @@
-.single-post-detail {
+﻿.single-post-detail {
   width: 100%;
   margin: 0 auto;
   padding: 0 3.75rem;
@@ -66,7 +66,7 @@
 }
 
 .single-post__title {
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 2.5rem;
   font-weight: 900;
   line-height: 1.2;
@@ -96,14 +96,14 @@
 }
 
 .single-post__text {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.25rem;
   margin: 0;
 }
 .single-post__content-paragraph {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.85;
@@ -153,7 +153,7 @@
 
 .single-post__content {
   width: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.35;
@@ -172,7 +172,7 @@
   border-top: 1px solid rgba(229, 231, 235, 1);
 }
 .single-post__quote-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.875rem;
   font-weight: 700;
   line-height: 2rem;
@@ -201,7 +201,7 @@
 }
 
 .single-post__kv-item {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.125rem;
   line-height: 1.875rem;
   margin: 0;
@@ -257,7 +257,7 @@
 }
 
 .single-post__image-desc {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.875rem;
@@ -267,7 +267,7 @@
 }
 
 .single-post__quote-desc {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.85;
@@ -443,3 +443,4 @@
     gap: 0.875rem;
   }
 }
+
