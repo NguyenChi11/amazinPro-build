@@ -39,6 +39,49 @@ if ($rows && is_array($rows)) {
         ];
     }
 }
+
+$section_option_items = array();
+$option_enabled = get_post_meta($page_id, 'buildpro_option_enabled', true);
+$option_enabled = $option_enabled === '' ? 1 : (int) $option_enabled;
+$option_rows = get_post_meta($page_id, 'buildpro_option_items', true);
+if (is_customize_preview()) {
+    $option_mods = get_theme_mod('buildpro_option_items', array());
+    if (is_array($option_mods) && !empty($option_mods)) {
+        $option_rows = $option_mods;
+    }
+    $option_enabled_mod = get_theme_mod('buildpro_option_enabled', 1);
+    $option_enabled = (int) $option_enabled_mod;
+}
+if ($option_rows && is_array($option_rows)) {
+    foreach ($option_rows as $row) {
+        $icon_id = isset($row['icon_id']) ? (int) $row['icon_id'] : 0;
+        $icon_url = isset($row['icon_url']) ? $row['icon_url'] : '';
+        $text = isset($row['text']) ? $row['text'] : '';
+        $description = isset($row['description']) ? $row['description'] : '';
+        $section_option_items[] = array(
+            'icon_id'     => $icon_id,
+            'icon_url'    => $icon_url,
+            'text'        => $text,
+            'description' => $description,
+        );
+    }
+}
+
+$min_count = 6;
+$option_count = count($section_option_items);
+if ($option_count > 0 && $option_count < $min_count) {
+    $duplicated = $section_option_items;
+    while (count($duplicated) < $min_count) {
+        foreach ($section_option_items as $item) {
+            $duplicated[] = $item;
+            if (count($duplicated) >= $min_count) {
+                break;
+            }
+        }
+    }
+    $section_option_items = $duplicated;
+}
+
 if (empty($section_banner_houses)) {
     if (is_customize_preview()) {
 ?>
@@ -137,4 +180,39 @@ if (empty($section_banner_houses)) {
             <?php endforeach; ?>
         </div>
     </div>
+
+    <?php if ($option_enabled === 1 && !empty($section_option_items)): ?>
+        <div class="section-banner__options" data-aos="fade-up" data-i18n-icon="<?php echo esc_attr__('icon', 'buildpro'); ?>">
+            <div class="swiper section-banner__options-swiper">
+                <div class="swiper-wrapper section-banner__options-swiper-wrapper">
+                    <?php foreach ($section_option_items as $section_option_item): ?>
+                        <div class="swiper-slide section-banner__options-swiper-item">
+                            <div class="section-banner__options-item">
+                                <div class="section-banner__options-item-icon">
+                                    <?php
+                                    $icon_src = '';
+                                    if (!empty($section_option_item['icon_id'])) {
+                                        $icon_src = wp_get_attachment_image_url($section_option_item['icon_id'], 'full');
+                                    }
+                                    if (!$icon_src && !empty($section_option_item['icon_url'])) {
+                                        $icon_src = $section_option_item['icon_url'];
+                                    }
+                                    ?>
+                                    <?php if ($icon_src): ?>
+                                        <img src="<?php echo esc_url($icon_src); ?>" class="section-banner__options-item-icon-image"
+                                            alt="<?php echo esc_attr__('icon', 'buildpro'); ?>">
+                                    <?php endif; ?>
+                                </div>
+                                <h3 class="section-banner__options-item-text"><?php echo esc_html($section_option_item['text']); ?></h3>
+                                <p class="section-banner__options-item-description"><?php echo esc_html($section_option_item['description']); ?>
+                                </p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    <?php elseif (is_customize_preview()): ?>
+        <div class="section-banner__options" data-no-fallback="1" style="display:none"></div>
+    <?php endif; ?>
 </section>

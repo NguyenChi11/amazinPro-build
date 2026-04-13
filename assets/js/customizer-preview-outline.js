@@ -21,7 +21,6 @@
     buildpro_portfolio_section: ".section-portfolio",
     buildpro_product_section: ".section-product",
     buildpro_post_section: ".section-post",
-    buildpro_option_section: ".section-option",
 
     // About Us page
     buildpro_about_banner_section: ".about-us__section-banner",

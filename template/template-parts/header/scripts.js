@@ -102,20 +102,35 @@ document.addEventListener("DOMContentLoaded", function () {
   // Header logic here
   const header = document.querySelector(".site-header");
   if (header) {
-    // Add scroll class (throttled)
+    // Add header classes based on scroll direction (throttled)
     let ticking = false;
+    let lastScrollY = window.scrollY || 0;
+
     function onScroll() {
       if (ticking) return;
       ticking = true;
       window.requestAnimationFrame(function () {
-        if (window.scrollY > 0) {
+        const currentScrollY = window.scrollY || 0;
+
+        if (currentScrollY > 0) {
           header.classList.add("is-scrolled");
         } else {
           header.classList.remove("is-scrolled");
         }
+
+        if (currentScrollY <= 0) {
+          header.classList.remove("is-hidden");
+        } else if (currentScrollY > lastScrollY && currentScrollY > 80) {
+          header.classList.add("is-hidden");
+        } else if (currentScrollY < lastScrollY) {
+          header.classList.remove("is-hidden");
+        }
+
+        lastScrollY = currentScrollY;
         ticking = false;
       });
     }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }

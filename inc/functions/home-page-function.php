@@ -93,7 +93,6 @@ if (!function_exists('buildpro_home_sections_get_map')) {
     {
         return array(
             'section-banner' => 'template/template-parts/page/home/section-banner/index',
-            'section-option' => 'template/template-parts/page/home/section-option/index',
             'section-data' => 'template/template-parts/page/home/section-data/index',
             'section-product' => 'template/template-parts/page/home/section-products/index',
             'section-services' => 'template/template-parts/page/home/section-services/index',
@@ -116,7 +115,6 @@ if (!function_exists('buildpro_home_sections_get_labels')) {
     {
         return array(
             'section-banner' => __('Banner', 'buildpro'),
-            'section-option' => __('Option', 'buildpro'),
             'section-data' => __('Data', 'buildpro'),
             'section-product' => __('Products', 'buildpro'),
             'section-services' => __('Services', 'buildpro'),
@@ -465,7 +463,6 @@ CSS;
 (function($){
     var SECTION_KEYS = [
         'section-banner',
-        'section-option',
         'section-data',
         'section-product',
         'section-services',

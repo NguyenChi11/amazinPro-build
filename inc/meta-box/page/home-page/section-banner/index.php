@@ -28,7 +28,15 @@ function buildpro_banner_render_meta_box($post)
     $enabled = get_post_meta($post->ID, 'buildpro_banner_enabled', true);
     $enabled = $enabled === '' ? 1 : (int)$enabled;
     $items = is_array($items) ? $items : array();
+
+    $option_items = get_post_meta($post->ID, 'buildpro_option_items', true);
+    $option_enabled = get_post_meta($post->ID, 'buildpro_option_enabled', true);
+    $option_enabled = $option_enabled === '' ? 1 : (int) $option_enabled;
+    $option_items = is_array($option_items) ? $option_items : array();
+
     wp_enqueue_style('buildpro-banner-admin', get_theme_file_uri('template/meta-box/page/home/section-banner/style.css'), array(), null);
+    wp_enqueue_style('buildpro-option-admin-merged', get_theme_file_uri('template/meta-box/page/home/section-banner/option-style.css'), array(), null);
+
     $prepared = array();
     foreach ($items as $item) {
         $image_id = isset($item['image_id']) ? (int)$item['image_id'] : 0;
@@ -50,7 +58,24 @@ function buildpro_banner_render_meta_box($post)
             'thumb_url' => $thumb,
         );
     }
+
+    $option_prepared = array();
+    foreach ($option_items as $it) {
+        $icon_id = isset($it['icon_id']) ? (int) $it['icon_id'] : 0;
+        $thumb = $icon_id ? wp_get_attachment_image_url($icon_id, 'thumbnail') : '';
+        $option_prepared[] = array(
+            'icon_id' => $icon_id,
+            'text' => isset($it['text']) ? (string) $it['text'] : '',
+            'description' => isset($it['description']) ? (string) $it['description'] : '',
+            'thumb_url' => $thumb ? (string) $thumb : '',
+        );
+    }
+
+    $banner_enabled = $enabled;
     include get_theme_file_path('template/meta-box/page/home/section-banner/index.php');
+    $enabled = $option_enabled;
+    include get_theme_file_path('template/meta-box/page/home/section-banner/option-index.php');
+
     wp_enqueue_script(
         'buildpro-banner-admin',
         get_theme_file_uri('template/meta-box/page/home/section-banner/script.js'),
@@ -60,7 +85,20 @@ function buildpro_banner_render_meta_box($post)
     );
     wp_add_inline_script(
         'buildpro-banner-admin',
-        'window.buildproBannerData=' . wp_json_encode(array('items' => $prepared, 'enabled' => $enabled)) . ';',
+        'window.buildproBannerData=' . wp_json_encode(array('items' => $prepared, 'enabled' => $banner_enabled)) . ';',
+        'before'
+    );
+
+    wp_enqueue_script(
+        'buildpro-option-admin-merged',
+        get_theme_file_uri('template/meta-box/page/home/section-banner/option-script.js'),
+        array(),
+        null,
+        true
+    );
+    wp_add_inline_script(
+        'buildpro-option-admin-merged',
+        'window.buildproOptionData=' . wp_json_encode(array('items' => $option_prepared, 'enabled' => $option_enabled)) . ';',
         'before'
     );
     return;
@@ -93,6 +131,8 @@ function buildpro_save_banner_meta($post_id)
     }
     $items = isset($_POST['buildpro_banner_items']) && is_array($_POST['buildpro_banner_items']) ? $_POST['buildpro_banner_items'] : array();
     $enabled = isset($_POST['buildpro_banner_enabled']) ? absint($_POST['buildpro_banner_enabled']) : 1;
+    $option_items = isset($_POST['buildpro_option_items']) && is_array($_POST['buildpro_option_items']) ? $_POST['buildpro_option_items'] : array();
+    $option_enabled = isset($_POST['buildpro_option_enabled']) ? absint($_POST['buildpro_option_enabled']) : 1;
     $clean = array();
     foreach ($items as $item) {
         $clean[] = array(
@@ -105,14 +145,36 @@ function buildpro_save_banner_meta($post_id)
             'link_target' => isset($item['link_target']) ? sanitize_text_field($item['link_target']) : '',
         );
     }
+
+    $option_clean = array();
+    foreach ($option_items as $item) {
+        $option_clean[] = array(
+            'icon_id' => isset($item['icon_id']) ? absint($item['icon_id']) : 0,
+            'text' => isset($item['text']) ? sanitize_text_field($item['text']) : '',
+            'description' => isset($item['description']) ? sanitize_textarea_field($item['description']) : '',
+        );
+    }
+
     if (empty($clean)) {
         $enabled = 0;
     } else {
         $enabled = 1;
     }
+
+    if (empty($option_clean)) {
+        $option_enabled = 0;
+    } else {
+        $option_enabled = 1;
+    }
+
     update_post_meta($post_id, 'buildpro_banner_items', $clean);
     update_post_meta($post_id, 'buildpro_banner_enabled', $enabled);
     set_theme_mod('buildpro_banner_items', $clean);
     set_theme_mod('buildpro_banner_enabled', $enabled);
+
+    update_post_meta($post_id, 'buildpro_option_items', $option_clean);
+    update_post_meta($post_id, 'buildpro_option_enabled', $option_enabled);
+    set_theme_mod('buildpro_option_items', $option_clean);
+    set_theme_mod('buildpro_option_enabled', $option_enabled);
 }
 add_action('save_post_page', 'buildpro_save_banner_meta');

@@ -5,7 +5,6 @@ if (function_exists('buildpro_render_home_sections')) {
 }
 
 get_template_part('template/template-parts/page/home/section-banner/index');
-get_template_part('template/template-parts/page/home/section-option/index');
 get_template_part('template/template-parts/page/home/section-data/index');
 get_template_part('template/template-parts/page/home/section-products/index');
 get_template_part('template/template-parts/page/home/section-services/index');

@@ -18,6 +18,28 @@ if (!class_exists('BuildPro_Banner_Repeater_Control') && class_exists('WP_Custom
         {
             $items = $this->value();
             $items = is_array($items) ? $items : array();
+            $buildpro_repeater_mode = 'banner';
+
+            echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
+            if (!empty($this->description)) {
+                echo '<p class="description">' . esc_html($this->description) . '</p>';
+            }
+
+            include get_theme_file_path('template/customize/page/home/section-banner/index.php');
+        }
+    }
+}
+
+if (!class_exists('BuildPro_Banner_Option_Repeater_Control') && class_exists('WP_Customize_Control')) {
+    class BuildPro_Banner_Option_Repeater_Control extends WP_Customize_Control
+    {
+        public $type = 'buildpro_banner_option_repeater';
+
+        public function render_content()
+        {
+            $items = $this->value();
+            $items = is_array($items) ? $items : array();
+            $buildpro_repeater_mode = 'option';
 
             echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
             if (!empty($this->description)) {
@@ -136,6 +158,56 @@ function buildpro_banner_get_default_items()
     return array();
 }
 
+function buildpro_option_find_home_id()
+{
+    return buildpro_banner_find_home_id();
+}
+
+function buildpro_option_get_default_items()
+{
+    $page_id = buildpro_option_find_home_id();
+    if ($page_id) {
+        $items = get_post_meta($page_id, 'buildpro_option_items', true);
+        return is_array($items) ? $items : array();
+    }
+    return array();
+}
+
+function buildpro_option_get_default_enabled()
+{
+    $page_id = buildpro_option_find_home_id();
+    if ($page_id) {
+        $enabled = get_post_meta($page_id, 'buildpro_option_enabled', true);
+        return $enabled === '' ? 1 : (int) $enabled;
+    }
+    return 1;
+}
+
+function buildpro_option_sanitize_items($value)
+{
+    if (is_string($value)) {
+        $decoded = json_decode($value, true);
+        if (is_array($decoded)) {
+            $value = $decoded;
+        }
+    }
+
+    if (!is_array($value)) {
+        return array();
+    }
+
+    $clean = array();
+    foreach ($value as $item) {
+        $clean[] = array(
+            'icon_id' => isset($item['icon_id']) ? absint($item['icon_id']) : 0,
+            'text' => isset($item['text']) ? sanitize_text_field($item['text']) : '',
+            'description' => isset($item['description']) ? sanitize_textarea_field($item['description']) : '',
+        );
+    }
+
+    return $clean;
+}
+
 // ─── Sanitize ─────────────────────────────────────────────────────────────────
 
 function buildpro_banner_sanitize_items($value)
@@ -247,6 +319,55 @@ function buildpro_banner_customize_register($wp_customize)
         'section' => 'buildpro_banner_section',
         'type'    => 'checkbox',
     ));
+
+    // Banner option cards.
+    $wp_customize->add_setting('buildpro_option_enabled', array(
+        'default' => buildpro_option_get_default_enabled(),
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control('buildpro_option_enabled', array(
+        'label' => __('Enable Banner Options', 'buildpro'),
+        'section' => 'buildpro_banner_section',
+        'type' => 'checkbox',
+        'priority' => 40,
+    ));
+
+    $wp_customize->add_setting('buildpro_option_items', array(
+        'default' => buildpro_option_get_default_items(),
+        'transport' => 'postMessage',
+        'sanitize_callback' => 'buildpro_option_sanitize_items',
+    ));
+    if (class_exists('BuildPro_Banner_Option_Repeater_Control')) {
+        $wp_customize->add_control(new BuildPro_Banner_Option_Repeater_Control($wp_customize, 'buildpro_option_items', array(
+            'label' => __('Banner Option Items', 'buildpro'),
+            'description' => __('Add/Edit option cards displayed below the banner.', 'buildpro'),
+            'section' => 'buildpro_banner_section',
+            'priority' => 41,
+        )));
+    }
+
+    if (isset($wp_customize->selective_refresh)) {
+        $wp_customize->selective_refresh->add_partial('buildpro_option_items', array(
+            'selector' => '.section-banner',
+            'settings' => array('buildpro_option_items'),
+            'render_callback' => function () {
+                ob_start();
+                get_template_part('template/template-parts/page/home/section-banner/index');
+                return ob_get_clean();
+            },
+        ));
+        $wp_customize->selective_refresh->add_partial('buildpro_option_enabled', array(
+            'selector' => '.section-banner',
+            'settings' => array('buildpro_option_enabled'),
+            'container_inclusive' => true,
+            'render_callback' => function () {
+                ob_start();
+                get_template_part('template/template-parts/page/home/section-banner/index');
+                return ob_get_clean();
+            },
+        ));
+    }
 }
 add_action('customize_register', 'buildpro_banner_customize_register');
 
@@ -256,6 +377,8 @@ function buildpro_banner_sync_customizer_to_meta($wp_customize_manager)
 {
     $items   = buildpro_banner_sanitize_items(get_theme_mod('buildpro_banner_items', array()));
     $enabled = absint(get_theme_mod('buildpro_banner_enabled', 1));
+    $option_items = buildpro_option_sanitize_items(get_theme_mod('buildpro_option_items', array()));
+    $option_enabled = absint(get_theme_mod('buildpro_option_enabled', 1));
 
     $page_id = 0;
     if ($wp_customize_manager instanceof WP_Customize_Manager) {
@@ -291,6 +414,8 @@ function buildpro_banner_sync_customizer_to_meta($wp_customize_manager)
         foreach ($targets as $tid) {
             update_post_meta($tid, 'buildpro_banner_items',   $items);
             update_post_meta($tid, 'buildpro_banner_enabled', $enabled);
+            update_post_meta($tid, 'buildpro_option_items', $option_items);
+            update_post_meta($tid, 'buildpro_option_enabled', $option_enabled);
         }
     }
 }

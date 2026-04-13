@@ -232,3 +232,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // pagination disabled: no click handlers
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  var root = document.querySelector(".section-banner__options");
+  var container = document.querySelector(".section-banner__options-swiper");
+  var wrapper = document.querySelector(
+    ".section-banner__options-swiper-wrapper",
+  );
+  if (!container || !wrapper || typeof Swiper === "undefined") return;
+
+  var rootFontSize =
+    parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  var spacing = 3.75 * rootFontSize;
+
+  var noFallback = root && root.getAttribute("data-no-fallback") === "1";
+  if (noFallback) {
+    wrapper.innerHTML = "";
+    return;
+  }
+
+  new Swiper(container, {
+    slidesPerView: 3,
+    spaceBetween: spacing,
+    loop: true,
+    speed: 6000,
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: false,
+    },
+    freeMode: true,
+    freeModeMomentum: false,
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+});

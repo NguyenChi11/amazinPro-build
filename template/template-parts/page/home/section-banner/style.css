@@ -262,6 +262,89 @@
   opacity: 1;
   visibility: visible;
 }
+
+.section-banner__options {
+  padding: 0 3.75rem;
+  position: relative;
+}
+
+.section-banner__options-swiper-wrapper {
+  padding: 4.625rem 0;
+}
+
+.section-banner__options-swiper-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-banner__options-item {
+  width: 100%;
+  min-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1.25rem;
+  box-shadow: 4px 4px 20px 0 rgba(7, 59, 111, 0.15);
+  min-width: 0;
+}
+
+.section-banner__options-item-icon {
+  background-color: rgba(230, 243, 255, 1);
+  padding: 0.875rem;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-banner__options-item-icon-image {
+  width: 2rem;
+  height: 2rem;
+}
+
+.section-banner__options-item-text {
+  margin: 1rem 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
+  line-height: 1.625rem;
+  letter-spacing: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.section-banner__options-item-description {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: rgba(126, 132, 139, 1);
+  line-height: 1.625rem;
+  letter-spacing: 0;
+  text-align: justify;
+  margin: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 @media (max-width: 639.98px) {
   .section-banner {
     padding: 0rem 1rem;
@@ -321,5 +404,38 @@
     right: 1rem;
     top: 1rem;
   }
-}
 
+  .section-banner__options {
+    padding: 0 1rem;
+    padding-top: 1rem;
+  }
+
+  .section-banner__options-swiper-wrapper {
+    padding: 2rem 0;
+  }
+
+  .section-banner__options-item {
+    min-height: 14rem;
+    padding: 1rem;
+  }
+
+  .section-banner__options-item-icon {
+    padding: 0.75rem;
+  }
+
+  .section-banner__options-item-icon-image {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .section-banner__options-item-text {
+    font-size: 1.125rem;
+    margin: 0.75rem 0;
+  }
+
+  .section-banner__options-item-description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: left;
+  }
+}

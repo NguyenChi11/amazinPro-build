@@ -31,7 +31,7 @@
 </template>
 <div class="buildpro-option-block"
     style="margin-bottom:10px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px">
-    <h4><?php echo esc_html__('Section Option Status', 'buildpro'); ?></h4>
+    <h4><?php echo esc_html__('Banner Option Status', 'buildpro'); ?></h4>
     <input type="hidden" id="buildpro_option_enabled" name="buildpro_option_enabled"
         value="<?php echo isset($enabled) ? (int)$enabled : 1; ?>">
     <div style="display:flex;gap:8px">
