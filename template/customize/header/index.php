@@ -17,18 +17,9 @@
                             id="remove_header_logo"><?php echo esc_html__('Remove', 'buildpro'); ?></button>
                         <div id="header_logo_preview">
                             <?php if ($logo_url): ?>
-                            <img src="<?= esc_url($logo_url) ?>" />
+                                <img src="<?= esc_url($logo_url) ?>" />
                             <?php endif; ?>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="buildpro_header_title"><?php echo esc_html__('Title', 'buildpro'); ?></label>
-                    </th>
-                    <td>
-                        <input type="text" id="buildpro_header_title" name="buildpro_header_title" class="regular-text"
-                            value="<?= esc_attr($text) ?>" />
                     </td>
                 </tr>
                 <tr>

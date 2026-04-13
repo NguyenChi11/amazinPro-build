@@ -16,16 +16,6 @@ function buildpro_customize_register($wp_customize)
         'description' => __('Please use a square logo', 'buildpro'),
         'mime_type' => 'image',
     )));
-    $wp_customize->add_setting('buildpro_header_title', array(
-        'default' => '',
-        'transport' => 'postMessage',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('buildpro_header_title', array(
-        'label' => __('Title', 'buildpro'),
-        'section' => 'buildpro_header_section',
-        'type' => 'text',
-    ));
     $wp_customize->add_setting('buildpro_header_quote_text', array(
         'default' => __('Request a Quote', 'buildpro'),
         'transport' => 'postMessage',
@@ -148,14 +138,6 @@ add_action('admin_enqueue_scripts', 'buildpro_header_admin_enqueue');
 function buildpro_header_admin_page()
 {
     $logo_id = get_theme_mod('header_logo', 0);
-    $text = get_theme_mod('buildpro_header_title', '');
-    if ($text === '') {
-        $text = get_theme_mod('header_text', '');
-    }
-    $desc = get_theme_mod('buildpro_header_description', '');
-    if ($desc === '') {
-        $desc = get_theme_mod('header_description', '');
-    }
     $quote_text = get_theme_mod('buildpro_header_quote_text', '');
     $quote_url = get_theme_mod('buildpro_header_quote_url', '');
     if (!is_scalar($quote_text) || trim((string) $quote_text) === '') {
@@ -174,8 +156,6 @@ function buildpro_handle_header_save()
     check_admin_referer('buildpro_header_save');
     $logo_raw = isset($_POST['header_logo']) ? $_POST['header_logo'] : "";
     $logo = absint($logo_raw);
-    $text = isset($_POST['buildpro_header_title']) ? sanitize_text_field($_POST['buildpro_header_title']) : '';
-    $desc = isset($_POST['buildpro_header_description']) ? sanitize_textarea_field($_POST['buildpro_header_description']) : '';
     $quote_text = isset($_POST['buildpro_header_quote_text']) ? sanitize_text_field($_POST['buildpro_header_quote_text']) : '';
     $quote_url = isset($_POST['buildpro_header_quote_url']) ? esc_url_raw($_POST['buildpro_header_quote_url']) : '';
     if ($logo_raw === "" || $logo === 0) {
@@ -183,20 +163,10 @@ function buildpro_handle_header_save()
     } else {
         set_theme_mod('header_logo', $logo);
     }
-    if ($text === '') {
-        remove_theme_mod('buildpro_header_title');
-        remove_theme_mod('header_text');
-    } else {
-        set_theme_mod('buildpro_header_title', $text);
-        remove_theme_mod('header_text');
-    }
-    if ($desc === '') {
-        remove_theme_mod('buildpro_header_description');
-        remove_theme_mod('header_description');
-    } else {
-        set_theme_mod('buildpro_header_description', $desc);
-        remove_theme_mod('header_description');
-    }
+    remove_theme_mod('buildpro_header_title');
+    remove_theme_mod('header_text');
+    remove_theme_mod('buildpro_header_description');
+    remove_theme_mod('header_description');
     if ($quote_text === '') {
         remove_theme_mod('buildpro_header_quote_text');
     } else {

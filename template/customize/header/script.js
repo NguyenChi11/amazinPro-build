@@ -376,32 +376,6 @@
   }
 
   if (wp && wp.customize) {
-    wp.customize("buildpro_header_title", function (value) {
-      value.bind(function (to) {
-        var el = document.querySelector(".header-logo-text");
-        if (!el) return;
-        var v = (to == null ? "" : String(to)).trim();
-        if (v === "0" || v === "1" || v === "") {
-          var data = window.headerData || {};
-          el.textContent = data.title || "";
-        } else {
-          el.textContent = v;
-        }
-      });
-    });
-    wp.customize("buildpro_header_description", function (value) {
-      value.bind(function (to) {
-        var el = document.querySelector(".header-logo-desc");
-        if (!el) return;
-        var v = (to == null ? "" : String(to)).trim();
-        if (v === "0" || v === "1" || v === "") {
-          var data = window.headerData || {};
-          el.textContent = data.description || "";
-        } else {
-          el.textContent = v;
-        }
-      });
-    });
     wp.customize("header_logo", function (value) {
       value.bind(function () {
         if (wp.customize.selectiveRefresh) {

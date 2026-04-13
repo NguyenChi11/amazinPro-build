@@ -159,20 +159,10 @@ if (!is_customize_preview() && !$has_data) {
                         <?php
                         $header_logo_id = get_theme_mod('header_logo', 0);
                         $header_logo_url = $header_logo_id ? wp_get_attachment_image_url($header_logo_id, 'full') : '';
-                        $header_title = get_theme_mod('buildpro_header_title', '');
-                        $header_sub = get_theme_mod('buildpro_header_description', '');
-                        $header_title = is_scalar($header_title) ? trim((string)$header_title) : '';
-                        $header_sub = is_scalar($header_sub) ? trim((string)$header_sub) : '';
                         ?>
                         <?php if ($header_logo_url): ?>
                             <img class="footer__logo" src="<?php echo esc_url($header_logo_url); ?>"
                                 alt="<?php esc_attr_e('Footer Logo', 'buildpro'); ?>">
-                        <?php endif; ?>
-                        <?php if (!empty($header_title)): ?>
-                            <h3 class="footer__title"><?php echo esc_html($header_title); ?></h3>
-                        <?php endif; ?>
-                        <?php if (!empty($header_sub)): ?>
-                            <h4 class="footer__subtitle"><?php echo esc_html($header_sub); ?></h4>
                         <?php endif; ?>
                     </div>
                 </div>
