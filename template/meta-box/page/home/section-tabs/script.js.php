@@ -9,7 +9,6 @@
             function show(id) {
                 var ids = [
                     "buildpro_banner_meta",
-                    "buildpro_data_meta",
                     "buildpro_materials_meta",
                     "buildpro_portfolio_meta",
                     "buildpro_post_section_meta"

@@ -1,6 +1,5 @@
 <?php
 require get_template_directory() . '/inc/meta-box/page/home-page/section-banner/index.php';
-require get_template_directory() . '/inc/meta-box/page/home-page/section-data/index.php';
 require get_template_directory() . '/inc/meta-box/page/home-page/section-products/index.php';
 require get_template_directory() . '/inc/meta-box/page/home-page/section-projects/index.php';
 require get_template_directory() . '/inc/meta-box/page/home-page/section-post/index.php';

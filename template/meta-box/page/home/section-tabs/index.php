@@ -8,7 +8,6 @@ function render_home_page_tabs()
 {
     $tabs = [
         'buildpro_banner_meta' => esc_html__('Banner', 'buildpro'),
-        'buildpro_data_meta' => esc_html__('Data', 'buildpro'),
         'buildpro_materials_meta' => esc_html__('Products', 'buildpro'),
         'buildpro_portfolio_meta' => esc_html__('Projects', 'buildpro'),
         'buildpro_post_section_meta' => esc_html__('Post', 'buildpro')

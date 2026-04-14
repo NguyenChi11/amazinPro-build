@@ -204,7 +204,7 @@
   align-items: center;
   justify-content: flex-start;
   margin: 0;
-  padding: 1rem 2rem 2rem;
+  padding-top: 1rem;
 }
 .section-post__item-readmore {
   font-family: "Montserrat", sans-serif;

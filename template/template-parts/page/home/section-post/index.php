@@ -48,7 +48,7 @@ if ($enabled !== 1) {
 $posts = [];
 $query = new WP_Query(array(
     'post_type' => 'post',
-    'posts_per_page' => 3,
+    'posts_per_page' => 1,
     'orderby' => 'date',
     'order' => 'DESC',
     'ignore_sticky_posts' => true,
@@ -102,13 +102,13 @@ if (empty($posts)) {
                     <p class="section-post__item-desc">
                         <?php echo esc_html(get_post_meta($p['id'], 'buildpro_post_description', true)); ?>
                     </p>
-                </div>
-                <div class="section-post__item-bottom">
-                    <p class="section-post__item-readmore"><?php esc_html_e('Read more', 'buildpro'); ?>
-                        <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')); ?>"
-                            alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>"
-                            class="section-services__item-link-icon">
-                    </p>
+                    <div class="section-post__item-bottom">
+                        <p class="section-post__item-readmore"><?php esc_html_e('Read more', 'buildpro'); ?>
+                            <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')); ?>"
+                                alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>"
+                                class="section-services__item-link-icon">
+                        </p>
+                    </div>
                 </div>
             </a>
         <?php endforeach; ?>

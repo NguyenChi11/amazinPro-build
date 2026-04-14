@@ -406,13 +406,6 @@ function buildpro_maybe_import_default_content()
             buildpro_import_option_demo();
         }
     }
-    $data_demo_file = get_theme_file_path('/import/data-demo/page/home/data-home.php');
-    if (file_exists($data_demo_file)) {
-        require_once $data_demo_file;
-        if (function_exists('buildpro_import_data_demo')) {
-            buildpro_import_data_demo();
-        }
-    }
     $products_demo_file = get_theme_file_path('/import/data-demo/page/home/products-home.php');
     if (file_exists($products_demo_file)) {
         require_once $products_demo_file;
