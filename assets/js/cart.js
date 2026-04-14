@@ -26,8 +26,10 @@
     btn.classList.remove("is-added", "is-error");
     btn.classList.add("is-adding");
     btn.disabled = true;
-    var originalText = btn.textContent;
-    btn.textContent = "Adding…";
+    var originalHtml = btn.innerHTML;
+    var originalLabel = btn.getAttribute("aria-label") || "Add to Cart";
+    btn.textContent = "Adding...";
+    btn.setAttribute("aria-label", "Adding");
 
     var qty = 1;
     var row = btn.closest(".single-product__cart-row");
@@ -55,24 +57,28 @@
         btn.classList.remove("is-adding");
         if (data && !data.error) {
           btn.textContent = "Added ✓";
+          btn.setAttribute("aria-label", "Added");
           btn.classList.add("is-added");
           updateCartBadge(getCurrentCount() + 1); // Refresh mini cart dropdown
           if (typeof window.buildproRefreshMiniCart === "function") {
             window.buildproRefreshMiniCart(true);
           }
           setTimeout(function () {
-            btn.textContent = originalText;
+            btn.innerHTML = originalHtml;
+            btn.setAttribute("aria-label", originalLabel);
             btn.classList.remove("is-added");
           }, 1500);
         } else {
-          btn.textContent = originalText;
+          btn.innerHTML = originalHtml;
+          btn.setAttribute("aria-label", originalLabel);
           btn.classList.add("is-error");
         }
       })
       .catch(function () {
         btn.disabled = false;
         btn.classList.remove("is-adding");
-        btn.textContent = originalText;
+        btn.innerHTML = originalHtml;
+        btn.setAttribute("aria-label", originalLabel);
         btn.classList.add("is-error");
       });
   }

@@ -20,6 +20,7 @@ const ProductsData = {
       bedroom: 3,
       bathroom: 2,
       area: 1250,
+      location: "New York, USA",
       gallery: [
         "/wp-content/themes/build_pro_v2/assets/images/image_1.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_2.jpg",
@@ -43,6 +44,7 @@ const ProductsData = {
       bedroom: 4,
       bathroom: 3,
       area: 1680,
+      location: "Chicago, USA",
       gallery: [
         "/wp-content/themes/build_pro_v2/assets/images/image_3.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
@@ -66,6 +68,7 @@ const ProductsData = {
       bedroom: 2,
       bathroom: 2,
       area: 980,
+      location: "San Diego, USA",
       gallery: [
         "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",

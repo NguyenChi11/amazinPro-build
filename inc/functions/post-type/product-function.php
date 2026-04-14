@@ -17,9 +17,11 @@ function buildpro_save_product_meta($post_id)
     $bedrooms = isset($_POST['buildpro_product_bedrooms']) ? sanitize_text_field($_POST['buildpro_product_bedrooms']) : '';
     $bathrooms = isset($_POST['buildpro_product_bathrooms']) ? sanitize_text_field($_POST['buildpro_product_bathrooms']) : '';
     $area = isset($_POST['buildpro_product_area']) ? sanitize_text_field($_POST['buildpro_product_area']) : '';
+    $location = isset($_POST['buildpro_product_location']) ? sanitize_text_field($_POST['buildpro_product_location']) : '';
 
     update_post_meta($post_id, 'buildpro_product_bedrooms', $bedrooms);
     update_post_meta($post_id, 'buildpro_product_bathrooms', $bathrooms);
     update_post_meta($post_id, 'buildpro_product_area', $area);
+    update_post_meta($post_id, 'buildpro_product_location', $location);
 }
 add_action('save_post_product', 'buildpro_save_product_meta');

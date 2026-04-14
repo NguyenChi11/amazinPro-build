@@ -15,7 +15,7 @@ html {
 }
 
 .main {
-  background-color: rgba(246, 247, 248, 1);
+  /* background-color: rgba(246, 247, 248, 1); */
 }
 
 @media screen and (max-width: 639.98px) {

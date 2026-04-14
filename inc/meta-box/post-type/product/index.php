@@ -2,6 +2,7 @@
 require get_template_directory() . '/inc/meta-box/post-type/product/bedroom/index.php';
 require get_template_directory() . '/inc/meta-box/post-type/product/bathroom/index.php';
 require get_template_directory() . '/inc/meta-box/post-type/product/area/index.php';
+require get_template_directory() . '/inc/meta-box/post-type/product/location/index.php';
 
 function buildpro_product_group_meta_box_add($post_type, $post)
 {
@@ -19,7 +20,8 @@ function buildpro_product_group_meta_box_render($post)
     echo '<div class="buildpro-admin-tabs" style="margin:0;padding:8px 0;">'
         . '<button type="button" class="button buildpro-admin-tab is-active" data-target="buildpro_product_tab_bedroom">' . esc_html__('Bedroom', 'buildpro') . '</button> '
         . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_product_tab_bathroom">' . esc_html__('Bathroom', 'buildpro') . '</button> '
-        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_product_tab_area">' . esc_html__('Area', 'buildpro') . '</button>'
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_product_tab_area">' . esc_html__('Area', 'buildpro') . '</button> '
+        . '<button type="button" class="button buildpro-admin-tab" data-target="buildpro_product_tab_location">' . esc_html__('Location', 'buildpro') . '</button>'
         . '</div>';
 
     echo '<script>
@@ -27,7 +29,7 @@ function buildpro_product_group_meta_box_render($post)
         function init(){
             var tabs = document.querySelectorAll(".buildpro-admin-tab");
             function show(id){
-                ["buildpro_product_tab_bedroom","buildpro_product_tab_bathroom","buildpro_product_tab_area"].forEach(function(x){
+                ["buildpro_product_tab_bedroom","buildpro_product_tab_bathroom","buildpro_product_tab_area","buildpro_product_tab_location"].forEach(function(x){
                     var el = document.getElementById(x);
                     if(el){ el.style.display = (x === id) ? "block" : "none"; }
                 });
@@ -54,6 +56,10 @@ function buildpro_product_group_meta_box_render($post)
 
     echo '<div id="buildpro_product_tab_area" style="display:none;">';
     buildpro_product_area_render_meta_box($post);
+    echo '</div>';
+
+    echo '<div id="buildpro_product_tab_location" style="display:none;">';
+    buildpro_product_location_render_meta_box($post);
     echo '</div>';
 
     echo '<style>
