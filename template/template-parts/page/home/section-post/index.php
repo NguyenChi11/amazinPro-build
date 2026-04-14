@@ -51,6 +51,7 @@ $query = new WP_Query(array(
     'posts_per_page' => 3,
     'orderby' => 'date',
     'order' => 'DESC',
+    'ignore_sticky_posts' => true,
     'post_status' => 'publish',
     'no_found_rows' => true,
 ));
@@ -105,7 +106,8 @@ if (empty($posts)) {
                 <div class="section-post__item-bottom">
                     <p class="section-post__item-readmore"><?php esc_html_e('Read more', 'buildpro'); ?>
                         <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')); ?>"
-                            alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>" class="section-services__item-link-icon">
+                            alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>"
+                            class="section-services__item-link-icon">
                     </p>
                 </div>
             </a>
@@ -122,7 +124,10 @@ if (empty($posts)) {
         <a class="section-portfolio__page-link-text" href="<?php echo esc_url($blog_page_url); ?>">
             <?php echo esc_html($view_all_text); ?>
         </a>
-        <img class="section-banner__item-button-icon"
-            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>" alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">
+        <svg class="section-banner__item-button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+            aria-hidden="true" focusable="false">
+            <path
+                d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" />
+        </svg>
     </div>
 </section>

@@ -264,7 +264,7 @@ function wp_enqueue_custom_assets()
             'type' => 'script',
             'handle' => 'buildpro-section-post-script',
             'src' => get_theme_file_uri('template/template-parts/page/home/section-post/script.js'),
-            'deps' => ['swiper'],
+            'deps' => [],
             'ver' => $version,
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-post/script.js'))

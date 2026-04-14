@@ -1,6 +1,6 @@
 ﻿.section-portfolio {
-  padding: 5.375rem 3.75rem;
-
+  padding: 0rem 3.75rem;
+  padding-top: 3.675rem;
   display: flex;
   flex-direction: column;
   align-items: center;
