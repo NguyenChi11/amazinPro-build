@@ -430,10 +430,6 @@
   }
 }
 
-.section-product__item-title {
-  font-size: 0.8125rem;
-}
-
 .section-product__item-price {
   font-size: 0.8125rem;
 }
@@ -453,4 +449,3 @@
   height: 2rem;
   font-size: 0.8125rem;
 }
-

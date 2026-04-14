@@ -43,6 +43,11 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
             $title = get_the_title($post_id);
             $price = '';
             $currency_symbol = '';
+            $gallery_images = array();
+            if ($image_url !== '') {
+                $gallery_images[] = $image_url;
+            }
+            $product = null;
             if (function_exists('wc_get_product')) {
                 $product = call_user_func('wc_get_product', $post_id);
                 if ($product) {
@@ -56,6 +61,18 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
                     }
                     if (function_exists('get_woocommerce_currency_symbol')) {
                         $currency_symbol = get_woocommerce_currency_symbol();
+                    }
+
+                    if (method_exists($product, 'get_gallery_image_ids')) {
+                        $gallery_ids = $product->get_gallery_image_ids();
+                        if (is_array($gallery_ids) && !empty($gallery_ids)) {
+                            foreach ($gallery_ids as $gallery_id) {
+                                $gallery_url = wp_get_attachment_image_url((int) $gallery_id, 'large');
+                                if (is_string($gallery_url) && $gallery_url !== '' && !in_array($gallery_url, $gallery_images, true)) {
+                                    $gallery_images[] = $gallery_url;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -75,6 +92,7 @@ if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
                 'price' => $price,
                 'currency_symbol' => $currency_symbol,
                 'link' => get_permalink($post_id),
+                'gallery' => $gallery_images,
                 'bedrooms' => $bedrooms,
                 'bathrooms' => $bathrooms,
                 'area' => $area,
@@ -129,14 +147,27 @@ $icon_cart_url = get_theme_file_uri('/assets/images/icon/icon_cart.png');
         <?php foreach ($items as $item): ?>
         <div class="section-product__grid-item">
             <div class="section-product__item">
-                <a class="section-product__item-link" href="<?php echo esc_url($item['link']); ?>"
-                    aria-label="<?php echo esc_attr($item['title']); ?>">
-                    <div class="section-product__item-image">
-                        <?php if (!empty($item['image'])): ?>
-                        <img src="<?php echo esc_url($item['image']); ?>" alt="<?php echo esc_attr($item['title']); ?>">
+                <div class="section-product__item-image swiper section-product__item-image-swiper">
+                    <div class="swiper-wrapper">
+                        <?php if (!empty($item['gallery'])): ?>
+                        <?php foreach ($item['gallery'] as $gallery_image_url): ?>
+                        <div class="swiper-slide">
+                            <a class="section-product__item-link" href="<?php echo esc_url($item['link']); ?>"
+                                aria-label="<?php echo esc_attr($item['title']); ?>">
+                                <img src="<?php echo esc_url($gallery_image_url); ?>"
+                                    alt="<?php echo esc_attr($item['title']); ?>">
+                            </a>
+                        </div>
+                        <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
-                </a>
+                    <?php if (!empty($item['gallery']) && count($item['gallery']) > 1): ?>
+                    <div class="swiper-button-prev section-product__item-image-prev"
+                        aria-label="<?php esc_attr_e('Previous image', 'buildpro'); ?>"></div>
+                    <div class="swiper-button-next section-product__item-image-next"
+                        aria-label="<?php esc_attr_e('Next image', 'buildpro'); ?>"></div>
+                    <?php endif; ?>
+                </div>
                 <div class="section-product__item-content">
                     <div class="section-product__item-price-row">
                         <p class="section-product__item-price">
@@ -203,8 +234,10 @@ $icon_cart_url = get_theme_file_uri('/assets/images/icon/icon_cart.png');
         <a class="section-portfolio__page-link-text" href="<?php echo esc_url($products_page_url); ?>">
             <?php echo esc_html($materials_view_all_text); ?>
         </a>
-        <img class="section-banner__item-button-icon"
-            src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right.png')); ?>"
-            alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>">
+        <svg class="section-banner__item-button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+            aria-hidden="true" focusable="false">
+            <path
+                d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" />
+        </svg>
     </div>
 </section>
