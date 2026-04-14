@@ -420,14 +420,6 @@ function buildpro_maybe_import_default_content()
             buildpro_import_product_demo();
         }
     }
-
-    $evaluate_demo_file = get_theme_file_path('/import/data-demo/page/home/evaluate-home.php');
-    if (file_exists($evaluate_demo_file)) {
-        require_once $evaluate_demo_file;
-        if (function_exists('buildpro_import_evaluate_demo')) {
-            buildpro_import_evaluate_demo();
-        }
-    }
     $project_demo_file = get_theme_file_path('/import/data-demo/page/home/project-home.php');
     if (file_exists($project_demo_file)) {
         require_once $project_demo_file;

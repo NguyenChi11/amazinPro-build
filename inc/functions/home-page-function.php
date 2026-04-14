@@ -95,7 +95,6 @@ if (!function_exists('buildpro_home_sections_get_map')) {
             'section-banner' => 'template/template-parts/page/home/section-banner/index',
             'section-data' => 'template/template-parts/page/home/section-data/index',
             'section-product' => 'template/template-parts/page/home/section-products/index',
-            'section-evaluate' => 'template/template-parts/page/home/section-evaluate/index',
             'section-portfolio' => 'template/template-parts/page/home/section-projects/index',
             'section-post' => 'template/template-parts/page/home/section-post/index',
         );
@@ -116,7 +115,6 @@ if (!function_exists('buildpro_home_sections_get_labels')) {
             'section-banner' => __('Banner', 'buildpro'),
             'section-data' => __('Data', 'buildpro'),
             'section-product' => __('Products', 'buildpro'),
-            'section-evaluate' => __('Evaluate', 'buildpro'),
             'section-portfolio' => __('Projects', 'buildpro'),
             'section-post' => __('Posts', 'buildpro'),
         );
@@ -463,7 +461,6 @@ CSS;
         'section-banner',
         'section-data',
         'section-product',
-        'section-evaluate',
         'section-portfolio',
         'section-post'
     ];

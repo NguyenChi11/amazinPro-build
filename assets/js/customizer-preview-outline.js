@@ -16,7 +16,6 @@
     buildpro_banner_section: ".section-banner:not([data-no-fallback])",
     buildpro_link_picker_section: ".section-banner:not([data-no-fallback])",
     buildpro_data_section: ".section-data",
-    buildpro_evaluate_section: ".section-evaluate",
     buildpro_portfolio_section: ".section-portfolio",
     buildpro_product_section: ".section-product",
     buildpro_post_section: ".section-post",
