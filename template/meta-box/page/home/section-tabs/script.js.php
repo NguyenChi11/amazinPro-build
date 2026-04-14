@@ -11,7 +11,6 @@
                     "buildpro_banner_meta",
                     "buildpro_data_meta",
                     "buildpro_materials_meta",
-                    "buildpro_services_meta",
                     "buildpro_evaluate_meta",
                     "buildpro_portfolio_meta",
                     "buildpro_post_section_meta"

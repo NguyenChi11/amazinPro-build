@@ -421,13 +421,6 @@ function buildpro_maybe_import_default_content()
         }
     }
 
-    $service_demo_file = get_theme_file_path('/import/data-demo/page/home/service-home.php');
-    if (file_exists($service_demo_file)) {
-        require_once $service_demo_file;
-        if (function_exists('buildpro_import_service_demo')) {
-            buildpro_import_service_demo();
-        }
-    }
     $evaluate_demo_file = get_theme_file_path('/import/data-demo/page/home/evaluate-home.php');
     if (file_exists($evaluate_demo_file)) {
         require_once $evaluate_demo_file;
