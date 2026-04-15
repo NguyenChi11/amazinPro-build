@@ -2,7 +2,7 @@
   width: 100%;
 
   margin: 0 auto;
-  padding: 0 3.75rem;
+  padding: 0.5rem 3.75rem;
 }
 
 .single-project__back {
@@ -755,4 +755,3 @@
     padding: 2rem 0;
   }
 }
-

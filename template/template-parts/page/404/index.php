@@ -1,4 +1,8 @@
 <?php
+// Include breadcrumb
+get_template_part('template/template-parts/breadcrums/index');
+?>
+<?php
 $home_url = home_url('/');
 $contact_url = home_url('/contact/');
 ?>
@@ -11,8 +15,10 @@ $contact_url = home_url('/contact/');
             <?php esc_html_e("The page you are looking for might have been moved, removed, or is temporarily unavailable. We're building something better!", 'buildpro'); ?>
         </p>
         <div class="error-404-buttons">
-            <a href="<?php echo esc_url($home_url); ?>" class="btn btn-primary"><?php esc_html_e('Back to Home', 'buildpro'); ?></a>
-            <a href="<?php echo esc_url($contact_url); ?>" class="btn btn-secondary"><?php esc_html_e('Contact Support', 'buildpro'); ?></a>
+            <a href="<?php echo esc_url($home_url); ?>"
+                class="btn btn-primary"><?php esc_html_e('Back to Home', 'buildpro'); ?></a>
+            <a href="<?php echo esc_url($contact_url); ?>"
+                class="btn btn-secondary"><?php esc_html_e('Contact Support', 'buildpro'); ?></a>
         </div>
     </div>
 </section>
