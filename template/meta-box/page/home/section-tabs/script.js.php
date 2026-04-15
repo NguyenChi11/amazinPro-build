@@ -11,6 +11,7 @@
                     "buildpro_banner_meta",
                     "buildpro_materials_meta",
                     "buildpro_portfolio_meta",
+                    "buildpro_contact_section_meta",
                     "buildpro_post_section_meta"
                 ];
                 ids.forEach(function(x) {

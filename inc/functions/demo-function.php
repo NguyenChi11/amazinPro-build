@@ -250,6 +250,23 @@ function buildpro_maybe_import_about_us_contact_demo_once()
     }
 }
 
+function buildpro_maybe_import_home_contact_form_once()
+{
+    if (get_option('buildpro_home_contact_form_imported') === '1') {
+        return;
+    }
+
+    if (!function_exists('buildpro_cf7_maybe_create_form')) {
+        return;
+    }
+
+    buildpro_cf7_maybe_create_form();
+
+    if (function_exists('buildpro_cf7_get_home_form_id') && (int) buildpro_cf7_get_home_form_id() > 0) {
+        update_option('buildpro_home_contact_form_imported', '1');
+    }
+}
+
 function buildpro_maybe_import_privacy_policy_demo_once()
 {
     if (get_option('buildpro_privacy_policy_demo_imported') === '1') {
@@ -355,6 +372,10 @@ function buildpro_maybe_import_default_content()
     // Header demo (logo/title/description) should be set on first import.
     if (function_exists('buildpro_maybe_import_header_demo_once')) {
         buildpro_maybe_import_header_demo_once();
+    }
+
+    if (function_exists('buildpro_maybe_import_home_contact_form_once')) {
+        buildpro_maybe_import_home_contact_form_once();
     }
 
     if (function_exists('buildpro_maybe_import_privacy_policy_demo_once')) {

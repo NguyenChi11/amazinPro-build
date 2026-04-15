@@ -95,6 +95,7 @@ if (!function_exists('buildpro_home_sections_get_map')) {
             'section-banner' => 'template/template-parts/page/home/section-banner/index',
             'section-product' => 'template/template-parts/page/home/section-products/index',
             'section-portfolio' => 'template/template-parts/page/home/section-projects/index',
+            'section-contact' => 'template/template-parts/page/home/section-contact/index',
             'section-post' => 'template/template-parts/page/home/section-post/index',
         );
     }
@@ -114,6 +115,7 @@ if (!function_exists('buildpro_home_sections_get_labels')) {
             'section-banner' => __('Banner', 'buildpro'),
             'section-product' => __('Products', 'buildpro'),
             'section-portfolio' => __('Projects', 'buildpro'),
+            'section-contact' => __('Contact', 'buildpro'),
             'section-post' => __('Posts', 'buildpro'),
         );
     }
@@ -126,6 +128,7 @@ if (!function_exists('buildpro_home_sections_get_aliases')) {
             // Back-compat for earlier key names.
             'section-products' => 'section-product',
             'section-projects' => 'section-portfolio',
+            'section-contacts' => 'section-contact',
         );
     }
 }
@@ -459,6 +462,7 @@ CSS;
         'section-banner',
         'section-product',
         'section-portfolio',
+        'section-contact',
         'section-post'
     ];
 

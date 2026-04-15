@@ -74,4 +74,5 @@ if (!function_exists('buildpro_home_add_inline_i18n')) {
 require get_template_directory() . '/inc/customizer/home-page/section-banner/index.php';
 require get_template_directory() . '/inc/customizer/home-page/section-products/index.php';
 require get_template_directory() . '/inc/customizer/home-page/section-projects/index.php';
+require get_template_directory() . '/inc/customizer/home-page/section-contact/index.php';
 require get_template_directory() . '/inc/customizer/home-page/section-post/index.php';

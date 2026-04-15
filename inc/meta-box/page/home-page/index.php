@@ -2,6 +2,7 @@
 require get_template_directory() . '/inc/meta-box/page/home-page/section-banner/index.php';
 require get_template_directory() . '/inc/meta-box/page/home-page/section-products/index.php';
 require get_template_directory() . '/inc/meta-box/page/home-page/section-projects/index.php';
+require get_template_directory() . '/inc/meta-box/page/home-page/section-contact/index.php';
 require get_template_directory() . '/inc/meta-box/page/home-page/section-post/index.php';
 
 function buildpro_home_group_meta_box_add($post_type, $post)

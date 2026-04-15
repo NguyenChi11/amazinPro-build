@@ -1,0 +1,59 @@
+.buildpro-contact-block {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  margin-top: 8px;
+}
+
+.buildpro-contact-field {
+  margin: 10px 0;
+}
+
+.buildpro-contact-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.buildpro-contact-fields .regular-text,
+.buildpro-contact-fields .large-text {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.buildpro-contact-fields .large-text {
+  padding: 10px;
+}
+
+.buildpro-contact-image-preview {
+  margin-top: 8px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+}
+
+.buildpro-contact-image-preview img {
+  max-height: 120px;
+  max-width: 100%;
+  display: block;
+}
+
+.buildpro-contact-image-preview span {
+  color: #6b7280;
+}
+
+.buildpro-contact-image-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}

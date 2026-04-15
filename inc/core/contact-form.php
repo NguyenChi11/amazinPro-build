@@ -14,6 +14,16 @@ function buildpro_cf7_demo_form_id_option()
     return 'buildpro_cf7_demo_form_id';
 }
 
+function buildpro_cf7_home_form_title()
+{
+    return 'BuildPro Home Contact Form';
+}
+
+function buildpro_cf7_home_form_id_option()
+{
+    return 'buildpro_cf7_home_form_id';
+}
+
 function buildpro_cf7_wait_option()
 {
     return 'buildpro_cf7_wait_activation';
@@ -27,6 +37,16 @@ function buildpro_cf7_get_saved_form_id()
 function buildpro_cf7_save_form_id($id)
 {
     update_option(buildpro_cf7_demo_form_id_option(), (int) $id);
+}
+
+function buildpro_cf7_get_saved_home_form_id()
+{
+    return (int) get_option(buildpro_cf7_home_form_id_option(), 0);
+}
+
+function buildpro_cf7_save_home_form_id($id)
+{
+    update_option(buildpro_cf7_home_form_id_option(), (int) $id);
 }
 
 function buildpro_cf7_demo_form_content()
@@ -50,6 +70,66 @@ function buildpro_cf7_demo_form_content()
     $form .= '<p class="contact-form__field"><label class="contact-form__label">Subject</label>[text your-subject class:contact-form__input placeholder "Subject email?"]</p>';
     $form .= '<p class="contact-form__field"><label class="contact-form__label">Message</label>[textarea your-message class:contact-form__input placeholder "Tell us about your project requirements . . ."]</p>';
     $form .= '<p class="contact-form__actions">[submit class:contact-form__submit "Submit Request"]</p>';
+    $form .= '</div>';
+    return $form;
+}
+
+function buildpro_cf7_home_contact_data()
+{
+    $defaults = array(
+        'placeholder' => 'Enter your email',
+        'submitText' => 'Send',
+    );
+
+    if (function_exists('buildpro_import_parse_js')) {
+        $data = buildpro_import_parse_js('/assets/data/contact-data.js', 'homeContactData');
+        if (is_array($data)) {
+            if (!empty($data['placeholder']) && is_string($data['placeholder'])) {
+                $defaults['placeholder'] = sanitize_text_field($data['placeholder']);
+            }
+
+            if (!empty($data['submitText']) && is_string($data['submitText'])) {
+                $defaults['submitText'] = sanitize_text_field($data['submitText']);
+            }
+        }
+    }
+
+    // Let Home page meta box override placeholder when available.
+    $home_page_id = 0;
+    $front_page_id = (int) get_option('page_on_front');
+    if ($front_page_id > 0) {
+        $home_page_id = $front_page_id;
+    } else {
+        $pages = get_pages(array(
+            'meta_key' => '_wp_page_template',
+            'meta_value' => 'home-page.php',
+            'number' => 1,
+        ));
+        if (!empty($pages) && isset($pages[0]->ID)) {
+            $home_page_id = (int) $pages[0]->ID;
+        }
+    }
+
+    if ($home_page_id > 0) {
+        $meta_placeholder = get_post_meta($home_page_id, 'buildpro_contact_placeholder', true);
+        if (is_string($meta_placeholder) && $meta_placeholder !== '') {
+            $defaults['placeholder'] = sanitize_text_field($meta_placeholder);
+        }
+    }
+
+    return $defaults;
+}
+
+function buildpro_cf7_home_form_content()
+{
+    $data = buildpro_cf7_home_contact_data();
+    $placeholder = str_replace('"', "'", (string) $data['placeholder']);
+    $submit_text = str_replace('"', "'", (string) $data['submitText']);
+
+    $form = '';
+    $form .= '<div class="section-contact__form-wrapper"><!-- buildpro-home-demo-form-v1 -->';
+    $form .= '<p class="section-contact__form-field"><label class="screen-reader-text">Email address</label>[email* your-email id:section-contact-email class:section-contact__input autocomplete:email placeholder "' . $placeholder . '"]</p>';
+    $form .= '<p class="section-contact__form-action">[submit class:section-contact__submit "' . $submit_text . '"]</p>';
     $form .= '</div>';
     return $form;
 }
@@ -103,6 +183,45 @@ function buildpro_cf7_demo_form_mail_2(): array
     );
 }
 
+function buildpro_cf7_home_form_mail(): array
+{
+    return array(
+        'active' => true,
+        'recipient' => '[_site_admin_email]',
+        'sender' => '[_site_title] <[_site_admin_email]>',
+        'subject' => '[_site_title] - Home contact: [your-email]',
+        'additional_headers' => "Reply-To: [your-email]\nContent-Type: text/html; charset=UTF-8\n",
+        'body' => "<h2>New home contact request</h2>\n"
+            . "<p><strong>Email:</strong> <a href=\"mailto:[your-email]\">[your-email]</a></p>\n"
+            . "<hr>\n"
+            . "<p>Sent from Home section at <a href=\"[_site_url]\">[_site_title]</a></p>\n"
+            . "[buildpro-home-demo-mail-html-v1]",
+        'attachments' => '',
+        'use_html' => true,
+        'exclude_blank' => true,
+    );
+}
+
+function buildpro_cf7_home_form_mail_2(): array
+{
+    return array(
+        'active' => true,
+        'recipient' => '[your-email]',
+        'sender' => '[_site_title] <[_site_admin_email]>',
+        'subject' => 'Thanks for contacting [_site_title]',
+        'additional_headers' => "Reply-To: [_site_admin_email]\nContent-Type: text/html; charset=UTF-8\n",
+        'body' => "<p>Hi,</p>\n"
+            . "<p>Thanks for contacting <strong>[_site_title]</strong>. We have received your request and will get back to you soon.</p>\n"
+            . "<p><strong>Your email:</strong> [your-email]</p>\n"
+            . "<hr>\n"
+            . "<p>[_site_title] - <a href=\"[_site_url]\">[_site_url]</a></p>\n"
+            . "[buildpro-home-demo-mail2-html-v1]",
+        'attachments' => '',
+        'use_html' => true,
+        'exclude_blank' => true,
+    );
+}
+
 function buildpro_cf7_update_mail_if_needed(int $form_id): void
 {
     if ($form_id <= 0) {
@@ -138,6 +257,41 @@ function buildpro_cf7_update_mail_if_needed(int $form_id): void
     }
 }
 
+function buildpro_cf7_update_home_mail_if_needed(int $form_id): void
+{
+    if ($form_id <= 0) {
+        return;
+    }
+
+    $mail = get_post_meta($form_id, '_mail', true);
+    $needs_update = (
+        !is_array($mail)
+        || empty($mail['active'])
+        || $mail['active'] !== true
+        || empty($mail['body'])
+        || empty($mail['use_html'])
+        || $mail['use_html'] !== true
+        || strpos((string) $mail['body'], '[buildpro-home-demo-mail-html-v1]') === false
+    );
+    if ($needs_update) {
+        update_post_meta($form_id, '_mail', buildpro_cf7_home_form_mail());
+    }
+
+    $mail2 = get_post_meta($form_id, '_mail_2', true);
+    $needs_update2 = (
+        !is_array($mail2)
+        || empty($mail2['active'])
+        || $mail2['active'] !== true
+        || empty($mail2['body'])
+        || empty($mail2['use_html'])
+        || $mail2['use_html'] !== true
+        || strpos((string) $mail2['body'], '[buildpro-home-demo-mail2-html-v1]') === false
+    );
+    if ($needs_update2) {
+        update_post_meta($form_id, '_mail_2', buildpro_cf7_home_form_mail_2());
+    }
+}
+
 function buildpro_cf7_find_form_id()
 {
     $saved = buildpro_cf7_get_saved_form_id();
@@ -153,6 +307,42 @@ function buildpro_cf7_find_form_id()
         return (int) $existing->ID;
     }
     return 0;
+}
+
+function buildpro_cf7_find_home_form_id()
+{
+    $saved = buildpro_cf7_get_saved_home_form_id();
+    if ($saved > 0) {
+        $p = get_post($saved);
+        if ($p && $p->post_type === 'wpcf7_contact_form') {
+            return (int) $saved;
+        }
+    }
+    $existing = get_page_by_title(buildpro_cf7_home_form_title(), OBJECT, 'wpcf7_contact_form');
+    if ($existing) {
+        buildpro_cf7_save_home_form_id($existing->ID);
+        return (int) $existing->ID;
+    }
+    return 0;
+}
+
+function buildpro_cf7_get_home_form_id()
+{
+    $fid = buildpro_cf7_find_home_form_id();
+    if ($fid > 0) {
+        return $fid;
+    }
+
+    if (!buildpro_cf7_is_active()) {
+        return 0;
+    }
+
+    $created_id = buildpro_cf7_create_home_form();
+    if ($created_id > 0) {
+        buildpro_cf7_update_home_form_if_needed($created_id);
+    }
+
+    return (int) $created_id;
 }
 
 function buildpro_cf7_update_form_if_needed($form_id = 0)
@@ -174,6 +364,31 @@ function buildpro_cf7_update_form_if_needed($form_id = 0)
         update_post_meta($fid, '_form', buildpro_cf7_demo_form_content());
     }
     buildpro_cf7_update_mail_if_needed($fid);
+    return $fid;
+}
+
+function buildpro_cf7_update_home_form_if_needed($form_id = 0)
+{
+    $fid = $form_id > 0 ? (int) $form_id : buildpro_cf7_find_home_form_id();
+    if ($fid <= 0) {
+        return 0;
+    }
+    $content = (string) get_post_meta($fid, '_form', true);
+    $home_data = buildpro_cf7_home_contact_data();
+    $expected_placeholder = str_replace('"', "'", (string) $home_data['placeholder']);
+    $expected_submit = str_replace('"', "'", (string) $home_data['submitText']);
+    $needs_update = (
+        strpos($content, 'buildpro-home-demo-form-v1') === false
+        || strpos($content, 'section-contact__input') === false
+        || strpos($content, 'section-contact__submit') === false
+        || strpos($content, '[email* your-email') === false
+        || strpos($content, 'placeholder "' . $expected_placeholder . '"') === false
+        || strpos($content, '[submit class:section-contact__submit "' . $expected_submit . '"]') === false
+    );
+    if ($needs_update) {
+        update_post_meta($fid, '_form', buildpro_cf7_home_form_content());
+    }
+    buildpro_cf7_update_home_mail_if_needed($fid);
     return $fid;
 }
 
@@ -202,18 +417,54 @@ function buildpro_cf7_create_form()
     return 0;
 }
 
+function buildpro_cf7_create_home_form()
+{
+    if (!buildpro_cf7_is_active()) {
+        return 0;
+    }
+    $existing_id = buildpro_cf7_find_home_form_id();
+    if ($existing_id > 0) {
+        return (int) $existing_id;
+    }
+    $post_id = wp_insert_post(array(
+        'post_type' => 'wpcf7_contact_form',
+        'post_status' => 'publish',
+        'post_title' => buildpro_cf7_home_form_title(),
+        'post_name' => 'buildpro-home-contact-form',
+    ));
+    if ($post_id && !is_wp_error($post_id)) {
+        add_post_meta($post_id, '_form', buildpro_cf7_home_form_content(), true);
+        add_post_meta($post_id, '_mail', buildpro_cf7_home_form_mail(), true);
+        add_post_meta($post_id, '_mail_2', buildpro_cf7_home_form_mail_2(), true);
+        buildpro_cf7_save_home_form_id($post_id);
+        return (int) $post_id;
+    }
+    return 0;
+}
+
 function buildpro_cf7_maybe_create_form()
 {
     if (!buildpro_cf7_is_active()) {
         update_option(buildpro_cf7_wait_option(), 1);
         return;
     }
-    $created_id = buildpro_cf7_create_form();
-    if ($created_id > 0) {
+    $main_form_id = buildpro_cf7_create_form();
+    $home_form_id = buildpro_cf7_create_home_form();
+
+    if ($main_form_id > 0 || $home_form_id > 0) {
         delete_option(buildpro_cf7_wait_option());
-        buildpro_cf7_update_form_if_needed($created_id);
+    }
+
+    if ($main_form_id > 0) {
+        buildpro_cf7_update_form_if_needed($main_form_id);
     } else {
         buildpro_cf7_update_form_if_needed();
+    }
+
+    if ($home_form_id > 0) {
+        buildpro_cf7_update_home_form_if_needed($home_form_id);
+    } else {
+        buildpro_cf7_update_home_form_if_needed();
     }
 }
 
@@ -231,6 +482,7 @@ function buildpro_cf7_on_plugins_loaded()
     }
     if (buildpro_cf7_is_active()) {
         buildpro_cf7_update_form_if_needed();
+        buildpro_cf7_update_home_form_if_needed();
     }
 }
 add_action('plugins_loaded', 'buildpro_cf7_on_plugins_loaded', 99);
@@ -438,12 +690,15 @@ function buildpro_cf7_skip_mail_for_demo_form($skip_mail, $contact_form)
         return $skip_mail;
     }
 
-    $demo_form_id = buildpro_cf7_find_form_id();
-    if ($demo_form_id <= 0) {
+    $allowed_form_ids = array_filter(array(
+        (int) buildpro_cf7_find_form_id(),
+        (int) buildpro_cf7_find_home_form_id(),
+    ));
+    if (empty($allowed_form_ids)) {
         return $skip_mail;
     }
 
-    if ((int) $contact_form->id() !== (int) $demo_form_id) {
+    if (!in_array((int) $contact_form->id(), $allowed_form_ids, true)) {
         return $skip_mail;
     }
 
@@ -458,7 +713,7 @@ function buildpro_cf7_skip_mail_for_demo_form($skip_mail, $contact_form)
     }
 
     // In local environments, mail() is commonly unavailable and causes mail_failed.
-    // Skip actual sending for the BuildPro demo form so submit returns success.
+    // Skip actual sending for BuildPro demo forms so submit returns success.
     return true;
 }
 

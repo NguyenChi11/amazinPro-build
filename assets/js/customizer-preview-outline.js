@@ -17,6 +17,7 @@
     buildpro_link_picker_section: ".section-banner:not([data-no-fallback])",
     buildpro_portfolio_section: ".section-portfolio",
     buildpro_product_section: ".section-product",
+    buildpro_contact_section: ".section-contact",
     buildpro_post_section: ".section-post",
 
     // About Us page

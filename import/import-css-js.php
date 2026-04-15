@@ -225,6 +225,15 @@ function wp_enqueue_custom_assets()
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-post/style.css'))
         ],
         [
+            'type' => 'style',
+            'handle' => 'buildpro-section-contact-style',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-contact/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-contact/style.css'))
+        ],
+        [
             'type' => 'script',
             'handle' => 'buildpro-section-post-script',
             'src' => get_theme_file_uri('template/template-parts/page/home/section-post/script.js'),
@@ -232,6 +241,15 @@ function wp_enqueue_custom_assets()
             'ver' => $version,
             'in_footer' => true,
             'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-post/script.js'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-contact-script',
+            'src' => get_theme_file_uri('template/template-parts/page/home/section-contact/script.js'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/home/section-contact/script.js'))
         ],
         [
             'type' => 'style',
