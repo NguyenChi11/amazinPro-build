@@ -1,0 +1,13 @@
+.buildpro-products-title-block {
+  margin: 0 0 12px;
+}
+
+.buildpro-products-title-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.buildpro-products-title-actions {
+  margin-top: 8px;
+}

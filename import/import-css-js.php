@@ -416,6 +416,24 @@ function wp_enqueue_custom_assets()
 
         [
             'type' => 'style',
+            'handle' => 'buildpro-section-product-title-style',
+            'src' => get_theme_file_uri('template/template-parts/page/product/section-title/style.css'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => false,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/product/section-title/style.css'))
+        ],
+        [
+            'type' => 'script',
+            'handle' => 'buildpro-section-product-title-script',
+            'src' => get_theme_file_uri('template/template-parts/page/product/section-title/script.js'),
+            'deps' => [],
+            'ver' => $version,
+            'in_footer' => true,
+            'condition' => file_exists(get_theme_file_path('template/template-parts/page/product/section-title/script.js'))
+        ],
+        [
+            'type' => 'style',
             'handle' => 'buildpro-section-product-style',
             'src' => get_theme_file_uri('template/template-parts/page/product/section-products/style.css'),
             'deps' => [],

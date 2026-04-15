@@ -1,142 +1,162 @@
-<section class="product-section-products" data-aos="fade-up">
-    <div class="product-section-products__left">
-        <div class="product-section-products__title">
-            <h2 class="product-section-products__title-text">
-                <?php esc_html_e('Catalog', 'buildpro'); ?>
-            </h2>
-            <p class="product-section-products__title-desc">
-                <?php esc_html_e('Construction Supplies', 'buildpro'); ?>
-            </p>
+<section class="product--section-products product-section-products" data-aos="fade-up">
+    <div class="product-section-products__top">
+        <div class="product-section-products__top_right">
+            <div class="product-section-products__title">
+                <h2 class="product-section-products__title-text">
+                    <?php esc_html_e('Catalog', 'buildpro'); ?>
+                </h2>
+                <p class="product-section-products__title-desc">
+                    <?php esc_html_e('Construction Supplies', 'buildpro'); ?>
+                </p>
+            </div>
+            <div class="product-section-products__category">
+                <?php
+                $brands_icon = get_theme_file_uri('/assets/images/icon/materials-svgrepo-com 1.png');
+                $cats_icon   = get_theme_file_uri('/assets/images/icon/paint-bucket-svgrepo-com 1.png');
+                $tags_icon   = get_theme_file_uri('/assets/images/icon/tools-svgrepo-com 1.png');
+                $maps = array(
+                    'product_brand' => array('icon' => $brands_icon, 'label' => __('Brands', 'buildpro')),
+                    'product_cat'   => array('icon' => $cats_icon, 'label' => __('Categories', 'buildpro')),
+                    'product_tag'   => array('icon' => $tags_icon, 'label' => __('Tags', 'buildpro')),
+                );
+                $current_url = function_exists('get_permalink') ? get_permalink() : home_url('/');
+                $current_paged = max(1, !empty($_GET['prod_p']) ? (int) $_GET['prod_p'] : 1);
+                $pagination_key = 'prod_p';
+                $sel_brand = isset($_GET['brand']) ? sanitize_text_field(wp_unslash($_GET['brand'])) : '';
+                $sel_cat   = isset($_GET['category']) ? sanitize_text_field(wp_unslash($_GET['category'])) : '';
+                $sel_tag   = isset($_GET['tag']) ? sanitize_text_field(wp_unslash($_GET['tag'])) : '';
+                $keyword   = isset($_GET['q']) ? sanitize_text_field(wp_unslash($_GET['q'])) : '';
+
+                $psp_initial_visible = (int) apply_filters('buildpro_product_filters_initial_visible', 8);
+                if ($psp_initial_visible <= 0) {
+                    $psp_initial_visible = 8;
+                }
+                $psp_terms_max = (int) apply_filters('buildpro_product_filters_terms_max', 50);
+                if ($psp_terms_max <= 0) {
+                    $psp_terms_max = 50;
+                }
+
+                foreach ($maps as $tax => $cfg) {
+                    if (!taxonomy_exists($tax)) {
+                        continue;
+                    }
+                    $terms = get_terms(array(
+                        'taxonomy' => $tax,
+                        'hide_empty' => true,
+                        'number' => $psp_terms_max,
+                        'orderby' => 'count',
+                        'order' => 'DESC',
+                    ));
+                    if (is_wp_error($terms) || empty($terms)) {
+                        continue;
+                    }
+
+                    $group_id = 'psp-cat-group-' . sanitize_html_class($tax);
+                    $has_more = count($terms) > $psp_initial_visible;
+                ?>
+                    <div class="psp-cat-group psp-cat-group--<?php echo esc_attr($tax); ?>"
+                        data-tax="<?php echo esc_attr($tax); ?>">
+                        <div class="psp-cat-group__head">
+                            <div class="psp-cat-group__meta">
+                                <img class="psp-cat-group__icon" src="<?php echo esc_url($cfg['icon']); ?>"
+                                    alt="<?php echo esc_attr($cfg['label']); ?>">
+                                <span class="psp-cat-group__label"><?php echo esc_html($cfg['label']); ?></span>
+                            </div>
+                            <?php if ($has_more) : ?>
+                                <button type="button" class="psp-cat-group__toggle" aria-expanded="false"
+                                    aria-controls="<?php echo esc_attr($group_id); ?>"
+                                    data-more-label="<?php echo esc_attr__('More', 'buildpro'); ?>"
+                                    data-less-label="<?php echo esc_attr__('Less', 'buildpro'); ?>"><?php esc_html_e('More', 'buildpro'); ?></button>
+                            <?php endif; ?>
+                        </div>
+                        <div id="<?php echo esc_attr($group_id); ?>" class="psp-cat-group__list"
+                            data-collapsed="<?php echo $has_more ? '1' : '0'; ?>"
+                            style="--psp-initial-visible:<?php echo (int) $psp_initial_visible; ?>">
+                            <?php
+                            // Always render an "All" chip for each taxonomy group
+                            $is_all_active = ($tax === 'product_brand' && $sel_brand === '')
+                                || ($tax === 'product_cat' && $sel_cat === '')
+                                || ($tax === 'product_tag' && $sel_tag === '');
+
+                            $args_clear = array();
+                            if ($keyword !== '') {
+                                $args_clear['q'] = $keyword;
+                            }
+                            if ($sel_brand !== '' && $tax !== 'product_brand') {
+                                $args_clear['brand'] = $sel_brand;
+                            }
+                            if ($sel_cat !== '' && $tax !== 'product_cat') {
+                                $args_clear['category'] = $sel_cat;
+                            }
+                            if ($sel_tag !== '' && $tax !== 'product_tag') {
+                                $args_clear['tag'] = $sel_tag;
+                            }
+                            if ($current_paged > 1) {
+                                $args_clear[$pagination_key] = $current_paged;
+                            }
+                            $link_clear = add_query_arg($args_clear, $current_url);
+
+                            $aria_all = $is_all_active ? ' aria-current="true"' : '';
+
+                            $all_cls = 'psp-chip psp-chip--all' . ($is_all_active ? ' psp-chip--active' : '');
+                            ?>
+                            <a class="<?php echo esc_attr($all_cls); ?>" href="<?php echo esc_url($link_clear); ?>"
+                                <?php echo $aria_all; ?>>
+                                <span class="psp-chip__text"><?php esc_html_e('All', 'buildpro'); ?></span>
+                            </a>
+                            <?php
+
+                            foreach ($terms as $t) {
+                                $is_active = ($tax === 'product_brand' && $sel_brand === $t->slug)
+                                    || ($tax === 'product_cat' && $sel_cat === $t->slug)
+                                    || ($tax === 'product_tag' && $sel_tag === $t->slug);
+
+                                // Preserve current selections and keyword
+                                $args_out = array();
+                                if ($keyword !== '') {
+                                    $args_out['q'] = $keyword;
+                                }
+                                if ($sel_brand !== '' && $tax !== 'product_brand') {
+                                    $args_out['brand'] = $sel_brand;
+                                }
+                                if ($sel_cat !== '' && $tax !== 'product_cat') {
+                                    $args_out['category'] = $sel_cat;
+                                }
+                                if ($sel_tag !== '' && $tax !== 'product_tag') {
+                                    $args_out['tag'] = $sel_tag;
+                                }
+                                // Toggle behavior: clicking active chip removes it; clicking inactive sets it
+                                if (!$is_active) {
+                                    if ($tax === 'product_brand') {
+                                        $args_out['brand'] = $t->slug;
+                                    } elseif ($tax === 'product_cat') {
+                                        $args_out['category'] = $t->slug;
+                                    } else {
+                                        $args_out['tag'] = $t->slug;
+                                    }
+                                }
+                                // Preserve current page to avoid losing pagination on toggle (supports both 'paged' and 'page')
+                                if ($current_paged > 1) {
+                                    $args_out[$pagination_key] = $current_paged;
+                                }
+                                $link = add_query_arg($args_out, $current_url);
+                                $cls = 'psp-chip' . ($is_active ? ' psp-chip--active' : '');
+                                $aria_current = $is_active ? ' aria-current="true"' : '';
+                            ?>
+                                <a class="<?php echo esc_attr($cls); ?>" href="<?php echo esc_url($link); ?>"
+                                    <?php echo $aria_current; ?>>
+                                    <span class="psp-chip__text"><?php echo esc_html($t->name); ?></span>
+                                </a>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
         </div>
-        <div class="product-section-products__category">
-            <?php
-            $brands_icon = get_theme_file_uri('/assets/images/icon/materials-svgrepo-com 1.png');
-            $cats_icon   = get_theme_file_uri('/assets/images/icon/paint-bucket-svgrepo-com 1.png');
-            $tags_icon   = get_theme_file_uri('/assets/images/icon/tools-svgrepo-com 1.png');
-            $maps = array(
-                'product_brand' => array('icon' => $brands_icon, 'label' => __('Brands', 'buildpro')),
-                'product_cat'   => array('icon' => $cats_icon, 'label' => __('Categories', 'buildpro')),
-                'product_tag'   => array('icon' => $tags_icon, 'label' => __('Tags', 'buildpro')),
-            );
-            $current_url = function_exists('get_permalink') ? get_permalink() : home_url('/');
-            $current_paged = max(1, !empty($_GET['prod_p']) ? (int) $_GET['prod_p'] : 1);
-            $pagination_key = 'prod_p';
-            $sel_brand = isset($_GET['brand']) ? sanitize_text_field(wp_unslash($_GET['brand'])) : '';
-            $sel_cat   = isset($_GET['category']) ? sanitize_text_field(wp_unslash($_GET['category'])) : '';
-            $sel_tag   = isset($_GET['tag']) ? sanitize_text_field(wp_unslash($_GET['tag'])) : '';
-            $keyword   = isset($_GET['q']) ? sanitize_text_field(wp_unslash($_GET['q'])) : '';
-
-            $psp_initial_visible = (int) apply_filters('buildpro_product_filters_initial_visible', 8);
-            if ($psp_initial_visible <= 0) {
-                $psp_initial_visible = 8;
-            }
-            $psp_terms_max = (int) apply_filters('buildpro_product_filters_terms_max', 50);
-            if ($psp_terms_max <= 0) {
-                $psp_terms_max = 50;
-            }
-
-            foreach ($maps as $tax => $cfg) {
-                if (!taxonomy_exists($tax)) {
-                    continue;
-                }
-                $terms = get_terms(array(
-                    'taxonomy' => $tax,
-                    'hide_empty' => true,
-                    'number' => $psp_terms_max,
-                    'orderby' => 'count',
-                    'order' => 'DESC',
-                ));
-                if (is_wp_error($terms) || empty($terms)) {
-                    continue;
-                }
-
-                $group_id = 'psp-cat-group-' . sanitize_html_class($tax);
-                $has_more = count($terms) > $psp_initial_visible;
-
-                echo '<div class="psp-cat-group psp-cat-group--' . esc_attr($tax) . '" data-tax="' . esc_attr($tax) . '">';
-                echo '  <div class="psp-cat-group__head">';
-                echo '    <div class="psp-cat-group__meta">';
-                echo '      <img class="psp-cat-group__icon" src="' . esc_url($cfg['icon']) . '" alt="' . esc_attr($cfg['label']) . '">';
-                echo '      <span class="psp-cat-group__label">' . esc_html($cfg['label']) . '</span>';
-                echo '    </div>';
-                if ($has_more) {
-                    echo '    <button type="button" class="psp-cat-group__toggle" aria-expanded="false" aria-controls="' . esc_attr($group_id) . '" data-more-label="' . esc_attr__('More', 'buildpro') . '" data-less-label="' . esc_attr__('Less', 'buildpro') . '">' . esc_html__('More', 'buildpro') . '</button>';
-                }
-                echo '  </div>';
-                echo '  <div id="' . esc_attr($group_id) . '" class="psp-cat-group__list" data-collapsed="' . ($has_more ? '1' : '0') . '" style="--psp-initial-visible:' . (int) $psp_initial_visible . '">';
-
-                // Always render an "All" chip for each taxonomy group
-                $is_all_active = ($tax === 'product_brand' && $sel_brand === '')
-                    || ($tax === 'product_cat' && $sel_cat === '')
-                    || ($tax === 'product_tag' && $sel_tag === '');
-
-                $args_clear = array();
-                if ($keyword !== '') {
-                    $args_clear['q'] = $keyword;
-                }
-                if ($sel_brand !== '' && $tax !== 'product_brand') {
-                    $args_clear['brand'] = $sel_brand;
-                }
-                if ($sel_cat !== '' && $tax !== 'product_cat') {
-                    $args_clear['category'] = $sel_cat;
-                }
-                if ($sel_tag !== '' && $tax !== 'product_tag') {
-                    $args_clear['tag'] = $sel_tag;
-                }
-                if ($current_paged > 1) {
-                    $args_clear[$pagination_key] = $current_paged;
-                }
-                $link_clear = add_query_arg($args_clear, $current_url);
-
-                $aria_all = $is_all_active ? ' aria-current="true"' : '';
-
-                foreach ($terms as $t) {
-                    $is_active = ($tax === 'product_brand' && $sel_brand === $t->slug)
-                        || ($tax === 'product_cat' && $sel_cat === $t->slug)
-                        || ($tax === 'product_tag' && $sel_tag === $t->slug);
-
-                    // Preserve current selections and keyword
-                    $args_out = array();
-                    if ($keyword !== '') {
-                        $args_out['q'] = $keyword;
-                    }
-                    if ($sel_brand !== '' && $tax !== 'product_brand') {
-                        $args_out['brand'] = $sel_brand;
-                    }
-                    if ($sel_cat !== '' && $tax !== 'product_cat') {
-                        $args_out['category'] = $sel_cat;
-                    }
-                    if ($sel_tag !== '' && $tax !== 'product_tag') {
-                        $args_out['tag'] = $sel_tag;
-                    }
-                    // Toggle behavior: clicking active chip removes it; clicking inactive sets it
-                    if (!$is_active) {
-                        if ($tax === 'product_brand') {
-                            $args_out['brand'] = $t->slug;
-                        } elseif ($tax === 'product_cat') {
-                            $args_out['category'] = $t->slug;
-                        } else {
-                            $args_out['tag'] = $t->slug;
-                        }
-                    }
-                    // Preserve current page to avoid losing pagination on toggle (supports both 'paged' and 'page')
-                    if ($current_paged > 1) {
-                        $args_out[$pagination_key] = $current_paged;
-                    }
-                    $link = add_query_arg($args_out, $current_url);
-                    $cls = 'psp-chip' . ($is_active ? ' psp-chip--active' : '');
-                    $aria_current = $is_active ? ' aria-current="true"' : '';
-                    echo '<a class="' . esc_attr($cls) . '" href="' . esc_url($link) . '"' . $aria_current . '>';
-                    echo '<span class="psp-chip__text">' . esc_html($t->name) . '</span>';
-                    echo '</a>';
-                }
-                echo '  </div>';
-                echo '</div>';
-            }
-            ?>
-        </div>
-    </div>
-    <div class="product-section-products__right">
         <div class="product-section-products__product-search">
             <form class="psp-search" role="search" method="get" action="<?php echo esc_url(get_permalink()); ?>">
                 <label class="screen-reader-text"
@@ -162,11 +182,19 @@
                 <?php endif; ?>
             </form>
         </div>
+    </div>
+    <div class="product-section-products__bottom">
+
         <div class="product-section-products__product--list">
             <?php
             $paged = max(1, !empty($_GET['prod_p']) ? (int) $_GET['prod_p'] : 1);
             $ppp = 9;
             $items = array();
+            $icon_bedroom_url = get_theme_file_uri('/assets/images/icon/icon_bedroom.png');
+            $icon_bathroom_url = get_theme_file_uri('/assets/images/icon/icon_bathroom.png');
+            $icon_ruler_url = get_theme_file_uri('/assets/images/icon/icon_ruler.png');
+            $icon_location_card_url = get_theme_file_uri('/assets/images/icon/icon_location_card.png');
+            $icon_cart_url = get_theme_file_uri('/assets/images/icon/icon_cart.png');
             if (class_exists('WooCommerce') || function_exists('wc_get_product')) {
                 $sel_brand = isset($_GET['brand']) ? sanitize_text_field(wp_unslash($_GET['brand'])) : '';
                 $sel_cat   = isset($_GET['category']) ? sanitize_text_field(wp_unslash($_GET['category'])) : '';
@@ -210,36 +238,110 @@
                 }
                 $q = new WP_Query($args);
                 if ($q->have_posts()) {
-                    echo '<div class="section-product__list">';
-                    while ($q->have_posts()) {
-                        $q->the_post();
-                        $pid = get_the_ID();
-                        $img = get_the_post_thumbnail_url($pid, 'large');
-                        $title = get_the_title($pid);
-                        $price = '';
-                        if (function_exists('wc_get_product')) {
-                            $p = wc_get_product($pid);
-                            if ($p) {
-                                $price = $p->get_price();
+            ?>
+                    <div class="section-product__list">
+                        <?php
+                        while ($q->have_posts()) {
+                            $q->the_post();
+                            $pid = get_the_ID();
+                            $img = get_the_post_thumbnail_url($pid, 'large');
+                            $title = get_the_title($pid);
+                            $price = '';
+                            $currency_symbol = '';
+                            $bedrooms = (string) get_post_meta($pid, 'buildpro_product_bedrooms', true);
+                            $bathrooms = (string) get_post_meta($pid, 'buildpro_product_bathrooms', true);
+                            $area = (string) get_post_meta($pid, 'buildpro_product_area', true);
+                            if ($area !== '' && is_numeric($area)) {
+                                $area_number = (float) $area;
+                                $area_decimals = floor($area_number) == $area_number ? 0 : 2;
+                                $area = number_format_i18n($area_number, $area_decimals);
                             }
+                            $location = (string) get_post_meta($pid, 'buildpro_product_location', true);
+                            if (function_exists('wc_get_product')) {
+                                $p = call_user_func('wc_get_product', $pid);
+                                if ($p) {
+                                    $raw_price = $p->get_price();
+                                    if ($raw_price !== '' && is_numeric($raw_price)) {
+                                        $price_number = (float) $raw_price;
+                                        $price_decimals = floor($price_number) == $price_number ? 0 : 2;
+                                        $price = number_format_i18n($price_number, $price_decimals);
+                                    } elseif (is_string($raw_price)) {
+                                        $price = $raw_price;
+                                    }
+                                    if (function_exists('get_woocommerce_currency_symbol')) {
+                                        $currency_symbol = call_user_func('get_woocommerce_currency_symbol');
+                                    }
+                                }
+                            }
+                            if ($currency_symbol === '') {
+                                $currency_symbol = '$';
+                            }
+                            $link = get_permalink($pid);
+                        ?>
+                            <div class="section-product__grid-item">
+                                <div class="section-product__item">
+                                    <div class="section-product__item-image">
+                                        <a class="section-product__item-link" href="<?php echo esc_url($link); ?>"
+                                            aria-label="<?php echo esc_attr($title); ?>">
+                                            <?php if (!empty($img)) : ?>
+                                                <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($title); ?>">
+                                            <?php endif; ?>
+                                        </a>
+                                    </div>
+                                    <div class="section-product__item-content">
+                                        <div class="section-product__item-price-row">
+                                            <p class="section-product__item-price">
+                                                <?php if ($price !== '') : ?>
+                                                    <span><?php echo esc_html($currency_symbol); ?></span><span><?php echo esc_html($price); ?></span>
+                                                <?php else : ?>
+                                                    <?php esc_html_e('Contact', 'buildpro'); ?>
+                                                <?php endif; ?>
+                                            </p>
+                                            <button class="section-product__item-cta btn-add-to-cart" type="button"
+                                                data-product-id="<?php echo esc_attr($pid); ?>"
+                                                aria-label="<?php esc_attr_e('Add to Cart', 'buildpro'); ?>">
+                                                <img src="<?php echo esc_url($icon_cart_url); ?>" alt="" aria-hidden="true">
+                                                <span><?php esc_html_e('Add to Cart', 'buildpro'); ?></span>
+                                            </button>
+                                        </div>
+                                        <a class="section-product__item-title-link" href="<?php echo esc_url($link); ?>">
+                                            <h3 class="section-product__item-title"><?php echo esc_html($title); ?></h3>
+                                        </a>
+                                        <div class="section-product__item-meta"
+                                            aria-label="<?php esc_attr_e('Property details', 'buildpro'); ?>">
+                                            <div class="section-product__item-meta-item">
+                                                <img src="<?php echo esc_url($icon_bedroom_url); ?>"
+                                                    alt="<?php esc_attr_e('Bedroom', 'buildpro'); ?>">
+                                                <span><?php echo esc_html($bedrooms !== '' ? $bedrooms : '-'); ?></span>
+                                            </div>
+                                            <div class="section-product__item-meta-item">
+                                                <img src="<?php echo esc_url($icon_bathroom_url); ?>"
+                                                    alt="<?php esc_attr_e('Bathroom', 'buildpro'); ?>">
+                                                <span><?php echo esc_html($bathrooms !== '' ? $bathrooms : '-'); ?></span>
+                                            </div>
+                                            <div class="section-product__item-meta-item">
+                                                <img src="<?php echo esc_url($icon_ruler_url); ?>"
+                                                    alt="<?php esc_attr_e('Area', 'buildpro'); ?>">
+                                                <?php if ($area !== '') : ?>
+                                                    <span><?php echo esc_html($area . ' ' . __('sq ft', 'buildpro')); ?></span>
+                                                <?php else : ?>
+                                                    <span>-</span>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                        <div class="section-product__item-location">
+                                            <img src="<?php echo esc_url($icon_location_card_url); ?>"
+                                                alt="<?php esc_attr_e('Location', 'buildpro'); ?>">
+                                            <span><?php echo esc_html($location !== '' ? $location : __('Updating location', 'buildpro')); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
                         }
-                        $link = get_permalink($pid);
-                        echo '<a class="section-product__item" href="' . esc_url($link) . '">';
-                        echo '  <div class="section-product__item-image">';
-                        if (!empty($img)) {
-                            echo '    <img src="' . esc_url($img) . '" alt="' . esc_attr($title) . '">';
-                        }
-                        echo '  </div>';
-                        echo '  <div class="section-product__item-content">';
-                        echo '    <h3 class="section-product__item-title">' . esc_html($title) . '</h3>';
-                        echo '    <div class="section-product__item-bottom">';
-                        echo '      <p class="section-product__item-price"><span>$</span>' . esc_html($price) . '<span>/' . esc_html__('ton', 'buildpro') . '</span></p>';
-                        echo '      <button class="section-product__item-cta btn-add-to-cart" data-product-id="' . esc_attr($pid) . '">' . esc_html__('Add to Cart', 'buildpro') . '</button>';
-                        echo '    </div>';
-                        echo '  </div>';
-                        echo '</a>';
-                    }
-                    echo '</div>';
+                        ?>
+                    </div>
+                    <?php
                     $preserve = array();
                     if ($keyword !== '') $preserve['q'] = $keyword;
                     if ($sel_brand !== '') $preserve['brand'] = $sel_brand;
@@ -257,21 +359,31 @@
                         'prev_next' => false,
                     ));
                     if (!empty($links) && is_array($links)) {
-                        echo '<nav class="product--pagination"><ul class="page-numbers">';
-                        if ($paged > 1) {
-                            echo '<li><a class="page-numbers prev" href="' . esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged - 1)), $current_url)) . '">&lsaquo;</a></li>';
-                        } else {
-                            echo '<li><span class="page-numbers prev disabled">&lsaquo;</span></li>';
-                        }
-                        foreach ($links as $lnk) {
-                            echo '<li>' . $lnk . '</li>';
-                        }
-                        if ($paged < (int) $q->max_num_pages) {
-                            echo '<li><a class="page-numbers next" href="' . esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged + 1)), $current_url)) . '">&rsaquo;</a></li>';
-                        } else {
-                            echo '<li><span class="page-numbers next disabled">&rsaquo;</span></li>';
-                        }
-                        echo '</ul></nav>';
+                    ?>
+                        <nav class="product--pagination">
+                            <ul class="page-numbers">
+                                <?php if ($paged > 1) : ?>
+                                    <li><a class="page-numbers prev"
+                                            href="<?php echo esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged - 1)), $current_url)); ?>">&lsaquo;</a>
+                                    </li>
+                                <?php else : ?>
+                                    <li><span class="page-numbers prev disabled">&lsaquo;</span></li>
+                                <?php endif; ?>
+
+                                <?php foreach ($links as $lnk) : ?>
+                                    <li><?php echo $lnk; ?></li>
+                                <?php endforeach; ?>
+
+                                <?php if ($paged < (int) $q->max_num_pages) : ?>
+                                    <li><a class="page-numbers next"
+                                            href="<?php echo esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged + 1)), $current_url)); ?>">&rsaquo;</a>
+                                    </li>
+                                <?php else : ?>
+                                    <li><span class="page-numbers next disabled">&rsaquo;</span></li>
+                                <?php endif; ?>
+                            </ul>
+                        </nav>
+            <?php
                     }
                 }
             }

@@ -402,6 +402,14 @@ function buildpro_maybe_import_default_content()
                 buildpro_maybe_import_about_us_contact_demo_once();
             }
 
+            $products_title_demo_file = get_theme_file_path('/import/data-demo/page/products/title-product.php');
+            if (file_exists($products_title_demo_file)) {
+                require_once $products_title_demo_file;
+                if (function_exists('buildpro_import_products_title_demo')) {
+                    buildpro_import_products_title_demo();
+                }
+            }
+
             buildpro_backfill_demo_post_types_if_missing();
             return;
         }
@@ -456,6 +464,15 @@ function buildpro_maybe_import_default_content()
             buildpro_import_projects_title_demo();
         }
     }
+
+    $products_title_demo_file = get_theme_file_path('/import/data-demo/page/products/title-product.php');
+    if (file_exists($products_title_demo_file)) {
+        require_once $products_title_demo_file;
+        if (function_exists('buildpro_import_products_title_demo')) {
+            buildpro_import_products_title_demo();
+        }
+    }
+
     $about_banner_demo_file = get_theme_file_path('/import/data-demo/page/about-us/banner-about-us.php');
     if (file_exists($about_banner_demo_file)) {
         require_once $about_banner_demo_file;

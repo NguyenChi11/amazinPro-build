@@ -29,6 +29,9 @@
 
     // Projects page
     buildpro_projects_title_section: ".project--section-title",
+
+    // Products page
+    buildpro_products_title_section: ".product--section-title",
   };
 
   var FOCUSED_CLASS = "customizer-section-focused";

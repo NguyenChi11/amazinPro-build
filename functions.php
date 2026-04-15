@@ -106,9 +106,11 @@ require get_template_directory() . '/inc/customizer/footer/index.php';
 require get_template_directory() . '/inc/customizer/link-picker/index.php';
 require get_template_directory() . '/inc/customizer/home-page/index.php';
 require get_template_directory() . '/inc/customizer/project-page/index.php';
+require get_template_directory() . '/inc/customizer/product-page/index.php';
 require get_template_directory() . '/inc/customizer/about-us-page/index.php';
 require get_template_directory() . '/inc/meta-box/page/home-page/index.php';
 require get_template_directory() . '/inc/meta-box/page/project-page/index.php';
+require get_template_directory() . '/inc/meta-box/page/product-page/index.php';
 require get_template_directory() . '/inc/meta-box/page/about-us-page/index.php';
 
 
@@ -120,6 +122,7 @@ require get_template_directory() . '/inc/functions/page/cart.php';
 require get_template_directory() . '/inc/functions/page/bill.php';
 require get_template_directory() . '/inc/functions/page/checkout.php';
 require get_template_directory() . '/inc/functions/page/project.php';
+require get_template_directory() . '/inc/functions/page/product.php';
 require get_template_directory() . '/inc/functions/page/about-us.php';
 
 require get_template_directory() . '/inc/functions/post-type/project-function.php';
