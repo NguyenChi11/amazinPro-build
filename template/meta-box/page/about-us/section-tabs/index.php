@@ -8,7 +8,6 @@ function render_about_us_page_tabs()
 {
     $tabs = [
         'buildpro_about_banner_meta' => __('Banner', 'buildpro'),
-        'buildpro_about_core_values_meta' => __('Core Values', 'buildpro'),
         'buildpro_about_leader_meta' => __('Leader', 'buildpro'),
         'buildpro_about_policy_meta' => __('Policy', 'buildpro'),
         'buildpro_about_contact_meta' => __('Contact', 'buildpro')

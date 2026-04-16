@@ -34,7 +34,6 @@ if (!function_exists('buildpro_about_us_add_inline_i18n')) {
 }
 
 require get_template_directory() . '/inc/customizer/about-us-page/section-banner/index.php';
-require get_template_directory() . '/inc/customizer/about-us-page/section-core-values/index.php';
 require get_template_directory() . '/inc/customizer/about-us-page/section-leader/index.php';
 require get_template_directory() . '/inc/customizer/about-us-page/section-policy/index.php';
 require get_template_directory() . '/inc/customizer/about-us-page/section-contact/index.php';

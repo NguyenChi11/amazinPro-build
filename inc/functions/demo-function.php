@@ -489,14 +489,6 @@ function buildpro_maybe_import_default_content()
         }
     }
 
-    $about_core_values_demo_file = get_theme_file_path('/import/data-demo/page/about-us/core-value-about-us.php');
-    if (file_exists($about_core_values_demo_file)) {
-        require_once $about_core_values_demo_file;
-        if (function_exists('buildpro_import_about_us_core_values_demo')) {
-            buildpro_import_about_us_core_values_demo();
-        }
-    }
-
     if (function_exists('buildpro_maybe_import_about_us_contact_demo_once')) {
         buildpro_maybe_import_about_us_contact_demo_once();
     }

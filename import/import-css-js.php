@@ -307,24 +307,6 @@ function wp_enqueue_custom_assets()
         ],
         [
             'type' => 'style',
-            'handle' => 'buildpro-section-about-us-core-values-style',
-            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-core-values/style.css'),
-            'deps' => [],
-            'ver' => $version,
-            'in_footer' => false,
-            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-core-values/style.css'))
-        ],
-        [
-            'type' => 'script',
-            'handle' => 'buildpro-section-about-us-core-values-script',
-            'src' => get_theme_file_uri('template/template-parts/page/about-us/section-core-values/script.js'),
-            'deps' => ['swiper'],
-            'ver' => $version,
-            'in_footer' => true,
-            'condition' => file_exists(get_theme_file_path('template/template-parts/page/about-us/section-core-values/script.js'))
-        ],
-        [
-            'type' => 'style',
             'handle' => 'buildpro-section-about-us-leader-style',
             'src' => get_theme_file_uri('template/template-parts/page/about-us/section-leader/style.css'),
             'deps' => [],

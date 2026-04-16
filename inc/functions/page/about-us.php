@@ -4,7 +4,6 @@ if (!function_exists('buildpro_about_sections_get_map')) {
     {
         return array(
             'about-us__section-banner' => 'template/template-parts/page/about-us/section-banner/index',
-            'about-core-values' => 'template/template-parts/page/about-us/section-core-values/index',
             'about-leader' => 'template/template-parts/page/about-us/section-leader/index',
             'about-policy' => 'template/template-parts/page/about-us/section-policy/index',
             'about-contact' => 'template/template-parts/page/about-us/section-contact/index',
@@ -25,7 +24,6 @@ if (!function_exists('buildpro_about_sections_get_labels')) {
     {
         return array(
             'about-us__section-banner' => __('Banner', 'buildpro'),
-            'about-core-values' => __('Core Values', 'buildpro'),
             'about-leader' => __('Leader', 'buildpro'),
             'about-policy' => __('Policy', 'buildpro'),
             'about-contact' => __('Contact', 'buildpro'),
@@ -39,7 +37,6 @@ if (!function_exists('buildpro_about_sections_get_aliases')) {
     {
         return array(
             'about-section-banner' => 'about-us__section-banner',
-            'about-section-core-values' => 'about-core-values',
             'about-section-leader' => 'about-leader',
             'about-section-policy' => 'about-policy',
             'about-section-contact' => 'about-contact',
@@ -358,7 +355,6 @@ CSS;
 (function($){
 	var SECTION_KEYS = [
 		'about-us__section-banner',
-		'about-core-values',
 		'about-leader',
 		'about-policy',
 		'about-contact',

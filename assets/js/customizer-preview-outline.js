@@ -22,7 +22,6 @@
 
     // About Us page
     buildpro_about_banner_section: ".about-us__section-banner",
-    buildpro_about_core_values_section: ".about-core-values",
     buildpro_about_leader_section: ".about-leader",
     buildpro_about_policy_section: ".about-policy",
     buildpro_about_contact_section: ".about-contact",
