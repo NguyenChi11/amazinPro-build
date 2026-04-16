@@ -43,24 +43,23 @@ function buildpro_import_product_demo($target_id = 0)
         set_theme_mod('materials_enabled', 1);
         return;
     }
-    $existing = new WP_Query(array(
-        'post_type' => 'product',
-        'posts_per_page' => 1,
-        'post_status' => 'publish',
-        'no_found_rows' => true,
-        'fields' => 'ids',
-    ));
-    if ($existing->have_posts()) {
-        wp_reset_postdata();
-    } else {
-        wp_reset_postdata();
-        if (function_exists('buildpro_import_parse_js')) {
-            $data = buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
-            if (isset($data['items']) && is_array($data['items'])) {
-                foreach ($data['items'] as $it) {
-                    if (function_exists('buildpro_import_create_wc_product')) {
-                        buildpro_import_create_wc_product($it);
-                    }
+    // Always process full demo dataset.
+    // Existing products are skipped safely inside buildpro_import_create_wc_product() by slug.
+    if (function_exists('buildpro_import_get_wc_products_data')) {
+        $data = buildpro_import_get_wc_products_data();
+        if (isset($data['items']) && is_array($data['items'])) {
+            foreach ($data['items'] as $it) {
+                if (function_exists('buildpro_import_create_wc_product')) {
+                    buildpro_import_create_wc_product($it);
+                }
+            }
+        }
+    } elseif (function_exists('buildpro_import_parse_js')) {
+        $data = buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
+        if (isset($data['items']) && is_array($data['items'])) {
+            foreach ($data['items'] as $it) {
+                if (function_exists('buildpro_import_create_wc_product')) {
+                    buildpro_import_create_wc_product($it);
                 }
             }
         }

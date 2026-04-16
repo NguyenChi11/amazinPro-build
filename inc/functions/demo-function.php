@@ -22,6 +22,17 @@ function buildpro_import_parse_js($rel_file, $const_name)
     return is_array($data) ? $data : array();
 }
 
+function buildpro_import_get_wc_products_data()
+{
+    $primary = buildpro_import_parse_js('/assets/data/product-data.js', 'ProductsData');
+    if (isset($primary['items']) && is_array($primary['items']) && !empty($primary['items'])) {
+        return $primary;
+    }
+
+    $fallback = buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
+    return is_array($fallback) ? $fallback : array();
+}
+
 function buildpro_import_create_wc_product($item)
 {
     if (!(class_exists('WooCommerce') || function_exists('wc_get_product'))) {
@@ -59,7 +70,8 @@ function buildpro_import_create_wc_product($item)
     if (!empty($gids)) {
         update_post_meta($post_id, '_product_image_gallery', implode(',', array_map('intval', $gids)));
     }
-    $reg = isset($item['regularPrice']) ? (string)$item['regularPrice'] : '';
+    $price = isset($item['price']) ? (string)$item['price'] : '';
+    $reg = isset($item['regularPrice']) ? (string)$item['regularPrice'] : $price;
     $sale = isset($item['salePrice']) ? (string)$item['salePrice'] : '';
     if ($sale !== '') {
         update_post_meta($post_id, '_sale_price', $sale);
@@ -107,6 +119,80 @@ function buildpro_import_create_wc_product($item)
     if ($typical !== '') {
         update_post_meta($post_id, 'typical_range', $typical);
     }
+
+    $key_info = (isset($item['keyInformation']) && is_array($item['keyInformation'])) ? $item['keyInformation'] : array();
+
+    $overview = isset($item['overview']) ? sanitize_textarea_field((string) $item['overview']) : '';
+    if ($overview !== '') {
+        update_post_meta($post_id, 'buildpro_product_overview', $overview);
+    }
+
+    $area = isset($key_info['area']) ? (string) $key_info['area'] : (isset($item['area']) ? (string) $item['area'] : '');
+    if ($area !== '') {
+        update_post_meta($post_id, 'buildpro_product_area', sanitize_text_field($area));
+    }
+
+    $location = isset($item['location']) ? (string) $item['location'] : '';
+    if ($location !== '') {
+        update_post_meta($post_id, 'buildpro_product_location', sanitize_text_field($location));
+    }
+
+    $bedrooms = isset($key_info['bedroom']) ? (string) $key_info['bedroom'] : (isset($item['bedroom']) ? (string) $item['bedroom'] : '');
+    if ($bedrooms !== '') {
+        update_post_meta($post_id, 'buildpro_product_bedrooms', sanitize_text_field($bedrooms));
+    }
+
+    $bathrooms = isset($key_info['bathroom']) ? (string) $key_info['bathroom'] : (isset($item['bathroom']) ? (string) $item['bathroom'] : '');
+    if ($bathrooms !== '') {
+        update_post_meta($post_id, 'buildpro_product_bathrooms', sanitize_text_field($bathrooms));
+    }
+
+    $meta_key_map = array(
+        'lotSize' => 'buildpro_product_lot_size',
+        'garage' => 'buildpro_product_garage',
+        'yearBuilt' => 'buildpro_product_year_built',
+        'floors' => 'buildpro_product_floors',
+    );
+    foreach ($meta_key_map as $src_key => $meta_key) {
+        if (!isset($key_info[$src_key])) {
+            continue;
+        }
+        $value = sanitize_text_field((string) $key_info[$src_key]);
+        if ($value !== '') {
+            update_post_meta($post_id, $meta_key, $value);
+        }
+    }
+
+    $list_map = array(
+        'features' => 'buildpro_product_features',
+        'interiorFeatures' => 'buildpro_product_interior_features',
+    );
+    foreach ($list_map as $src_key => $meta_key) {
+        if (!isset($item[$src_key])) {
+            continue;
+        }
+
+        $rows = array();
+        $src_value = $item[$src_key];
+        if (is_array($src_value)) {
+            foreach ($src_value as $row) {
+                $row = sanitize_text_field((string) $row);
+                if ($row !== '') {
+                    $rows[] = $row;
+                }
+            }
+        } else {
+            $single = sanitize_textarea_field((string) $src_value);
+            if ($single !== '') {
+                $rows[] = $single;
+            }
+        }
+
+        if (!empty($rows)) {
+            update_post_meta($post_id, $meta_key, implode("\n", $rows));
+        }
+    }
+
     return (int)$post_id;
 }
 
@@ -346,10 +432,24 @@ function buildpro_backfill_demo_post_types_if_missing()
 
     $wc_active = class_exists('WooCommerce') || function_exists('wc_get_product');
     $products_demo_file = get_theme_file_path('/import/data-demo/page/home/products-home.php');
-    if ($wc_active && !buildpro_has_published_content('product') && file_exists($products_demo_file)) {
-        require_once $products_demo_file;
-        if (function_exists('buildpro_import_product_demo')) {
-            buildpro_import_product_demo();
+    if ($wc_active && file_exists($products_demo_file)) {
+        $should_import_products = !buildpro_has_published_content('product');
+
+        if (!$should_import_products && function_exists('buildpro_import_get_wc_products_data')) {
+            $data = buildpro_import_get_wc_products_data();
+            $expected = (isset($data['items']) && is_array($data['items'])) ? count($data['items']) : 0;
+            if ($expected > 0) {
+                $counts = wp_count_posts('product');
+                $published = (is_object($counts) && isset($counts->publish)) ? (int) $counts->publish : 0;
+                $should_import_products = ($published < $expected);
+            }
+        }
+
+        if ($should_import_products) {
+            require_once $products_demo_file;
+            if (function_exists('buildpro_import_product_demo')) {
+                buildpro_import_product_demo();
+            }
         }
     }
 

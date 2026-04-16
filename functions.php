@@ -166,7 +166,9 @@ function buildpro_maybe_import_wc_products()
     $need = get_option('buildpro_wc_do_import') === '1';
     $active = class_exists('WooCommerce') || function_exists('wc_get_product');
     if ($need && $active) {
-        $wcProducts = buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
+        $wcProducts = function_exists('buildpro_import_get_wc_products_data')
+            ? buildpro_import_get_wc_products_data()
+            : buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
         if (isset($wcProducts['items']) && is_array($wcProducts['items'])) {
             foreach ($wcProducts['items'] as $it) {
                 buildpro_import_create_wc_product($it);
@@ -187,7 +189,9 @@ function buildpro_run_wc_import_now()
     if (!$active) {
         return;
     }
-    $wcProducts = buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
+    $wcProducts = function_exists('buildpro_import_get_wc_products_data')
+        ? buildpro_import_get_wc_products_data()
+        : buildpro_import_parse_js('/assets/data/woocommerce-product-data.js', 'woocommerceProductData');
     if (isset($wcProducts['items']) && is_array($wcProducts['items'])) {
         foreach ($wcProducts['items'] as $it) {
             buildpro_import_create_wc_product($it);
