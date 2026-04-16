@@ -81,26 +81,31 @@ if ($enabled && (!empty($items) || is_customize_preview())) :
                         $it_description = $it['description'];
                         $it_url = $it['url'];
                         $it_link_title = isset($it['link_title']) ? (string) $it['link_title'] : '';
+                        $card_tag = $it_url !== '' ? 'a' : 'div';
+                        $card_attr = $it_url !== '' ? ' href="' . esc_url($it_url) . '"' : '';
+                        if ($it_position !== '' && $it_name !== '') {
+                            $display_name = $it_position . ' - ' . $it_name;
+                        } elseif ($it_name !== '') {
+                            $display_name = $it_name;
+                        } else {
+                            $display_name = $it_position;
+                        }
                     ?>
-                        <a class="about-leader__card" href="<?php echo esc_url($it_url); ?>">
+                        <<?php echo esc_attr($card_tag); ?> class="about-leader__card" <?php echo $card_attr; ?>>
                             <div class="about-leader__avatar-wrap">
-                                <div class="about-leader__avatar-ring"></div>
                                 <?php if ($icon_url) : ?>
-                                    <img class="about-leader__avatar" src="<?php echo esc_url($icon_url); ?>" alt="">
+                                    <img class="about-leader__avatar" src="<?php echo esc_url($icon_url); ?>" alt="<?php echo esc_attr($display_name); ?>">
                                 <?php else : ?>
                                     <div class="about-leader__avatar placeholder"></div>
                                 <?php endif; ?>
                             </div>
-                            <?php if ($it_position !== '') : ?>
-                                <div class="about-leader__badge"><?php echo esc_html($it_position); ?></div>
-                            <?php endif; ?>
-                            <?php if ($it_name !== '') : ?>
-                                <h3 class="about-leader__name"><?php echo esc_html($it_name); ?></h3>
+                            <?php if ($display_name !== '') : ?>
+                                <h3 class="about-leader__name"><?php echo esc_html($display_name); ?></h3>
                             <?php endif; ?>
                             <?php if ($it_description !== '') : ?>
                                 <div class="about-leader__role"><?php echo esc_html($it_description); ?></div>
                             <?php endif; ?>
-                        </a>
+                        </<?php echo esc_attr($card_tag); ?>>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
