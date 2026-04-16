@@ -69,7 +69,7 @@
   height: 9.375rem;
   padding: 1.875rem;
   background: rgba(227, 233, 241, 1);
-  border-radius: 1.25rem;
+  border-radius: 0.5rem;
   min-width: 0;
   overflow: hidden;
 }
@@ -113,7 +113,7 @@
   flex: 0 1 34.375rem;
   min-width: 0;
   height: 47.375rem;
-  border-radius: 1.875rem;
+  border-radius: 0.5rem;
   box-shadow: 4px 4px 20px 0px rgba(7, 59, 111, 0.1);
   overflow: hidden; /* nÃªn dÃ¹ng hidden thay vÃ¬ clip */
 }
@@ -222,4 +222,3 @@
     border-radius: 1.25rem;
   }
 }
-

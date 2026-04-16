@@ -54,25 +54,25 @@
                     $group_id = 'psp-cat-group-' . sanitize_html_class($tax);
                     $has_more = count($terms) > $psp_initial_visible;
                 ?>
-                    <div class="psp-cat-group psp-cat-group--<?php echo esc_attr($tax); ?>"
-                        data-tax="<?php echo esc_attr($tax); ?>">
-                        <div class="psp-cat-group__head">
-                            <div class="psp-cat-group__meta">
-                                <img class="psp-cat-group__icon" src="<?php echo esc_url($cfg['icon']); ?>"
-                                    alt="<?php echo esc_attr($cfg['label']); ?>">
-                                <span class="psp-cat-group__label"><?php echo esc_html($cfg['label']); ?></span>
-                            </div>
-                            <?php if ($has_more) : ?>
-                                <button type="button" class="psp-cat-group__toggle" aria-expanded="false"
-                                    aria-controls="<?php echo esc_attr($group_id); ?>"
-                                    data-more-label="<?php echo esc_attr__('More', 'buildpro'); ?>"
-                                    data-less-label="<?php echo esc_attr__('Less', 'buildpro'); ?>"><?php esc_html_e('More', 'buildpro'); ?></button>
-                            <?php endif; ?>
+                <div class="psp-cat-group psp-cat-group--<?php echo esc_attr($tax); ?>"
+                    data-tax="<?php echo esc_attr($tax); ?>">
+                    <div class="psp-cat-group__head">
+                        <div class="psp-cat-group__meta">
+                            <img class="psp-cat-group__icon" src="<?php echo esc_url($cfg['icon']); ?>"
+                                alt="<?php echo esc_attr($cfg['label']); ?>">
+                            <span class="psp-cat-group__label"><?php echo esc_html($cfg['label']); ?></span>
                         </div>
-                        <div id="<?php echo esc_attr($group_id); ?>" class="psp-cat-group__list"
-                            data-collapsed="<?php echo $has_more ? '1' : '0'; ?>"
-                            style="--psp-initial-visible:<?php echo (int) $psp_initial_visible; ?>">
-                            <?php
+                        <?php if ($has_more) : ?>
+                        <button type="button" class="psp-cat-group__toggle" aria-expanded="false"
+                            aria-controls="<?php echo esc_attr($group_id); ?>"
+                            data-more-label="<?php echo esc_attr__('More', 'buildpro'); ?>"
+                            data-less-label="<?php echo esc_attr__('Less', 'buildpro'); ?>"><?php esc_html_e('More', 'buildpro'); ?></button>
+                        <?php endif; ?>
+                    </div>
+                    <div id="<?php echo esc_attr($group_id); ?>" class="psp-cat-group__list"
+                        data-collapsed="<?php echo $has_more ? '1' : '0'; ?>"
+                        style="--psp-initial-visible:<?php echo (int) $psp_initial_visible; ?>">
+                        <?php
                             // Always render an "All" chip for each taxonomy group
                             $is_all_active = ($tax === 'product_brand' && $sel_brand === '')
                                 || ($tax === 'product_cat' && $sel_cat === '')
@@ -100,11 +100,11 @@
 
                             $all_cls = 'psp-chip psp-chip--all' . ($is_all_active ? ' psp-chip--active' : '');
                             ?>
-                            <a class="<?php echo esc_attr($all_cls); ?>" href="<?php echo esc_url($link_clear); ?>"
-                                <?php echo $aria_all; ?>>
-                                <span class="psp-chip__text"><?php esc_html_e('All', 'buildpro'); ?></span>
-                            </a>
-                            <?php
+                        <a class="<?php echo esc_attr($all_cls); ?>" href="<?php echo esc_url($link_clear); ?>"
+                            <?php echo $aria_all; ?>>
+                            <span class="psp-chip__text"><?php esc_html_e('All', 'buildpro'); ?></span>
+                        </a>
+                        <?php
 
                             foreach ($terms as $t) {
                                 $is_active = ($tax === 'product_brand' && $sel_brand === $t->slug)
@@ -143,15 +143,15 @@
                                 $cls = 'psp-chip' . ($is_active ? ' psp-chip--active' : '');
                                 $aria_current = $is_active ? ' aria-current="true"' : '';
                             ?>
-                                <a class="<?php echo esc_attr($cls); ?>" href="<?php echo esc_url($link); ?>"
-                                    <?php echo $aria_current; ?>>
-                                    <span class="psp-chip__text"><?php echo esc_html($t->name); ?></span>
-                                </a>
-                            <?php
+                        <a class="<?php echo esc_attr($cls); ?>" href="<?php echo esc_url($link); ?>"
+                            <?php echo $aria_current; ?>>
+                            <span class="psp-chip__text"><?php echo esc_html($t->name); ?></span>
+                        </a>
+                        <?php
                             }
                             ?>
-                        </div>
                     </div>
+                </div>
                 <?php
                 }
                 ?>
@@ -172,13 +172,13 @@
                     placeholder="<?php esc_attr_e('Search materials, tools, or brands ...', 'buildpro'); ?>"
                     value="<?php echo isset($_GET['q']) ? esc_attr(wp_unslash($_GET['q'])) : ''; ?>" />
                 <?php if (!empty($sel_brand)): ?>
-                    <input type="hidden" name="brand" value="<?php echo esc_attr($sel_brand); ?>" />
+                <input type="hidden" name="brand" value="<?php echo esc_attr($sel_brand); ?>" />
                 <?php endif; ?>
                 <?php if (!empty($sel_cat)): ?>
-                    <input type="hidden" name="category" value="<?php echo esc_attr($sel_cat); ?>" />
+                <input type="hidden" name="category" value="<?php echo esc_attr($sel_cat); ?>" />
                 <?php endif; ?>
                 <?php if (!empty($sel_tag)): ?>
-                    <input type="hidden" name="tag" value="<?php echo esc_attr($sel_tag); ?>" />
+                <input type="hidden" name="tag" value="<?php echo esc_attr($sel_tag); ?>" />
                 <?php endif; ?>
             </form>
         </div>
@@ -188,7 +188,7 @@
         <div class="product-section-products__product--list">
             <?php
             $paged = max(1, !empty($_GET['prod_p']) ? (int) $_GET['prod_p'] : 1);
-            $ppp = 9;
+            $ppp = 6;
             $items = array();
             $icon_bedroom_url = get_theme_file_uri('/assets/images/icon/icon_bedroom.png');
             $icon_bathroom_url = get_theme_file_uri('/assets/images/icon/icon_bathroom.png');
@@ -239,8 +239,8 @@
                 $q = new WP_Query($args);
                 if ($q->have_posts()) {
             ?>
-                    <div class="section-product__list">
-                        <?php
+            <div class="section-product__list">
+                <?php
                         while ($q->have_posts()) {
                             $q->the_post();
                             $pid = get_the_ID();
@@ -278,70 +278,70 @@
                             }
                             $link = get_permalink($pid);
                         ?>
-                            <div class="section-product__grid-item">
-                                <div class="section-product__item">
-                                    <div class="section-product__item-image">
-                                        <a class="section-product__item-link" href="<?php echo esc_url($link); ?>"
-                                            aria-label="<?php echo esc_attr($title); ?>">
-                                            <?php if (!empty($img)) : ?>
-                                                <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($title); ?>">
-                                            <?php endif; ?>
-                                        </a>
-                                    </div>
-                                    <div class="section-product__item-content">
-                                        <div class="section-product__item-price-row">
-                                            <p class="section-product__item-price">
-                                                <?php if ($price !== '') : ?>
-                                                    <span><?php echo esc_html($currency_symbol); ?></span><span><?php echo esc_html($price); ?></span>
-                                                <?php else : ?>
-                                                    <?php esc_html_e('Contact', 'buildpro'); ?>
-                                                <?php endif; ?>
-                                            </p>
-                                            <button class="section-product__item-cta btn-add-to-cart" type="button"
-                                                data-product-id="<?php echo esc_attr($pid); ?>"
-                                                aria-label="<?php esc_attr_e('Add to Cart', 'buildpro'); ?>">
-                                                <img src="<?php echo esc_url($icon_cart_url); ?>" alt="" aria-hidden="true">
-                                                <span><?php esc_html_e('Add to Cart', 'buildpro'); ?></span>
-                                            </button>
-                                        </div>
-                                        <a class="section-product__item-title-link" href="<?php echo esc_url($link); ?>">
-                                            <h3 class="section-product__item-title"><?php echo esc_html($title); ?></h3>
-                                        </a>
-                                        <div class="section-product__item-meta"
-                                            aria-label="<?php esc_attr_e('Property details', 'buildpro'); ?>">
-                                            <div class="section-product__item-meta-item">
-                                                <img src="<?php echo esc_url($icon_bedroom_url); ?>"
-                                                    alt="<?php esc_attr_e('Bedroom', 'buildpro'); ?>">
-                                                <span><?php echo esc_html($bedrooms !== '' ? $bedrooms : '-'); ?></span>
-                                            </div>
-                                            <div class="section-product__item-meta-item">
-                                                <img src="<?php echo esc_url($icon_bathroom_url); ?>"
-                                                    alt="<?php esc_attr_e('Bathroom', 'buildpro'); ?>">
-                                                <span><?php echo esc_html($bathrooms !== '' ? $bathrooms : '-'); ?></span>
-                                            </div>
-                                            <div class="section-product__item-meta-item">
-                                                <img src="<?php echo esc_url($icon_ruler_url); ?>"
-                                                    alt="<?php esc_attr_e('Area', 'buildpro'); ?>">
-                                                <?php if ($area !== '') : ?>
-                                                    <span><?php echo esc_html($area . ' ' . __('sq ft', 'buildpro')); ?></span>
-                                                <?php else : ?>
-                                                    <span>-</span>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                        <div class="section-product__item-location">
-                                            <img src="<?php echo esc_url($icon_location_card_url); ?>"
-                                                alt="<?php esc_attr_e('Location', 'buildpro'); ?>">
-                                            <span><?php echo esc_html($location !== '' ? $location : __('Updating location', 'buildpro')); ?></span>
-                                        </div>
-                                    </div>
+                <div class="section-product__grid-item">
+                    <div class="section-product__item">
+                        <div class="section-product__item-image">
+                            <a class="section-product__item-link" href="<?php echo esc_url($link); ?>"
+                                aria-label="<?php echo esc_attr($title); ?>">
+                                <?php if (!empty($img)) : ?>
+                                <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($title); ?>">
+                                <?php endif; ?>
+                            </a>
+                        </div>
+                        <div class="section-product__item-content">
+                            <div class="section-product__item-price-row">
+                                <p class="section-product__item-price">
+                                    <?php if ($price !== '') : ?>
+                                    <span><?php echo esc_html($currency_symbol); ?></span><span><?php echo esc_html($price); ?></span>
+                                    <?php else : ?>
+                                    <?php esc_html_e('Contact', 'buildpro'); ?>
+                                    <?php endif; ?>
+                                </p>
+                                <button class="section-product__item-cta btn-add-to-cart" type="button"
+                                    data-product-id="<?php echo esc_attr($pid); ?>"
+                                    aria-label="<?php esc_attr_e('Add to Cart', 'buildpro'); ?>">
+                                    <img src="<?php echo esc_url($icon_cart_url); ?>" alt="" aria-hidden="true">
+                                    <span><?php esc_html_e('Add to Cart', 'buildpro'); ?></span>
+                                </button>
+                            </div>
+                            <a class="section-product__item-title-link" href="<?php echo esc_url($link); ?>">
+                                <h3 class="section-product__item-title"><?php echo esc_html($title); ?></h3>
+                            </a>
+                            <div class="section-product__item-meta"
+                                aria-label="<?php esc_attr_e('Property details', 'buildpro'); ?>">
+                                <div class="section-product__item-meta-item">
+                                    <img src="<?php echo esc_url($icon_bedroom_url); ?>"
+                                        alt="<?php esc_attr_e('Bedroom', 'buildpro'); ?>">
+                                    <span><?php echo esc_html($bedrooms !== '' ? $bedrooms : '-'); ?></span>
+                                </div>
+                                <div class="section-product__item-meta-item">
+                                    <img src="<?php echo esc_url($icon_bathroom_url); ?>"
+                                        alt="<?php esc_attr_e('Bathroom', 'buildpro'); ?>">
+                                    <span><?php echo esc_html($bathrooms !== '' ? $bathrooms : '-'); ?></span>
+                                </div>
+                                <div class="section-product__item-meta-item">
+                                    <img src="<?php echo esc_url($icon_ruler_url); ?>"
+                                        alt="<?php esc_attr_e('Area', 'buildpro'); ?>">
+                                    <?php if ($area !== '') : ?>
+                                    <span><?php echo esc_html($area . ' ' . __('sq ft', 'buildpro')); ?></span>
+                                    <?php else : ?>
+                                    <span>-</span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                        <?php
+                            <div class="section-product__item-location">
+                                <img src="<?php echo esc_url($icon_location_card_url); ?>"
+                                    alt="<?php esc_attr_e('Location', 'buildpro'); ?>">
+                                <span><?php echo esc_html($location !== '' ? $location : __('Updating location', 'buildpro')); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
                         }
                         ?>
-                    </div>
-                    <?php
+            </div>
+            <?php
                     $preserve = array();
                     if ($keyword !== '') $preserve['q'] = $keyword;
                     if ($sel_brand !== '') $preserve['brand'] = $sel_brand;
@@ -360,29 +360,29 @@
                     ));
                     if (!empty($links) && is_array($links)) {
                     ?>
-                        <nav class="product--pagination">
-                            <ul class="page-numbers">
-                                <?php if ($paged > 1) : ?>
-                                    <li><a class="page-numbers prev"
-                                            href="<?php echo esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged - 1)), $current_url)); ?>">&lsaquo;</a>
-                                    </li>
-                                <?php else : ?>
-                                    <li><span class="page-numbers prev disabled">&lsaquo;</span></li>
-                                <?php endif; ?>
+            <nav class="product--pagination">
+                <ul class="page-numbers">
+                    <?php if ($paged > 1) : ?>
+                    <li><a class="page-numbers prev"
+                            href="<?php echo esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged - 1)), $current_url)); ?>">&lsaquo;</a>
+                    </li>
+                    <?php else : ?>
+                    <li><span class="page-numbers prev disabled">&lsaquo;</span></li>
+                    <?php endif; ?>
 
-                                <?php foreach ($links as $lnk) : ?>
-                                    <li><?php echo $lnk; ?></li>
-                                <?php endforeach; ?>
+                    <?php foreach ($links as $lnk) : ?>
+                    <li><?php echo $lnk; ?></li>
+                    <?php endforeach; ?>
 
-                                <?php if ($paged < (int) $q->max_num_pages) : ?>
-                                    <li><a class="page-numbers next"
-                                            href="<?php echo esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged + 1)), $current_url)); ?>">&rsaquo;</a>
-                                    </li>
-                                <?php else : ?>
-                                    <li><span class="page-numbers next disabled">&rsaquo;</span></li>
-                                <?php endif; ?>
-                            </ul>
-                        </nav>
+                    <?php if ($paged < (int) $q->max_num_pages) : ?>
+                    <li><a class="page-numbers next"
+                            href="<?php echo esc_url(add_query_arg(array_merge($preserve, array('prod_p' => $paged + 1)), $current_url)); ?>">&rsaquo;</a>
+                    </li>
+                    <?php else : ?>
+                    <li><span class="page-numbers next disabled">&rsaquo;</span></li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
             <?php
                     }
                 }
