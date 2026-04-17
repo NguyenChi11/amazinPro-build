@@ -220,8 +220,8 @@
   transition: color 0.24s ease;
 }
 .section-banner__item-button-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
   display: block;
   fill: currentColor;
   color: #111;
