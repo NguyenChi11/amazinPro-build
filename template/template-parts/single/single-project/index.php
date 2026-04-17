@@ -12,14 +12,39 @@ $about_image_url = $about_image_id ? wp_get_attachment_image_url($about_image_id
 $price       = get_post_meta($pid, 'price_project', true);
 $information = get_post_meta($pid, 'information_project', true);
 $datetime    = get_post_meta($pid, 'date_time_project', true);
+$project_overview = trim((string) get_post_meta($pid, 'project_overview_project', true));
+$project_key_info_raw = get_post_meta($pid, 'project_key_infomation', true);
+$project_key_info_raw = is_array($project_key_info_raw) ? $project_key_info_raw : array();
+$project_the_vision = trim((string) get_post_meta($pid, 'the_vision_project', true));
+$project_architectural_design = trim((string) get_post_meta($pid, 'architectural_design_project', true));
+$project_highlights_raw = get_post_meta($pid, 'project_highlight_options', true);
+$project_highlights_raw = is_array($project_highlights_raw) ? $project_highlights_raw : array();
 $gallery_ids = get_post_meta($pid, 'project_gallery_ids', true);
 $gallery_ids = is_array($gallery_ids) ? array_values(array_filter(array_map('absint', $gallery_ids))) : array();
-$standards   = get_post_meta($pid, 'project_standards', true);
-$standards   = is_array($standards) ? $standards : array();
 $total_area  = get_post_meta($pid, 'total_area_project', true);
 $completion  = get_post_meta($pid, 'completion_project', true);
 $arch_style  = get_post_meta($pid, 'architectural_style_project', true);
 $contruction_terms = get_the_terms($pid, 'project-contruction');
+
+$project_key_info = array();
+foreach ($project_key_info_raw as $project_row) {
+    $key = isset($project_row['key']) ? trim((string) $project_row['key']) : '';
+    $value = isset($project_row['value']) ? trim((string) $project_row['value']) : '';
+    if ($key !== '' || $value !== '') {
+        $project_key_info[] = array(
+            'key' => $key,
+            'value' => $value,
+        );
+    }
+}
+
+$project_highlights = array();
+foreach ($project_highlights_raw as $highlight_item) {
+    $highlight_item = trim((string) $highlight_item);
+    if ($highlight_item !== '') {
+        $project_highlights[] = $highlight_item;
+    }
+}
 ?>
 
 <?php
@@ -76,6 +101,13 @@ get_template_part('template/template-parts/breadcrums/index');
         <?php the_content(); ?>
     </section>
 
+    <?php if ($project_overview !== '') : ?>
+        <section class="single-project__content" data-aos="fade-up">
+            <h2 class="single-project__section-title"><?php esc_html_e('Project Overview', 'buildpro'); ?></h2>
+            <?php echo apply_filters('the_content', $project_overview); ?>
+        </section>
+    <?php endif; ?>
+
 
     <section class="single-project__facts" data-aos="fade-up">
         <div class="single-project__facts-grid">
@@ -94,16 +126,30 @@ get_template_part('template/template-parts/breadcrums/index');
                         class="label"><?php esc_html_e('Architectural Style', 'buildpro'); ?></span><span
                         class="value"><?php echo esc_html($arch_style); ?></span></div>
             <?php endif; ?>
-            <!-- <?php if ($datetime !== '') : ?>
+            <?php if ($datetime !== '') : ?>
                 <div class="single-project__fact-item"><span class="label">Date Time</span><span
                         class="value"><?php echo esc_html($datetime); ?></span></div>
             <?php endif; ?>
             <?php if ($price !== '') : ?>
                 <div class="single-project__fact-item"><span class="label">Price</span><span
                         class="value"><?php echo esc_html($price); ?></span></div>
-            <?php endif; ?> -->
+            <?php endif; ?>
         </div>
     </section>
+
+    <?php if (!empty($project_key_info)) : ?>
+        <section class="single-project__facts" data-aos="fade-up">
+            <h2 class="single-project__section-title"><?php esc_html_e('Key Information', 'buildpro'); ?></h2>
+            <div class="single-project__facts-grid">
+                <?php foreach ($project_key_info as $project_info_item) : ?>
+                    <div class="single-project__fact-item">
+                        <span class="label"><?php echo esc_html($project_info_item['key']); ?></span>
+                        <span class="value"><?php echo esc_html($project_info_item['value']); ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+    <?php endif; ?>
 
     <?php if ($about !== '') : ?>
         <section class="single-project__about" data-aos="fade-up">
@@ -134,42 +180,35 @@ get_template_part('template/template-parts/breadcrums/index');
         </section>
     <?php endif; ?>
 
-    <?php if (!empty($standards)) : ?>
-        <section class="single-project__standards" data-aos="fade-up">
-            <h2 class="single-project__section-title"><?php esc_html_e('Standards', 'buildpro'); ?></h2>
-            <div class="single-project__standards-list">
-                <?php foreach ($standards as $row) :
-                    $img_id = isset($row['image_id']) ? absint($row['image_id']) : 0;
-                    $title  = isset($row['title']) ? sanitize_text_field($row['title']) : '';
-                    $desc   = isset($row['description']) ? sanitize_text_field($row['description']) : '';
-                    if (!$img_id && $title === '' && $desc === '') continue;
-                    $thumb = $img_id ? wp_get_attachment_image_url($img_id, 'medium') : '';
-                ?>
-                    <div class="single-project__standard-item">
-                        <div class="single-project__standard-thumb">
-                            <?php if ($thumb) : ?>
-                                <img src="<?php echo esc_url($thumb); ?>"
-                                    alt="<?php echo esc_attr__('Standard image', 'buildpro'); ?>">
-                            <?php endif; ?>
-                        </div>
-                        <div class="single-project__standard-content">
-                            <?php if ($title !== '') : ?>
-                                <h3 class="single-project__standard-title"><?php echo esc_html($title); ?></h3>
-                            <?php endif; ?>
-                            <?php if ($desc !== '') : ?>
-                                <p class="single-project__standard-desc"><?php echo esc_html($desc); ?></p>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+    <?php if ($project_the_vision !== '') : ?>
+        <section class="single-project__content" data-aos="fade-up">
+            <h2 class="single-project__section-title"><?php esc_html_e('The Vision', 'buildpro'); ?></h2>
+            <?php echo apply_filters('the_content', $project_the_vision); ?>
         </section>
     <?php endif; ?>
 
-    <!-- <?php if ($information !== '') : ?>
-        <section class="single-project__information">
-            <h2 class="single-project__section-title">Information</h2>
-            <div class="single-project__information-content"><?php echo wp_kses_post(wpautop($information)); ?></div>
+    <?php if ($project_architectural_design !== '') : ?>
+        <section class="single-project__content" data-aos="fade-up">
+            <h2 class="single-project__section-title"><?php esc_html_e('Architectural Design', 'buildpro'); ?></h2>
+            <?php echo apply_filters('the_content', $project_architectural_design); ?>
         </section>
-    <?php endif; ?> -->
+    <?php endif; ?>
+
+    <?php if (!empty($project_highlights)) : ?>
+        <section class="single-project__content" data-aos="fade-up">
+            <h2 class="single-project__section-title"><?php esc_html_e('Highlights', 'buildpro'); ?></h2>
+            <ul>
+                <?php foreach ($project_highlights as $highlight_value) : ?>
+                    <li><?php echo esc_html($highlight_value); ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </section>
+    <?php endif; ?>
+
+    <?php if ($information !== '') : ?>
+        <section class="single-project__content" data-aos="fade-up">
+            <h2 class="single-project__section-title"><?php esc_html_e('Information', 'buildpro'); ?></h2>
+            <?php echo wp_kses_post(wpautop($information)); ?>
+        </section>
+    <?php endif; ?>
 </article>

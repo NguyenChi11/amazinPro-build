@@ -90,39 +90,46 @@ function buildpro_save_project_meta($post_id)
     $location = isset($_POST['location_project']) ? sanitize_text_field($_POST['location_project']) : '';
     $about = isset($_POST['about_project']) ? wp_kses_post($_POST['about_project']) : '';
     $about_image_id = isset($_POST['about_image_project']) ? absint($_POST['about_image_project']) : 0;
+    $project_overview = isset($_POST['project_overview_project']) ? wp_kses_post($_POST['project_overview_project']) : '';
+    $the_vision = isset($_POST['the_vision_project']) ? wp_kses_post($_POST['the_vision_project']) : '';
+    $architectural_design = isset($_POST['architectural_design_project']) ? wp_kses_post($_POST['architectural_design_project']) : '';
     $price = isset($_POST['price_project']) ? sanitize_text_field($_POST['price_project']) : '';
     $information = isset($_POST['information_project']) ? wp_kses_post($_POST['information_project']) : '';
     $datetime = isset($_POST['date_time_project']) ? sanitize_text_field($_POST['date_time_project']) : '';
     $total_area = isset($_POST['total_area_project']) ? sanitize_text_field($_POST['total_area_project']) : '';
     $completion = isset($_POST['completion_project']) ? sanitize_text_field($_POST['completion_project']) : '';
     $arch_style = isset($_POST['architectural_style_project']) ? sanitize_text_field($_POST['architectural_style_project']) : '';
-    $gallery_raw = isset($_POST['project_gallery_ids']) ? $_POST['project_gallery_ids'] : '';
-    $gallery_ids = array();
-    if (is_array($gallery_raw)) {
-        foreach ($gallery_raw as $gid) {
-            $gallery_ids[] = absint($gid);
-        }
-    } elseif (is_string($gallery_raw)) {
-        $gallery_ids = array_filter(array_map('absint', explode(',', $gallery_raw)));
-    }
-    $standards_raw = isset($_POST['project_standards']) && is_array($_POST['project_standards']) ? $_POST['project_standards'] : array();
-    $standards = array();
-    foreach ($standards_raw as $row) {
-        $img = isset($row['image_id']) ? absint($row['image_id']) : 0;
-        $title = isset($row['title']) ? sanitize_text_field($row['title']) : '';
-        $desc = isset($row['description']) ? sanitize_textarea_field($row['description']) : '';
-        if ($img || $title !== '' || $desc !== '') {
-            $standards[] = array('image_id' => $img, 'title' => $title, 'description' => $desc);
+
+    $key_info_raw = isset($_POST['project_key_infomation']) && is_array($_POST['project_key_infomation']) ? $_POST['project_key_infomation'] : array();
+    $key_info = array();
+    foreach ($key_info_raw as $row) {
+        $k = isset($row['key']) ? sanitize_text_field($row['key']) : '';
+        $v = isset($row['value']) ? sanitize_text_field($row['value']) : '';
+        if ($k !== '' || $v !== '') {
+            $key_info[] = array('key' => $k, 'value' => $v);
         }
     }
+
+    $highlights_raw = isset($_POST['project_highlight_options']) && is_array($_POST['project_highlight_options']) ? $_POST['project_highlight_options'] : array();
+    $highlights = array();
+    foreach ($highlights_raw as $option) {
+        $text = sanitize_text_field($option);
+        if ($text !== '') {
+            $highlights[] = $text;
+        }
+    }
+
     update_post_meta($post_id, 'project_banner_id', $banner_id);
     update_post_meta($post_id, 'location_project', $location);
     update_post_meta($post_id, 'about_project', $about);
     update_post_meta($post_id, 'about_image_project', $about_image_id);
+    update_post_meta($post_id, 'project_overview_project', $project_overview);
+    update_post_meta($post_id, 'project_key_infomation', $key_info);
+    update_post_meta($post_id, 'the_vision_project', $the_vision);
+    update_post_meta($post_id, 'architectural_design_project', $architectural_design);
+    update_post_meta($post_id, 'project_highlight_options', $highlights);
     update_post_meta($post_id, 'price_project', $price);
     update_post_meta($post_id, 'date_time_project', $datetime);
-    update_post_meta($post_id, 'project_gallery_ids', $gallery_ids);
-    update_post_meta($post_id, 'project_standards', $standards);
     update_post_meta($post_id, 'information_project', $information);
     update_post_meta($post_id, 'total_area_project', $total_area);
     update_post_meta($post_id, 'completion_project', $completion);

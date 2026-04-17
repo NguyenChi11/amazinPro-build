@@ -17,18 +17,6 @@ function buildpro_import_project_demo($target_id = 0)
     if ($home_id <= 0) {
         return;
     }
-    $existing = new WP_Query(array(
-        'post_type' => 'project',
-        'posts_per_page' => 1,
-        'post_status' => 'publish',
-        'no_found_rows' => true,
-        'fields' => 'ids',
-    ));
-    if ($existing->have_posts()) {
-        wp_reset_postdata();
-        return;
-    }
-    wp_reset_postdata();
     $title = '';
     $desc = '';
     $view_all_text = '';

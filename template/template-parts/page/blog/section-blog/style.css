@@ -7,6 +7,7 @@
   --blog-card: #ffffff;
   --blog-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
 
+  margin-top: 5rem;
   position: relative;
   overflow: clip;
   padding: clamp(3rem, 5vw, 5.625rem) clamp(1rem, 4vw, 3.75rem);

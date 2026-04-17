@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: start;
   gap: 4.625rem;
+  margin-top: 5rem;
 }
 .about-us__section-banner__left {
   width: 100%;

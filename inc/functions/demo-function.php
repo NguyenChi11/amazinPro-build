@@ -1,4 +1,44 @@
 <?php
+function buildpro_import_decode_js_string_literal($literal)
+{
+    if (!is_string($literal) || strlen($literal) < 2) {
+        return '';
+    }
+
+    $quote = $literal[0];
+    if (($quote !== '"' && $quote !== "'") || substr($literal, -1) !== $quote) {
+        return '';
+    }
+
+    $inner = substr($literal, 1, -1);
+    return stripcslashes($inner);
+}
+
+function buildpro_import_expand_join_expressions($object_source)
+{
+    if (!is_string($object_source) || $object_source === '') {
+        return $object_source;
+    }
+
+    $pattern = '/\[((?:\s*"(?:\\\\.|[^"\\\\])*"\s*,?)*)\s*\]\s*\.join\(\s*("(?:\\\\.|[^"\\\\])*"|\'(?:\\\\.|[^\'\\\\])*\')\s*\)/s';
+
+    return preg_replace_callback($pattern, function ($matches) {
+        $array_json = '[' . $matches[1] . ']';
+        $array_json = preg_replace('/,\s*]/', ']', $array_json);
+        $parts = json_decode($array_json, true);
+        if (!is_array($parts)) {
+            return $matches[0];
+        }
+
+        $separator = buildpro_import_decode_js_string_literal($matches[2]);
+        $parts = array_map(function ($part) {
+            return is_scalar($part) ? (string) $part : '';
+        }, $parts);
+
+        return json_encode(implode($separator, $parts), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }, $object_source);
+}
+
 function buildpro_import_parse_js($rel_file, $const_name)
 {
     $path = get_theme_file_path($rel_file);
@@ -15,6 +55,7 @@ function buildpro_import_parse_js($rel_file, $const_name)
     }
     $obj = $m[1];
     $obj = rtrim($obj, ';');
+    $obj = buildpro_import_expand_join_expressions($obj);
     $json = preg_replace('/([,{]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:/', '$1"$2":', $obj);
     $json = preg_replace('/,\s*]/', ']', $json);
     $json = preg_replace('/,\s*}/', '}', $json);
@@ -403,7 +444,20 @@ function buildpro_has_published_content($post_type)
 
 function buildpro_maybe_import_post_demo_once()
 {
-    if (get_option('buildpro_post_demo_imported') === '1') {
+    $should_import_posts = !buildpro_has_published_content('post');
+
+    if (!$should_import_posts && function_exists('buildpro_import_parse_js')) {
+        $post_data = buildpro_import_parse_js('/assets/data/post-data.js', 'postsData');
+        $expected_posts = (isset($post_data['items']) && is_array($post_data['items'])) ? count($post_data['items']) : 0;
+        if ($expected_posts > 0) {
+            $post_counts = wp_count_posts('post');
+            $published_posts = (is_object($post_counts) && isset($post_counts->publish)) ? (int) $post_counts->publish : 0;
+            $should_import_posts = ($published_posts < $expected_posts);
+        }
+    }
+
+    if (!$should_import_posts) {
+        update_option('buildpro_post_demo_imported', '1');
         return;
     }
 
@@ -415,7 +469,11 @@ function buildpro_maybe_import_post_demo_once()
         }
     }
 
-    update_option('buildpro_post_demo_imported', '1');
+    $post_counts_after = wp_count_posts('post');
+    $published_after = (is_object($post_counts_after) && isset($post_counts_after->publish)) ? (int) $post_counts_after->publish : 0;
+    if ($published_after > 0) {
+        update_option('buildpro_post_demo_imported', '1');
+    }
 }
 
 function buildpro_backfill_demo_post_types_if_missing()
@@ -423,10 +481,24 @@ function buildpro_backfill_demo_post_types_if_missing()
     buildpro_maybe_import_post_demo_once();
 
     $project_demo_file = get_theme_file_path('/import/data-demo/page/home/project-home.php');
-    if (post_type_exists('project') && !buildpro_has_published_content('project') && file_exists($project_demo_file)) {
-        require_once $project_demo_file;
-        if (function_exists('buildpro_import_project_demo')) {
-            buildpro_import_project_demo();
+    if (post_type_exists('project') && file_exists($project_demo_file)) {
+        $should_import_projects = !buildpro_has_published_content('project');
+
+        if (!$should_import_projects && function_exists('buildpro_import_parse_js')) {
+            $project_data = buildpro_import_parse_js('/assets/data/project-data.js', 'projectsData');
+            $expected_projects = (isset($project_data['items']) && is_array($project_data['items'])) ? count($project_data['items']) : 0;
+            if ($expected_projects > 0) {
+                $project_counts = wp_count_posts('project');
+                $published_projects = (is_object($project_counts) && isset($project_counts->publish)) ? (int) $project_counts->publish : 0;
+                $should_import_projects = ($published_projects < $expected_projects);
+            }
+        }
+
+        if ($should_import_projects) {
+            require_once $project_demo_file;
+            if (function_exists('buildpro_import_project_demo')) {
+                buildpro_import_project_demo();
+            }
         }
     }
 
@@ -650,14 +722,44 @@ function buildpro_import_create_post($item)
         set_post_thumbnail($post_id, $img);
     }
     $banner = 0;
-    if (isset($item['banner']) && is_array($item['banner']) && !empty($item['banner'])) {
-        $banner = buildpro_import_image_id($item['banner'][0]);
+    if (isset($item['banner'])) {
+        if (is_array($item['banner']) && !empty($item['banner'])) {
+            $banner = buildpro_import_image_id($item['banner'][0]);
+        } elseif (is_string($item['banner']) && $item['banner'] !== '') {
+            $banner = buildpro_import_image_id($item['banner']);
+        }
+    }
+    if (!$banner && isset($item['gallery']) && is_array($item['gallery']) && !empty($item['gallery'])) {
+        $banner = buildpro_import_image_id($item['gallery'][0]);
     }
     update_post_meta($post_id, 'buildpro_post_banner_id', $banner);
     update_post_meta($post_id, 'buildpro_post_description', isset($item['description']) ? $item['description'] : '');
+    update_post_meta($post_id, 'buildpro_post_paragraph', isset($item['paragraph']) ? $item['paragraph'] : '');
+    update_post_meta($post_id, 'buildpro_post_quote_title', isset($item['quoteTitle']) ? $item['quoteTitle'] : '');
+    update_post_meta($post_id, 'buildpro_post_quote_description', isset($item['quoteDescription']) ? $item['quoteDescription'] : '');
+    update_post_meta($post_id, 'buildpro_post_quote_desc_image_desc', isset($item['quoteImageDescription']) ? $item['quoteImageDescription'] : '');
+
+    $quote_kv = array();
+    if (isset($item['quoteKeyValues']) && is_array($item['quoteKeyValues'])) {
+        foreach ($item['quoteKeyValues'] as $row) {
+            $k = isset($row['key']) ? (string) $row['key'] : '';
+            $v = isset($row['value']) ? (string) $row['value'] : '';
+            if ($k !== '' || $v !== '') {
+                $quote_kv[] = array('key' => $k, 'value' => $v);
+            }
+        }
+    }
+    update_post_meta($post_id, 'buildpro_post_quote_kv', $quote_kv);
+
     $gids = array();
-    if (isset($item['gallery']) && is_array($item['gallery'])) {
-        foreach ($item['gallery'] as $g) {
+    $quote_gallery = array();
+    if (isset($item['quoteGallery']) && is_array($item['quoteGallery'])) {
+        $quote_gallery = $item['quoteGallery'];
+    } elseif (isset($item['gallery']) && is_array($item['gallery'])) {
+        $quote_gallery = $item['gallery'];
+    }
+    if (!empty($quote_gallery)) {
+        foreach ($quote_gallery as $g) {
             $id = buildpro_import_image_id($g);
             if ($id) {
                 $gids[] = $id;
@@ -690,14 +792,56 @@ function buildpro_import_create_project($item)
         set_post_thumbnail($post_id, $img);
     }
     $banner = 0;
-    if (isset($item['gallery']) && is_array($item['gallery']) && !empty($item['gallery'])) {
+    if (isset($item['banner'])) {
+        if (is_array($item['banner']) && !empty($item['banner'])) {
+            $banner = buildpro_import_image_id($item['banner'][0]);
+        } elseif (is_string($item['banner']) && $item['banner'] !== '') {
+            $banner = buildpro_import_image_id($item['banner']);
+        }
+    }
+    if (!$banner && isset($item['gallery']) && is_array($item['gallery']) && !empty($item['gallery'])) {
         $banner = buildpro_import_image_id($item['gallery'][0]);
     }
+    $about_img = (isset($item['aboutImage']) && is_string($item['aboutImage']) && $item['aboutImage'] !== '')
+        ? buildpro_import_image_id($item['aboutImage'])
+        : 0;
     update_post_meta($post_id, 'project_banner_id', $banner);
     update_post_meta($post_id, 'location_project', isset($item['location']) ? $item['location'] : '');
     update_post_meta($post_id, 'about_project', isset($item['about']) ? $item['about'] : '');
+    update_post_meta($post_id, 'about_image_project', $about_img);
+    update_post_meta($post_id, 'project_overview_project', isset($item['projectOverview']) ? $item['projectOverview'] : '');
+    update_post_meta($post_id, 'the_vision_project', isset($item['vision']) ? $item['vision'] : '');
+    update_post_meta($post_id, 'architectural_design_project', isset($item['architecturalDesign']) ? $item['architecturalDesign'] : '');
     update_post_meta($post_id, 'price_project', isset($item['price']) ? $item['price'] : '');
     update_post_meta($post_id, 'date_time_project', isset($item['dateTime']) ? $item['dateTime'] : '');
+    update_post_meta($post_id, 'information_project', isset($item['information']) ? $item['information'] : '');
+    update_post_meta($post_id, 'total_area_project', isset($item['totalArea']) ? $item['totalArea'] : '');
+    update_post_meta($post_id, 'completion_project', isset($item['completion']) ? $item['completion'] : '');
+    update_post_meta($post_id, 'architectural_style_project', isset($item['architecturalStyle']) ? $item['architecturalStyle'] : '');
+
+    $project_key_info = array();
+    if (isset($item['keyInfomation']) && is_array($item['keyInfomation'])) {
+        foreach ($item['keyInfomation'] as $row) {
+            $k = isset($row['key']) ? (string) $row['key'] : '';
+            $v = isset($row['value']) ? (string) $row['value'] : '';
+            if ($k !== '' || $v !== '') {
+                $project_key_info[] = array('key' => $k, 'value' => $v);
+            }
+        }
+    }
+    update_post_meta($post_id, 'project_key_infomation', $project_key_info);
+
+    $project_highlights = array();
+    if (isset($item['highlights']) && is_array($item['highlights'])) {
+        foreach ($item['highlights'] as $highlight_item) {
+            $highlight_item = trim((string) $highlight_item);
+            if ($highlight_item !== '') {
+                $project_highlights[] = $highlight_item;
+            }
+        }
+    }
+    update_post_meta($post_id, 'project_highlight_options', $project_highlights);
+
     $gids = array();
     if (isset($item['gallery']) && is_array($item['gallery'])) {
         foreach ($item['gallery'] as $g) {
