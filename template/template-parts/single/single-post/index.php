@@ -129,5 +129,65 @@ get_template_part('template/template-parts/breadcrums/index');
         }
         ?>
     </section> -->
+    <?php
+    $more_posts_q = new WP_Query(array(
+        'post_type' => 'post',
+        'posts_per_page' => 3,
+        'post__not_in' => array($pid),
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'post_status' => 'publish',
+        'no_found_rows' => true,
+    ));
+    if ($more_posts_q->have_posts()) :
+    ?>
+        <section class="single-post__related-posts" data-aos="fade-up">
+            <h2 class="single-post__related-title"><?php echo esc_html__('More Posts', 'buildpro'); ?></h2>
+            <div class="blog-section-blog__left">
+                <div class="section-post__list">
+                    <?php
+                    while ($more_posts_q->have_posts()) :
+                        $more_posts_q->the_post();
+                        $more_id = get_the_ID();
+                        $more_title = get_the_title($more_id);
+                        $more_img = get_the_post_thumbnail_url($more_id, 'large');
+                        $more_date = get_the_date('', $more_id);
+                        $more_link = get_permalink($more_id);
+                        $more_desc = get_post_meta($more_id, 'buildpro_post_description', true);
+                        $more_views_num = function_exists('buildpro_get_post_views') ? buildpro_get_post_views($more_id) : (int) get_post_meta($more_id, 'buildpro_post_views', true);
+                        $more_views_txt = sprintf(esc_html__('%s views', 'buildpro'), function_exists('buildpro_format_views') ? buildpro_format_views($more_views_num) : (string) $more_views_num);
+                    ?>
+                        <a class="section-post__item" href="<?php echo esc_url($more_link); ?>">
+                            <div class="section-post__item-image">
+                                <?php if (!empty($more_img)) : ?>
+                                    <img src="<?php echo esc_url($more_img); ?>" alt="<?php echo esc_attr($more_title); ?>">
+                                <?php endif; ?>
+                            </div>
+                            <div class="section-post__item-content">
+                                <div class="section-post__item-top">
+                                    <?php echo buildpro_svg_icon('calendar-days', 'regular', 'section-post__item-icon'); ?>
+                                    <p class="section-post__item-date"><?php echo esc_html($more_date); ?></p>
+                                </div>
+                                <h3 class="section-post__item-title"><?php echo esc_html($more_title); ?></h3>
+                                <div class="section-post__item-views"><?php echo esc_html($more_views_txt); ?></div>
+                                <p class="section-post__item-desc"><?php echo esc_html($more_desc); ?></p>
+                            </div>
+                            <div class="section-post__item-bottom">
+                                <p class="section-post__item-readmore">
+                                    <?php echo esc_html__('Read more', 'buildpro'); ?>
+                                    <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/Arrow_Right_blue.png')); ?>"
+                                        alt="<?php echo esc_attr__('Right arrow', 'buildpro'); ?>"
+                                        class="section-services__item-link-icon">
+                                </p>
+                            </div>
+                        </a>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+        </section>
+    <?php
+    endif;
+    wp_reset_postdata();
+    ?>
 
 </article>

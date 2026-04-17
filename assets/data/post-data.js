@@ -14,7 +14,9 @@ const postsData = {
         "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
       ],
-      description: [
+      description:
+        "Digital twin technology is revolutionizing construction project management by providing real-time insights, improving collaboration, and optimizing resource allocation. This article explores how digital twins are transforming the industry and why they are essential for the future of construction.",
+      paragraph: [
         "<p>In an industry where precision, efficiency, and risk management define success, construction companies are increasingly turning to innovative technologies to stay ahead. One of the most transformative advancements today is Digital Twin Technology - a powerful solution that is reshaping how projects are planned, executed, and maintained.</p>",
         "<h2>What is Digital Twin Technology?</h2>",
         "<p>A digital twin is a real-time, virtual representation of a physical asset, system, or process. In construction, it allows project teams to create a dynamic 3D model of a building or infrastructure project, continuously updated with live data from sensors, IoT devices, and project management systems.</p>",
@@ -34,10 +36,6 @@ const postsData = {
         "<h2>Why It Matters for the Future of Construction</h2>",
         "<p>As projects become more complex and client expectations continue to rise, traditional project management methods are no longer enough. Digital twin technology empowers construction companies to deliver smarter, safer, and more sustainable projects.</p>",
         "<p>At BuildPro, we believe that embracing innovation is key to delivering excellence. By integrating advanced technologies like digital twins into our workflow, we are not only improving project outcomes but also redefining industry standards.</p>",
-      ].join(""),
-      paragraph: [
-        "<p>Digital twin technology is reshaping how construction projects are planned, executed, and maintained.</p>",
-        "<p>This article provides actionable guidance for current project delivery decisions.</p>",
       ].join(""),
       quoteTitle: "Digital Twin Benefits",
       quoteDescription:
@@ -66,7 +64,9 @@ const postsData = {
       date: "2026-03-28",
       link: "/blog/residential-design-trends-2026",
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
-      description: [
+      description:
+        "Residential architecture in 2026 is moving beyond visual appeal and focusing on long-term performance. Homeowners expect spaces that are efficient, comfortable, and adaptable to changing daily routines.",
+      paragraph: [
         "<p>Residential architecture in 2026 is moving beyond visual appeal and focusing on long-term performance. Homeowners expect spaces that are efficient, comfortable, and adaptable to changing daily routines.</p>",
         "<h2>Key Trends in 2026</h2>",
         "<p><strong>1. Flexible Floor Planning</strong></p>",
@@ -79,10 +79,6 @@ const postsData = {
         "<p>Material decisions increasingly balance aesthetics with durability, lifecycle cost, and easy maintenance.</p>",
         "<h2>Implementation Strategy</h2>",
         "<p>Successful residential projects align architectural ideas with climate data, user behavior, and construction practicality from the first design phase.</p>",
-      ].join(""),
-      paragraph: [
-        "<p>Design trends in 2026 focus on daylight, energy efficiency, and flexible family spaces.</p>",
-        "<p>Use this post as a checklist for early-stage residential design decisions.</p>",
       ].join(""),
       quoteTitle: "Design Priorities",
       quoteDescription:
@@ -113,7 +109,9 @@ const postsData = {
         "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
       ],
-      description: [
+      description:
+        "Commercial projects involve complex stakeholders, larger budgets, and higher operational expectations. Project management is the framework that keeps these factors aligned.",
+      paragraph: [
         "<p>Commercial projects involve complex stakeholders, larger budgets, and higher operational expectations. Project management is the framework that keeps these factors aligned.</p>",
         "<h2>Critical Management Functions</h2>",
         "<p><strong>1. Scope Governance</strong></p>",
@@ -126,10 +124,6 @@ const postsData = {
         "<p>Inspection and test plans at each phase reduce rework and strengthen client confidence at handover.</p>",
         "<h2>Execution Impact</h2>",
         "<p>Teams that combine strong governance with transparent communication consistently deliver safer, faster, and more predictable outcomes.</p>",
-      ].join(""),
-      paragraph: [
-        "<p>Commercial delivery requires strict cost control, procurement clarity, and decisive execution.</p>",
-        "<p>The summary below helps teams align schedule, quality, and budget checkpoints.</p>",
       ].join(""),
       quoteTitle: "Management Framework",
       quoteDescription:
@@ -158,7 +152,9 @@ const postsData = {
       link: "/blog/premium-materials-overview",
       banner:
         "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
-      description: [
+      description:
+        "Material quality has a direct impact on performance, maintenance cost, and visual identity. Premium does not simply mean expensive - it means suitable, durable, and verifiable.",
+      paragraph: [
         "<p>Material quality has a direct impact on performance, maintenance cost, and visual identity. Premium does not simply mean expensive - it means suitable, durable, and verifiable.</p>",
         "<h2>How to Evaluate Premium Materials</h2>",
         "<p><strong>1. Technical Performance</strong></p>",
@@ -171,10 +167,6 @@ const postsData = {
         "<p>Confirm interfaces between materials to avoid cracks, staining, and moisture-related failures over time.</p>",
         "<h2>Practical Recommendation</h2>",
         "<p>Use mockups and sample boards early. Real-world testing helps teams validate color, texture, and detailing before full-scale procurement.</p>",
-      ].join(""),
-      paragraph: [
-        "<p>An overview of premium materials that improve aesthetics, performance, and lifecycle cost.</p>",
-        "<p>Review these criteria before finalizing material schedules and procurement packages.</p>",
       ].join(""),
       quoteTitle: "Selection Criteria",
       quoteDescription:
@@ -202,7 +194,9 @@ const postsData = {
       date: "2026-02-02",
       link: "/blog/from-concept-to-model",
       banner: "/wp-content/themes/build_pro_v2/assets/images/avatar_2.jpg",
-      description: [
+      description:
+        "Concept modeling bridges the gap between design intent and project understanding. It gives stakeholders a shared visual language before technical documentation is finalized.",
+      paragraph: [
         "<p>Concept modeling bridges the gap between design intent and project understanding. It gives stakeholders a shared visual language before technical documentation is finalized.</p>",
         "<h2>Why Concept Models Matter</h2>",
         "<p><strong>1. Faster Decision Making</strong></p>",
@@ -215,10 +209,6 @@ const postsData = {
         "<p>Clear concept validation lowers the chance of major scope changes once procurement and construction begin.</p>",
         "<h2>From Idea to Buildable Scheme</h2>",
         "<p>When concept outputs are tied to technical constraints, teams can move from vision to buildable design with far less friction.</p>",
-      ].join(""),
-      paragraph: [
-        "<p>How concept models improve communication between architects, owners, and contractors.</p>",
-        "<p>Teams can use this flow to validate scope earlier and reduce redesign cycles.</p>",
       ].join(""),
       quoteTitle: "Modeling Benefits",
       quoteDescription:
@@ -251,7 +241,9 @@ const postsData = {
         "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
       ],
-      description: [
+      description:
+        "In dense urban environments, facade design must solve multiple problems at once: daylight, heat gain, privacy, maintenance access, and city identity. This article explores core design principles and delivery strategies for high-performance facades in challenging contexts.",
+      paragraph: [
         "<p>In dense urban environments, facade design must solve multiple problems at once: daylight, heat gain, privacy, maintenance access, and city identity.</p>",
         "<h2>Core Facade Design Principles</h2>",
         "<p><strong>1. Orientation Response</strong></p>",
@@ -264,10 +256,6 @@ const postsData = {
         "<p>Facade cleaning and component replacement should be planned from day one, especially on mid-rise and high-rise projects.</p>",
         "<h2>Design-to-Delivery Alignment</h2>",
         "<p>Early collaboration between architects, facade consultants, and contractors is essential for performance and constructability.</p>",
-      ].join(""),
-      paragraph: [
-        "<p>Facade design in dense contexts must balance daylight, privacy, and thermal efficiency.</p>",
-        "<p>Use these principles to align architectural intent with constructability and operations.</p>",
       ].join(""),
       quoteTitle: "Facade Performance",
       quoteDescription:
@@ -295,7 +283,9 @@ const postsData = {
       date: "2026-01-08",
       link: "/blog/team-coordination-practices",
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_contact.jpg",
-      description: [
+      description:
+        "High-performing projects are not only about technical capability. They are also about communication structure, accountability, and response discipline across teams",
+      paragraph: [
         "<p>High-performing projects are not only about technical capability. They are also about communication structure, accountability, and response discipline across teams.</p>",
         "<h2>Coordination Practices That Work</h2>",
         "<p><strong>1. Structured Weekly Reviews</strong></p>",
@@ -308,10 +298,6 @@ const postsData = {
         "<p>A documented escalation path ensures critical blockers are solved quickly and by the right decision makers.</p>",
         "<h2>Outcome</h2>",
         "<p>Teams with strong coordination routines deliver more predictable results, fewer claims, and higher stakeholder trust.</p>",
-      ].join(""),
-      paragraph: [
-        "<p>Efficient collaboration between design and delivery teams reduces late-stage conflicts.</p>",
-        "<p>This summary helps define communication rhythm and ownership across teams.</p>",
       ].join(""),
       quoteTitle: "Collaboration Standards",
       quoteDescription:
@@ -339,7 +325,9 @@ const postsData = {
       date: "2025-12-22",
       link: "/blog/skyline-office-case-study",
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-      description: [
+      description:
+        "In this case study, we explore how a mid-rise office project in a dense urban district successfully navigated schedule and quality challenges through structured execution planning",
+      paragraph: [
         "<p>This case study reviews how a mid-rise office project achieved schedule and quality targets in a dense urban district with strict access and permit constraints.</p>",
         "<h2>Project Snapshot</h2>",
         "<p>The project involved multi-trade coordination, limited staging zones, and strict noise and traffic restrictions around the site perimeter.</p>",
@@ -354,10 +342,6 @@ const postsData = {
         "<p>Weekly progress dashboards kept owner and consultant teams aligned on progress, risk, and decisions.</p>",
         "<h2>Results</h2>",
         "<p>The project reached handover with reduced rework, controlled safety exposure, and stable schedule performance despite high external constraints.</p>",
-      ].join(""),
-      paragraph: [
-        "<p>A case study on executing a mid-rise office building under tight urban constraints.</p>",
-        "<p>Use these lessons to improve logistics planning and stakeholder reporting quality.</p>",
       ].join(""),
       quoteTitle: "Case Study Outcomes",
       quoteDescription:
