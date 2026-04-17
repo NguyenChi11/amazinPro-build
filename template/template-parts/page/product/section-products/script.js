@@ -10,14 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const root = document.querySelector(".product-section-products");
   if (!root) return;
 
-  let globalBound = false;
-
   function qs(sel) {
     return root.querySelector(sel);
-  }
-
-  function qsa(sel) {
-    return Array.from(root.querySelectorAll(sel));
   }
 
   // Scroll to product list (like blog pagination behavior)
@@ -51,42 +45,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Category groups expand/collapse
-  function bindFilterGroupToggles() {
-    qsa(".psp-cat-group").forEach((group) => {
-      const btn = group.querySelector(".psp-cat-group__toggle");
-      const list = group.querySelector(".psp-cat-group__list");
-      if (!btn || !list) return;
+  function buildURLFromForm(form) {
+    const action = form.getAttribute("action") || window.location.href;
+    const url = new URL(action, window.location.origin);
+    const params = new URLSearchParams();
+    const formData = new FormData(form);
 
-      const more = btn.getAttribute("data-more-label") || "More";
-      const less = btn.getAttribute("data-less-label") || "Less";
-
-      btn.addEventListener("click", function () {
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-        btn.setAttribute("aria-expanded", expanded ? "false" : "true");
-        list.dataset.collapsed = expanded ? "1" : "0";
-        btn.textContent = expanded ? more : less;
-      });
+    formData.forEach((rawValue, key) => {
+      const value = String(rawValue).trim();
+      if (value !== "") {
+        params.set(key, value);
+      }
     });
+
+    // Always reset pagination when filters/search change.
+    params.delete("prod_p");
+    url.search = params.toString();
+    return url.toString();
   }
 
-  // Search: AJAX update (preserve filter state, reset to page 1)
-  function makeURL(pageUrl, qVal) {
-    const url = new URL(pageUrl, window.location.origin);
-    const prms = url.searchParams;
-    const q = (qVal || "").trim();
-    if (q) {
-      prms.set("q", q);
-    } else {
-      prms.delete("q");
+  function syncFormFromURL(form, urlString) {
+    const url = new URL(urlString, window.location.origin);
+    const params = url.searchParams;
+
+    const input = form.querySelector("#psp-search-input");
+    if (input) {
+      input.value = params.get("q") || "";
     }
-    prms.delete("prod_p");
-    url.search = prms.toString();
-    return url.toString();
+
+    ["brand", "category", "tag"].forEach((name) => {
+      const el = form.querySelector(`[name="${name}"]`);
+      if (!el) return;
+      el.value = params.get(name) || "";
+    });
   }
 
   async function updateList(targetUrl, push) {
     try {
+      root.classList.add("psp-is-loading");
       const res = await fetch(targetUrl, {
         headers: { "X-Requested-With": "XMLHttpRequest" },
         credentials: "same-origin",
@@ -107,83 +103,14 @@ document.addEventListener("DOMContentLoaded", function () {
         history.replaceState({}, "", targetUrl);
       }
       bindPagination();
-    } catch (_) {}
-  }
-
-  // AJAX update when clicking category chips (updates BOTH left filters & right content)
-  async function updateByFilter(targetUrl, push) {
-    try {
-      root.classList.add("psp-is-loading");
-      const res = await fetch(targetUrl, {
-        headers: { "X-Requested-With": "XMLHttpRequest" },
-        credentials: "same-origin",
-      });
-      const html = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-      const nextRoot = doc.querySelector(".product-section-products");
-      if (!nextRoot) return;
-
-      const nextCategory = nextRoot.querySelector(
-        ".product-section-products__category",
-      );
-      const nextRight = nextRoot.querySelector(
-        ".product-section-products__right",
-      );
-      const curCategory = qs(".product-section-products__category");
-      const curRight = qs(".product-section-products__right");
-
-      if (nextCategory && curCategory) {
-        curCategory.innerHTML = nextCategory.innerHTML;
-      }
-      if (nextRight && curRight) {
-        curRight.innerHTML = nextRight.innerHTML;
-      }
-
-      if (push) {
-        history.pushState({}, "", targetUrl);
-      } else {
-        history.replaceState({}, "", targetUrl);
-      }
-
-      // Re-bind events after DOM replacements
-      bindFilterGroupToggles();
-      bindCategoryChips();
-      bindPagination();
-      bindSearch();
-
-      scrollToList();
     } catch (_) {
     } finally {
       root.classList.remove("psp-is-loading");
     }
   }
 
-  function bindCategoryChips() {
-    const catWrap = qs(".product-section-products__category");
-    if (!catWrap) return;
-    catWrap.querySelectorAll("a.psp-chip").forEach((a) => {
-      a.addEventListener("click", function (e) {
-        if (
-          e.defaultPrevented ||
-          e.metaKey ||
-          e.ctrlKey ||
-          e.shiftKey ||
-          e.altKey
-        ) {
-          return;
-        }
-        const href = a.getAttribute("href");
-        if (!href) return;
-        e.preventDefault();
-        sessionStorage.setItem("bp_scroll_product", "1");
-        updateByFilter(href, true);
-      });
-    });
-  }
-
-  function bindSearch() {
-    const form = qs(".psp-search");
+  function bindSearchAndFilters() {
+    const form = qs(".psp-filter-form");
     const listWrap = qs(".product-section-products__product--list");
     if (!form || !listWrap) return;
 
@@ -192,34 +119,43 @@ document.addEventListener("DOMContentLoaded", function () {
     form.parentNode.replaceChild(freshForm, form);
 
     const freshInput = freshForm.querySelector("#psp-search-input");
-    if (!freshInput) return;
+    const freshSelects = Array.from(
+      freshForm.querySelectorAll(".psp-filter-field__select"),
+    );
 
-    const onType = debounce(() => {
-      const url = makeURL(window.location.href, freshInput.value);
-      updateList(url, false);
-    }, 350);
-    freshInput.addEventListener("input", onType);
+    if (freshInput) {
+      const onType = debounce(() => {
+        const url = buildURLFromForm(freshForm);
+        updateList(url, false);
+      }, 350);
+      freshInput.addEventListener("input", onType);
+    }
+
+    freshSelects.forEach((select) => {
+      select.addEventListener("change", function () {
+        const url = buildURLFromForm(freshForm);
+        updateList(url, true);
+        scrollToList();
+      });
+    });
 
     freshForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const url = makeURL(
-        freshForm.getAttribute("action") || window.location.href,
-        freshInput.value,
-      );
+      const url = buildURLFromForm(freshForm);
       updateList(url, true);
+      scrollToList();
     });
   }
 
   // Initial bindings
-  bindFilterGroupToggles();
-  bindCategoryChips();
   bindPagination();
-  bindSearch();
+  bindSearchAndFilters();
 
-  if (!globalBound) {
-    globalBound = true;
-    window.addEventListener("popstate", function () {
-      updateByFilter(window.location.href, false);
-    });
-  }
+  window.addEventListener("popstate", function () {
+    const form = qs(".psp-filter-form");
+    if (form) {
+      syncFormFromURL(form, window.location.href);
+    }
+    updateList(window.location.href, false);
+  });
 });
