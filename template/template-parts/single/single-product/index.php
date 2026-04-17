@@ -1,393 +1,400 @@
 <?php
 $pid = get_the_ID();
-if (!(class_exists('WooCommerce') || function_exists('wc_get_product'))) {
+if (!function_exists('wc_get_product')) {
     return;
 }
 if (!$pid || get_post_type($pid) !== 'product') {
     return;
 }
-$product = wc_get_product($pid);
-$title = get_the_title($pid);
-$featured_id = get_post_thumbnail_id($pid);
-$featured = $featured_id ? wp_get_attachment_image($featured_id, 'large') : '';
-$gallery_ids = $product->get_gallery_image_ids();
-$price_html = $product->get_price_html();
-$regular_price = $product->get_regular_price();
-$sale_price = $product->get_sale_price();
-$sku = $product->get_sku();
-$in_stock = $product->is_in_stock();
-$stock_status = $product->get_stock_status();
-$stock_qty = $product->get_stock_quantity();
-$short_desc = $product->get_short_description();
-$desc = $product->get_description();
-$cats = wc_get_product_category_list($pid);
-$tags = wc_get_product_tag_list($pid);
-$type = $product->get_type();
-$avg_rating = $product->get_average_rating();
-$review_count = $product->get_review_count();
-$length = $product->get_length();
-$width = $product->get_width();
-$height = $product->get_height();
-$weight = $product->get_weight();
-$shipping_class = $product->get_shipping_class();
-$downloads = $product->get_downloads();
-$attributes = $product->get_attributes();
-$typical_range = get_post_meta($pid, 'typical_range', true);
-$sale_from = method_exists($product, 'get_date_on_sale_from') ? $product->get_date_on_sale_from() : null;
-$sale_to = method_exists($product, 'get_date_on_sale_to') ? $product->get_date_on_sale_to() : null;
-$sale_from_str = $sale_from ? wc_format_datetime($sale_from) : '';
-$sale_to_str = $sale_to ? wc_format_datetime($sale_to) : '';
+
+$product = call_user_func('wc_get_product', $pid);
+if (!$product) {
+    return;
+}
+
+$title = (string) get_the_title($pid);
+
+$featured_id = (int) get_post_thumbnail_id($pid);
+$gallery_ids = array_values(array_filter((array) $product->get_gallery_image_ids(), static function ($image_id) use ($featured_id) {
+    $image_id = (int) $image_id;
+    return $image_id > 0 && $image_id !== $featured_id;
+}));
+
+$slide_ids = array();
+if ($featured_id > 0) {
+    $slide_ids[] = $featured_id;
+}
+$slide_ids = array_merge($slide_ids, $gallery_ids);
+
+$price_html = (string) $product->get_price_html();
+if ($price_html === '') {
+    $fallback_price = $product->get_price();
+    if ($fallback_price !== '') {
+        $price_html = function_exists('wc_price') ? call_user_func('wc_price', $fallback_price) : esc_html($fallback_price);
+    }
+}
+
+$thumb_placeholder = function_exists('wc_placeholder_img_src') ? call_user_func('wc_placeholder_img_src', 'woocommerce_thumbnail') : '';
+$main_placeholder = function_exists('wc_placeholder_img_src') ? call_user_func('wc_placeholder_img_src', 'woocommerce_single') : '';
+
+$bedrooms = trim((string) get_post_meta($pid, 'buildpro_product_bedrooms', true));
+$bathrooms = trim((string) get_post_meta($pid, 'buildpro_product_bathrooms', true));
+$area = trim((string) get_post_meta($pid, 'buildpro_product_area', true));
+$location = trim((string) get_post_meta($pid, 'buildpro_product_location', true));
+$overview = trim((string) get_post_meta($pid, 'buildpro_product_overview', true));
+$typical_range = trim((string) get_post_meta($pid, 'typical_range', true));
+$lot_size = trim((string) get_post_meta($pid, 'buildpro_product_lot_size', true));
+$garage = trim((string) get_post_meta($pid, 'buildpro_product_garage', true));
+$year_built = trim((string) get_post_meta($pid, 'buildpro_product_year_built', true));
+$floors = trim((string) get_post_meta($pid, 'buildpro_product_floors', true));
+
+if ($overview === '') {
+    $overview = trim((string) $product->get_short_description());
+}
+if ($overview === '') {
+    $overview = trim((string) $product->get_description());
+}
+
+$normalize_list = static function ($raw_value) {
+    if (is_array($raw_value)) {
+        $rows = $raw_value;
+    } else {
+        $rows = explode("\n", str_replace(array("\r\n", "\r"), "\n", (string) $raw_value));
+    }
+
+    $clean_rows = array();
+    foreach ($rows as $row) {
+        $row = trim((string) $row);
+        if ($row !== '') {
+            $clean_rows[] = $row;
+        }
+    }
+
+    return $clean_rows;
+};
+
+$feature_items = $normalize_list(get_post_meta($pid, 'buildpro_product_features', true));
+$interior_feature_items = $normalize_list(get_post_meta($pid, 'buildpro_product_interior_features', true));
+
+$details = array();
+if ($lot_size !== '') {
+    $details[esc_html__('Lot size', 'buildpro')] = $lot_size;
+}
+if ($garage !== '') {
+    $details[esc_html__('Garage', 'buildpro')] = $garage;
+}
+if ($year_built !== '') {
+    $details[esc_html__('Year built', 'buildpro')] = $year_built;
+}
+if ($floors !== '') {
+    $details[esc_html__('Floors', 'buildpro')] = $floors;
+}
+if ($typical_range !== '') {
+    $details[esc_html__('Typical range', 'buildpro')] = $typical_range;
+}
+
+$product_type = (string) $product->get_type();
+if ($product_type !== '') {
+    $details[esc_html__('Product type', 'buildpro')] = ucwords($product_type);
+}
+
+$sku = (string) $product->get_sku();
+if ($sku !== '') {
+    $details[esc_html__('SKU', 'buildpro')] = $sku;
+}
+
+$icon_bedroom_url = get_theme_file_uri('/assets/images/icon/icon_bedroom.png');
+$icon_bathroom_url = get_theme_file_uri('/assets/images/icon/icon_bathroom.png');
+$icon_ruler_url = get_theme_file_uri('/assets/images/icon/icon_ruler.png');
+$icon_location_card_url = get_theme_file_uri('/assets/images/icon/icon_location_card.png');
+$icon_cart_url = get_theme_file_uri('/assets/images/icon/icon_cart.png');
+
+$related_products = array();
+$related_query = new WP_Query(array(
+    'post_type' => 'product',
+    'post_status' => 'publish',
+    'posts_per_page' => 3,
+    'post__not_in' => array($pid),
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'no_found_rows' => true,
+));
+
+if ($related_query->have_posts()) {
+    $currency_symbol = function_exists('get_woocommerce_currency_symbol') ? (string) call_user_func('get_woocommerce_currency_symbol') : '$';
+
+    while ($related_query->have_posts()) {
+        $related_query->the_post();
+
+        $related_pid = get_the_ID();
+        $related_product = call_user_func('wc_get_product', $related_pid);
+        if (!$related_product) {
+            continue;
+        }
+
+        $related_price = '';
+        $raw_related_price = $related_product->get_price();
+        if ($raw_related_price !== '' && is_numeric($raw_related_price)) {
+            $related_price_number = (float) $raw_related_price;
+            $related_price_decimals = floor($related_price_number) == $related_price_number ? 0 : 2;
+            $related_price = number_format_i18n($related_price_number, $related_price_decimals);
+        } elseif (is_string($raw_related_price)) {
+            $related_price = $raw_related_price;
+        }
+
+        $related_area = trim((string) get_post_meta($related_pid, 'buildpro_product_area', true));
+        if ($related_area !== '' && is_numeric($related_area)) {
+            $related_area_number = (float) $related_area;
+            $related_area_decimals = floor($related_area_number) == $related_area_number ? 0 : 2;
+            $related_area = number_format_i18n($related_area_number, $related_area_decimals);
+        }
+
+        $related_image = get_the_post_thumbnail_url($related_pid, 'large');
+        if ($related_image === '') {
+            $related_image = $main_placeholder;
+        }
+
+        $related_products[] = array(
+            'id' => $related_pid,
+            'title' => (string) get_the_title($related_pid),
+            'link' => (string) get_permalink($related_pid),
+            'image' => (string) $related_image,
+            'price' => (string) $related_price,
+            'currency_symbol' => $currency_symbol,
+            'bedrooms' => trim((string) get_post_meta($related_pid, 'buildpro_product_bedrooms', true)),
+            'bathrooms' => trim((string) get_post_meta($related_pid, 'buildpro_product_bathrooms', true)),
+            'area' => $related_area,
+            'location' => trim((string) get_post_meta($related_pid, 'buildpro_product_location', true)),
+        );
+    }
+}
+wp_reset_postdata();
 ?>
 
 <?php
-// Include breadcrumb
 get_template_part('template/template-parts/breadcrums/index');
 ?>
 
 <article class="single-product-detail" id="product-<?php echo esc_attr($pid); ?>">
-    <header class="single-product__header" data-aos="fade-up">
-        <div class="single-product__images-container">
-            <!-- Main Swiper (ảnh lớn) -->
-            <div class="swiper main-swiper">
+    <header class="single-product__hero" data-aos="fade-up">
+        <div class="single-product__gallery">
+            <div class="swiper thumbs-swiper" aria-label="Product thumbnails">
                 <div class="swiper-wrapper">
-                    <?php if (!empty($featured)) : ?>
-                        <div class="swiper-slide"><?php echo $featured; ?></div>
-                    <?php endif; ?>
-
-                    <?php if (!empty($gallery_ids)) : ?>
-                        <?php foreach ($gallery_ids as $gid) :
-                            $img = wp_get_attachment_image($gid, 'large');
-                            if (!$img) continue;
+                    <?php if (!empty($slide_ids)) : ?>
+                    <?php foreach ($slide_ids as $image_id) :
+                            $thumb_image = wp_get_attachment_image($image_id, 'thumbnail', false, array('loading' => 'lazy'));
+                            if (!$thumb_image) {
+                                continue;
+                            }
                         ?>
-                            <div class="swiper-slide"><?php echo $img; ?></div>
-                        <?php endforeach; ?>
+                    <div class="swiper-slide"><?php echo $thumb_image; ?></div>
+                    <?php endforeach; ?>
+                    <?php else : ?>
+                    <div class="swiper-slide">
+                        <img src="<?php echo esc_url($thumb_placeholder); ?>" alt="<?php echo esc_attr($title); ?>"
+                            loading="lazy">
+                    </div>
                     <?php endif; ?>
                 </div>
-                <!-- Nếu muốn thêm nút prev/next (tùy chọn) -->
-                <!-- <div class="swiper-button-prev"></div> -->
-                <!-- <div class="swiper-button-next"></div> -->
             </div>
 
-            <!-- Thumbs Swiper (thumbnails nhỏ bên dưới) -->
-            <div class="swiper thumbs-swiper">
+            <div class="swiper main-swiper" aria-label="Product gallery">
                 <div class="swiper-wrapper">
-                    <?php if (!empty($featured)) :
-                        // Lấy featured thumbnail nhỏ hơn
-                        $thumb_featured = get_the_post_thumbnail($pid, 'thumbnail'); // hoặc 'medium'
-                        if ($thumb_featured) : ?>
-                            <div class="swiper-slide"><?php echo $thumb_featured; ?></div>
-                    <?php endif;
-                    endif; ?>
-
-                    <?php if (!empty($gallery_ids)) : ?>
-                        <?php foreach ($gallery_ids as $gid) :
-                            $thumb_img = wp_get_attachment_image($gid, 'thumbnail'); // kích thước nhỏ cho thumbs
-                            if (!$thumb_img) continue;
+                    <?php if (!empty($slide_ids)) : ?>
+                    <?php foreach ($slide_ids as $index => $image_id) :
+                            $main_attrs = $index === 0
+                                ? array('loading' => 'eager', 'fetchpriority' => 'high')
+                                : array('loading' => 'lazy');
+                            $main_image = wp_get_attachment_image($image_id, 'large', false, $main_attrs);
+                            if (!$main_image) {
+                                continue;
+                            }
                         ?>
-                            <div class="swiper-slide"><?php echo $thumb_img; ?></div>
-                        <?php endforeach; ?>
+                    <div class="swiper-slide"><?php echo $main_image; ?></div>
+                    <?php endforeach; ?>
+                    <?php else : ?>
+                    <div class="swiper-slide">
+                        <img src="<?php echo esc_url($main_placeholder); ?>" alt="<?php echo esc_attr($title); ?>"
+                            loading="eager">
+                    </div>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
-        <div class="single-product__info">
-            <h1 class="single-product__title"><?php echo esc_html($title); ?></h1>
-            <div class="single-product__meta">
-                <span
-                    class="single-product__sku"><?php echo $sku ? sprintf(esc_html__('SKU: %s', 'buildpro'), esc_html($sku)) : ''; ?></span>
-                <?php if ($stock_qty !== null) : ?>
-                    <span
-                        class="single-product__stock-qty"><?php printf(esc_html__('Qty: %s', 'buildpro'), (int)$stock_qty); ?></span>
-                <?php endif; ?>
-                <?php if ($avg_rating) : ?>
-                    <span
-                        class="single-product__rating"><?php printf(esc_html__('%1$s / 5 (%2$s reviews)', 'buildpro'), esc_html($avg_rating), (int)$review_count); ?></span>
-                <?php endif; ?>
-            </div>
-            <div class="single-product__meta-info">
-                <?php
-                // 1. Brand (sử dụng taxonomy core 'product_brand' của WooCommerce từ 9.6+)
-                if (taxonomy_exists('product_brand')) {
-                    $brands = wc_get_product_terms($pid, 'product_brand', array('fields' => 'names'));
-                    if (! empty($brands) && ! is_wp_error($brands)) :
-                ?>
-                        <div class="single-product__brand">
-                            <strong><?php esc_html_e('Brand:', 'buildpro'); ?></strong>
-                            <?php echo esc_html(implode(', ', $brands)); ?>
-                        </div>
-                    <?php
-                    endif;
-                } else {
-                    // Fallback nếu không dùng taxonomy core (ví dụ custom field hoặc attribute 'pa_brand')
-                    $brand_custom = $product->get_attribute('brand'); // hoặc get_post_meta($pid, 'brand', true);
-                    if (! empty($brand_custom)) :
-                    ?>
-                        <div class="single-product__brand">
-                            <strong><?php esc_html_e('Brand:', 'buildpro'); ?></strong>
-                            <?php echo wp_kses_post($brand_custom); ?>
-                        </div>
-                <?php
-                    endif;
-                }
-                ?>
 
-                <?php
-                // 2. Category (danh mục sản phẩm)
-                $cats_html = wc_get_product_category_list($pid, ' • ', '', '');
-                if (! empty($cats_html)) :
-                ?>
-                    <div class="single-product__categories">
-                        <strong><?php esc_html_e('Category:', 'buildpro'); ?></strong>
-                        <?php echo wp_kses_post($cats_html); ?>
-                    </div>
-                <?php endif; ?>
-
-                <?php
-                // 3. Tags (thẻ sản phẩm)
-                $tags_html = wc_get_product_tag_list($pid, ' • ', '', '');
-                if (! empty($tags_html)) :
-                ?>
-                    <div class="single-product__tags">
-                        <strong><?php esc_html_e('Tags:', 'buildpro'); ?></strong> <?php echo wp_kses_post($tags_html); ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-            <div class="single-product__description__container">
-                <h2 class="single-product__description__title"><?php esc_html_e('Key Features', 'buildpro'); ?></h2>
-                <div class="single-product__description">
-                    <?php if (!empty($desc)) : ?>
-                        <div class="single-product__desc-content"><?php echo wp_kses_post(wpautop($desc)); ?></div>
-                    <?php endif; ?>
-                </div>
-            </div>
-
-            <div class="single-product__price__container">
-                <div class="single-product__price">
-                    <?php
-                    $low = '';
-                    $high = '';
-                    if ($sale_price !== '' && $regular_price !== '' && (float) $sale_price < (float) $regular_price) {
-                        $low = wc_price($sale_price);
-                        $high = wc_price($regular_price);
-                        echo wp_kses_post($low . ' - ' . $high . '<span class="single-product__unit">/' . esc_html__('ton', 'buildpro') . '</span>');
-                    } else {
-                        $val = $product->get_price();
-                        if ($val === '' && $sale_price !== '') {
-                            $val = $sale_price;
-                        }
-                        if ($val === '' && $regular_price !== '') {
-                            $val = $regular_price;
-                        }
-                        if ($val !== '') {
-                            echo wp_kses_post(wc_price($val) . '<span class="single-product__unit">/' . esc_html__('ton', 'buildpro') . '</span>');
-                        }
-                    }
-                    ?>
-                </div>
-                <?php
-                if ($sale_price !== '' && ($sale_from_str !== '' || $sale_to_str !== '')) {
-                    echo '<div class="single-product__sale-range">';
-                    if ($sale_from_str !== '') {
-                        echo '<span class="single-product__sale-from">' . sprintf(esc_html__('Start: %s', 'buildpro'), esc_html($sale_from_str)) . '</span>';
-                    }
-                    if ($sale_to_str !== '') {
-                        echo '<span class="single-product__sale-to">' . sprintf(esc_html__('End: %s', 'buildpro'), esc_html($sale_to_str)) . '</span>';
-                    }
-                    echo '</div>';
-                }
-                ?>
-            </div>
-            <div class="single-product__cart-row">
-                <div class="single-product__qty">
-                    <button type="button" class="single-product__qty-btn single-product__qty-minus"
-                        aria-label="<?php echo esc_attr__('Decrease quantity', 'buildpro'); ?>">−</button>
-                    <input type="number" class="single-product__qty-input" value="1" min="1" max="999"
-                        aria-label="<?php echo esc_attr__('Quantity', 'buildpro'); ?>">
-                    <button type="button" class="single-product__qty-btn single-product__qty-plus"
-                        aria-label="<?php echo esc_attr__('Increase quantity', 'buildpro'); ?>">+</button>
-                </div>
-                <button class="single-product__product__cart btn-add-to-cart"
-                    data-product-id="<?php echo esc_attr($pid); ?>"><?php echo esc_html__('Add to Cart', 'buildpro'); ?></button>
-            </div>
-        </div>
-    </header>
-    <div class="single-product__top">
-        <div class="single-product__summary">
-            <?php if (!empty($short_desc)) : ?>
-                <div class="single-product__short-desc"><?php echo wp_kses_post(wpautop($short_desc)); ?></div>
+        <div class="single-product__panel">
+            <?php if ($price_html !== '') : ?>
+            <div class="single-product__price"><?php echo wp_kses_post($price_html); ?></div>
             <?php endif; ?>
 
-            <!-- <?php if (!empty($typical_range)) : ?>
-            <div class="single-product__typical">
-                <?php echo sprintf(esc_html__('Typical Range: %s', 'buildpro'), esc_html($typical_range)); ?></div>
-            <?php endif; ?> -->
+            <h1 class="single-product__title"><?php echo esc_html($title); ?></h1>
+
+            <div class="single-product__facts">
+                <?php if ($bedrooms !== '') : ?>
+                <div class="single-product__fact">
+                    <i class="fa-solid fa-bed" aria-hidden="true"></i>
+                    <span><?php echo esc_html($bedrooms); ?></span>
+                </div>
+                <?php endif; ?>
+
+                <?php if ($bathrooms !== '') : ?>
+                <div class="single-product__fact">
+                    <i class="fa-solid fa-bath" aria-hidden="true"></i>
+                    <span><?php echo esc_html($bathrooms); ?></span>
+                </div>
+                <?php endif; ?>
+
+                <?php if ($area !== '') : ?>
+                <div class="single-product__fact">
+                    <i class="fa-solid fa-ruler-combined" aria-hidden="true"></i>
+                    <span><?php echo esc_html($area); ?> <?php esc_html_e('sq ft', 'buildpro'); ?></span>
+                </div>
+                <?php endif; ?>
+            </div>
+
+            <?php if ($location !== '') : ?>
+            <div class="single-product__location">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span><?php echo esc_html($location); ?></span>
+            </div>
+            <?php endif; ?>
+
+            <button type="button" class="single-product__cta btn-add-to-cart"
+                data-product-id="<?php echo esc_attr($pid); ?>"
+                aria-label="<?php echo esc_attr__('Contact agent', 'buildpro'); ?>">
+                <?php echo esc_html__('Contact Agent', 'buildpro'); ?>
+            </button>
         </div>
-    </div>
-    <div class="single-product__specs__container">
-        <?php if (!empty($attributes)) : ?>
-            <section class="single-product__attributes" data-aos="fade-up">
-                <h2><?php esc_html_e('Engineering Specifications', 'buildpro'); ?></h2>
-                <div class="single-product__attr-list">
-                    <?php foreach ($attributes as $attr) :
-                        if ($attr->is_taxonomy()) {
-                            $taxonomy = $attr->get_name();
-                            $terms = wc_get_product_terms($pid, $taxonomy, array('fields' => 'names'));
-                            $value = implode(', ', $terms);
-                            $label = wc_attribute_label($taxonomy);
-                        } else {
-                            $label = $attr->get_name();
-                            $options = $attr->get_options();
-                            $value = implode(', ', array_map('sanitize_text_field', (array)$options));
-                        }
-                        if ($label === '' && $value === '') continue;
-                    ?>
-                        <div class="single-product__attr-item">
-                            <span class="single-product__attr-name"><?php echo esc_html($label); ?></span>
-                            <span class="single-product__attr-value"><?php echo esc_html($value); ?></span>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </section>
+    </header>
+
+    <div class="single-product__content">
+        <?php if ($overview !== '') : ?>
+        <section class="single-product__section single-product__section--overview" data-aos="fade-up">
+            <h2 class="single-product__section-title"><?php esc_html_e('Overview', 'buildpro'); ?></h2>
+            <div class="single-product__section-content"><?php echo wp_kses_post(wpautop($overview)); ?></div>
+        </section>
         <?php endif; ?>
-        <section class="single-product__specs" data-aos="fade-up">
-            <h2><?php esc_html_e('Specifications', 'buildpro'); ?></h2>
-            <div class="single-product__spec-list">
-                <?php if ($length || $width || $height) : ?>
-                    <div class="single-product__spec-item">
-                        <span><?php esc_html_e('Size', 'buildpro'); ?></span><span><?php echo esc_html(trim(($length ? $length . ' × ' : '') . ($width ? $width . ' × ' : '') . ($height ? $height : ''))); ?></span>
-                    </div>
-                <?php endif; ?>
-                <?php if ($weight) : ?>
-                    <div class="single-product__spec-item">
-                        <span><?php esc_html_e('Weight', 'buildpro'); ?></span><span><?php echo esc_html($weight); ?></span>
-                    </div>
-                <?php endif; ?>
-                <?php if ($shipping_class) : ?>
-                    <div class="single-product__spec-item">
-                        <span><?php esc_html_e('Shipping class', 'buildpro'); ?></span><span><?php echo esc_html($shipping_class); ?></span>
-                    </div>
-                <?php endif; ?>
-                <div class="single-product__spec-item">
-                    <span><?php esc_html_e('Product Type', 'buildpro'); ?></span><span><?php echo esc_html($type); ?></span>
+
+        <?php if (!empty($feature_items) || !empty($interior_feature_items)) : ?>
+        <section class="single-product__section single-product__section--features" data-aos="fade-up">
+            <h2 class="single-product__section-title"><?php esc_html_e('Features', 'buildpro'); ?></h2>
+            <div class="single-product__feature-columns">
+                <?php if (!empty($feature_items)) : ?>
+                <div class="single-product__feature-block single-product__feature-block--key">
+                    <ul>
+                        <?php foreach ($feature_items as $feature_item) : ?>
+                        <li><?php echo esc_html($feature_item); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
-                <div class="single-product__spec-item">
-                    <span><?php esc_html_e('Stock Status', 'buildpro'); ?></span><span><?php echo esc_html($stock_status); ?></span>
-                </div>
+                <?php endif; ?>
+
             </div>
         </section>
-    </div>
-    <?php if (!empty($downloads)) : ?>
-        <section class="single-product__downloads" data-aos="fade-up">
-            <h2><?php esc_html_e('Downloads', 'buildpro'); ?></h2>
-            <ul class="single-product__download-list">
-                <?php foreach ($downloads as $d) :
-                    $name = $d->get_name();
-                    $url = $d->get_file();
-                ?>
-                    <li><a href="<?php echo esc_url($url); ?>" target="_blank"
-                            rel="noopener"><?php echo esc_html($name ?: $url); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </section>
-    <?php endif; ?>
+        <?php endif; ?>
 
-    <?php
-    $related_args = array(
-        'post_type'           => 'product',
-        'posts_per_page'      => 3,
-        'post__not_in'        => array($pid),
-        'post_status'         => 'publish',
-        'ignore_sticky_posts' => true,
-        'no_found_rows'       => true,
-        'orderby'             => 'rand',
-    );
-    $tax_filters = array();
-    if (taxonomy_exists('product_brand')) {
-        $brand_ids = wp_get_post_terms($pid, 'product_brand', array('fields' => 'ids'));
-        if (!empty($brand_ids) && !is_wp_error($brand_ids)) {
-            $tax_filters[] = array(
-                'taxonomy' => 'product_brand',
-                'field'    => 'term_id',
-                'terms'    => $brand_ids,
-            );
-        }
-    }
-    $cat_ids = wp_get_post_terms($pid, 'product_cat', array('fields' => 'ids'));
-    if (!empty($cat_ids) && !is_wp_error($cat_ids)) {
-        $tax_filters[] = array(
-            'taxonomy' => 'product_cat',
-            'field'    => 'term_id',
-            'terms'    => $cat_ids,
-        );
-    }
-    $tag_ids = wp_get_post_terms($pid, 'product_tag', array('fields' => 'ids'));
-    if (!empty($tag_ids) && !is_wp_error($tag_ids)) {
-        $tax_filters[] = array(
-            'taxonomy' => 'product_tag',
-            'field'    => 'term_id',
-            'terms'    => $tag_ids,
-        );
-    }
-    if (!empty($tax_filters)) {
-        $related_args['tax_query'] = array_merge(array('relation' => 'OR'), $tax_filters);
-    }
-    $related_q = new WP_Query($related_args);
-    if ($related_q->have_posts()) :
-    ?>
-        <section class="single-product__related" data-aos="fade-up">
-            <h2 class="single-product__related-title"><?php esc_html_e('You might also like', 'buildpro'); ?></h2>
-            <div class="section-product__list">
-                <?php
-                while ($related_q->have_posts()) :
-                    $related_q->the_post();
-                    $rid    = get_the_ID();
-                    $rimg   = get_the_post_thumbnail_url($rid, 'large');
-                    $rtitle = get_the_title($rid);
-                    $rlink  = get_permalink($rid);
-                    $rprice = '';
-                    if (function_exists('wc_get_product')) {
-                        $rp = wc_get_product($rid);
-                        if ($rp) {
-                            $rprice = $rp->get_price();
-                        }
-                    }
-                ?>
-                    <a class="section-product__item" href="<?php echo esc_url($rlink); ?>">
-                        <div class="section-product__item-image">
-                            <?php if (!empty($rimg)) : ?>
-                                <img src="<?php echo esc_url($rimg); ?>" alt="<?php echo esc_attr($rtitle); ?>">
+        <?php if (!empty($interior_feature_items)) : ?>
+        <section class="single-product__section single-product__section--interior-features" data-aos="fade-up">
+            <div class="single-product__feature-block single-product__feature-block--interior">
+                <h2 class="single-product__section-title"><?php esc_html_e('Interior Features', 'buildpro'); ?></h2>
+                <ul>
+                    <?php foreach ($interior_feature_items as $interior_item) : ?>
+                    <li><?php echo esc_html($interior_item); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </section>
+        <?php endif; ?>
+
+        <?php if (!empty($details)) : ?>
+        <section class="single-product__section single-product__section--details" data-aos="fade-up">
+            <h2 class="single-product__section-title"><?php esc_html_e('Key Information', 'buildpro'); ?></h2>
+            <div class="single-product__details">
+                <?php foreach ($details as $label => $value) : ?>
+                <div class="single-product__detail-item">
+                    <span class="single-product__detail-label"><?php echo esc_html($label); ?></span>
+                    <span class="single-product__detail-value"><?php echo esc_html($value); ?></span>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <?php endif; ?>
+    </div>
+
+    <?php if (!empty($related_products)) : ?>
+    <section class="single-product__related" data-aos="fade-up">
+        <h2 class="single-product__related-title"><?php esc_html_e('Trending Listings', 'buildpro'); ?></h2>
+
+        <div class="single-product__related-grid">
+            <?php foreach ($related_products as $related_item) : ?>
+            <article class="single-product__related-item">
+                <a class="single-product__related-link single-product__related-link--image"
+                    href="<?php echo esc_url($related_item['link']); ?>"
+                    aria-label="<?php echo esc_attr($related_item['title']); ?>">
+                    <?php if ($related_item['image'] !== '') : ?>
+                    <img src="<?php echo esc_url($related_item['image']); ?>"
+                        alt="<?php echo esc_attr($related_item['title']); ?>" loading="lazy">
+                    <?php endif; ?>
+                </a>
+
+                <div class="single-product__related-content">
+                    <div class="single-product__related-price-row">
+                        <p class="single-product__related-price">
+                            <?php if ($related_item['price'] !== '') : ?>
+                            <span><?php echo esc_html($related_item['currency_symbol']); ?></span><span><?php echo esc_html($related_item['price']); ?></span>
+                            <?php else : ?>
+                            <?php esc_html_e('Contact', 'buildpro'); ?>
+                            <?php endif; ?>
+                        </p>
+
+                        <!-- <button class="single-product__related-cta btn-add-to-cart" type="button"
+                            data-product-id="<?php echo esc_attr($related_item['id']); ?>"
+                            aria-label="<?php esc_attr_e('Add to cart', 'buildpro'); ?>">
+                            <img src="<?php echo esc_url($icon_cart_url); ?>" alt="" aria-hidden="true">
+                            <span><?php esc_html_e('Add to cart', 'buildpro'); ?></span>
+                        </button> -->
+                    </div>
+
+                    <a class="single-product__related-link single-product__related-link--title"
+                        href="<?php echo esc_url($related_item['link']); ?>">
+                        <h3 class="single-product__related-item-title"><?php echo esc_html($related_item['title']); ?>
+                        </h3>
+                    </a>
+
+                    <div class="single-product__related-meta"
+                        aria-label="<?php esc_attr_e('Property details', 'buildpro'); ?>">
+                        <div class="single-product__related-meta-item">
+                            <img src="<?php echo esc_url($icon_bedroom_url); ?>"
+                                alt="<?php esc_attr_e('Bedroom', 'buildpro'); ?>">
+                            <span><?php echo esc_html($related_item['bedrooms'] !== '' ? $related_item['bedrooms'] : '-'); ?></span>
+                        </div>
+                        <div class="single-product__related-meta-item">
+                            <img src="<?php echo esc_url($icon_bathroom_url); ?>"
+                                alt="<?php esc_attr_e('Bathroom', 'buildpro'); ?>">
+                            <span><?php echo esc_html($related_item['bathrooms'] !== '' ? $related_item['bathrooms'] : '-'); ?></span>
+                        </div>
+                        <div class="single-product__related-meta-item">
+                            <img src="<?php echo esc_url($icon_ruler_url); ?>"
+                                alt="<?php esc_attr_e('Area', 'buildpro'); ?>">
+                            <?php if ($related_item['area'] !== '') : ?>
+                            <span><?php echo esc_html($related_item['area'] . ' ' . __('sq ft', 'buildpro')); ?></span>
+                            <?php else : ?>
+                            <span>-</span>
                             <?php endif; ?>
                         </div>
-                        <div class="section-product__item-content">
-                            <h3 class="section-product__item-title"><?php echo esc_html($rtitle); ?></h3>
-                            <div class="section-product__item-bottom">
-                                <p class="section-product__item-price">
-                                    <?php if ($rprice !== '') : ?>
-                                        <span>$</span><?php echo esc_html($rprice); ?><span>/<?php echo esc_html__('ton', 'buildpro'); ?></span>
-                                    <?php endif; ?>
-                                </p>
-                                <button class="section-product__item-cta btn-add-to-cart"
-                                    data-product-id="<?php echo esc_attr($rid); ?>"><?php echo esc_html__('Add to Cart', 'buildpro'); ?></button>
-                            </div>
-                        </div>
-                    </a>
-                <?php endwhile;
-                wp_reset_postdata(); ?>
-            </div>
-        </section>
+                    </div>
+
+                    <div class="single-product__related-location">
+                        <img src="<?php echo esc_url($icon_location_card_url); ?>"
+                            alt="<?php esc_attr_e('Location', 'buildpro'); ?>">
+                        <span><?php echo esc_html($related_item['location'] !== '' ? $related_item['location'] : __('Updating location', 'buildpro')); ?></span>
+                    </div>
+                </div>
+            </article>
+            <?php endforeach; ?>
+        </div>
+    </section>
     <?php endif; ?>
 
-    <?php if ($product && $product->get_reviews_allowed()) : ?>
-        <section class="single-product__reviews" data-aos="fade-up">
-            <?php
-            comments_template();
-            ?>
-        </section>
-    <?php endif; ?>
-    <!-- <?php if (!empty($cats)) : ?>
-        <div class="single-product__cats"><?php echo wp_kses_post($cats); ?></div>
-    <?php endif; ?>
-    <?php if (!empty($tags)) : ?>
-        <div class="single-product__tags"><?php echo wp_kses_post($tags); ?></div>
-    <?php endif; ?> -->
+    <?php get_template_part('template/template-parts/page/home/section-contact/index'); ?>
 </article>

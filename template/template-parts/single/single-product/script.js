@@ -1,33 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Khởi tạo thumbs swiper trước
-  const thumbsSwiper = new Swiper(".thumbs-swiper", {
+  var gallery = document.querySelector(".single-product__gallery");
+  if (!gallery || typeof Swiper === "undefined") {
+    return;
+  }
+
+  var thumbsElement = gallery.querySelector(".thumbs-swiper");
+  var mainElement = gallery.querySelector(".main-swiper");
+
+  if (!thumbsElement || !mainElement) {
+    return;
+  }
+
+  var totalSlides = mainElement.querySelectorAll(".swiper-slide").length;
+
+  var thumbsSwiper = new Swiper(thumbsElement, {
     spaceBetween: 10,
-    slidesPerView: 4, // hiển thị 4 thumbs cùng lúc (điều chỉnh tùy ý)
+    slidesPerView: Math.min(4, Math.max(1, totalSlides)),
+    watchSlidesProgress: true,
     freeMode: true,
-    watchSlidesProgress: true, // rất quan trọng cho thumbs
+    direction: "vertical",
     breakpoints: {
-      640: { slidesPerView: 5 },
-      1024: { slidesPerView: 6 },
+      0: {
+        direction: "horizontal",
+        slidesPerView: Math.min(4, Math.max(1, totalSlides)),
+      },
+      768: {
+        direction: "vertical",
+        slidesPerView: Math.min(5, Math.max(1, totalSlides)),
+      },
     },
   });
 
-  // Khởi tạo main swiper, kết nối với thumbs
-  const mainSwiper = new Swiper(".main-swiper", {
-    loop: true, // loop vô hạn
+  new Swiper(mainElement, {
+    loop: false,
     spaceBetween: 10,
-    navigation: {
-      // tùy chọn: thêm nút prev/next
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
+    speed: 500,
     thumbs: {
-      swiper: thumbsSwiper, // kết nối hai swiper
+      swiper: thumbsSwiper,
     },
-    autoplay: {
-      delay: 3000, // 3 giây = 3000ms
-      disableOnInteraction: false, // vẫn autoplay sau khi user tương tác (click, swipe)
-    },
-    // Tùy chọn: pause khi hover (nếu muốn)
-    // pauseOnMouseEnter: true,
   });
 });

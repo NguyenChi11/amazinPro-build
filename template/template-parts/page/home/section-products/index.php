@@ -122,105 +122,105 @@ $icon_cart_url = get_theme_file_uri('/assets/images/icon/icon_cart.png');
 <?php $style = $materials_enabled !== 1 ? ' style="display:none"' : ''; ?>
 <section class="section-product" data-aos="fade-up" <?php echo $style; ?>>
     <?php if (is_customize_preview()): ?>
-    <div class="section-product__hover-outline"></div>
+        <div class="section-product__hover-outline"></div>
 
-    <script>
-    (function() {
-        var btn = document.querySelector('.section-product__customize-button');
-        if (btn && window.parent && window.parent.wp && window.parent.wp.customize) {
-            btn.addEventListener('click', function() {
-                window.parent.wp.customize.section('buildpro_product_section').focus();
-            });
-        }
-    })();
-    </script>
+        <script>
+            (function() {
+                var btn = document.querySelector('.section-product__customize-button');
+                if (btn && window.parent && window.parent.wp && window.parent.wp.customize) {
+                    btn.addEventListener('click', function() {
+                        window.parent.wp.customize.section('buildpro_product_section').focus();
+                    });
+                }
+            })();
+        </script>
     <?php endif; ?>
     <div class="section-product__header">
         <?php if ($materials_title !== ''): ?>
-        <h2 class="section-product__title"><?php echo esc_html($materials_title); ?></h2>
+            <h2 class="section-product__title"><?php echo esc_html($materials_title); ?></h2>
         <?php endif; ?>
         <?php if ($materials_description !== ''): ?>
-        <p class="section-product__description"><?php echo esc_html($materials_description); ?></p>
+            <p class="section-product__description"><?php echo esc_html($materials_description); ?></p>
         <?php endif; ?>
     </div>
     <div class="section-product__grid">
         <?php foreach ($items as $item): ?>
-        <div class="section-product__grid-item">
-            <div class="section-product__item">
-                <div class="section-product__item-image swiper section-product__item-image-swiper">
-                    <div class="swiper-wrapper">
-                        <?php if (!empty($item['gallery'])): ?>
-                        <?php foreach ($item['gallery'] as $gallery_image_url): ?>
-                        <div class="swiper-slide">
-                            <a class="section-product__item-link" href="<?php echo esc_url($item['link']); ?>"
-                                aria-label="<?php echo esc_attr($item['title']); ?>">
-                                <img src="<?php echo esc_url($gallery_image_url); ?>"
-                                    alt="<?php echo esc_attr($item['title']); ?>">
-                            </a>
+            <div class="section-product__grid-item">
+                <div class="section-product__item">
+                    <div class="section-product__item-image swiper section-product__item-image-swiper">
+                        <div class="swiper-wrapper">
+                            <?php if (!empty($item['gallery'])): ?>
+                                <?php foreach ($item['gallery'] as $gallery_image_url): ?>
+                                    <div class="swiper-slide">
+                                        <a class="section-product__item-link" href="<?php echo esc_url($item['link']); ?>"
+                                            aria-label="<?php echo esc_attr($item['title']); ?>">
+                                            <img src="<?php echo esc_url($gallery_image_url); ?>"
+                                                alt="<?php echo esc_attr($item['title']); ?>">
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
-                        <?php endforeach; ?>
+                        <?php if (!empty($item['gallery']) && count($item['gallery']) > 1): ?>
+                            <div class="swiper-button-prev section-product__item-image-prev"
+                                aria-label="<?php esc_attr_e('Previous image', 'buildpro'); ?>"></div>
+                            <div class="swiper-button-next section-product__item-image-next"
+                                aria-label="<?php esc_attr_e('Next image', 'buildpro'); ?>"></div>
                         <?php endif; ?>
                     </div>
-                    <?php if (!empty($item['gallery']) && count($item['gallery']) > 1): ?>
-                    <div class="swiper-button-prev section-product__item-image-prev"
-                        aria-label="<?php esc_attr_e('Previous image', 'buildpro'); ?>"></div>
-                    <div class="swiper-button-next section-product__item-image-next"
-                        aria-label="<?php esc_attr_e('Next image', 'buildpro'); ?>"></div>
-                    <?php endif; ?>
-                </div>
-                <div class="section-product__item-content">
-                    <div class="section-product__item-price-row">
-                        <p class="section-product__item-price">
-                            <?php if ($item['price'] !== ''): ?>
-                            <span><?php echo esc_html($item['currency_symbol'] !== '' ? $item['currency_symbol'] : '$'); ?></span><span><?php echo esc_html($item['price']); ?>
-                                <?php else: ?></span>
-                            <?php esc_html_e('Contact', 'buildpro'); ?>
-                            <?php endif; ?>
-                        </p>
-                        <button class="section-product__item-cta btn-add-to-cart" type="button"
+                    <div class="section-product__item-content">
+                        <div class="section-product__item-price-row">
+                            <p class="section-product__item-price">
+                                <?php if ($item['price'] !== ''): ?>
+                                    <span><?php echo esc_html($item['currency_symbol'] !== '' ? $item['currency_symbol'] : '$'); ?></span><span><?php echo esc_html($item['price']); ?>
+                                    <?php else: ?></span>
+                                    <?php esc_html_e('Contact', 'buildpro'); ?>
+                                <?php endif; ?>
+                            </p>
+                            <!-- <button class="section-product__item-cta btn-add-to-cart" type="button"
                             data-product-id="<?php echo esc_attr($item['id']); ?>"
                             aria-label="<?php esc_attr_e('Add to Cart', 'buildpro'); ?>">
                             <img src="<?php echo esc_url($icon_cart_url); ?>" alt="" aria-hidden="true">
                             <span><?php esc_html_e('Add to Cart', 'buildpro'); ?></span>
-                        </button>
-                    </div>
-                    <a class="section-product__item-title-link" href="<?php echo esc_url($item['link']); ?>">
-                        <h3 class="section-product__item-title"><?php echo esc_html($item['title']); ?></h3>
-                    </a>
-                    <div class="section-product__item-meta"
-                        aria-label="<?php esc_attr_e('Property details', 'buildpro'); ?>">
-                        <div class="section-product__item-meta-item">
-                            <img src="<?php echo esc_url($icon_bedroom_url); ?>"
-                                alt="<?php esc_attr_e('Bedroom', 'buildpro'); ?>">
-                            <span><?php echo esc_html($item['bedrooms'] !== '' ? $item['bedrooms'] : '-'); ?></span>
+                        </button> -->
                         </div>
-                        <div class="section-product__item-meta-item">
-                            <img src="<?php echo esc_url($icon_bathroom_url); ?>"
-                                alt="<?php esc_attr_e('Bathroom', 'buildpro'); ?>">
-                            <span><?php echo esc_html($item['bathrooms'] !== '' ? $item['bathrooms'] : '-'); ?></span>
+                        <a class="section-product__item-title-link" href="<?php echo esc_url($item['link']); ?>">
+                            <h3 class="section-product__item-title"><?php echo esc_html($item['title']); ?></h3>
+                        </a>
+                        <div class="section-product__item-meta"
+                            aria-label="<?php esc_attr_e('Property details', 'buildpro'); ?>">
+                            <div class="section-product__item-meta-item">
+                                <img src="<?php echo esc_url($icon_bedroom_url); ?>"
+                                    alt="<?php esc_attr_e('Bedroom', 'buildpro'); ?>">
+                                <span><?php echo esc_html($item['bedrooms'] !== '' ? $item['bedrooms'] : '-'); ?></span>
+                            </div>
+                            <div class="section-product__item-meta-item">
+                                <img src="<?php echo esc_url($icon_bathroom_url); ?>"
+                                    alt="<?php esc_attr_e('Bathroom', 'buildpro'); ?>">
+                                <span><?php echo esc_html($item['bathrooms'] !== '' ? $item['bathrooms'] : '-'); ?></span>
+                            </div>
+                            <div class="section-product__item-meta-item">
+                                <img src="<?php echo esc_url($icon_ruler_url); ?>"
+                                    alt="<?php esc_attr_e('Area', 'buildpro'); ?>">
+                                <span>
+                                    <?php
+                                    if ($item['area'] !== '') {
+                                        echo esc_html($item['area'] . ' ' . __('sq ft', 'buildpro'));
+                                    } else {
+                                        echo '-';
+                                    }
+                                    ?>
+                                </span>
+                            </div>
                         </div>
-                        <div class="section-product__item-meta-item">
-                            <img src="<?php echo esc_url($icon_ruler_url); ?>"
-                                alt="<?php esc_attr_e('Area', 'buildpro'); ?>">
-                            <span>
-                                <?php
-                                        if ($item['area'] !== '') {
-                                            echo esc_html($item['area'] . ' ' . __('sq ft', 'buildpro'));
-                                        } else {
-                                            echo '-';
-                                        }
-                                        ?>
-                            </span>
+                        <div class="section-product__item-location">
+                            <img src="<?php echo esc_url($icon_location_card_url); ?>"
+                                alt="<?php esc_attr_e('Location', 'buildpro'); ?>">
+                            <span><?php echo esc_html($item['location'] !== '' ? $item['location'] : __('Updating location', 'buildpro')); ?></span>
                         </div>
-                    </div>
-                    <div class="section-product__item-location">
-                        <img src="<?php echo esc_url($icon_location_card_url); ?>"
-                            alt="<?php esc_attr_e('Location', 'buildpro'); ?>">
-                        <span><?php echo esc_html($item['location'] !== '' ? $item['location'] : __('Updating location', 'buildpro')); ?></span>
                     </div>
                 </div>
             </div>
-        </div>
         <?php endforeach; ?>
     </div>
     <?php
