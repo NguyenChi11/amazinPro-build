@@ -89,37 +89,64 @@
         }
         ?>
     </div>
-    <div class="blog-section-blog__right">
-        <?php
-        $limit = 3;
-        $trending = [];
-        $format_number = function ($n) {
-            if ($n >= 1000000) {
-                return round($n / 1000000, 1) . 'm';
-            }
-            if ($n >= 1000) {
-                return round($n / 1000, 1) . 'k';
-            }
-            return $n;
-        };
-        $q1 = new WP_Query(array(
-            'post_type' => 'post',
-            'posts_per_page' => $limit,
-            'meta_key' => 'buildpro_post_views',
-            'orderby' => 'meta_value_num',
-            'order' => 'DESC',
-            'meta_query' => array(
-                array(
-                    'key' => 'buildpro_post_views',
-                    'compare' => 'EXISTS',
-                ),
+    <?php
+    $limit = 3;
+    $trending = [];
+    $format_number = function ($n) {
+        if ($n >= 1000000) {
+            return round($n / 1000000, 1) . 'm';
+        }
+        if ($n >= 1000) {
+            return round($n / 1000, 1) . 'k';
+        }
+        return $n;
+    };
+    $q1 = new WP_Query(array(
+        'post_type' => 'post',
+        'posts_per_page' => $limit,
+        'meta_key' => 'buildpro_post_views',
+        'orderby' => 'meta_value_num',
+        'order' => 'DESC',
+        'meta_query' => array(
+            array(
+                'key' => 'buildpro_post_views',
+                'compare' => 'EXISTS',
             ),
+        ),
+        'post_status' => 'publish',
+        'no_found_rows' => true,
+    ));
+    if ($q1->have_posts()) {
+        while ($q1->have_posts()) {
+            $q1->the_post();
+            $id = get_the_ID();
+            $views = (int) get_post_meta($id, 'buildpro_post_views', true);
+            $trending[] = array(
+                'id' => $id,
+                'title' => get_the_title($id),
+                'link' => get_permalink($id),
+                'views' => $views,
+                'author' => get_the_author(),
+                'published_at' => get_the_date(get_option('date_format'), $id) . ' ' . get_the_time(get_option('time_format'), $id),
+            );
+        }
+        wp_reset_postdata();
+    }
+    if (count($trending) < $limit) {
+        $remaining = $limit - count($trending);
+        $exclude = wp_list_pluck($trending, 'id');
+        $q2 = new WP_Query(array(
+            'post_type' => 'post',
+            'posts_per_page' => $remaining,
+            'orderby' => 'comment_count',
+            'order' => 'DESC',
+            'post__not_in' => $exclude,
             'post_status' => 'publish',
             'no_found_rows' => true,
         ));
-        if ($q1->have_posts()) {
-            while ($q1->have_posts()) {
-                $q1->the_post();
+        if ($q2->have_posts()) {
+            while ($q2->have_posts()) {
+                $q2->the_post();
                 $id = get_the_ID();
                 $views = (int) get_post_meta($id, 'buildpro_post_views', true);
                 $trending[] = array(
@@ -127,64 +154,53 @@
                     'title' => get_the_title($id),
                     'link' => get_permalink($id),
                     'views' => $views,
+                    'author' => get_the_author(),
+                    'published_at' => get_the_date(get_option('date_format'), $id) . ' ' . get_the_time(get_option('time_format'), $id),
                 );
             }
             wp_reset_postdata();
         }
-        if (count($trending) < $limit) {
-            $remaining = $limit - count($trending);
-            $exclude = wp_list_pluck($trending, 'id');
-            $q2 = new WP_Query(array(
-                'post_type' => 'post',
-                'posts_per_page' => $remaining,
-                'orderby' => 'comment_count',
-                'order' => 'DESC',
-                'post__not_in' => $exclude,
-                'post_status' => 'publish',
-                'no_found_rows' => true,
-            ));
-            if ($q2->have_posts()) {
-                while ($q2->have_posts()) {
-                    $q2->the_post();
-                    $id = get_the_ID();
-                    $views = (int) get_post_meta($id, 'buildpro_post_views', true);
-                    $trending[] = array(
-                        'id' => $id,
-                        'title' => get_the_title($id),
-                        'link' => get_permalink($id),
-                        'views' => $views,
-                    );
-                }
-                wp_reset_postdata();
-            }
-        }
-        if (!empty($trending)) {
-        ?>
-            <aside class="blog-trending">
-                <div class="blog-trending__header">
-                    <span class="blog-trending__title"><?= esc_html__('Trending Now', 'buildpro'); ?></span>
-                    <img class="blog-trending__icon"
-                        src="<?= esc_url(get_theme_file_uri('/assets/images/icon/trend-up-svgrepo-com 1.png')); ?>"
-                        alt="<?= esc_attr__('Trending', 'buildpro'); ?>" aria-hidden="true">
-                </div>
-                <ol class="blog-trending__list">
-                    <?php foreach ($trending as $i => $p) {
-                        $idx = str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT);
-                        $views_txt = sprintf(esc_html__('%s views', 'buildpro'), $format_number($p['views']));
-                    ?>
-                        <li class="blog-trending__item">
-                            <span class="blog-trending__index"><?= esc_html($idx); ?></span>
-                            <div class="blog-trending__body">
-                                <a href="<?= esc_url($p['link']); ?>"
-                                    class="blog-trending__link"><?= esc_html($p['title']); ?></a>
-                                <div class="blog-trending__views"><?= esc_html($views_txt); ?></div>
-                            </div>
-                        </li>
-                    <?php } ?>
-                </ol>
-            </aside>
-        <?php
-        }
-        ?>
+    }
+    if (!empty($trending)) {
+    ?>
+        <aside class="blog-trending">
+            <div class="blog-trending__header">
+                <span class="blog-trending__title"><?= esc_html__('Trending Now', 'buildpro'); ?></span>
+                <img class="blog-trending__icon"
+                    src="<?= esc_url(get_theme_file_uri('/assets/images/icon/trend-up-svgrepo-com 1.png')); ?>"
+                    alt="<?= esc_attr__('Trending', 'buildpro'); ?>" aria-hidden="true">
+            </div>
+            <ol class="blog-trending__list">
+                <?php foreach ($trending as $i => $p) {
+                    $idx = str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT);
+                    $views_txt = sprintf(esc_html__('%s views', 'buildpro'), $format_number($p['views']));
+                    $author_txt = '';
+                    if (!empty($p['author'])) {
+                        $author_txt = sprintf(esc_html__('By %s', 'buildpro'), $p['author']);
+                    }
+                ?>
+                    <li class="blog-trending__item">
+                        <span class="blog-trending__index"><?= esc_html($idx); ?></span>
+                        <div class="blog-trending__body">
+                            <a href="<?= esc_url($p['link']); ?>" class="blog-trending__link"><?= esc_html($p['title']); ?></a>
+                            <?php if ($author_txt !== '' || !empty($p['published_at'])) { ?>
+                                <div class="blog-trending__meta">
+                                    <?php if ($author_txt !== '') { ?>
+                                        <span class="blog-trending__author"><?= esc_html($author_txt); ?></span>
+                                    <?php } ?>
+                                    <?php if (!empty($p['published_at'])) { ?>
+                                        <span class="blog-trending__time"><?= esc_html($p['published_at']); ?></span>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+                            <div class="blog-trending__views"><?= esc_html($views_txt); ?></div>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ol>
+        </aside>
+    <?php
+    }
+    ?>
     </div>
 </section>

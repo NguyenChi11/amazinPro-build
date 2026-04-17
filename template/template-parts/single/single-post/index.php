@@ -139,6 +139,32 @@ get_template_part('template/template-parts/breadcrums/index');
         'post_status' => 'publish',
         'no_found_rows' => true,
     ));
+
+    $view_all_posts_url = '';
+    $posts_page_id = (int) get_option('page_for_posts');
+    if ($posts_page_id > 0) {
+        $view_all_posts_url = (string) get_permalink($posts_page_id);
+    }
+    if ($view_all_posts_url === '') {
+        $blogs_pages = get_pages(array(
+            'meta_key' => '_wp_page_template',
+            'meta_value' => 'blogs-page.php',
+            'number' => 1,
+        ));
+        if (!empty($blogs_pages)) {
+            $view_all_posts_url = (string) get_permalink($blogs_pages[0]->ID);
+        }
+    }
+    if ($view_all_posts_url === '' && function_exists('get_post_type_archive_link')) {
+        $archive_url = get_post_type_archive_link('post');
+        if (is_string($archive_url) && $archive_url !== '') {
+            $view_all_posts_url = $archive_url;
+        }
+    }
+    if ($view_all_posts_url === '') {
+        $view_all_posts_url = home_url('/');
+    }
+
     if ($more_posts_q->have_posts()) :
     ?>
         <section class="single-post__related-posts" data-aos="fade-up">
@@ -182,6 +208,12 @@ get_template_part('template/template-parts/breadcrums/index');
                             </div>
                         </a>
                     <?php endwhile; ?>
+                </div>
+
+                <div class="single-post__related-actions">
+                    <a class="single-post__related-view-all" href="<?php echo esc_url($view_all_posts_url); ?>">
+                        <?php echo esc_html__('View All Posts', 'buildpro'); ?>
+                    </a>
                 </div>
             </div>
         </section>

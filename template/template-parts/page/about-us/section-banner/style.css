@@ -206,7 +206,7 @@
   }
 
   .about-us__section-banner__left__wrapper {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 1rem;
     width: 100%;
   }

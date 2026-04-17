@@ -129,7 +129,7 @@
 .section-contact__cf7,
 .section-contact .wpcf7 {
   width: 100%;
-  max-width: 420px;
+  /* max-width: 420px; */
 }
 
 .section-contact .wpcf7 form {
@@ -264,12 +264,53 @@
 }
 
 @media (max-width: 479.98px) {
-  .section-contact__form {
+  .section-contact__form,
+  .section-contact .wpcf7 form .section-contact__form-wrapper {
     grid-template-columns: minmax(0, 1fr) 52px;
   }
 
   .section-contact__input,
+  .section-contact
+    .wpcf7
+    input.section-contact__input.wpcf7-form-control:not([type="submit"]):not(
+      [type="radio"]
+    ):not([type="checkbox"]),
+  .section-contact
+    .wpcf7
+    input.wpcf7-form-control.section-contact__input:not([type="submit"]):not(
+      [type="radio"]
+    ):not([type="checkbox"]),
+  .section-contact .wpcf7 .section-contact__submit,
+  .section-contact .wpcf7 .wpcf7-submit.section-contact__submit,
   .section-contact__submit {
     min-height: 52px;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .section-contact__content {
+    padding: 1.4rem 1rem;
+  }
+
+  .section-contact__title {
+    font-size: clamp(1.45rem, 7vw, 2rem);
+  }
+
+  .section-contact__description {
+    margin: 0.7rem 0 1.2rem;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  .section-contact__form,
+  .section-contact .wpcf7 form .section-contact__form-wrapper,
+  .section-contact__cf7,
+  .section-contact .wpcf7 {
+    max-width: 100%;
+  }
+
+  .section-contact .wpcf7-response-output {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }

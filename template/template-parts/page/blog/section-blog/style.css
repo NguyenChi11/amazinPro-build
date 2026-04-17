@@ -391,6 +391,35 @@
   text-transform: uppercase;
 }
 
+.blog-trending__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  color: #73879f;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.blog-trending__author,
+.blog-trending__time {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.blog-trending__author::after {
+  content: "\2022";
+  margin-left: 0.35rem;
+  color: #9badc1;
+}
+
+.blog-trending__meta .blog-trending__time:only-child,
+.blog-trending__meta .blog-trending__author:only-child::after {
+  content: none;
+  margin: 0;
+}
+
 .blog-trending__item:hover {
   background: rgba(255, 255, 255, 0.8);
 }
@@ -490,5 +519,9 @@
 
   .blog-trending__link {
     font-size: 0.9375rem;
+  }
+
+  .blog-trending__meta {
+    font-size: 0.6875rem;
   }
 }

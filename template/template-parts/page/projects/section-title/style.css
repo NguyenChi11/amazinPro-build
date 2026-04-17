@@ -88,22 +88,63 @@
 
 @media (max-width: 639.98px) {
   .project--section-title {
+    margin-top: 2.5rem;
     padding: 1rem;
   }
   .project--section-title__title {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
+    font-size: 1.75rem;
+    line-height: 2.125rem;
     letter-spacing: 0;
     margin: 0;
     width: 100%;
     max-width: 100%;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
   .project--section-title__desc {
-    font-size: 0.625rem;
+    font-size: 0.8125rem;
     letter-spacing: 0;
-    line-height: normal;
+    line-height: 1.35;
     width: 100%;
     max-width: 100%;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .project--section-title {
+    margin-top: 3rem;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .project--section-title__title {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+  }
+
+  .project--section-title__desc {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project--section-title {
+    margin-top: 5rem;
+    padding: 4.375rem 3.75rem;
+  }
+
+  .project--section-title__title {
+    font-size: 3.125rem;
+    line-height: 3.75rem;
+    margin-bottom: 2.5rem;
+    max-width: 63.25rem;
+  }
+
+  .project--section-title__desc {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    max-width: 63.25rem;
   }
 }

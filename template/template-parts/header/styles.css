@@ -21,11 +21,17 @@
   width: 100%;
   background: transparent;
   border-bottom: none;
-  transition: transform 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .site-header.is-scrolled {
-  box-shadow: none;
+  background: #ffffff;
+  border-bottom: 1px solid var(--bp-header-border);
+  box-shadow: var(--bp-header-shadow);
 }
 
 .site-header.is-hidden {
@@ -34,7 +40,7 @@
 }
 
 .admin-bar .site-header {
-  top: 32px;
+  /* top: 32px; */
 }
 
 .admin-bar .site-header.is-hidden {
@@ -43,7 +49,7 @@
 
 @media (max-width: 782px) {
   .admin-bar .site-header {
-    top: 2.875rem;
+    /* top: 2.875rem; */
   }
 
   .admin-bar .site-header.is-hidden {
@@ -414,6 +420,7 @@
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
+  display: none;
 }
 
 .header-nav-button-cart:hover {
@@ -702,6 +709,7 @@
   font-size: 0.92rem;
   font-weight: 600;
   position: relative;
+  display: none;
 }
 
 .mobile-cart-icon {

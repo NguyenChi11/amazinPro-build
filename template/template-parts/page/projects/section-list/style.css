@@ -105,22 +105,75 @@
 @media (max-width: 639.98px) {
   .project--section-list .section-portfolio__list {
     grid-template-columns: 1fr;
-    gap: 0.75rem;
+    gap: 1rem;
   }
   .project--section-list .section-portfolio__item {
-    height: 12rem;
+    height: 14rem;
     width: 100%;
   }
   .project--section-list {
     padding: 0 1rem;
+    padding-bottom: 3rem;
   }
   .project--pagination {
     margin-top: 1rem;
+  }
+  .project--pagination ul.page-numbers {
+    gap: 0.5rem;
   }
   .project--pagination ul.page-numbers a,
   .project--pagination ul.page-numbers span {
     width: 2.25rem;
     height: 2.25rem;
     font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .project--section-list {
+    padding: 0 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .project--section-list .section-portfolio__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+    row-gap: 2rem;
+  }
+
+  .project--section-list .section-portfolio__item {
+    height: 22rem;
+  }
+
+  .project--pagination {
+    margin-top: 1.5rem;
+  }
+
+  .project--pagination ul.page-numbers {
+    gap: 0.75rem;
+  }
+
+  .project--pagination ul.page-numbers a,
+  .project--pagination ul.page-numbers span {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project--section-list {
+    padding: 0 3.75rem;
+    padding-bottom: 2rem;
+  }
+
+  .project--section-list .section-portfolio__list {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1.875rem;
+    row-gap: 3.75rem;
+  }
+
+  .project--section-list .section-portfolio__item {
+    height: 28.75rem;
   }
 }

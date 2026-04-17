@@ -11,22 +11,32 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
+  if (
+    thumbsElement.classList.contains("swiper-initialized") ||
+    mainElement.classList.contains("swiper-initialized")
+  ) {
+    return;
+  }
+
   var totalSlides = mainElement.querySelectorAll(".swiper-slide").length;
 
   var thumbsSwiper = new Swiper(thumbsElement, {
-    spaceBetween: 10,
+    spaceBetween: 8,
     slidesPerView: Math.min(4, Math.max(1, totalSlides)),
     watchSlidesProgress: true,
-    freeMode: true,
     direction: "vertical",
     breakpoints: {
       0: {
         direction: "horizontal",
         slidesPerView: Math.min(4, Math.max(1, totalSlides)),
+        freeMode: false,
+        spaceBetween: 8,
       },
-      768: {
+      640: {
         direction: "vertical",
         slidesPerView: Math.min(5, Math.max(1, totalSlides)),
+        freeMode: true,
+        spaceBetween: 10,
       },
     },
   });

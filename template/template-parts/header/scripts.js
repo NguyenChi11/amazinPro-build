@@ -111,19 +111,26 @@ document.addEventListener("DOMContentLoaded", function () {
       ticking = true;
       window.requestAnimationFrame(function () {
         const currentScrollY = window.scrollY || 0;
-
-        if (currentScrollY > 0) {
-          header.classList.add("is-scrolled");
-        } else {
-          header.classList.remove("is-scrolled");
-        }
+        const isScrollingUp = currentScrollY < lastScrollY;
+        const isScrollingDown = currentScrollY > lastScrollY;
 
         if (currentScrollY <= 0) {
+          header.classList.remove("is-scrolled");
           header.classList.remove("is-hidden");
-        } else if (currentScrollY > lastScrollY && currentScrollY > 80) {
-          header.classList.add("is-hidden");
-        } else if (currentScrollY < lastScrollY) {
+        } else if (isScrollingDown) {
+          header.classList.remove("is-scrolled");
+          if (currentScrollY > 80) {
+            header.classList.add("is-hidden");
+          }
+        } else if (isScrollingUp) {
+          header.classList.add("is-scrolled");
           header.classList.remove("is-hidden");
+        } else if (
+          !header.classList.contains("is-hidden") &&
+          currentScrollY > 80
+        ) {
+          // Keep a readable header state for initial loads when page is already scrolled.
+          header.classList.add("is-scrolled");
         }
 
         lastScrollY = currentScrollY;

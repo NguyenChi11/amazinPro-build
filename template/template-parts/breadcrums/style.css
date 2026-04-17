@@ -14,7 +14,7 @@
 
 @media (max-width: 782px) {
   .admin-bar .breadcrumb-container {
-    margin-top: calc(var(--bp-breadcrumb-header-offset-mobile) + 2.875rem);
+    margin-top: 1.5rem;
   }
 }
 
