@@ -436,67 +436,6 @@ const projectsData = {
         "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
       ],
     },
-    {
-      id: 3008,
-      title: "Concept Design Studio",
-      image: "/wp-content/themes/build_pro_v2/assets/images/avatar_1.jpg",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/avatar_2.jpg",
-      location: "SAN FRANCISCO",
-      about: [
-        "<p>Concept Design Studio is developed as a creative workspace where architecture teams can ideate, prototype, and present with clarity.</p>",
-        "<p>The environment supports collaboration-intensive workflows while maintaining acoustic comfort and focused working conditions.</p>",
-      ].join(""),
-      projectOverview: [
-        "<p>A compact studio project designed for concept development, design review sessions, and client workshop programs.</p>",
-        "<p><strong>Program:</strong> Open studio floor, presentation zone, model workshop, and meeting support areas.</p>",
-        "<p><strong>Performance Goal:</strong> Spatial flexibility, comfort, and high-quality visual communication.</p>",
-      ].join(""),
-      vision: [
-        "<p>Our vision is to provide a creative platform where ideas can be tested quickly and refined collaboratively.</p>",
-        "<p>The studio is intended to accelerate design decision-making and strengthen communication between teams and clients.</p>",
-      ].join(""),
-      architecturalDesign: [
-        "<p>The architectural approach balances open collaborative zones with quiet focus pockets and clean circulation logic.</p>",
-        "<p>Material and lighting choices are curated to support long working sessions, visual clarity, and presentation quality.</p>",
-      ].join(""),
-      keyInfomation: [
-        { key: "Status", value: "Completed" },
-        { key: "Building Type", value: "Design Studio" },
-        { key: "Gross Floor Area", value: "4,300 sqft" },
-        { key: "Location", value: "San Francisco" },
-      ],
-      highlights: [
-        "Collaborative studio planning",
-        "Acoustic comfort strategy",
-        "Client-focused presentation zones",
-      ],
-      aboutImage: "/wp-content/themes/build_pro_v2/assets/images/avatar_3.jpg",
-      information:
-        "Creative office and lab space dedicated to architecture and planning teams.",
-      totalArea: "4,300 sqft",
-      completion: "2025-11",
-      architecturalStyle: "Industrial Modern",
-      standards: [
-        {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_3.jpg",
-          title: "Acoustic Comfort",
-          description:
-            "Noise-control materials for focused team collaboration.",
-        },
-        {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
-          title: "Lighting Design",
-          description: "Layered lighting for workshop and presentation spaces.",
-        },
-      ],
-      price: "760000",
-      dateTime: "2025-11-28",
-      gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_1.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_2.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_3.jpg",
-      ],
-    },
   ],
 };
 

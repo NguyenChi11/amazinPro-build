@@ -51,7 +51,7 @@ if ($psp_terms_max <= 0) {
                         placeholder="<?php esc_attr_e('Search materials, tools, or brands ...', 'buildpro'); ?>"
                         value="<?php echo esc_attr($keyword); ?>" />
 
-                    <div class="product-section-products__category">
+                    <!-- <div class="product-section-products__category">
                         <div class="psp-filters-grid">
                             <?php
                             foreach ($maps as $tax => $cfg) {
@@ -121,7 +121,7 @@ if ($psp_terms_max <= 0) {
                         </div>
                     </div>
                     <button type="submit"
-                        class="psp-filter-submit"><?php esc_html_e('Apply Filters', 'buildpro'); ?></button>
+                        class="psp-filter-submit"><?php esc_html_e('Apply Filters', 'buildpro'); ?></button> -->
                 </form>
             </div>
         </div>

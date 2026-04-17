@@ -19,7 +19,26 @@ function buildpro_import_option_demo()
     }
     $existing = get_post_meta($home_id, 'buildpro_option_items', true);
     if (is_array($existing) && !empty($existing)) {
-        return;
+        $has_meaningful_data = false;
+        foreach ($existing as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $row_icon_id = isset($row['icon_id']) ? (int) $row['icon_id'] : 0;
+            $row_icon_url = isset($row['icon_url']) ? trim((string) $row['icon_url']) : '';
+            $row_text = isset($row['text']) ? trim((string) $row['text']) : '';
+            $row_description = isset($row['description']) ? trim((string) $row['description']) : '';
+
+            if ($row_icon_id > 0 || $row_icon_url !== '' || $row_text !== '' || $row_description !== '') {
+                $has_meaningful_data = true;
+                break;
+            }
+        }
+
+        if ($has_meaningful_data) {
+            return;
+        }
     }
     $path = get_theme_file_path('/assets/data/option-data.js');
     if (!file_exists($path)) {
@@ -43,11 +62,17 @@ function buildpro_import_option_demo()
     }
     $prepared = array();
     foreach ($items as $it) {
+        $icon_url = isset($it['icon_url']) ? (string) $it['icon_url'] : '';
+        $icon_id = 0;
+        if ($icon_url !== '' && function_exists('buildpro_import_image_id')) {
+            $icon_id = (int) buildpro_import_image_id($icon_url);
+        }
+
         $prepared[] = array(
-            'icon_id' => 0,
+            'icon_id' => $icon_id,
             'text' => isset($it['text']) ? (string)$it['text'] : '',
             'description' => isset($it['description']) ? (string)$it['description'] : '',
-            'icon_url' => isset($it['icon_url']) ? (string)$it['icon_url'] : '',
+            'icon_url' => $icon_url,
         );
     }
     update_post_meta($home_id, 'buildpro_option_items', $prepared);
