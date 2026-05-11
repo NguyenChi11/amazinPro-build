@@ -22,32 +22,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">
-                        <label
-                            for="buildpro_header_quote_text"><?php echo esc_html__('Quote Button Text', 'buildpro'); ?></label>
-                    </th>
-                    <td>
-                        <input type="text" id="buildpro_header_quote_text" name="buildpro_header_quote_text"
-                            class="regular-text" value="<?= esc_attr($quote_text) ?>" />
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label
-                            for="buildpro_header_quote_url"><?php echo esc_html__('Quote Button URL', 'buildpro'); ?></label>
-                    </th>
-                    <td>
-                        <input type="url" id="buildpro_header_quote_url" name="buildpro_header_quote_url"
-                            class="regular-text" value="<?= esc_attr($quote_url) ?>"
-                            placeholder="https://example.com/contact" />
-                        <button type="button" class="button choose-link-single" data-url="#buildpro_header_quote_url"
-                            data-title="#buildpro_header_quote_text"><?php echo esc_html__('Choose Link', 'buildpro'); ?></button>
-                        <p class="description">
-                            <?php echo esc_html__('Leave blank to use the About page contact anchor automatically.', 'buildpro'); ?>
-                        </p>
-                    </td>
-                </tr>
+
             </tbody>
         </table>
         <?php submit_button(); ?>

@@ -16,27 +16,7 @@ function buildpro_customize_register($wp_customize)
         'description' => __('Please use a square logo', 'buildpro'),
         'mime_type' => 'image',
     )));
-    $wp_customize->add_setting('buildpro_header_quote_text', array(
-        'default' => __('Request a Quote', 'buildpro'),
-        'transport' => 'postMessage',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('buildpro_header_quote_text', array(
-        'label' => __('Quote Button Text', 'buildpro'),
-        'section' => 'buildpro_header_section',
-        'type' => 'text',
-    ));
-    $wp_customize->add_setting('buildpro_header_quote_url', array(
-        'default' => '',
-        'transport' => 'postMessage',
-        'sanitize_callback' => 'esc_url_raw',
-    ));
-    $wp_customize->add_control('buildpro_header_quote_url', array(
-        'label' => __('Quote Button URL', 'buildpro'),
-        'description' => __('Leave blank to use the About page contact anchor automatically.', 'buildpro'),
-        'section' => 'buildpro_header_section',
-        'type' => 'url',
-    ));
+
     if (isset($wp_customize->selective_refresh)) {
         $wp_customize->selective_refresh->add_partial('header_logo', array(
             'selector' => '.header-logo',
@@ -138,11 +118,6 @@ add_action('admin_enqueue_scripts', 'buildpro_header_admin_enqueue');
 function buildpro_header_admin_page()
 {
     $logo_id = get_theme_mod('header_logo', 0);
-    $quote_text = get_theme_mod('buildpro_header_quote_text', '');
-    $quote_url = get_theme_mod('buildpro_header_quote_url', '');
-    if (!is_scalar($quote_text) || trim((string) $quote_text) === '') {
-        $quote_text = __('Request a Quote', 'buildpro');
-    }
     $logo_url = $logo_id ? wp_get_attachment_image_url($logo_id, 'thumbnail') : '';
 
     include get_theme_file_path('template/customize/header/index.php');
@@ -156,8 +131,6 @@ function buildpro_handle_header_save()
     check_admin_referer('buildpro_header_save');
     $logo_raw = isset($_POST['header_logo']) ? $_POST['header_logo'] : "";
     $logo = absint($logo_raw);
-    $quote_text = isset($_POST['buildpro_header_quote_text']) ? sanitize_text_field($_POST['buildpro_header_quote_text']) : '';
-    $quote_url = isset($_POST['buildpro_header_quote_url']) ? esc_url_raw($_POST['buildpro_header_quote_url']) : '';
     if ($logo_raw === "" || $logo === 0) {
         remove_theme_mod('header_logo');
     } else {
@@ -167,16 +140,6 @@ function buildpro_handle_header_save()
     remove_theme_mod('header_text');
     remove_theme_mod('buildpro_header_description');
     remove_theme_mod('header_description');
-    if ($quote_text === '') {
-        remove_theme_mod('buildpro_header_quote_text');
-    } else {
-        set_theme_mod('buildpro_header_quote_text', $quote_text);
-    }
-    if ($quote_url === '') {
-        remove_theme_mod('buildpro_header_quote_url');
-    } else {
-        set_theme_mod('buildpro_header_quote_url', $quote_url);
-    }
     wp_redirect(admin_url('themes.php?page=buildpro-header&updated=1'));
     exit;
 }

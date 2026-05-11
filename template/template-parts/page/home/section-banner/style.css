@@ -135,8 +135,8 @@
 .section-banner__image-stack {
   position: relative;
   width: 100%;
-  top: -1.25rem;
-  right: -1rem;
+  top: -2.25rem;
+  right: -3rem;
   max-width: 100vh;
   aspect-ratio: 792 / 827;
   overflow: hidden;

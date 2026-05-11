@@ -81,60 +81,9 @@
     }
   }
 
-  function bindHeaderQuoteChooseLinkControl() {
-    if (!(wp && wp.customize)) return;
 
-    var urlControl = document.getElementById(
-      "customize-control-buildpro_header_quote_url",
-    );
-    if (!urlControl) {
-      urlControl = document.querySelector(
-        ".customize-control-buildpro_header_quote_url",
-      );
-    }
-    if (!urlControl) return;
-    if (
-      urlControl.dataset &&
-      urlControl.dataset.buildproChooseLinkBound === "1"
-    ) {
-      return;
-    }
-
-    var urlInput = urlControl.querySelector('input[type="url"]');
-    if (!urlInput) return;
-
-    var titleControl = document.getElementById(
-      "customize-control-buildpro_header_quote_text",
-    );
-    if (!titleControl) {
-      titleControl = document.querySelector(
-        ".customize-control-buildpro_header_quote_text",
-      );
-    }
-    var titleInput = titleControl
-      ? titleControl.querySelector('input[type="text"]')
-      : null;
-
-    var chooseBtn = document.createElement("button");
-    chooseBtn.type = "button";
-    chooseBtn.className = "button buildpro-header-choose-link";
-    chooseBtn.textContent = t("chooseLink", "Choose Link");
-    chooseBtn.style.marginLeft = "0px";
-    chooseBtn.style.marginTop = "10px";
-
-    chooseBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      openHeaderLinkPicker(urlInput, titleInput);
-    });
-
-    urlInput.insertAdjacentElement("afterend", chooseBtn);
-    if (urlControl.dataset) {
-      urlControl.dataset.buildproChooseLinkBound = "1";
-    }
-  }
 
   function initHeaderControlsLinkPicker() {
-    bindHeaderQuoteChooseLinkControl();
     if (!(wp && wp.customize && typeof wp.customize.section === "function")) {
       return;
     }
@@ -143,17 +92,12 @@
     if (headerSection && headerSection.expanded) {
       headerSection.expanded.bind(function (expanded) {
         if (expanded) {
-          setTimeout(bindHeaderQuoteChooseLinkControl, 80);
+          // No more controls to bind here
         }
       });
     }
 
-    if (window.MutationObserver) {
-      var observer = new MutationObserver(function () {
-        bindHeaderQuoteChooseLinkControl();
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-    }
+
   }
 
   function initHeaderAdminLinkPicker() {
@@ -384,33 +328,7 @@
       });
     });
 
-    wp.customize("buildpro_header_quote_text", function (value) {
-      value.bind(function (to) {
-        var v = (to == null ? "" : String(to)).trim();
-        if (!v) {
-          var data = window.headerData || {};
-          v = data.quoteText || "Request a Quote";
-        }
-        var nodes = document.querySelectorAll(".header-nav-button p");
-        for (var i = 0; i < nodes.length; i++) {
-          nodes[i].textContent = v;
-        }
-      });
-    });
 
-    wp.customize("buildpro_header_quote_url", function (value) {
-      value.bind(function (to) {
-        var v = (to == null ? "" : String(to)).trim();
-        if (!v) {
-          var data = window.headerData || {};
-          v = data.quoteUrl || "#";
-        }
-        var links = document.querySelectorAll(".header-nav-button");
-        for (var i = 0; i < links.length; i++) {
-          links[i].setAttribute("href", v);
-        }
-      });
-    });
 
     if (typeof wp.customize.bind === "function") {
       wp.customize.bind("ready", function () {

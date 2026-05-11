@@ -1,51 +1,6 @@
 <?php
 $logo_id = get_theme_mod('header_logo', 0);
 
-$buildpro_quote_anchor = '#about-contact-form-inner';
-$buildpro_quote_url = home_url('/') . $buildpro_quote_anchor;
-try {
-    $buildpro_about_page_id = 0;
-    $buildpro_about_pages = get_pages(array(
-        'meta_key'   => '_wp_page_template',
-        'meta_value' => 'about-us-page.php',
-        'number'     => 1,
-    ));
-    if (empty($buildpro_about_pages)) {
-        $buildpro_about_pages = get_pages(array(
-            'meta_key'   => '_wp_page_template',
-            'meta_value' => 'about-page.php',
-            'number'     => 1,
-        ));
-    }
-    if (!empty($buildpro_about_pages)) {
-        $buildpro_about_page_id = (int) $buildpro_about_pages[0]->ID;
-    }
-    if ($buildpro_about_page_id > 0) {
-        $buildpro_quote_url = get_permalink($buildpro_about_page_id) . $buildpro_quote_anchor;
-    }
-} catch (Throwable $e) {
-}
-
-$buildpro_quote_text = get_theme_mod('buildpro_header_quote_text', '');
-if (is_scalar($buildpro_quote_text)) {
-    $buildpro_quote_text = trim((string)$buildpro_quote_text);
-} else {
-    $buildpro_quote_text = '';
-}
-if ($buildpro_quote_text === '') {
-    $buildpro_quote_text = __('Request a Quote', 'buildpro');
-}
-
-$buildpro_quote_url_mod = get_theme_mod('buildpro_header_quote_url', '');
-if (is_scalar($buildpro_quote_url_mod)) {
-    $buildpro_quote_url_mod = trim((string)$buildpro_quote_url_mod);
-} else {
-    $buildpro_quote_url_mod = '';
-}
-if ($buildpro_quote_url_mod !== '') {
-    $buildpro_quote_url = $buildpro_quote_url_mod;
-}
-
 $buildpro_is_customize = is_customize_preview();
 $buildpro_cart_url = function_exists('buildpro_get_cart_page_url')
     ? buildpro_get_cart_page_url()
@@ -59,12 +14,6 @@ $buildpro_cart_count = function_exists('WC') && WC()->cart ? (int) WC()->cart->g
             (function() {
                 try {
                     window.headerData = window.headerData || {};
-                    if (!window.headerData.quoteText) {
-                        window.headerData.quoteText = <?php echo wp_json_encode($buildpro_quote_text); ?>;
-                    }
-                    if (!window.headerData.quoteUrl) {
-                        window.headerData.quoteUrl = <?php echo wp_json_encode($buildpro_quote_url); ?>;
-                    }
                 } catch (e) {}
             })();
         </script>
@@ -117,22 +66,6 @@ $buildpro_cart_count = function_exists('WC') && WC()->cart ? (int) WC()->cart->g
             </div>
         </div>
 
-        <div class="header-button-link-part header-nav-container">
-
-            <div class="header-nav-button-container">
-                <a href="<?php echo esc_url($buildpro_quote_url); ?>" class="header-nav-button">
-                    <span class="header-nav-button__icon" aria-hidden="true">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M6.6 10.8a15.9 15.9 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.36 2.28.56 3.5.56a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.3 21 3 13.7 3 4.1a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.22.2 2.4.56 3.5a1 1 0 0 1-.24 1l-2.22 2.2z"
-                                fill="currentColor" />
-                        </svg>
-                    </span>
-                    <p><?php echo esc_html($buildpro_quote_text); ?></p>
-                </a>
-            </div>
-        </div>
-
         <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-sidebar">
             <span><?php esc_html_e('Menu', 'buildpro'); ?></span>
         </button>
@@ -168,16 +101,6 @@ $buildpro_cart_count = function_exists('WC') && WC()->cart ? (int) WC()->cart->g
                         class="mobile-cart-count<?php echo $buildpro_cart_count === 0 ? ' mobile-cart-count--hidden' : ''; ?>"><?php echo $buildpro_cart_count; ?></span>
                 </a>
             </div>
-            <a href="<?php echo esc_url($buildpro_quote_url); ?>" class="header-nav-button">
-                <span class="header-nav-button__icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M6.6 10.8a15.9 15.9 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.36 2.28.56 3.5.56a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.3 21 3 13.7 3 4.1a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.22.2 2.4.56 3.5a1 1 0 0 1-.24 1l-2.22 2.2z"
-                            fill="currentColor" />
-                    </svg>
-                </span>
-                <p><?php echo esc_html($buildpro_quote_text); ?></p>
-            </a>
         </div>
     </div>
     <div class="mobile-sidebar-backdrop"></div>
