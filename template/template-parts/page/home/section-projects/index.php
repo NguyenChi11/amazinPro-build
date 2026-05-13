@@ -7,36 +7,20 @@ $enabled = $enabled === '' ? 1 : (int)$enabled;
 $portfolio_title = get_post_meta($page_id, 'projects_title', true);
 $portfolio_desc = get_post_meta($page_id, 'projects_description', true);
 $portfolio_view_all_text = get_post_meta($page_id, 'projects_view_all_text', true);
+
+if ($portfolio_title === '') {
+    $portfolio_title = get_theme_mod('projects_title', '');
+}
+if ($portfolio_desc === '') {
+    $portfolio_desc = get_theme_mod('projects_description', '');
+}
+if ($portfolio_view_all_text === '') {
+    $portfolio_view_all_text = get_theme_mod('projects_view_all_text', '');
+}
+
 if (is_customize_preview()) {
     $enabled_mod = get_theme_mod('buildpro_portfolio_enabled', 1);
     $enabled = (int)$enabled_mod;
-    $data = get_theme_mod('buildpro_portfolio_data', array());
-    if (is_array($data)) {
-        if (isset($data['title']) && $data['title'] !== '') {
-            $portfolio_title = $data['title'];
-        } else {
-            $mod_title = get_theme_mod('projects_title', '');
-            if ($mod_title !== '') {
-                $portfolio_title = $mod_title;
-            }
-        }
-        if (isset($data['description']) && $data['description'] !== '') {
-            $portfolio_desc = $data['description'];
-        } else {
-            $mod_desc = get_theme_mod('projects_description', '');
-            if ($mod_desc !== '') {
-                $portfolio_desc = $mod_desc;
-            }
-        }
-        if (isset($data['view_all_text']) && $data['view_all_text'] !== '') {
-            $portfolio_view_all_text = $data['view_all_text'];
-        } else {
-            $mod_view_all_text = get_theme_mod('projects_view_all_text', '');
-            if ($mod_view_all_text !== '') {
-                $portfolio_view_all_text = $mod_view_all_text;
-            }
-        }
-    }
 }
 if (!is_string($portfolio_view_all_text) || $portfolio_view_all_text === '') {
     $portfolio_view_all_text = __('View All Projects', 'buildpro');

@@ -19,8 +19,9 @@
   right: 0;
   z-index: 1000;
   width: 100%;
-  background: transparent;
-  border-bottom: none;
+  background: #ffffff;
+  border-bottom: 1px solid var(--bp-header-border);
+  box-shadow: var(--bp-header-shadow);
   transition:
     transform 0.25s ease,
     background-color 0.25s ease,
@@ -30,8 +31,6 @@
 
 .site-header.is-scrolled {
   background: #ffffff;
-  border-bottom: 1px solid var(--bp-header-border);
-  box-shadow: var(--bp-header-shadow);
 }
 
 .site-header.is-hidden {
@@ -40,7 +39,7 @@
 }
 
 .admin-bar .site-header {
-  /* top: 32px; */
+  /* top: 2rem; */
 }
 
 .admin-bar .site-header.is-hidden {
@@ -543,14 +542,16 @@
   border-radius: 0.6rem;
   background: #ffffff;
   color: var(--bp-text);
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
   cursor: pointer;
   transition:
     border-color 0.2s ease,
     color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.mobile-menu-toggle i {
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 .mobile-menu-toggle:hover {

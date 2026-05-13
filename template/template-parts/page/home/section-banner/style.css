@@ -18,6 +18,7 @@
   align-items: center;
   gap: 1.25rem;
   margin-bottom: 6rem;
+  overflow: hidden;
 }
 
 .container-banner-left {
@@ -135,7 +136,7 @@
 .section-banner__image-stack {
   position: relative;
   width: 100%;
-  top: -2.25rem;
+  top: -5rem;
   right: -3rem;
   max-width: 100vh;
   aspect-ratio: 792 / 827;
@@ -344,7 +345,8 @@
 
 @media (min-width: 640px) and (max-width: 1024px) {
   .section-banner {
-    padding-top: 3rem;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .section-banner_container {
@@ -402,7 +404,8 @@
 
 @media (max-width: 639px) {
   .section-banner {
-    padding-top: 3.75rem;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .section-banner_container {

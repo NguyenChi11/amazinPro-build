@@ -137,6 +137,10 @@
 .single-product__cta {
   width: 100%;
   min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   border: 1px solid #555b63;
   border-radius: 0.25rem;
   background: transparent;

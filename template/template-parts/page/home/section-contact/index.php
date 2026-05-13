@@ -12,7 +12,7 @@ $home_form_id = function_exists('buildpro_cf7_get_home_form_id') ? (int) buildpr
 $use_cf7_home_form = $home_form_id > 0 && class_exists('WPCF7_ContactForm');
 ?>
 
-<section class="section-contact" data-aos="fade-up">
+<section id="contact" class="section-contact" data-aos="fade-up">
     <?php if (is_customize_preview()): ?>
     <div class="section-contact__hover-outline"></div>
 

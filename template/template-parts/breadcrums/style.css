@@ -1,10 +1,10 @@
 /* Breadcrumb Styles */
 .breadcrumb-container {
-  --bp-breadcrumb-header-offset: 8.5rem;
-  --bp-breadcrumb-header-offset-mobile: 4.6rem;
+  --bp-breadcrumb-header-offset: 1.5rem;
+  --bp-breadcrumb-header-offset-mobile: 1.6rem;
   position: relative;
   z-index: 2;
-  margin-top: var(--bp-breadcrumb-header-offset);
+  margin: 0;
   padding: 0rem 3.75rem;
 }
 
@@ -25,8 +25,7 @@
   }
 }
 
-.custom-breadcrumb-wrapper {
-}
+.custom-breadcrumb-wrapper {}
 
 .breadcrumb-nav {
   margin: 0;
@@ -87,6 +86,7 @@
   .breadcrumb-container {
     padding: 0.5rem 1rem;
   }
+
   /* 480px */
   .custom-breadcrumb-wrapper {
     padding: 0.5rem 0.75rem;

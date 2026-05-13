@@ -5,21 +5,20 @@ $materials_enabled = $materials_enabled === '' ? 1 : (int)$materials_enabled;
 $materials_title = get_post_meta($page_id, 'materials_title', true);
 $materials_description = get_post_meta($page_id, 'materials_description', true);
 $materials_view_all_text = get_post_meta($page_id, 'materials_view_all_text', true);
+
+if ($materials_title === '') {
+    $materials_title = get_theme_mod('materials_title', '');
+}
+if ($materials_description === '') {
+    $materials_description = get_theme_mod('materials_description', '');
+}
+if ($materials_view_all_text === '') {
+    $materials_view_all_text = get_theme_mod('materials_view_all_text', '');
+}
+
 if (is_customize_preview()) {
-    $mod_title = get_theme_mod('materials_title', $materials_title);
-    $mod_desc = get_theme_mod('materials_description', $materials_description);
-    $mod_view_all_text = get_theme_mod('materials_view_all_text', $materials_view_all_text);
     $mod_enabled = get_theme_mod('materials_enabled', 1);
     $materials_enabled = (int)$mod_enabled;
-    if ($mod_title !== '') {
-        $materials_title = $mod_title;
-    }
-    if ($mod_desc !== '') {
-        $materials_description = $mod_desc;
-    }
-    if ($mod_view_all_text !== '') {
-        $materials_view_all_text = $mod_view_all_text;
-    }
 }
 if (!is_string($materials_view_all_text) || $materials_view_all_text === '') {
     $materials_view_all_text = __('View All Products', 'buildpro');

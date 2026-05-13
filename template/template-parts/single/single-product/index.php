@@ -180,16 +180,16 @@ get_template_part('template/template-parts/breadcrums/index');
         <div class="single-product__gallery">
             <div class="swiper thumbs-swiper" aria-label="Product thumbnails">
                 <div class="swiper-wrapper">
-                    <?php if (!empty($slide_ids)) : ?>
-                        <?php foreach ($slide_ids as $image_id) :
+                    <?php if (!empty($slide_ids)): ?>
+                        <?php foreach ($slide_ids as $image_id):
                             $thumb_image = wp_get_attachment_image($image_id, 'thumbnail', false, array('loading' => 'lazy'));
                             if (!$thumb_image) {
                                 continue;
                             }
-                        ?>
+                            ?>
                             <div class="swiper-slide"><?php echo $thumb_image; ?></div>
                         <?php endforeach; ?>
-                    <?php else : ?>
+                    <?php else: ?>
                         <div class="swiper-slide">
                             <img src="<?php echo esc_url($thumb_placeholder); ?>" alt="<?php echo esc_attr($title); ?>"
                                 loading="lazy">
@@ -200,8 +200,8 @@ get_template_part('template/template-parts/breadcrums/index');
 
             <div class="swiper main-swiper" aria-label="Product gallery">
                 <div class="swiper-wrapper">
-                    <?php if (!empty($slide_ids)) : ?>
-                        <?php foreach ($slide_ids as $index => $image_id) :
+                    <?php if (!empty($slide_ids)): ?>
+                        <?php foreach ($slide_ids as $index => $image_id):
                             $main_attrs = $index === 0
                                 ? array('loading' => 'eager', 'fetchpriority' => 'high')
                                 : array('loading' => 'lazy');
@@ -209,10 +209,10 @@ get_template_part('template/template-parts/breadcrums/index');
                             if (!$main_image) {
                                 continue;
                             }
-                        ?>
+                            ?>
                             <div class="swiper-slide"><?php echo $main_image; ?></div>
                         <?php endforeach; ?>
-                    <?php else : ?>
+                    <?php else: ?>
                         <div class="swiper-slide">
                             <img src="<?php echo esc_url($main_placeholder); ?>" alt="<?php echo esc_attr($title); ?>"
                                 loading="eager">
@@ -223,52 +223,51 @@ get_template_part('template/template-parts/breadcrums/index');
         </div>
 
         <div class="single-product__panel">
-            <?php if ($price_html !== '') : ?>
+            <?php if ($price_html !== ''): ?>
                 <div class="single-product__price"><?php echo wp_kses_post($price_html); ?></div>
             <?php endif; ?>
 
             <h1 class="single-product__title"><?php echo esc_html($title); ?></h1>
 
             <div class="single-product__facts">
-                <?php if ($bedrooms !== '') : ?>
+                <?php if ($bedrooms !== ''): ?>
                     <div class="single-product__fact">
                         <i class="fa-solid fa-bed" aria-hidden="true"></i>
                         <span><?php echo esc_html($bedrooms); ?></span>
                     </div>
                 <?php endif; ?>
 
-                <?php if ($bathrooms !== '') : ?>
+                <?php if ($bathrooms !== ''): ?>
                     <div class="single-product__fact">
                         <i class="fa-solid fa-bath" aria-hidden="true"></i>
                         <span><?php echo esc_html($bathrooms); ?></span>
                     </div>
                 <?php endif; ?>
 
-                <?php if ($area !== '') : ?>
+                <?php if ($area !== ''): ?>
                     <div class="single-product__fact">
                         <i class="fa-solid fa-ruler-combined" aria-hidden="true"></i>
-                        <span><?php echo esc_html($area); ?> <?php esc_html_e('sq ft', 'buildpro'); ?></span>
+                        <span><?php echo esc_html($area); ?>     <?php esc_html_e('sq ft', 'buildpro'); ?></span>
                     </div>
                 <?php endif; ?>
             </div>
 
-            <?php if ($location !== '') : ?>
+            <?php if ($location !== ''): ?>
                 <div class="single-product__location">
                     <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                     <span><?php echo esc_html($location); ?></span>
                 </div>
             <?php endif; ?>
 
-            <button type="button" class="single-product__cta btn-add-to-cart"
-                data-product-id="<?php echo esc_attr($pid); ?>"
+            <a href="#contact" class="single-product__cta"
                 aria-label="<?php echo esc_attr__('Contact agent', 'buildpro'); ?>">
                 <?php echo esc_html__('Contact Agent', 'buildpro'); ?>
-            </button>
+            </a>
         </div>
     </header>
 
     <div class="single-product__content">
-        <?php if ($overview !== '') : ?>
+        <?php if ($overview !== ''): ?>
             <section class="single-product__section single-product__section--overview" data-aos="fade-up">
                 <h2 class="single-product__section-title"><?php esc_html_e('Overview', 'buildpro'); ?></h2>
                 <div class="single-product__section-content">
@@ -277,14 +276,14 @@ get_template_part('template/template-parts/breadcrums/index');
             </section>
         <?php endif; ?>
 
-        <?php if (!empty($feature_items) || !empty($interior_feature_items)) : ?>
+        <?php if (!empty($feature_items) || !empty($interior_feature_items)): ?>
             <section class="single-product__section single-product__section--features" data-aos="fade-up">
                 <h2 class="single-product__section-title"><?php esc_html_e('Features', 'buildpro'); ?></h2>
                 <div class="single-product__feature-columns">
-                    <?php if (!empty($feature_items)) : ?>
+                    <?php if (!empty($feature_items)): ?>
                         <div class="single-product__feature-block single-product__feature-block--key">
                             <ul>
-                                <?php foreach ($feature_items as $feature_item) : ?>
+                                <?php foreach ($feature_items as $feature_item): ?>
                                     <li><?php echo esc_html($feature_item); ?></li>
                                 <?php endforeach; ?>
                             </ul>
@@ -295,12 +294,12 @@ get_template_part('template/template-parts/breadcrums/index');
             </section>
         <?php endif; ?>
 
-        <?php if (!empty($interior_feature_items)) : ?>
+        <?php if (!empty($interior_feature_items)): ?>
             <section class="single-product__section single-product__section--interior-features" data-aos="fade-up">
                 <div class="single-product__feature-block single-product__feature-block--interior">
                     <h2 class="single-product__section-title"><?php esc_html_e('Interior Features', 'buildpro'); ?></h2>
                     <ul>
-                        <?php foreach ($interior_feature_items as $interior_item) : ?>
+                        <?php foreach ($interior_feature_items as $interior_item): ?>
                             <li><?php echo esc_html($interior_item); ?></li>
                         <?php endforeach; ?>
                     </ul>
@@ -308,11 +307,11 @@ get_template_part('template/template-parts/breadcrums/index');
             </section>
         <?php endif; ?>
 
-        <?php if (!empty($details)) : ?>
+        <?php if (!empty($details)): ?>
             <section class="single-product__section single-product__section--details" data-aos="fade-up">
                 <h2 class="single-product__section-title"><?php esc_html_e('Key Information', 'buildpro'); ?></h2>
                 <div class="single-product__details">
-                    <?php foreach ($details as $label => $value) : ?>
+                    <?php foreach ($details as $label => $value): ?>
                         <div class="single-product__detail-item">
                             <span class="single-product__detail-label"><?php echo esc_html($label); ?></span>
                             <span class="single-product__detail-value"><?php echo esc_html($value); ?></span>
@@ -323,17 +322,17 @@ get_template_part('template/template-parts/breadcrums/index');
         <?php endif; ?>
     </div>
 
-    <?php if (!empty($related_products)) : ?>
+    <?php if (!empty($related_products)): ?>
         <section class="single-product__related" data-aos="fade-up">
             <h2 class="single-product__related-title"><?php esc_html_e('Trending Listings', 'buildpro'); ?></h2>
 
             <div class="single-product__related-grid">
-                <?php foreach ($related_products as $related_item) : ?>
+                <?php foreach ($related_products as $related_item): ?>
                     <article class="single-product__related-item">
                         <a class="single-product__related-link single-product__related-link--image"
                             href="<?php echo esc_url($related_item['link']); ?>"
                             aria-label="<?php echo esc_attr($related_item['title']); ?>">
-                            <?php if ($related_item['image'] !== '') : ?>
+                            <?php if ($related_item['image'] !== ''): ?>
                                 <img src="<?php echo esc_url($related_item['image']); ?>"
                                     alt="<?php echo esc_attr($related_item['title']); ?>" loading="lazy">
                             <?php endif; ?>
@@ -342,9 +341,9 @@ get_template_part('template/template-parts/breadcrums/index');
                         <div class="single-product__related-content">
                             <div class="single-product__related-price-row">
                                 <p class="single-product__related-price">
-                                    <?php if ($related_item['price'] !== '') : ?>
+                                    <?php if ($related_item['price'] !== ''): ?>
                                         <span><?php echo esc_html($related_item['currency_symbol']); ?></span><span><?php echo esc_html($related_item['price']); ?></span>
-                                    <?php else : ?>
+                                    <?php else: ?>
                                         <?php esc_html_e('Contact', 'buildpro'); ?>
                                     <?php endif; ?>
                                 </p>
@@ -378,9 +377,9 @@ get_template_part('template/template-parts/breadcrums/index');
                                 <div class="single-product__related-meta-item">
                                     <img src="<?php echo esc_url($icon_ruler_url); ?>"
                                         alt="<?php esc_attr_e('Area', 'buildpro'); ?>">
-                                    <?php if ($related_item['area'] !== '') : ?>
+                                    <?php if ($related_item['area'] !== ''): ?>
                                         <span><?php echo esc_html($related_item['area'] . ' ' . __('sq ft', 'buildpro')); ?></span>
-                                    <?php else : ?>
+                                    <?php else: ?>
                                         <span>-</span>
                                     <?php endif; ?>
                                 </div>

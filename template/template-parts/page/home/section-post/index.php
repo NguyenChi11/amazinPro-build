@@ -4,39 +4,20 @@ $enabled = $enabled === '' ? 1 : (int) $enabled;
 $title = get_post_meta(get_the_ID(), 'title_post', true);
 $desc = get_post_meta(get_the_ID(), 'description_post', true);
 $view_all_text = get_post_meta(get_the_ID(), 'buildpro_post_view_all_text', true);
+
+if ($title === '') {
+    $title = get_theme_mod('title_post', '');
+}
+if ($desc === '') {
+    $desc = get_theme_mod('description_post', '');
+}
+if ($view_all_text === '') {
+    $view_all_text = get_theme_mod('buildpro_post_view_all_text', '');
+}
+
 if (is_customize_preview()) {
     $enabled_mod = get_theme_mod('buildpro_post_enabled', 1);
     $enabled = (int) $enabled_mod;
-    $bundle = get_theme_mod('buildpro_post_data', array());
-    if (is_string($bundle)) {
-        $decoded = json_decode($bundle, true);
-        if (is_array($decoded)) {
-            $bundle = $decoded;
-        }
-    }
-    if (is_array($bundle) && !empty($bundle)) {
-        if (isset($bundle['title'])) {
-            $title = $bundle['title'];
-        }
-        if (isset($bundle['desc'])) {
-            $desc = $bundle['desc'];
-        }
-        if (isset($bundle['view_all_text'])) {
-            $view_all_text = $bundle['view_all_text'];
-        }
-    }
-    $mod_title = get_theme_mod('title_post', '');
-    if ($mod_title !== '') {
-        $title = $mod_title;
-    }
-    $mod_desc = get_theme_mod('description_post', '');
-    if ($mod_desc !== '') {
-        $desc = $mod_desc;
-    }
-    $mod_view_all = get_theme_mod('buildpro_post_view_all_text', '');
-    if ($mod_view_all !== '') {
-        $view_all_text = $mod_view_all;
-    }
 }
 if (!is_string($view_all_text) || $view_all_text === '') {
     $view_all_text = __('View All Posts', 'buildpro');

@@ -66,8 +66,8 @@ $buildpro_cart_count = function_exists('WC') && WC()->cart ? (int) WC()->cart->g
             </div>
         </div>
 
-        <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-sidebar">
-            <span><?php esc_html_e('Menu', 'buildpro'); ?></span>
+        <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="mobile-sidebar" aria-label="<?php esc_attr_e('Menu', 'buildpro'); ?>">
+            <i class="fas fa-bars"></i>
         </button>
     </div>
 

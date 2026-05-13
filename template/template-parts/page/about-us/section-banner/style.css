@@ -4,14 +4,16 @@
   justify-content: space-between;
   align-items: start;
   gap: 4.625rem;
-  margin-top: 5rem;
+  margin-top: 0rem;
 }
+
 .about-us__section-banner__left {
   width: 100%;
   max-width: 51.5rem;
   flex: 1 1 0;
   min-width: 0;
 }
+
 .about-us__section-banner__left__text {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
@@ -89,6 +91,7 @@
   word-break: break-word;
   hyphens: auto;
 }
+
 .about-us__section-banner__left__wrapper__item__description {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
@@ -116,19 +119,22 @@
   height: 47.375rem;
   border-radius: 0.5rem;
   box-shadow: 4px 4px 20px 0px rgba(7, 59, 111, 0.1);
-  overflow: hidden; /* nÃªn dÃ¹ng hidden thay vÃ¬ clip */
+  overflow: hidden;
+  /* nÃªn dÃ¹ng hidden thay vÃ¬ clip */
 }
 
 .about-us__section-banner__right__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block; /* trÃ¡nh khoáº£ng tráº¯ng dÆ°á»›i áº£nh */
+  display: block;
+  /* trÃ¡nh khoáº£ng tráº¯ng dÆ°á»›i áº£nh */
 }
 
 .about-us__section-banner {
   position: relative;
 }
+
 .about-banner__hover-outline {
   position: absolute;
   inset: 0;
@@ -138,6 +144,7 @@
   pointer-events: none;
   transition: opacity 0.2s ease;
 }
+
 .about-banner__customize-shortcut {
   position: absolute;
   right: 3.75rem;
@@ -147,6 +154,7 @@
   visibility: hidden;
   transition: opacity 0.2s ease;
 }
+
 .about-banner__customize-button {
   border: none;
   background: #2563eb;
@@ -157,13 +165,16 @@
   font-size: 13px;
   line-height: 1;
 }
+
 .about-us__section-banner:hover .about-banner__hover-outline {
   opacity: 1;
 }
+
 .about-us__section-banner:hover .about-banner__customize-shortcut {
   opacity: 1;
   visibility: visible;
 }
+
 .about-us__section-banner .customize-partial-edit-shortcut {
   position: absolute;
   right: 3.75rem;
@@ -172,6 +183,7 @@
   visibility: hidden;
   transition: opacity 0.2s ease;
 }
+
 .about-us__section-banner:hover .customize-partial-edit-shortcut {
   opacity: 1;
   visibility: visible;

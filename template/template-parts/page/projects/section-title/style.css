@@ -1,5 +1,5 @@
-﻿.project--section-title {
-  margin-top: 5rem;
+.project--section-title {
+  margin-top: 0;
   padding: 4.375rem 3.75rem;
   position: relative;
 }
@@ -51,6 +51,7 @@
   pointer-events: none;
   transition: opacity 0.2s ease;
 }
+
 .project--section-title__customize-shortcut {
   position: absolute;
   right: 3.75rem;
@@ -60,6 +61,7 @@
   visibility: hidden;
   transition: opacity 0.2s ease;
 }
+
 .project--section-title__customize-button {
   border: none;
   background: #2563eb;
@@ -68,6 +70,7 @@
   padding: 0.5rem 0.75rem;
   cursor: pointer;
 }
+
 .project--section-title:hover .project--section-title__hover-outline {
   opacity: 1;
 }
@@ -81,6 +84,7 @@
   visibility: hidden;
   transition: opacity 0.2s ease;
 }
+
 .project--section-title:hover .customize-partial-edit-shortcut {
   opacity: 1;
   visibility: visible;
@@ -88,9 +92,10 @@
 
 @media (max-width: 639.98px) {
   .project--section-title {
-    margin-top: 2.5rem;
+    margin-top: 0;
     padding: 1rem;
   }
+
   .project--section-title__title {
     font-size: 1.75rem;
     line-height: 2.125rem;
@@ -100,6 +105,7 @@
     max-width: 100%;
     margin-bottom: 0.75rem;
   }
+
   .project--section-title__desc {
     font-size: 0.8125rem;
     letter-spacing: 0;
@@ -111,7 +117,7 @@
 
 @media (min-width: 640px) and (max-width: 1023.98px) {
   .project--section-title {
-    margin-top: 3rem;
+    margin-top: 0;
     padding: 2.5rem 1.5rem;
   }
 
@@ -131,7 +137,7 @@
 
 @media (min-width: 1024px) {
   .project--section-title {
-    margin-top: 5rem;
+    margin-top: 0;
     padding: 4.375rem 3.75rem;
   }
 
