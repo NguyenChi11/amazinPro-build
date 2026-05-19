@@ -20,7 +20,6 @@ function buildpro_save_product_meta($post_id)
         'buildpro_product_area',
         'buildpro_product_location',
         'typical_range',
-        'buildpro_product_lot_size',
         'buildpro_product_garage',
         'buildpro_product_year_built',
         'buildpro_product_floors',

@@ -43,7 +43,6 @@ $area = trim((string) get_post_meta($pid, 'buildpro_product_area', true));
 $location = trim((string) get_post_meta($pid, 'buildpro_product_location', true));
 $overview = trim((string) get_post_meta($pid, 'buildpro_product_overview', true));
 $typical_range = trim((string) get_post_meta($pid, 'typical_range', true));
-$lot_size = trim((string) get_post_meta($pid, 'buildpro_product_lot_size', true));
 $garage = trim((string) get_post_meta($pid, 'buildpro_product_garage', true));
 $year_built = trim((string) get_post_meta($pid, 'buildpro_product_year_built', true));
 $floors = trim((string) get_post_meta($pid, 'buildpro_product_floors', true));
@@ -77,8 +76,8 @@ $feature_items = $normalize_list(get_post_meta($pid, 'buildpro_product_features'
 $interior_feature_items = $normalize_list(get_post_meta($pid, 'buildpro_product_interior_features', true));
 
 $details = array();
-if ($lot_size !== '') {
-    $details[esc_html__('Lot size', 'buildpro')] = $lot_size;
+if ($area !== '') {
+    $details[esc_html__('Lot size', 'buildpro')] = $area;
 }
 if ($garage !== '') {
     $details[esc_html__('Garage', 'buildpro')] = $garage;
@@ -186,7 +185,7 @@ get_template_part('template/template-parts/breadcrums/index');
                             if (!$thumb_image) {
                                 continue;
                             }
-                            ?>
+                        ?>
                             <div class="swiper-slide"><?php echo $thumb_image; ?></div>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -209,7 +208,7 @@ get_template_part('template/template-parts/breadcrums/index');
                             if (!$main_image) {
                                 continue;
                             }
-                            ?>
+                        ?>
                             <div class="swiper-slide"><?php echo $main_image; ?></div>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -247,7 +246,7 @@ get_template_part('template/template-parts/breadcrums/index');
                 <?php if ($area !== ''): ?>
                     <div class="single-product__fact">
                         <i class="fa-solid fa-ruler-combined" aria-hidden="true"></i>
-                        <span><?php echo esc_html($area); ?>     <?php esc_html_e('sq ft', 'buildpro'); ?></span>
+                        <span><?php echo esc_html($area); ?> <?php esc_html_e('sq ft', 'buildpro'); ?></span>
                     </div>
                 <?php endif; ?>
             </div>
@@ -327,7 +326,7 @@ get_template_part('template/template-parts/breadcrums/index');
                 <div class="single-product__details">
                     <?php foreach ($details as $label => $value): ?>
                         <div class="single-product__detail-item">
-                            <span class="single-product__detail-label"><?php echo esc_html($label); ?></span>
+                            <span class="single-product__detail-label"><?php echo esc_html($label); ?>:</span>
                             <span class="single-product__detail-value"><?php echo esc_html($value); ?></span>
                         </div>
                     <?php endforeach; ?>

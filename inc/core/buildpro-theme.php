@@ -60,9 +60,9 @@ function buildpro_create_pages_from_templates_once()
     buildpro_create_default_pages();
 
     // Checkout flow templates requested for first import.
-    buildpro_ensure_page_with_template('Bill', 'bill', 'bill-page.php');
+    // buildpro_ensure_page_with_template('Bill', 'bill', 'bill-page.php');
     buildpro_ensure_page_with_template('Checkout', 'checkout', 'checkout-page.php');
-    buildpro_ensure_page_with_template('Cart', 'cart', 'cart-page.php');
+    // buildpro_ensure_page_with_template('Cart', 'cart', 'cart-page.php');
     buildpro_ensure_page_with_template('Privacy Policy', 'privacy-policy', 'privacy-policy-page.php');
     buildpro_ensure_page_with_template('Terms of Service', 'terms-of-service', 'terms-of-service-page.php');
 
@@ -98,7 +98,7 @@ function buildpro_create_default_pages()
     buildpro_ensure_page_with_template('Blogs', 'blogs', 'blogs-page.php');
     buildpro_ensure_page_with_template('Products', 'products', 'products-page.php');
     buildpro_ensure_page_with_template('Projects', 'projects', 'projects-page.php');
-    buildpro_ensure_page_with_template('Cart', 'cart', 'cart-page.php');
+    // buildpro_ensure_page_with_template('Cart', 'cart', 'cart-page.php');
     // Migrate existing pages using old slug 'about-page.php' -> 'about-us-page.php'
     $old_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'about-page.php', 'number' => -1));
     foreach ($old_pages as $op) {

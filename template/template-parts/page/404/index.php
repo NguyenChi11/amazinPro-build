@@ -1,6 +1,6 @@
 <?php
 // Include breadcrumb
-get_template_part('template/template-parts/breadcrums/index');
+// get_template_part('template/template-parts/breadcrums/index');
 ?>
 <?php
 $home_url = home_url('/');
@@ -17,8 +17,8 @@ $contact_url = home_url('/contact/');
         <div class="error-404-buttons">
             <a href="<?php echo esc_url($home_url); ?>"
                 class="btn btn-primary"><?php esc_html_e('Back to Home', 'buildpro'); ?></a>
-            <a href="<?php echo esc_url($contact_url); ?>"
-                class="btn btn-secondary"><?php esc_html_e('Contact Support', 'buildpro'); ?></a>
+            <!-- <a href="<?php echo esc_url($contact_url); ?>"
+                class="btn btn-secondary"><?php esc_html_e('Contact Support', 'buildpro'); ?></a> -->
         </div>
     </div>
 </section>

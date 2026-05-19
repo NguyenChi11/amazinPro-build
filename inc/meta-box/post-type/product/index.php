@@ -21,7 +21,6 @@ function buildpro_product_group_meta_box_render($post)
     $area = (string) get_post_meta($post->ID, 'buildpro_product_area', true);
     $location = (string) get_post_meta($post->ID, 'buildpro_product_location', true);
     $typical_range = (string) get_post_meta($post->ID, 'typical_range', true);
-    $lot_size = (string) get_post_meta($post->ID, 'buildpro_product_lot_size', true);
     $bedrooms = (string) get_post_meta($post->ID, 'buildpro_product_bedrooms', true);
     $bathrooms = (string) get_post_meta($post->ID, 'buildpro_product_bathrooms', true);
     $garage = (string) get_post_meta($post->ID, 'buildpro_product_garage', true);
@@ -74,7 +73,6 @@ function buildpro_product_group_meta_box_render($post)
     echo '<p class="buildpro-post-field"><label for="buildpro_product_area">' . esc_html__('Area', 'buildpro') . '</label><input id="buildpro_product_area" type="text" name="buildpro_product_area" class="regular-text" placeholder="' . esc_attr__('e.g. 2,350 sqft', 'buildpro') . '" value="' . esc_attr($area) . '"></p>';
     echo '<p class="buildpro-post-field"><label for="buildpro_product_location">' . esc_html__('Location', 'buildpro') . '</label><input id="buildpro_product_location" type="text" name="buildpro_product_location" class="regular-text" placeholder="' . esc_attr__('e.g. New York, USA', 'buildpro') . '" value="' . esc_attr($location) . '"></p>';
     echo '<p class="buildpro-post-field"><label for="typical_range">' . esc_html__('Typical Range', 'buildpro') . '</label><input id="typical_range" type="text" name="typical_range" class="regular-text" placeholder="' . esc_attr__('e.g. C25-C40', 'buildpro') . '" value="' . esc_attr($typical_range) . '"></p>';
-    echo '<p class="buildpro-post-field"><label for="buildpro_product_lot_size">' . esc_html__('Lot Size', 'buildpro') . '</label><input id="buildpro_product_lot_size" type="text" name="buildpro_product_lot_size" class="regular-text" placeholder="' . esc_attr__('e.g. 4,500 sqft', 'buildpro') . '" value="' . esc_attr($lot_size) . '"></p>';
     echo '<p class="buildpro-post-field"><label for="buildpro_product_bedrooms">' . esc_html__('Bedrooms', 'buildpro') . '</label><input id="buildpro_product_bedrooms" type="number" min="0" step="1" name="buildpro_product_bedrooms" class="regular-text" value="' . esc_attr($bedrooms) . '"></p>';
     echo '<p class="buildpro-post-field"><label for="buildpro_product_bathrooms">' . esc_html__('Bathrooms', 'buildpro') . '</label><input id="buildpro_product_bathrooms" type="number" min="0" step="0.5" name="buildpro_product_bathrooms" class="regular-text" value="' . esc_attr($bathrooms) . '"></p>';
     echo '<p class="buildpro-post-field"><label for="buildpro_product_garage">' . esc_html__('Garage', 'buildpro') . '</label><input id="buildpro_product_garage" type="text" name="buildpro_product_garage" class="regular-text" placeholder="' . esc_attr__('e.g. 2 cars', 'buildpro') . '" value="' . esc_attr($garage) . '"></p>';

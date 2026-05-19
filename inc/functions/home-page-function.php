@@ -32,10 +32,10 @@ function buildpro_ensure_ordered_primary_menu()
     }
     $targets = array(
         array('templates' => array('home-page.php'), 'slugs' => array('home', 'trang-chu', 'homepage')),
-        array('templates' => array('project-page.php', 'projects-page.php'), 'slugs' => array('projects', 'project', 'projects')),
-        array('templates' => array('product-page.php', 'products-page.php'), 'slugs' => array('products', 'product', 'products')),
         array('templates' => array('blogs-page.php', 'blog-page.php'), 'slugs' => array('blogs', 'blog', 'blog')),
-        array('templates' => array('about-page.php', 'about-us-page.php'), 'slugs' => array('about', 'about-us', 'about-us')),
+        array('templates' => array('product-page.php', 'products-page.php'), 'slugs' => array('products', 'product', 'products')),
+        array('templates' => array('project-page.php', 'projects-page.php'), 'slugs' => array('projects', 'project', 'projects')),
+        array('templates' => array('about-us-page.php', 'about-page.php'), 'slugs' => array('about-us', 'about')),
     );
     $page_ids = array();
     foreach ($targets as $t) {

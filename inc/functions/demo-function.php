@@ -189,7 +189,6 @@ function buildpro_import_create_wc_product($item)
     }
 
     $meta_key_map = array(
-        'lotSize' => 'buildpro_product_lot_size',
         'garage' => 'buildpro_product_garage',
         'yearBuilt' => 'buildpro_product_year_built',
         'floors' => 'buildpro_product_floors',
