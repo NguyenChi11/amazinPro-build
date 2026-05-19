@@ -19,7 +19,22 @@
             : "",
       };
       hidden.value = JSON.stringify(obj);
-      hidden.dispatchEvent(new Event("change"));
+      hidden.dispatchEvent(new Event("change", { bubbles: true }));
+
+      if (window.wp && window.wp.customize) {
+        if (window.wp.customize("buildpro_portfolio_data")) {
+          window.wp.customize("buildpro_portfolio_data").set(obj);
+        }
+        if (window.wp.customize("projects_title")) {
+          window.wp.customize("projects_title").set(obj.title);
+        }
+        if (window.wp.customize("projects_description")) {
+          window.wp.customize("projects_description").set(obj.description);
+        }
+        if (window.wp.customize("projects_view_all_text")) {
+          window.wp.customize("projects_view_all_text").set(obj.view_all_text);
+        }
+      }
     }
     Array.prototype.forEach.call(
       wrapper.querySelectorAll(

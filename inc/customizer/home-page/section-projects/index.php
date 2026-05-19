@@ -95,13 +95,28 @@ if (!function_exists('buildpro_portfolio_customize_register')) {
         ));
         $wp_customize->add_setting('buildpro_portfolio_enabled', array(
             'default' => 1,
-            'transport' => 'refresh',
+            'transport' => 'postMessage',
             'sanitize_callback' => 'absint',
         ));
         $wp_customize->add_control('buildpro_portfolio_enabled', array(
             'label' => __('Enable Portfolio', 'buildpro'),
             'section' => 'buildpro_portfolio_section',
             'type' => 'checkbox',
+        ));
+        $wp_customize->add_setting('projects_title', array(
+            'default' => '',
+            'transport' => 'postMessage',
+            'sanitize_callback' => 'sanitize_text_field',
+        ));
+        $wp_customize->add_setting('projects_description', array(
+            'default' => '',
+            'transport' => 'postMessage',
+            'sanitize_callback' => 'sanitize_textarea_field',
+        ));
+        $wp_customize->add_setting('projects_view_all_text', array(
+            'default' => __('View All Projects', 'buildpro'),
+            'transport' => 'postMessage',
+            'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_setting('buildpro_portfolio_data', array(
             'default' => buildpro_portfolio_get_default_data(),
@@ -132,7 +147,8 @@ if (!function_exists('buildpro_portfolio_customize_register')) {
         if (isset($wp_customize->selective_refresh)) {
             $wp_customize->selective_refresh->add_partial('buildpro_portfolio_data', array(
                 'selector' => '.section-portfolio',
-                'settings' => array('buildpro_portfolio_data'),
+                'settings' => array('buildpro_portfolio_data', 'buildpro_portfolio_enabled', 'projects_title', 'projects_description', 'projects_view_all_text'),
+                'container_inclusive' => true,
                 'render_callback' => function () {
                     ob_start();
                     get_template_part('template/template-parts/page/home/section-projects/index');
@@ -220,9 +236,20 @@ if (!function_exists('buildpro_portfolio_get_default_data')) {
             $title = get_post_meta($page_id, 'projects_title', true);
             $desc  = get_post_meta($page_id, 'projects_description', true);
             $view_all_text = get_post_meta($page_id, 'projects_view_all_text', true);
+            $theme_data = get_theme_mod('buildpro_portfolio_data', array());
+            $theme_data = is_array($theme_data) ? $theme_data : array();
             $title = is_string($title) ? $title : '';
             $desc  = is_string($desc) ? $desc : '';
             $view_all_text = is_string($view_all_text) ? $view_all_text : '';
+            if ($title === '' && isset($theme_data['title'])) {
+                $title = is_string($theme_data['title']) ? $theme_data['title'] : '';
+            }
+            if ($desc === '' && isset($theme_data['description'])) {
+                $desc = is_string($theme_data['description']) ? $theme_data['description'] : '';
+            }
+            if ($view_all_text === '' && isset($theme_data['view_all_text'])) {
+                $view_all_text = is_string($theme_data['view_all_text']) ? $theme_data['view_all_text'] : '';
+            }
             if ($view_all_text === '') {
                 $view_all_text = __('View All Projects', 'buildpro');
             }
@@ -253,17 +280,65 @@ if (!function_exists('buildpro_portfolio_sanitize_data')) {
 if (!function_exists('buildpro_portfolio_sync_customizer_to_meta')) {
     function buildpro_portfolio_sync_customizer_to_meta($wp_customize_manager)
     {
+        $posted_values = array();
+        if ($wp_customize_manager instanceof WP_Customize_Manager && method_exists($wp_customize_manager, 'unsanitized_post_values')) {
+            $posted_values = $wp_customize_manager->unsanitized_post_values();
+        }
+        if (
+            is_array($posted_values) &&
+            !array_key_exists('buildpro_portfolio_data', $posted_values) &&
+            !array_key_exists('buildpro_portfolio_enabled', $posted_values) &&
+            !array_key_exists('projects_title', $posted_values) &&
+            !array_key_exists('projects_description', $posted_values) &&
+            !array_key_exists('projects_view_all_text', $posted_values)
+        ) {
+            return;
+        }
+
         $data = get_theme_mod('buildpro_portfolio_data', array());
+        if ($wp_customize_manager instanceof WP_Customize_Manager) {
+            $data_setting = $wp_customize_manager->get_setting('buildpro_portfolio_data');
+            if ($data_setting && method_exists($data_setting, 'post_value')) {
+                $data = $data_setting->post_value($data);
+            }
+        }
         $data = buildpro_portfolio_sanitize_data($data);
         $title = isset($data['title']) ? $data['title'] : '';
         $desc  = isset($data['description']) ? $data['description'] : '';
         $view_all_text  = isset($data['view_all_text']) ? $data['view_all_text'] : '';
+        if ($wp_customize_manager instanceof WP_Customize_Manager) {
+            $title_setting = $wp_customize_manager->get_setting('projects_title');
+            if ($title_setting && method_exists($title_setting, 'post_value')) {
+                $title = sanitize_text_field($title_setting->post_value($title));
+            }
+            $desc_setting = $wp_customize_manager->get_setting('projects_description');
+            if ($desc_setting && method_exists($desc_setting, 'post_value')) {
+                $desc = sanitize_textarea_field($desc_setting->post_value($desc));
+            }
+            $view_all_setting = $wp_customize_manager->get_setting('projects_view_all_text');
+            if ($view_all_setting && method_exists($view_all_setting, 'post_value')) {
+                $view_all_text = sanitize_text_field($view_all_setting->post_value($view_all_text));
+            }
+        }
         $enabled = absint(get_theme_mod('buildpro_portfolio_enabled', 1));
+        if ($wp_customize_manager instanceof WP_Customize_Manager) {
+            $enabled_setting = $wp_customize_manager->get_setting('buildpro_portfolio_enabled');
+            if ($enabled_setting && method_exists($enabled_setting, 'post_value')) {
+                $enabled = absint($enabled_setting->post_value($enabled));
+            }
+        }
         $page_id = 0;
         if ($wp_customize_manager instanceof WP_Customize_Manager) {
             $setting = $wp_customize_manager->get_setting('buildpro_preview_page_id');
             if ($setting) {
-                $page_id = absint($setting->value());
+                $page_id = method_exists($setting, 'post_value') ? absint($setting->post_value($setting->value())) : absint($setting->value());
+            }
+        }
+        if ($page_id > 0) {
+            $template = get_page_template_slug($page_id);
+            $front_id = (int) get_option('page_on_front');
+            if ($template !== 'home-page.php' && $page_id !== $front_id) {
+                $page_id = 0;
             }
         }
         if ($page_id <= 0) {
@@ -287,6 +362,11 @@ if (!function_exists('buildpro_portfolio_sync_customizer_to_meta')) {
                 update_post_meta($tid, 'projects_view_all_text', $view_all_text);
                 update_post_meta($tid, 'buildpro_portfolio_enabled', $enabled);
             }
+            set_theme_mod('buildpro_portfolio_data', array(
+                'title' => $title,
+                'description' => $desc,
+                'view_all_text' => $view_all_text,
+            ));
             set_theme_mod('projects_title', $title);
             set_theme_mod('projects_description', $desc);
             set_theme_mod('projects_view_all_text', $view_all_text);

@@ -29,6 +29,17 @@ if (!function_exists('buildpro_portfolio_render_meta_box')) {
         $title = get_post_meta($post->ID, 'projects_title', true);
         $desc = get_post_meta($post->ID, 'projects_description', true);
         $view_all_text = get_post_meta($post->ID, 'projects_view_all_text', true);
+        $portfolio_data = get_theme_mod('buildpro_portfolio_data', array());
+        $portfolio_data = is_array($portfolio_data) ? $portfolio_data : array();
+        if ($title === '' && isset($portfolio_data['title']) && is_string($portfolio_data['title'])) {
+            $title = $portfolio_data['title'];
+        }
+        if ($desc === '' && isset($portfolio_data['description']) && is_string($portfolio_data['description'])) {
+            $desc = $portfolio_data['description'];
+        }
+        if ($view_all_text === '' && isset($portfolio_data['view_all_text']) && is_string($portfolio_data['view_all_text'])) {
+            $view_all_text = $portfolio_data['view_all_text'];
+        }
         $enabled = get_post_meta($post->ID, 'buildpro_portfolio_enabled', true);
         $enabled = $enabled === '' ? 1 : (int)$enabled;
         wp_enqueue_style('buildpro-portfolio-admin', get_theme_file_uri('template/meta-box/page/home/section-projects/style.css'), array(), null);
@@ -63,9 +74,15 @@ if (!function_exists('buildpro_save_portfolio_meta')) {
         update_post_meta($post_id, 'projects_description', $desc);
         update_post_meta($post_id, 'projects_view_all_text', $view_all_text);
         update_post_meta($post_id, 'buildpro_portfolio_enabled', $enabled);
+        $portfolio_data = array(
+            'title' => $title,
+            'description' => $desc,
+            'view_all_text' => $view_all_text,
+        );
         set_theme_mod('projects_title', $title);
         set_theme_mod('projects_description', $desc);
         set_theme_mod('projects_view_all_text', $view_all_text);
+        set_theme_mod('buildpro_portfolio_data', $portfolio_data);
         set_theme_mod('buildpro_portfolio_enabled', $enabled);
     }
 } // end if !function_exists buildpro_save_portfolio_meta

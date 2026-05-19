@@ -7,25 +7,40 @@ $enabled = $enabled === '' ? 1 : (int)$enabled;
 $portfolio_title = get_post_meta($page_id, 'projects_title', true);
 $portfolio_desc = get_post_meta($page_id, 'projects_description', true);
 $portfolio_view_all_text = get_post_meta($page_id, 'projects_view_all_text', true);
+$portfolio_customizer_data = get_theme_mod('buildpro_portfolio_data', array());
+$portfolio_customizer_data = is_array($portfolio_customizer_data) ? $portfolio_customizer_data : array();
 
 if ($portfolio_title === '') {
-    $portfolio_title = get_theme_mod('projects_title', '');
+    $portfolio_title = isset($portfolio_customizer_data['title']) ? $portfolio_customizer_data['title'] : get_theme_mod('projects_title', '');
 }
 if ($portfolio_desc === '') {
-    $portfolio_desc = get_theme_mod('projects_description', '');
+    $portfolio_desc = isset($portfolio_customizer_data['description']) ? $portfolio_customizer_data['description'] : get_theme_mod('projects_description', '');
 }
 if ($portfolio_view_all_text === '') {
-    $portfolio_view_all_text = get_theme_mod('projects_view_all_text', '');
+    $portfolio_view_all_text = isset($portfolio_customizer_data['view_all_text']) ? $portfolio_customizer_data['view_all_text'] : get_theme_mod('projects_view_all_text', '');
 }
 
 if (is_customize_preview()) {
     $enabled_mod = get_theme_mod('buildpro_portfolio_enabled', 1);
     $enabled = (int)$enabled_mod;
+    $portfolio_title = get_theme_mod('projects_title', $portfolio_title);
+    $portfolio_desc = get_theme_mod('projects_description', $portfolio_desc);
+    $portfolio_view_all_text = get_theme_mod('projects_view_all_text', $portfolio_view_all_text);
+
+    if (array_key_exists('title', $portfolio_customizer_data)) {
+        $portfolio_title = $portfolio_customizer_data['title'];
+    }
+    if (array_key_exists('description', $portfolio_customizer_data)) {
+        $portfolio_desc = $portfolio_customizer_data['description'];
+    }
+    if (array_key_exists('view_all_text', $portfolio_customizer_data)) {
+        $portfolio_view_all_text = $portfolio_customizer_data['view_all_text'];
+    }
 }
 if (!is_string($portfolio_view_all_text) || $portfolio_view_all_text === '') {
     $portfolio_view_all_text = __('View All Projects', 'buildpro');
 }
-if ($enabled !== 1) {
+if ($enabled !== 1 && !is_customize_preview()) {
     return;
 }
 
@@ -65,8 +80,13 @@ if ($query->have_posts()) {
     }
     wp_reset_postdata();
 }
+
+if (empty($portfolio_items) && !is_customize_preview()) {
+    return;
+}
 ?>
-<section class="section-portfolio" data-aos="fade-up">
+<?php $portfolio_style = $enabled !== 1 ? ' style="display:none"' : ''; ?>
+<section class="section-portfolio" data-aos="fade-up" <?php echo $portfolio_style; ?>>
     <?php if (is_customize_preview()): ?>
     <div class="section-portfolio__hover-outline"></div>
 
@@ -107,8 +127,8 @@ if ($query->have_posts()) {
                         <?php endif; ?>
                     </div>
                     <div class="section-portfolio__item-content">
-                        <p class="section-portfolio__item-text"><?php echo $item['text']; ?></p>
-                        <h3 class="section-portfolio__item-name"><?php echo $item['name']; ?></h3>
+                        <p class="section-portfolio__item-text"><?php echo esc_html($item['text']); ?></p>
+                        <h3 class="section-portfolio__item-name"><?php echo esc_html($item['name']); ?></h3>
                         <div class="section-portfolio__item-location-wrapper">
                             <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/icon/icon_location.png')); ?>"
                                 alt="<?php echo esc_attr__('Location', 'buildpro'); ?>"
@@ -140,7 +160,4 @@ if ($query->have_posts()) {
                 d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" />
         </svg>
     </div>
-    <?php if (empty($portfolio_items)) {
-        return;
-    } ?>
 </section>

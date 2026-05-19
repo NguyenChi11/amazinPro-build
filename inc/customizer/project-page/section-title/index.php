@@ -197,7 +197,21 @@ if (!function_exists('buildpro_projects_title_sanitize_data')) {
 if (!function_exists('buildpro_projects_title_sync_customizer_to_meta')) {
     function buildpro_projects_title_sync_customizer_to_meta($wp_customize_manager)
     {
+        $posted_values = array();
+        if ($wp_customize_manager instanceof WP_Customize_Manager && method_exists($wp_customize_manager, 'unsanitized_post_values')) {
+            $posted_values = $wp_customize_manager->unsanitized_post_values();
+        }
+        if (is_array($posted_values) && !array_key_exists('buildpro_projects_title_data', $posted_values)) {
+            return;
+        }
+
         $data = get_theme_mod('buildpro_projects_title_data', array());
+        if ($wp_customize_manager instanceof WP_Customize_Manager) {
+            $data_setting = $wp_customize_manager->get_setting('buildpro_projects_title_data');
+            if ($data_setting && method_exists($data_setting, 'post_value')) {
+                $data = $data_setting->post_value($data);
+            }
+        }
         $data = buildpro_projects_title_sanitize_data($data);
         $title = isset($data['title']) ? $data['title'] : '';
         $desc  = isset($data['description']) ? $data['description'] : '';
@@ -205,8 +219,11 @@ if (!function_exists('buildpro_projects_title_sync_customizer_to_meta')) {
         if ($wp_customize_manager instanceof WP_Customize_Manager) {
             $setting = $wp_customize_manager->get_setting('buildpro_preview_page_id');
             if ($setting) {
-                $page_id = absint($setting->value());
+                $page_id = method_exists($setting, 'post_value') ? absint($setting->post_value($setting->value())) : absint($setting->value());
             }
+        }
+        if ($page_id > 0 && get_page_template_slug($page_id) !== 'projects-page.php') {
+            return;
         }
         if ($page_id <= 0) {
             $page_id = buildpro_projects_title_find_page_id();
