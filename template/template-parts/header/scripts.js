@@ -122,43 +122,59 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Add header classes based on scroll direction (throttled)
+    const directionThreshold = 8;
+    const hiddenOffset = 120;
     let ticking = false;
-    let lastScrollY = window.scrollY || 0;
+    let lastScrollY = Math.max(window.scrollY || 0, 0);
+
+    function updateHeaderState(currentScrollY, direction) {
+      if (currentScrollY <= 0) {
+        header.classList.remove("is-scrolled");
+        header.classList.remove("is-hidden");
+        return;
+      }
+
+      header.classList.add("is-scrolled");
+
+      if (document.body.classList.contains("mobile-sidebar-open")) {
+        header.classList.remove("is-hidden");
+        return;
+      }
+
+      if (direction === "down" && currentScrollY > hiddenOffset) {
+        header.classList.add("is-hidden");
+      } else if (direction === "up") {
+        header.classList.remove("is-hidden");
+      }
+    }
 
     function onScroll() {
       if (ticking) return;
       ticking = true;
       window.requestAnimationFrame(function () {
-        const currentScrollY = window.scrollY || 0;
-        const isScrollingUp = currentScrollY < lastScrollY;
-        const isScrollingDown = currentScrollY > lastScrollY;
+        const currentScrollY = Math.max(window.scrollY || 0, 0);
+        const delta = currentScrollY - lastScrollY;
 
         if (currentScrollY <= 0) {
-          header.classList.remove("is-scrolled");
-          header.classList.remove("is-hidden");
-        } else if (isScrollingDown) {
-          header.classList.remove("is-scrolled");
-          if (currentScrollY > 80) {
-            header.classList.add("is-hidden");
-          }
-        } else if (isScrollingUp) {
-          header.classList.add("is-scrolled");
-          header.classList.remove("is-hidden");
-        } else if (
-          !header.classList.contains("is-hidden") &&
-          currentScrollY > 80
-        ) {
-          // Keep a readable header state for initial loads when page is already scrolled.
-          header.classList.add("is-scrolled");
+          updateHeaderState(currentScrollY, "up");
+          lastScrollY = currentScrollY;
+          ticking = false;
+          return;
         }
 
+        if (Math.abs(delta) < directionThreshold) {
+          ticking = false;
+          return;
+        }
+
+        updateHeaderState(currentScrollY, delta > 0 ? "down" : "up");
         lastScrollY = currentScrollY;
         ticking = false;
       });
     }
 
+    updateHeaderState(lastScrollY, null);
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
   }
 
   const toggleBtn = document.querySelector(".mobile-menu-toggle");

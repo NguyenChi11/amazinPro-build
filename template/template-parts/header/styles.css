@@ -27,7 +27,6 @@
   margin-bottom: 0;
   transition:
     transform 0.25s ease,
-    margin-bottom 0.25s ease,
     background-color 0.25s ease,
     box-shadow 0.25s ease,
     border-color 0.25s ease;
@@ -40,7 +39,6 @@
 .site-header.is-hidden {
   transform: translateY(-100%);
   pointer-events: none;
-  margin-bottom: calc(-1 * var(--bp-header-height));
 }
 
 .admin-bar .site-header {
@@ -50,7 +48,6 @@
 .admin-bar .site-header.is-hidden {
   transform: translateY(-100%);
   pointer-events: none;
-  margin-bottom: calc(-1 * var(--bp-header-height));
 }
 
 @media (max-width: 782px) {
@@ -61,7 +58,6 @@
   .admin-bar .site-header.is-hidden {
     transform: translateY(-100%);
     pointer-events: none;
-    margin-bottom: calc(-1 * var(--bp-header-height));
   }
 }
 
