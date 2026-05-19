@@ -97,6 +97,7 @@
 
 .about-contact-form .wpcf7 form .wpcf7-spinner {
   margin: 0.45rem 0 0;
+  display: none;
 }
 
 .about-contact-form .wpcf7-response-output {

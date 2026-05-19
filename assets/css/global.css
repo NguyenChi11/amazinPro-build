@@ -44,9 +44,6 @@ body {
   --bp-current-admin-bar-height: 0px;
   margin: 0;
   padding: 0;
-  padding-top: calc(
-    var(--bp-header-height) + var(--bp-current-admin-bar-height)
-  );
 }
 
 body.admin-bar {

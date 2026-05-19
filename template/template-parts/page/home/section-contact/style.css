@@ -149,6 +149,8 @@
 .section-contact .wpcf7 form .section-contact__form-field,
 .section-contact .wpcf7 form .section-contact__form-action {
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .section-contact .wpcf7 form .wpcf7-form-control-wrap {
@@ -166,6 +168,7 @@
 
 .section-contact .wpcf7 form .wpcf7-spinner {
   margin: 0.45rem 0 0;
+  display: none;
 }
 
 .section-contact .wpcf7-response-output {
