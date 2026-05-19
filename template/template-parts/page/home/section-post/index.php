@@ -18,6 +18,17 @@ if ($view_all_text === '') {
 if (is_customize_preview()) {
     $enabled_mod = get_theme_mod('buildpro_post_enabled', 1);
     $enabled = (int) $enabled_mod;
+    $preview_data = get_theme_mod('buildpro_post_data', array());
+    $preview_data = is_array($preview_data) ? $preview_data : array();
+    if (array_key_exists('title', $preview_data)) {
+        $title = (string) $preview_data['title'];
+    }
+    if (array_key_exists('desc', $preview_data)) {
+        $desc = (string) $preview_data['desc'];
+    }
+    if (array_key_exists('view_all_text', $preview_data)) {
+        $view_all_text = (string) $preview_data['view_all_text'];
+    }
 }
 if (!is_string($view_all_text) || $view_all_text === '') {
     $view_all_text = __('View All Posts', 'buildpro');

@@ -14,9 +14,9 @@ const postsData = {
         "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
       ],
-      description:
+      paragraph:
         "Digital twin technology is revolutionizing construction project management by providing real-time insights, improving collaboration, and optimizing resource allocation. This article explores how digital twins are transforming the industry and why they are essential for the future of construction.",
-      paragraph: [
+      description: [
         "<p>In an industry where precision, efficiency, and risk management define success, construction companies are increasingly turning to innovative technologies to stay ahead. One of the most transformative advancements today is Digital Twin Technology - a powerful solution that is reshaping how projects are planned, executed, and maintained.</p>",
         "<h2>What is Digital Twin Technology?</h2>",
         "<p>A digital twin is a real-time, virtual representation of a physical asset, system, or process. In construction, it allows project teams to create a dynamic 3D model of a building or infrastructure project, continuously updated with live data from sensors, IoT devices, and project management systems.</p>",
@@ -64,9 +64,9 @@ const postsData = {
       date: "2026-03-28",
       link: "/blog/residential-design-trends-2026",
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
-      description:
+      paragraph:
         "Residential architecture in 2026 is moving beyond visual appeal and focusing on long-term performance. Homeowners expect spaces that are efficient, comfortable, and adaptable to changing daily routines.",
-      paragraph: [
+      description: [
         "<p>Residential architecture in 2026 is moving beyond visual appeal and focusing on long-term performance. Homeowners expect spaces that are efficient, comfortable, and adaptable to changing daily routines.</p>",
         "<h2>Key Trends in 2026</h2>",
         "<p><strong>1. Flexible Floor Planning</strong></p>",
@@ -109,9 +109,9 @@ const postsData = {
         "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
       ],
-      description:
+      paragraph:
         "Commercial projects involve complex stakeholders, larger budgets, and higher operational expectations. Project management is the framework that keeps these factors aligned.",
-      paragraph: [
+      description: [
         "<p>Commercial projects involve complex stakeholders, larger budgets, and higher operational expectations. Project management is the framework that keeps these factors aligned.</p>",
         "<h2>Critical Management Functions</h2>",
         "<p><strong>1. Scope Governance</strong></p>",
@@ -152,9 +152,9 @@ const postsData = {
       link: "/blog/premium-materials-overview",
       banner:
         "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
-      description:
+      paragraph:
         "Material quality has a direct impact on performance, maintenance cost, and visual identity. Premium does not simply mean expensive - it means suitable, durable, and verifiable.",
-      paragraph: [
+      description: [
         "<p>Material quality has a direct impact on performance, maintenance cost, and visual identity. Premium does not simply mean expensive - it means suitable, durable, and verifiable.</p>",
         "<h2>How to Evaluate Premium Materials</h2>",
         "<p><strong>1. Technical Performance</strong></p>",
@@ -194,9 +194,9 @@ const postsData = {
       date: "2026-02-02",
       link: "/blog/from-concept-to-model",
       banner: "/wp-content/themes/build_pro_v2/assets/images/avatar_2.jpg",
-      description:
+      paragraph:
         "Concept modeling bridges the gap between design intent and project understanding. It gives stakeholders a shared visual language before technical documentation is finalized.",
-      paragraph: [
+      description: [
         "<p>Concept modeling bridges the gap between design intent and project understanding. It gives stakeholders a shared visual language before technical documentation is finalized.</p>",
         "<h2>Why Concept Models Matter</h2>",
         "<p><strong>1. Faster Decision Making</strong></p>",
@@ -241,9 +241,9 @@ const postsData = {
         "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
         "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
       ],
-      description:
+      paragraph:
         "In dense urban environments, facade design must solve multiple problems at once: daylight, heat gain, privacy, maintenance access, and city identity. This article explores core design principles and delivery strategies for high-performance facades in challenging contexts.",
-      paragraph: [
+      description: [
         "<p>In dense urban environments, facade design must solve multiple problems at once: daylight, heat gain, privacy, maintenance access, and city identity.</p>",
         "<h2>Core Facade Design Principles</h2>",
         "<p><strong>1. Orientation Response</strong></p>",
@@ -283,9 +283,9 @@ const postsData = {
       date: "2026-01-08",
       link: "/blog/team-coordination-practices",
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_contact.jpg",
-      description:
+      paragraph:
         "High-performing projects are not only about technical capability. They are also about communication structure, accountability, and response discipline across teams",
-      paragraph: [
+      description: [
         "<p>High-performing projects are not only about technical capability. They are also about communication structure, accountability, and response discipline across teams.</p>",
         "<h2>Coordination Practices That Work</h2>",
         "<p><strong>1. Structured Weekly Reviews</strong></p>",
@@ -325,9 +325,9 @@ const postsData = {
       date: "2025-12-22",
       link: "/blog/skyline-office-case-study",
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-      description:
+      paragraph:
         "In this case study, we explore how a mid-rise office project in a dense urban district successfully navigated schedule and quality challenges through structured execution planning",
-      paragraph: [
+      description: [
         "<p>This case study reviews how a mid-rise office project achieved schedule and quality targets in a dense urban district with strict access and permit constraints.</p>",
         "<h2>Project Snapshot</h2>",
         "<p>The project involved multi-trade coordination, limited staging zones, and strict noise and traffic restrictions around the site perimeter.</p>",

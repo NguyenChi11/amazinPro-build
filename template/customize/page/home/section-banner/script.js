@@ -53,7 +53,14 @@
         data.push(obj);
       });
       hidden.value = JSON.stringify(data);
-      hidden.dispatchEvent(new Event("change"));
+      hidden.dispatchEvent(new Event("input", { bubbles: true }));
+      hidden.dispatchEvent(new Event("change", { bubbles: true }));
+      if (window.wp && window.wp.customize) {
+        var setting = window.wp.customize("buildpro_banner_items");
+        if (setting && typeof setting.set === "function") {
+          setting.set(data);
+        }
+      }
     }
     function bindRow(row, openByDefault) {
       var header = row.querySelector(".buildpro-banner-header");
@@ -366,7 +373,14 @@
         data.push(obj);
       });
       hidden.value = JSON.stringify(data);
-      hidden.dispatchEvent(new Event("change"));
+      hidden.dispatchEvent(new Event("input", { bubbles: true }));
+      hidden.dispatchEvent(new Event("change", { bubbles: true }));
+      if (window.wp && window.wp.customize) {
+        var setting = window.wp.customize("buildpro_option_items");
+        if (setting && typeof setting.set === "function") {
+          setting.set(data);
+        }
+      }
     }
     function bindTabs(row) {
       var tabs = row.querySelectorAll(".buildpro-option-tab");

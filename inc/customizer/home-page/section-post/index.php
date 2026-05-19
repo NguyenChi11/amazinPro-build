@@ -126,8 +126,9 @@ if (!function_exists('buildpro_post_customize_register')) {
         if (isset($wp_customize->selective_refresh)) {
             $wp_customize->selective_refresh->add_partial('buildpro_post_data', array(
                 'selector' => '.section-post',
-                'settings' => array('buildpro_post_data'),
+                'settings' => array('buildpro_post_data', 'buildpro_post_enabled'),
                 'container_inclusive' => true,
+                'fallback_refresh' => true,
                 'render_callback' => function () {
                     ob_start();
                     get_template_part('template/template-parts/page/home/section-post/index');
