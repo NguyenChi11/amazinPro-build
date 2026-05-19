@@ -35,8 +35,8 @@ const footerData = {
     },
   ],
   createBuildText: "Create a better build",
-  policy: { text: "Policy", url: "/policy", target: "" },
-  service: { text: "Service", url: "/service", target: "" },
+  policy: { text: "Privacy Policy", url: "/policy", target: "" },
+  service: { text: "Terms of Service", url: "/service", target: "" },
 };
 
 window.footerData = footerData;

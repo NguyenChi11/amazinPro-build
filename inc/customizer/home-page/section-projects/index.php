@@ -90,7 +90,7 @@ if (!function_exists('buildpro_portfolio_customize_register')) {
         }
         $wp_customize->add_section('buildpro_portfolio_section', array(
             'title' => __('Home Page: Portfolio', 'buildpro'),
-            'priority' => 35,
+            'priority' => 33,
             'active_callback' => 'buildpro_customizer_is_home_preview',
         ));
         $wp_customize->add_setting('buildpro_portfolio_enabled', array(

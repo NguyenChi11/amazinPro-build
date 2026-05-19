@@ -136,7 +136,7 @@ function buildpro_product_customize_register($wp_customize)
 
     $wp_customize->add_section('buildpro_product_section', array(
         'title' => __('Home Page: Product', 'buildpro'),
-        'priority' => 29,
+        'priority' => 31,
         'active_callback' => 'buildpro_customizer_is_home_preview',
     ));
 

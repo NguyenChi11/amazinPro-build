@@ -105,7 +105,7 @@ if (!function_exists('buildpro_contact_customize_register')) {
 
         $wp_customize->add_section('buildpro_contact_section', array(
             'title' => __('Home Page: Contact', 'buildpro'),
-            'priority' => 33,
+            'priority' => 32,
             'active_callback' => 'buildpro_customizer_is_home_preview',
         ));
 

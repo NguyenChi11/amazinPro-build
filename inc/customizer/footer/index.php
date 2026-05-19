@@ -180,7 +180,7 @@ function buildpro_footer_customize_register($wp_customize)
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('footer_policy_text', array(
-        'label' => __('Policy Text', 'buildpro'),
+        'label' => __('Privacy Policy Text', 'buildpro'),
         'section' => 'buildpro_footer_section',
         'type' => 'text',
     ));
@@ -191,8 +191,8 @@ function buildpro_footer_customize_register($wp_customize)
     ));
     if (class_exists('BuildPro_Footer_Single_Link_Control')) {
         $wp_customize->add_control(new BuildPro_Footer_Single_Link_Control($wp_customize, 'footer_policy_link', array(
-            'label' => __('Policy Link', 'buildpro'),
-            'description' => __('Choose link for Policy.', 'buildpro'),
+            'label' => __('Privacy Policy Link', 'buildpro'),
+            'description' => __('Choose link for Privacy Policy.', 'buildpro'),
             'section' => 'buildpro_footer_section',
         )));
     }
@@ -202,7 +202,7 @@ function buildpro_footer_customize_register($wp_customize)
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('footer_servicer_text', array(
-        'label' => __('Service Text', 'buildpro'),
+        'label' => __('Terms of Service Text', 'buildpro'),
         'section' => 'buildpro_footer_section',
         'type' => 'text',
     ));
@@ -213,8 +213,8 @@ function buildpro_footer_customize_register($wp_customize)
     ));
     if (class_exists('BuildPro_Footer_Single_Link_Control')) {
         $wp_customize->add_control(new BuildPro_Footer_Single_Link_Control($wp_customize, 'footer_servicer_link', array(
-            'label' => __('Service Link', 'buildpro'),
-            'description' => __('Choose link for Servicer.', 'buildpro'),
+            'label' => __('Terms of Service Link', 'buildpro'),
+            'description' => __('Choose link for Terms of Service.', 'buildpro'),
             'section' => 'buildpro_footer_section',
         )));
     }
