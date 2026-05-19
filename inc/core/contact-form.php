@@ -29,6 +29,16 @@ function buildpro_cf7_wait_option()
     return 'buildpro_cf7_wait_activation';
 }
 
+function buildpro_cf7_checkout_form_title()
+{
+    return 'BuildPro Checkout Form';
+}
+
+function buildpro_cf7_checkout_form_id_option()
+{
+    return 'buildpro_cf7_checkout_form_id';
+}
+
 function buildpro_cf7_get_saved_form_id()
 {
     return (int) get_option(buildpro_cf7_demo_form_id_option(), 0);
@@ -49,6 +59,16 @@ function buildpro_cf7_save_home_form_id($id)
     update_option(buildpro_cf7_home_form_id_option(), (int) $id);
 }
 
+function buildpro_cf7_get_saved_checkout_form_id()
+{
+    return (int) get_option(buildpro_cf7_checkout_form_id_option(), 0);
+}
+
+function buildpro_cf7_save_checkout_form_id($id)
+{
+    update_option(buildpro_cf7_checkout_form_id_option(), (int) $id);
+}
+
 function buildpro_cf7_demo_form_content()
 {
     $options = array(
@@ -62,14 +82,57 @@ function buildpro_cf7_demo_form_content()
     }, $options);
     $choices = implode(' ', $quoted_choices);
     $form = '';
-    $form .= '<div class="contact-form__grid"><!-- buildpro-demo-form-v3 -->';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Full name</label>[text* your-name class:contact-form__input placeholder "John Doe"]</p>';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Email Address</label>[email* your-email class:contact-form__input placeholder "contact@amazinpro.com"]</p>';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Phone Number</label>[tel your-phone class:contact-form__input placeholder "(+84)349582808"]</p>';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Project Type</label>[select* project-type class:contact-form__input ' . $choices . ']</p>';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Subject</label>[text your-subject class:contact-form__input placeholder "Subject email?"]</p>';
-    $form .= '<p class="contact-form__field"><label class="contact-form__label">Message</label>[textarea your-message class:contact-form__input placeholder "Tell us about your project requirements . . ."]</p>';
-    $form .= '<p class="contact-form__actions">[submit class:contact-form__submit "Submit Request"]</p>';
+    $form .= '<div class="contact-form__grid"><!-- buildpro-demo-form-v5 -->';
+    
+    $form .= '<div class="contact-form__field">';
+    $form .= '  <label class="contact-form__label">Full name</label>';
+    $form .= '  <div class="contact-form__input-wrapper">';
+    $form .= '    <i class="fa-regular fa-user"></i>';
+    $form .= '    [text* your-name class:contact-form__input placeholder "John Doe"]';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="contact-form__field">';
+    $form .= '  <label class="contact-form__label">Email Address</label>';
+    $form .= '  <div class="contact-form__input-wrapper">';
+    $form .= '    <i class="fa-regular fa-envelope"></i>';
+    $form .= '    [email* your-email class:contact-form__input placeholder "contact@amazinpro.com"]';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="contact-form__field">';
+    $form .= '  <label class="contact-form__label">Phone Number</label>';
+    $form .= '  <div class="contact-form__input-wrapper">';
+    $form .= '    <i class="fa-solid fa-phone-flip"></i>';
+    $form .= '    [tel your-phone class:contact-form__input placeholder "(+84) . . ."]';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="contact-form__field">';
+    $form .= '  <label class="contact-form__label">Project Type</label>';
+    $form .= '  <div class="contact-form__input-wrapper">';
+    $form .= '    <i class="fa-solid fa-briefcase"></i>';
+    $form .= '    [select* project-type class:contact-form__input ' . $choices . ']';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="contact-form__field contact-form__field--full">';
+    $form .= '  <label class="contact-form__label">Subject</label>';
+    $form .= '  <div class="contact-form__input-wrapper">';
+    $form .= '    <i class="fa-solid fa-circle-info"></i>';
+    $form .= '    [text your-subject class:contact-form__input placeholder "How can we help?"]';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="contact-form__field contact-form__field--full">';
+    $form .= '  <label class="contact-form__label">Message</label>';
+    $form .= '  <div class="contact-form__input-wrapper contact-form__input-wrapper--textarea">';
+    $form .= '    <i class="fa-regular fa-comment-dots"></i>';
+    $form .= '    [textarea your-message class:contact-form__input x4 placeholder "Tell us about your project requirements . . ."]';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="contact-form__actions">[submit class:contact-form__submit "Send Message"]</div>';
     $form .= '</div>';
     return $form;
 }
@@ -130,6 +193,57 @@ function buildpro_cf7_home_form_content()
     $form .= '<div class="section-contact__form-wrapper"><!-- buildpro-home-demo-form-v1 -->';
     $form .= '<p class="section-contact__form-field"><label class="screen-reader-text">Email address</label>[email* your-email id:section-contact-email class:section-contact__input autocomplete:email placeholder "' . $placeholder . '"]</p>';
     $form .= '<p class="section-contact__form-action">[submit class:section-contact__submit "' . $submit_text . '"]</p>';
+    $form .= '</div>';
+    return $form;
+}
+
+function buildpro_cf7_checkout_form_content()
+{
+    $form = '';
+    $form .= '<div class="checkout-contact__form-wrapper"><!-- buildpro-checkout-demo-form-v2 -->';
+    $form .= '[hidden project-id default:get]';
+    $form .= '[hidden project-title default:get]';
+    $form .= '[hidden project-image default:get]';
+    $form .= '[hidden project-price default:get]';
+    
+    $form .= '<div class="checkout-contact__field-row">';
+    $form .= '  <div class="checkout-contact__field-group">';
+    $form .= '    <label class="checkout-contact__label">Full Name <span class="required">*</span></label>';
+    $form .= '    <div class="checkout-contact__input-wrapper">';
+    $form .= '      <i class="fa-regular fa-user"></i>';
+    $form .= '      [text* your-name class:checkout-contact__input placeholder "Enter your full name"]';
+    $form .= '    </div>';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="checkout-contact__field-row checkout-contact__field-row--two-cols">';
+    $form .= '  <div class="checkout-contact__field-group">';
+    $form .= '    <label class="checkout-contact__label">Email Address <span class="required">*</span></label>';
+    $form .= '    <div class="checkout-contact__input-wrapper">';
+    $form .= '      <i class="fa-regular fa-envelope"></i>';
+    $form .= '      [email* your-email class:checkout-contact__input placeholder "Enter your email"]';
+    $form .= '    </div>';
+    $form .= '  </div>';
+    $form .= '  <div class="checkout-contact__field-group">';
+    $form .= '    <label class="checkout-contact__label">Phone Number <span class="required">*</span></label>';
+    $form .= '    <div class="checkout-contact__input-wrapper">';
+    $form .= '      <i class="fa-solid fa-phone-flip"></i>';
+    $form .= '      [tel* your-phone class:checkout-contact__input placeholder "Enter your phone"]';
+    $form .= '    </div>';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="checkout-contact__field-group">';
+    $form .= '  <label class="checkout-contact__label">Additional Notes</label>';
+    $form .= '  <div class="checkout-contact__input-wrapper checkout-contact__input-wrapper--textarea">';
+    $form .= '    [textarea your-message class:checkout-contact__input x4 placeholder "Anything else we should know?"]';
+    $form .= '  </div>';
+    $form .= '</div>';
+
+    $form .= '<div class="checkout-contact__form-footer">';
+    $form .= '  [submit class:checkout-contact__submit "Confirm Booking"]';
+    $form .= '</div>';
+    
     $form .= '</div>';
     return $form;
 }
@@ -216,6 +330,53 @@ function buildpro_cf7_home_form_mail_2(): array
             . "<hr>\n"
             . "<p>[_site_title] - <a href=\"[_site_url]\">[_site_url]</a></p>\n"
             . "[buildpro-home-demo-mail2-html-v1]",
+        'attachments' => '',
+        'use_html' => true,
+        'exclude_blank' => true,
+    );
+}
+
+function buildpro_cf7_checkout_form_mail(): array
+{
+    return array(
+        'active' => true,
+        'recipient' => '[_site_admin_email]',
+        'sender' => '[_site_title] <[_site_admin_email]>',
+        'subject' => '[_site_title] - New Booking: [project-title]',
+        'additional_headers' => "Reply-To: [your-email]\nContent-Type: text/html; charset=UTF-8\n",
+        'body' => "<h2>New Booking Request</h2>\n"
+            . "<p><strong>Project:</strong> [project-title] (ID: [project-id])<br>\n"
+            . "<strong>Price:</strong> [project-price]<br>\n"
+            . "<strong>Customer:</strong> [your-name]<br>\n"
+            . "<strong>Email:</strong> [your-email]<br>\n"
+            . "<strong>Phone:</strong> [your-phone]</p>\n"
+            . "<h3>Project Image:</h3>\n"
+            . "<p><img src=\"[project-image]\" style=\"max-width: 300px; height: auto;\"></p>\n"
+            . "<h3>Message:</h3>\n"
+            . "<div>[your-message]</div>\n"
+            . "<hr>\n"
+            . "<p>Sent from Checkout page at <a href=\"[_site_url]\">[_site_url]</a></p>\n"
+            . "[buildpro-checkout-demo-mail-html-v1]",
+        'attachments' => '',
+        'use_html' => true,
+        'exclude_blank' => true,
+    );
+}
+
+function buildpro_cf7_checkout_form_mail_2(): array
+{
+    return array(
+        'active' => true,
+        'recipient' => '[your-email]',
+        'sender' => '[_site_title] <[_site_admin_email]>',
+        'subject' => 'Booking Confirmation - [_site_title]',
+        'additional_headers' => "Reply-To: [_site_admin_email]\nContent-Type: text/html; charset=UTF-8\n",
+        'body' => "<p>Hi [your-name],</p>\n"
+            . "<p>Thank you for choosing <strong>[_site_title]</strong> for your project: <strong>[project-title]</strong>.</p>\n"
+            . "<p>We have received your booking request and our team will contact you shortly to discuss the next steps.</p>\n"
+            . "<hr>\n"
+            . "<p>[_site_title] - <a href=\"[_site_url]\">[_site_url]</a></p>\n"
+            . "[buildpro-checkout-demo-mail2-html-v1]",
         'attachments' => '',
         'use_html' => true,
         'exclude_blank' => true,
@@ -326,6 +487,23 @@ function buildpro_cf7_find_home_form_id()
     return 0;
 }
 
+function buildpro_cf7_find_checkout_form_id()
+{
+    $saved = buildpro_cf7_get_saved_checkout_form_id();
+    if ($saved > 0) {
+        $p = get_post($saved);
+        if ($p && $p->post_type === 'wpcf7_contact_form') {
+            return (int) $saved;
+        }
+    }
+    $existing = get_page_by_title(buildpro_cf7_checkout_form_title(), OBJECT, 'wpcf7_contact_form');
+    if ($existing) {
+        buildpro_cf7_save_checkout_form_id($existing->ID);
+        return (int) $existing->ID;
+    }
+    return 0;
+}
+
 function buildpro_cf7_get_home_form_id()
 {
     $fid = buildpro_cf7_find_home_form_id();
@@ -340,6 +518,25 @@ function buildpro_cf7_get_home_form_id()
     $created_id = buildpro_cf7_create_home_form();
     if ($created_id > 0) {
         buildpro_cf7_update_home_form_if_needed($created_id);
+    }
+
+    return (int) $created_id;
+}
+
+function buildpro_cf7_get_checkout_form_id()
+{
+    $fid = buildpro_cf7_find_checkout_form_id();
+    if ($fid > 0) {
+        return $fid;
+    }
+
+    if (!buildpro_cf7_is_active()) {
+        return 0;
+    }
+
+    $created_id = buildpro_cf7_create_checkout_form();
+    if ($created_id > 0) {
+        buildpro_cf7_update_checkout_form_if_needed($created_id);
     }
 
     return (int) $created_id;
@@ -392,6 +589,41 @@ function buildpro_cf7_update_home_form_if_needed($form_id = 0)
     return $fid;
 }
 
+function buildpro_cf7_update_checkout_form_if_needed($form_id = 0)
+{
+    $fid = $form_id > 0 ? (int) $form_id : buildpro_cf7_find_checkout_form_id();
+    if ($fid <= 0) {
+        return 0;
+    }
+    $content = (string) get_post_meta($fid, '_form', true);
+    $needs_update = (
+        strpos($content, 'buildpro-checkout-demo-form-v1') === false
+        || strpos($content, 'checkout-contact__form-wrapper') === false
+    );
+    if ($needs_update) {
+        update_post_meta($fid, '_form', buildpro_cf7_checkout_form_content());
+    }
+    buildpro_cf7_update_checkout_mail_if_needed($fid);
+    return $fid;
+}
+
+function buildpro_cf7_update_checkout_mail_if_needed(int $form_id): void
+{
+    if ($form_id <= 0) {
+        return;
+    }
+
+    $mail = get_post_meta($form_id, '_mail', true);
+    if (!is_array($mail) || strpos((string) ($mail['body'] ?? ''), '[buildpro-checkout-demo-mail-html-v1]') === false) {
+        update_post_meta($form_id, '_mail', buildpro_cf7_checkout_form_mail());
+    }
+
+    $mail2 = get_post_meta($form_id, '_mail_2', true);
+    if (!is_array($mail2) || strpos((string) ($mail2['body'] ?? ''), '[buildpro-checkout-demo-mail2-html-v1]') === false) {
+        update_post_meta($form_id, '_mail_2', buildpro_cf7_checkout_form_mail_2());
+    }
+}
+
 function buildpro_cf7_create_form()
 {
     if (!buildpro_cf7_is_active()) {
@@ -442,6 +674,31 @@ function buildpro_cf7_create_home_form()
     return 0;
 }
 
+function buildpro_cf7_create_checkout_form()
+{
+    if (!buildpro_cf7_is_active()) {
+        return 0;
+    }
+    $existing_id = buildpro_cf7_find_checkout_form_id();
+    if ($existing_id > 0) {
+        return (int) $existing_id;
+    }
+    $post_id = wp_insert_post(array(
+        'post_type' => 'wpcf7_contact_form',
+        'post_status' => 'publish',
+        'post_title' => buildpro_cf7_checkout_form_title(),
+        'post_name' => 'buildpro-checkout-form',
+    ));
+    if ($post_id && !is_wp_error($post_id)) {
+        add_post_meta($post_id, '_form', buildpro_cf7_checkout_form_content(), true);
+        add_post_meta($post_id, '_mail', buildpro_cf7_checkout_form_mail(), true);
+        add_post_meta($post_id, '_mail_2', buildpro_cf7_checkout_form_mail_2(), true);
+        buildpro_cf7_save_checkout_form_id($post_id);
+        return (int) $post_id;
+    }
+    return 0;
+}
+
 function buildpro_cf7_maybe_create_form()
 {
     if (!buildpro_cf7_is_active()) {
@@ -450,8 +707,9 @@ function buildpro_cf7_maybe_create_form()
     }
     $main_form_id = buildpro_cf7_create_form();
     $home_form_id = buildpro_cf7_create_home_form();
+    $checkout_form_id = buildpro_cf7_create_checkout_form();
 
-    if ($main_form_id > 0 || $home_form_id > 0) {
+    if ($main_form_id > 0 || $home_form_id > 0 || $checkout_form_id > 0) {
         delete_option(buildpro_cf7_wait_option());
     }
 
@@ -465,6 +723,12 @@ function buildpro_cf7_maybe_create_form()
         buildpro_cf7_update_home_form_if_needed($home_form_id);
     } else {
         buildpro_cf7_update_home_form_if_needed();
+    }
+
+    if ($checkout_form_id > 0) {
+        buildpro_cf7_update_checkout_form_if_needed($checkout_form_id);
+    } else {
+        buildpro_cf7_update_checkout_form_if_needed();
     }
 }
 
@@ -483,6 +747,7 @@ function buildpro_cf7_on_plugins_loaded()
     if (buildpro_cf7_is_active()) {
         buildpro_cf7_update_form_if_needed();
         buildpro_cf7_update_home_form_if_needed();
+        buildpro_cf7_update_checkout_form_if_needed();
     }
 }
 add_action('plugins_loaded', 'buildpro_cf7_on_plugins_loaded', 99);
@@ -693,6 +958,7 @@ function buildpro_cf7_skip_mail_for_demo_form($skip_mail, $contact_form)
     $allowed_form_ids = array_filter(array(
         (int) buildpro_cf7_find_form_id(),
         (int) buildpro_cf7_find_home_form_id(),
+        (int) buildpro_cf7_find_checkout_form_id(),
     ));
     if (empty($allowed_form_ids)) {
         return $skip_mail;
@@ -740,3 +1006,69 @@ function buildpro_remove_flamingo_inbound_meta_metabox(): void
 }
 
 add_action('load-flamingo_page_flamingo_inbound', 'buildpro_remove_flamingo_inbound_meta_metabox', 20, 0);
+
+/**
+ * Create a WooCommerce Order automatically when the Checkout Contact Form is submitted.
+ */
+function buildpro_cf7_create_wc_order_from_submission($contact_form)
+{
+    if (!class_exists('WooCommerce')) {
+        return;
+    }
+
+    $submission = WPCF7_Submission::get_instance();
+    if (!$submission) {
+        return;
+    }
+
+    $posted_data = $submission->get_posted_data();
+    $form_id = (int) $contact_form->id();
+    $checkout_form_id = (int) buildpro_cf7_find_checkout_form_id();
+
+    // Check if it's the checkout form
+    if ($form_id !== $checkout_form_id || $checkout_form_id <= 0) {
+        return;
+    }
+
+    $project_id = (int) ($posted_data['project-id'] ?? 0);
+    $name = sanitize_text_field($posted_data['your-name'] ?? '');
+    $email = sanitize_email($posted_data['your-email'] ?? '');
+    $phone = sanitize_text_field($posted_data['your-phone'] ?? '');
+    $message = sanitize_textarea_field($posted_data['your-message'] ?? '');
+
+    // Create Order
+    $order = wc_create_order();
+
+    if (is_wp_error($order)) {
+        return;
+    }
+
+    // Add Product
+    if ($project_id > 0) {
+        $product = wc_get_product($project_id);
+        if ($product) {
+            $order->add_product($product, 1);
+        }
+    }
+
+    // Set Customer Info (Billing)
+    $address = array(
+        'first_name' => $name,
+        'email'      => $email,
+        'phone'      => $phone,
+    );
+
+    $order->set_address($address, 'billing');
+    $order->set_customer_note($message);
+
+    // Add Meta for identification
+    $order->update_meta_data('_booking_from_contact_form', 'yes');
+    $order->update_meta_data('_contact_form_id', $form_id);
+
+    // Calculate Totals & Save
+    $order->calculate_totals();
+    $order->update_status('on-hold', sprintf(__('Booking request created via Checkout Contact Form for Project ID: %d', 'buildpro'), $project_id));
+    $order->save();
+}
+
+add_action('wpcf7_mail_sent', 'buildpro_cf7_create_wc_order_from_submission');

@@ -1025,3 +1025,162 @@ select,
 textarea {
   font-family: var(--buildpro-font-default);
 }
+
+/* Global Contact Form 7 Premium Styling */
+.wpcf7 {
+  width: 100%;
+}
+
+.wpcf7-form-control-wrap {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem
+}
+
+.wpcf7-form-control.wpcf7-text,
+.wpcf7-form-control.wpcf7-textarea,
+.wpcf7-form-control.wpcf7-select {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  color: #1e293b;
+  background-color: #f8fafc;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.wpcf7-form-control.wpcf7-text:focus,
+.wpcf7-form-control.wpcf7-textarea:focus,
+.wpcf7-form-control.wpcf7-select:focus {
+  border-color: #137fec;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(19, 127, 236, 0.1);
+}
+
+.wpcf7-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #137fec;
+  color: #ffffff;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wpcf7-submit:hover {
+  background-color: #0f6fd0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(19, 127, 236, 0.3);
+}
+
+.wpcf7-not-valid-tip {
+  color: #ef4444;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 0.35rem;
+}
+
+.wpcf7-response-output {
+  margin: 1.5rem 0 0 !important;
+  padding: 1rem 1.25rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.95rem !important;
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.wpcf7-mail-sent-ok {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0 !important;
+  color: #166534 !important;
+}
+
+.wpcf7-validation-errors {
+  background-color: #fef2f2;
+  border-color: #fecaca !important;
+  color: #991b1b !important;
+}
+
+/* Custom Input Wrapper with Icons (used in our templates) */
+.contact-form__input-wrapper,
+.checkout-contact__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.contact-form__input-wrapper i,
+.checkout-contact__input-wrapper i {
+  position: absolute;
+  left: 1.2rem;
+  color: #94a3b8;
+  font-size: 1rem;
+  z-index: 2;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.contact-form__input-wrapper .wpcf7-form-control,
+.checkout-contact__input-wrapper .wpcf7-form-control {
+  padding-left: 3rem !important;
+}
+
+.contact-form__input-wrapper--textarea i,
+.checkout-contact__input-wrapper--textarea i {
+  top: 1.2rem;
+}
+
+.contact-form__input-wrapper--textarea .wpcf7-form-control,
+.checkout-contact__input-wrapper--textarea .wpcf7-form-control {
+  padding-left: 1.25rem !important;
+}
+
+.contact-form__input-wrapper:focus-within i,
+.checkout-contact__input-wrapper:focus-within i {
+  color: #137fec;
+}
+
+/* Contact Form Grid Layout */
+.contact-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.contact-form__label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.contact-form__actions {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .contact-form__grid {
+    grid-template-columns: 1fr;
+  }
+}

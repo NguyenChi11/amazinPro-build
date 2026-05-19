@@ -259,7 +259,21 @@ get_template_part('template/template-parts/breadcrums/index');
                 </div>
             <?php endif; ?>
 
-            <a href="#contact" class="single-product__cta"
+            <?php
+            $checkout_pages = get_pages(array(
+                'meta_key' => '_wp_page_template',
+                'meta_value' => 'checkout-page.php',
+                'number' => 1
+            ));
+            $checkout_url = !empty($checkout_pages) ? get_permalink($checkout_pages[0]->ID) : home_url('/checkout-contact/');
+            $checkout_url = add_query_arg(array(
+                'project-id' => get_the_ID(),
+                'project-title' => get_the_title(),
+                'project-image' => get_the_post_thumbnail_url(get_the_ID(), 'large'),
+                'project-price' => get_post_meta(get_the_ID(), 'buildpro_product_price', true),
+            ), $checkout_url);
+            ?>
+            <a href="<?php echo esc_url($checkout_url); ?>" class="single-product__cta"
                 aria-label="<?php echo esc_attr__('Contact agent', 'buildpro'); ?>">
                 <?php echo esc_html__('Contact Agent', 'buildpro'); ?>
             </a>
