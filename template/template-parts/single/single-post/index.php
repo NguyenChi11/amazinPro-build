@@ -14,6 +14,8 @@ $quote_gallery = is_array($quote_gallery) ? $quote_gallery : array();
 $quote_kv = get_post_meta($pid, 'buildpro_post_quote_kv', true);
 $quote_kv = is_array($quote_kv) ? $quote_kv : array();
 $quote_img_desc = get_post_meta($pid, 'buildpro_post_quote_desc_image_desc', true);
+$views_num = function_exists('buildpro_get_post_views') ? buildpro_get_post_views($pid) : (int) get_post_meta($pid, 'buildpro_post_views', true);
+$views_txt = sprintf(esc_html__('%s views', 'buildpro'), function_exists('buildpro_format_views') ? buildpro_format_views($views_num) : (string) $views_num);
 ?>
 
 <?php
@@ -45,6 +47,10 @@ get_template_part('template/template-parts/breadcrums/index');
                     <i class="fa-regular fa-bookmark single-post__icon" aria-hidden="true"></i>
                     <span
                         class="single-post__text"><?php echo wp_kses_post(get_the_category_list(', ', '', $pid)); ?></span>
+                </div>
+                <div class="single-post--title__items">
+                    <i class="fa-regular fa-eye single-post__icon" aria-hidden="true"></i>
+                    <span class="single-post__text"><?php echo esc_html($views_txt); ?></span>
                 </div>
             </div>
         </div>

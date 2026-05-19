@@ -46,6 +46,7 @@ if ($query->have_posts()) {
             'image' => get_the_post_thumbnail_url($id, 'large'),
             'date' => get_the_date('', $id),
             'link' => get_permalink($id),
+            'views' => function_exists('buildpro_get_post_views') ? buildpro_get_post_views($id) : (int) get_post_meta($id, 'buildpro_post_views', true),
         );
     }
     wp_reset_postdata();
@@ -80,6 +81,14 @@ if (empty($posts)) {
                         <p class="section-post__item-date"><?php echo esc_html($p['date']); ?></p>
                     </div>
                     <h3 class="section-post__item-title"><?php echo esc_html($p['title']); ?></h3>
+                    <div class="section-post__item-views">
+                        <?php
+                        echo esc_html(sprintf(
+                            esc_html__('%s views', 'buildpro'),
+                            function_exists('buildpro_format_views') ? buildpro_format_views((int) $p['views']) : (string) $p['views']
+                        ));
+                        ?>
+                    </div>
                     <p class="section-post__item-desc">
                         <?php echo esc_html(get_post_meta($p['id'], 'buildpro_post_description', true)); ?>
                     </p>

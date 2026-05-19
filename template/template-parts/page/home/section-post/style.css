@@ -177,6 +177,22 @@
   overflow: hidden;
 }
 
+.section-post__item-views {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 0.85rem;
+  padding: 0.3125rem 0.625rem;
+  border-radius: 999px;
+  border: 1px solid #d8e3f1;
+  background: #f5f9ff;
+  color: #41546c;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
 .section-post__item-desc {
   font-family: "Montserrat", sans-serif;
   font-weight: 400; /* Regular */
