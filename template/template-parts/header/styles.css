@@ -3,6 +3,8 @@
   --bp-header-bg: #f3f4f6;
   --bp-header-border: #e8ebef;
   --bp-header-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+  --bp-header-height: 8.1875rem;
+  --bp-admin-bar-height: 0px;
   --bp-text: #101828;
   --bp-muted: #64748b;
   --bp-nav-active: #2a7de1;
@@ -14,7 +16,7 @@
 
 .site-header {
   position: fixed;
-  top: 0;
+  top: var(--bp-admin-bar-height, 0px);
   left: 0;
   right: 0;
   z-index: 1000;
@@ -39,20 +41,20 @@
 }
 
 .admin-bar .site-header {
-  /* top: 2rem; */
+  --bp-admin-bar-height: 32px;
 }
 
 .admin-bar .site-header.is-hidden {
-  transform: translateY(calc(-100% - 2rem));
+  transform: translateY(calc(-100% - var(--bp-admin-bar-height, 0px)));
 }
 
 @media (max-width: 782px) {
   .admin-bar .site-header {
-    /* top: 2.875rem; */
+    --bp-admin-bar-height: 46px;
   }
 
   .admin-bar .site-header.is-hidden {
-    transform: translateY(calc(-100% - 2.875rem));
+    transform: translateY(calc(-100% - var(--bp-admin-bar-height, 0px)));
   }
 }
 
@@ -794,6 +796,10 @@ body.mobile-sidebar-open {
 }
 
 @media (max-width: 980px) {
+  :root {
+    --bp-header-height: 5.625rem;
+  }
+
   .site-branding {
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
@@ -824,6 +830,10 @@ body.mobile-sidebar-open {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --bp-header-height: 4.35rem;
+  }
+
   .site-branding {
     padding-left: 0.95rem;
     padding-right: 0.95rem;

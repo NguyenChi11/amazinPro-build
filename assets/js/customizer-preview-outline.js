@@ -66,6 +66,15 @@
     }
   }
 
+  function getHeaderOffset() {
+    var header = document.querySelector(".site-header");
+    if (!header) return 90;
+    var rect = header.getBoundingClientRect();
+    var style = window.getComputedStyle(header);
+    var top = parseFloat(style.top || "0") || 0;
+    return Math.ceil(rect.height + top + 16);
+  }
+
   // ── Highlight section + scroll ───────────────────────────────────────────
   function activateSection(sectionId) {
     clearFocus();
@@ -75,7 +84,9 @@
     if (!el) return;
     el.classList.add(FOCUSED_CLASS);
     currentEl = el;
-    var top = el.getBoundingClientRect().top + window.pageYOffset - 90;
+    var top =
+      el.getBoundingClientRect().top + window.pageYOffset - getHeaderOffset();
+    top = Math.max(0, top);
     window.scrollTo({ top: top, behavior: "smooth" });
   }
 

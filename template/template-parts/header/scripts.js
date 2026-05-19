@@ -102,6 +102,25 @@ document.addEventListener("DOMContentLoaded", function () {
   // Header logic here
   const header = document.querySelector(".site-header");
   if (header) {
+    function syncHeaderHeight() {
+      const rect = header.getBoundingClientRect();
+      if (rect.height > 0) {
+        document.documentElement.style.setProperty(
+          "--bp-header-height",
+          Math.ceil(rect.height) + "px",
+        );
+      }
+    }
+
+    syncHeaderHeight();
+    window.addEventListener("load", syncHeaderHeight);
+    window.addEventListener("resize", syncHeaderHeight);
+    header.querySelectorAll("img").forEach(function (img) {
+      if (!img.complete) {
+        img.addEventListener("load", syncHeaderHeight, { once: true });
+      }
+    });
+
     // Add header classes based on scroll direction (throttled)
     let ticking = false;
     let lastScrollY = window.scrollY || 0;
