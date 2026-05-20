@@ -731,7 +731,18 @@ function buildpro_import_create_post($item)
     if (!$banner && isset($item['gallery']) && is_array($item['gallery']) && !empty($item['gallery'])) {
         $banner = buildpro_import_image_id($item['gallery'][0]);
     }
+    $description_short = '';
+    if (isset($item['description_short'])) {
+        $description_short = (string) $item['description_short'];
+    } elseif (isset($item['descriptionShort'])) {
+        $description_short = (string) $item['descriptionShort'];
+    } elseif (isset($item['paragraph'])) {
+        $description_short = (string) $item['paragraph'];
+    } elseif (isset($item['description'])) {
+        $description_short = wp_trim_words(wp_strip_all_tags((string) $item['description']), 24, '...');
+    }
     update_post_meta($post_id, 'buildpro_post_banner_id', $banner);
+    update_post_meta($post_id, 'buildpro_post_description_short', sanitize_textarea_field($description_short));
     update_post_meta($post_id, 'buildpro_post_description', isset($item['description']) ? $item['description'] : '');
     update_post_meta($post_id, 'buildpro_post_paragraph', isset($item['paragraph']) ? $item['paragraph'] : '');
     update_post_meta($post_id, 'buildpro_post_quote_title', isset($item['quoteTitle']) ? $item['quoteTitle'] : '');

@@ -57,6 +57,7 @@ if ($query->have_posts()) {
             'image' => get_the_post_thumbnail_url($id, 'large'),
             'date' => get_the_date('', $id),
             'link' => get_permalink($id),
+            'description_short' => buildpro_get_post_description_short($id),
             'views' => function_exists('buildpro_get_post_views') ? buildpro_get_post_views($id) : (int) get_post_meta($id, 'buildpro_post_views', true),
         );
     }
@@ -101,7 +102,7 @@ if (empty($posts)) {
                         ?>
                     </div>
                     <p class="section-post__item-desc">
-                        <?php echo esc_html(get_post_meta($p['id'], 'buildpro_post_description', true)); ?>
+                        <?php echo esc_html($p['description_short']); ?>
                     </p>
                     <div class="section-post__item-bottom">
                         <p class="section-post__item-readmore"><?php esc_html_e('Read more', 'buildpro'); ?>

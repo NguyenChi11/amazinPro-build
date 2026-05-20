@@ -22,6 +22,7 @@
                     $img = get_the_post_thumbnail_url($id, 'large');
                     $date = get_the_date('', $id);
                     $link = get_permalink($id);
+                    $desc_short = buildpro_get_post_description_short($id);
                     $views_num = function_exists('buildpro_get_post_views') ? buildpro_get_post_views($id) : (int) get_post_meta($id, 'buildpro_post_views', true);
                     $views_txt = sprintf(esc_html__('%s views', 'buildpro'), function_exists('buildpro_format_views') ? buildpro_format_views($views_num) : (string) $views_num);
                 ?>
@@ -39,7 +40,7 @@
                             <h3 class="section-post__item-title"><?= esc_html($title); ?></h3>
                             <div class="section-post__item-views"><?= esc_html($views_txt); ?></div>
                             <p class="section-post__item-desc">
-                                <?= esc_html(get_post_meta($id, 'buildpro_post_description', true)); ?></p>
+                                <?= esc_html($desc_short); ?></p>
                         </div>
                         <div class="section-post__item-bottom">
                             <p class="section-post__item-readmore">

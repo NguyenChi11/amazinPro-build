@@ -16,6 +16,8 @@ const postsData = {
       ],
       paragraph:
         "Digital twin technology is revolutionizing construction project management by providing real-time insights, improving collaboration, and optimizing resource allocation. This article explores how digital twins are transforming the industry and why they are essential for the future of construction.",
+      description_short:
+        "Digital twin technology gives construction teams real-time visibility, stronger coordination, and predictive insight across planning, delivery, and operations.",
       description: [
         "<p>In an industry where precision, efficiency, and risk management define success, construction companies are increasingly turning to innovative technologies to stay ahead. One of the most transformative advancements today is Digital Twin Technology - a powerful solution that is reshaping how projects are planned, executed, and maintained.</p>",
         "<h2>What is Digital Twin Technology?</h2>",
@@ -66,6 +68,8 @@ const postsData = {
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
       paragraph:
         "Residential architecture in 2026 is moving beyond visual appeal and focusing on long-term performance. Homeowners expect spaces that are efficient, comfortable, and adaptable to changing daily routines.",
+      description_short:
+        "Residential design in 2026 prioritizes flexible layouts, daylight, durable finishes, and high-performance envelopes for long-term comfort.",
       description: [
         "<p>Residential architecture in 2026 is moving beyond visual appeal and focusing on long-term performance. Homeowners expect spaces that are efficient, comfortable, and adaptable to changing daily routines.</p>",
         "<h2>Key Trends in 2026</h2>",
@@ -111,6 +115,8 @@ const postsData = {
       ],
       paragraph:
         "Commercial projects involve complex stakeholders, larger budgets, and higher operational expectations. Project management is the framework that keeps these factors aligned.",
+      description_short:
+        "Commercial project management keeps scope, schedule, cost, and quality aligned across complex teams and high-expectation environments.",
       description: [
         "<p>Commercial projects involve complex stakeholders, larger budgets, and higher operational expectations. Project management is the framework that keeps these factors aligned.</p>",
         "<h2>Critical Management Functions</h2>",
@@ -154,6 +160,8 @@ const postsData = {
         "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
       paragraph:
         "Material quality has a direct impact on performance, maintenance cost, and visual identity. Premium does not simply mean expensive - it means suitable, durable, and verifiable.",
+      description_short:
+        "Premium materials should be evaluated by technical performance, installation quality, lifecycle value, and compatibility.",
       description: [
         "<p>Material quality has a direct impact on performance, maintenance cost, and visual identity. Premium does not simply mean expensive - it means suitable, durable, and verifiable.</p>",
         "<h2>How to Evaluate Premium Materials</h2>",
@@ -196,6 +204,8 @@ const postsData = {
       banner: "/wp-content/themes/build_pro_v2/assets/images/avatar_2.jpg",
       paragraph:
         "Concept modeling bridges the gap between design intent and project understanding. It gives stakeholders a shared visual language before technical documentation is finalized.",
+      description_short:
+        "Concept modeling helps stakeholders understand design intent early, improve coordination, and reduce downstream execution risk.",
       description: [
         "<p>Concept modeling bridges the gap between design intent and project understanding. It gives stakeholders a shared visual language before technical documentation is finalized.</p>",
         "<h2>Why Concept Models Matter</h2>",
@@ -243,6 +253,8 @@ const postsData = {
       ],
       paragraph:
         "In dense urban environments, facade design must solve multiple problems at once: daylight, heat gain, privacy, maintenance access, and city identity. This article explores core design principles and delivery strategies for high-performance facades in challenging contexts.",
+      description_short:
+        "Facade design in dense cities balances daylight, heat control, privacy, maintenance access, and envelope performance.",
       description: [
         "<p>In dense urban environments, facade design must solve multiple problems at once: daylight, heat gain, privacy, maintenance access, and city identity.</p>",
         "<h2>Core Facade Design Principles</h2>",
@@ -285,6 +297,8 @@ const postsData = {
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_contact.jpg",
       paragraph:
         "High-performing projects are not only about technical capability. They are also about communication structure, accountability, and response discipline across teams",
+      description_short:
+        "Strong coordination practices improve accountability, documentation, escalation, and response speed across project teams.",
       description: [
         "<p>High-performing projects are not only about technical capability. They are also about communication structure, accountability, and response discipline across teams.</p>",
         "<h2>Coordination Practices That Work</h2>",
@@ -327,6 +341,8 @@ const postsData = {
       banner: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
       paragraph:
         "In this case study, we explore how a mid-rise office project in a dense urban district successfully navigated schedule and quality challenges through structured execution planning",
+      description_short:
+        "This case study shows how structured execution planning helped a dense urban office project protect schedule and quality.",
       description: [
         "<p>This case study reviews how a mid-rise office project achieved schedule and quality targets in a dense urban district with strict access and permit constraints.</p>",
         "<h2>Project Snapshot</h2>",

@@ -5,7 +5,7 @@ if (! $pid || get_post_type($pid) !== 'post') {
 }
 $banner_id = (int) get_post_meta($pid, 'buildpro_post_banner_id', true);
 $banner_url = $banner_id ? wp_get_attachment_image_url($banner_id, 'full') : '';
-$post_desc = get_post_meta($pid, 'buildpro_post_description', true);
+$post_desc = buildpro_get_post_description_short($pid);
 $paragraph = get_post_meta($pid, 'buildpro_post_paragraph', true);
 $quote_title = get_post_meta($pid, 'buildpro_post_quote_title', true);
 $quote_desc = get_post_meta($pid, 'buildpro_post_quote_description', true);
@@ -185,7 +185,7 @@ get_template_part('template/template-parts/breadcrums/index');
                         $more_img = get_the_post_thumbnail_url($more_id, 'large');
                         $more_date = get_the_date('', $more_id);
                         $more_link = get_permalink($more_id);
-                        $more_desc = get_post_meta($more_id, 'buildpro_post_description', true);
+                        $more_desc = buildpro_get_post_description_short($more_id);
                         $more_views_num = function_exists('buildpro_get_post_views') ? buildpro_get_post_views($more_id) : (int) get_post_meta($more_id, 'buildpro_post_views', true);
                         $more_views_txt = sprintf(esc_html__('%s views', 'buildpro'), function_exists('buildpro_format_views') ? buildpro_format_views($more_views_num) : (string) $more_views_num);
                     ?>

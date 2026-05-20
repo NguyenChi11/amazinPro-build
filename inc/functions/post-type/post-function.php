@@ -74,6 +74,26 @@ function buildpro_increment_post_views($post_id)
     return $views;
 }
 
+function buildpro_get_post_description_short($post_id)
+{
+    $post_id = absint($post_id);
+    if ($post_id <= 0) {
+        return '';
+    }
+
+    $description_short = get_post_meta($post_id, 'buildpro_post_description_short', true);
+    if (is_string($description_short) && $description_short !== '') {
+        return $description_short;
+    }
+
+    $description = get_post_meta($post_id, 'buildpro_post_description', true);
+    if (!is_string($description) || $description === '') {
+        return '';
+    }
+
+    return wp_trim_words(wp_strip_all_tags($description), 24, '...');
+}
+
 function buildpro_track_single_post_view()
 {
     if (is_admin() || is_preview() || is_feed() || is_trackback() || is_robots()) {
@@ -110,7 +130,7 @@ function buildpro_save_post_meta($post_id)
         return;
     }
     $banner_id = isset($_POST['buildpro_post_banner_id']) ? absint($_POST['buildpro_post_banner_id']) : 0;
-    $post_desc = isset($_POST['buildpro_post_description']) ? sanitize_textarea_field($_POST['buildpro_post_description']) : '';
+    $post_desc_short = isset($_POST['buildpro_post_description_short']) ? sanitize_textarea_field($_POST['buildpro_post_description_short']) : '';
     $paragraph = isset($_POST['buildpro_post_paragraph']) ? wp_kses_post($_POST['buildpro_post_paragraph']) : '';
     $quote_title = isset($_POST['buildpro_post_quote_title']) ? sanitize_text_field($_POST['buildpro_post_quote_title']) : '';
     $quote_desc = isset($_POST['buildpro_post_quote_description']) ? sanitize_textarea_field($_POST['buildpro_post_quote_description']) : '';
@@ -127,7 +147,10 @@ function buildpro_save_post_meta($post_id)
     }
     $quote_desc_image_desc = isset($_POST['buildpro_post_quote_desc_image_desc']) ? sanitize_textarea_field($_POST['buildpro_post_quote_desc_image_desc']) : '';
     update_post_meta($post_id, 'buildpro_post_banner_id', $banner_id);
-    update_post_meta($post_id, 'buildpro_post_description', $post_desc);
+    if (isset($_POST['buildpro_post_description'])) {
+        update_post_meta($post_id, 'buildpro_post_description', sanitize_textarea_field($_POST['buildpro_post_description']));
+    }
+    update_post_meta($post_id, 'buildpro_post_description_short', $post_desc_short);
     update_post_meta($post_id, 'buildpro_post_paragraph', $paragraph);
     update_post_meta($post_id, 'buildpro_post_quote_title', $quote_title);
     update_post_meta($post_id, 'buildpro_post_quote_description', $quote_desc);
