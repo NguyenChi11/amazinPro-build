@@ -60,7 +60,7 @@ wp_enqueue_style('checkout-contact-style', get_template_directory_uri() . '/temp
 
                     <div class="checkout-contact__footer">
                         <button type="submit" class="checkout-contact__submit">
-                            <span><?php _e('Submit Booking', 'buildpro'); ?></span>
+                            <span><?php _e('Submit', 'buildpro'); ?></span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -79,7 +79,7 @@ wp_enqueue_style('checkout-contact-style', get_template_directory_uri() . '/temp
                     <?php endif; ?>
                     <div class="project-summary-card__content">
                         <h4 class="project-summary-card__name"><?php echo esc_html($product_title); ?></h4>
-                        <?php 
+                        <?php
                             $price = get_post_meta($product_id, '_price', true);
                             if ($price): ?>
                         <p class="project-summary-card__price">
@@ -88,7 +88,7 @@ wp_enqueue_style('checkout-contact-style', get_template_directory_uri() . '/temp
                         <?php endif; ?>
 
                         <div class="project-summary-card__meta">
-                            <?php 
+                            <?php
                                 $bedrooms = get_post_meta($product_id, 'buildpro_product_bedrooms', true);
                                 $bathrooms = get_post_meta($product_id, 'buildpro_product_bathrooms', true);
                                 ?>
