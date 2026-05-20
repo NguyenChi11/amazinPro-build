@@ -20,6 +20,10 @@ if (empty($rows)) {
 if (is_customize_preview()) {
     $enabled_mod = get_theme_mod('buildpro_banner_enabled', 1);
     $enabled = (int) $enabled_mod;
+    $preview_rows = get_theme_mod('buildpro_banner_items', array());
+    if (is_array($preview_rows)) {
+        $rows = $preview_rows;
+    }
 }
 if ($rows && is_array($rows)) {
     foreach ($rows as $row) {
@@ -53,6 +57,10 @@ if (empty($option_rows)) {
 if (is_customize_preview()) {
     $option_enabled_mod = get_theme_mod('buildpro_option_enabled', 1);
     $option_enabled = (int) $option_enabled_mod;
+    $preview_option_rows = get_theme_mod('buildpro_option_items', array());
+    if (is_array($preview_option_rows)) {
+        $option_rows = $preview_option_rows;
+    }
 }
 if ($option_rows && is_array($option_rows)) {
     foreach ($option_rows as $row) {

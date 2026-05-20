@@ -80,6 +80,8 @@
 .about-contact-form .wpcf7 form .section-contact__form-field,
 .about-contact-form .wpcf7 form .section-contact__form-action {
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .about-contact-form .wpcf7 form .wpcf7-form-control-wrap {

@@ -299,7 +299,9 @@ function buildpro_banner_customize_register($wp_customize)
     if (isset($wp_customize->selective_refresh)) {
         $wp_customize->selective_refresh->add_partial('buildpro_banner_items', array(
             'selector'        => '.section-banner',
-            'settings'        => array('buildpro_banner_items'),
+            'settings'        => array('buildpro_banner_items', 'buildpro_banner_enabled', 'buildpro_option_items', 'buildpro_option_enabled'),
+            'container_inclusive' => true,
+            'fallback_refresh' => true,
             'render_callback' => function () {
                 ob_start();
                 get_template_part('template/template-parts/page/home/section-banner/index');
@@ -351,6 +353,8 @@ function buildpro_banner_customize_register($wp_customize)
         $wp_customize->selective_refresh->add_partial('buildpro_option_items', array(
             'selector' => '.section-banner',
             'settings' => array('buildpro_option_items'),
+            'container_inclusive' => true,
+            'fallback_refresh' => true,
             'render_callback' => function () {
                 ob_start();
                 get_template_part('template/template-parts/page/home/section-banner/index');
@@ -361,6 +365,7 @@ function buildpro_banner_customize_register($wp_customize)
             'selector' => '.section-banner',
             'settings' => array('buildpro_option_enabled'),
             'container_inclusive' => true,
+            'fallback_refresh' => true,
             'render_callback' => function () {
                 ob_start();
                 get_template_part('template/template-parts/page/home/section-banner/index');

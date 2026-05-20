@@ -19,6 +19,9 @@ if ($materials_view_all_text === '') {
 if (is_customize_preview()) {
     $mod_enabled = get_theme_mod('materials_enabled', 1);
     $materials_enabled = (int)$mod_enabled;
+    $materials_title = get_theme_mod('materials_title', $materials_title);
+    $materials_description = get_theme_mod('materials_description', $materials_description);
+    $materials_view_all_text = get_theme_mod('materials_view_all_text', $materials_view_all_text);
 }
 if (!is_string($materials_view_all_text) || $materials_view_all_text === '') {
     $materials_view_all_text = __('View All Products', 'buildpro');

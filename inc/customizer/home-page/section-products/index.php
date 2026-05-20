@@ -187,7 +187,9 @@ function buildpro_product_customize_register($wp_customize)
     if (isset($wp_customize->selective_refresh)) {
         $wp_customize->selective_refresh->add_partial('materials_title', array(
             'selector' => '.section-product',
-            'settings' => array('materials_title'),
+            'settings' => array('materials_title', 'materials_description', 'materials_enabled', 'materials_view_all_text'),
+            'container_inclusive' => true,
+            'fallback_refresh' => true,
             'render_callback' => function () {
                 ob_start();
                 get_template_part('template/template-parts/page/home/section-products/index');
@@ -198,6 +200,7 @@ function buildpro_product_customize_register($wp_customize)
             'selector' => '.section-product',
             'settings' => array('materials_description'),
             'container_inclusive' => true,
+            'fallback_refresh' => true,
             'render_callback' => function () {
                 ob_start();
                 get_template_part('template/template-parts/page/home/section-products/index');
@@ -208,6 +211,7 @@ function buildpro_product_customize_register($wp_customize)
             'selector' => '.section-product',
             'settings' => array('materials_enabled'),
             'container_inclusive' => true,
+            'fallback_refresh' => true,
             'render_callback' => function () {
                 ob_start();
                 get_template_part('template/template-parts/page/home/section-products/index');
@@ -218,6 +222,7 @@ function buildpro_product_customize_register($wp_customize)
             'selector' => '.section-product',
             'settings' => array('materials_view_all_text'),
             'container_inclusive' => true,
+            'fallback_refresh' => true,
             'render_callback' => function () {
                 ob_start();
                 get_template_part('template/template-parts/page/home/section-products/index');
