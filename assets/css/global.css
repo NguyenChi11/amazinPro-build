@@ -1154,6 +1154,9 @@ textarea {
   z-index: 2;
   pointer-events: none;
   transition: color 0.2s ease;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
 }
 
 .contact-form__input-wrapper .wpcf7-form-control,
@@ -1164,6 +1167,7 @@ textarea {
 .contact-form__input-wrapper--textarea i,
 .checkout-contact__input-wrapper--textarea i {
   top: 1.2rem;
+  transform: none;
 }
 
 .contact-form__input-wrapper--textarea .wpcf7-form-control,

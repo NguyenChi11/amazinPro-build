@@ -83,7 +83,7 @@ function buildpro_cf7_demo_form_content()
     $choices = implode(' ', $quoted_choices);
     $form = '';
     $form .= '<div class="contact-form__grid"><!-- buildpro-demo-form-v5 -->';
-    
+
     $form .= '<div class="contact-form__field">';
     $form .= '  <label class="contact-form__label">Full name</label>';
     $form .= '  <div class="contact-form__input-wrapper">';
@@ -205,7 +205,7 @@ function buildpro_cf7_checkout_form_content()
     $form .= '[hidden project-title default:get]';
     $form .= '[hidden project-image default:get]';
     $form .= '[hidden project-price default:get]';
-    
+
     $form .= '<div class="checkout-contact__field-row">';
     $form .= '  <div class="checkout-contact__field-group">';
     $form .= '    <label class="checkout-contact__label">Full Name <span class="required">*</span></label>';
@@ -243,7 +243,7 @@ function buildpro_cf7_checkout_form_content()
     $form .= '<div class="checkout-contact__form-footer">';
     $form .= '  [submit class:checkout-contact__submit "Confirm Booking"]';
     $form .= '</div>';
-    
+
     $form .= '</div>';
     return $form;
 }

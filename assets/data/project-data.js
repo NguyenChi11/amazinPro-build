@@ -1,7 +1,7 @@
 const projectsData = {
-  projectTitle: "PROJECTS",
+  projectTitle: "Explore Collections",
   projectDescription:
-    "Representative projects with clear location, standards, and complete technical information.",
+    "Explore our diverse portfolio of completed landmarks across the country.",
   projectViewAllText: "View All Projects",
   items: [
     {
