@@ -64,7 +64,7 @@
 .site-branding {
   max-width: 100%;
   margin: 0 auto;
-  padding: 2rem 3.75rem;
+  padding: 0.5rem 3.75rem;
   display: flex;
   align-items: center;
   gap: 0.95rem;
@@ -121,8 +121,8 @@
 }
 
 .header-logo img {
-  width: 4.125rem;
-  height: 4.125rem;
+  width: 5.375rem;
+  height: 5.375rem;
   object-fit: contain;
   display: block;
 }
