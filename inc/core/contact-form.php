@@ -241,7 +241,7 @@ function buildpro_cf7_checkout_form_content()
     $form .= '</div>';
 
     $form .= '<div class="checkout-contact__form-footer">';
-    $form .= '  [submit class:checkout-contact__submit "Confirm Booking"]';
+    $form .= '  [submit class:checkout-contact__submit "Submit Booking"]';
     $form .= '</div>';
 
     $form .= '</div>';
