@@ -1,6 +1,7 @@
 ﻿.section-post {
   padding: 0rem 3.75rem;
   padding-top: 3.625rem;
+  padding-bottom: 3.625rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
