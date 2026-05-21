@@ -1,5 +1,5 @@
 const headerData = {
-  logo: "/wp-content/themes/build_pro_v2/assets/images/Logo.png",
+  logo: "/wp-content/themes/BuildX/assets/images/Logo.png",
   quoteText: "Request a Quote",
   quoteUrl: "/about-us/#about-contact-form-inner",
 };

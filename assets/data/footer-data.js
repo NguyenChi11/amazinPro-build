@@ -1,8 +1,7 @@
 const footerData = {
-  banner:
-    "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_ft.png",
+  banner: "/wp-content/themes/BuildX/assets/images/redux/banner/banner_ft.png",
   information: {
-    logo: "/wp-content/themes/build_pro_v2/assets/images/Logo.png",
+    logo: "/wp-content/themes/BuildX/assets/images/Logo.png",
     title: "BuildPro",
     subTitle: "Better Building",
     description:
@@ -16,19 +15,19 @@ const footerData = {
   },
   contactLinks: [
     {
-      icon: "/wp-content/themes/build_pro_v2/assets/images/icon/fb.png",
+      icon: "/wp-content/themes/BuildX/assets/images/icon/fb.png",
       title: "Facebook",
       url: "https://www.facebook.com/Amazinsolution",
       target: "_blank",
     },
     {
-      icon: "/wp-content/themes/build_pro_v2/assets/images/icon/in.png",
+      icon: "/wp-content/themes/BuildX/assets/images/icon/in.png",
       title: "LinkedIn",
       url: "https://www.linkedin.com/company/amazinsolution",
       target: "_blank",
     },
     {
-      icon: "/wp-content/themes/build_pro_v2/assets/images/icon/tw.png",
+      icon: "/wp-content/themes/BuildX/assets/images/icon/tw.png",
       title: "Twitter",
       url: "https://www.twitter.com/Amazinsolution",
       target: "_blank",

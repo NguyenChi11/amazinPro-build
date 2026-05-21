@@ -7,12 +7,12 @@ const postsData = {
     {
       id: 2101,
       title: "Digital Twin Technology In Construction",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       date: "2026-04-10",
       link: "/blog/digital-twin-technology-in-construction",
       banner: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_7.jpg",
       ],
       paragraph:
         "Digital twin technology is revolutionizing construction project management by providing real-time insights, improving collaboration, and optimizing resource allocation. This article explores how digital twins are transforming the industry and why they are essential for the future of construction.",
@@ -50,22 +50,22 @@ const postsData = {
         { key: "Prediction", value: "Early warning for risks and delays" },
       ],
       quoteGallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_7.jpg",
       ],
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_7.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
       ],
     },
     {
       id: 2102,
       title: "Residential Design Trends",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_9.jpg",
       date: "2026-03-28",
       link: "/blog/residential-design-trends-2026",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
+      banner: "/wp-content/themes/BuildX/assets/images/image_9.jpg",
       paragraph:
         "Residential architecture in 2026 is moving beyond visual appeal and focusing on long-term performance. Homeowners expect spaces that are efficient, comfortable, and adaptable to changing daily routines.",
       description_short:
@@ -95,23 +95,23 @@ const postsData = {
         { key: "Systems", value: "Efficient lighting and ventilation" },
       ],
       quoteGallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_9.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_5.jpg",
       ],
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_9.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_5.jpg",
       ],
     },
     {
       id: 2103,
       title: "Commercial Project Management",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       date: "2026-03-12",
       link: "/blog/commercial-project-management-guide",
       banner: [
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_7.jpg",
       ],
       paragraph:
         "Commercial projects involve complex stakeholders, larger budgets, and higher operational expectations. Project management is the framework that keeps these factors aligned.",
@@ -142,22 +142,22 @@ const postsData = {
         { key: "Procurement", value: "Approved vendor and lead-time control" },
       ],
       quoteGallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
       ],
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
       ],
     },
     {
       id: 2104,
       title: "Premium Materials Overview",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_4.jpg",
       date: "2026-02-20",
       link: "/blog/premium-materials-overview",
       banner:
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_2.jpg",
       paragraph:
         "Material quality has a direct impact on performance, maintenance cost, and visual identity. Premium does not simply mean expensive - it means suitable, durable, and verifiable.",
       description_short:
@@ -187,21 +187,21 @@ const postsData = {
         { key: "Cost", value: "Balanced upfront and lifecycle value" },
       ],
       quoteGallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_4.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_3.jpg",
       ],
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_4.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_3.jpg",
       ],
     },
     {
       id: 2105,
       title: "From Concept To Model",
-      image: "/wp-content/themes/build_pro_v2/assets/images/avatar_1.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/avatar_1.jpg",
       date: "2026-02-02",
       link: "/blog/from-concept-to-model",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/avatar_2.jpg",
+      banner: "/wp-content/themes/BuildX/assets/images/avatar_2.jpg",
       paragraph:
         "Concept modeling bridges the gap between design intent and project understanding. It gives stakeholders a shared visual language before technical documentation is finalized.",
       description_short:
@@ -231,25 +231,25 @@ const postsData = {
         { key: "Approval", value: "Faster owner decision cycles" },
       ],
       quoteGallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_1.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_2.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/avatar_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/avatar_2.jpg",
+        "/wp-content/themes/BuildX/assets/images/avatar_3.jpg",
       ],
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_1.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_2.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/avatar_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/avatar_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/avatar_2.jpg",
+        "/wp-content/themes/BuildX/assets/images/avatar_3.jpg",
       ],
     },
     {
       id: 2106,
       title: "Facade Design In Dense Cities",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_6.jpg",
       date: "2026-01-19",
       link: "/blog/facade-design-dense-cities",
       banner: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_6.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       ],
       paragraph:
         "In dense urban environments, facade design must solve multiple problems at once: daylight, heat gain, privacy, maintenance access, and city identity. This article explores core design principles and delivery strategies for high-performance facades in challenging contexts.",
@@ -280,21 +280,21 @@ const postsData = {
         { key: "Maintenance", value: "Accessible facade cleaning strategy" },
       ],
       quoteGallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_6.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       ],
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_6.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       ],
     },
     {
       id: 2107,
       title: "Team Coordination Practices",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_contact.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_contact.jpg",
       date: "2026-01-08",
       link: "/blog/team-coordination-practices",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/image_contact.jpg",
+      banner: "/wp-content/themes/BuildX/assets/images/image_contact.jpg",
       paragraph:
         "High-performing projects are not only about technical capability. They are also about communication structure, accountability, and response discipline across teams",
       description_short:
@@ -324,21 +324,21 @@ const postsData = {
         { key: "Escalation", value: "Defined path and response time" },
       ],
       quoteGallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_contact.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_contact.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_1.jpg",
       ],
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_contact.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_contact.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_1.jpg",
       ],
     },
     {
       id: 2108,
       title: "Skyline Office Case Study",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       date: "2025-12-22",
       link: "/blog/skyline-office-case-study",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+      banner: "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       paragraph:
         "In this case study, we explore how a mid-rise office project in a dense urban district successfully navigated schedule and quality challenges through structured execution planning",
       description_short:
@@ -370,12 +370,12 @@ const postsData = {
         { key: "Safety", value: "No major incident recorded" },
       ],
       quoteGallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
       ],
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
       ],
     },
   ],

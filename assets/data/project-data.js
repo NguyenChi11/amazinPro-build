@@ -7,9 +7,9 @@ const projectsData = {
     {
       id: 3001,
       title: "Commerce Tower",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_7.jpg",
       banner:
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_1.jpg",
       location: "WASHINGTON DC",
       about: [
         "<p>Commerce Tower is a contemporary office destination designed for long-term business performance. The project combines efficient planning, premium facade materials, and strong circulation logic to support modern tenants.</p>",
@@ -39,7 +39,7 @@ const projectsData = {
         "Flexible office modules",
         "Premium curtain wall facade",
       ],
-      aboutImage: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+      aboutImage: "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       information:
         "Grade A commercial project with smart building management and flexible office layouts.",
       totalArea: "48,500 sqft",
@@ -47,18 +47,18 @@ const projectsData = {
       architecturalStyle: "Contemporary Corporate",
       standards: [
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_1.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_1.jpg",
           title: "Structural Steel",
           description:
             "High-strength structural steel meets quality standards.",
         },
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_2.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_2.jpg",
           title: "Thermal Material",
           description: "Thermal materials meet energy efficiency standards.",
         },
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_3.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_3.jpg",
           title: "Completion",
           description: "Premium ceramic surface meets completion standards.",
         },
@@ -66,17 +66,17 @@ const projectsData = {
       price: "2500000",
       dateTime: "2025-08-15",
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_1.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_2.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
       ],
     },
     {
       id: 3002,
       title: "Residential Complex",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_9.jpg",
       banner:
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_2.jpg",
       location: "NEW YORK",
       about: [
         "<p>Residential Complex is planned as a people-first community with balanced density, open green areas, and comfortable daily living infrastructure.</p>",
@@ -106,7 +106,7 @@ const projectsData = {
         "Shared green spaces",
         "Sustainable building envelope",
       ],
-      aboutImage: "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
+      aboutImage: "/wp-content/themes/BuildX/assets/images/image_4.jpg",
       information:
         "Mixed-use residential block with shared amenities and green open spaces.",
       totalArea: "31,200 sqft",
@@ -114,12 +114,12 @@ const projectsData = {
       architecturalStyle: "Urban Minimalist",
       standards: [
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_4.jpg",
           title: "Safety",
           description: "PCCC standard safety system.",
         },
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_5.jpg",
           title: "Materials",
           description: "Ceramic tiles, durable glass.",
         },
@@ -127,17 +127,17 @@ const projectsData = {
       price: "1750000",
       dateTime: "2025-06-03",
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_7.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_9.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       ],
     },
     {
       id: 3003,
       title: "Retail Center",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       banner:
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
       location: "LOS ANGELES",
       about: [
         "<p>Retail Center is designed as a high-footfall destination where circulation, visibility, and tenant mix work together to maximize customer experience.</p>",
@@ -167,7 +167,7 @@ const projectsData = {
         "Open customer circulation",
         "High durability interior finishes",
       ],
-      aboutImage: "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
+      aboutImage: "/wp-content/themes/BuildX/assets/images/image_6.jpg",
       information:
         "High-footfall retail destination combining cinema, food, and lifestyle brands.",
       totalArea: "39,000 sqft",
@@ -175,17 +175,17 @@ const projectsData = {
       architecturalStyle: "Commercial Contemporary",
       standards: [
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_6.jpg",
           title: "Sound System",
           description: "Sound solution for commercial spaces.",
         },
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_3.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_3.jpg",
           title: "Lighting",
           description: "Energy-efficient lighting system.",
         },
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_2.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_2.jpg",
           title: "Structural Design",
           description: "Safe and durable structural design.",
         },
@@ -193,16 +193,16 @@ const projectsData = {
       price: "980000",
       dateTime: "2025-02-17",
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_2.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_1.jpg",
       ],
     },
     {
       id: 3004,
       title: "Premium Villa",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_4.jpg",
+      banner: "/wp-content/themes/BuildX/assets/images/image_4.jpg",
       location: "WASHINGTON DC",
       about: [
         "<p>Premium Villa is crafted as a private residence where architecture, interior detailing, and landscape are treated as one unified experience.</p>",
@@ -232,7 +232,7 @@ const projectsData = {
         "Smart home lighting",
         "Integrated private landscape",
       ],
-      aboutImage: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
+      aboutImage: "/wp-content/themes/BuildX/assets/images/image_9.jpg",
       information:
         "Detached villa project with private landscape and smart lighting controls.",
       totalArea: "9,200 sqft",
@@ -240,7 +240,7 @@ const projectsData = {
       architecturalStyle: "Luxury Modern",
       standards: [
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_5.jpg",
           title: "Materials",
           description: "Natural stone, high-end wood, low-e glass.",
         },
@@ -248,16 +248,16 @@ const projectsData = {
       price: "3500000",
       dateTime: "2025-01-05",
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_7.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_9.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       ],
     },
     {
       id: 3005,
       title: "Lakefront Townhouse",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_5.jpg",
+      banner: "/wp-content/themes/BuildX/assets/images/image_5.jpg",
       location: "SEATTLE",
       about: [
         "<p>Lakefront Townhouse is developed with a focus on natural light penetration, efficient circulation, and low-maintenance exterior materials.</p>",
@@ -287,7 +287,7 @@ const projectsData = {
         "Climate-resilient facade",
         "Community-friendly layout",
       ],
-      aboutImage: "/wp-content/themes/build_pro_v2/assets/images/image_1.jpg",
+      aboutImage: "/wp-content/themes/BuildX/assets/images/image_1.jpg",
       information:
         "Cluster housing with efficient circulation, passive cooling, and family-oriented layouts.",
       totalArea: "12,800 sqft",
@@ -295,13 +295,13 @@ const projectsData = {
       architecturalStyle: "Scandinavian Modern",
       standards: [
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_2.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_2.jpg",
           title: "Facade Panels",
           description:
             "Weather-resistant cladding with low maintenance requirements.",
         },
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_3.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_3.jpg",
           title: "Insulation",
           description: "Thermal envelope optimized for year-round comfort.",
         },
@@ -309,16 +309,16 @@ const projectsData = {
       price: "1420000",
       dateTime: "2025-10-11",
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_1.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_5.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_1.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_1.jpg",
       ],
     },
     {
       id: 3006,
       title: "Urban Office Hub",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+      banner: "/wp-content/themes/BuildX/assets/images/image_10.jpg",
       location: "CHICAGO",
       about: [
         "<p>Urban Office Hub is conceived as a productivity-focused workplace with flexible floor plates, efficient building services, and future-ready infrastructure.</p>",
@@ -348,7 +348,7 @@ const projectsData = {
         "Flexible office floor plates",
         "High-performance facade system",
       ],
-      aboutImage: "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
+      aboutImage: "/wp-content/themes/BuildX/assets/images/image_7.jpg",
       information:
         "Mid-rise office project integrating smart access control and energy monitoring.",
       totalArea: "56,400 sqft",
@@ -356,13 +356,13 @@ const projectsData = {
       architecturalStyle: "International Style",
       standards: [
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_6.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_6.jpg",
           title: "Building Envelope",
           description:
             "High-performance glazing and insulated facade assembly.",
         },
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_4.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_4.jpg",
           title: "Fire Safety",
           description: "Compliant fire protection and evacuation systems.",
         },
@@ -370,16 +370,16 @@ const projectsData = {
       price: "4200000",
       dateTime: "2026-03-22",
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_10.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_7.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_2.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_10.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_7.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_2.jpg",
       ],
     },
     {
       id: 3007,
       title: "Hillside Family House",
-      image: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
-      banner: "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
+      image: "/wp-content/themes/BuildX/assets/images/image_9.jpg",
+      banner: "/wp-content/themes/BuildX/assets/images/image_9.jpg",
       location: "AUSTIN",
       about: [
         "<p>Hillside Family House is a custom residential project designed around warmth, simplicity, and long-term family use.</p>",
@@ -409,7 +409,7 @@ const projectsData = {
         "Warm contemporary facade",
         "Indoor-outdoor continuity",
       ],
-      aboutImage: "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
+      aboutImage: "/wp-content/themes/BuildX/assets/images/image_5.jpg",
       information:
         "Custom-built residence emphasizing comfort, daylight, and outdoor connection.",
       totalArea: "7,450 sqft",
@@ -417,12 +417,12 @@ const projectsData = {
       architecturalStyle: "Transitional",
       standards: [
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_1.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_1.jpg",
           title: "Concrete Structure",
           description: "Reinforced frame designed for long-term durability.",
         },
         {
-          image: "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
+          image: "/wp-content/themes/BuildX/assets/images/image_5.jpg",
           title: "Interior Finishes",
           description:
             "Premium joinery, stone surfaces, and engineered flooring.",
@@ -431,9 +431,9 @@ const projectsData = {
       price: "1280000",
       dateTime: "2025-12-05",
       gallery: [
-        "/wp-content/themes/build_pro_v2/assets/images/image_9.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/image_5.jpg",
-        "/wp-content/themes/build_pro_v2/assets/images/redux/banner/banner_3.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_9.jpg",
+        "/wp-content/themes/BuildX/assets/images/image_5.jpg",
+        "/wp-content/themes/BuildX/assets/images/redux/banner/banner_3.jpg",
       ],
     },
   ],
